@@ -2019,7 +2019,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (currentUser == null || !currentUser.self) {
                 muteItem = headerItem.addSubItem(mute, R.drawable.msg_mute, null);
             }
-            if (ChatObject.isChannel(currentChat) && !currentChat.creator) {
+            if (ChatObject.isChannel(currentChat)) {
                 if (!ChatObject.isNotInChat(currentChat)) {
                     if (currentChat.megagroup) {
                         headerItem.addSubItem(delete_chat, R.drawable.msg_leave, LocaleController.getString("LeaveMegaMenu", R.string.LeaveMegaMenu));
