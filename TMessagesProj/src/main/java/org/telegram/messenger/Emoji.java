@@ -263,9 +263,16 @@ public class Emoji {
 
         @Override
         public void draw(Canvas canvas) {
+            Rect b;
+            if (fullSize) {
+                b = getDrawRect();
+            } else {
+                b = getBounds();
+            }
             if (SharedConfig.useSystemEmoji) {
-                textPaint.setTextSize(getBounds().width());
-                canvas.drawText(EmojiData.data[info.page][info.emojiIndex], getBounds().left, getBounds().bottom, textPaint);
+                String emoji = fixEmoji(EmojiData.data[info.page][info.emojiIndex]);
+                textPaint.setTextSize(b.height() * 0.8f);
+                canvas.drawText(emoji,  0, emoji.length(), b.left, b.bottom - b.height() * 0.225f, textPaint);
                 return;
             }
 
@@ -275,16 +282,7 @@ public class Emoji {
                 return;
             }
 
-            Rect b;
-            if (fullSize) {
-                b = getDrawRect();
-            } else {
-                b = getBounds();
-            }
-
-            if (!canvas.quickReject(b.left, b.top, b.right, b.bottom, Canvas.EdgeType.AA)) {
-                canvas.drawBitmap(emojiBmp[info.page][info.page2], null, b, paint);
-            }
+            canvas.drawBitmap(emojiBmp[info.page][info.page2], null, b, paint);
         }
 
         @Override
@@ -481,14 +479,12 @@ public class Emoji {
                     if (emojiOnly != null) {
                         emojiOnly[0]++;
                     }
-                    if (!SharedConfig.useSystemEmoji) {
-                        CharSequence code = emojiCode.subSequence(0, emojiCode.length());
-                        drawable = Emoji.getEmojiDrawable(code);
-                        if (drawable != null) {
-                            span = new EmojiSpan(drawable, DynamicDrawableSpan.ALIGN_BOTTOM, size, fontMetrics);
-                            s.setSpan(span, startIndex, startIndex + startLength, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                            emojiCount++;
-                        }
+                    CharSequence code = emojiCode.subSequence(0, emojiCode.length());
+                    drawable = Emoji.getEmojiDrawable(code);
+                    if (drawable != null) {
+                        span = new EmojiSpan(drawable, DynamicDrawableSpan.ALIGN_BOTTOM, size, fontMetrics);
+                        s.setSpan(span, startIndex, startIndex + startLength, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        emojiCount++;
                     }
                     startLength = 0;
                     startIndex = -1;
