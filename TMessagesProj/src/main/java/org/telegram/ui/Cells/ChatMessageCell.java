@@ -125,13 +125,6 @@ import ru.utkacraft.cupertinolib.popup.ContextTouchListener;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate, ImageReceiver.ImageReceiverDelegate, DownloadController.FileDownloadProgressListener, TextSelectionHelper.SelectableView {
-    public ContextTouchListener cgListener;
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (cgListener != null && cgListener.onTouch(this, ev)) return true;
-        return super.dispatchTouchEvent(ev);
-    }
 
     public interface ChatMessageCellDelegate {
         default void didPressUserAvatar(ChatMessageCell cell, TLRPC.User user, float touchX, float touchY) {

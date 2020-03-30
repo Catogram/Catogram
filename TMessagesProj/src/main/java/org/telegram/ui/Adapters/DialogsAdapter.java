@@ -120,11 +120,6 @@ public class DialogsAdapter extends RecyclerListView.SelectionAdapter {
         return current != getItemCount() || current == 1;
     }
 
-    public void setDialogsType(int type) {
-        dialogsType = type;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getItemCount() {
         ArrayList<TLRPC.Dialog> array = DialogsActivity.getDialogsArray(currentAccount, dialogsType, folderId, dialogsListFrozen);

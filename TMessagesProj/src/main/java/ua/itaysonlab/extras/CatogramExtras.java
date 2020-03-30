@@ -35,7 +35,7 @@ import java.io.FileInputStream;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "1.7";
+    public static String CG_VERSION = "1.7.1";
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;

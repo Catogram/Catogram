@@ -52,6 +52,8 @@ import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class MessagesController extends BaseController implements NotificationCenter.NotificationCenterDelegate {
 
     private ConcurrentHashMap<Integer, TLRPC.Chat> chats = new ConcurrentHashMap<>(100, 1.0f, 2);
@@ -4221,6 +4223,12 @@ public class MessagesController extends BaseController implements NotificationCe
                     noDialog = true;
                 } else if (response instanceof TLRPC.TL_help_proxyDataPromo) {
                     final TLRPC.TL_help_proxyDataPromo res = (TLRPC.TL_help_proxyDataPromo) response;
+
+                    if (CatogramConfig.hideProxySponsor) {
+                        nextProxyInfoCheckTime = res.expires;
+                        noDialog = true;
+                        return;
+                    }
 
                     final long did;
                     if (res.peer.user_id != 0) {

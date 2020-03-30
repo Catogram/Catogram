@@ -207,7 +207,7 @@ public class AppearancePreferencesEntry implements BasePreferencesEntry {
                     }
                 })
         );
-        categories.add(new TGKitCategory(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header), filters));
+        //categories.add(new TGKitCategory(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header), filters));
 
         List<TGKitPreference> drawer = new ArrayList<>();
         drawer.add(

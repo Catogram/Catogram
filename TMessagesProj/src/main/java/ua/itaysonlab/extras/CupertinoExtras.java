@@ -16,7 +16,7 @@ import java.util.List;
 import ru.utkacraft.cupertinolib.popup.ContextMenu;
 
 public class CupertinoExtras {
-    public static void initViewHolder(ArrayList<Integer> optionsID,
+    public static ContextMenu initViewHolder(ArrayList<Integer> optionsID,
                                                       ArrayList<CharSequence> optionTitles,
                                                       ArrayList<Integer> optionIcons,
                                                       Context context,
@@ -42,12 +42,7 @@ public class CupertinoExtras {
             return true;
         });
 
-        ctxMenu.setOnDismissListener(dialog -> recyclerView.getAdapter().bindViewHolder(viewHolder, viewHolder.getAdapterPosition()));
-        viewHolder.itemView.setOnTouchListener(ctxMenu.getTouchListener(viewHolder.itemView));
-
-        ((ChatMessageCell) viewHolder.itemView).cgListener = ctxMenu.getTouchListener(viewHolder.itemView);
-
-        //return ctxMenu;
+        return ctxMenu;
     }
 
     private static List<ContextMenu.PopupAction> generateActionList(ArrayList<Integer> optionsID, ArrayList<CharSequence> optionTitles, ArrayList<Integer> optionIcons) {
@@ -57,7 +52,7 @@ public class CupertinoExtras {
             if (action.id == 23) action.setHasTopPadding();
             actions.add(action);
         }
-        actions.add(new ContextMenu.PopupAction(999, "Select", R.drawable.arrow_more, false).setHasTopPadding());
+        //actions.add(new ContextMenu.PopupAction(999, "Select", R.drawable.arrow_more, false).setHasTopPadding());
         return actions;
     }
 

@@ -14256,7 +14256,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
 
             if (CatogramConfig.useCupertinoLib) {
-                ua.itaysonlab.extras.CupertinoExtras.fromTelegramContextMenu(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption).createAndShow();
+                ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption).createAndShow();
                 return;
             }
 

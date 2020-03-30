@@ -153,6 +153,8 @@ import org.telegram.ui.Components.UndoView;
 
 import java.util.ArrayList;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class DialogsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
     private class ViewPage extends FrameLayout {
@@ -1772,6 +1774,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
                 @Override
                 public int getTabCounter(int tabId) {
+                    if (CatogramConfig.newTabs_noUnread) return 0;
                     if (tabId == Integer.MAX_VALUE) {
                         return getMessagesStorage().getMainUnreadCount();
                     } else {

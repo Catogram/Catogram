@@ -124,6 +124,5 @@ public class CGFiltersDelegate {
 
     private static void applyFilters(DialogsActivity act, CatogramFilter filter) {
         CatogramConfig.setSavedFilter(filter.savePath);
-        act.applyCatogramFilter(filter);
     }
 }
