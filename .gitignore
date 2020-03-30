@@ -4,3 +4,9 @@ build/
 obj/
 *.iml
 local.properties
+TMessagesProj/.cxx/
+TMessagesProj/build/
+gradle.properties
+TMessagesProj/config/release.keystore
+.DS_Store
+TMessagesProj/google-services.json
