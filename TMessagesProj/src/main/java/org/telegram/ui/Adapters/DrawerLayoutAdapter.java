@@ -216,7 +216,7 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
             return;
         }
         int eventType = Theme.getEventType();
-<<<<<<< HEAD
+
         int newGroupIcon;
         int newSecretIcon;
         int newChannelIcon;
@@ -226,7 +226,7 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
         int settingsIcon;
         int inviteIcon;
         int helpIcon;
-        if (eventType == 0) {
+        if (CatogramConfig.forceNewYearDrawer || eventType == 0) {
             newGroupIcon = R.drawable.menu_groups_ny;
             newSecretIcon = R.drawable.menu_secret_ny;
             newChannelIcon = R.drawable.menu_channel_ny;
@@ -236,21 +236,6 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
             settingsIcon = R.drawable.menu_settings_ny;
             inviteIcon = R.drawable.menu_invite_ny;
             helpIcon = R.drawable.menu_help_ny;
-=======
-        if (CatogramConfig.forceNewYearDrawer || eventType == 0) {
-            //items.add(new Item(2, LocaleController.getString("NewGroup", R.string.NewGroup), R.drawable.menu_groups_ny));
-            //if (!hasWallet) {
-            //   items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), R.drawable.menu_secret_ny));
-            //    items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), R.drawable.menu_channel_ny));
-            //}
-            items.add(new Item(6, LocaleController.getString("Contacts", R.string.Contacts), R.drawable.menu_contacts_ny));
-            items.add(new Item(10, LocaleController.getString("Calls", R.string.Calls), R.drawable.menu_calls_ny));
-            items.add(new Item(11, LocaleController.getString("SavedMessages", R.string.SavedMessages), R.drawable.menu_bookmarks_ny));
-            items.add(new Item(8, LocaleController.getString("Settings", R.string.Settings), R.drawable.menu_settings_ny));
-            items.add(null); // divider
-            items.add(new Item(7, LocaleController.getString("InviteFriends", R.string.InviteFriends), R.drawable.menu_invite_ny));
-            items.add(new Item(9, LocaleController.getString("TelegramFAQ", R.string.TelegramFAQ), R.drawable.menu_help_ny));
->>>>>>> migrate
         } else if (eventType == 1) {
             newGroupIcon = R.drawable.menu_groups_14;
             newSecretIcon = R.drawable.menu_secret_14;
@@ -262,7 +247,6 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
             inviteIcon = R.drawable.menu_secret_ny;
             helpIcon = R.drawable.menu_help;
         } else {
-<<<<<<< HEAD
             newGroupIcon = R.drawable.menu_groups;
             newSecretIcon = R.drawable.menu_secret;
             newChannelIcon = R.drawable.menu_broadcast;
@@ -272,21 +256,8 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
             settingsIcon = R.drawable.menu_settings;
             inviteIcon = R.drawable.menu_invite;
             helpIcon = R.drawable.menu_help;
-=======
-            //items.add(new Item(2, LocaleController.getString("NewGroup", R.string.NewGroup), R.drawable.menu_groups));
-            //if (!hasWallet) {
-            //    items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), R.drawable.menu_secret));
-            //    items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), R.drawable.menu_broadcast));
-            //}
-            items.add(new Item(6, LocaleController.getString("Contacts", R.string.Contacts), R.drawable.menu_contacts));
-            items.add(new Item(10, LocaleController.getString("Calls", R.string.Calls), R.drawable.menu_calls));
-            items.add(new Item(11, LocaleController.getString("SavedMessages", R.string.SavedMessages), R.drawable.menu_saved));
-            items.add(new Item(8, LocaleController.getString("Settings", R.string.Settings), R.drawable.menu_settings));
-            items.add(null); // divider
-            items.add(new Item(7, LocaleController.getString("InviteFriends", R.string.InviteFriends), R.drawable.menu_invite));
-            items.add(new Item(9, LocaleController.getString("TelegramFAQ", R.string.TelegramFAQ), R.drawable.menu_help));
->>>>>>> migrate
         }
+
         items.add(new Item(2, LocaleController.getString("NewGroup", R.string.NewGroup), newGroupIcon));
         items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), newSecretIcon));
         items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), newChannelIcon));

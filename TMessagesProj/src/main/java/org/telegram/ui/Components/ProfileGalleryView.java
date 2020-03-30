@@ -48,8 +48,6 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
     private boolean scrolledByUser;
     private boolean isDownReleased;
 
-    private ProfileActivity profileActivity;
-
     private int currentAccount = UserConfig.selectedAccount;
 
     private ImageLocation prevImageLocation;
@@ -64,16 +62,12 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         private BackupImageView imageView;
     }
 
-<<<<<<< HEAD
     public interface Callback {
         void onDown(boolean left);
         void onRelease();
     }
 
     public ProfileGalleryView(Context context, long dialogId, ActionBar parentActionBar, RecyclerListView parentListView, ProfileActivity.AvatarImageView parentAvatarImageView, int parentClassGuid, Callback callback) {
-=======
-    public ProfileGalleryView(Context context, long dialogId, ActionBar parentActionBar, RecyclerListView parentListView, ProfileActivity.AvatarImageView parentAvatarImageView, int parentClassGuid, ProfileActivity profileActivity) {
->>>>>>> migrate
         super(context);
         setVisibility(View.GONE);
         setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -82,69 +76,10 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         this.dialogId = dialogId;
         this.parentListView = parentListView;
         this.parentClassGuid = parentClassGuid;
-        this.profileActivity = profileActivity;
         setAdapter(adapter = new ViewPagerAdapter(context, parentAvatarImageView, parentActionBar));
-<<<<<<< HEAD
+
         this.touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         this.callback = callback;
-=======
-
-        touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        gestureDetector = new GestureDetector(context, new GestureDetector.OnGestureListener() {
-            @Override
-            public boolean onDown(MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent e) {
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                if (CatogramConfig.profiles_openOnTap) {
-                    ProfileGalleryView.this.profileActivity.openAvatar(getRealPosition());
-                    return true;
-                }
-
-                if (CatogramConfig.profiles_noEdgeTapping) return true;
-
-                final int itemsCount = adapter.getCount();
-                int currentItem = getCurrentItem();
-                if (itemsCount > 1) {
-                    if (e.getX() > getWidth() / 3) {
-                        final int extraCount = adapter.getExtraCount();
-                        if (++currentItem >= itemsCount - extraCount) {
-                            currentItem = extraCount;
-                        }
-                    } else {
-                        final int extraCount = adapter.getExtraCount();
-                        if (--currentItem < extraCount) {
-                            currentItem = itemsCount - extraCount - 1;
-                        }
-                    }
-                    setCurrentItem(currentItem, false);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                return false;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-            }
-
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                return false;
-            }
-        });
->>>>>>> migrate
 
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.dialogPhotosLoaded);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.fileDidLoad);

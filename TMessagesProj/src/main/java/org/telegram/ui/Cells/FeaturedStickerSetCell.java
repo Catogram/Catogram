@@ -86,52 +86,8 @@ public class FeaturedStickerSetCell extends FrameLayout {
         imageView.setLayerNum(1);
         addView(imageView, LayoutHelper.createFrame(48, 48, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, LocaleController.isRTL ? 0 : 12, 8, LocaleController.isRTL ? 12 : 0, 0));
 
-<<<<<<< HEAD
         addButton = new ProgressButton(context);
-=======
-        addButton = new TextView(context) {
-            @Override
-            protected void onDraw(Canvas canvas) {
-                super.onDraw(canvas);
-                if (drawProgress || !drawProgress && progressAlpha != 0) {
-                    progressPaint.setAlpha(Math.min(255, (int) (progressAlpha * 255)));
-                    int x = getMeasuredWidth() - AndroidUtilities.dp(11);
-                    progressRect.set(x, AndroidUtilities.dp(3), x + AndroidUtilities.dp(8), AndroidUtilities.dp(8 + 3));
-                    canvas.drawArc(progressRect, angle, 220, false, progressPaint);
-                    invalidate((int) progressRect.left - AndroidUtilities.dp(2), (int) progressRect.top - AndroidUtilities.dp(2), (int) progressRect.right + AndroidUtilities.dp(2), (int) progressRect.bottom + AndroidUtilities.dp(2));
-                    long newTime = System.currentTimeMillis();
-                    if (Math.abs(lastUpdateTime - System.currentTimeMillis()) < 1000) {
-                        long delta = (newTime - lastUpdateTime);
-                        float dt = 360 * delta / 2000.0f;
-                        angle += dt;
-                        angle -= 360 * (angle / 360);
-                        if (drawProgress) {
-                            if (progressAlpha < 1.0f) {
-                                progressAlpha += delta / 200.0f;
-                                if (progressAlpha > 1.0f) {
-                                    progressAlpha = 1.0f;
-                                }
-                            }
-                        } else {
-                            if (progressAlpha > 0.0f) {
-                                progressAlpha -= delta / 200.0f;
-                                if (progressAlpha < 0.0f) {
-                                    progressAlpha = 0.0f;
-                                }
-                            }
-                        }
-                    }
-                    lastUpdateTime = newTime;
-                    invalidate();
-                }
-            }
-        };
-        addButton.setGravity(Gravity.CENTER);
-        addButton.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
-        addButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        addButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
-        addButton.setBackgroundDrawable(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(4), Theme.getColor(Theme.key_featuredStickers_addButton), Theme.getColor(Theme.key_featuredStickers_addButtonPressed)));
->>>>>>> migrate
+
         addButton.setText(LocaleController.getString("Add", R.string.Add));
         addButton.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
         addButton.setProgressColor(Theme.getColor(Theme.key_featuredStickers_buttonProgress));
