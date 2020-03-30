@@ -23,6 +23,8 @@ import android.opengl.GLUtils;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Parcelable;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.util.TypedValue;
@@ -60,7 +62,7 @@ import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL;
 import javax.microedition.khronos.opengles.GL10;
 
-public class IntroActivity extends Activity implements NotificationCenter.NotificationCenterDelegate {
+public class IntroActivity extends AppCompatActivity implements NotificationCenter.NotificationCenterDelegate {
 
     private int currentAccount = UserConfig.selectedAccount;
 
@@ -221,7 +223,7 @@ public class IntroActivity extends Activity implements NotificationCenter.Notifi
         startMessagingButton.setText(LocaleController.getString("StartMessaging", R.string.StartMessaging));
         startMessagingButton.setGravity(Gravity.CENTER);
         startMessagingButton.setTextColor(0xffffffff);
-        startMessagingButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        startMessagingButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         startMessagingButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         startMessagingButton.setBackgroundDrawable(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(4), 0xff50a8eb, 0xff439bde));
         startMessagingButton.setPadding(AndroidUtilities.dp(34), 0, AndroidUtilities.dp(34), 0);

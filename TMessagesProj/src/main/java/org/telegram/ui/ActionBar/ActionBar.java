@@ -38,6 +38,8 @@ import org.telegram.ui.Components.SnowflakesEffect;
 
 import java.util.ArrayList;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class ActionBar extends FrameLayout {
 
     public static class ActionBarMenuOnItemClick {
@@ -160,6 +162,11 @@ public class ActionBar extends FrameLayout {
         invalidate();
     }
 
+    public void setOnTitleLongClickListner(View.OnLongClickListener listener) {
+        titleTextView.setOnLongClickListener(listener);
+        subtitleTextView.setOnLongClickListener(listener);
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (supportsHolidayImage && !titleOverlayShown && !LocaleController.isRTL && ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -205,13 +212,7 @@ public class ActionBar extends FrameLayout {
                 drawable.setBounds(x, y - drawable.getIntrinsicHeight(), x + drawable.getIntrinsicWidth(), y);
                 drawable.draw(canvas);
                 if (Theme.canStartHolidayAnimation()) {
-                    if (snowflakesEffect == null) {
-                        snowflakesEffect = new SnowflakesEffect();
-                    }
-                } else if (!manualStart) {
-                    if (snowflakesEffect != null) {
-                        snowflakesEffect = null;
-                    }
+                    snowflakesEffect = new SnowflakesEffect();
                 }
                 if (snowflakesEffect != null) {
                     snowflakesEffect.onDraw(this, canvas);
@@ -282,7 +283,7 @@ public class ActionBar extends FrameLayout {
         titleTextView = new SimpleTextView(getContext());
         titleTextView.setGravity(Gravity.LEFT);
         titleTextView.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle));
-        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         addView(titleTextView, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP));
     }
 
@@ -957,7 +958,7 @@ public class ActionBar extends FrameLayout {
     }
 
     public boolean getCastShadows() {
-        return castShadows;
+        return !CatogramConfig.flatActionbar;
     }
 
     @Override

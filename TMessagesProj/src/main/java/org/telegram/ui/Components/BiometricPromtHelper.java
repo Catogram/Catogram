@@ -120,7 +120,7 @@ public class BiometricPromtHelper {
             builder.setCustomView(linearLayout);
 
             TextView titleTextView = new TextView(context);
-            titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             titleTextView.setGravity(Gravity.CENTER_HORIZONTAL);
             titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
             titleTextView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
@@ -151,7 +151,7 @@ public class BiometricPromtHelper {
             negativeButton.setGravity(Gravity.CENTER);
             negativeButton.setTextColor(Theme.getColor(Theme.key_dialogButton));
             negativeButton.setText(LocaleController.getString("Cancel", R.string.Cancel));
-            negativeButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            negativeButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             negativeButton.setSingleLine(true);
             negativeButton.setPadding(AndroidUtilities.dp(10), 0, AndroidUtilities.dp(10), 0);
             negativeButton.setBackgroundDrawable(Theme.getRoundRectSelectorDrawable(Theme.getColor(Theme.key_dialogButton)));
@@ -388,11 +388,7 @@ public class BiometricPromtHelper {
     }
 
     final static String[] badBiometricModels = new String[]{
-            "SM-G95",
-            "SM-G96",
             "SM-G97",
-            "SM-N95",
-            "SM-N96",
             "SM-N97",
             "SM-A20"
     };

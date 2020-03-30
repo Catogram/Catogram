@@ -2356,8 +2356,46 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         frameLayout.addView(recordPanel, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48));
         recordPanel.setOnTouchListener((v, event) -> true);
 
+<<<<<<< HEAD
         slideText = new SlideTextView(context);
         recordPanel.addView(slideText, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, Gravity.NO_GRAVITY, 45, 0, 0, 0));
+=======
+        slideText = new LinearLayout(context);
+        slideText.setOrientation(LinearLayout.HORIZONTAL);
+        recordPanel.addView(slideText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 30, 0, 0, 0));
+
+        recordCancelImage = new ImageView(context);
+        recordCancelImage.setImageResource(R.drawable.slidearrow);
+        recordCancelImage.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_recordVoiceCancel), PorterDuff.Mode.MULTIPLY));
+        slideText.addView(recordCancelImage, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 0, 1, 0, 0));
+
+        recordCancelText = new TextView(context);
+        recordCancelText.setText(LocaleController.getString("SlideToCancel", R.string.SlideToCancel));
+        recordCancelText.setTextColor(Theme.getColor(Theme.key_chat_recordVoiceCancel));
+        recordCancelText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        slideText.addView(recordCancelText, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 6, 0, 0, 0));
+
+        recordSendText = new TextView(context);
+        recordSendText.setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
+        recordSendText.setTextColor(Theme.getColor(Theme.key_chat_fieldOverlayText));
+        recordSendText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        recordSendText.setGravity(Gravity.CENTER);
+        recordSendText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        recordSendText.setAlpha(0.0f);
+        recordSendText.setPadding(AndroidUtilities.dp(36), 0, 0, 0);
+        recordSendText.setOnClickListener(v -> {
+            if (hasRecordVideo && videoSendButton.getTag() != null) {
+                CameraController.getInstance().cancelOnInitRunnable(onFinishInitCameraRunnable);
+                delegate.needStartRecordVideo(2, true, 0);
+            } else {
+                delegate.needStartRecordAudio(0);
+                MediaController.getInstance().stopRecording(0, false, 0);
+            }
+            recordingAudioVideo = false;
+            updateRecordIntefrace();
+        });
+        recordPanel.addView(recordSendText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0, 0, 0));
+>>>>>>> migrate
 
         recordTimeContainer = new LinearLayout(context);
         recordTimeContainer.setOrientation(LinearLayout.HORIZONTAL);
@@ -5951,7 +5989,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     return;
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
-                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                 builder.setMessage(LocaleController.getString("ClearRecentEmoji", R.string.ClearRecentEmoji));
                 builder.setPositiveButton(LocaleController.getString("ClearButton", R.string.ClearButton).toUpperCase(), (dialogInterface, i) -> emojiView.clearRecentEmoji());
                 builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);

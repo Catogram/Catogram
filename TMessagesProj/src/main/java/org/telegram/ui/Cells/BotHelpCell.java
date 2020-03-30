@@ -96,7 +96,7 @@ public class BotHelpCell extends View {
             }
         }
         MessageObject.addLinks(false, stringBuilder);
-        stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), 0, help.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), 0, help.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Emoji.replaceEmoji(stringBuilder, Theme.chat_msgTextPaint.getFontMetricsInt(), AndroidUtilities.dp(20), false);
         try {
             textLayout = new StaticLayout(stringBuilder, Theme.chat_msgTextPaint, maxWidth, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);

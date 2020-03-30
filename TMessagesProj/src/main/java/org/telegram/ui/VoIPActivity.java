@@ -43,6 +43,7 @@ import android.os.Bundle;
 import androidx.annotation.IntRange;
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -109,7 +110,7 @@ import org.telegram.ui.Components.voip.VoIPHelper;
 
 import java.io.ByteArrayOutputStream;
 
-public class VoIPActivity extends Activity implements VoIPService.StateListener, NotificationCenter.NotificationCenterDelegate {
+public class VoIPActivity extends AppCompatActivity implements VoIPService.StateListener, NotificationCenter.NotificationCenterDelegate {
 
     private int currentAccount = -1;
     private static final String TAG = "tg-voip-ui";
@@ -215,26 +216,10 @@ public class VoIPActivity extends Activity implements VoIPService.StateListener,
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
 
-        nameText.setOnClickListener(new View.OnClickListener() {
-            private int tapCount = 0;
-
-            @Override
-            public void onClick(View v) {
-                if (BuildVars.DEBUG_VERSION || tapCount == 9) {
-                    showDebugAlert();
-                    tapCount = 0;
-                } else {
-                    tapCount++;
-                }
-            }
+        nameText.setOnLongClickListener(v -> {
+            showDebugAlert();
+            return true;
         });
-        /*nameText.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                showDebugCtlAlert();
-                return true;
-            }
-        });*/
 
         endBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -528,7 +513,7 @@ public class VoIPActivity extends Activity implements VoIPService.StateListener,
         signalBarsDrawable = new SignalBarsDrawable();
         signalBarsDrawable.setBounds(0, 0, signalBarsDrawable.getIntrinsicWidth(), signalBarsDrawable.getIntrinsicHeight());
         branding.setCompoundDrawables(LocaleController.isRTL ? signalBarsDrawable : logo, null, LocaleController.isRTL ? logo : signalBarsDrawable, null);
-        branding.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        branding.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         branding.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         branding.setCompoundDrawablePadding(AndroidUtilities.dp(5));
         branding.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
@@ -549,7 +534,7 @@ public class VoIPActivity extends Activity implements VoIPService.StateListener,
         state.setTextColor(0xCCFFFFFF);
         state.setSingleLine();
         state.setEllipsize(TextUtils.TruncateAt.END);
-        state.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        state.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         state.setShadowLayer(AndroidUtilities.dp(3), 0, AndroidUtilities.dp(.666666667f), 0x4C000000);
         state.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         state.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
@@ -561,7 +546,7 @@ public class VoIPActivity extends Activity implements VoIPService.StateListener,
         state.setTextColor(0xCCFFFFFF);
         state.setSingleLine();
         state.setEllipsize(TextUtils.TruncateAt.END);
-        state.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        state.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         state.setShadowLayer(AndroidUtilities.dp(3), 0, AndroidUtilities.dp(.666666667f), 0x4C000000);
         state.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         state.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);

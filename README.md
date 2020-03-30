@@ -1,3 +1,10 @@
+## A note about Catogram
+
+This repo is provided because of GPL license. Please note that it WON'T compile because of:
+- no CupertinoLib (private YTKAB0BP library)
+- no gradle-properties/google-services.json/keystore
+If you use something from this, please write me in the credits. Thanks!
+
 ## Telegram messenger for Android
 
 [Telegram](https://telegram.org) is a messaging app with a focus on speed and security. It’s superfast, simple and free.

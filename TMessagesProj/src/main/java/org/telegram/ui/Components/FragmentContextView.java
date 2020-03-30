@@ -364,7 +364,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
             titleTextView.setTag(Theme.key_returnToCallText);
             closeButton.setVisibility(GONE);
             playButton.setVisibility(GONE);
-            titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             titleTextView.setLayoutParams(LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 0, 0, 0, 2));
             titleTextView.setPadding(0, 0, 0, 0);
@@ -550,7 +550,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
                 int start = fullString.indexOf(liveLocation);
                 SpannableStringBuilder stringBuilder = new SpannableStringBuilder(fullString);
                 titleTextView.setEllipsize(TextUtils.TruncateAt.END);
-                TypefaceSpan span = new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf"), 0, Theme.getColor(Theme.key_inappPlayerPerformer));
+                TypefaceSpan span = new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold(), 0, Theme.getColor(Theme.key_inappPlayerPerformer));
                 stringBuilder.setSpan(span, start, start + liveLocation.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                 titleTextView.setText(stringBuilder);
             } else {
@@ -628,7 +628,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder(fullString);
         titleTextView.setEllipsize(TextUtils.TruncateAt.END);
         if (start >= 0) {
-            TypefaceSpan span = new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf"), 0, Theme.getColor(Theme.key_inappPlayerPerformer));
+            TypefaceSpan span = new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold(), 0, Theme.getColor(Theme.key_inappPlayerPerformer));
             stringBuilder.setSpan(span, start, start + liveLocation.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         }
         titleTextView.setText(stringBuilder);
@@ -754,7 +754,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
                     stringBuilder = new SpannableStringBuilder(String.format("%s - %s", messageObject.getMusicAuthor(), messageObject.getMusicTitle()));
                     titleTextView.setEllipsize(TextUtils.TruncateAt.END);
                 }
-                TypefaceSpan span = new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf"), 0, Theme.getColor(Theme.key_inappPlayerPerformer));
+                TypefaceSpan span = new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold(), 0, Theme.getColor(Theme.key_inappPlayerPerformer));
                 stringBuilder.setSpan(span, 0, messageObject.getMusicAuthor().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                 titleTextView.setText(stringBuilder);
             }

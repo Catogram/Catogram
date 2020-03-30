@@ -56,6 +56,7 @@ import org.json.JSONObject;
 import org.telegram.messenger.support.SparseLongArray;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLRPC;
+import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.LaunchActivity;
 import org.telegram.ui.PopupNotificationActivity;
 
@@ -65,6 +66,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+
+import ua.itaysonlab.catogram.CatogramConfig;
 
 public class NotificationsController extends BaseController {
 
@@ -2724,7 +2727,7 @@ public class NotificationsController extends BaseController {
                         name = LocaleController.getString("NotificationHiddenName", R.string.NotificationHiddenName);
                     }
                 } else {
-                    name = LocaleController.getString("AppName", R.string.AppName);
+                    name = LocaleController.getString("CG_AppName", R.string.CG_AppName);
                 }
                 replace = false;
             } else {
@@ -2759,7 +2762,7 @@ public class NotificationsController extends BaseController {
                     .setGroupSummary(true)
                     .setShowWhen(true)
                     .setWhen(((long) lastMessageObject.messageOwner.date) * 1000)
-                    .setColor(0xff11acfa);
+                    .setColor(CatogramConfig.accentNotification ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa);
 
             long[] vibrationPattern = null;
             int importance = 0;
@@ -3485,7 +3488,7 @@ public class NotificationsController extends BaseController {
                     .setContentText(text.toString())
                     .setAutoCancel(true)
                     .setNumber(messageObjects.size())
-                    .setColor(0xff11acfa)
+                    .setColor(CatogramConfig.accentNotification ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa)
                     .setGroupSummary(false)
                     .setWhen(date)
                     .setShowWhen(true)

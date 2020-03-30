@@ -25,6 +25,8 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import androidx.annotation.IdRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
 import androidx.core.os.CancellationSignal;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -58,6 +60,9 @@ import org.telegram.ui.ActionBar.Theme;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.security.CGBiometricPrompt;
 
 public class PasscodeView extends FrameLayout {
 
@@ -929,6 +934,25 @@ public class PasscodeView extends FrameLayout {
     private void checkFingerprint() {
         Activity parentActivity = (Activity) getContext();
         if (Build.VERSION.SDK_INT >= 23 && parentActivity != null && SharedConfig.useFingerprint && !ApplicationLoader.mainInterfacePaused) {
+            if (CatogramConfig.useBiometricPrompt) {
+                CGBiometricPrompt.callBiometricPrompt((AppCompatActivity) parentActivity, new CGBiometricPrompt.CGBiometricListener() {
+                    @Override
+                    public void onError(CharSequence msg) {
+
+                    }
+
+                    @Override
+                    public void onFailed() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(BiometricPrompt.AuthenticationResult result) {
+                        processDone(true);
+                    }
+                });
+                return;
+            }
             try {
                 if (fingerprintDialog != null && fingerprintDialog.isShowing()) {
                     return;
@@ -972,7 +996,7 @@ public class PasscodeView extends FrameLayout {
                     fingerprintStatusTextView.setLayoutParams(layoutParams);
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                     builder.setView(relativeLayout);
                     builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
                     builder.setOnDismissListener(dialog -> {

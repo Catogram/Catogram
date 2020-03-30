@@ -92,6 +92,8 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class ContactsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
     private ContactsAdapter listViewAdapter;
@@ -512,7 +514,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                         }
                         AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                         builder.setMessage(LocaleController.getString("InviteUser", R.string.InviteUser));
-                        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                         final String arg1 = usePhone;
                         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialogInterface, i) -> {
                             try {
@@ -632,7 +634,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                     TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(channelId);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                     if (ChatObject.canAddAdmins(chat)) {
-                        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                         builder.setMessage(LocaleController.getString("AddBotAsAdmin", R.string.AddBotAsAdmin));
                         builder.setPositiveButton(LocaleController.getString("MakeAdmin", R.string.MakeAdmin), (dialogInterface, i) -> {
                             if (delegate != null) {
@@ -650,7 +652,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 }
             }
             AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
             String message = LocaleController.formatStringSimple(selectAlertString, UserObject.getUserName(user));
             EditTextBoldCursor editText = null;
             if (!user.bot && needForwardCount) {
@@ -741,10 +743,14 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
             if (activity != null) {
                 checkPermission = false;
                 if (activity.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-                    if (activity.shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+                    if (activity.shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) && !CatogramConfig.contactsNever) {
                         AlertDialog.Builder builder = AlertsCreator.createContactsPermissionDialog(activity, param -> {
                             askAboutContacts = param != 0;
                             if (param == 0) {
+                                return;
+                            }
+                            if (param == 2) {
+                                CatogramConfig.shownContactsNever();
                                 return;
                             }
                             askForPermissons(false);
@@ -793,10 +799,14 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
         if (activity == null || !UserConfig.getInstance(currentAccount).syncContacts || activity.checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        if (alert && askAboutContacts) {
+        if (alert && askAboutContacts && !CatogramConfig.contactsNever) {
             AlertDialog.Builder builder = AlertsCreator.createContactsPermissionDialog(activity, param -> {
                 askAboutContacts = param != 0;
                 if (param == 0) {
+                    return;
+                }
+                if (param == 2) {
+                    CatogramConfig.shownContactsNever();
                     return;
                 }
                 askForPermissons(false);

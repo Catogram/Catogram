@@ -37,6 +37,8 @@ import org.telegram.ui.ChatActivity;
 import org.telegram.ui.MediaActivity;
 import org.telegram.ui.ProfileActivity;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class ChatAvatarContainer extends FrameLayout implements NotificationCenter.NotificationCenterDelegate {
 
     private BackupImageView avatarImageView;
@@ -72,13 +74,20 @@ public class ChatAvatarContainer extends FrameLayout implements NotificationCent
         addView(avatarImageView);
         if (parentFragment != null && !parentFragment.isInScheduleMode()) {
             avatarImageView.setOnClickListener(v -> openProfile(true));
+            avatarImageView.setOnLongClickListener(v -> {
+                if (MessagesController.getNotificationsSettings(currentAccount).getInt("pin_" + parentFragment.getDialogId(), 0) != 0) {
+                    MessagesController.getNotificationsSettings(currentAccount).edit().remove("pin_" + parentFragment.getDialogId()).commit();
+                    parentFragment.updatePinnedMessageView(true);
+                }
+                return true;
+            });
         }
 
         titleTextView = new SimpleTextView(context);
         titleTextView.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle));
         titleTextView.setTextSize(18);
         titleTextView.setGravity(Gravity.LEFT);
-        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         titleTextView.setLeftDrawableTopPadding(-AndroidUtilities.dp(1.3f));
         addView(titleTextView);
 
@@ -100,7 +109,7 @@ public class ChatAvatarContainer extends FrameLayout implements NotificationCent
         }
 
         if (parentFragment != null && !parentFragment.isInScheduleMode()) {
-            setOnClickListener(v -> openProfile(false));
+            setOnClickListener(v -> openProfile(CatogramConfig.profiles_alwaysExpand));
 
             TLRPC.Chat chat = parentFragment.getCurrentChat();
             statusDrawables[0] = new TypingDotsDrawable();

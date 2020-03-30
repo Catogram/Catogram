@@ -427,7 +427,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
         public void updateDrawState(TextPaint ds) {
             super.updateDrawState(ds);
             ds.setUnderlineText(true);
-            ds.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            ds.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         }
 
         @Override
@@ -993,7 +993,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                                     int num = a;
                                     AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                                     builder.setMessage(LocaleController.formatString("PassportNameCheckAlert", R.string.PassportNameCheckAlert, firstName, middleName, lastName));
-                                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                                     builder.setPositiveButton(LocaleController.getString("Done", R.string.Done), (dialogInterface, i) -> {
                                         inputFields[FIELD_NAME].setText(firstName);
                                         inputFields[FIELD_MIDNAME].setText(middleName);
@@ -1556,7 +1556,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
         noPasswordSetTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText5));
         noPasswordSetTextView.setGravity(Gravity.CENTER);
         noPasswordSetTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
-        noPasswordSetTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        noPasswordSetTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         noPasswordSetTextView.setText(LocaleController.getString("TelegramPassportCreatePassword", R.string.TelegramPassportCreatePassword));
         linearLayout2.addView(noPasswordSetTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 24, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, 21, 9, 21, 0));
         noPasswordSetTextView.setOnClickListener(v -> {
@@ -1660,9 +1660,9 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                             } else {
                                 timeString = LocaleController.formatPluralString("Minutes", time / 60);
                             }
-                            showAlertWithText(LocaleController.getString("AppName", R.string.AppName), LocaleController.formatString("FloodWaitTime", R.string.FloodWaitTime, timeString));
+                            showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), LocaleController.formatString("FloodWaitTime", R.string.FloodWaitTime, timeString));
                         } else {
-                            showAlertWithText(LocaleController.getString("AppName", R.string.AppName), error.text);
+                            showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), error.text);
                         }
                     }
                 }), ConnectionsManager.RequestFlagFailOnServerErrors | ConnectionsManager.RequestFlagWithoutLogin);
@@ -1901,7 +1901,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                                             if ("APP_VERSION_OUTDATED".equals(error1.text)) {
                                                 AlertsCreator.showUpdateAppAlert(getParentActivity(), LocaleController.getString("UpdateAppAlert", R.string.UpdateAppAlert), true);
                                             } else {
-                                                showAlertWithText(LocaleController.getString("AppName", R.string.AppName), error1.text);
+                                                showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), error1.text);
                                             }
                                             showEditDoneProgress(true, false);
                                         }
@@ -1933,9 +1933,9 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                                     } else {
                                         timeString = LocaleController.formatPluralString("Minutes", time / 60);
                                     }
-                                    showAlertWithText(LocaleController.getString("AppName", R.string.AppName), LocaleController.formatString("FloodWaitTime", R.string.FloodWaitTime, timeString));
+                                    showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), LocaleController.formatString("FloodWaitTime", R.string.FloodWaitTime, timeString));
                                 } else {
-                                    showAlertWithText(LocaleController.getString("AppName", R.string.AppName), error.text);
+                                    showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), error.text);
                                 }
                             }
                         });
@@ -2392,7 +2392,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                     if ("APP_VERSION_OUTDATED".equals(error.text)) {
                         AlertsCreator.showUpdateAppAlert(getParentActivity(), LocaleController.getString("UpdateAppAlert", R.string.UpdateAppAlert), true);
                     } else {
-                        showAlertWithText(LocaleController.getString("AppName", R.string.AppName), error.text);
+                        showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), error.text);
                     }
                 }
             }));
@@ -2406,7 +2406,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
         acceptTextView.setText(LocaleController.getString("PassportAuthorize", R.string.PassportAuthorize));
         acceptTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         acceptTextView.setGravity(Gravity.CENTER);
-        acceptTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        acceptTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         bottomLayout.addView(acceptTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.CENTER));
 
         progressViewButton = new ContextProgressView(context, 0);
@@ -2502,7 +2502,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
         emptyTextView1.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText2));
         emptyTextView1.setGravity(Gravity.CENTER);
         emptyTextView1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-        emptyTextView1.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        emptyTextView1.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         emptyTextView1.setText(LocaleController.getString("PassportNoDocuments", R.string.PassportNoDocuments));
         emptyLayout.addView(emptyTextView1, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 0, 16, 0, 0));
 
@@ -2518,7 +2518,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
         emptyTextView3.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText4));
         emptyTextView3.setGravity(Gravity.CENTER);
         emptyTextView3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-        emptyTextView3.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        emptyTextView3.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         emptyTextView3.setGravity(Gravity.CENTER);
         emptyTextView3.setText(LocaleController.getString("PassportNoDocumentsAdd", R.string.PassportNoDocumentsAdd).toUpperCase());
         emptyLayout.addView(emptyTextView3, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, 30, Gravity.CENTER, 0, 16, 0, 0));
@@ -3539,7 +3539,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
             finishFragment();
         });
         builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
         if (documentOnly && currentDocumentsType == null && currentType.type instanceof TLRPC.TL_secureValueTypeAddress) {
             builder.setMessage(LocaleController.getString("PassportDeleteAddressAlert", R.string.PassportDeleteAddressAlert));
         } else if (documentOnly && currentDocumentsType == null && currentType.type instanceof TLRPC.TL_secureValueTypePersonalDetails) {
@@ -4890,7 +4890,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                 builder.setMessage(LocaleController.getString("PassportDeleteScan", R.string.PassportDeleteScan));
             }
             builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
             builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialog, which) -> {
                 documentsCells.remove(document);
                 if (type == UPLOADING_TYPE_SELFIE) {
@@ -5808,7 +5808,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                 if (errorRunnable != null) {
                     errorRunnable.onError(error.text, null);
                 }
-                showAlertWithText(LocaleController.getString("AppName", R.string.AppName), error.text);
+                showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), error.text);
             } else {
                 if (documentOnly) {
                     if (documentRequiredType != null) {
@@ -5970,7 +5970,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                             deleteValueInternal(requiredType, null, null, true, this::needHideProgress, (error, text) -> needHideProgress(), documentOnly);
                         });
                         builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-                        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                         builder.setMessage(phoneField ? LocaleController.getString("PassportDeletePhoneAlert", R.string.PassportDeletePhoneAlert) : LocaleController.getString("PassportDeleteEmailAlert", R.string.PassportDeleteEmailAlert));
                         showDialog(builder.create());
                         return;
@@ -6268,7 +6268,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                 if (!permissionsItems.isEmpty()) {
                     if (getParentActivity().shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                         builder.setMessage(LocaleController.getString("AllowReadCall", R.string.AllowReadCall));
                         permissionsDialog = showDialog(builder.create());
@@ -6628,7 +6628,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                 }
                 if (grantResults != null && grantResults.length != 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                     builder.setMessage(LocaleController.getString("PermissionNoAudioVideo", R.string.PermissionNoAudioVideo));
                     builder.setNegativeButton(LocaleController.getString("PermissionOpenSettings", R.string.PermissionOpenSettings), (dialog, which) -> {
                         try {
@@ -6798,7 +6798,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
             return;
         }
         if (uploadingFileType == UPLOADING_TYPE_DOCUMENTS && documents.size() >= 20) {
-            showAlertWithText(LocaleController.getString("AppName", R.string.AppName), LocaleController.formatString("PassportUploadMaxReached", R.string.PassportUploadMaxReached, LocaleController.formatPluralString("Files", 20)));
+            showAlertWithText(LocaleController.getString("CG_AppName", R.string.CG_AppName), LocaleController.formatString("PassportUploadMaxReached", R.string.PassportUploadMaxReached, LocaleController.formatPluralString("Files", 20)));
             return;
         }
         createChatAttachView();
@@ -7307,7 +7307,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
             titleTextView = new TextView(context);
             titleTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-            titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             titleTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             titleTextView.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             titleTextView.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
@@ -7550,7 +7550,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
                     codeField[a].setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
                     codeField[a].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                     codeField[a].setMaxLines(1);
-                    codeField[a].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+                    codeField[a].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
                     codeField[a].setPadding(0, 0, 0, 0);
                     codeField[a].setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
                     if (verificationType == 3) {
@@ -7879,7 +7879,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
         public boolean onBackPressed(boolean force) {
             if (!force) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                 builder.setMessage(LocaleController.getString("StopVerification", R.string.StopVerification));
                 builder.setPositiveButton(LocaleController.getString("Continue", R.string.Continue), null);
                 builder.setNegativeButton(LocaleController.getString("Stop", R.string.Stop), (dialogInterface, i) -> {
