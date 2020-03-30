@@ -19,8 +19,7 @@ public class BuildVars {
     public static boolean USE_CLOUD_STRINGS = true;
     public static boolean CHECK_UPDATES = false;
     public static boolean TON_WALLET_STANDALONE = false;
-
-    public static int BUILD_VERSION = 1908;
+    public static int BUILD_VERSION = 1910;
     public static String BUILD_VERSION_STRING = "6.0.0";
     public static int APP_ID = CATOGRAM_APP_ID;
     public static String APP_HASH = "CATOGRAM_API_HASH";
