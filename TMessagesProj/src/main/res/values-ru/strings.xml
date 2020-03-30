@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="AdvancedSettings">Настройки Catogram</string>
+
+    <string name="AS_Header_Appearance">Внешний вид</string>
+    <string name="AS_HideUserPhone">Скрыть номер телефона</string>
+    <string name="AS_HideUserPhoneSummary">в шторке и настройках</string>
+    <string name="AS_NoRounding">Отключить округливание чисел</string>
+    <string name="AS_NoRoundingSummary">1.2K -> 1234</string>
+    <string name="AS_Vibration">Отключить вибрацию</string>
+
+    <string name="AS_Header_Fun">Веселые вещи</string>
+    <string name="AS_ForceNY">Форсировать стиль Нового года</string>
+    <string name="AS_ForceNYSummary">перезапустите приложение для применения</string>
+    <string name="AS_ForcePacman">Форсировать анимацию Pacman</string>
+    <string name="AS_ForcePacmanSummary">при архивации чата</string>
+    <string name="AS_ForceFireworks">Форсировать фейрверки в шторке</string>
+    <string name="AS_ForceFireworksSummary">отключит снегопад при включении</string>
+    <string name="AS_SystemFonts">Использовать системные шрифты</string>
+
+    <string name="AS_Header_Privacy">Приватность</string>
+    <string name="AS_NoProxyPromo">Не показывать спонсора прокси</string>
+    <string name="AS_NoTyping">Не отправлять статус написания</string>
+    <string name="AS_DisableFlagSecure">Включить скриншоты в секретных чатах</string>
+
+    <string name="AS_Hidden">Скрыто</string>
+    <string name="AS_UserID">ID пользователя</string>
+    <string name="AS_GroupID">ID группы</string>
+    <string name="CatogramVersion">Catogram %1$s</string>
+    <string name="AV_ThemeBased">Динамическая</string>
+
+    <string name="AS_CupertinoLib">Редизайн меню сообщения (бета)</string>
+    <string name="AS_CupertinoLibSummary">соответствует дизайну приложения Telegram для iOS</string>
+
+    <string name="AS_Header_Categories">Категории</string>
+    <string name="AS_Header_About">О Catogram</string>
+
+    <string name="CG_AboutDesc">Экспериметальная модификация официального приложения Telegram.</string>
+    <string name="CG_Donate">Поддержать разработку</string>
+    <string name="CG_ToChannel">Открыть официальный канал</string>
+    <string name="AS_ForceNY_Drawer">Новогодние иконки в шторке</string>
+
+    <string name="DebugMenu">Меню отладки</string>
+    <string name="AS_SysEmoji">Использовать системные эмодзи</string>
+    <string name="AS_SysEmojiDesc">может вызвать баги, будьте осторожней</string>
+
+    <string name="AS_DrawerAvatar">Аватар пользователя как шапка</string>
+    <string name="AS_DrawerBlur">Размыть шапку</string>
+    <string name="AS_DrawerDarken">Затемнить шапку</string>
+    <string name="AS_DrawerCategory">Шторка</string>
+    <string name="AS_FlatSB">Прозрачный статусбар</string>
+    <string name="AS_FlatAB">Отключить тень у тулбара</string>
+    <string name="AS_FlatSB_Desc">(переустановите тему) только для Android 6+</string>
+    <string name="AS_RedesignCategory">Редизайн</string>
+
+    <string name="CG_Filters_Header">Фильтр диалогов</string>
+    <string name="CG_Filters_PM">Личные сообщения</string>
+    <string name="CG_Filters_Secret">Секретные чаты</string>
+    <string name="CG_Filters_Channels">Каналы</string>
+    <string name="CG_Filters_Chats">Группы</string>
+    <string name="CG_Filters_Bots">Боты</string>
+    <string name="CG_Filters_All">Все чаты</string>
+
+    <string name="AS_Filters_THint">Показывать подсказку меню</string>
+    <string name="AS_Filters_THintDesc">на субзаголовке тулбара</string>
+
+    <string name="AS_Filters_Header">Фильтры диалогов</string>
+    <string name="AS_Filters_Count">Показывать количество чатов в диалоге</string>
+    <string name="AS_Filters_Count_Desc">вместо количества непрочитанных сообщений</string>
+    <string name="CG_Filters_ToolbarHint">удерживайте для изменения фильтра</string>
+    <string name="CG_Filters_AlsoFABHint">Вы также можете изменить фильтр удерживая по плавающей кнопке \"Написать\".</string>
+
+    <string name="CG_Filters_GenericHint">Это значение будет сохранено.</string>
+
+    <string name="AS_Category_Security">Безопасность</string>
+    <string name="AS_Header_Auth">Авторизация</string>
+    <string name="AS_Biometric">Использовать BiometricPrompt</string>
+    <string name="AS_BiometricDesc">работает со сканированием лица на устройствах подобным Pixel 4</string>
+
+    <string name="CG_Biometric_Subtitle">Вход в приложение</string>
+    <string name="CG_Biometric_Negative">Ввести PIN</string>
+
+    <string name="AS_Header_Notification">Уведомления</string>
+    <string name="AS_AccentNotify">Цвет акцента как цвет уведомления</string>
+
+    <string name="CG_Never">НИКОГДА</string>
+
+    <string name="AS_Filters_ReplaceFAB">Заменить поведение плавающей кнопки</string>
+    <string name="AS_Filters_ReplaceFABDesc">когда включено:\nнажатие - сменить фильтр\nдлинное нажатие - действие по умолчанию (\"Написать\")</string>
+
+    <string name="CG_ChatMenu_RestorePin">Вернуть закрепленное сообщение</string>
+    <string name="CG_ChatMenu_HidePin">Скрыть закрепленное сообщение</string>
+    <string name="CG_ChatMenu_ToChannel">Привязанный канал</string>
+    <string name="CG_ChannelMenu_ToChat">Привязанный чат</string>
+
+    <string name="AS_Header_Chats">Диалоги</string>
+    <string name="CG_NewRepostUI">Включить новый UI репостов везде</string>
+    <string name="CG_NewRepostUI_Desc">работает как кнопка пересыла в чатах</string>
+    <string name="CG_ConfirmCalls">Спрашивать перед звонком</string>
+    <string name="CG_ABSearch">Поиск в тулбаре</string>
+    <string name="CG_ABSearch_Desc">в окне чатов</string>
+
+    <string name="CG_SmoothKbd">Плавная анимация клавиатуры</string>
+    <string name="CG_SmoothKbd_Desc">использует официальную реализацию Telegram</string>
+
+    <string name="CG_Header_Profile">Профили</string>
+    <string name="CG_NewAvaHeader_NoEdgeTapping">Блокировать нажатия по краям</string>
+    <string name="CG_NewAvaHeader_NoEdgeTapping_Desc">вы все еще можете пролистывать аватары</string>
+    <string name="CG_NewAvaHeader_OpenOnTap">Открывать на весь экран при нажатии</string>
+    <string name="CG_NewAvaHeader_OpenOnTap_Desc">это ЗАМЕНИТ нажатие на углы</string>
+    <string name="CG_NewAvaHeader_AlwaysExpand">Всегда раскрывать</string>
+    <string name="CG_NewAvaHeader_AlwaysExpand_Desc">всегда раскрывать аватар в заголовок при открытии профиля</string>
+
+    <string name="CG_Slider_StickerAmplifier">Множитель размера стикеров</string>
+    <string name="CG_NewMsgAnim">Анимация новых сообщений (бета)</string>
+    <string name="CG_HideKbdOnScroll">Прятать клавиатуру при прокрутке</string>
+</resources>

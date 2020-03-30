@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.extras.CatogramExtras;
+
 public class ProfileGalleryView extends CircularViewPager implements NotificationCenter.NotificationCenterDelegate {
 
     private final PointF downPoint = new PointF();
@@ -43,6 +46,8 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
     private final int parentClassGuid;
     private final long dialogId;
     private boolean scrolledByUser;
+
+    private ProfileActivity profileActivity;
 
     private int currentAccount = UserConfig.selectedAccount;
 
@@ -58,7 +63,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         private BackupImageView imageView;
     }
 
-    public ProfileGalleryView(Context context, long dialogId, ActionBar parentActionBar, RecyclerListView parentListView, ProfileActivity.AvatarImageView parentAvatarImageView, int parentClassGuid) {
+    public ProfileGalleryView(Context context, long dialogId, ActionBar parentActionBar, RecyclerListView parentListView, ProfileActivity.AvatarImageView parentAvatarImageView, int parentClassGuid, ProfileActivity profileActivity) {
         super(context);
         setVisibility(View.GONE);
         setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -67,6 +72,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         this.dialogId = dialogId;
         this.parentListView = parentListView;
         this.parentClassGuid = parentClassGuid;
+        this.profileActivity = profileActivity;
         setAdapter(adapter = new ViewPagerAdapter(context, parentAvatarImageView, parentActionBar));
 
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -82,6 +88,13 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
 
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
+                if (CatogramConfig.profiles_openOnTap) {
+                    ProfileGalleryView.this.profileActivity.openAvatar(getRealPosition());
+                    return true;
+                }
+
+                if (CatogramConfig.profiles_noEdgeTapping) return true;
+
                 final int itemsCount = adapter.getCount();
                 int currentItem = getCurrentItem();
                 if (itemsCount > 1) {
@@ -121,7 +134,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.dialogPhotosLoaded);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.fileDidLoad);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.FileLoadProgressChanged);
-        MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 80, 0, true, parentClassGuid);
+        MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, CatogramExtras.LOAD_AVATAR_COUNT_HEADER, 0, true, parentClassGuid);
     }
 
     public void onDestroy() {
@@ -196,7 +209,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         }
         if (prevImageLocation != null && prevImageLocation.location.local_id != imageLocation.location.local_id) {
             imagesLocations.clear();
-            MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 80, 0, true, parentClassGuid);
+            MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, CatogramExtras.LOAD_AVATAR_COUNT_HEADER, 0, true, parentClassGuid);
         }
         if (!imagesLocations.isEmpty()) {
             return;
@@ -332,7 +345,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
                     resetCurrentItem();
                 }
                 if (fromCache) {
-                    MessagesController.getInstance(currentAccount).loadDialogPhotos(did, 80, 0, false, parentClassGuid);
+                    MessagesController.getInstance(currentAccount).loadDialogPhotos(did, CatogramExtras.LOAD_AVATAR_COUNT_HEADER, 0, false, parentClassGuid);
                 }
             }
         } else if (id == NotificationCenter.fileDidLoad) {

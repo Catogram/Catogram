@@ -883,7 +883,7 @@ public class ChannelAdminLogActivity extends BaseFragment implements Notificatio
 
         bottomOverlayChatText = new TextView(context);
         bottomOverlayChatText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-        bottomOverlayChatText.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        bottomOverlayChatText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         bottomOverlayChatText.setTextColor(Theme.getColor(Theme.key_chat_fieldOverlayText));
         bottomOverlayChatText.setText(LocaleController.getString("SETTINGS", R.string.SETTINGS).toUpperCase());
         bottomOverlayChat.addView(bottomOverlayChatText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER));
@@ -996,7 +996,7 @@ public class ChannelAdminLogActivity extends BaseFragment implements Notificatio
         searchCountText = new SimpleTextView(context);
         searchCountText.setTextColor(Theme.getColor(Theme.key_chat_searchPanelText));
         searchCountText.setTextSize(15);
-        searchCountText.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        searchCountText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         searchContainer.addView(searchCountText, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.CENTER_VERTICAL, 108, 0, 0, 0));
 
         chatAdapter.updateRows();
@@ -1320,7 +1320,7 @@ public class ChannelAdminLogActivity extends BaseFragment implements Notificatio
                                 return;
                             }
                             AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                             builder.setMessage(LocaleController.getString("IncorrectTheme", R.string.IncorrectTheme));
                             builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                             showDialog(builder.create());
@@ -1334,7 +1334,7 @@ public class ChannelAdminLogActivity extends BaseFragment implements Notificatio
                                 return;
                             }
                             AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                             builder.setMessage(LocaleController.getString("IncorrectLocalization", R.string.IncorrectLocalization));
                             builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                             showDialog(builder.create());
@@ -1805,7 +1805,7 @@ public class ChannelAdminLogActivity extends BaseFragment implements Notificatio
             return;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
         if (message.type == 3) {
             builder.setMessage(LocaleController.getString("NoPlayerInstalled", R.string.NoPlayerInstalled));

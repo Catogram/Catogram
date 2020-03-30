@@ -79,7 +79,7 @@ public class JoinGroupAlert extends BottomSheet {
         }
 
         TextView textView = new TextView(context);
-        textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
         textView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
         textView.setText(title);

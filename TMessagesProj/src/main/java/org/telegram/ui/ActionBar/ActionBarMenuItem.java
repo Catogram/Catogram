@@ -135,7 +135,7 @@ public class ActionBarMenuItem extends FrameLayout {
         if (text) {
             textView = new TextView(context);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-            textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(AndroidUtilities.dp(4), 0, AndroidUtilities.dp(4), 0);
             if (iconColor != 0) {

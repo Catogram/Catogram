@@ -51,6 +51,8 @@ import android.provider.Settings;
 
 import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
+import ua.itaysonlab.extras.CatogramExtras;
+import ua.itaysonlab.extras.CatogramFontLoader;
 
 import android.telephony.TelephonyManager;
 import android.text.Selection;
@@ -90,13 +92,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.internal.telephony.ITelephony;
-import com.google.android.gms.auth.api.phone.SmsRetriever;
-import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.Task;
-
-import net.hockeyapp.android.CrashManager;
-import net.hockeyapp.android.CrashManagerListener;
-import net.hockeyapp.android.UpdateManager;
 
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.tgnet.ConnectionsManager;
@@ -1085,6 +1081,7 @@ public class AndroidUtilities {
     }
 
     public static Typeface getTypeface(String assetPath) {
+        if (CatogramFontLoader.needRedirect(assetPath)) return CatogramFontLoader.redirect(assetPath);
         synchronized (typefaceCache) {
             if (!typefaceCache.containsKey(assetPath)) {
                 try {
@@ -1122,22 +1119,7 @@ public class AndroidUtilities {
     }
 
     public static void setWaitingForSms(boolean value) {
-        synchronized (smsLock) {
-            waitingForSms = value;
-            try {
-                if (waitingForSms) {
-                    SmsRetrieverClient client = SmsRetriever.getClient(ApplicationLoader.applicationContext);
-                    Task<Void> task = client.startSmsRetriever();
-                    task.addOnSuccessListener(aVoid -> {
-                        if (BuildVars.DEBUG_VERSION) {
-                            FileLog.d("sms listener registered");
-                        }
-                    });
-                }
-            } catch (Throwable e) {
-                FileLog.e(e);
-            }
-        }
+
     }
 
     public static int getShadowHeight() {
@@ -1812,7 +1794,7 @@ public class AndroidUtilities {
             }
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(stringBuilder);
             for (int a = 0; a < bolds.size() / 2; a++) {
-                spannableStringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), bolds.get(a * 2), bolds.get(a * 2 + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableStringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), bolds.get(a * 2), bolds.get(a * 2 + 1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             return spannableStringBuilder;
         } catch (Exception e) {
@@ -1926,28 +1908,15 @@ public class AndroidUtilities {
     }*/
 
     public static void checkForCrashes(Activity context) {
-        try {
-            CrashManager.register(context, BuildVars.DEBUG_VERSION ? BuildVars.HOCKEY_APP_HASH_DEBUG : BuildVars.HOCKEY_APP_HASH, new CrashManagerListener() {
-                @Override
-                public boolean includeDeviceData() {
-                    return true;
-                }
-            });
-        } catch (Throwable e) {
-            FileLog.e(e);
-        }
+
     }
 
     public static void checkForUpdates(Activity context) {
-        if (BuildVars.DEBUG_VERSION) {
-            UpdateManager.register(context, BuildVars.DEBUG_VERSION ? BuildVars.HOCKEY_APP_HASH_DEBUG : BuildVars.HOCKEY_APP_HASH);
-        }
+
     }
 
     public static void unregisterUpdates() {
-        if (BuildVars.DEBUG_VERSION) {
-            UpdateManager.unregister();
-        }
+
     }
 
     public static void addToClipboard(CharSequence str) {
@@ -2393,7 +2362,7 @@ public class AndroidUtilities {
                     parentFragment.presentFragment(new ThemePreviewActivity(themeInfo));
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                     builder.setMessage(LocaleController.getString("IncorrectTheme", R.string.IncorrectTheme));
                     builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                     parentFragment.showDialog(builder.create());
@@ -2439,7 +2408,7 @@ public class AndroidUtilities {
                         return;
                     }
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                     builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                     builder.setMessage(LocaleController.formatString("NoHandleAppInstalled", R.string.NoHandleAppInstalled, message.getDocument().mime_type));
                     if (parentFragment != null) {
@@ -2481,7 +2450,7 @@ public class AndroidUtilities {
             }
             if (Build.VERSION.SDK_INT >= 26 && realMimeType != null && realMimeType.equals("application/vnd.android.package-archive") && !ApplicationLoader.applicationContext.getPackageManager().canRequestPackageInstalls()) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                 builder.setMessage(LocaleController.getString("ApkRestricted", R.string.ApkRestricted));
                 builder.setPositiveButton(LocaleController.getString("PermissionOpenSettings", R.string.PermissionOpenSettings), (dialogInterface, i) -> {
                     try {
@@ -3182,13 +3151,13 @@ public class AndroidUtilities {
                 if ((flags & View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) == 0) {
                     flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                     decorView.setSystemUiVisibility(flags);
-                    window.setStatusBarColor(0x0f000000);
+                    window.setStatusBarColor(CatogramExtras.getLightStatusbarColor());
                 }
             } else {
                 if ((flags & View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) != 0) {
                     flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                     decorView.setSystemUiVisibility(flags);
-                    window.setStatusBarColor(0x33000000);
+                    window.setStatusBarColor(CatogramExtras.getDarkStatusbarColor());
                 }
             }
         }

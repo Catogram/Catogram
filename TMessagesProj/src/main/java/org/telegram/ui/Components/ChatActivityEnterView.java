@@ -1409,7 +1409,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         recordSendText.setTextColor(Theme.getColor(Theme.key_chat_fieldOverlayText));
         recordSendText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
         recordSendText.setGravity(Gravity.CENTER);
-        recordSendText.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        recordSendText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         recordSendText.setAlpha(0.0f);
         recordSendText.setPadding(AndroidUtilities.dp(36), 0, 0, 0);
         recordSendText.setOnClickListener(v -> {
@@ -4320,7 +4320,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     return;
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
-                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                 builder.setMessage(LocaleController.getString("ClearRecentEmoji", R.string.ClearRecentEmoji));
                 builder.setPositiveButton(LocaleController.getString("ClearButton", R.string.ClearButton).toUpperCase(), (dialogInterface, i) -> emojiView.clearRecentEmoji());
                 builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);

@@ -660,7 +660,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
             pickerBottomLayout.setTextColor(Theme.getColor(Theme.key_dialogTextBlue2));
             pickerBottomLayout.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             pickerBottomLayout.setPadding(AndroidUtilities.dp(18), 0, AndroidUtilities.dp(18), 0);
-            pickerBottomLayout.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            pickerBottomLayout.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             pickerBottomLayout.setGravity(Gravity.CENTER);
             pickerBottomLayout.setText(LocaleController.getString("CopyLink", R.string.CopyLink).toUpperCase());
             pickerBottomLayout.setOnClickListener(v -> {
@@ -757,7 +757,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
         });
 
         textPaint.setTextSize(AndroidUtilities.dp(12));
-        textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
 
         selectedCountView = new View(context) {
             @Override

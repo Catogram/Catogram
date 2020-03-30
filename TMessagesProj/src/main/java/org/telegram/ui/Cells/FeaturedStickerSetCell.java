@@ -141,7 +141,7 @@ public class FeaturedStickerSetCell extends FrameLayout {
         addButton.setGravity(Gravity.CENTER);
         addButton.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
         addButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        addButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        addButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         addButton.setBackgroundDrawable(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(4), Theme.getColor(Theme.key_featuredStickers_addButton), Theme.getColor(Theme.key_featuredStickers_addButtonPressed)));
         addButton.setText(LocaleController.getString("Add", R.string.Add));
         addButton.setPadding(AndroidUtilities.dp(17), 0, AndroidUtilities.dp(17), 0);

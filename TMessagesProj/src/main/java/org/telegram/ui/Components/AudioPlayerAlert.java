@@ -470,7 +470,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         titleTextView = new TextView(context);
         titleTextView.setTextColor(Theme.getColor(Theme.key_player_actionBarTitle));
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         titleTextView.setEllipsize(TextUtils.TruncateAt.END);
         titleTextView.setSingleLine(true);
         playerLayout.addView(titleTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 72, 18, 60, 0));
@@ -860,7 +860,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
                     parentActivity.startActivityForResult(Intent.createChooser(intent, LocaleController.getString("ShareFile", R.string.ShareFile)), 500);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
-                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                     builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                     builder.setMessage(LocaleController.getString("PleaseDownload", R.string.PleaseDownload));
                     builder.show();

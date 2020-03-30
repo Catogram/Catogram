@@ -1830,7 +1830,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteRedText));
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             textView.setGravity(Gravity.CENTER);
-            textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             textView.setText(LocaleController.getString("BanFromTheGroup", R.string.BanFromTheGroup));
             frameLayout1.addView(textView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 0, 1, 0, 0));
 
@@ -1876,7 +1876,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         if (avatarsViewPager != null) {
             avatarsViewPager.onDestroy();
         }
-        avatarsViewPager = new ProfileGalleryView(context, user_id != 0 ? user_id : -chat_id, actionBar, listView, avatarImage, getClassGuid());
+        avatarsViewPager = new ProfileGalleryView(context, user_id != 0 ? user_id : -chat_id, actionBar, listView, avatarImage, getClassGuid(), this);
         frameLayout.addView(avatarsViewPager);
 
         overlaysView = new OverlaysView(context);
@@ -1899,7 +1899,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             }
             nameTextView[a].setTextSize(18);
             nameTextView[a].setGravity(Gravity.LEFT);
-            nameTextView[a].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            nameTextView[a].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             nameTextView[a].setLeftDrawableTopPadding(-AndroidUtilities.dp(1.3f));
             nameTextView[a].setPivotX(0);
             nameTextView[a].setPivotY(0);
@@ -2101,7 +2101,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         }
     }
 
-    private void openAvatar() {
+    public void openAvatar(final int index) {
         if (listView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) {
             return;
         }
@@ -2112,7 +2112,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 if (user.photo.dc_id != 0) {
                     user.photo.photo_big.dc_id = user.photo.dc_id;
                 }
-                PhotoViewer.getInstance().openPhoto(user.photo.photo_big, provider);
+                PhotoViewer.getInstance().openPhoto(user.photo.photo_big, index, provider);
             }
         } else if (chat_id != 0) {
             TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chat_id);
@@ -2121,10 +2121,12 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 if (chat.photo.dc_id != 0) {
                     chat.photo.photo_big.dc_id = chat.photo.dc_id;
                 }
-                PhotoViewer.getInstance().openPhoto(chat.photo.photo_big, provider);
+                PhotoViewer.getInstance().openPhoto(chat.photo.photo_big, index, provider);
             }
         }
     }
+
+    public void openAvatar() { openAvatar(0); }
 
     private boolean onMemberClick(TLRPC.ChatParticipant participant, boolean isLong) {
         if (getParentActivity() == null) {
@@ -4451,7 +4453,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 case 3:
                     AboutLinkCell aboutLinkCell = (AboutLinkCell) holder.itemView;
                     if (position == userInfoRow) {
-                        aboutLinkCell.setTextAndValue(userInfo.about, LocaleController.getString("UserBio", R.string.UserBio), isBot);
+                        aboutLinkCell.setTextAndValue(userInfo.about, LocaleController.getString("UserBio", R.string.UserBio), true);
                     } else if (position == channelInfoRow) {
                         String text = chatInfo.about;
                         while (text.contains("\n\n\n")) {

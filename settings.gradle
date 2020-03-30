@@ -1,1 +1,2 @@
-include ':TMessagesProj'
+include ':TMessagesProj', ':CupertinoLib'
+project(':CupertinoLib').projectDir = new File('CupertinoLib')

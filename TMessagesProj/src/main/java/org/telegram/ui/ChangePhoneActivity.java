@@ -143,7 +143,7 @@ public class ChangePhoneActivity extends BaseFragment {
 
     @Override
     public View createView(Context context) {
-        actionBar.setTitle(LocaleController.getString("AppName", R.string.AppName));
+        actionBar.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
         actionBar.setBackButtonImage(R.drawable.ic_ab_back);
         actionBar.setActionBarMenuOnItemClick(new ActionBar.ActionBarMenuOnItemClick() {
             @Override
@@ -727,7 +727,7 @@ public class ChangePhoneActivity extends BaseFragment {
                         if (preferences.getBoolean("firstlogin", true) || getParentActivity().shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
                             preferences.edit().putBoolean("firstlogin", false).commit();
                             AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                             builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                             builder.setMessage(LocaleController.getString("AllowReadCall", R.string.AllowReadCall));
                             permissionsDialog = showDialog(builder.create());
@@ -867,7 +867,7 @@ public class ChangePhoneActivity extends BaseFragment {
             titleTextView = new TextView(context);
             titleTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-            titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             titleTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             titleTextView.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             titleTextView.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
@@ -1123,7 +1123,7 @@ public class ChangePhoneActivity extends BaseFragment {
                     codeField[a].setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
                     codeField[a].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                     codeField[a].setMaxLines(1);
-                    codeField[a].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+                    codeField[a].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
                     codeField[a].setPadding(0, 0, 0, 0);
                     codeField[a].setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
                     if (currentType == 3) {
@@ -1463,7 +1463,7 @@ public class ChangePhoneActivity extends BaseFragment {
         public boolean onBackPressed(boolean force) {
             if (!force) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                 builder.setMessage(LocaleController.getString("StopVerification", R.string.StopVerification));
                 builder.setPositiveButton(LocaleController.getString("Continue", R.string.Continue), null);
                 builder.setNegativeButton(LocaleController.getString("Stop", R.string.Stop), (dialogInterface, i) -> {

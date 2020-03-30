@@ -249,7 +249,7 @@ public class PhotoPaintView extends FrameLayout implements EntityView.EntityView
         cancelTextView.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, 0));
         cancelTextView.setPadding(AndroidUtilities.dp(20), 0, AndroidUtilities.dp(20), 0);
         cancelTextView.setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
-        cancelTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        cancelTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         toolsView.addView(cancelTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT));
 
         doneTextView = new TextView(context);
@@ -259,7 +259,7 @@ public class PhotoPaintView extends FrameLayout implements EntityView.EntityView
         doneTextView.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, 0));
         doneTextView.setPadding(AndroidUtilities.dp(20), 0, AndroidUtilities.dp(20), 0);
         doneTextView.setText(LocaleController.getString("Done", R.string.Done).toUpperCase());
-        doneTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        doneTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         toolsView.addView(doneTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.RIGHT));
 
         paintButton = new ImageView(context);
@@ -440,7 +440,7 @@ public class PhotoPaintView extends FrameLayout implements EntityView.EntityView
             }
             AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
             builder.setMessage(LocaleController.getString("DiscardChanges", R.string.DiscardChanges));
-            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
             builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialogInterface, i) -> okRunnable.run());
             builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
             photoViewer.showAlertDialog(builder);

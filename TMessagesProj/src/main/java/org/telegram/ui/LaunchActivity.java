@@ -113,9 +113,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-public class LaunchActivity extends Activity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
+public class LaunchActivity extends AppCompatActivity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
 
     private boolean finished;
     private String videoPath;
@@ -1833,7 +1834,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                 NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.didReceiveSmsCode, code);
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(LaunchActivity.this);
-                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                 builder.setMessage(AndroidUtilities.replaceTags(LocaleController.formatString("OtherLoginCode", R.string.OtherLoginCode, code)));
                 builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                 showAlertDialog(builder);
@@ -2042,7 +2043,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                             }
                         } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(LaunchActivity.this);
-                            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                             if (error.text.startsWith("FLOOD_WAIT")) {
                                 builder.setMessage(LocaleController.getString("FloodWait", R.string.FloodWait));
                             } else {
@@ -2096,7 +2097,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                                 }
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LaunchActivity.this);
-                                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
                                 if (error.text.startsWith("FLOOD_WAIT")) {
                                     builder.setMessage(LocaleController.getString("FloodWait", R.string.FloodWait));
                                 } else if (error.text.equals("USERS_TOO_MUCH")) {
@@ -2778,7 +2779,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
 
     private void showPermissionErrorAlert(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
         builder.setMessage(message);
         builder.setNegativeButton(LocaleController.getString("PermissionOpenSettings", R.string.PermissionOpenSettings), (dialog, which) -> {
             try {
@@ -2994,7 +2995,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                 return;
             }
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
             if (reason != 2 && reason != 3) {
                 builder.setNegativeButton(LocaleController.getString("MoreInfo", R.string.MoreInfo), (dialogInterface, i) -> {
                     if (!mainFragmentsStack.isEmpty()) {
@@ -3033,7 +3034,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         } else if (id == NotificationCenter.wasUnableToFindCurrentLocation) {
             final HashMap<String, MessageObject> waitingForLocation = (HashMap<String, MessageObject>) args[0];
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
             builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
             builder.setNegativeButton(LocaleController.getString("ShareYouLocationUnableManually", R.string.ShareYouLocationUnableManually), (dialogInterface, i) -> {
                 if (mainFragmentsStack.isEmpty()) {

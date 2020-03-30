@@ -49,7 +49,7 @@ public class AvatarDrawable extends Drawable {
         super();
 
         namePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-        namePaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        namePaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         namePaint.setTextSize(AndroidUtilities.dp(18));
     }
 

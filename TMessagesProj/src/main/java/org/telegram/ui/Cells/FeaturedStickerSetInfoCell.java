@@ -64,7 +64,7 @@ public class FeaturedStickerSetInfoCell extends FrameLayout {
         nameTextView = new TextView(context);
         nameTextView.setTextColor(Theme.getColor(Theme.key_chat_emojiPanelTrendingTitle));
         nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
-        nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        nameTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         nameTextView.setEllipsize(TextUtils.TruncateAt.END);
         nameTextView.setSingleLine(true);
         addView(nameTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, left, 8, 40, 0));
@@ -80,7 +80,7 @@ public class FeaturedStickerSetInfoCell extends FrameLayout {
         addButton.setGravity(Gravity.CENTER);
         addButton.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
         addButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        addButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        addButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         addButton.setBackgroundDrawable(addDrawable);
         addButton.setPadding(AndroidUtilities.dp(17), 0, AndroidUtilities.dp(17), 0);
         addButton.setText(LocaleController.getString("Add", R.string.Add));
@@ -90,7 +90,7 @@ public class FeaturedStickerSetInfoCell extends FrameLayout {
         delButton.setGravity(Gravity.CENTER);
         delButton.setTextColor(Theme.getColor(Theme.key_featuredStickers_removeButtonText));
         delButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        delButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        delButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         delButton.setText(LocaleController.getString("StickersRemove", R.string.StickersRemove));
         addView(delButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, 28, Gravity.TOP | Gravity.RIGHT, 0, 16, 14, 0));
 
