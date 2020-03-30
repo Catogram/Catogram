@@ -93,12 +93,6 @@ import android.widget.TextView;
 
 import com.android.internal.telephony.ITelephony;
 import com.google.android.gms.tasks.Task;
-<<<<<<< HEAD
-import com.microsoft.appcenter.AppCenter;
-import com.microsoft.appcenter.crashes.Crashes;
-import com.microsoft.appcenter.distribute.Distribute;
-=======
->>>>>>> migrate
 
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.tgnet.ConnectionsManager;
@@ -1935,35 +1929,10 @@ public class AndroidUtilities {
         }
     }*/
 
-<<<<<<< HEAD
     public static void startAppCenter(Activity context) {
-        try {
-            if (BuildVars.DEBUG_VERSION) {
-                Distribute.setEnabledForDebuggableBuild(true);
-                AppCenter.start(context.getApplication(), BuildVars.DEBUG_VERSION ? BuildVars.APPCENTER_HASH_DEBUG : BuildVars.APPCENTER_HASH, Distribute.class, Crashes.class);
-            } else {
-                AppCenter.start(context.getApplication(), BuildVars.DEBUG_VERSION ? BuildVars.APPCENTER_HASH_DEBUG : BuildVars.APPCENTER_HASH, Crashes.class);
-            }
-            AppCenter.setUserId("uid=" + UserConfig.getInstance(UserConfig.selectedAccount).clientUserId);
-        } catch (Throwable e) {
-            FileLog.e(e);
-        }
+
     }
 
-    private static long lastUpdateCheckTime;
-    public static void checkForUpdates() {
-        try {
-            if (BuildVars.DEBUG_VERSION) {
-                if (SystemClock.elapsedRealtime() - lastUpdateCheckTime < 60 * 60 * 1000) {
-                    return;
-                }
-                lastUpdateCheckTime = SystemClock.elapsedRealtime();
-                Distribute.checkForUpdate();
-            }
-        } catch (Throwable e) {
-            FileLog.e(e);
-        }
-=======
     public static void checkForCrashes(Activity context) {
 
     }
@@ -1974,7 +1943,6 @@ public class AndroidUtilities {
 
     public static void unregisterUpdates() {
 
->>>>>>> migrate
     }
 
     public static void addToClipboard(CharSequence str) {

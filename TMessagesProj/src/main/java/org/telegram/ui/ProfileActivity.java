@@ -1949,12 +1949,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         if (avatarsViewPager != null) {
             avatarsViewPager.onDestroy();
         }
-<<<<<<< HEAD
-=======
-        avatarsViewPager = new ProfileGalleryView(context, user_id != 0 ? user_id : -chat_id, actionBar, listView, avatarImage, getClassGuid(), this);
-        frameLayout.addView(avatarsViewPager);
 
->>>>>>> migrate
         overlaysView = new OverlaysView(context);
         avatarsViewPager = new ProfileGalleryView(context, user_id != 0 ? user_id : -chat_id, actionBar, listView, avatarImage, getClassGuid(), overlaysView);
         frameLayout.addView(avatarsViewPager);
@@ -2179,15 +2174,11 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         }
     }
 
-<<<<<<< HEAD
     public TLRPC.Chat getCurrentChat() {
         return currentChat;
     }
 
     private void openAvatar() {
-=======
-    public void openAvatar(final int index) {
->>>>>>> migrate
         if (listView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) {
             return;
         }
@@ -2198,7 +2189,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 if (user.photo.dc_id != 0) {
                     user.photo.photo_big.dc_id = user.photo.dc_id;
                 }
-                PhotoViewer.getInstance().openPhoto(user.photo.photo_big, index, provider);
+                PhotoViewer.getInstance().openPhoto(user.photo.photo_big, provider);
             }
         } else if (chat_id != 0) {
             TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(chat_id);
@@ -2207,7 +2198,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 if (chat.photo.dc_id != 0) {
                     chat.photo.photo_big.dc_id = chat.photo.dc_id;
                 }
-                PhotoViewer.getInstance().openPhoto(chat.photo.photo_big, index, provider);
+                PhotoViewer.getInstance().openPhoto(chat.photo.photo_big, provider);
             }
         }
     }
@@ -2215,13 +2206,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         return onMemberClick(participant, isLong, false);
     }
 
-<<<<<<< HEAD
     public boolean onMemberClick(TLRPC.ChatParticipant participant, boolean isLong, boolean resultOnly) {
-=======
-    public void openAvatar() { openAvatar(0); }
-
-    private boolean onMemberClick(TLRPC.ChatParticipant participant, boolean isLong) {
->>>>>>> migrate
         if (getParentActivity() == null) {
             return false;
         }

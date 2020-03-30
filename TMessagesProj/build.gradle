@@ -33,24 +33,16 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision:16.2.0'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-<<<<<<< HEAD
-    implementation "com.microsoft.appcenter:appcenter-distribute:3.1.0"
-    implementation "com.microsoft.appcenter:appcenter-crashes:3.1.0"
-=======
->>>>>>> migrate
+
     implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
     implementation 'com.facebook.rebound:rebound:0.3.8'
 }
 
 android {
     compileSdkVersion 29
-<<<<<<< HEAD
+
     buildToolsVersion '29.0.3'
-    ndkVersion "20.0.5594570"
-=======
-    buildToolsVersion '29.0.2'
     ndkVersion "20.1.5948944"
->>>>>>> migrate
 
     defaultConfig.applicationId = "ua.itaysonlab.messenger"
 
@@ -362,11 +354,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
-<<<<<<< HEAD
-        versionName "6.0.0"
-=======
-        versionName "CG-5.15.0"
->>>>>>> migrate
+        versionName "CG-6.0.0"
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
 

@@ -75,14 +75,9 @@ public class FeaturedStickerSetInfoCell extends FrameLayout {
         addButton = new ProgressButton(context);
         addButton.setProgressColor(Theme.getColor(Theme.key_featuredStickers_buttonProgress));
         addButton.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
-<<<<<<< HEAD
+
         addButton.setBackgroundRoundRect(Theme.getColor(Theme.key_featuredStickers_addButton), Theme.getColor(Theme.key_featuredStickers_addButtonPressed));
-=======
-        addButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        addButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
-        addButton.setBackgroundDrawable(addDrawable);
-        addButton.setPadding(AndroidUtilities.dp(17), 0, AndroidUtilities.dp(17), 0);
->>>>>>> migrate
+
         addButton.setText(LocaleController.getString("Add", R.string.Add));
         addView(addButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, 28, Gravity.TOP | Gravity.RIGHT, 0, 16, 14, 0));
 

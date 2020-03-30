@@ -435,14 +435,9 @@ public class ActionIntroActivity extends BaseFragment implements LocationControl
                 desctiptionLines[a * 2].setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
                 desctiptionLines[a * 2].setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
                 desctiptionLines[a * 2].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-<<<<<<< HEAD
+
                 desctiptionLines[a * 2].setText(String.format(LocaleController.isRTL ? ".%d" : "%d.", a + 1));
                 desctiptionLines[a * 2].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
-=======
-                desctiptionLines[a * 2].setText(String.format("%d.", a + 1));
-                desctiptionLines[a * 2].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
-                linearLayout.addView(desctiptionLines[a * 2], LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, 0, 0, 4, 0));
->>>>>>> migrate
 
                 desctiptionLines[a * 2 + 1] = new TextView(context);
                 desctiptionLines[a * 2 + 1].setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));

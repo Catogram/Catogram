@@ -286,27 +286,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.userInfoDidLoad);
         NotificationCenter.getGlobalInstance().addObserver(this, NotificationCenter.emojiDidLoad);
 
-<<<<<<< HEAD
         updateRows();
-=======
-        rowCount = 0;
-        emptyRow = rowCount++;
-        numberSectionRow = rowCount++;
-        numberRow = rowCount++;
-        usernameRow = rowCount++;
-        bioRow = rowCount++;
-        settingsSectionRow = rowCount++;
-        settingsSectionRow2 = rowCount++;
-        catogramRaw = rowCount++;
-        notificationRow = rowCount++;
-        privacyRow = rowCount++;
-        dataRow = rowCount++;
-        chatRow = rowCount++;
-        devicesRow = rowCount++;
-        languageRow = rowCount++;
-        helpRow = rowCount++;
-        versionRow = rowCount++;
->>>>>>> migrate
 
         getMediaDataController().checkFeaturedStickers();
         getMessagesController().loadSuggestedFilters();
@@ -515,7 +495,6 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             }
         });
 
-<<<<<<< HEAD
         listView.setOnItemLongClickListener(new RecyclerListView.OnItemLongClickListener() {
 
             private int pressCount = 0;
@@ -523,143 +502,73 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             @Override
             public boolean onItemClick(View view, int position) {
                 if (position == versionRow) {
-                    pressCount++;
-                    if (pressCount >= 2 || BuildVars.DEBUG_PRIVATE_VERSION) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                        builder.setTitle(LocaleController.getString("DebugMenu", R.string.DebugMenu));
-                        CharSequence[] items;
-                        items = new CharSequence[]{
-                                LocaleController.getString("DebugMenuImportContacts", R.string.DebugMenuImportContacts),
-                                LocaleController.getString("DebugMenuReloadContacts", R.string.DebugMenuReloadContacts),
-                                LocaleController.getString("DebugMenuResetContacts", R.string.DebugMenuResetContacts),
-                                LocaleController.getString("DebugMenuResetDialogs", R.string.DebugMenuResetDialogs),
-                                BuildVars.LOGS_ENABLED ? LocaleController.getString("DebugMenuDisableLogs", R.string.DebugMenuDisableLogs) : LocaleController.getString("DebugMenuEnableLogs", R.string.DebugMenuEnableLogs),
-                                SharedConfig.inappCamera ? LocaleController.getString("DebugMenuDisableCamera", R.string.DebugMenuDisableCamera) : LocaleController.getString("DebugMenuEnableCamera", R.string.DebugMenuEnableCamera),
-                                LocaleController.getString("DebugMenuClearMediaCache", R.string.DebugMenuClearMediaCache),
-                                LocaleController.getString("DebugMenuCallSettings", R.string.DebugMenuCallSettings),
-                                null,
-                                BuildVars.DEBUG_PRIVATE_VERSION ? "Check for app updates" : null,
-                                LocaleController.getString("DebugMenuReadAllDialogs", R.string.DebugMenuReadAllDialogs),
-                                SharedConfig.pauseMusicOnRecord ? LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) : LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
-                                BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() && Build.VERSION.SDK_INT >= 23 ? (SharedConfig.smoothKeyboard ? LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) : LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard)) : null
-                        };
-                        builder.setItems(items, (dialog, which) -> {
-                            if (which == 0) {
-                                UserConfig.getInstance(currentAccount).syncContacts = true;
-                                UserConfig.getInstance(currentAccount).saveConfig(false);
-                                ContactsController.getInstance(currentAccount).forceImportContacts();
-                            } else if (which == 1) {
-                                ContactsController.getInstance(currentAccount).loadContacts(false, 0);
-                            } else if (which == 2) {
-                                ContactsController.getInstance(currentAccount).resetImportedContacts();
-                            } else if (which == 3) {
-                                MessagesController.getInstance(currentAccount).forceResetDialogs();
-                            } else if (which == 4) {
-                                BuildVars.LOGS_ENABLED = !BuildVars.LOGS_ENABLED;
-                                SharedPreferences sharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("systemConfig", Context.MODE_PRIVATE);
-                                sharedPreferences.edit().putBoolean("logsEnabled", BuildVars.LOGS_ENABLED).commit();
-                                updateRows();
-                            } else if (which == 5) {
-                                SharedConfig.toggleInappCamera();
-                            } else if (which == 6) {
-                                MessagesStorage.getInstance(currentAccount).clearSentMedia();
-                                SharedConfig.setNoSoundHintShowed(false);
-                                SharedPreferences.Editor editor = MessagesController.getGlobalMainSettings().edit();
-                                editor.remove("archivehint").remove("archivehint_l").remove("gifhint").remove("soundHint").remove("themehint").remove("filterhint").commit();
-                                SharedConfig.textSelectionHintShows = 0;
-                                SharedConfig.lockRecordAudioVideoHint = 0;
-                                SharedConfig.stickersReorderingHintUsed = false;
-                            } else if (which == 7) {
-                                VoIPHelper.showCallDebugSettings(getParentActivity());
-                            } else if (which == 8) {
-                                SharedConfig.toggleRoundCamera16to9();
-                            } else if (which == 9) {
-                                ((LaunchActivity) getParentActivity()).checkAppUpdate(true);
-                            } else if (which == 10) {
-                                MessagesStorage.getInstance(currentAccount).readAllDialogs(-1);
-                            } else if (which == 11) {
-                                SharedConfig.togglePauseMusicOnRecord();
-                            } else if (which == 12) {
-                                SharedConfig.toggleSmoothKeyboard();
-                                if (SharedConfig.smoothKeyboard && getParentActivity() != null) {
-                                    getParentActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                                }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+                    builder.setTitle(LocaleController.getString("DebugMenu", R.string.DebugMenu));
+                    CharSequence[] items;
+                    items = new CharSequence[]{
+                            LocaleController.getString("DebugMenuImportContacts", R.string.DebugMenuImportContacts),
+                            LocaleController.getString("DebugMenuReloadContacts", R.string.DebugMenuReloadContacts),
+                            LocaleController.getString("DebugMenuResetContacts", R.string.DebugMenuResetContacts),
+                            LocaleController.getString("DebugMenuResetDialogs", R.string.DebugMenuResetDialogs),
+                            BuildVars.LOGS_ENABLED ? LocaleController.getString("DebugMenuDisableLogs", R.string.DebugMenuDisableLogs) : LocaleController.getString("DebugMenuEnableLogs", R.string.DebugMenuEnableLogs),
+                            SharedConfig.inappCamera ? LocaleController.getString("DebugMenuDisableCamera", R.string.DebugMenuDisableCamera) : LocaleController.getString("DebugMenuEnableCamera", R.string.DebugMenuEnableCamera),
+                            LocaleController.getString("DebugMenuClearMediaCache", R.string.DebugMenuClearMediaCache),
+                            LocaleController.getString("DebugMenuCallSettings", R.string.DebugMenuCallSettings),
+                            null,
+                            BuildVars.DEBUG_PRIVATE_VERSION ? "Check for app updates" : null,
+                            LocaleController.getString("DebugMenuReadAllDialogs", R.string.DebugMenuReadAllDialogs),
+                            SharedConfig.pauseMusicOnRecord ? LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) : LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
+                            BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() && Build.VERSION.SDK_INT >= 23 ? (SharedConfig.smoothKeyboard ? LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) : LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard)) : null
+                    };
+                    builder.setItems(items, (dialog, which) -> {
+                        if (which == 0) {
+                            UserConfig.getInstance(currentAccount).syncContacts = true;
+                            UserConfig.getInstance(currentAccount).saveConfig(false);
+                            ContactsController.getInstance(currentAccount).forceImportContacts();
+                        } else if (which == 1) {
+                            ContactsController.getInstance(currentAccount).loadContacts(false, 0);
+                        } else if (which == 2) {
+                            ContactsController.getInstance(currentAccount).resetImportedContacts();
+                        } else if (which == 3) {
+                            MessagesController.getInstance(currentAccount).forceResetDialogs();
+                        } else if (which == 4) {
+                            BuildVars.LOGS_ENABLED = !BuildVars.LOGS_ENABLED;
+                            SharedPreferences sharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("systemConfig", Context.MODE_PRIVATE);
+                            sharedPreferences.edit().putBoolean("logsEnabled", BuildVars.LOGS_ENABLED).commit();
+                            updateRows();
+                        } else if (which == 5) {
+                            SharedConfig.toggleInappCamera();
+                        } else if (which == 6) {
+                            MessagesStorage.getInstance(currentAccount).clearSentMedia();
+                            SharedConfig.setNoSoundHintShowed(false);
+                            SharedPreferences.Editor editor = MessagesController.getGlobalMainSettings().edit();
+                            editor.remove("archivehint").remove("archivehint_l").remove("gifhint").remove("soundHint").remove("themehint").remove("filterhint").commit();
+                            SharedConfig.textSelectionHintShows = 0;
+                            SharedConfig.lockRecordAudioVideoHint = 0;
+                            SharedConfig.stickersReorderingHintUsed = false;
+                        } else if (which == 7) {
+                            VoIPHelper.showCallDebugSettings(getParentActivity());
+                        } else if (which == 8) {
+                            SharedConfig.toggleRoundCamera16to9();
+                        } else if (which == 9) {
+                            ((LaunchActivity) getParentActivity()).checkAppUpdate(true);
+                        } else if (which == 10) {
+                            MessagesStorage.getInstance(currentAccount).readAllDialogs(-1);
+                        } else if (which == 11) {
+                            SharedConfig.togglePauseMusicOnRecord();
+                        } else if (which == 12) {
+                            SharedConfig.toggleSmoothKeyboard();
+                            if (SharedConfig.smoothKeyboard && getParentActivity() != null) {
+                                getParentActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                             }
-                        });
-                        builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-                        showDialog(builder.create());
-                    } else {
-                        try {
-                            Toast.makeText(getParentActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            FileLog.e(e);
-=======
-        listView.setOnItemLongClickListener((view, position) -> {
-            if (position == versionRow) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                builder.setTitle(LocaleController.getString("DebugMenu", R.string.DebugMenu));
-                CharSequence[] items;
-                items = new CharSequence[]{
-                        LocaleController.getString("DebugMenuImportContacts", R.string.DebugMenuImportContacts),
-                        LocaleController.getString("DebugMenuReloadContacts", R.string.DebugMenuReloadContacts),
-                        LocaleController.getString("DebugMenuResetContacts", R.string.DebugMenuResetContacts),
-                        LocaleController.getString("DebugMenuResetDialogs", R.string.DebugMenuResetDialogs),
-                        BuildVars.LOGS_ENABLED ? LocaleController.getString("DebugMenuDisableLogs", R.string.DebugMenuDisableLogs) : LocaleController.getString("DebugMenuEnableLogs", R.string.DebugMenuEnableLogs),
-                        SharedConfig.inappCamera ? LocaleController.getString("DebugMenuDisableCamera", R.string.DebugMenuDisableCamera) : LocaleController.getString("DebugMenuEnableCamera", R.string.DebugMenuEnableCamera),
-                        LocaleController.getString("DebugMenuClearMediaCache", R.string.DebugMenuClearMediaCache),
-                        LocaleController.getString("DebugMenuCallSettings", R.string.DebugMenuCallSettings),
-                        null,
-                        BuildVars.DEBUG_PRIVATE_VERSION ? "Check for app updates" : null,
-                        LocaleController.getString("DebugMenuReadAllDialogs", R.string.DebugMenuReadAllDialogs),
-                        SharedConfig.pauseMusicOnRecord ? LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) : LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
-                        BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() ? (SharedConfig.smoothKeyboard ? LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) : LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard)) : null
-                };
-                builder.setItems(items, (dialog, which) -> {
-                    if (which == 0) {
-                        UserConfig.getInstance(currentAccount).syncContacts = true;
-                        UserConfig.getInstance(currentAccount).saveConfig(false);
-                        ContactsController.getInstance(currentAccount).forceImportContacts();
-                    } else if (which == 1) {
-                        ContactsController.getInstance(currentAccount).loadContacts(false, 0);
-                    } else if (which == 2) {
-                        ContactsController.getInstance(currentAccount).resetImportedContacts();
-                    } else if (which == 3) {
-                        MessagesController.getInstance(currentAccount).forceResetDialogs();
-                    } else if (which == 4) {
-                        BuildVars.LOGS_ENABLED = !BuildVars.LOGS_ENABLED;
-                        SharedPreferences sharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("systemConfig", Context.MODE_PRIVATE);
-                        sharedPreferences.edit().putBoolean("logsEnabled", BuildVars.LOGS_ENABLED).commit();
-                    } else if (which == 5) {
-                        SharedConfig.toggleInappCamera();
-                    } else if (which == 6) {
-                        MessagesStorage.getInstance(currentAccount).clearSentMedia();
-                        SharedConfig.setNoSoundHintShowed(false);
-                        SharedPreferences.Editor editor = MessagesController.getGlobalMainSettings().edit();
-                        editor.remove("archivehint").remove("archivehint_l").remove("gifhint").remove("soundHint").remove("themehint").commit();
-                        SharedConfig.textSelectionHintShows = 0;
-                    } else if (which == 7) {
-                        VoIPHelper.showCallDebugSettings(getParentActivity());
-                    } else if (which == 8) {
-                        SharedConfig.toggleRoundCamera16to9();
-                    } else if (which == 9) {
-                        ((LaunchActivity) getParentActivity()).checkAppUpdate(true);
-                    } else if (which == 10) {
-                        MessagesStorage.getInstance(currentAccount).readAllDialogs(-1);
-                    } else if (which == 11) {
-                        SharedConfig.togglePauseMusicOnRecord();
-                    } else if (which == 12) {
-                        SharedConfig.toggleSmoothKeyboard();
-                        if (SharedConfig.smoothKeyboard && getParentActivity() != null) {
-                            getParentActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
->>>>>>> migrate
                         }
-                    }
-                });
-                builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-                showDialog(builder.create());
-                return true;
+                    });
+                    builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
+                    showDialog(builder.create());
+                    return true;
+                };
+                return false;
             }
-            return false;
         });
 
 
@@ -893,6 +802,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         settingsSectionRow = rowCount++;
         settingsSectionRow2 = rowCount++;
         notificationRow = rowCount++;
+        catogramRaw = rowCount++;
         privacyRow = rowCount++;
         dataRow = rowCount++;
         chatRow = rowCount++;
@@ -1553,8 +1463,6 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         }
     }
 
-<<<<<<< HEAD
-=======
     private void showHelpAlert() {
         if (getParentActivity() == null) {
             return;
@@ -1651,7 +1559,6 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         showDialog(builder.create());
     }
 
->>>>>>> migrate
     private void sendLogs() {
         if (getParentActivity() == null) {
             return;
@@ -2370,13 +2277,9 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                 case 2: {
                     TextCell textCell = (TextCell) holder.itemView;
                     if (position == languageRow) {
-<<<<<<< HEAD
                         textCell.setTextAndIcon(LocaleController.getString("Language", R.string.Language), R.drawable.menu_language, false);
-=======
-                        textCell.setTextAndIcon(LocaleController.getString("Language", R.string.Language), R.drawable.menu_language, true);
                     } else if (position == catogramRaw) {
                         textCell.setTextAndIcon(LocaleController.getString("AdvancedSettings", R.string.AdvancedSettings), R.drawable.menu_settings, true);
->>>>>>> migrate
                     } else if (position == notificationRow) {
                         textCell.setTextAndIcon(LocaleController.getString("NotificationsAndSounds", R.string.NotificationsAndSounds), R.drawable.menu_notifications, true);
                     } else if (position == privacyRow) {
@@ -2546,17 +2449,11 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                 return 0;
             } else if (position == settingsSectionRow || position == devicesSectionRow || position == helpSectionCell) {
                 return 1;
-<<<<<<< HEAD
-            } else if (position == notificationRow || position == privacyRow || position == languageRow ||
+            } else if (position == catogramRaw || position == notificationRow || position == privacyRow || position == languageRow ||
                     position == dataRow || position == chatRow || position == questionRow ||
                     position == devicesRow || position == filtersRow || position == faqRow ||
                     position == policyRow || position == sendLogsRow || position == clearLogsRow ||
                     position == switchBackendRow) {
-=======
-            } else if (position == catogramRaw || position == notificationRow || position == privacyRow || position == languageRow ||
-                    position == dataRow || position == chatRow || position == helpRow ||
-                    position == devicesRow) {
->>>>>>> migrate
                 return 2;
             } else if (position == versionRow) {
                 return 5;
