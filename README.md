@@ -2,8 +2,11 @@
 
 This repo is provided because of GPL license. Please note that it WON'T compile because of:
 - no CupertinoLib (private YTKAB0BP library)
+*You can remove this, but you will be left without iOS stuff*
 - no gradle-properties/google-services.json/keystore
-If you use something from this, please write me in the credits. Thanks!
+*Use your own certificates*
+
+If you use something from this repo, please write me in the credits. Thanks!
 
 ## Telegram messenger for Android
 
