@@ -816,15 +816,17 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     } else {
                         childTop = commentView.getBottom();
                     }
-                } else if (child == filterTabsView || child == searchTabsView || child == filtersView) {
-                    childTop = onlySelect ? 0 : actionBar.getMeasuredHeight();
-                } else if (child == searchViewPager) {
-                    childTop = (onlySelect ? 0 : actionBar.getMeasuredHeight()) + topPadding + (searchTabsView == null ? 0 : AndroidUtilities.dp(44));
+                } else if (child == filterTabsView) {
+                    childTop = actionBar.getMeasuredHeight();
+                } else if (child == searchListView || child == searchEmptyView) {
+                    childTop = (onlySelect && initialDialogsType != 3 ? 0 : actionBar.getMeasuredHeight()) + topPadding;
                 } else if (child instanceof ViewPage) {
-                    if (filterTabsView != null && filterTabsView.getVisibility() == VISIBLE) {
-                        childTop = AndroidUtilities.dp(44);
-                    } else if (!onlySelect) {
-                        childTop = actionBar.getMeasuredHeight();
+                    if (initialDialogsType == 3 || !onlySelect) {
+                        if (filterTabsView != null && filterTabsView.getVisibility() == VISIBLE) {
+                            childTop = AndroidUtilities.dp(44);
+                        } else {
+                            childTop = actionBar.getMeasuredHeight();
+                        }
                     }
                     childTop += topPadding;
                 } else if (child instanceof FragmentContextView) {
@@ -1171,26 +1173,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         @Override
         protected void onMeasure(int widthSpec, int heightSpec) {
             int t = 0;
-            if (!onlySelect) {
-                if (filterTabsView != null && filterTabsView.getVisibility() == VISIBLE) {
-                    t = AndroidUtilities.dp(44);
-                } else {
-                    t = actionBar.getMeasuredHeight();
-                }
-            }
-
-            int pos = parentPage.layoutManager.findFirstVisibleItemPosition();
-            if (pos != RecyclerView.NO_POSITION) {
-                RecyclerView.ViewHolder holder = parentPage.listView.findViewHolderForAdapterPosition(pos);
-                if (holder != null) {
-                    int top = holder.itemView.getTop();
-
-                    ignoreLayout = true;
-                    parentPage.layoutManager.scrollToPositionWithOffset(pos, (int) (top - lastListPadding + scrollAdditionalOffset));
-                    ignoreLayout = false;
-                }
-            }
-            if (!onlySelect) {
+            if (initialDialogsType == 3 || !onlySelect) {
                 ignoreLayout = true;
                 if (filterTabsView != null && filterTabsView.getVisibility() == VISIBLE) {
                     t = ActionBar.getCurrentActionBarHeight() + (actionBar.getOccupyStatusBar() ? AndroidUtilities.statusBarHeight : 0);
@@ -1214,7 +1197,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             }
             checkIfAdapterValid();
             super.onMeasure(widthSpec, heightSpec);
-            if (!onlySelect) {
+            if (initialDialogsType == 3 || !onlySelect) {
                 if (appliedPaddingTop != t && viewPages != null && viewPages.length > 1) {
                     viewPages[1].setTranslationX(viewPages[0].getMeasuredWidth());
                 }
@@ -1937,7 +1920,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 actionBar.setSupportsHolidayImage(true);
             }
         }
-        if (!onlySelect) {
+        if (initialDialogsType == 3 || !onlySelect) {
             actionBar.setAddToContainer(false);
             actionBar.setCastShadows(false);
             actionBar.setClipContent(true);
@@ -2696,8 +2679,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                             }
                         }
                     }
-                    boolean f1flag = initialDialogsType == 0 && folderId == 0 && !onlySelect;
-                    if (f1flag && filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE && recyclerView == viewPages[0].listView && !searching && !actionBar.isActionModeShowed() && !disableActionBarScrolling && filterTabsViewIsVisible) {
+                    if (filterTabsView != null && filterTabsView.getVisibility() == View.VISIBLE && recyclerView == viewPages[0].listView && !searching && !actionBar.isActionModeShowed() && !disableActionBarScrolling && filterTabsViewIsVisible) {
                         if (dy > 0 && hasHiddenArchive() && viewPages[0].dialogsType == 0) {
                             View child = recyclerView.getChildAt(0);
                             if (child != null) {
@@ -3140,12 +3122,8 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         if (filterTabsView != null) {
             contentView.addView(filterTabsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 44));
         }
-        if (!onlySelect) {
-            final FrameLayout.LayoutParams layoutParams = LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT);
-            if (inPreviewMode && Build.VERSION.SDK_INT >= 21) {
-                layoutParams.topMargin = AndroidUtilities.statusBarHeight;
-            }
-            contentView.addView(actionBar, layoutParams);
+        if (initialDialogsType == 3 || !onlySelect) {
+            contentView.addView(actionBar, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
         }
 
         for (int a = 0; a < 2; a++) {
@@ -6873,5 +6851,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         }
 
         return arrayList;
+    }
+
+    @Override
+    public boolean isSwipeBackEnabled(MotionEvent event) {
+        return !(initialDialogsType == 3 && viewPages[0].selectedType != filterTabsView.getFirstTabId());
     }
 }
