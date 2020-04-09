@@ -169,45 +169,19 @@ public class AppearancePreferencesEntry implements BasePreferencesEntry {
 
         List<TGKitPreference> filters = new ArrayList<>();
         filters.add(
-                new TGKitSwitchPreference(LocaleController.getString("AS_Filters_THint", R.string.AS_Filters_THint), LocaleController.getString("AS_Filters_THintDesc", R.string.AS_Filters_THintDesc), true, new TGKitSwitchPreference.TGSPContract() {
+                new TGKitSwitchPreference(LocaleController.getString("CG_NewTabs_NoCounter", R.string.CG_NewTabs_NoCounter), false, new TGKitSwitchPreference.TGSPContract() {
                     @Override
                     public boolean getPreferenceValue() {
-                        return CatogramConfig.filterHintToolbar;
+                        return CatogramConfig.newTabs_noUnread;
                     }
 
                     @Override
                     public void toggleValue() {
-                        CatogramConfig.toggleToolbarHint();
+                        CatogramConfig.toggleTabCount();
                     }
                 })
         );
-        filters.add(
-                new TGKitSwitchPreference(LocaleController.getString("AS_Filters_Count", R.string.AS_Filters_Count), LocaleController.getString("AS_Filters_Count_Desc", R.string.AS_Filters_Count_Desc), true, new TGKitSwitchPreference.TGSPContract() {
-                    @Override
-                    public boolean getPreferenceValue() {
-                        return CatogramConfig.filterChatCount;
-                    }
-
-                    @Override
-                    public void toggleValue() {
-                        CatogramConfig.toggleFilterChatCount();
-                    }
-                })
-        );
-        filters.add(
-                new TGKitSwitchPreference(LocaleController.getString("AS_Filters_ReplaceFAB", R.string.AS_Filters_ReplaceFAB), LocaleController.getString("AS_Filters_ReplaceFABDesc", R.string.AS_Filters_ReplaceFABDesc), false, new TGKitSwitchPreference.TGSPContract() {
-                    @Override
-                    public boolean getPreferenceValue() {
-                        return CatogramConfig.filterInsteadOfWrite;
-                    }
-
-                    @Override
-                    public void toggleValue() {
-                        CatogramConfig.toggleFilterReplaceFAB();
-                    }
-                })
-        );
-        //categories.add(new TGKitCategory(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header), filters));
+        categories.add(new TGKitCategory(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header), filters));
 
         List<TGKitPreference> drawer = new ArrayList<>();
         drawer.add(

@@ -3710,4 +3710,6 @@
     <string name="CG_Slider_StickerAmplifier">Sticker size amplifier</string>
     <string name="CG_NewMsgAnim">New message animation (beta)</string>
     <string name="CG_HideKbdOnScroll">Hide keyboard on scroll</string>
+
+    <string name="CG_NewTabs_NoCounter">Hide counter in tabs</string>
 </resources>

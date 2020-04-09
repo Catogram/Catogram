@@ -61,6 +61,8 @@ public class CatogramConfig {
     public static boolean newMessageAnimation = false;
     public static boolean hideKeyboardOnScroll = false;
 
+    public static boolean newTabs_noUnread = false;
+
     public static int slider_stickerAmplifier = 100;
 
     public static void initConfig(SharedPreferences preferences) {
@@ -111,6 +113,8 @@ public class CatogramConfig {
         newMessageAnimation = preferences.getBoolean("cg_msganim", false);
         hideKeyboardOnScroll = preferences.getBoolean("cg_hidekbd", false);
 
+        newTabs_noUnread = preferences.getBoolean("cg_notabnum", false);
+
         CatogramToasts.init(preferences);
     }
 
@@ -126,6 +130,11 @@ public class CatogramConfig {
     public static void toggleProfilesNoEdgeTapping() {
         profiles_noEdgeTapping = !profiles_noEdgeTapping;
         putBoolean("cg_prof_edge", profiles_noEdgeTapping);
+    }
+
+    public static void toggleTabCount() {
+        newTabs_noUnread = !newTabs_noUnread;
+        putBoolean("cg_notabnum", newTabs_noUnread);
     }
 
     public static void toggleProfilesOpenOnTap() {

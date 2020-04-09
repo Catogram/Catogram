@@ -114,4 +114,6 @@
     <string name="CG_Slider_StickerAmplifier">Множитель размера стикеров</string>
     <string name="CG_NewMsgAnim">Анимация новых сообщений (бета)</string>
     <string name="CG_HideKbdOnScroll">Прятать клавиатуру при прокрутке</string>
+
+    <string name="CG_NewTabs_NoCounter">Скрыть счетчики у вкладок</string>
 </resources>
