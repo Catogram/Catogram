@@ -39,6 +39,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import androidx.annotation.UiThread;
 
+import com.google.android.exoplayer2.util.Log;
+
 public class MessagesStorage extends BaseController {
 
     public interface IntCallback {
@@ -80,7 +82,7 @@ public class MessagesStorage extends BaseController {
     private CountDownLatch openSync = new CountDownLatch(1);
 
     private static volatile MessagesStorage[] Instance = new MessagesStorage[UserConfig.MAX_ACCOUNT_COUNT];
-    private final static int LAST_DB_VERSION = 67;
+    private final static int LAST_DB_VERSION = 68;
 
     public static MessagesStorage getInstance(int num) {
         MessagesStorage localInstance = Instance[num];
@@ -302,7 +304,7 @@ public class MessagesStorage extends BaseController {
                 database.executeFast("CREATE INDEX IF NOT EXISTS folder_id_idx_dialogs ON dialogs(folder_id);").stepThis().dispose();
                 database.executeFast("CREATE INDEX IF NOT EXISTS flags_idx_dialogs ON dialogs(flags);").stepThis().dispose();
 
-                database.executeFast("CREATE TABLE dialog_filter(id INTEGER PRIMARY KEY, ord INTEGER, unread_count INTEGER, flags INTEGER, title TEXT)").stepThis().dispose();
+                database.executeFast("CREATE TABLE dialog_filter(id INTEGER PRIMARY KEY, ord INTEGER, unread_count INTEGER, flags INTEGER, title TEXT, emoticon TEXT)").stepThis().dispose();
                 database.executeFast("CREATE TABLE dialog_filter_ep(id INTEGER, peer INTEGER, PRIMARY KEY (id, peer))").stepThis().dispose();
                 database.executeFast("CREATE TABLE dialog_filter_pin_v2(id INTEGER, peer INTEGER, pin INTEGER, PRIMARY KEY (id, peer))").stepThis().dispose();
 
@@ -885,7 +887,9 @@ public class MessagesStorage extends BaseController {
                     version = 67;
                 }
                 if (version == 67) {
-
+                    database.executeFast("ALTER TABLE dialog_filter ADD TEXT").stepThis().dispose();
+                    database.executeFast("PRAGMA user_version = 68").stepThis().dispose();
+                    version = 68;
                 }
             } catch (Exception e) {
                 FileLog.e(e);
@@ -1585,7 +1589,7 @@ public class MessagesStorage extends BaseController {
 
                 usersToLoad.add(getUserConfig().getClientUserId());
 
-                SQLiteCursor filtersCursor = database.queryFinalized("SELECT id, ord, unread_count, flags, title FROM dialog_filter WHERE 1");
+                SQLiteCursor filtersCursor = database.queryFinalized("SELECT id, ord, unread_count, flags, title, emoticon FROM dialog_filter WHERE 1");
 
                 boolean updateCounters = false;
                 while (filtersCursor.next()) {
@@ -1595,6 +1599,9 @@ public class MessagesStorage extends BaseController {
                     filter.pendingUnreadCount = filter.unreadCount = -1;//filtersCursor.intValue(2);
                     filter.flags = filtersCursor.intValue(3);
                     filter.name = filtersCursor.stringValue(4);
+
+                    if (!filtersCursor.isNull(5)) filter.emoticon = filtersCursor.stringValue(5);
+
                     dialogFilters.add(filter);
                     dialogFiltersMap.put(filter.id, filter);
                     filtersById.put(filter.id, filter);
@@ -2025,12 +2032,19 @@ public class MessagesStorage extends BaseController {
                 dialogFiltersMap.put(filter.id, filter);
             }
 
-            SQLitePreparedStatement state = database.executeFast("REPLACE INTO dialog_filter VALUES(?, ?, ?, ?, ?)");
+            SQLitePreparedStatement state = database.executeFast("REPLACE INTO dialog_filter VALUES(?, ?, ?, ?, ?, ?)");
             state.bindInteger(1, filter.id);
             state.bindInteger(2, filter.order);
             state.bindInteger(3, filter.unreadCount);
             state.bindInteger(4, filter.flags);
             state.bindString(5, filter.name);
+
+            if (filter.emoticon == null) {
+                state.bindNull(6);
+            } else {
+                state.bindString(6, filter.emoticon);
+            }
+
             state.step();
             state.dispose();
             if (peers) {
@@ -2127,10 +2141,17 @@ public class MessagesStorage extends BaseController {
                         filtersToDelete.remove(newFilter.id);
                         boolean changed = false;
                         boolean unreadChanged = false;
+
                         if (!TextUtils.equals(filter.name, newFilter.title)) {
                             changed = true;
                             filter.name = newFilter.title;
                         }
+
+                        if (!TextUtils.equals(filter.emoticon, newFilter.emoticon)) {
+                            changed = true;
+                            filter.emoticon = newFilter.emoticon;
+                        }
+
                         if (filter.flags != newFlags) {
                             filter.flags = newFlags;
                             changed = true;
@@ -2277,6 +2298,9 @@ public class MessagesStorage extends BaseController {
                         filter.id = newFilter.id;
                         filter.flags = newFlags;
                         filter.name = newFilter.title;
+
+                        filter.emoticon = newFilter.emoticon;
+
                         filter.pendingUnreadCount = -1;
                         for (int c = 0; c < 2; c++) {
                             if (c == 0) {

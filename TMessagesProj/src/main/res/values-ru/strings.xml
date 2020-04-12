@@ -116,4 +116,12 @@
     <string name="CG_HideKbdOnScroll">Прятать клавиатуру при прокрутке</string>
 
     <string name="CG_NewTabs_NoCounter">Скрыть счетчики у вкладок</string>
+    <string name="CG_NewTabs_RemoveAllChats">Скрыть вкладку \"Все чаты"\ [нужен перезапуск]</string>
+    <string name="CG_NewTabs_RemoveAllChats_Desc">нажмите на кнопку \"Назад\" на главной странице чтобы ее открыть</string>
+
+    <string name="CG_NewTabs_Emoticons">Иконка вкладки вместо имени [нужен перезапуск]</string>
+    <string name="CG_NewTabs_Emoticons_Desc">это синхронизируется через Telegram</string>
+
+    <string name="CG_NewTabs_EmoticonsAppend">Добавить иконку чата к ее имени [нужен перезапуск]</string>
+    <string name="CG_NewTabs_EmoticonsAppend_Desc">когда опция \"вместо\" отключена</string>
 </resources>

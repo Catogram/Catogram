@@ -167,22 +167,6 @@ public class AppearancePreferencesEntry implements BasePreferencesEntry {
         );
         categories.add(new TGKitCategory(LocaleController.getString("AS_Header_Notification", R.string.AS_Header_Notification), notification));
 
-        List<TGKitPreference> filters = new ArrayList<>();
-        filters.add(
-                new TGKitSwitchPreference(LocaleController.getString("CG_NewTabs_NoCounter", R.string.CG_NewTabs_NoCounter), false, new TGKitSwitchPreference.TGSPContract() {
-                    @Override
-                    public boolean getPreferenceValue() {
-                        return CatogramConfig.newTabs_noUnread;
-                    }
-
-                    @Override
-                    public void toggleValue() {
-                        CatogramConfig.toggleTabCount();
-                    }
-                })
-        );
-        categories.add(new TGKitCategory(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header), filters));
-
         List<TGKitPreference> drawer = new ArrayList<>();
         drawer.add(
                 new TGKitSwitchPreference(

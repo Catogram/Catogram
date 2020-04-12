@@ -69,6 +69,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.util.Log;
+
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
@@ -154,6 +156,7 @@ import org.telegram.ui.Components.UndoView;
 import java.util.ArrayList;
 
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.extras.CatogramExtras;
 
 public class DialogsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
@@ -1623,7 +1626,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 if (BuildVars.DEBUG_VERSION) {
                     actionBar.setTitle("Telegram Beta");
                 } else {
-                    actionBar.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    actionBar.setTitle("Catogram");
                 }
             }
             if (folderId == 0) {
@@ -2938,10 +2941,23 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     filterTabsView.resetTabId();
                 }
                 filterTabsView.removeTabs();
-                filterTabsView.addTab(Integer.MAX_VALUE, LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
+                if (!CatogramConfig.newTabs_hideAllChats) filterTabsView.addTab(Integer.MAX_VALUE, LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
                 for (int a = 0, N = filters.size(); a < N; a++) {
-                    filterTabsView.addTab(a, filters.get(a).name);
+                    String name = filters.get(a).name;
+
+                    if (CatogramConfig.newTabs_emoji_appendToName && filters.get(a).emoticon != null) {
+                        name = filters.get(a).emoticon + " " + name;
+                    }
+
+                    if (CatogramConfig.newTabs_emoji_insteadOfName) {
+                        name = CatogramExtras.wrapEmoticon(filters.get(a).emoticon);
+                    }
+
+                    filterTabsView.addTab(a, name);
                 }
+
                 id = filterTabsView.getCurrentTabId();
                 if (id >= 0) {
                     viewPages[0].selectedType = id;
@@ -3074,7 +3090,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                         showDialog(permissionDialog = builder.create());
                     } else if (hasNotStoragePermission && activity.shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                        builder.setTitle("Catogram");
                         builder.setMessage(LocaleController.getString("PermissionStorage", R.string.PermissionStorage));
                         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
                         showDialog(permissionDialog = builder.create());
@@ -3091,7 +3107,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 return;
             }
             showDialog(new AlertDialog.Builder(getParentActivity())
-                    .setTitle(LocaleController.getString("AppName", R.string.AppName))
+                    .setTitle("Catogram")
                     .setMessage(LocaleController.getString("PermissionXiaomiLockscreen", R.string.PermissionXiaomiLockscreen))
                     .setPositiveButton(LocaleController.getString("PermissionOpenSettings", R.string.PermissionOpenSettings), (dialog, which) -> {
                         Intent intent = XiaomiUtilities.getPermissionManagerIntent();
@@ -3913,7 +3929,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     AlertsCreator.showSimpleAlert(DialogsActivity.this, LocaleController.formatString("PinFolderLimitReached", R.string.PinFolderLimitReached, LocaleController.formatPluralString("Chats", maxPinnedCount)));
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                    builder.setTitle("Catogram");
                     builder.setMessage(LocaleController.formatString("PinToTopLimitReached2", R.string.PinToTopLimitReached2, LocaleController.formatPluralString("Chats", maxPinnedCount)));
                     builder.setNegativeButton(LocaleController.getString("FiltersSetupPinAlert", R.string.FiltersSetupPinAlert), (dialog, which) -> presentFragment(new FiltersSetupActivity()));
                     builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);

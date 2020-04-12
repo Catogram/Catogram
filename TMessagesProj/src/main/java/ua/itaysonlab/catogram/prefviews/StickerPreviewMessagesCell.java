@@ -79,7 +79,6 @@ public class StickerPreviewMessagesCell extends LinearLayout {
         float modifier = CatogramConfig.slider_stickerAmplifier / 100f;
         photoSize.w = 450;
         photoSize.h = 200;
-        ua.itaysonlab.CatogramLogger.d("Stickers:Preview", "photoWidth = "+photoSize.w+", photoHeight = "+photoSize.h);
 
         photoSize.type = "s";
         photoSize.location = new TLRPC.TL_fileLocationUnavailable();

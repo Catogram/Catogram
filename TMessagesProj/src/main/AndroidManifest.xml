@@ -72,7 +72,7 @@
         android:name="org.telegram.messenger.${applicationClassName}"
         android:allowBackup="false"
         android:hardwareAccelerated="@bool/useHardwareAcceleration"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/cg_launcher"
         android:largeHeap="true"
         android:theme="@style/Theme.TMessages.Start"
         android:manageSpaceActivity="org.telegram.ui.ExternalActionActivity"
@@ -136,13 +136,13 @@
                 <data android:host="t.me" android:scheme="http" />
                 <data android:host="t.me" android:scheme="https" />
             </intent-filter>
-            <intent-filter android:icon="@mipmap/ic_launcher" android:priority="1">
+            <intent-filter android:icon="@mipmap/cg_launcher" android:priority="1">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="tg" />
             </intent-filter>
-            <intent-filter android:icon="@mipmap/ic_launcher" android:priority="1">
+            <intent-filter android:icon="@mipmap/cg_launcher" android:priority="1">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -158,7 +158,7 @@
             android:excludeFromRecents="true"
             android:stateNotNeeded="true"
             android:theme="@style/Theme.TMessages.Transparent">
-            <intent-filter android:icon="@mipmap/ic_launcher" android:priority="1">
+            <intent-filter android:icon="@mipmap/cg_launcher" android:priority="1">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -170,7 +170,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
             android:hardwareAccelerated="@bool/useHardwareAcceleration"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter android:icon="@mipmap/ic_launcher">
+            <intent-filter android:icon="@mipmap/cg_launcher">
                 <action android:name="org.telegram.passport.AUTHORIZE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>

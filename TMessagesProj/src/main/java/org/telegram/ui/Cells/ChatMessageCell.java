@@ -4205,7 +4205,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         }
                     }
 
-                    ua.itaysonlab.CatogramLogger.d("Stickers:BeforeAmplifier", "photoWidth = "+photoWidth+", photoHeight = "+photoHeight+", max: W = "+maxWidth+" / H = "+maxHeight);
+                    //ua.itaysonlab.CatogramLogger.d("Stickers:BeforeAmplifier", "photoWidth = "+photoWidth+", photoHeight = "+photoHeight+", max: W = "+maxWidth+" / H = "+maxHeight);
 
                     float modifier = CatogramConfig.slider_stickerAmplifier / 100f;
 
@@ -4214,7 +4214,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     maxWidth = (int) (maxWidth * modifier);
                     maxHeight = (int) (maxHeight * modifier);
 
-                    ua.itaysonlab.CatogramLogger.d("Stickers:AfterAmplifier", "photoWidth = "+photoWidth+", photoHeight = "+photoHeight+", max: W = "+maxWidth+" / H = "+maxHeight+", amplifier = "+modifier+" [pref = "+CatogramConfig.slider_stickerAmplifier+"]");
+                    //ua.itaysonlab.CatogramLogger.d("Stickers:AfterAmplifier", "photoWidth = "+photoWidth+", photoHeight = "+photoHeight+", max: W = "+maxWidth+" / H = "+maxHeight+", amplifier = "+modifier+" [pref = "+CatogramConfig.slider_stickerAmplifier+"]");
 
                     Object parentObject = messageObject;
                     int w = (int) (photoWidth / AndroidUtilities.density);

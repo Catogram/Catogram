@@ -16509,7 +16509,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
 
         public void updatePendingAnim() {
-            ua.itaysonlab.CatogramLogger.d("CG:Animations:Update", "lastVisibleItemPosition = "+chatLayoutManager.findLastVisibleItemPosition()+", itemCount = "+chatAdapter.getItemCount());
+            //ua.itaysonlab.CatogramLogger.d("CG:Animations:Update", "lastVisibleItemPosition = "+chatLayoutManager.findLastVisibleItemPosition()+", itemCount = "+chatAdapter.getItemCount());
             bottomAnimPending = chatLayoutManager.findLastVisibleItemPosition() <= chatAdapter.getItemCount();
         }
 
@@ -16532,7 +16532,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     holder.itemView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                         @Override
                         public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                            ua.itaysonlab.CatogramLogger.d("CG:Animations", "We're in");
+                            //ua.itaysonlab.CatogramLogger.d("CG:Animations", "We're in");
 
                             v.removeOnLayoutChangeListener(this);
 

@@ -62,6 +62,10 @@ public class CatogramConfig {
     public static boolean hideKeyboardOnScroll = false;
 
     public static boolean newTabs_noUnread = false;
+    public static boolean newTabs_hideAllChats = false;
+
+    public static boolean newTabs_emoji_insteadOfName = false;
+    public static boolean newTabs_emoji_appendToName = false;
 
     public static int slider_stickerAmplifier = 100;
 
@@ -114,6 +118,9 @@ public class CatogramConfig {
         hideKeyboardOnScroll = preferences.getBoolean("cg_hidekbd", false);
 
         newTabs_noUnread = preferences.getBoolean("cg_notabnum", false);
+        newTabs_hideAllChats = preferences.getBoolean("cg_ntallchats", false);
+        newTabs_emoji_insteadOfName = preferences.getBoolean("newTabs_emoji_insteadOfName", false);
+        newTabs_emoji_appendToName = preferences.getBoolean("newTabs_emoji_appendToName", false);
 
         CatogramToasts.init(preferences);
     }
@@ -130,6 +137,21 @@ public class CatogramConfig {
     public static void toggleProfilesNoEdgeTapping() {
         profiles_noEdgeTapping = !profiles_noEdgeTapping;
         putBoolean("cg_prof_edge", profiles_noEdgeTapping);
+    }
+
+    public static void toggleAllChats() {
+        newTabs_hideAllChats = !newTabs_hideAllChats;
+        putBoolean("cg_ntallchats", newTabs_hideAllChats);
+    }
+
+    public static void toggleEmojiIN() {
+        newTabs_emoji_insteadOfName = !newTabs_emoji_insteadOfName;
+        putBoolean("newTabs_emoji_insteadOfName", newTabs_emoji_insteadOfName);
+    }
+
+    public static void toggleEmojiAN() {
+        newTabs_emoji_appendToName = !newTabs_emoji_appendToName;
+        putBoolean("newTabs_emoji_appendToName", newTabs_emoji_appendToName);
     }
 
     public static void toggleTabCount() {

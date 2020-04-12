@@ -473,7 +473,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                 }
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(getParentActivity());
                 builder1.setMessage(LocaleController.getString("AreYouSure", R.string.AreYouSure));
-                builder1.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                builder1.setTitle("Catogram");
                 builder1.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialogInterface, i) -> {
                     SharedConfig.pushAuthKey = null;
                     SharedConfig.pushAuthKeyId = null;
@@ -795,8 +795,11 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
     private void updateRows() {
         rowCount = 0;
         emptyRow = rowCount++;
+
         numberSectionRow = rowCount++;
-        numberRow = rowCount++;
+
+        numberRow = CatogramConfig.hidePhoneNumber ? -1 : rowCount++;
+
         usernameRow = rowCount++;
         bioRow = rowCount++;
         settingsSectionRow = rowCount++;

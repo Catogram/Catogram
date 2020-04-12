@@ -53,6 +53,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class FilterTabsView extends FrameLayout {
 
     public interface FilterTabsViewDelegate {
@@ -219,8 +221,8 @@ public class FilterTabsView extends FrameLayout {
             int textX = (getMeasuredWidth() - tabWidth) / 2;
             if (!TextUtils.equals(currentTab.title, currentText)) {
                 currentText = currentTab.title;
-                CharSequence text = Emoji.replaceEmoji(currentText, textPaint.getFontMetricsInt(), AndroidUtilities.dp(15), false);
-                textLayout = new StaticLayout(text, textPaint, AndroidUtilities.dp(400), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0, false);
+                //CharSequence text = Emoji.replaceEmoji(currentText, textPaint.getFontMetricsInt(), AndroidUtilities.dp(15), false);
+                textLayout = new StaticLayout(currentText, textPaint, AndroidUtilities.dp(400), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0, false);
                 textHeight = textLayout.getHeight();
                 textOffsetX = (int) -textLayout.getLineLeft(0);
             }
@@ -814,10 +816,15 @@ public class FilterTabsView extends FrameLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (!tabs.isEmpty()) {
             int width = MeasureSpec.getSize(widthMeasureSpec) - AndroidUtilities.dp(7) - AndroidUtilities.dp(7);
+
             Tab firstTab = tabs.get(0);
-            firstTab.setTitle(LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
             int tabWith = firstTab.getWidth(false);
-            firstTab.setTitle(allTabsWidth > width ? LocaleController.getString("FilterAllChatsShort", R.string.FilterAllChatsShort) : LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
+            if (!CatogramConfig.newTabs_hideAllChats) {
+                firstTab.setTitle(LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+                firstTab.setTitle(allTabsWidth > width ? LocaleController.getString("FilterAllChatsShort", R.string.FilterAllChatsShort) : LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+            }
+
             int trueTabsWidth = allTabsWidth - tabWith;
             trueTabsWidth += firstTab.getWidth(false);
             int prevWidth = additionalTabWidth;
@@ -966,7 +973,9 @@ public class FilterTabsView extends FrameLayout {
                 requestLayout();
                 adapter.notifyDataSetChanged();
                 allTabsWidth = 0;
-                tabs.get(0).setTitle(LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
+                if (!CatogramConfig.newTabs_hideAllChats) tabs.get(0).setTitle(LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
                 for (int b = 0; b < N; b++) {
                     allTabsWidth += tabs.get(b).getWidth(true) + AndroidUtilities.dp(32);
                 }
@@ -995,7 +1004,9 @@ public class FilterTabsView extends FrameLayout {
             requestLayout();
             adapter.notifyDataSetChanged();
             allTabsWidth = 0;
-            tabs.get(0).setTitle(LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
+            if (!CatogramConfig.newTabs_hideAllChats) tabs.get(0).setTitle(LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+
             for (int b = 0, N = tabs.size(); b < N; b++) {
                 allTabsWidth += tabs.get(b).getWidth(true) + AndroidUtilities.dp(32);
             }

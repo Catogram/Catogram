@@ -9,10 +9,12 @@
 package org.telegram.tgnet;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.telegram.messenger.Utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 @SuppressWarnings("unchecked")
@@ -13329,6 +13331,7 @@ public class TLRPC {
             id = stream.readInt32(exception);
             title = stream.readString(exception);
             if ((flags & 33554432) != 0) {
+                //Log.d("CG-Emoticon", Arrays.toString(stream.readStringAsByteArray(exception)));
                 emoticon = stream.readString(exception);
             }
             int magic = stream.readInt32(exception);

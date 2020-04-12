@@ -16,7 +16,6 @@ import org.telegram.ui.Components.SeekBarView;
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 
 public class StickerSliderCell extends FrameLayout {
-    private StickerPreviewMessagesCell messagesCell;
     private TGKitSliderPreference.TGSLContract contract;
     private SeekBarView sizeBar;
 
@@ -47,7 +46,6 @@ public class StickerSliderCell extends FrameLayout {
             public void onSeekBarDrag(boolean stop, float progress) {
                 contract.setValue(Math.round(startRadius + (endRadius - startRadius) * progress));
                 requestLayout();
-                messagesCell.invalidate();
             }
 
             @Override
@@ -56,9 +54,6 @@ public class StickerSliderCell extends FrameLayout {
             }
         });
         addView(sizeBar, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 38, Gravity.START | Gravity.TOP, 5, 5, 39, 0));
-
-        messagesCell = new StickerPreviewMessagesCell(context);
-        addView(messagesCell, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP, 0, 53, 0, 0));
     }
 
     @Override

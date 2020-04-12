@@ -74,6 +74,61 @@ public class ChatsPreferencesEntry implements BasePreferencesEntry {
         );
         categories.add(new TGKitCategory(LocaleController.getString("CG_Slider_StickerAmplifier", R.string.CG_Slider_StickerAmplifier), stickerSize));
 
+        List<TGKitPreference> filters = new ArrayList<>();
+        filters.add(
+                new TGKitSwitchPreference(LocaleController.getString("CG_NewTabs_NoCounter", R.string.CG_NewTabs_NoCounter), true, new TGKitSwitchPreference.TGSPContract() {
+                    @Override
+                    public boolean getPreferenceValue() {
+                        return CatogramConfig.newTabs_noUnread;
+                    }
+
+                    @Override
+                    public void toggleValue() {
+                        CatogramConfig.toggleTabCount();
+                    }
+                })
+        );
+        filters.add(
+                new TGKitSwitchPreference(LocaleController.getString("CG_NewTabs_RemoveAllChats", R.string.CG_NewTabs_RemoveAllChats), LocaleController.getString("CG_NewTabs_RemoveAllChats_Desc", R.string.CG_NewTabs_RemoveAllChats_Desc), true, new TGKitSwitchPreference.TGSPContract() {
+                    @Override
+                    public boolean getPreferenceValue() {
+                        return CatogramConfig.newTabs_hideAllChats;
+                    }
+
+                    @Override
+                    public void toggleValue() {
+                        CatogramConfig.toggleAllChats();
+                    }
+                })
+        );
+        filters.add(
+                new TGKitSwitchPreference(LocaleController.getString("CG_NewTabs_Emoticons", R.string.CG_NewTabs_Emoticons), LocaleController.getString("CG_NewTabs_Emoticons_Desc", R.string.CG_NewTabs_Emoticons_Desc), true, new TGKitSwitchPreference.TGSPContract() {
+                    @Override
+                    public boolean getPreferenceValue() {
+                        return CatogramConfig.newTabs_emoji_insteadOfName;
+                    }
+
+                    @Override
+                    public void toggleValue() {
+                        CatogramConfig.toggleEmojiIN();
+                    }
+                })
+        );
+        filters.add(
+                new TGKitSwitchPreference(LocaleController.getString("CG_NewTabs_EmoticonsAppend", R.string.CG_NewTabs_EmoticonsAppend), LocaleController.getString("CG_NewTabs_EmoticonsAppend_Desc", R.string.CG_NewTabs_EmoticonsAppend_Desc), false, new TGKitSwitchPreference.TGSPContract() {
+                    @Override
+                    public boolean getPreferenceValue() {
+                        return CatogramConfig.newTabs_emoji_appendToName;
+                    }
+
+                    @Override
+                    public void toggleValue() {
+                        CatogramConfig.toggleEmojiAN();
+                    }
+                })
+        );
+        categories.add(new TGKitCategory(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header), filters));
+
         List<TGKitPreference> dialogs = new ArrayList<>();
         dialogs.add(
                 new TGKitSwitchPreference(LocaleController.getString("CG_NewRepostUI", R.string.CG_NewRepostUI), LocaleController.getString("CG_NewRepostUI_Desc", R.string.CG_NewRepostUI_Desc), true, new TGKitSwitchPreference.TGSPContract() {

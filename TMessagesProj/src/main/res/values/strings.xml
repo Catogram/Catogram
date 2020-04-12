@@ -3712,4 +3712,12 @@
     <string name="CG_HideKbdOnScroll">Hide keyboard on scroll</string>
 
     <string name="CG_NewTabs_NoCounter">Hide counter in tabs</string>
+    <string name="CG_NewTabs_RemoveAllChats">Hide \"All chats\" tab [restart needed]</string>
+    <string name="CG_NewTabs_RemoveAllChats_Desc">press \"Back\" on home page to open it</string>
+
+    <string name="CG_NewTabs_Emoticons">Show tab emoticons instead of titles [restart needed]</string>
+    <string name="CG_NewTabs_Emoticons_Desc">this is cloud-synced by Telegram</string>
+
+    <string name="CG_NewTabs_EmoticonsAppend">Append tab emoticons to titles [restart needed]</string>
+    <string name="CG_NewTabs_EmoticonsAppend_Desc">when \"instead of\" option is off</string>
 </resources>

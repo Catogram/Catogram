@@ -337,6 +337,8 @@ public class MessagesController extends BaseController implements NotificationCe
         public ArrayList<Integer> neverShow = new ArrayList<>();
         public LongSparseArray<Integer> pinnedDialogs = new LongSparseArray<>();
         public ArrayList<TLRPC.Dialog> dialogs = new ArrayList<>();
+
+        public String emoticon;
     }
 
     private DialogFilter sortingDialogFilter;
@@ -12123,7 +12125,7 @@ public class MessagesController extends BaseController implements NotificationCe
             return;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getParentActivity());
-        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
+        builder.setTitle("Catogram");
         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
         builder.setMessage(reason);
         fragment.showDialog(builder.create());

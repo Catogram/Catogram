@@ -19,7 +19,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
 
-import com.google.android.exoplayer2.util.Log;
+import android.util.Log;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLoader;
@@ -31,11 +31,13 @@ import org.telegram.tgnet.TLRPC;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "1.7.1";
+    public static String CG_VERSION = "1.8";
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -138,6 +140,20 @@ public class CatogramExtras {
         p.setColorFilter(filter);
         canvas.drawBitmap(bm, new Matrix(), p);
         return bm;
+    }
+
+    public static String wrapEmoticon(String base) {
+        if (base == null) {
+            return "\uD83D\uDCC1";
+        } else if (base.length() == 0) {
+            //Log.d("CG-Test", Arrays.toString(base.getBytes(StandardCharsets.UTF_16BE)));
+
+            return "\uD83D\uDDC2";
+        } else {
+            //Log.d("CG-Test", Arrays.toString(base.getBytes(StandardCharsets.UTF_16BE)));
+
+            return base;
+        }
     }
 
     public static BitmapDrawable currentAccountBitmap;
