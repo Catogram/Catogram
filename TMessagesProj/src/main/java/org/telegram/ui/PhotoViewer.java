@@ -9322,6 +9322,17 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                     dateTextView.setText(dateString);
                 }
             }
+            if (avatarsDialogId < 0) {
+                TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(-avatarsDialogId);
+                if (chat != null) {
+                    nameTextView.setText(chat.title);
+                }
+            } else {
+                TLRPC.User user = MessagesController.getInstance(currentAccount).getUser(avatarsDialogId);
+                if (user != null) {
+                    nameTextView.setText(UserObject.getUserName(user));
+                }
+            }
 
             if (canEditAvatar && !avatarsArr.isEmpty()) {
                 menuItem.showSubItem(gallery_menu_edit_avatar);
