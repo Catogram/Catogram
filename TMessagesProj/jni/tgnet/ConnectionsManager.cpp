@@ -39,6 +39,7 @@ jclass jclass_ByteBuffer = nullptr;
 jmethodID jclass_ByteBuffer_allocateDirect = 0;
 #endif
 
+static std::map<int, ConnectionsManager> cg_instances;
 static bool done = false;
 
 ConnectionsManager::ConnectionsManager(int32_t instance) {
@@ -129,39 +130,15 @@ ConnectionsManager::~ConnectionsManager() {
 }
 
 ConnectionsManager& ConnectionsManager::getInstance(int32_t instanceNum) {
-    switch (instanceNum) {
-        case 0:
-            static ConnectionsManager instance0(0);
-            return instance0;
-        case 1:
-            static ConnectionsManager instance1(1);
-            return instance1;
-        case 3:
-            static ConnectionsManager instance3(3);
-            return instance3;
-        case 4:
-            static ConnectionsManager instance4(4);
-            return instance4;
-        case 5:
-            static ConnectionsManager instance5(5);
-            return instance5;
-        case 6:
-            static ConnectionsManager instance6(6);
-            return instance6;
-        case 7:
-            static ConnectionsManager instance7(7);
-            return instance7;
-        case 8:
-            static ConnectionsManager instance8(8);
-            return instance8;
-        case 9:
-            static ConnectionsManager instance9(9);
-            return instance9;
-        case 2:
-        default:
-            static ConnectionsManager instance2(2);
-            return instance2;
+    // cg_instances is our vector
+    FileLog::d("CG:AccV2 / VectorSize: %u", cg_instances.size());
+    FileLog::d("CG:AccV2 / InstanceNumber: %u", instanceNum);
+
+    if (cg_instances.count(instanceNum) == 0) {
+        cg_instances.emplace(std::piecewise_construct, std::forward_as_tuple(instanceNum), std::forward_as_tuple(ConnectionsManager(instanceNum)));
     }
+
+    return (ConnectionsManager &) cg_instances[instanceNum];
 }
 
 int ConnectionsManager::callEvents(int64_t now) {

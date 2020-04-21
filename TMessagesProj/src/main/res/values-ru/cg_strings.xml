@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- by iTaysonLab -->
     <string name="AdvancedSettings">Настройки Catogram</string>
 
     <string name="AS_Header_Appearance">Внешний вид</string>

@@ -157,7 +157,7 @@ public class CatogramExtras {
     }
 
     public static BitmapDrawable currentAccountBitmap;
-    public static int MAX_ACCOUNT_SIZE = 10;
+    public static int MAX_ACCOUNT_SIZE = 32;
 
     // 80 in official
     public static int LOAD_AVATAR_COUNT_HEADER = 100;
