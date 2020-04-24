@@ -153,7 +153,7 @@ public class LoginActivity extends BaseFragment {
 
     private final static int done_button = 1;
 
-    private class ProgressView extends View {
+    private static class ProgressView extends View {
 
         private final Path path = new Path();
         private final RectF rect = new RectF();
@@ -1375,7 +1375,7 @@ public class LoginActivity extends BaseFragment {
                     }
                     s.replace(0, s.length(), builder);
                     if (start >= 0) {
-                        phoneField.setSelection(start <= phoneField.length() ? start : phoneField.length());
+                        phoneField.setSelection(Math.min(start, phoneField.length()));
                     }
                     phoneField.onTextChange();
                     ignoreOnPhoneChange = false;
@@ -3557,7 +3557,7 @@ public class LoginActivity extends BaseFragment {
             }
 
             SpannableStringBuilder text = new SpannableStringBuilder(currentTermsOfService.text);
-            MessageObject.addEntitiesToText(text, currentTermsOfService.entities, false, 0, false, false, false);
+            MessageObject.addEntitiesToText(text, currentTermsOfService.entities, false, false, false, false);
             builder.setMessage(text);
 
             showDialog(builder.create());
@@ -3912,10 +3912,10 @@ public class LoginActivity extends BaseFragment {
                         needHideProgress(false, false);
                         AndroidUtilities.hideKeyboard(fragmentView.findFocus());
                         onAuthSuccess((TLRPC.TL_auth_authorization) response, true);
+                        if (avatarBig != null) {
+                            MessagesController.getInstance(currentAccount).uploadAndApplyUserAvatar(avatarBig);
+                        }
                     }, 150);
-                    if (avatarBig != null) {
-                        MessagesController.getInstance(currentAccount).uploadAndApplyUserAvatar(avatarBig);
-                    }
                 } else {
                     needHideProgress(false);
                     if (error.text.contains("PHONE_NUMBER_INVALID")) {
@@ -3994,10 +3994,10 @@ public class LoginActivity extends BaseFragment {
     }
 
     @Override
-    public ThemeDescription[] getThemeDescriptions() {
+    public ArrayList<ThemeDescription> getThemeDescriptions() {
         for (int a = 0;a < views.length; a++) {
             if (views[a] == null) {
-                return new ThemeDescription[0];
+                return new ArrayList<>();
             }
         }
         PhoneView phoneView = (PhoneView) views[0];
@@ -4133,6 +4133,6 @@ public class LoginActivity extends BaseFragment {
         arrayList.add(new ThemeDescription(smsView4.blackImageView, ThemeDescription.FLAG_IMAGECOLOR, null, null, null, null, Theme.key_windowBackgroundWhiteBlackText));
         arrayList.add(new ThemeDescription(smsView4.blueImageView, ThemeDescription.FLAG_IMAGECOLOR, null, null, null, null, Theme.key_chats_actionBackground));
 
-        return arrayList.toArray(new ThemeDescription[0]);
+        return arrayList;
     }
 }
