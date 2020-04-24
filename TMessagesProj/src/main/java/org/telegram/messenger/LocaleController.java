@@ -738,6 +738,15 @@ public class LocaleController {
                 }
             }
         }
+
+        LocaleInfo localeInfo = new LocaleInfo();
+        localeInfo.name = "中文（喵体）";
+        localeInfo.nameEnglish = "Chinese (Meowfied)";
+        localeInfo.shortName = localeInfo.pluralLangCode = "meowcn";
+        localeInfo.pathToFile = "file:///android_asset/cato_meowcn_v1.1.1.xml";
+        localeInfo.builtIn = true;
+        localeInfo.isRtl = false;
+        unofficialLanguages.add(localeInfo);
     }
 
     private HashMap<String, String> getLocaleFileStrings(File file) {
