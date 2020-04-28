@@ -530,7 +530,7 @@ public class GroupCreateFinalActivity extends BaseFragment implements Notificati
             if (editText.length() == 0) {
                 Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
                 if (v != null) {
-                    v.vibrate(200);
+                    ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
                 }
                 AndroidUtilities.shakeView(editText, 2, 0);
                 return;

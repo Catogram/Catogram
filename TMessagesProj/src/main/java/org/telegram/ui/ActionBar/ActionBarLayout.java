@@ -1157,7 +1157,7 @@ public class ActionBarLayout extends FrameLayout {
                 }
             });
             animatorSet.start();
-            performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(this, HapticFeedbackConstants.KEYBOARD_TAP);
 
             fragment.setInPreviewMode(false);
         }

@@ -6,23 +6,10 @@ import ua.itaysonlab.tgkit.preference.TGKitPreference;
 
 public class TGKitSwitchPreference extends TGKitPreference {
     public TGSPContract contract;
-    public boolean divider;
+    public boolean divider = false;
 
     @Nullable
     public String summary;
-
-    public TGKitSwitchPreference(String title, boolean divider, TGSPContract contract) {
-        this.contract = contract;
-        this.title = title;
-        this.divider = divider;
-    }
-
-    public TGKitSwitchPreference(String title, String summary, boolean divider, TGSPContract contract) {
-        this.contract = contract;
-        this.title = title;
-        this.summary = summary;
-        this.divider = divider;
-    }
 
     @Override
     public TGPType getType() {

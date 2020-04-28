@@ -37,7 +37,7 @@ import java.util.Arrays;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "1.9";
+    public static String CG_VERSION = "1.10-alpha";
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -50,35 +50,35 @@ public class CatogramExtras {
     }
 
     public static void setSecureFlag(Window window) {
-        if (!CatogramConfig.controversiveNoSecureFlag) window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag()) window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     public static void setSecureFlag(WindowManager.LayoutParams window) {
-        if (!CatogramConfig.controversiveNoSecureFlag) window.flags |= WindowManager.LayoutParams.FLAG_SECURE;
+        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag()) window.flags |= WindowManager.LayoutParams.FLAG_SECURE;
     }
 
     public static void clearSecureFlag(Window window) {
-        if (!CatogramConfig.controversiveNoSecureFlag) window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag()) window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     public static void vibrate(Vibrator vibrator, int ms) {
-        if (CatogramConfig.noVibration) return;
+        if (CatogramConfig.INSTANCE.getNoVibration()) return;
         vibrator.vibrate(ms);
     }
 
     public static void vibrate(Vibrator vibrator, long[] pattern, int repeat) {
-        if (CatogramConfig.noVibration) return;
+        if (CatogramConfig.INSTANCE.getNoVibration()) return;
         vibrator.vibrate(pattern, repeat);
     }
 
-    public static void performHapticFeedback(View view, int feedbackConstant, int flags) {
-        if (CatogramConfig.noVibration) return;
-        view.performHapticFeedback(feedbackConstant, flags);
+    public static boolean performHapticFeedback(View view, int feedbackConstant, int flags) {
+        if (CatogramConfig.INSTANCE.getNoVibration()) return false;
+        return view.performHapticFeedback(feedbackConstant, flags);
     }
 
-    public static void performHapticFeedback(View view, int feedbackConstant) {
-        if (CatogramConfig.noVibration) return;
-        view.performHapticFeedback(feedbackConstant);
+    public static boolean performHapticFeedback(View view, int feedbackConstant) {
+        if (CatogramConfig.INSTANCE.getNoVibration()) return false;
+        return view.performHapticFeedback(feedbackConstant);
     }
 
     public static Typeface getBold() {
@@ -98,7 +98,7 @@ public class CatogramExtras {
     }
 
     @ColorInt public static int getLightStatusbarColor() {
-        if (CatogramConfig.flatStatusbar) {
+        if (CatogramConfig.INSTANCE.getFlatStatusbar()) {
             return 0x00000000;
         } else {
             return 0x0f000000;
@@ -106,7 +106,7 @@ public class CatogramExtras {
     }
 
     @ColorInt public static int getDarkStatusbarColor() {
-        if (CatogramConfig.flatStatusbar) {
+        if (CatogramConfig.INSTANCE.getFlatStatusbar()) {
             return 0x00000000;
         } else {
             return 0x33000000;
@@ -124,7 +124,7 @@ public class CatogramExtras {
                 photoIn.close();
 
                 Bitmap bg = BitmapFactory.decodeByteArray(photoData, 0, photoData.length);
-                if (CatogramConfig.drawerBlur) bg = Utilities.blurWallpaper(bg);
+                if (CatogramConfig.INSTANCE.getDrawerBlur()) bg = Utilities.blurWallpaper(bg);
 
                 currentAccountBitmap = new BitmapDrawable(Resources.getSystem(), bg);
             } catch (Exception e) {

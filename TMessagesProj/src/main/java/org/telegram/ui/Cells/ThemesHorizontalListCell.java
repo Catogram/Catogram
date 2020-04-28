@@ -189,7 +189,7 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
                     if (action == MotionEvent.ACTION_DOWN) {
                         pressed = true;
                     } else {
-                        performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+                        ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(this, HapticFeedbackConstants.KEYBOARD_TAP);
                         showOptionsForTheme(themeInfo);
                     }
                 }

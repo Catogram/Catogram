@@ -553,7 +553,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 					duration/=2;
 				else if(vibrate==3)
 					duration*=2;
-				vibrator.vibrate(new long[]{0, duration, 500}, 0);
+				ua.itaysonlab.extras.CatogramExtras.vibrate(vibrator, new long[]{0, duration, 500}, 0);
 			}
 		}
 	}
@@ -1239,7 +1239,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 				if(!isProximityNear){
 					Vibrator vibrator=(Vibrator) getSystemService(VIBRATOR_SERVICE);
 					if(vibrator.hasVibrator())
-						vibrator.vibrate(100);
+						ua.itaysonlab.extras.CatogramExtras.vibrate(vibrator, 100);
 				}
 				AndroidUtilities.runOnUIThread(new Runnable(){
 					@Override

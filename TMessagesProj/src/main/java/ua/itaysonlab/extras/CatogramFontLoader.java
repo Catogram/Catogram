@@ -13,7 +13,7 @@ public class CatogramFontLoader {
     private static Typeface sysMono = Typeface.MONOSPACE;
 
     public static boolean needRedirect(String path) {
-        return CatogramConfig.systemFonts && (
+        return CatogramConfig.INSTANCE.getSystemFonts() && (
                 path.equals("fonts/rmedium.ttf")
                 || path.equals("fonts/rmediumitalic.ttf")
                 || path.equals("fonts/ritalic.ttf")
@@ -35,7 +35,7 @@ public class CatogramFontLoader {
     }
 
     public static Typeface getBold() {
-        if (CatogramConfig.systemFonts) {
+        if (CatogramConfig.INSTANCE.getSystemFonts()) {
             return sysBold;
         } else {
             return AndroidUtilities.getTypeface("fonts/rmedium.ttf");
@@ -43,7 +43,7 @@ public class CatogramFontLoader {
     }
 
     public static Typeface getBoldItalic() {
-        if (CatogramConfig.systemFonts) {
+        if (CatogramConfig.INSTANCE.getSystemFonts()) {
             return sysBoldItalic;
         } else {
             return AndroidUtilities.getTypeface("fonts/rmediumitalic.ttf");
@@ -51,7 +51,7 @@ public class CatogramFontLoader {
     }
 
     public static Typeface getItalic() {
-        if (CatogramConfig.systemFonts) {
+        if (CatogramConfig.INSTANCE.getSystemFonts()) {
             return sysItalic;
         } else {
             return AndroidUtilities.getTypeface("fonts/ritalic.ttf");
@@ -59,7 +59,7 @@ public class CatogramFontLoader {
     }
 
     public static Typeface getMono() {
-        if (CatogramConfig.systemFonts) {
+        if (CatogramConfig.INSTANCE.getSystemFonts()) {
             return sysMono;
         } else {
             return AndroidUtilities.getTypeface("fonts/rmono.ttf");

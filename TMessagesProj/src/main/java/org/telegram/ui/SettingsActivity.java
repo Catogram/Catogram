@@ -798,7 +798,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
         numberSectionRow = rowCount++;
 
-        numberRow = CatogramConfig.hidePhoneNumber ? -1 : rowCount++;
+        numberRow = CatogramConfig.INSTANCE.getHidePhoneNumber() ? -1 : rowCount++;
 
         usernameRow = rowCount++;
         bioRow = rowCount++;

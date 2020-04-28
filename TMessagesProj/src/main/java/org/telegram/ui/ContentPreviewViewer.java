@@ -208,7 +208,7 @@ public class ContentPreviewViewer {
                     close();
                 });
                 visibleDialog.show();
-                containerView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(containerView, HapticFeedbackConstants.LONG_PRESS);
             } else if (delegate != null) {
                 animateY = true;
                 visibleDialog = new BottomSheet(parentActivity, false) {
@@ -290,7 +290,7 @@ public class ContentPreviewViewer {
                     close();
                 });
                 visibleDialog.show();
-                containerView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(containerView, HapticFeedbackConstants.LONG_PRESS);
                 if (canDelete) {
                     visibleDialog.setItemColor(items.size() - 1, Theme.getColor(Theme.key_dialogTextRed2), Theme.getColor(Theme.key_dialogRedIcon));
                 }

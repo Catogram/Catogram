@@ -224,7 +224,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
                         if (nameTextView.length() == 0) {
                             Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
                             if (v != null) {
-                                v.vibrate(200);
+                                ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
                             }
                             AndroidUtilities.shakeView(nameTextView, 2, 0);
                             return;
@@ -261,7 +261,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
                                 if (!lastNameAvailable) {
                                     Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
                                     if (v != null) {
-                                        v.vibrate(200);
+                                        ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
                                     }
                                     AndroidUtilities.shakeView(checkTextView, 2, 0);
                                     return;

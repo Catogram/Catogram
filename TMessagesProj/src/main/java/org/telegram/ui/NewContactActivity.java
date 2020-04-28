@@ -112,7 +112,7 @@ public class NewContactActivity extends BaseFragment implements AdapterView.OnIt
                     if (firstNameField.length() == 0) {
                         Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         if (v != null) {
-                            v.vibrate(200);
+                            ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
                         }
                         AndroidUtilities.shakeView(firstNameField, 2, 0);
                         return;
@@ -120,7 +120,7 @@ public class NewContactActivity extends BaseFragment implements AdapterView.OnIt
                     if (codeField.length() == 0) {
                         Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         if (v != null) {
-                            v.vibrate(200);
+                            ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
                         }
                         AndroidUtilities.shakeView(codeField, 2, 0);
                         return;
@@ -128,7 +128,7 @@ public class NewContactActivity extends BaseFragment implements AdapterView.OnIt
                     if (phoneField.length() == 0) {
                         Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         if (v != null) {
-                            v.vibrate(200);
+                            ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
                         }
                         AndroidUtilities.shakeView(phoneField, 2, 0);
                         return;

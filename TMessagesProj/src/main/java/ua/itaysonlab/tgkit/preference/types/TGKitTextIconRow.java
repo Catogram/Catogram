@@ -8,22 +8,14 @@ import org.telegram.ui.Cells.TextCell;
 import ua.itaysonlab.tgkit.preference.TGKitPreference;
 
 public class TGKitTextIconRow extends TGKitPreference {
-    public boolean divider;
-    public int icon;
+    public boolean divider = false;
+    public int icon = -1;
 
     @Nullable
-    public String value;
+    public String value = null;
 
     @Nullable
     public TGTIListener listener;
-
-    public TGKitTextIconRow(String title, @Nullable String value, int icon, boolean divider, TGTIListener listener) {
-        this.title = title;
-        this.value = value;
-        this.icon = icon;
-        this.listener = listener;
-        this.divider = divider;
-    }
 
     public void bindCell(TextCell cell) {
         if (icon != -1 && value != null) {

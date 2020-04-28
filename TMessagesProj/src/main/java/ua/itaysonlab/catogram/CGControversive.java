@@ -17,6 +17,6 @@ public class CGControversive {
     }
 
     public static boolean noReading() {
-        return isControversiveFeaturesEnabled() && CatogramConfig.controversiveNoReading;
+        return isControversiveFeaturesEnabled() && CatogramConfig.INSTANCE.getControversiveNoReading();
     }
 }

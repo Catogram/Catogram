@@ -1406,7 +1406,7 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
         }
         Vibrator v = (Vibrator) getParentActivity().getSystemService(Context.VIBRATOR_SERVICE);
         if (v != null) {
-            v.vibrate(200);
+            ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
         }
         if (clear) {
             field.setText("");

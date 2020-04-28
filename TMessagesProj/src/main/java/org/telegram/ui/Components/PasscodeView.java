@@ -128,7 +128,7 @@ public class PasscodeView extends FrameLayout {
                 return;
             }
             try {
-                performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(this, HapticFeedbackConstants.KEYBOARD_TAP);
             } catch (Exception e) {
                 FileLog.e(e);
             }
@@ -249,7 +249,7 @@ public class PasscodeView extends FrameLayout {
                 return;
             }
             try {
-                performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(this, HapticFeedbackConstants.KEYBOARD_TAP);
             } catch (Exception e) {
                 FileLog.e(e);
             }
@@ -885,7 +885,7 @@ public class PasscodeView extends FrameLayout {
     private void onPasscodeError() {
         Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         if (v != null) {
-            v.vibrate(200);
+            ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
         }
         shakeTextView(2, 0);
     }
@@ -1137,7 +1137,7 @@ public class PasscodeView extends FrameLayout {
         fingerprintStatusTextView.setTextColor(0xfff4511e);
         Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         if (v != null) {
-            v.vibrate(200);
+            ua.itaysonlab.extras.CatogramExtras.vibrate(v, 200);
         }
         AndroidUtilities.shakeView(fingerprintStatusTextView, 2, 0);
     }

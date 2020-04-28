@@ -2116,7 +2116,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
                         return;
                     }
                     try {
-                        performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                        ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(InstantCameraView.this, HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
                     } catch (Exception ignore) {
 
                     }

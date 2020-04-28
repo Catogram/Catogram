@@ -73,7 +73,7 @@ public class SharedLinkCell extends FrameLayout {
         public void run() {
             if (checkingForLongPress && getParent() != null && currentPressCount == pressCount) {
                 checkingForLongPress = false;
-                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(SharedLinkCell.this, HapticFeedbackConstants.LONG_PRESS);
                 if (pressedLink >= 0) {
                     delegate.onLinkLongPress(links.get(pressedLink));
                 }

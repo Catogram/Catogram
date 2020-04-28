@@ -76,7 +76,7 @@ public class StickerPreviewMessagesCell extends LinearLayout {
         TLRPC.TL_photoSize photoSize = new TLRPC.TL_photoSize();
         photoSize.size = 0;
 
-        float modifier = CatogramConfig.slider_stickerAmplifier / 100f;
+        float modifier = CatogramConfig.INSTANCE.getSlider_stickerAmplifier() / 100f;
         photoSize.w = 450;
         photoSize.h = 200;
 

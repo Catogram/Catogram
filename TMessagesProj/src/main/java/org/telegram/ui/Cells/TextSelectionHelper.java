@@ -224,7 +224,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                 textY = maybeTextY;
 
                 selectedView = newView;
-                textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.LONG_PRESS);
                 showActions();
                 invalidate();
 
@@ -812,7 +812,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                                     if (viewChanged || layoutOld != layoutNew || newSelectionLine != layoutNew.getLineForOffset(selectionStart) && newSelectionLine == nextWhitespaceLine) {
                                         jumpToLine(newSelection, nextWhitespace, viewChanged, layoutBlock.yOffset, oldYoffset, oldSelectedView);
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                                            textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                                            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.TEXT_HANDLE_MOVE);
                                         }
                                         TextSelectionHelper.this.invalidate();
                                     } else if (Layout.DIR_RIGHT_TO_LEFT == layoutNew.getParagraphDirection(layoutNew.getLineForOffset(newSelection)) || layoutNew.isRtlCharAt(newSelection) || nextWhitespaceLine != currentLine || newSelectionLine != nextWhitespaceLine) {
@@ -824,7 +824,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                                             movingHandleStart = false;
                                         }
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                                            textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                                            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.TEXT_HANDLE_MOVE);
                                         }
                                         TextSelectionHelper.this.invalidate();
                                     } else {
@@ -875,7 +875,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                                                 movingHandleStart = false;
                                             }
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                                                textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                                                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.TEXT_HANDLE_MOVE);
                                             }
                                             TextSelectionHelper.this.invalidate();
                                         }
@@ -913,7 +913,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                                     if (viewChanged || layoutOld != layoutNew || newSelectionLine != layoutNew.getLineForOffset(selectionEnd) && newSelectionLine == nextWhitespaceLine) {
                                         jumpToLine(newSelection, nextWhitespace, viewChanged, layoutBlock.yOffset, oldYoffset, oldSelectedView);
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                                            textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                                            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.TEXT_HANDLE_MOVE);
                                         }
                                         TextSelectionHelper.this.invalidate();
                                     } else if (Layout.DIR_RIGHT_TO_LEFT == layoutNew.getParagraphDirection(layoutNew.getLineForOffset(newSelection)) || layoutNew.isRtlCharAt(newSelection) || currentLine != nextWhitespaceLine || newSelectionLine != nextWhitespaceLine) {
@@ -925,7 +925,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                                             movingHandleStart = true;
                                         }
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                                            textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                                            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.TEXT_HANDLE_MOVE);
                                         }
                                         TextSelectionHelper.this.invalidate();
                                     } else {
@@ -957,7 +957,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                                                 movingHandleStart = true;
                                             }
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                                                textSelectionOverlay.performHapticFeedback(HapticFeedbackConstants.TEXT_HANDLE_MOVE);
+                                                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(textSelectionOverlay, HapticFeedbackConstants.TEXT_HANDLE_MOVE);
                                             }
                                             TextSelectionHelper.this.invalidate();
                                         }

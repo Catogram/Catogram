@@ -2869,7 +2869,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
         requestAudioFocus(true);
 
         try {
-            feedbackView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(feedbackView, HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
         } catch (Exception ignore) {
 
         }
@@ -3054,7 +3054,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
                 stopRecordingInternal(0, false, 0);
             }
             try {
-                feedbackView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(feedbackView, HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
             } catch (Exception ignore) {
 
             }

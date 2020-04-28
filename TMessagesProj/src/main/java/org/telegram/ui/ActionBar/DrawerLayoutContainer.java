@@ -16,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -38,6 +39,8 @@ import org.telegram.messenger.BuildVars;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.R;
 import org.telegram.messenger.SharedConfig;
+
+import ua.itaysonlab.catogram.CatogramConfig;
 
 public class DrawerLayoutContainer extends FrameLayout {
 
@@ -72,7 +75,7 @@ public class DrawerLayoutContainer extends FrameLayout {
     private float scrimOpacity;
     private Drawable shadowLeft;
     private boolean allowOpenDrawer;
-    private boolean allowOpenDrawerBySwipe = true;
+    private boolean allowOpenDrawerBySwipe = false;
 
     private float drawerPosition;
     private boolean drawerOpened;
@@ -107,7 +110,8 @@ public class DrawerLayoutContainer extends FrameLayout {
                 invalidate();
                 return insets.consumeSystemWindowInsets();
             });
-            setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+            if (CatogramConfig.flatStatusbar) ((Activity) context).getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
         shadowLeft = getResources().getDrawable(R.drawable.menu_shadow);
@@ -272,6 +276,7 @@ public class DrawerLayoutContainer extends FrameLayout {
     }
 
     public void setAllowOpenDrawer(boolean value, boolean animated) {
+        value = false;
         allowOpenDrawer = value;
         if (!allowOpenDrawer && drawerPosition != 0) {
             if (!animated) {

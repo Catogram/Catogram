@@ -743,7 +743,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
             if (activity != null) {
                 checkPermission = false;
                 if (activity.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-                    if (activity.shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) && !CatogramConfig.contactsNever) {
+                    if (activity.shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) && !CatogramConfig.INSTANCE.getContactsNever()) {
                         AlertDialog.Builder builder = AlertsCreator.createContactsPermissionDialog(activity, param -> {
                             askAboutContacts = param != 0;
                             if (param == 0) {
@@ -799,7 +799,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
         if (activity == null || !UserConfig.getInstance(currentAccount).syncContacts || activity.checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        if (alert && askAboutContacts && !CatogramConfig.contactsNever) {
+        if (alert && askAboutContacts && !CatogramConfig.INSTANCE.getContactsNever()) {
             AlertDialog.Builder builder = AlertsCreator.createContactsPermissionDialog(activity, param -> {
                 askAboutContacts = param != 0;
                 if (param == 0) {

@@ -220,7 +220,7 @@ public class DrawerProfileCell extends FrameLayout {
         }
         nameTextView.setTextColor(Theme.getColor(Theme.key_chats_menuName));
 
-        if (CatogramConfig.drawerAvatar && CatogramExtras.currentAccountBitmap != null) {
+        if (CatogramConfig.INSTANCE.getDrawerAvatar() && CatogramExtras.currentAccountBitmap != null) {
             backgroundDrawable = CatogramExtras.currentAccountBitmap;
             useImageBackground = true;
         }
@@ -236,8 +236,8 @@ public class DrawerProfileCell extends FrameLayout {
                 darkBackColor = Theme.getColor(Theme.key_listSelector);
             } else if (backgroundDrawable instanceof BitmapDrawable) {
                 Bitmap bitmap = ((BitmapDrawable) backgroundDrawable).getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-                if (CatogramConfig.drawerBlur) bitmap = Utilities.blurWallpaper(bitmap);
-                if (CatogramConfig.drawerDarken) CatogramExtras.darkenBitmap(bitmap);
+                if (CatogramConfig.INSTANCE.getDrawerBlur()) bitmap = Utilities.blurWallpaper(bitmap);
+                if (CatogramConfig.INSTANCE.getDrawerDarken()) CatogramExtras.darkenBitmap(bitmap);
                 float scaleX = (float) getMeasuredWidth() / (float) bitmap.getWidth();
                 float scaleY = (float) getMeasuredHeight() / (float) bitmap.getHeight();
                 float scale = scaleX < scaleY ? scaleY : scaleX;

@@ -49,7 +49,7 @@ public class CupertinoExtras {
         ArrayList<ContextMenu.PopupAction> actions = new ArrayList<>();
         for (int a = 0, N = optionsID.size(); a < N; a++) {
             ContextMenu.PopupAction action = new ContextMenu.PopupAction(optionsID.get(a), optionTitles.get(a), optionIcons.get(a), analyzeDangerousity(optionsID.get(a)));
-            if (action.id == 23) action.setHasTopPadding();
+            if (action.id == 1) action.setHasTopPadding();
             actions.add(action);
         }
         //actions.add(new ContextMenu.PopupAction(999, "Select", R.drawable.arrow_more, false).setHasTopPadding());
@@ -57,7 +57,7 @@ public class CupertinoExtras {
     }
 
     private static boolean analyzeDangerousity(int actionID) {
-        return actionID == 1 || actionID == 23; // Delete / Report
+        return actionID == 1; // Delete
     }
 
     public interface OnClickListener {

@@ -10,10 +10,6 @@ public class TGKitSliderPreference extends TGKitPreference {
     @Nullable
     public String summary;
 
-    public TGKitSliderPreference(TGSLContract contract) {
-        this.contract = contract;
-    }
-
     @Override
     public TGPType getType() {
         return TGPType.SLIDER;

@@ -2880,7 +2880,7 @@ public class AlertsCreator {
             if (editText.length() == 0) {
                 Vibrator vibrator = (Vibrator) ApplicationLoader.applicationContext.getSystemService(Context.VIBRATOR_SERVICE);
                 if (vibrator != null) {
-                    vibrator.vibrate(200);
+                    ua.itaysonlab.extras.CatogramExtras.vibrate(vibrator, 200);
                 }
                 AndroidUtilities.shakeView(editText, 2, 0);
                 return;
