@@ -1,14 +1,16 @@
 package ua.itaysonlab.catogram
 
+import android.app.Activity
 import android.content.SharedPreferences
 import com.google.android.exoplayer2.util.Log
+import org.telegram.messenger.ApplicationLoader
 import org.telegram.messenger.MessagesController
 import ua.itaysonlab.catogram.preferences.ktx.boolean
 import ua.itaysonlab.catogram.preferences.ktx.int
 import ua.itaysonlab.catogram.ui.CatogramToasts
 
 object CatogramConfig {
-    private lateinit var sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE)
 
     var hidePhoneNumber by sharedPreferences.boolean("advanced_hidephonenumber", true)
     var forceNewYear by sharedPreferences.boolean("advanced_forcenewyear", false)
@@ -19,7 +21,6 @@ object CatogramConfig {
     var forceNewYearDrawer by sharedPreferences.boolean("advanced_nydrawer", false)
     var hideProxySponsor by sharedPreferences.boolean("advanced_hideproxysponsor", false)
     var noTyping by sharedPreferences.boolean("advanced_notyping", false)
-    var useCupertinoLib by sharedPreferences.boolean("advanced_cupertino", false)
     var drawerAvatar by sharedPreferences.boolean("cg_drawer_avatar", false)
     var flatStatusbar by sharedPreferences.boolean("cg_flat_statusbar", false)
     var flatActionbar by sharedPreferences.boolean("cg_flat_actionbar", false)
@@ -42,16 +43,18 @@ object CatogramConfig {
     var newTabs_hideAllChats by sharedPreferences.boolean("cg_ntallchats", false)
     var newTabs_emoji_insteadOfName by sharedPreferences.boolean("newTabs_emoji_insteadOfName", false)
     var newTabs_emoji_appendToName by sharedPreferences.boolean("newTabs_emoji_appendToName", false)
+    var forceSVDrawer by sharedPreferences.boolean("cg_sv_drawer", false)
 
-    var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", false)
+    var redesign_messageOption by sharedPreferences.int("cg_messageOption", 1)
+    var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", true)
 
     var slider_stickerAmplifier by sharedPreferences.int("cg_stickamplifier", 100)
 
-    @JvmStatic
-    fun initConfig(preferences: SharedPreferences) {
-        Log.d("Catogram", "initConfig")
-        sharedPreferences = preferences
-        CatogramToasts.init(preferences)
+    var useCupertinoLib by sharedPreferences.boolean("advanced_cupertino", false)
+    var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", true)
+
+    init {
+        CatogramToasts.init(sharedPreferences)
     }
 
     private fun putBoolean(key: String, value: Boolean) {

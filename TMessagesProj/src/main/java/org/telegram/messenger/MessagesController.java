@@ -4396,7 +4396,7 @@ public class MessagesController extends BaseController implements NotificationCe
                 } else if (response instanceof TLRPC.TL_help_proxyDataPromo) {
                     final TLRPC.TL_help_proxyDataPromo res = (TLRPC.TL_help_proxyDataPromo) response;
 
-                    if (CatogramConfig.hideProxySponsor) {
+                    if (CatogramConfig.INSTANCE.getHideProxySponsor()) {
                         nextProxyInfoCheckTime = res.expires;
                         noDialog = true;
                         return;

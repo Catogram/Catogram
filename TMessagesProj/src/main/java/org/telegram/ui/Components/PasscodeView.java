@@ -934,7 +934,7 @@ public class PasscodeView extends FrameLayout {
     private void checkFingerprint() {
         Activity parentActivity = (Activity) getContext();
         if (Build.VERSION.SDK_INT >= 23 && parentActivity != null && SharedConfig.useFingerprint && !ApplicationLoader.mainInterfacePaused) {
-            if (CatogramConfig.useBiometricPrompt) {
+            if (CatogramConfig.INSTANCE.getUseBiometricPrompt()) {
                 CGBiometricPrompt.callBiometricPrompt((AppCompatActivity) parentActivity, new CGBiometricPrompt.CGBiometricListener() {
                     @Override
                     public void onError(CharSequence msg) {

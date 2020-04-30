@@ -37,7 +37,6 @@
     <string name="CG_AboutDesc">An experimental Telegram app modification.</string>
     <string name="CG_Donate">Donate</string>
     <string name="CG_ToChannel">Open official channel</string>
-    <string name="AS_ForceNY_Drawer">Force New Year drawer icons</string>
     <string name="AS_SysEmoji">Use system emoji</string>
     <string name="AS_SysEmojiDesc">can cause bugs, be careful</string>
 
@@ -122,4 +121,32 @@
 
     <string name="CG_NewTabs_EmoticonsAppend">Append tab emoticons to titles [restart needed]</string>
     <string name="CG_NewTabs_EmoticonsAppend_Desc">when \"instead of\" option is off</string>
+
+    <string name="CG_MessageMenuOption">Message menu style</string>
+    <string name="CG_MessageMenuOption_TGX">Telegram X-styled</string>
+    <string name="CG_MessageMenuOption_CL">CupertinoLib (beta, iOS-styled)</string>
+    <string name="CG_MessageMenuOption_Default">Default</string>
+
+    <string name="CG_NewDrawer">Use the new drawer</string>
+    <string name="CG_NewDrawer_Desc">not compatible with multiaccount</string>
+
+    <string name="CG_MessageButton_Override">Override message action button</string>
+    <string name="CG_MessageButton_Override_Desc">enables it on own messages</string>
+
+    <string name="CG_MessageButton_Out">Outgoing messages</string>
+    <string name="CG_MessageButton_In">Incoming messages</string>
+
+    <string name="CG_MessageButton_Option_Share">Share [default]</string>
+    <string name="CG_MessageButton_Option_Edit">Edit [your only]</string>
+    <string name="CG_MessageButton_Option_Saved">To Cloud</string>
+
+    <string name="CG_ConfirmCalling_Header">Confirm call</string>
+    <string name="CG_ConfirmCalling_Question">Call to %s?</string>
+    <string name="CG_ConfirmCalling_Action">Confirm</string>
+    <string name="CG_ConfirmCalling_Action_Cancel">Cancel</string>
+
+    <string name="AS_ForceIcons">Drawer icons style</string>
+    <string name="AS_ForceNY_Drawer">New Year</string>
+    <string name="AS_ForceSV_Drawer">St. Valentine</string>
+    <string name="AS_ForceDefault_Drawer">Default</string>
 </resources>

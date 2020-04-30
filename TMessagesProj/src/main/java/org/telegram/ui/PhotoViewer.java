@@ -8910,7 +8910,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         }
 
         float x = e.getX();
-        if (!CatogramConfig.profiles_noEdgeTapping && checkImageView.getVisibility() != View.VISIBLE) {
+        if (!CatogramConfig.INSTANCE.getProfiles_noEdgeTapping() && checkImageView.getVisibility() != View.VISIBLE) {
             int side = Math.min(135, containerView.getMeasuredWidth() / 8);
             if (x < side) {
                 if (leftImage.hasImageSet()) {

@@ -11,7 +11,7 @@ class StringPreference(
 ) : ReadWriteProperty<Any, String> {
     override fun getValue(thisRef: Any, property: KProperty<*>): String = sharedPreferences.getString(key, defaultValue)!!
     override fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
-        sharedPreferences.edit().putString(key, defaultValue).commit()
+        sharedPreferences.edit().putString(key, value).commit()
     }
 }
 
@@ -22,7 +22,7 @@ class IntPreference(
 ) : ReadWriteProperty<Any, Int> {
     override fun getValue(thisRef: Any, property: KProperty<*>): Int = sharedPreferences.getInt(key, defaultValue)
     override fun setValue(thisRef: Any, property: KProperty<*>, value: Int) {
-        sharedPreferences.edit().putInt(key, defaultValue).commit()
+        sharedPreferences.edit().putInt(key, value).commit()
     }
 }
 
@@ -33,7 +33,7 @@ class BooleanPreference(
 ) : ReadWriteProperty<Any, Boolean> {
     override fun getValue(thisRef: Any, property: KProperty<*>): Boolean = sharedPreferences.getBoolean(key, defaultValue)
     override fun setValue(thisRef: Any, property: KProperty<*>, value: Boolean) {
-        sharedPreferences.edit().putBoolean(key, defaultValue).commit()
+        sharedPreferences.edit().putBoolean(key, value).commit()
     }
 }
 

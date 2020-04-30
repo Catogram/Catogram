@@ -6,7 +6,8 @@ public enum TGPType {
     SWITCH(3, true),
     TEXT_DETAIL(4, true),
     TEXT_ICON(5, true),
-    SLIDER(6, true);
+    SLIDER(6, true),
+    LIST(7, true);
 
     public int adapterType;
     public boolean enabled;

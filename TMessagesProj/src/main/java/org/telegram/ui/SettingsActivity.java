@@ -2233,7 +2233,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                     if (position == numberRow) {
                         TLRPC.User user = UserConfig.getInstance(currentAccount).getCurrentUser();
                         String value;
-                        if (CatogramConfig.hidePhoneNumber) {
+                        if (CatogramConfig.INSTANCE.getHidePhoneNumber()) {
                             value = LocaleController.getString("AS_Hidden", R.string.AS_Hidden);
                         } else if (user != null && user.phone != null && user.phone.length() != 0) {
                             value = PhoneFormat.getInstance().format("+" + user.phone);

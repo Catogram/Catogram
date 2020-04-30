@@ -109,7 +109,7 @@ public class ChatAvatarContainer extends FrameLayout implements NotificationCent
         }
 
         if (parentFragment != null && !parentFragment.isInScheduleMode()) {
-            setOnClickListener(v -> openProfile(CatogramConfig.profiles_alwaysExpand));
+            setOnClickListener(v -> openProfile(CatogramConfig.INSTANCE.getProfiles_alwaysExpand()));
 
             TLRPC.Chat chat = parentFragment.getCurrentChat();
             statusDrawables[0] = new TypingDotsDrawable();

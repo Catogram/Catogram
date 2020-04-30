@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram.preferences
 
+import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
@@ -79,21 +80,16 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }
             }
 
-            /*
-            general.add(
-            new TGKitSwitchPreference(LocaleController.getString("CG_ConfirmCalls", R.string.CG_ConfirmCalls), null, true, new TGKitSwitchPreference.TGSPContract() {
-                @Override
-                public boolean getPreferenceValue() {
-                    return CatogramConfig.confirmCalls;
-                }
+            switch {
+                title = LocaleController.getString("CG_ConfirmCalls", R.string.CG_ConfirmCalls)
+                divider = true
 
-                @Override
-                public void toggleValue() {
-                    CatogramConfig.toggleCallConfirm();
+                contract({
+                    return@contract CatogramConfig.confirmCalls
+                }) {
+                    CatogramConfig.confirmCalls = it
                 }
-            })
-            );
-             */
+            }
 
             switch {
                 title = LocaleController.getString("AS_SysEmoji", R.string.AS_SysEmoji)
@@ -120,16 +116,38 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_DrawerCategory", R.string.AS_DrawerCategory)) {
-            // TODO: create switcher
-            switch {
-                title = LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)
-                summary = LocaleController.getString("AS_ForceNYSummary", R.string.AS_ForceNYSummary)
+            list {
+                title = LocaleController.getString("AS_ForceIcons", R.string.AS_ForceIcons)
                 divider = true
 
                 contract({
-                    return@contract CatogramConfig.forceNewYearDrawer
+                    return@contract listOf(
+                            Pair(0, LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)),
+                            Pair(1, LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)),
+                            Pair(2, LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer))
+                    )
+                }, {
+                    return@contract when (CatogramConfig.redesign_messageOption) {
+                        1 -> LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)
+                        2 -> LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)
+                        else -> LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)
+                    }
                 }) {
-                    CatogramConfig.forceNewYearDrawer = it
+                    CatogramConfig.redesign_messageOption = it
+                    when (CatogramConfig.redesign_messageOption) {
+                        0 -> {
+                            CatogramConfig.forceNewYearDrawer = false
+                            CatogramConfig.forceSVDrawer = false
+                        }
+                        1 -> {
+                            CatogramConfig.forceNewYearDrawer = false
+                            CatogramConfig.forceSVDrawer = true
+                        }
+                        2 -> {
+                            CatogramConfig.forceNewYearDrawer = true
+                            CatogramConfig.forceSVDrawer = false
+                        }
+                    }
                 }
             }
 

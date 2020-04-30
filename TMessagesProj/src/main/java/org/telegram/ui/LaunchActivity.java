@@ -116,7 +116,32 @@ import java.util.Map;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-public class LaunchActivity extends AppCompatActivity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
+import ua.itaysonlab.redesign.BottomSlideFragment;
+
+public class LaunchActivity extends AppCompatActivity implements BottomSlideFragment.BottomSlideActivityInterface, ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
+
+    private List<BottomSlideFragment> slideFragments = new ArrayList<>();
+
+    @Override
+    public void addBackPressedListener(BottomSlideFragment fragment) {
+        slideFragments.add(fragment);
+    }
+
+    @Override
+    public void removeBackPressedListener(BottomSlideFragment fragment) {
+        slideFragments.remove(fragment);
+    }
+
+    @Override
+    public void setDisableLightStatusBar(boolean isLight) {
+        int color = Theme.getColor(Theme.key_actionBarDefault, null, true);
+        if (color != Color.WHITE) return;
+        if (!isLight) {
+            AndroidUtilities.setLightStatusBar(getWindow(), true);
+        } else {
+            AndroidUtilities.setLightStatusBar(getWindow(), false);
+        }
+    }
 
     private boolean finished;
     private String videoPath;
@@ -3696,6 +3721,10 @@ public class LaunchActivity extends AppCompatActivity implements ActionBarLayout
     public void onBackPressed() {
         if (passcodeView.getVisibility() == View.VISIBLE) {
             finish();
+            return;
+        }
+        if (!slideFragments.isEmpty()) {
+            slideFragments.get(slideFragments.size()-1).onBackPressed();
             return;
         }
         if (SecretMediaViewer.hasInstance() && SecretMediaViewer.getInstance().isVisible()) {

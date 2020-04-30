@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram.preferences
 
+import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
@@ -11,14 +12,49 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
     override fun getPreferences() = tgKitScreen(LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)) {
         category(LocaleController.getString("AS_RedesignCategory", R.string.AS_RedesignCategory)) {
             switch {
-                title = LocaleController.getString("AS_CupertinoLib", R.string.AS_CupertinoLib)
-                summary = LocaleController.getString("AS_CupertinoLibSummary", R.string.AS_CupertinoLibSummary)
+                title = LocaleController.getString("CG_NewDrawer", R.string.CG_NewDrawer)
+                summary = LocaleController.getString("CG_NewDrawer_Desc", R.string.CG_NewDrawer_Desc)
                 divider = true
 
                 contract({
-                    return@contract CatogramConfig.useCupertinoLib
+                    return@contract CatogramConfig.redesign_SlideDrawer
                 }) {
-                    CatogramConfig.useCupertinoLib = it
+                    CatogramConfig.redesign_SlideDrawer = it
+                }
+            }
+
+            list {
+                title = LocaleController.getString("CG_MessageMenuOption", R.string.CG_MessageMenuOption)
+                divider = true
+
+                contract({
+                    return@contract listOf(
+                            Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
+                            Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
+                            Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL))
+                    )
+                }, {
+                    return@contract when (CatogramConfig.redesign_messageOption) {
+                        1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
+                        2 -> LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)
+                        else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
+                    }
+                }) {
+                    CatogramConfig.redesign_messageOption = it
+                    when (CatogramConfig.redesign_messageOption) {
+                        0 -> {
+                            CatogramConfig.useCupertinoLib = false
+                            CatogramConfig.useTgxMenuSlide = false
+                        }
+                        1 -> {
+                            CatogramConfig.useCupertinoLib = false
+                            CatogramConfig.useTgxMenuSlide = true
+                        }
+                        2 -> {
+                            CatogramConfig.useCupertinoLib = true
+                            CatogramConfig.useTgxMenuSlide = false
+                        }
+                    }
                 }
             }
 

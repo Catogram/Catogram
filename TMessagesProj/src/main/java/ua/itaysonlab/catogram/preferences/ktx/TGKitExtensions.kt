@@ -1,12 +1,10 @@
 package ua.itaysonlab.catogram.preferences.ktx
 
+import androidx.core.util.Pair
 import ua.itaysonlab.tgkit.preference.TGKitCategory
 import ua.itaysonlab.tgkit.preference.TGKitPreference
 import ua.itaysonlab.tgkit.preference.TGKitSettings
-import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference
-import ua.itaysonlab.tgkit.preference.types.TGKitSwitchPreference
-import ua.itaysonlab.tgkit.preference.types.TGKitTextDetailRow
-import ua.itaysonlab.tgkit.preference.types.TGKitTextIconRow
+import ua.itaysonlab.tgkit.preference.types.*
 
 fun tgKitScreen(name: String, block: TGKitScreen.() -> Unit) = TGKitSettings(name, mutableListOf<TGKitCategory>().apply(block))
 
@@ -14,6 +12,7 @@ fun TGKitScreen.category(name: String, block: TGKitPreferences.() -> Unit) = add
         TGKitCategory(name, mutableListOf<TGKitPreference>().apply(block))
 )
 
+fun TGKitPreferences.list(block: TGKitListPreference.() -> Unit) = add(TGKitListPreference().apply(block))
 fun TGKitPreferences.switch(block: TGKitSwitchPreference.() -> Unit) = add(TGKitSwitchPreference().apply(block))
 fun TGKitPreferences.slider(block: TGKitSliderPreference.() -> Unit) = add(TGKitSliderPreference().apply(block))
 fun TGKitPreferences.textIcon(block: TGKitTextIconRow.() -> Unit) = add(TGKitTextIconRow().apply(block))
@@ -23,6 +22,22 @@ fun TGKitSwitchPreference.contract(getValue: () -> Boolean, setValue: (Boolean) 
     contract = object: TGKitSwitchPreference.TGSPContract {
         override fun getPreferenceValue() = getValue()
         override fun toggleValue() = setValue(!getValue())
+    }
+}
+
+fun TGKitListPreference.contract(getOptions: () -> List<Pair<Int, String>>, getValue: () -> String, setValue: (Int) -> Unit) {
+    contract = object: TGKitListPreference.TGTLContract {
+        override fun setValue(id: Int) {
+            setValue(id)
+        }
+
+        override fun getValue(): String {
+            return getValue()
+        }
+
+        override fun getOptions(): List<Pair<Int, String>> {
+            return getOptions()
+        }
     }
 }
 

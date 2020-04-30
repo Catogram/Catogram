@@ -300,7 +300,7 @@ public class DrawerProfileCell extends FrameLayout {
         accountsShown = accounts;
         setArrowState(false);
         nameTextView.setText(UserObject.getUserName(user));
-        if (CatogramConfig.hidePhoneNumber) {
+        if (CatogramConfig.INSTANCE.getHidePhoneNumber()) {
             phoneTextView.setText(LocaleController.getString("AS_Hidden", R.string.AS_Hidden));
         } else {
             phoneTextView.setText(PhoneFormat.getInstance().format("+" + user.phone));

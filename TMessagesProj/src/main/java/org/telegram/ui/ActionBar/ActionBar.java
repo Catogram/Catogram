@@ -958,7 +958,7 @@ public class ActionBar extends FrameLayout {
     }
 
     public boolean getCastShadows() {
-        return !CatogramConfig.flatActionbar;
+        return !CatogramConfig.INSTANCE.getFlatActionbar();
     }
 
     @Override

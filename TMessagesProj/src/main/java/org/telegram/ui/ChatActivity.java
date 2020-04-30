@@ -230,6 +230,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kotlin.Unit;
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.ui.CatogramToasts;
 
@@ -1655,7 +1656,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
 
         if (!inScheduleMode) {
-            if (CatogramConfig.searchInActionbar && searchItem != null) {
+            if (CatogramConfig.INSTANCE.getSearchInActionbar() && searchItem != null) {
                 ActionBarMenuItem searchItem = menu.addItem(search, R.drawable.msg_search);
                 searchItem.setContentDescription(LocaleController.getString("Search", R.string.Search));
             }
@@ -1700,7 +1701,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             editTextItem.addSubItem(text_link, LocaleController.getString("CreateLink", R.string.CreateLink));
             editTextItem.addSubItem(text_regular, LocaleController.getString("Regular", R.string.Regular));
 
-            if (!CatogramConfig.searchInActionbar && searchItem != null) {
+            if (!CatogramConfig.INSTANCE.getSearchInActionbar() && searchItem != null) {
                 headerItem.addSubItem(search, R.drawable.msg_search, LocaleController.getString("Search", R.string.Search));
             }
 
@@ -3350,11 +3351,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (CatogramConfig.hideKeyboardOnScroll) {
-                        InputMethodManager imm = (InputMethodManager) getParentActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(recyclerView.getWindowToken(), 0);
-                    }
-
                     if (pollHintCell != null) {
                         pollHintView.showForMessageCell(pollHintCell, -1, pollHintX, pollHintY, true);
                         pollHintCell = null;
@@ -3379,6 +3375,11 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         scrollingFloatingDate = true;
                         checkTextureViewPosition = true;
                         scrollingChatListView = true;
+
+                        if (CatogramConfig.INSTANCE.getHideKeyboardOnScroll()) {
+                            InputMethodManager imm = (InputMethodManager) getParentActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(recyclerView.getWindowToken(), 0);
+                        }
                     }
                     if (SharedConfig.getDevicePerfomanceClass() == SharedConfig.PERFORMANCE_CLASS_LOW) {
                         NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.stopAllHeavyOperations, 512);
@@ -5376,7 +5377,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlert() {
-        if (CatogramConfig.newRepostUI) {
+        if (CatogramConfig.INSTANCE.getNewRepostUI()) {
             showShareAlert();
         } else {
             openForward();
@@ -5384,7 +5385,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlertSelected() {
-        if (CatogramConfig.newRepostUI) {
+        if (CatogramConfig.INSTANCE.getNewRepostUI()) {
             forwardingMessage = selectedObject;
             forwardingMessageGroup = selectedObjectGroup;
             ArrayList<MessageObject> fmessages = new ArrayList<>();
@@ -14286,8 +14287,16 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 return;
             }
 
-            if (CatogramConfig.useCupertinoLib) {
+            if (CatogramConfig.INSTANCE.getUseCupertinoLib()) {
                 ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption).createAndShow();
+                return;
+            }
+
+            if (CatogramConfig.INSTANCE.getUseTgxMenuSlide()) {
+                ua.itaysonlab.extras.TgxExtras.createSlideMenu(options, items, icons, getParentActivity(), (id) -> {
+                    this.processSelectedOption(id);
+                    return Unit.INSTANCE;
+                }).show(getParentActivity());
                 return;
             }
 
@@ -16615,7 +16624,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 // CG-Anim
                 //ua.itaysonlab.CatogramLogger.d("CG:Animations", "enabled = " + CatogramConfig.newMessageAnimation + ", pending = "+bottomAnimPending+", posApplied = "+(position == 0));
                 //ua.itaysonlab.CatogramLogger.d("Animations", "curPos = "+(position)+", itemCount = "+(getItemCount() - 1));
-                if (CatogramConfig.newMessageAnimation && bottomAnimPending && position == 0) {
+                if (CatogramConfig.INSTANCE.getNewMessageAnimation() && bottomAnimPending && position == 0) {
                     holder.itemView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                         @Override
                         public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -17278,7 +17287,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         themeDescriptions.add(new ThemeDescription(chatListView, ThemeDescription.FLAG_TEXTCOLOR, new Class[]{ChatActionCell.class}, Theme.chat_actionTextPaint, null, null, Theme.key_chat_serviceText));
         themeDescriptions.add(new ThemeDescription(chatListView, ThemeDescription.FLAG_LINKCOLOR, new Class[]{ChatActionCell.class}, Theme.chat_actionTextPaint, null, null, Theme.key_chat_serviceLink));
 
-        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, new Drawable[]{Theme.chat_shareIconDrawable, Theme.chat_replyIconDrawable, Theme.chat_botInlineDrawable, Theme.chat_botLinkDrawalbe, Theme.chat_goIconDrawable}, null, Theme.key_chat_serviceIcon));
+        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, new Drawable[]{Theme.chat_saveIconDrawable, Theme.chat_editIconDrawable, Theme.chat_shareIconDrawable, Theme.chat_replyIconDrawable, Theme.chat_botInlineDrawable, Theme.chat_botLinkDrawalbe, Theme.chat_goIconDrawable}, null, Theme.key_chat_serviceIcon));
 
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class, ChatActionCell.class}, null, null, null, Theme.key_chat_serviceBackground));
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class, ChatActionCell.class}, null, null, null, Theme.key_chat_serviceBackgroundSelected));

@@ -8831,6 +8831,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             } else {
                 shareStartX = currentBackgroundDrawable.getBounds().right + AndroidUtilities.dp(8);
             }
+
+            // CG-TODO: draw custom button
+
             setDrawableBounds(Theme.chat_shareDrawable, shareStartX, shareStartY = layoutHeight - AndroidUtilities.dp(41));
             Theme.chat_shareDrawable.draw(canvas);
             if (drwaShareGoIcon) {
@@ -8838,6 +8841,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 Theme.chat_goIconDrawable.draw(canvas);
             } else {
                 setDrawableBounds(Theme.chat_shareIconDrawable, shareStartX + AndroidUtilities.dp(8), shareStartY + AndroidUtilities.dp(9));
+                setDrawableBounds(Theme.chat_editIconDrawable, shareStartX + AndroidUtilities.dp(8), shareStartY + AndroidUtilities.dp(9));
+                setDrawableBounds(Theme.chat_saveIconDrawable, shareStartX + AndroidUtilities.dp(8), shareStartY + AndroidUtilities.dp(9));
                 Theme.chat_shareIconDrawable.draw(canvas);
             }
         }

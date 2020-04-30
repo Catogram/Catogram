@@ -35,6 +35,7 @@ import ua.itaysonlab.tgkit.preference.TGKitCategory;
 import ua.itaysonlab.tgkit.preference.TGKitPreference;
 import ua.itaysonlab.tgkit.preference.TGKitSettings;
 import ua.itaysonlab.tgkit.preference.types.TGKitHeaderRow;
+import ua.itaysonlab.tgkit.preference.types.TGKitListPreference;
 import ua.itaysonlab.tgkit.preference.types.TGKitSectionRow;
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 import ua.itaysonlab.tgkit.preference.types.TGKitSwitchPreference;
@@ -119,6 +120,11 @@ public class TGKitSettingsFragment extends BaseFragment {
             } else if (pref instanceof TGKitTextIconRow) {
                 TGKitTextIconRow preference = ((TGKitTextIconRow) pref);
                 if (preference.listener != null) preference.listener.onClick(this);
+            } else if (pref instanceof TGKitListPreference) {
+                TGKitListPreference preference = ((TGKitListPreference) pref);
+                preference.callActionHueta(getParentActivity(), () -> {
+                    if (view instanceof TextDetailSettingsCell) ((TextDetailSettingsCell) view).setTextAndValue(preference.title, preference.contract.getValue(), preference.divider);
+                });
             }
         });
 
@@ -189,6 +195,13 @@ public class TGKitSettingsFragment extends BaseFragment {
                     ((StickerSliderCell) holder.itemView).setContract(((TGKitSliderPreference) positions.get(position)).contract);
                     break;
                 }
+                case 7: {
+                    TextDetailSettingsCell settingsCell = (TextDetailSettingsCell) holder.itemView;
+                    TGKitListPreference pref = (TGKitListPreference) positions.get(position);
+                    settingsCell.setMultilineDetail(true);
+                    settingsCell.setTextAndValue(pref.title, pref.contract.getValue(), pref.divider);
+                    break;
+                }
             }
         }
 
@@ -199,6 +212,11 @@ public class TGKitSettingsFragment extends BaseFragment {
                 int position = holder.getAdapterPosition();
                 TextCheckCell checkCell = (TextCheckCell) holder.itemView;
                 checkCell.setChecked(((TGKitSwitchPreference) positions.get(position)).contract.getPreferenceValue());
+            } else if (viewType == 7) {
+                int position = holder.getAdapterPosition();
+                TextDetailSettingsCell checkCell = (TextDetailSettingsCell) holder.itemView;
+                TGKitListPreference pref = ((TGKitListPreference) positions.get(position));
+                checkCell.setTextAndValue(pref.title, pref.contract.getValue(), pref.divider);
             }
         }
 
@@ -231,6 +249,7 @@ public class TGKitSettingsFragment extends BaseFragment {
                     view.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
                     break;
                 case 4:
+                case 7:
                     view = new TextDetailSettingsCell(mContext);
                     view.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
                     break;

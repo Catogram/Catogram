@@ -15,7 +15,7 @@ public class CatogramToasts {
     }
 
     public static void notifyAboutUnpin() {
-        if (shownUnpinHint) return;
+        //if (shownUnpinHint) return;
         Toast.makeText(ApplicationLoader.applicationContext, "You can show pinned message again by long-clicking on chat's avatar.", Toast.LENGTH_SHORT).show();
         shownUnpinHint();
     }

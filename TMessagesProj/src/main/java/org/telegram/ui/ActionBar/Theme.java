@@ -1502,7 +1502,7 @@ public class Theme {
         }
 
         public boolean isDark() {
-            return "Dark Blue".equals(name) || "Night".equals(name) || "AMOLED".equals(name);
+            return "Dark Blue".equals(name) || "Arctic Blue".equals(name) || "Night".equals(name) || "AMOLED".equals(name);
         }
 
         public boolean isLight() {
@@ -2111,6 +2111,8 @@ public class Theme {
     public static Drawable chat_contextResult_shadowUnderSwitchDrawable;
     public static Drawable chat_shareDrawable;
     public static Drawable chat_shareIconDrawable;
+    public static Drawable chat_saveIconDrawable;
+    public static Drawable chat_editIconDrawable;
     public static Drawable chat_replyIconDrawable;
     public static Drawable chat_goIconDrawable;
     public static Drawable chat_botLinkDrawalbe;
@@ -4341,7 +4343,7 @@ public class Theme {
     }
 
     public static int getEventType() {
-        if (CatogramConfig.forceNewYear) return 0;
+        if (CatogramConfig.INSTANCE.getForceNewYear()) return 0;
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         int monthOfYear = calendar.get(Calendar.MONTH);
@@ -4367,13 +4369,13 @@ public class Theme {
             int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
             int minutes = calendar.get(Calendar.MINUTE);
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            if (CatogramConfig.forceNewYear || (monthOfYear == 0 && dayOfMonth == 1 && minutes <= 10 && hour == 0)) {
+            if (CatogramConfig.INSTANCE.getForceNewYear() || (monthOfYear == 0 && dayOfMonth == 1 && minutes <= 10 && hour == 0)) {
                 canStartHolidayAnimation = true;
             } else {
                 canStartHolidayAnimation = false;
             }
             if (dialogs_holidayDrawable == null) {
-                if (CatogramConfig.forceNewYear || (monthOfYear == 11 && dayOfMonth >= (BuildVars.DEBUG_PRIVATE_VERSION ? 29 : 31) && dayOfMonth <= 31 || monthOfYear == 0 && dayOfMonth == 1)) {
+                if (CatogramConfig.INSTANCE.getForceNewYear() || (monthOfYear == 11 && dayOfMonth >= (BuildVars.DEBUG_PRIVATE_VERSION ? 29 : 31) && dayOfMonth <= 31 || monthOfYear == 0 && dayOfMonth == 1)) {
                     dialogs_holidayDrawable = ApplicationLoader.applicationContext.getResources().getDrawable(R.drawable.newyear);
                     dialogs_holidayDrawableOffsetX = -AndroidUtilities.dp(3);
                     dialogs_holidayDrawableOffsetY = -AndroidUtilities.dp(1);
@@ -6804,8 +6806,11 @@ public class Theme {
             chat_cornerInner[2] = resources.getDrawable(R.drawable.corner_in_br);
             chat_cornerInner[3] = resources.getDrawable(R.drawable.corner_in_bl);
 
+            // CG-TODO: add more icons to action
             chat_shareDrawable = resources.getDrawable(R.drawable.share_round);
             chat_shareIconDrawable = resources.getDrawable(R.drawable.share_arrow);
+            chat_saveIconDrawable = resources.getDrawable(R.drawable.menu_saved);
+            chat_editIconDrawable = resources.getDrawable(R.drawable.msg_edit);
             chat_replyIconDrawable = resources.getDrawable(R.drawable.fast_reply);
             chat_goIconDrawable = resources.getDrawable(R.drawable.message_arrow);
 
@@ -7049,6 +7054,8 @@ public class Theme {
             setDrawableColorByKey(chat_msgStickerClockDrawable, key_chat_serviceText);
             setDrawableColorByKey(chat_msgStickerViewsDrawable, key_chat_serviceText);
             setDrawableColorByKey(chat_shareIconDrawable, key_chat_serviceIcon);
+            setDrawableColorByKey(chat_editIconDrawable, key_chat_serviceIcon);
+            setDrawableColorByKey(chat_saveIconDrawable, key_chat_serviceIcon);
             setDrawableColorByKey(chat_replyIconDrawable, key_chat_serviceIcon);
             setDrawableColorByKey(chat_goIconDrawable, key_chat_serviceIcon);
             setDrawableColorByKey(chat_botInlineDrawable, key_chat_serviceIcon);

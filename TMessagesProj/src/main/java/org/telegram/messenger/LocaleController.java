@@ -1585,7 +1585,7 @@ public class LocaleController {
     }
 
     public static String formatShortNumber(int number, int[] rounded) {
-        if (CatogramConfig.noRounding) return String.valueOf(number);
+        if (CatogramConfig.INSTANCE.getNoRounding()) return String.valueOf(number);
         StringBuilder K = new StringBuilder();
         int lastDec = 0;
         int KCount = 0;
@@ -1616,7 +1616,7 @@ public class LocaleController {
     }
 
     public static String formatShortNumber(long number, int[] rounded) {
-        if (CatogramConfig.noRounding) return String.valueOf(number);
+        if (CatogramConfig.INSTANCE.getNoRounding()) return String.valueOf(number);
         StringBuilder K = new StringBuilder();
         long lastDec = 0;
         while (number / 1000 > 0) {

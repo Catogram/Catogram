@@ -75,7 +75,7 @@ public class DrawerLayoutContainer extends FrameLayout {
     private float scrimOpacity;
     private Drawable shadowLeft;
     private boolean allowOpenDrawer;
-    private boolean allowOpenDrawerBySwipe = false;
+    private boolean allowOpenDrawerBySwipe = !CatogramConfig.INSTANCE.getRedesign_SlideDrawer();
 
     private float drawerPosition;
     private boolean drawerOpened;
@@ -111,7 +111,7 @@ public class DrawerLayoutContainer extends FrameLayout {
                 return insets.consumeSystemWindowInsets();
             });
             setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-            if (CatogramConfig.flatStatusbar) ((Activity) context).getWindow().setStatusBarColor(Color.TRANSPARENT);
+            if (CatogramConfig.INSTANCE.getFlatStatusbar()) ((Activity) context).getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
         shadowLeft = getResources().getDrawable(R.drawable.menu_shadow);
@@ -276,7 +276,7 @@ public class DrawerLayoutContainer extends FrameLayout {
     }
 
     public void setAllowOpenDrawer(boolean value, boolean animated) {
-        value = false;
+        if (CatogramConfig.INSTANCE.getRedesign_SlideDrawer()) value = false;
         allowOpenDrawer = value;
         if (!allowOpenDrawer && drawerPosition != 0) {
             if (!animated) {

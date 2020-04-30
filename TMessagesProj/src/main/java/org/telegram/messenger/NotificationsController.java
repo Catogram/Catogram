@@ -2787,7 +2787,7 @@ public class NotificationsController extends BaseController {
                     .setGroupSummary(true)
                     .setShowWhen(true)
                     .setWhen(((long) lastMessageObject.messageOwner.date) * 1000)
-                    .setColor(CatogramConfig.accentNotification ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa);
+                    .setColor(CatogramConfig.INSTANCE.getAccentNotification() ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa);
 
             long[] vibrationPattern = null;
             int importance = 0;
@@ -3513,7 +3513,7 @@ public class NotificationsController extends BaseController {
                     .setContentText(text.toString())
                     .setAutoCancel(true)
                     .setNumber(messageObjects.size())
-                    .setColor(CatogramConfig.accentNotification ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa)
+                    .setColor(CatogramConfig.INSTANCE.getAccentNotification() ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa)
                     .setGroupSummary(false)
                     .setWhen(date)
                     .setShowWhen(true)

@@ -39,7 +39,6 @@
     <string name="CG_AboutDesc">Экспериметальная модификация официального приложения Telegram.</string>
     <string name="CG_Donate">Поддержать разработку</string>
     <string name="CG_ToChannel">Открыть официальный канал</string>
-    <string name="AS_ForceNY_Drawer">Новогодние иконки в шторке</string>
 
     <string name="DebugMenu">Меню отладки</string>
     <string name="AS_SysEmoji">Использовать системные эмодзи</string>
@@ -125,4 +124,31 @@
 
     <string name="CG_NewTabs_EmoticonsAppend">Добавить иконку чата к ее имени [нужен перезапуск]</string>
     <string name="CG_NewTabs_EmoticonsAppend_Desc">когда опция \"вместо\" отключена</string>
+
+    <string name="CG_MessageMenuOption">Стиль меню сообщения</string>
+    <string name="CG_MessageMenuOption_TGX">В стиле Telegram X</string>
+    <string name="CG_MessageMenuOption_CL">CupertinoLib (бета, в стиле iOS)</string>
+    <string name="CG_MessageMenuOption_Default">По умолчанию</string>
+
+    <string name="CG_NewDrawer">Использовать новую шторку</string>
+    <string name="CG_NewDrawer_Desc">несовместимо с мультиаккаунтом</string>
+
+    <string name="CG_MessageButton_Override">Override message action button</string>
+    <string name="CG_MessageButton_Override_Desc">enables it on own messages</string>
+
+    <string name="CG_MessageButton_Out">Outgoing messages</string>
+    <string name="CG_MessageButton_In">Incoming messages</string>
+
+    <string name="CG_MessageButton_Option_Share">Share [default]</string>
+    <string name="CG_MessageButton_Option_Edit">Edit [your only]</string>
+    <string name="CG_MessageButton_Option_Saved">To Cloud</string>
+
+    <string name="CG_ConfirmCalling_Header">Подтвердить звонок</string>
+    <string name="CG_ConfirmCalling_Question">Позовнить %s?</string>
+    <string name="CG_ConfirmCalling_Action">Подтвердить</string>
+    <string name="CG_ConfirmCalling_Action_Cancel">Отменить</string>
+
+    <string name="AS_ForceIcons">Стиль иконок в шторке</string>
+    <string name="AS_ForceNY_Drawer">Новый Год</string>
+    <string name="AS_ForceDefault_Drawer">По умолчанию</string>
 </resources>

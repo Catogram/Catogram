@@ -1786,7 +1786,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
                 @Override
                 public int getTabCounter(int tabId) {
-                    if (CatogramConfig.newTabs_noUnread) return 0;
+                    if (CatogramConfig.INSTANCE.getNewTabs_noUnread()) return 0;
                     if (tabId == Integer.MAX_VALUE) {
                         return getMessagesStorage().getMainUnreadCount();
                     }
@@ -2031,8 +2031,11 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     } else if (onlySelect || folderId != 0) {
                         finishFragment();
                     } else if (parentLayout != null) {
-                        new DrawerSheetFragment().show(getParentActivity());
-                        //parentLayout.getDrawerLayoutContainer().openDrawer(false);
+                        if (CatogramConfig.INSTANCE.getRedesign_SlideDrawer()) {
+                            new DrawerSheetFragment().show(getParentActivity());
+                        } else {
+                            parentLayout.getDrawerLayoutContainer().openDrawer(false);
+                        }
                     }
                 } else if (id == 1) {
                     SharedConfig.appLocked = !SharedConfig.appLocked;
@@ -2948,16 +2951,16 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 }
                 filterTabsView.removeTabs();
 
-                if (!CatogramConfig.newTabs_hideAllChats) filterTabsView.addTab(Integer.MAX_VALUE, LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+                if (!CatogramConfig.INSTANCE.getNewTabs_hideAllChats()) filterTabsView.addTab(Integer.MAX_VALUE, LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
 
                 for (int a = 0, N = filters.size(); a < N; a++) {
                     String name = filters.get(a).name;
 
-                    if (CatogramConfig.newTabs_emoji_appendToName && filters.get(a).emoticon != null) {
-                        name = filters.get(a).emoticon + " " + name;
+                    if (CatogramConfig.INSTANCE.getNewTabs_emoji_appendToName() && filters.get(a).emoticon != null) {
+                        name = CatogramExtras.wrapEmoticon(filters.get(a).emoticon) + " " + name;
                     }
 
-                    if (CatogramConfig.newTabs_emoji_insteadOfName) {
+                    if (CatogramConfig.INSTANCE.getNewTabs_emoji_insteadOfName()) {
                         name = CatogramExtras.wrapEmoticon(filters.get(a).emoticon);
                     }
 
