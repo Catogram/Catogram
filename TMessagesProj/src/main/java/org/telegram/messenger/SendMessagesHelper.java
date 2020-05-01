@@ -3109,6 +3109,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                         }
                         if (poll.results != null && !TextUtils.isEmpty(poll.results.solution)) {
                             inputMediaPoll.solution = poll.results.solution;
+                            inputMediaPoll.solution_entities = poll.results.solution_entities;
                             inputMediaPoll.flags |= 2;
                         }
                         inputMedia = inputMediaPoll;
