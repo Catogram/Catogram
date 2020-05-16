@@ -128,6 +128,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import ua.itaysonlab.CatogramLogger;
+
 public class ChatActivityEnterView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
 
     private float circleAlpha1 = 0.4f;
@@ -1907,6 +1909,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
 
             private void send(InputContentInfoCompat inputContentInfo, boolean notify, int scheduleDate) {
                 ClipDescription description = inputContentInfo.getDescription();
+                CatogramLogger.d("CG_WebP", "MIME: "+description.getMimeType(0));
                 if (description.hasMimeType("image/gif")) {
                     SendMessagesHelper.prepareSendingDocument(accountInstance, null, null, inputContentInfo.getContentUri(), null, "image/gif", dialog_id, replyingMessageObject, inputContentInfo, null, notify, 0);
                 } else {

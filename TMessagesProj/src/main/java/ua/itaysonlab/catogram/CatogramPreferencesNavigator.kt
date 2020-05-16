@@ -1,6 +1,5 @@
 package ua.itaysonlab.catogram
 
-import org.telegram.ui.ActionBar.BaseFragment
 import ua.itaysonlab.catogram.preferences.AppearancePreferencesEntry
 import ua.itaysonlab.catogram.preferences.ChatsPreferencesEntry
 import ua.itaysonlab.catogram.preferences.MainPreferencesEntry
@@ -9,19 +8,9 @@ import ua.itaysonlab.tgkit.TGKitSettingsFragment
 
 object CatogramPreferencesNavigator {
     @JvmStatic
-    fun createMainMenu(): TGKitSettingsFragment {
-        return TGKitSettingsFragment(MainPreferencesEntry())
-    }
+    fun createMainMenu() = TGKitSettingsFragment(MainPreferencesEntry())
 
-    fun createChats(): BaseFragment {
-        return TGKitSettingsFragment(ChatsPreferencesEntry())
-    }
-
-    fun createAppearance(): BaseFragment {
-        return TGKitSettingsFragment(AppearancePreferencesEntry())
-    }
-
-    fun createSecurity(): BaseFragment {
-        return TGKitSettingsFragment(SecurityPreferencesEntry())
-    }
+    fun createChats() = TGKitSettingsFragment(ChatsPreferencesEntry())
+    fun createAppearance() = TGKitSettingsFragment(AppearancePreferencesEntry())
+    fun createSecurity() = TGKitSettingsFragment(SecurityPreferencesEntry())
 }
