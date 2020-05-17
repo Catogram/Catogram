@@ -46,7 +46,7 @@
     <string name="AS_DrawerCategory">Drawer</string>
     <string name="AS_FlatSB">Flat statusbar</string>
     <string name="AS_FlatAB">Disable toolbar shadow</string>
-    <string name="AS_FlatSB_Desc">(reapply theme) only for Android 6+</string>
+    <string name="AS_FlatSB_Desc">only for Android 6+</string>
     <string name="AS_RedesignCategory">Redesign</string>
 
     <string name="CG_Filters_Header">Dialog filter</string>
@@ -149,4 +149,15 @@
     <string name="AS_ForceNY_Drawer">New Year</string>
     <string name="AS_ForceSV_Drawer">St. Valentine</string>
     <string name="AS_ForceDefault_Drawer">Default</string>
+
+    <string name="AS_KbdWebp">Send media from keyboard as stickers</string>
+    <string name="AS_KbdWebp_Desc">for SKeyboard, GBoard and others</string>
+
+    <string name="AS_ChangeIcon">Application icon</string>
+    <string name="AS_ChangeIcon_Old">Default</string>
+    <string name="AS_ChangeIcon_AltBlue">New Blue (by @RKBDI)</string>
+    <string name="AS_ChangeIcon_AltOrange">New Orange (by @RKBDI)</string>
+
+    <string name="AS_ForwardNoAuthorship">No-Author Forward [beta]</string>
+    <string name="AS_ForwardNoAuthorship_Desc">currently only on classic forward</string>
 </resources>

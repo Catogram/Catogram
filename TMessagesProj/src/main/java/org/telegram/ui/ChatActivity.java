@@ -5386,6 +5386,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlertSelected() {
+        createCGShareAlertSelected(false);
+    }
+
+    private void createCGShareAlertSelected(boolean noAuthor) {
         if (CatogramConfig.INSTANCE.getNewRepostUI()) {
             forwardingMessage = selectedObject;
             forwardingMessageGroup = selectedObjectGroup;
@@ -7672,7 +7676,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (forwardingMessages != null) {
                 ArrayList<MessageObject> messagesToForward = forwardingMessages;
                 forwardingMessages = null;
-                forwardMessages(messagesToForward, false, notify, scheduleDate != 0 && scheduleDate != 0x7ffffffe ? scheduleDate + 1 : scheduleDate);
+                forwardMessages(messagesToForward, CatogramConfig.INSTANCE.getForwardNoAuthorship(), notify, scheduleDate != 0 && scheduleDate != 0x7ffffffe ? scheduleDate + 1 : scheduleDate);
             }
             chatActivityEnterView.setForceShowSendButton(false, false);
             chatActivityEnterView.hideTopView(animated);
@@ -14759,6 +14763,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
             case 2: {
                 createCGShareAlertSelected();
+                break;
+            }
+            case 902: {
+                createCGShareAlertSelected(true);
                 break;
             }
             case 3: {

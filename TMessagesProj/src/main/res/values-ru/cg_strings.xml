@@ -50,7 +50,7 @@
     <string name="AS_DrawerCategory">Шторка</string>
     <string name="AS_FlatSB">Прозрачный статусбар</string>
     <string name="AS_FlatAB">Отключить тень у тулбара</string>
-    <string name="AS_FlatSB_Desc">(переустановите тему) только для Android 6+</string>
+    <string name="AS_FlatSB_Desc">только для Android 6+</string>
     <string name="AS_RedesignCategory">Редизайн</string>
 
     <string name="CG_Filters_Header">Фильтр диалогов</string>
@@ -151,4 +151,15 @@
     <string name="AS_ForceIcons">Стиль иконок в шторке</string>
     <string name="AS_ForceNY_Drawer">Новый Год</string>
     <string name="AS_ForceDefault_Drawer">По умолчанию</string>
+
+    <string name="AS_KbdWebp">Отправлять фото из клавиатуры как стикеры</string>
+    <string name="AS_KbdWebp_Desc">для SKeyboard, GBoard и других</string>
+
+    <string name="AS_ChangeIcon">Иконка приложения</string>
+    <string name="AS_ChangeIcon_Old">По умолчанию</string>
+    <string name="AS_ChangeIcon_AltBlue">Синяя новая (от @RKBDI)</string>
+    <string name="AS_ChangeIcon_AltOrange">Оранжевая новая (от @RKBDI)</string>
+
+    <string name="AS_ForwardNoAuthorship">Пересыл без автора [бета]</string>
+    <string name="AS_ForwardNoAuthorship_Desc">сейчас работает только на старом стиле</string>
 </resources>

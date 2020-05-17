@@ -11,3 +11,4 @@ TMessagesProj/config/release.keystore
 .DS_Store
 TMessagesProj/google-services.json
 TMessagesProj/config/release/release.keystore
+*.li

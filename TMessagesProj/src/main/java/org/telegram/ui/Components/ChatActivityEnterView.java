@@ -129,6 +129,8 @@ import java.util.List;
 import java.util.Locale;
 
 import ua.itaysonlab.CatogramLogger;
+import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.extras.TgxExtras;
 
 public class ChatActivityEnterView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
 
@@ -1909,12 +1911,19 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
 
             private void send(InputContentInfoCompat inputContentInfo, boolean notify, int scheduleDate) {
                 ClipDescription description = inputContentInfo.getDescription();
+
                 CatogramLogger.d("CG_WebP", "MIME: "+description.getMimeType(0));
+
                 if (description.hasMimeType("image/gif")) {
                     SendMessagesHelper.prepareSendingDocument(accountInstance, null, null, inputContentInfo.getContentUri(), null, "image/gif", dialog_id, replyingMessageObject, inputContentInfo, null, notify, 0);
                 } else {
-                    SendMessagesHelper.prepareSendingPhoto(accountInstance, null, inputContentInfo.getContentUri(), dialog_id, replyingMessageObject, null, null, null, inputContentInfo, 0, null, notify, 0);
+                    if (CatogramConfig.INSTANCE.getKeyboardImageAsSticker()) {
+                        TgxExtras.convertAndSend(accountInstance, inputContentInfo.getContentUri(), dialog_id, replyingMessageObject, inputContentInfo, notify);
+                    } else {
+                        SendMessagesHelper.prepareSendingPhoto(accountInstance, null, inputContentInfo.getContentUri(), dialog_id, replyingMessageObject, null, null, null, inputContentInfo, 0, null, notify, 0);
+                    }
                 }
+
                 if (delegate != null) {
                     delegate.onMessageSend(null, true, scheduleDate);
                 }

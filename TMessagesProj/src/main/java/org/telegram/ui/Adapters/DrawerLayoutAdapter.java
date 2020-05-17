@@ -252,7 +252,7 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
             newChannelIcon = R.drawable.menu_broadcast;
             contactsIcon = R.drawable.menu_contacts;
             callsIcon = R.drawable.menu_calls;
-            savedIcon = R.drawable.menu_saved;
+            savedIcon = R.drawable.menu_saved_cg;
             settingsIcon = R.drawable.menu_settings;
             inviteIcon = R.drawable.menu_invite;
             helpIcon = R.drawable.menu_help;

@@ -649,6 +649,9 @@ public class AndroidUtilities {
         if (pathString.endsWith(".attheme")) {
             return false;
         }
+        if (pathString.endsWith(".webp")) {
+            return false;
+        }
         return pathString != null && pathString.toLowerCase().contains("/data/data/" + ApplicationLoader.applicationContext.getPackageName());
     }
 

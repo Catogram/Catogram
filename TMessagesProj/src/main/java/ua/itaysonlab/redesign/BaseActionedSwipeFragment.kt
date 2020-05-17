@@ -27,10 +27,12 @@ abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
 
             getActions().forEach { action ->
                 addView(LayoutInflater.from(ctx).inflate(R.layout.v5_slide_item, this, false).apply {
-                    this.action_iv.setImageResource(action.icon)
-                    this.action_iv.imageTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
-
-                    if (action.icon == -1) this.action_iv.visibility = View.GONE
+                    if (action.icon == -1) {
+                        this.action_iv.visibility = View.GONE
+                    } else {
+                        this.action_iv.setImageResource(action.icon)
+                        this.action_iv.imageTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+                    }
 
                     this.action_tv.text = action.title
                     this.action_tv.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))

@@ -21,7 +21,7 @@ import ua.itaysonlab.extras.CatogramExtras
 import ua.itaysonlab.tgkit.preference.types.TGKitTextIconRow
 
 class MainPreferencesEntry : BasePreferencesEntry {
-    override fun getPreferences() = tgKitScreen(LocaleController.getString("AdvancedSettings", R.string.AdvancedSettings)) {
+    override fun getPreferences(bf: BaseFragment) = tgKitScreen(LocaleController.getString("AdvancedSettings", R.string.AdvancedSettings)) {
         category(LocaleController.getString("AS_Header_Categories", R.string.AS_Header_Categories)) {
             textIcon {
                 title = LocaleController.getString("AS_Header_Appearance", R.string.AS_Header_Appearance)

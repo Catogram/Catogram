@@ -54,7 +54,7 @@ public class TGKitSettingsFragment extends BaseFragment {
 
     public TGKitSettingsFragment(BasePreferencesEntry entry) {
         super();
-        this.settings = entry.getPreferences();
+        this.settings = entry.getPreferences(this);
     }
 
     private ListAdapter listAdapter;

@@ -7078,7 +7078,7 @@ public class Theme {
             setDrawableColorByKey(chat_msgStickerClockDrawable, key_chat_serviceText);
             setDrawableColorByKey(chat_msgStickerViewsDrawable, key_chat_serviceText);
             setDrawableColorByKey(chat_shareIconDrawable, key_chat_serviceIcon);
-            setDrawableColorByKey(chat_editIconDrawable, key_chat_serviceIcon);
+            //setDrawableColorByKey(chat_editIconDrawable, key_chat_serviceIcon);
             setDrawableColorByKey(chat_saveIconDrawable, key_chat_serviceIcon);
             setDrawableColorByKey(chat_replyIconDrawable, key_chat_serviceIcon);
             setDrawableColorByKey(chat_goIconDrawable, key_chat_serviceIcon);

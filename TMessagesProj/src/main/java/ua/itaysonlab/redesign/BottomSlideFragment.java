@@ -178,7 +178,7 @@ public abstract class BottomSlideFragment {
         if (mSlideController != null) {
             Activity act = mSlideController.mActivity;
             ViewGroup decor = (ViewGroup) act.getWindow().getDecorView();
-            decor.setBackgroundColor(Color.BLACK);
+            //decor.setBackgroundColor(Color.parseColor("#9600FF"));
 
             mBackgroundView = decor.getChildAt(0);
 

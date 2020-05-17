@@ -12,6 +12,8 @@ import ua.itaysonlab.catogram.ui.CatogramToasts
 object CatogramConfig {
     private val sharedPreferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE)
 
+    var hideProxySponsor = false
+
     var hidePhoneNumber by sharedPreferences.boolean("advanced_hidephonenumber", true)
     var forceNewYear by sharedPreferences.boolean("advanced_forcenewyear", false)
     var forcePacman by sharedPreferences.boolean("advanced_forcepacman", false)
@@ -19,7 +21,6 @@ object CatogramConfig {
     var systemFonts by sharedPreferences.boolean("advanced_systemfonts", false)
     var noVibration by sharedPreferences.boolean("advanced_novibration", false)
     var forceNewYearDrawer by sharedPreferences.boolean("advanced_nydrawer", false)
-    var hideProxySponsor by sharedPreferences.boolean("advanced_hideproxysponsor", false)
     var noTyping by sharedPreferences.boolean("advanced_notyping", false)
     var drawerAvatar by sharedPreferences.boolean("cg_drawer_avatar", false)
     var flatStatusbar by sharedPreferences.boolean("cg_flat_statusbar", false)
@@ -45,13 +46,17 @@ object CatogramConfig {
     var newTabs_emoji_appendToName by sharedPreferences.boolean("newTabs_emoji_appendToName", false)
     var forceSVDrawer by sharedPreferences.boolean("cg_sv_drawer", false)
 
-    var redesign_messageOption by sharedPreferences.int("cg_messageOption", 1)
-    var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", true)
+    var redesign_messageOption by sharedPreferences.int("cg_messageOption", 0)
+    var redesign_iconOption by sharedPreferences.int("cg_iconoption", 1)
+    var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", false)
 
     var slider_stickerAmplifier by sharedPreferences.int("cg_stickamplifier", 100)
 
     var useCupertinoLib by sharedPreferences.boolean("advanced_cupertino", false)
     var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", true)
+
+    var keyboardImageAsSticker by sharedPreferences.boolean("cg_send_kbd_as_sticker", true)
+    var forwardNoAuthorship by sharedPreferences.boolean("cg_forward_no_authorship", false)
 
     init {
         CatogramToasts.init(sharedPreferences)

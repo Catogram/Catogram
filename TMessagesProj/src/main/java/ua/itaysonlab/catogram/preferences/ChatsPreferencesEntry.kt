@@ -1,74 +1,17 @@
 package ua.itaysonlab.catogram.preferences
 
+import android.view.WindowManager
 import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
+import org.telegram.ui.ActionBar.BaseFragment
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference.TGSLContract
 
 class ChatsPreferencesEntry : BasePreferencesEntry {
-    override fun getPreferences() = tgKitScreen(LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)) {
-        category(LocaleController.getString("AS_RedesignCategory", R.string.AS_RedesignCategory)) {
-            switch {
-                title = LocaleController.getString("CG_NewDrawer", R.string.CG_NewDrawer)
-                summary = LocaleController.getString("CG_NewDrawer_Desc", R.string.CG_NewDrawer_Desc)
-                divider = true
-
-                contract({
-                    return@contract CatogramConfig.redesign_SlideDrawer
-                }) {
-                    CatogramConfig.redesign_SlideDrawer = it
-                }
-            }
-
-            list {
-                title = LocaleController.getString("CG_MessageMenuOption", R.string.CG_MessageMenuOption)
-                divider = true
-
-                contract({
-                    return@contract listOf(
-                            Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
-                            Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
-                            Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL))
-                    )
-                }, {
-                    return@contract when (CatogramConfig.redesign_messageOption) {
-                        1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
-                        2 -> LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)
-                        else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
-                    }
-                }) {
-                    CatogramConfig.redesign_messageOption = it
-                    when (CatogramConfig.redesign_messageOption) {
-                        0 -> {
-                            CatogramConfig.useCupertinoLib = false
-                            CatogramConfig.useTgxMenuSlide = false
-                        }
-                        1 -> {
-                            CatogramConfig.useCupertinoLib = false
-                            CatogramConfig.useTgxMenuSlide = true
-                        }
-                        2 -> {
-                            CatogramConfig.useCupertinoLib = true
-                            CatogramConfig.useTgxMenuSlide = false
-                        }
-                    }
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_NewMsgAnim", R.string.CG_NewMsgAnim)
-
-                contract({
-                    return@contract CatogramConfig.newMessageAnimation
-                }) {
-                    CatogramConfig.newMessageAnimation = it
-                }
-            }
-        }
-
+    override fun getPreferences(bf: BaseFragment) = tgKitScreen(LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)) {
         category(LocaleController.getString("CG_Slider_StickerAmplifier", R.string.CG_Slider_StickerAmplifier)) {
             slider {
                 contract = object : TGSLContract {
@@ -161,6 +104,21 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     return@contract SharedConfig.smoothKeyboard
                 }) {
                     SharedConfig.toggleSmoothKeyboard()
+                    if (SharedConfig.smoothKeyboard && bf.parentActivity != null) {
+                        bf.parentActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+                    }
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("AS_KbdWebp", R.string.AS_KbdWebp)
+                summary = LocaleController.getString("AS_KbdWebp_Desc", R.string.AS_KbdWebp_Desc)
+                divider = true
+
+                contract({
+                    return@contract CatogramConfig.keyboardImageAsSticker
+                }) {
+                    CatogramConfig.keyboardImageAsSticker = it
                 }
             }
 

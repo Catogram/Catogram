@@ -1,14 +1,100 @@
 package ua.itaysonlab.catogram.preferences
 
+import android.graphics.Color
 import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
+import org.telegram.ui.ActionBar.BaseFragment
+import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
+import ua.itaysonlab.extras.CatogramExtras
+import ua.itaysonlab.extras.IconExtras
 
 class AppearancePreferencesEntry : BasePreferencesEntry {
-    override fun getPreferences() = tgKitScreen(LocaleController.getString("AS_Header_Appearance", R.string.AS_Header_Appearance)) {
+    override fun getPreferences(bf: BaseFragment) = tgKitScreen(LocaleController.getString("AS_Header_Appearance", R.string.AS_Header_Appearance)) {
+        category(LocaleController.getString("AS_RedesignCategory", R.string.AS_RedesignCategory)) {
+            switch {
+                title = LocaleController.getString("CG_NewDrawer", R.string.CG_NewDrawer)
+                summary = LocaleController.getString("CG_NewDrawer_Desc", R.string.CG_NewDrawer_Desc)
+                divider = true
+
+                contract({
+                    return@contract CatogramConfig.redesign_SlideDrawer
+                }) {
+                    CatogramConfig.redesign_SlideDrawer = it
+                }
+            }
+
+            list {
+                title = LocaleController.getString("CG_MessageMenuOption", R.string.CG_MessageMenuOption)
+                divider = true
+
+                contract({
+                    return@contract listOf(
+                            Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
+                            Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
+                            Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL))
+                    )
+                }, {
+                    return@contract when (CatogramConfig.redesign_messageOption) {
+                        1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
+                        2 -> LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)
+                        else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
+                    }
+                }) {
+                    CatogramConfig.redesign_messageOption = it
+                    when (CatogramConfig.redesign_messageOption) {
+                        0 -> {
+                            CatogramConfig.useCupertinoLib = false
+                            CatogramConfig.useTgxMenuSlide = false
+                        }
+                        1 -> {
+                            CatogramConfig.useCupertinoLib = false
+                            CatogramConfig.useTgxMenuSlide = true
+                        }
+                        2 -> {
+                            CatogramConfig.useCupertinoLib = true
+                            CatogramConfig.useTgxMenuSlide = false
+                        }
+                    }
+                }
+            }
+
+            list {
+                title = LocaleController.getString("AS_ChangeIcon", R.string.AS_ChangeIcon)
+                divider = true
+
+                contract({
+                    return@contract listOf(
+                            Pair(0, LocaleController.getString("AS_ChangeIcon_Old", R.string.AS_ChangeIcon_Old)),
+                            Pair(1, LocaleController.getString("AS_ChangeIcon_AltBlue", R.string.AS_ChangeIcon_AltBlue)),
+                            Pair(2, LocaleController.getString("AS_ChangeIcon_AltOrange", R.string.AS_ChangeIcon_AltOrange))
+                    )
+                }, {
+                    return@contract when (CatogramConfig.redesign_iconOption) {
+                        1 -> LocaleController.getString("AS_ChangeIcon_AltBlue", R.string.AS_ChangeIcon_AltBlue)
+                        2 -> LocaleController.getString("AS_ChangeIcon_AltOrange", R.string.AS_ChangeIcon_AltOrange)
+                        else -> LocaleController.getString("AS_ChangeIcon_Old", R.string.AS_ChangeIcon_Old)
+                    }
+                }) {
+                    CatogramConfig.redesign_iconOption = it
+                    IconExtras.setIcon(it)
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_NewMsgAnim", R.string.CG_NewMsgAnim)
+
+                contract({
+                    return@contract CatogramConfig.newMessageAnimation
+                }) {
+                    CatogramConfig.newMessageAnimation = it
+                }
+            }
+        }
+
         category(LocaleController.getString("General", R.string.General)) {
             switch {
                 title = LocaleController.getString("AS_HideUserPhone", R.string.AS_HideUserPhone)
@@ -64,8 +150,8 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 contract({
                     return@contract CatogramConfig.flatStatusbar
                 }) {
-                    // TODO: do the switch
                     CatogramConfig.flatStatusbar = it
+                    bf.parentActivity.window.statusBarColor = if (Theme.getColor(Theme.key_actionBarDefault, null, true) == Color.WHITE) CatogramExtras.getLightStatusbarColor() else CatogramExtras.getDarkStatusbarColor()
                 }
             }
 

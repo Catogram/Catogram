@@ -48,6 +48,8 @@ import org.telegram.ui.Components.LayoutHelper;
 
 import java.util.ArrayList;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 public class ActionBarLayout extends FrameLayout {
 
     public interface ActionBarLayoutDelegate {
@@ -327,6 +329,7 @@ public class ActionBarLayout extends FrameLayout {
     }
 
     public void drawHeaderShadow(Canvas canvas, int y) {
+        if (CatogramConfig.INSTANCE.getFlatActionbar()) return;
         drawHeaderShadow(canvas, 255, y);
     }
 
