@@ -12,6 +12,8 @@ import org.telegram.messenger.R
 import org.telegram.ui.ActionBar.Theme
 
 abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
+    var needToTint = true
+
     abstract fun getActions(): List<Action>
 
     abstract fun processActionClick(id: String)
@@ -31,7 +33,7 @@ abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
                         this.action_iv.visibility = View.GONE
                     } else {
                         this.action_iv.setImageResource(action.icon)
-                        this.action_iv.imageTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+                        if (needToTint) this.action_iv.imageTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
                     }
 
                     this.action_tv.text = action.title

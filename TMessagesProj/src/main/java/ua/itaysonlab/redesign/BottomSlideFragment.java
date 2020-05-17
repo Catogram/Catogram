@@ -227,6 +227,7 @@ public abstract class BottomSlideFragment {
             View overlay = new View(act);
             overlay.setBackgroundColor(0x80000000);
             overlay.setAlpha(0);
+            overlay.setOnClickListener(v -> dismiss());
             sheetComponent.addView(overlay);
             sheetComponent.addView(mView);
 

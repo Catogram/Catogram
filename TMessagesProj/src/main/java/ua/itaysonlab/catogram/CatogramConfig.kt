@@ -12,7 +12,7 @@ import ua.itaysonlab.catogram.ui.CatogramToasts
 object CatogramConfig {
     private val sharedPreferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE)
 
-    var hideProxySponsor = false
+    var hideProxySponsor by sharedPreferences.boolean("advanced_hideproxysponsor", true)
 
     var hidePhoneNumber by sharedPreferences.boolean("advanced_hidephonenumber", true)
     var forceNewYear by sharedPreferences.boolean("advanced_forcenewyear", false)

@@ -185,7 +185,7 @@ public class VoIPService extends VoIPBaseService{
 		if(callIShouldHavePutIntoIntent!=null && Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
 			NotificationsController.checkOtherNotificationsChannel();
 			Notification.Builder bldr=new Notification.Builder(this, NotificationsController.OTHER_NOTIFICATIONS_CHANNEL)
-					.setSmallIcon(R.drawable.notification)
+					.setSmallIcon(R.drawable.cg_notification)
 					.setContentTitle(LocaleController.getString("VoipOutgoingCall", R.string.VoipOutgoingCall))
 					.setShowWhen(false);
 			startForeground(ID_ONGOING_CALL_NOTIFICATION, bldr.build());

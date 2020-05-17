@@ -3,6 +3,7 @@ package ua.itaysonlab.catogram.preferences
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.ui.ActionBar.BaseFragment
+import ua.itaysonlab.catogram.CGControversive
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 
@@ -22,16 +23,18 @@ class SecurityPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Privacy", R.string.AS_Header_Privacy)) {
-            /*switch {
-                title = LocaleController.getString("AS_NoProxyPromo", R.string.AS_NoProxyPromo)
-                divider = true
+            if (CGControversive.isControversiveFeaturesEnabled()) {
+                switch {
+                    title = LocaleController.getString("AS_NoProxyPromo", R.string.AS_NoProxyPromo)
+                    divider = true
 
-                contract({
-                    return@contract CatogramConfig.hideProxySponsor
-                }) {
-                    //CatogramConfig.hideProxySponsor = it
+                    contract({
+                        return@contract CatogramConfig.hideProxySponsor
+                    }) {
+                        CatogramConfig.hideProxySponsor = it
+                    }
                 }
-            }*/
+            }
 
             switch {
                 title = LocaleController.getString("AS_NoTyping", R.string.AS_NoTyping)

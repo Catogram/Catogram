@@ -507,7 +507,7 @@ public class VoIPActivity extends AppCompatActivity implements VoIPService.State
         TextView branding = new TextView(this);
         branding.setTextColor(0xCCFFFFFF);
         branding.setText(LocaleController.getString("VoipInCallBranding", R.string.VoipInCallBranding));
-        Drawable logo = getResources().getDrawable(R.drawable.notification).mutate();
+        Drawable logo = getResources().getDrawable(R.drawable.cg_notification).mutate();
         logo.setAlpha(0xCC);
         logo.setBounds(0, 0, AndroidUtilities.dp(15), AndroidUtilities.dp(15));
         signalBarsDrawable = new SignalBarsDrawable();

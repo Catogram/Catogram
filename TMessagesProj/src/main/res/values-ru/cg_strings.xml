@@ -6,7 +6,7 @@
     <string name="AS_Header_Appearance">Внешний вид</string>
     <string name="AS_HideUserPhone">Скрыть номер телефона</string>
     <string name="AS_HideUserPhoneSummary">в шторке и настройках</string>
-    <string name="AS_NoRounding">Отключить округливание чисел</string>
+    <string name="AS_NoRounding">Отключить округление чисел</string>
     <string name="AS_NoRoundingSummary">1.2K -> 1234</string>
     <string name="AS_Vibration">Отключить вибрацию</string>
 

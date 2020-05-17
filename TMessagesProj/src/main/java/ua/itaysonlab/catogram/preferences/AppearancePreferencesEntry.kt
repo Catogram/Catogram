@@ -66,14 +66,14 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 title = LocaleController.getString("AS_ChangeIcon", R.string.AS_ChangeIcon)
                 divider = true
 
-                contract({
-                    return@contract listOf(
-                            Pair(0, LocaleController.getString("AS_ChangeIcon_Old", R.string.AS_ChangeIcon_Old)),
-                            Pair(1, LocaleController.getString("AS_ChangeIcon_AltBlue", R.string.AS_ChangeIcon_AltBlue)),
-                            Pair(2, LocaleController.getString("AS_ChangeIcon_AltOrange", R.string.AS_ChangeIcon_AltOrange))
+                contractIcons({
+                    return@contractIcons listOf(
+                            Triple(0, LocaleController.getString("AS_ChangeIcon_Old", R.string.AS_ChangeIcon_Old), R.mipmap.cg_launcher),
+                            Triple(1, LocaleController.getString("AS_ChangeIcon_AltBlue", R.string.AS_ChangeIcon_AltBlue), R.mipmap.cg_launcher_alt_blue),
+                            Triple(2, LocaleController.getString("AS_ChangeIcon_AltOrange", R.string.AS_ChangeIcon_AltOrange), R.mipmap.cg_launcher_alt_orange)
                     )
                 }, {
-                    return@contract when (CatogramConfig.redesign_iconOption) {
+                    return@contractIcons when (CatogramConfig.redesign_iconOption) {
                         1 -> LocaleController.getString("AS_ChangeIcon_AltBlue", R.string.AS_ChangeIcon_AltBlue)
                         2 -> LocaleController.getString("AS_ChangeIcon_AltOrange", R.string.AS_ChangeIcon_AltOrange)
                         else -> LocaleController.getString("AS_ChangeIcon_Old", R.string.AS_ChangeIcon_Old)

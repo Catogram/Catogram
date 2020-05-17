@@ -31,12 +31,44 @@ fun TGKitListPreference.contract(getOptions: () -> List<Pair<Int, String>>, getV
             setValue(id)
         }
 
+        override fun hasIcons(): Boolean {
+            return false
+        }
+
+        override fun getOptionsIcons(): MutableList<Triple<Int, String, Int>> {
+            return mutableListOf()
+        }
+
         override fun getValue(): String {
             return getValue()
         }
 
         override fun getOptions(): List<Pair<Int, String>> {
             return getOptions()
+        }
+    }
+}
+
+fun TGKitListPreference.contractIcons(getOptions: () -> List<Triple<Int, String, Int>>, getValue: () -> String, setValue: (Int) -> Unit) {
+    contract = object: TGKitListPreference.TGTLContract {
+        override fun setValue(id: Int) {
+            setValue(id)
+        }
+
+        override fun hasIcons(): Boolean {
+            return true
+        }
+
+        override fun getOptionsIcons(): List<Triple<Int, String, Int>> {
+            return getOptions()
+        }
+
+        override fun getValue(): String {
+            return getValue()
+        }
+
+        override fun getOptions(): List<Pair<Int, String>> {
+            return mutableListOf()
         }
     }
 }

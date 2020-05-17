@@ -461,7 +461,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 		Notification.Builder builder = new Notification.Builder(this)
 				.setContentTitle(LocaleController.getString("VoipOutgoingCall", R.string.VoipOutgoingCall))
 				.setContentText(name)
-				.setSmallIcon(R.drawable.notification)
+				.setSmallIcon(R.drawable.cg_notification)
 				.setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			Intent endIntent = new Intent(this, VoIPActionsReceiver.class);
@@ -1037,7 +1037,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 		Notification.Builder builder = new Notification.Builder(this)
 				.setContentTitle(LocaleController.getString("VoipInCallBranding", R.string.VoipInCallBranding))
 				.setContentText(name)
-				.setSmallIcon(R.drawable.notification)
+				.setSmallIcon(R.drawable.cg_notification)
 				.setSubText(subText)
 				.setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 		Uri soundProviderUri=Uri.parse("content://"+BuildConfig.APPLICATION_ID+".call_sound_provider/start_ringing");
