@@ -52,7 +52,8 @@ object TgxExtras {
     }
 
     @JvmStatic
-    fun createForwardTimeName(obj: MessageObject, orig: CharSequence): CharSequence {
+    fun createForwardTimeName(obj: MessageObject, orig: CharSequence): String {
+        //return orig.toString()
         return "$orig [${LocaleController.formatDate(obj.messageOwner.fwd_from.date.toLong())}]"
     }
 }

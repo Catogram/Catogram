@@ -8331,7 +8331,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     currentForwardNameString = currentForwardName;
                 }
 
-                forwardedNameWidth = getMaxNameWidth();
+                currentForwardNameString = TgxExtras.createForwardTimeName(messageObject, currentForwardNameString);
+
+                 forwardedNameWidth = getMaxNameWidth();
                 String forwardedString = getForwardedMessageText(messageObject);
                 if (hasPsaHint) {
                     forwardedNameWidth -= AndroidUtilities.dp(36);
@@ -8340,9 +8342,14 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 String fromFormattedString = LocaleController.getString("FromFormatted", R.string.FromFormatted);
                 int idx = fromFormattedString.indexOf("%1$s");
                 int fromWidth = (int) Math.ceil(Theme.chat_forwardNamePaint.measureText(from + " "));
-                CharSequence name = TgxExtras.createForwardTimeName(messageObject, TextUtils.ellipsize(currentForwardNameString.replace('\n', ' '), Theme.chat_replyNamePaint, forwardedNameWidth - fromWidth - viaWidth, TextUtils.TruncateAt.END));
                 String fromString = name.toString();
-
+                CharSequence name = TextUtils.ellipsize(currentForwardNameString.replace('\n', ' '), Theme.chat_replyNamePaint, forwardedNameWidth - fromWidth - viaWidth, TextUtils.TruncateAt.END);
+                String fromString;
+                try {
+                    fromString = String.format(fromFormattedString, name);
+                } catch (Exception e) {
+                    fromString = name.toString();
+                }
                 CharSequence lastLine;
                 SpannableStringBuilder stringBuilder;
                 if (viaString != null) {
@@ -8350,11 +8357,11 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     viaNameWidth = (int) Math.ceil(Theme.chat_forwardNamePaint.measureText(fromString));
                     stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), stringBuilder.length() - viaUsername.length() - 1, stringBuilder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 } else {
-                    stringBuilder = new SpannableStringBuilder(name);
+                    stringBuilder = new SpannableStringBuilder(String.format(fromFormattedString, name));
                 }
                 forwardNameCenterX = fromWidth + (int) Math.ceil(Theme.chat_forwardNamePaint.measureText(name, 0, name.length())) / 2;
                 if (idx >= 0 && (currentForwardName == null || messageObject.messageOwner.fwd_from.from_id != 0)) {
-                    stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), idx, idx + name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
                 lastLine = stringBuilder;
                 lastLine = TextUtils.ellipsize(lastLine, Theme.chat_forwardNamePaint, forwardedNameWidth, TextUtils.TruncateAt.END);
@@ -8499,13 +8506,14 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         } else if (currentForwardName != null) {
                             currentForwardNameString = currentForwardName;
                         }
+                        currentForwardNameString = TgxExtras.createForwardTimeName(messageObject, currentForwardNameString);
                         name = getForwardedMessageText(messageObject);
                         String from = LocaleController.getString("From", R.string.From);
                         String fromFormattedString = LocaleController.getString("FromFormatted", R.string.FromFormatted);
                         int idx = fromFormattedString.indexOf("%1$s");
                         int fromWidth = (int) Math.ceil(Theme.chat_replyNamePaint.measureText(from + " "));
-                        CharSequence n = TgxExtras.createForwardTimeName(messageObject, TextUtils.ellipsize(currentForwardNameString.replace('\n', ' '), Theme.chat_replyNamePaint, maxWidth - fromWidth, TextUtils.TruncateAt.END));
-                        SpannableStringBuilder stringBuilder = new SpannableStringBuilder(n);
+                        CharSequence n = TextUtils.ellipsize(currentForwardNameString.replace('\n', ' '), Theme.chat_replyNamePaint, maxWidth - fromWidth, TextUtils.TruncateAt.END);
+                        SpannableStringBuilder stringBuilder = new SpannableStringBuilder(String.format(fromFormattedString, n));
                         if (idx >= 0 && (currentForwardName == null || messageObject.messageOwner.fwd_from.from_id != 0)) {
                             stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), idx, idx + n.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
