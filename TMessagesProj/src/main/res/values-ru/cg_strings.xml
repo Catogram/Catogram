@@ -141,7 +141,7 @@
 
     <string name="CG_MessageButton_Option_Share">Share [default]</string>
     <string name="CG_MessageButton_Option_Edit">Edit [your only]</string>
-    <string name="CG_MessageButton_Option_Saved">To Cloud</string>
+    <string name="CG_MessageButton_Option_Saved">В облако</string>
 
     <string name="CG_ConfirmCalling_Header">Подтвердить звонок</string>
     <string name="CG_ConfirmCalling_Question">Позовнить %s?</string>
