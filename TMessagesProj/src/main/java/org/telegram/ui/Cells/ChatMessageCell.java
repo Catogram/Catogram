@@ -8342,7 +8342,6 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 String fromFormattedString = LocaleController.getString("FromFormatted", R.string.FromFormatted);
                 int idx = fromFormattedString.indexOf("%1$s");
                 int fromWidth = (int) Math.ceil(Theme.chat_forwardNamePaint.measureText(from + " "));
-                String fromString = name.toString();
                 CharSequence name = TextUtils.ellipsize(currentForwardNameString.replace('\n', ' '), Theme.chat_replyNamePaint, forwardedNameWidth - fromWidth - viaWidth, TextUtils.TruncateAt.END);
                 String fromString;
                 try {
