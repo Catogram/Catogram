@@ -118,7 +118,7 @@ public class RecyclerListView extends SLRecyclerView {
     private static boolean gotAttributes;
 
     private boolean hiddenByEmptyView;
-    public boolean animationRunning;
+    public boolean scrollAnimationRunning;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -1772,9 +1772,13 @@ public class RecyclerListView extends SLRecyclerView {
         return pinnedHeader;
     }
 
+    public boolean isScrollAnimationRunning() {
+        return scrollAnimationRunning;
+    }
+
     @Override
     public void requestLayout() {
-        if (animationRunning) {
+        if (scrollAnimationRunning) {
             return;
         }
         super.requestLayout();

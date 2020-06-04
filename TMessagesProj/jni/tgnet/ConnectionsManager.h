@@ -200,7 +200,7 @@ private:
     std::vector<ConnectionSocket *> activeConnectionsCopy;
     int epolFd;
     int eventFd;
-    int *pipeFd;
+    int *pipeFd = nullptr;
     NativeByteBuffer *networkBuffer;
 
     requestsList requestsQueue;
