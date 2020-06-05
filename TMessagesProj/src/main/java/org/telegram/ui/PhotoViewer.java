@@ -2781,7 +2781,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         case MotionEvent.ACTION_UP:
                         case MotionEvent.ACTION_CANCEL:
                         case MotionEvent.ACTION_POINTER_UP:
-                            AndroidUtilities.runOnUIThread(hideActionBarRunnable, 3000);
+                            scheduleActionBarHide();
                             break;
                     }
                 }
@@ -3368,7 +3368,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             @Override
             public void onHideSubMenu() {
                 if (videoPlayerControlVisible && isPlaying) {
-                    AndroidUtilities.runOnUIThread(hideActionBarRunnable, 3000);
+                    scheduleActionBarHide();
                 }
             }
         });
@@ -5121,6 +5121,27 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         return injectingVideoPlayer != null;
     }
 
+    private void scheduleActionBarHide() {
+        scheduleActionBarHide(3000);
+    }
+
+    private void scheduleActionBarHide(int delay) {
+        if (!isAccessibilityEnabled()) {
+            AndroidUtilities.cancelRunOnUIThread(hideActionBarRunnable);
+            AndroidUtilities.runOnUIThread(hideActionBarRunnable, delay);
+        }
+    }
+
+    private boolean isAccessibilityEnabled() {
+        try {
+            AccessibilityManager am = (AccessibilityManager) actvityContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
+            return am.isEnabled();
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+        return false;
+    }
+
     private void updatePlayerState(boolean playWhenReady, int playbackState) {
         if (videoPlayer == null) {
             return;
@@ -5135,7 +5156,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 if (buffering) {
                     AndroidUtilities.cancelRunOnUIThread(hideActionBarRunnable);
                 } else {
-                    AndroidUtilities.runOnUIThread(hideActionBarRunnable, 3000);
+                    scheduleActionBarHide();
                 }
                 toggleMiniProgress(buffering, true);
             }
@@ -5507,7 +5528,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         }
         setVideoPlayerControlVisible(!isCurrentVideo, true);
         if (!isCurrentVideo) {
-            AndroidUtilities.runOnUIThread(hideActionBarRunnable, playerAutoStarted ? 3000 : 1000);
+            scheduleActionBarHide(playerAutoStarted ? 3000 : 1000);
         }
 
         inPreview = preview;
@@ -5806,7 +5827,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             stickers = photoPaintView.getMasks();
         }
         if (bitmap != null) {
-            TLRPC.PhotoSize size = ImageLoader.scaleAndSaveImage(bitmap, currentEditMode == 3 ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 80, false, 101, 101);
+            TLRPC.PhotoSize size = ImageLoader.scaleAndSaveImage(bitmap, currentEditMode == 3 ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 87, false, 101, 101);
             if (size != null) {
                 if (entry.thumbPath != null) {
                     new File(entry.thumbPath).delete();
@@ -5841,7 +5862,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         Canvas b = new Canvas(canvasBitmap);
                         b.drawBitmap(bitmap, null, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), bitmapPaint);
                         b.drawBitmap(paintBitmap, null, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), bitmapPaint);
-                        size = ImageLoader.scaleAndSaveImage(canvasBitmap, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 80, false, 101, 101);
+                        size = ImageLoader.scaleAndSaveImage(canvasBitmap, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 87, false, 101, 101);
                         entry.imagePath = FileLoader.getPathToAttach(size, true).toString();
                         canvasBitmap.recycle();
                         paintingOverlay.setEntities(currentMediaEntities, isCurrentVideo, true);
@@ -5876,7 +5897,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         Canvas b = new Canvas(canvasBitmap);
                         b.drawBitmap(bitmap, null, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), bitmapPaint);
                         b.drawBitmap(paintBitmap, null, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), bitmapPaint);
-                        size = ImageLoader.scaleAndSaveImage(canvasBitmap, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 80, false, 101, 101);
+                        size = ImageLoader.scaleAndSaveImage(canvasBitmap, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 87, false, 101, 101);
                         if (entry.imagePath != null) {
                             new File(entry.imagePath).delete();
                         }
@@ -5919,11 +5940,12 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                             new File(entry.fullPaintPath).delete();
                         }
                     }
+                    entry.stickers = stickers;
                     entry.paintPath = currentPaintPath = FileLoader.getPathToAttach(size, true).toString();
                     paintingOverlay.setEntities(entry.mediaEntities = currentMediaEntities = entities == null || entities.isEmpty() ? null : entities, isCurrentVideo, true);
                     entry.averageDuration = currentAverageDuration = photoPaintView.getLcm();
                     if (entry.mediaEntities != null && paintThumbBitmap[0] != null) {
-                        size = ImageLoader.scaleAndSaveImage(paintThumbBitmap[0], Bitmap.CompressFormat.PNG, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 80, false, 101, 101);
+                        size = ImageLoader.scaleAndSaveImage(paintThumbBitmap[0], Bitmap.CompressFormat.PNG, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 87, false, 101, 101);
                         entry.fullPaintPath = FileLoader.getPathToAttach(size, true).toString();
                     } else {
                         entry.fullPaintPath = entry.paintPath;
@@ -5946,7 +5968,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         if (originalBitmap != null) {
                             Canvas b = new Canvas(originalBitmap);
                             b.drawBitmap(paintThumbBitmap[0] != null ? paintThumbBitmap[0] : bitmap, null, new Rect(0, 0, originalBitmap.getWidth(), originalBitmap.getHeight()), bitmapPaint);
-                            size = ImageLoader.scaleAndSaveImage(originalBitmap, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 80, false, 101, 101);
+                            size = ImageLoader.scaleAndSaveImage(originalBitmap, AndroidUtilities.getPhotoSize(), AndroidUtilities.getPhotoSize(), 87, false, 101, 101);
                             if (entry.imagePath != null) {
                                 new File(entry.imagePath).delete();
                             }
@@ -5990,7 +6012,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
                 SharedConfig.saveConfig();
 
-                entry.stickers = stickers;
                 if (savedFilterState != null) {
                     entry.savedFilterState = currentSavedFilterState = savedFilterState;
                 }
@@ -6754,7 +6775,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         updateContainerFlags(show);
 
         if (videoPlayerControlVisible && isPlaying && show) {
-            AndroidUtilities.runOnUIThread(hideActionBarRunnable, 3000);
+            scheduleActionBarHide();
         } else {
             AndroidUtilities.cancelRunOnUIThread(hideActionBarRunnable);
         }
@@ -6893,7 +6914,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 if (Math.abs(videoPlayerSeekbar.getProgress() - 1.0f) < 0.01f || videoPlayer.getCurrentPosition() == videoPlayer.getDuration()) {
                     videoPlayer.seekTo(0);
                 }
-                AndroidUtilities.runOnUIThread(hideActionBarRunnable, 1000);
+                scheduleActionBarHide();
             }
             videoPlayer.play();
         }

@@ -293,7 +293,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 1984
+    defaultConfig.versionCode = 1985
 
     def tgVoipDexFileName = "libtgvoip.dex"
     def tgVoipDexClasses = ["AudioRecordJNI", "AudioTrackJNI", "NativeTgVoipDelegate", "NativeTgVoipInstance", "TgVoipNativeLoader", "Resampler", "VLog"]
