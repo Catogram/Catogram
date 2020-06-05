@@ -1115,6 +1115,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         private float[] animAlphas = new float[3];
         private float[] alphas = new float[3];
         private float scale = 1.0f;
+        private boolean visible;
 
         public PhotoProgressView(View parentView) {
             if (decelerateInterpolator == null) {
@@ -1204,12 +1205,16 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             } else {
                 previousBackgroundState = -2;
             }
-            backgroundState = state;
+            onBackgroundStateUpdated(backgroundState = state);
             parent.invalidate();
+        }
+
+        protected void onBackgroundStateUpdated(int state) {
         }
 
         public void setAlpha(float value) {
             alphas[0] = animAlphas[0] = value;
+            checkVisibility();
         }
 
         public void setScale(float value) {
@@ -1222,6 +1227,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 if (!animated) {
                     animAlphas[index] = alpha;
                 }
+                checkVisibility();
                 parent.invalidate();
             }
         }
@@ -1230,6 +1236,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             for (int i = 0; i < alphas.length; i++) {
                 alphas[i] = animAlphas[i] = 1.0f;
             }
+            checkVisibility();
         }
 
         private float calculateAlpha() {
@@ -1244,13 +1251,25 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             return alpha;
         }
 
-        public boolean isVisible() {
+        private void checkVisibility() {
+            boolean newVisible = true;
             for (int i = 0; i < alphas.length; i++) {
                 if (alphas[i] != 1.0f) {
-                    return false;
+                    newVisible = false;
+                    break;
                 }
             }
-            return true;
+            if (newVisible != visible) {
+                visible = newVisible;
+                onVisibilityChanged(visible);
+            }
+        }
+
+        protected void onVisibilityChanged(boolean visible) {
+        }
+
+        public boolean isVisible() {
+            return visible;
         }
 
         public int getX() {
@@ -2811,6 +2830,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         }
                         heightSize += AndroidUtilities.statusBarHeight;
                     }
+                    AndroidUtilities.displaySize.y = heightSize - AndroidUtilities.statusBarHeight - insets.getStableInsetBottom();
                     heightSize -= insets.getSystemWindowInsetBottom();
                 } else {
                     if (heightSize > AndroidUtilities.displaySize.y) {
@@ -3442,7 +3462,21 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         setCaptionHwLayerEnabled(true);
 
         for (int a = 0; a < 3; a++) {
-            photoProgressViews[a] = new PhotoProgressView(containerView);
+            photoProgressViews[a] = new PhotoProgressView(containerView) {
+                @Override
+                protected void onBackgroundStateUpdated(int state) {
+                    if (this == photoProgressViews[0]) {
+                        updateAccessibilityOverlayVisibility();
+                    }
+                }
+
+                @Override
+                protected void onVisibilityChanged(boolean visible) {
+                    if (this == photoProgressViews[0]) {
+                        updateAccessibilityOverlayVisibility();
+                    }
+                }
+            };
             photoProgressViews[a].setBackgroundState(PROGRESS_EMPTY, false);
         }
 
@@ -5216,7 +5250,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             if (!isPlaying) {
                 isPlaying = true;
                 photoProgressViews[0].setBackgroundState(isCurrentVideo ? PROGRESS_NONE : PROGRESS_PAUSE, false);
-                photoProgressViews[0].setIndexedAlpha(1, !isCurrentVideo && ((playerAutoStarted && !playerWasPlaying) || !isActionBarVisible) ? 0f : 1f, false);
+                photoProgressViews[0].setIndexedAlpha(1, !isCurrentVideo && !isAccessibilityEnabled() && ((playerAutoStarted && !playerWasPlaying) || !isActionBarVisible) ? 0f : 1f, false);
                 playerWasPlaying = true;
                 AndroidUtilities.runOnUIThread(updateProgressRunnable);
             }
@@ -5532,8 +5566,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         }
 
         inPreview = preview;
-
-        updateAccessibilityOverlayVisibility();
     }
 
     private void createVideoTextureView(MediaController.SavedFilterState savedFilterState) {
@@ -5584,7 +5616,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             }
             videoPlayer.releasePlayer(true);
             videoPlayer = null;
-            updateAccessibilityOverlayVisibility();
         } else {
             playerWasPlaying = false;
         }
@@ -7771,7 +7802,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         animateCaption = false;
                     }
                     isCurrentVideo = true;
-                    updateAccessibilityOverlayVisibility();
                     boolean isMuted = false;
                     float start = 0.0f;
                     float end = 1.0f;
@@ -7816,7 +7846,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         animateCaption = false;
                     }
                     isCurrentVideo = false;
-                    updateAccessibilityOverlayVisibility();
                     compressItem.setVisibility(View.GONE);
                     if (isAnimation || sendPhotoType == SELECT_TYPE_QR || isDocumentsPicker) {
                         paintItem.setVisibility(View.GONE);
@@ -8137,6 +8166,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 photoProgressViews[0] = photoProgressViews[2];
                 photoProgressViews[2] = tempProgress;
                 setIndexToImage(leftImage, currentIndex - 1);
+                updateAccessibilityOverlayVisibility();
 
                 checkProgress(1, true, false);
                 checkProgress(2, true, false);
@@ -8150,6 +8180,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 photoProgressViews[0] = photoProgressViews[1];
                 photoProgressViews[1] = tempProgress;
                 setIndexToImage(rightImage, currentIndex + 1);
+                updateAccessibilityOverlayVisibility();
 
                 checkProgress(1, true, false);
                 checkProgress(2, true, false);
@@ -9361,7 +9392,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             }
             MediaController.getInstance().injectVideoPlayer(videoPlayer, currentMessageObject);
             videoPlayer = null;
-            updateAccessibilityOverlayVisibility();
         }
     }
 
@@ -11633,12 +11663,18 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     }
 
     private void updateAccessibilityOverlayVisibility() {
-        if (playButtonAccessibilityOverlay == null)
-            return;
-        if (isCurrentVideo && (videoPlayer == null || !videoPlayer.isPlaying())) {
-            playButtonAccessibilityOverlay.setVisibility(View.VISIBLE);
-        } else {
-            playButtonAccessibilityOverlay.setVisibility(View.INVISIBLE);
+        if (playButtonAccessibilityOverlay != null) {
+            final int state = photoProgressViews[0].backgroundState;
+            if (photoProgressViews[0].isVisible() && (state == PROGRESS_PLAY || state == PROGRESS_PAUSE)) {
+                if (state == PROGRESS_PLAY) {
+                    playButtonAccessibilityOverlay.setContentDescription(LocaleController.getString("AccActionPlay", R.string.AccActionPlay));
+                } else {
+                    playButtonAccessibilityOverlay.setContentDescription(LocaleController.getString("AccActionPause", R.string.AccActionPause));
+                }
+                playButtonAccessibilityOverlay.setVisibility(View.VISIBLE);
+            } else {
+                playButtonAccessibilityOverlay.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
