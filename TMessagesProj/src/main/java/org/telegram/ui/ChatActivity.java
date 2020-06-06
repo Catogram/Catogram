@@ -11179,11 +11179,11 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             chatAdapter.notifyItemInserted(placeToPaste);
                         }
                         if (obj.isOut() && waitingForSendingMessageLoad) {
-                                waitingForSendingMessageLoad = false;
-                                chatActivityEnterView.hideTopView(true);
-                                if (changeBoundAnimator != null) {
-                                    changeBoundAnimator.start();
-                                }
+                            waitingForSendingMessageLoad = false;
+                            chatActivityEnterView.hideTopView(true);
+                            if (changeBoundAnimator != null) {
+                                changeBoundAnimator.start();
+                            }
                         }
                         if (!obj.isOut() && obj.messageOwner.mentioned && obj.isContentUnread()) {
                             newMentionsCount++;
@@ -11444,8 +11444,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             canShowPagedownButton = false;
             updatePagedownButtonVisibility(true);
             showMentionDownButton(false, true);
+            removeUnreadPlane(true);
             if (updated && chatAdapter != null) {
-                removeUnreadPlane(true);
                 chatAdapter.notifyDataSetChanged();
             }
         } else if (id == NotificationCenter.messagesDeleted) {
@@ -11506,7 +11506,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             addToSelectedMessages(obj, false, updatedSelectedLast = (a == size - 1));
                         }
                         MessageObject removed = messages.remove(index);
-                        removedIndexes.add(chatAdapter.messagesStartRow + index);
+                        if (chatAdapter != null) {
+                            removedIndexes.add(chatAdapter.messagesStartRow + index);
+                        }
                         if (removed.getGroupId() != 0) {
                             MessageObject.GroupedMessages groupedMessages = groupedMessagesMap.get(removed.getGroupId());
                             if (groupedMessages != null) {
@@ -11529,7 +11531,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                 messagesByDays.remove(obj.dateKey);
                                 if (index >= 0 && index < messages.size()) {
                                     messages.remove(index);
-                                    removedIndexes.add(chatAdapter.messagesStartRow + index);
+                                    if (chatAdapter != null) {
+                                        removedIndexes.add(chatAdapter.messagesStartRow + index);
+                                    }
                                 }
                             }
                         }
@@ -11604,22 +11608,21 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 updatePagedownButtonVisibility(true);
                 showMentionDownButton(false, true);
             }
-            if (chatAdapter != null) {
-                if (updated) {
-                    int count = removedIndexes.size();
-                    for (int a = 0; a < count; a++) {
+            if (updated) {
+                if (chatAdapter != null) {
+                    for (int a = 0, N = removedIndexes.size(); a < N; a++) {
                         chatAdapter.notifyItemRemoved(removedIndexes.get(a));
                     }
-                    updateVisibleRows();
-                } else {
-                    first_unread_id = 0;
-                    last_message_id = 0;
-                    createUnreadMessageAfterId = 0;
-                    removeMessageObject(unreadMessageObject);
-                    unreadMessageObject = null;
-                    if (pagedownButtonCounter != null) {
-                        pagedownButtonCounter.setVisibility(View.INVISIBLE);
-                    }
+                }
+                updateVisibleRows();
+            } else {
+                first_unread_id = 0;
+                last_message_id = 0;
+                createUnreadMessageAfterId = 0;
+                removeMessageObject(unreadMessageObject);
+                unreadMessageObject = null;
+                if (pagedownButtonCounter != null) {
+                    pagedownButtonCounter.setVisibility(View.INVISIBLE);
                 }
             }
             if (updateScheduled) {
@@ -12821,7 +12824,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         if (dayArr.isEmpty()) {
                             messagesByDays.remove(old.dateKey);
                             messages.remove(index);
-                            chatAdapter.notifyItemRemoved(chatAdapter.messagesStartRow);
+                            chatAdapter.notifyItemRemoved(chatAdapter.messagesStartRow + index);
                         }
                     }
                 }
