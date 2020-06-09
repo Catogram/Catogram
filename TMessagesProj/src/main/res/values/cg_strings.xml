@@ -161,4 +161,12 @@
 
     <string name="AS_ForwardNoAuthorship">No-Author Forward [beta]</string>
     <string name="AS_ForwardNoAuthorship_Desc">currently only on classic forward</string>
+
+    <string name="CG_ForwardMsgDate">Show forwarded message date</string>
+    <string name="CG_Translate">Translate</string>
+    <string name="CG_Translate_Orig">Original</string>
+    <string name="CG_Translate_Translated">Translated</string>
+    <string name="CG_Translate_Language">Detected language</string>
+    <string name="CG_Translate_PoweredBy">Powered by</string>
+    <string name="CG_ToSaved">Save message</string>
 </resources>

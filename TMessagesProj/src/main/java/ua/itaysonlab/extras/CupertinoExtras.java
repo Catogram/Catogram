@@ -43,6 +43,7 @@ public class CupertinoExtras {
         ctxMenu.setDangerColor(Theme.getColor(Theme.key_dialogTextRed));
         ctxMenu.setMarginStartEnd(CatogramExtras.dip2px(context, isOut ? 8f : 56f));
         ctxMenu.setSheetGravity(isOut ? Gravity.END : Gravity.START);
+        ctxMenu.forceMoveStrategy(ContextMenu2.MoveStrategy.MOVE_DOWN);
 
         ctxMenu.setActions(generateActionList(optionsID, optionTitles, optionIcons));
         ctxMenu.setClickListener((action) -> {

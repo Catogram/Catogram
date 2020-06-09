@@ -3054,14 +3054,6 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 for (int a = 0, N = filters.size(); a < N; a++) {
                     String name = filters.get(a).name;
 
-                    if (CatogramConfig.INSTANCE.getNewTabs_emoji_appendToName() && filters.get(a).emoticon != null) {
-                        name = CatogramExtras.wrapEmoticon(filters.get(a).emoticon) + " " + name;
-                    }
-
-                    if (CatogramConfig.INSTANCE.getNewTabs_emoji_insteadOfName()) {
-                        name = CatogramExtras.wrapEmoticon(filters.get(a).emoticon);
-                    }
-
                     filterTabsView.addTab(a, name);
                 }
 

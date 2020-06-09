@@ -125,6 +125,7 @@ import org.telegram.messenger.R;
 import org.telegram.messenger.SecretChatHelper;
 import org.telegram.messenger.SendMessagesHelper;
 import org.telegram.messenger.SharedConfig;
+import org.telegram.messenger.UserConfig;
 import org.telegram.messenger.UserObject;
 import org.telegram.messenger.Utilities;
 import org.telegram.messenger.VideoEditedInfo;
@@ -225,6 +226,7 @@ import java.util.regex.Pattern;
 
 import kotlin.Unit;
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.translate.TranslateAPI;
 import ua.itaysonlab.catogram.ui.CatogramToasts;
 
 @SuppressWarnings("unchecked")
@@ -14906,6 +14908,17 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 return;
             }
 
+            String text = selectedObject.caption != null ? selectedObject.caption.toString() : selectedObject.messageText.toString();
+            if (!TextUtils.isEmpty(text)) {
+                items.add(LocaleController.getString("CG_Translate", R.string.CG_Translate));
+                options.add(990);
+                icons.add(R.drawable.round_translate_24);
+            }
+
+            items.add(LocaleController.getString("CG_ToSaved", R.string.CG_ToSaved));
+            options.add(991);
+            icons.add(R.drawable.menu_saved);
+
             if (CatogramConfig.INSTANCE.getUseCupertinoLib()) {
                 ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption);
                 return;
@@ -15344,6 +15357,17 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
             case 2: {
                 createCGShareAlertSelected();
+                break;
+            }
+            // 990 - translate, 991 - saved
+            case 990: {
+                TranslateAPI.callTranslationDialog(selectedObject, (AppCompatActivity) getParentActivity());
+                break;
+            }
+            case 991: {
+                ArrayList<MessageObject> obj = new ArrayList<>();
+                obj.add(selectedObject);
+                SendMessagesHelper.getInstance(0).sendMessage(obj, UserConfig.getInstance(currentAccount).clientUserId, true, 0);
                 break;
             }
             case 902: {

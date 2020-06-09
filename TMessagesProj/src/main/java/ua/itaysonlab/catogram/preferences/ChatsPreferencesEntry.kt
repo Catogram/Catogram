@@ -57,29 +57,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.newTabs_hideAllChats = it
                 }
             }
-
-            switch {
-                title = LocaleController.getString("CG_NewTabs_Emoticons", R.string.CG_NewTabs_Emoticons)
-                summary = LocaleController.getString("CG_NewTabs_Emoticons_Desc", R.string.CG_NewTabs_Emoticons_Desc)
-                divider = true
-
-                contract({
-                    return@contract CatogramConfig.newTabs_emoji_insteadOfName
-                }) {
-                    CatogramConfig.newTabs_emoji_insteadOfName = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_NewTabs_EmoticonsAppend", R.string.CG_NewTabs_EmoticonsAppend)
-                summary = LocaleController.getString("CG_NewTabs_EmoticonsAppend_Desc", R.string.CG_NewTabs_EmoticonsAppend_Desc)
-
-                contract({
-                    return@contract CatogramConfig.newTabs_emoji_appendToName
-                }) {
-                    CatogramConfig.newTabs_emoji_appendToName = it
-                }
-            }
         }
 
         category(LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)) {
@@ -117,6 +94,16 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.hideKeyboardOnScroll
                 }) {
                     CatogramConfig.hideKeyboardOnScroll = it
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_ForwardMsgDate", R.string.CG_ForwardMsgDate)
+
+                contract({
+                    return@contract CatogramConfig.msgForwardDate
+                }) {
+                    CatogramConfig.msgForwardDate = it
                 }
             }
         }

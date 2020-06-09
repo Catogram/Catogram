@@ -126,8 +126,9 @@
     <string name="CG_NewTabs_EmoticonsAppend_Desc">когда опция \"вместо\" отключена</string>
 
     <string name="CG_MessageMenuOption">Стиль меню сообщения</string>
-    <string name="CG_MessageMenuOption_TGX">В стиле Telegram X</string>
+    <string name="CG_MessageMenuOption_TGX">В стиле Telegram X (слайд-меню)</string>
     <string name="CG_MessageMenuOption_CL">CupertinoLib (бета, в стиле iOS)</string>
+    <string name="CG_MessageMenuOption_TGXS">В стиле Telegram X (классический)</string>
     <string name="CG_MessageMenuOption_Default">По умолчанию</string>
 
     <string name="CG_NewDrawer">Использовать новую шторку</string>
@@ -162,4 +163,12 @@
 
     <string name="AS_ForwardNoAuthorship">Пересыл без автора [бета]</string>
     <string name="AS_ForwardNoAuthorship_Desc">сейчас работает только на старом стиле</string>
+
+    <string name="CG_ForwardMsgDate">Показывать дату пересланного сообщения</string>
+    <string name="CG_Translate">Перевести</string>
+    <string name="CG_Translate_Orig">Оригинал</string>
+    <string name="CG_Translate_Translated">Перевод</string>
+    <string name="CG_Translate_Language">Обнаруженный язык</string>
+    <string name="CG_Translate_PoweredBy">При помощи</string>
+    <string name="CG_ToSaved">Сохранить сообщение</string>
 </resources>

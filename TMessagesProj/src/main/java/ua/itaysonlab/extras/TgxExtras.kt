@@ -9,6 +9,7 @@ import androidx.core.net.toUri
 import androidx.core.view.inputmethod.InputContentInfoCompat
 import com.google.android.exoplayer2.util.Log
 import org.telegram.messenger.*
+import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment
 import ua.itaysonlab.redesign.sheet.TgxMessageMenuSheetFragment
 import ua.itaysonlab.redesign.slides.TgxMessageMenuFragment
@@ -69,6 +70,7 @@ object TgxExtras {
 
     @JvmStatic
     fun createForwardTimeName(obj: MessageObject, orig: CharSequence): String {
+        if (!CatogramConfig.msgForwardDate) return orig.toString()
         //return orig.toString()
         return "$orig [${LocaleController.formatDate(obj.messageOwner.fwd_from.date.toLong())}]"
     }
