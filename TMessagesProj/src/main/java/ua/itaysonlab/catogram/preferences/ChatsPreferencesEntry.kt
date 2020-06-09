@@ -111,18 +111,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
-                title = LocaleController.getString("AS_KbdWebp", R.string.AS_KbdWebp)
-                summary = LocaleController.getString("AS_KbdWebp_Desc", R.string.AS_KbdWebp_Desc)
-                divider = true
-
-                contract({
-                    return@contract CatogramConfig.keyboardImageAsSticker
-                }) {
-                    CatogramConfig.keyboardImageAsSticker = it
-                }
-            }
-
-            switch {
                 title = LocaleController.getString("CG_HideKbdOnScroll", R.string.CG_HideKbdOnScroll)
 
                 contract({

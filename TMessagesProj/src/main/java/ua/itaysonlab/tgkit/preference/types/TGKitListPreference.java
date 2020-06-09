@@ -2,6 +2,7 @@ package ua.itaysonlab.tgkit.preference.types;
 
 import android.app.Activity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import kotlin.Triple;
 import kotlin.Unit;
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment;
+import ua.itaysonlab.redesign.sheet.TgxMessageMenuSheetFragment;
 import ua.itaysonlab.redesign.slides.TgxMessageMenuFragment;
 import ua.itaysonlab.tgkit.preference.TGKitPreference;
 

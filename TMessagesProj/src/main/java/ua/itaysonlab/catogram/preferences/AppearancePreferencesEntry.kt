@@ -35,12 +35,14 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract listOf(
                             Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
                             Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
-                            Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL))
+                            Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)),
+                            Pair(3, LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS))
                     )
                 }, {
                     return@contract when (CatogramConfig.redesign_messageOption) {
                         1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
                         2 -> LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)
+                        3 -> LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)
                         else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
                     }
                 }) {
@@ -49,14 +51,22 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                         0 -> {
                             CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = false
+                            CatogramConfig.useTgxMenuSlideSheet = false
                         }
                         1 -> {
                             CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = true
+                            CatogramConfig.useTgxMenuSlideSheet = false
                         }
                         2 -> {
                             CatogramConfig.useCupertinoLib = true
                             CatogramConfig.useTgxMenuSlide = false
+                            CatogramConfig.useTgxMenuSlideSheet = false
+                        }
+                        3 -> {
+                            CatogramConfig.useCupertinoLib = false
+                            CatogramConfig.useTgxMenuSlide = false
+                            CatogramConfig.useTgxMenuSlideSheet = true
                         }
                     }
                 }
@@ -81,16 +91,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }) {
                     CatogramConfig.redesign_iconOption = it
                     IconExtras.setIcon(it)
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_NewMsgAnim", R.string.CG_NewMsgAnim)
-
-                contract({
-                    return@contract CatogramConfig.newMessageAnimation
-                }) {
-                    CatogramConfig.newMessageAnimation = it
                 }
             }
         }

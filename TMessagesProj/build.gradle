@@ -16,18 +16,20 @@ configurations {
 
 configurations.all {
     exclude group: 'com.google.firebase', module: 'firebase-core'
+    exclude group: 'androidx.recyclerview', module: 'recyclerview'
 }
 
 dependencies {
     implementation project(":CupertinoLib")
 
-    implementation 'androidx.core:core:1.3.0-rc01'
+    implementation 'androidx.core:core:1.4.0-alpha01'
     implementation 'androidx.palette:palette:1.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.biometric:biometric:1.0.1'
     implementation 'androidx.exifinterface:exifinterface:1.2.0'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+    implementation 'com.google.android.material:material:1.3.0-alpha01'
     implementation 'com.android.support:multidex:1.0.3'
 
     compileOnly 'org.checkerframework:checker-qual:2.5.2'

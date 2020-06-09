@@ -38,7 +38,6 @@ object CatogramConfig {
     var profiles_noEdgeTapping by sharedPreferences.boolean("cg_prof_edge", false)
     var profiles_openOnTap by sharedPreferences.boolean("cg_prof_open", false)
     var profiles_alwaysExpand by sharedPreferences.boolean("cg_prof_expand", false)
-    var newMessageAnimation by sharedPreferences.boolean("cg_msganim", false)
     var hideKeyboardOnScroll by sharedPreferences.boolean("cg_hidekbd", false)
     var newTabs_noUnread by sharedPreferences.boolean("cg_notabnum", false)
     var newTabs_hideAllChats by sharedPreferences.boolean("cg_ntallchats", false)
@@ -54,8 +53,9 @@ object CatogramConfig {
 
     var useCupertinoLib by sharedPreferences.boolean("advanced_cupertino", false)
     var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", true)
+    var useTgxMenuSlideSheet by sharedPreferences.boolean("advanced_tgxslide_sheet", false)
 
-    var keyboardImageAsSticker by sharedPreferences.boolean("cg_send_kbd_as_sticker", true)
+    var keyboardImageAsSticker = false
     var forwardNoAuthorship by sharedPreferences.boolean("cg_forward_no_authorship", false)
 
     init {

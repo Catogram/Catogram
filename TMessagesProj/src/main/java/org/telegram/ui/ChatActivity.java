@@ -46,6 +46,7 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -93,19 +94,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.ChatListItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.GridLayoutManagerFixed;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScrollerCustom;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.facebook.rebound.SimpleSpringListener;
-import com.facebook.rebound.Spring;
-import com.facebook.rebound.SpringConfig;
-import com.facebook.rebound.SpringSystem;
 
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.util.Log;
@@ -247,9 +238,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private ArrayList<ChatMessageCell> chatMessageCellsCache = new ArrayList<>();
 
     private HashMap<MessageObject, Boolean> alredyPlayedStickers = new HashMap<>();
-
-    private SpringSystem springSystem = SpringSystem.create();
-    private boolean bottomAnimPending;
 
     private Dialog closeChatDialog;
     private FrameLayout progressView;
@@ -11130,7 +11118,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             dateObj.stableId = lastStableId++;
                             messages.add(placeToPaste, dateObj);
                             if (chatAdapter != null) {
-                                chatAdapter.updatePendingAnim();
                                 chatAdapter.notifyItemInserted(placeToPaste);
                             }
                         }
@@ -11153,7 +11140,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                     dateObj.stableId = lastStableId++;
                                     messages.add(0, dateObj);
                                     if (chatAdapter != null) {
-                                        chatAdapter.updatePendingAnim();
                                         chatAdapter.notifyItemInserted(0);
                                     }
                                     unreadMessageObject = dateObj;
@@ -11179,7 +11165,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         obj.stableId = lastStableId++;
                         messages.add(placeToPaste, obj);
                         if (chatAdapter != null) {
-                            chatAdapter.updatePendingAnim();
                             chatAdapter.notifyItemChanged(placeToPaste);
                             chatAdapter.notifyItemInserted(placeToPaste);
                         }
@@ -14908,15 +14893,25 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
 
             if (CatogramConfig.INSTANCE.getUseCupertinoLib()) {
-                ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption).createAndShow();
+                ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption);
                 return;
             }
 
             if (CatogramConfig.INSTANCE.getUseTgxMenuSlide()) {
+                AndroidUtilities.hideKeyboard(getParentActivity().findViewById(android.R.id.content));
                 ua.itaysonlab.extras.TgxExtras.createSlideMenu(options, items, icons, getParentActivity(), (id) -> {
                     this.processSelectedOption(id);
                     return Unit.INSTANCE;
                 }).show(getParentActivity());
+                return;
+            }
+
+            if (CatogramConfig.INSTANCE.getUseTgxMenuSlideSheet()) {
+                AndroidUtilities.hideKeyboard(getParentActivity().findViewById(android.R.id.content));
+                ua.itaysonlab.extras.TgxExtras.createSheetMenu(options, items, icons, getParentActivity(), (id) -> {
+                    this.processSelectedOption(id);
+                    return Unit.INSTANCE;
+                }).show(((AppCompatActivity) getParentActivity()).getSupportFragmentManager(), null);
                 return;
             }
 
@@ -17270,11 +17265,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             return new RecyclerListView.Holder(view);
         }
 
-        public void updatePendingAnim() {
-            //ua.itaysonlab.CatogramLogger.d("CG:Animations:Update", "lastVisibleItemPosition = "+chatLayoutManager.findLastVisibleItemPosition()+", itemCount = "+chatAdapter.getItemCount());
-            bottomAnimPending = chatLayoutManager.findLastVisibleItemPosition() <= chatAdapter.getItemCount();
-        }
-
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (position == botInfoRow) {
@@ -17286,55 +17276,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else if (position >= messagesStartRow && position < messagesEndRow) {
                 MessageObject message = messages.get(position - messagesStartRow);
                 View view = holder.itemView;
-
-                // CG-Anim
-                //ua.itaysonlab.CatogramLogger.d("CG:Animations", "enabled = " + CatogramConfig.newMessageAnimation + ", pending = "+bottomAnimPending+", posApplied = "+(position == 0));
-                //ua.itaysonlab.CatogramLogger.d("Animations", "curPos = "+(position)+", itemCount = "+(getItemCount() - 1));
-                if (CatogramConfig.INSTANCE.getNewMessageAnimation() && bottomAnimPending && position == 0) {
-                    holder.itemView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-                        @Override
-                        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                            //ua.itaysonlab.CatogramLogger.d("CG:Animations", "We're in");
-
-                            v.removeOnLayoutChangeListener(this);
-
-                            boolean isOut = message.isOut();
-
-                            v.setTranslationY(v.getMeasuredHeight());
-                            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) chatListView.getLayoutParams();
-                            params.topMargin = -v.getMeasuredHeight();
-                            chatListView.setTranslationY(v.getMeasuredHeight());
-
-                            //int avatar = mRecyclerView.getResources().getDimensionPixelSize(R.dimen.message_avatar_size) + mRecyclerView.getResources().getDimensionPixelSize(R.dimen.message_avatar_margin);
-                            int avatar = 1;
-
-                            springSystem.createSpring()
-                                    .setSpringConfig(SpringConfig.fromOrigamiTensionAndFriction(82, 16))
-                                    .setOvershootClampingEnabled(true)
-                                    .addListener(new SimpleSpringListener() {
-                                        @Override
-                                        public void onSpringUpdate(Spring spring) {
-                                            float val = (float) spring.getCurrentValue();
-                                            float a = (1f - val);
-                                            float y = v.getMeasuredHeight() * a;
-
-                                            v.setTranslationX(avatar * a * (isOut ? 1 : -1));
-                                            v.setTranslationY(y);
-
-                                            params.topMargin = (int) -y;
-                                            chatListView.requestLayout();
-                                            chatListView.setTranslationY(y);
-
-                                            if (val == 1) {
-                                                spring.destroy();
-                                            }
-                                        }
-                                    })
-                                    .setEndValue(1);
-                        }
-                    });
-                    bottomAnimPending = false;
-                }
 
                 if (view instanceof ChatMessageCell) {
                     final ChatMessageCell messageCell = (ChatMessageCell) view;

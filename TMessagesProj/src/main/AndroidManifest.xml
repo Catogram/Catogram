@@ -414,6 +414,11 @@
 
         <meta-data android:name="android.max_aspect" android:value="2.5" />
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCC9qm_RXuqWNoNaUr-wMVwrE-OcAGBmBU"/>
+
     </application>
 
 </manifest>

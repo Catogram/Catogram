@@ -123,8 +123,9 @@
     <string name="CG_NewTabs_EmoticonsAppend_Desc">when \"instead of\" option is off</string>
 
     <string name="CG_MessageMenuOption">Message menu style</string>
-    <string name="CG_MessageMenuOption_TGX">Telegram X-styled</string>
+    <string name="CG_MessageMenuOption_TGX">Telegram X-styled (slide)</string>
     <string name="CG_MessageMenuOption_CL">CupertinoLib (beta, iOS-styled)</string>
+    <string name="CG_MessageMenuOption_TGXS">Telegram X-styled (classic)</string>
     <string name="CG_MessageMenuOption_Default">Default</string>
 
     <string name="CG_NewDrawer">Use the new drawer</string>
