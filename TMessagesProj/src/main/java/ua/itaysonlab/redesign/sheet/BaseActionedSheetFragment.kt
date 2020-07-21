@@ -26,6 +26,10 @@ abstract class BaseActionedSheetFragment: BottomSheetDialogFragment() {
         return null
     }
 
+    override fun getTheme(): Int {
+        return R.style.TransSheet
+    }
+
     private fun getActionsView(ctx: Context): View {
         return LinearLayout(ctx).apply {
             orientation = LinearLayout.VERTICAL

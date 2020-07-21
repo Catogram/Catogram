@@ -1,27 +1,17 @@
 package ua.itaysonlab.extras;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.core.util.Pair;
-import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.telegram.messenger.AndroidUtilities;
-import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.Theme;
-import org.telegram.ui.Cells.ChatMessageCell;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import ru.utkacraft.cupertinolib.actionsheet.ActionSheet;
-import ru.utkacraft.cupertinolib.actionsheet.SimpleTextHolderProvider;
-import ru.utkacraft.cupertinolib.popup.ContextMenu;
 import ru.utkacraft.cupertinolib.popup.contextmenu2.ContextMenu2;
 
 public class CupertinoExtras {
@@ -41,9 +31,9 @@ public class CupertinoExtras {
         ctxMenu.setBackgroundColor(Theme.getColor(Theme.key_dialogBackground));
         ctxMenu.setAccentColor(Theme.getColor(Theme.key_dialogTextBlack));
         ctxMenu.setDangerColor(Theme.getColor(Theme.key_dialogTextRed));
-        ctxMenu.setMarginStartEnd(CatogramExtras.dip2px(context, isOut ? 8f : 56f));
+        ctxMenu.setMarginStartEnd(CatogramExtras.dip2px(context, (isOut || !needLargeStartSpace) ? 8f : 56f));
         ctxMenu.setSheetGravity(isOut ? Gravity.END : Gravity.START);
-        ctxMenu.forceMoveStrategy(ContextMenu2.MoveStrategy.MOVE_DOWN);
+        //ctxMenu.forceMoveStrategy(ContextMenu2.MoveStrategy.MOVE_UP_CONTENT);
 
         ctxMenu.setActions(generateActionList(optionsID, optionTitles, optionIcons));
         ctxMenu.setClickListener((action) -> {
@@ -72,7 +62,7 @@ public class CupertinoExtras {
         ArrayList<ContextMenu2.Action> actions = new ArrayList<>();
         for (int a = 0, N = optionsID.size(); a < N; a++) {
             ContextMenu2.Action action = new ContextMenu2.Action(optionsID.get(a), optionTitles.get(a), optionIcons.get(a), analyzeDangerousity(optionsID.get(a)));
-            if (action.id == 1) action.setHasTopPadding();
+            //if (action.id == 1) action.setHasTopPadding();
             actions.add(action);
         }
         //actions.add(new ContextMenu.PopupAction(999, "Select", R.drawable.arrow_more, false).setHasTopPadding());

@@ -14908,8 +14908,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 return;
             }
 
-            String text = selectedObject.caption != null ? selectedObject.caption.toString() : selectedObject.messageText.toString();
-            if (!TextUtils.isEmpty(text)) {
+            String text = selectedObject.messageText.toString();
+            if (text != null && !TextUtils.isEmpty(text) && !selectedObject.isService()) {
                 items.add(LocaleController.getString("CG_Translate", R.string.CG_Translate));
                 options.add(990);
                 icons.add(R.drawable.round_translate_24);
@@ -14917,7 +14917,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
             items.add(LocaleController.getString("CG_ToSaved", R.string.CG_ToSaved));
             options.add(991);
-            icons.add(R.drawable.menu_saved);
+            icons.add(R.drawable.menu_saved_cg);
 
             if (CatogramConfig.INSTANCE.getUseCupertinoLib()) {
                 ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption);

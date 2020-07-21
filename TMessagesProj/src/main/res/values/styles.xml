@@ -2,6 +2,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--THEMES-->
+    <style name="TransSheet" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 
     <style name="Theme.TMessages.Start" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:actionBarStyle">@style/ActionBar.Transparent.TMessages.Start</item>

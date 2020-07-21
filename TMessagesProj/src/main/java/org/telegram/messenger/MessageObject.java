@@ -2137,6 +2137,10 @@ public class MessageObject {
         return localType != 0;
     }
 
+    public boolean isService() {
+        return messageOwner instanceof TLRPC.TL_messageService;
+    }
+
     private void updateMessageText(AbstractMap<Integer, TLRPC.User> users, AbstractMap<Integer, TLRPC.Chat> chats, SparseArray<TLRPC.User> sUsers, SparseArray<TLRPC.Chat> sChats) {
         TLRPC.User fromUser = null;
         if (messageOwner.from_id > 0) {

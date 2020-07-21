@@ -76,22 +76,6 @@ fun <T: Activity> AnkoAsyncContext<T>.activityUiThreadWithContext(f: Context.(T)
     return true
 }
 
-@JvmName("activityContextUiThread")
-fun <T: Activity> AnkoAsyncContext<AnkoContext<T>>.activityUiThread(f: (T) -> Unit): Boolean {
-    val activity = weakRef.get()?.owner ?: return false
-    if (activity.isFinishing) return false
-    activity.runOnUiThread { f(activity) }
-    return true
-}
-
-@JvmName("activityContextUiThreadWithContext")
-fun <T: Activity> AnkoAsyncContext<AnkoContext<T>>.activityUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
-    val activity = weakRef.get()?.owner ?: return false
-    if (activity.isFinishing) return false
-    activity.runOnUiThread { activity.f(activity) }
-    return true
-}
-
 @Deprecated(message = "Use support library fragments instead. Framework fragments were deprecated in API 28.")
 fun <T: Fragment> AnkoAsyncContext<T>.fragmentUiThread(f: (T) -> Unit): Boolean {
     val fragment = weakRef.get() ?: return false
