@@ -169,4 +169,16 @@
     <string name="CG_Translate_Language">Detected language</string>
     <string name="CG_Translate_PoweredBy">Powered by</string>
     <string name="CG_ToSaved">Save message</string>
+
+    <string name="CG_FABLeft">\"New chat\" on the left</string>
+    <string name="CG_IntroMessage">An **unofficial** Telegram client modification.\nIt has **additional features** and **improved customization**.</string>
+
+    <string name="CG_GooglePlay_Donate">Donate</string>
+    <string name="CG_GooglePlay_Info">Information</string>
+    <string name="CG_GooglePlay_InfoDesc">All payments will be processed by Google Play.</string>
+    <string name="CG_GooglePlay_ChooseAmount">Choose an amount</string>
+    <string name="CG_GooglePlay_Thanks">Thanks!</string>
+    <string name="CG_GooglePlay_Amount_One" translatable="false">1$</string>
+    <string name="CG_GooglePlay_Amount_Two" translatable="false">2$</string>
+    <string name="CG_GooglePlay_Amount_Five" translatable="false">5$</string>
 </resources>

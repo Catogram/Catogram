@@ -58,6 +58,14 @@ class MainPreferencesEntry : BasePreferencesEntry {
                     startDebug(it)
                 }
             }
+
+            textIcon {
+                title = LocaleController.getString("CG_GooglePlay_Donate", R.string.CG_GooglePlay_Donate)
+                icon = R.drawable.round_attach_money_24
+                listener = TGKitTextIconRow.TGTIListener {
+                    it.presentFragment(CatogramPreferencesNavigator.createDonate())
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Header_About", R.string.AS_Header_About)) {
@@ -75,13 +83,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
                     goToChannel(it)
                 }
             }
-
-            textIcon {
-                title = LocaleController.getString("CG_Donate", R.string.CG_Donate)
-                listener = TGKitTextIconRow.TGTIListener {
-                    goToDonate(it)
-                }
-            }
         }
     }
 
@@ -93,10 +94,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
             intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
             intent.putExtra(Browser.EXTRA_APPLICATION_ID, bf.parentActivity.packageName)
             bf.parentActivity.startActivity(intent)
-        }
-
-        private fun goToDonate(bf: BaseFragment) {
-            bf.parentActivity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://qiwi.me/itaysonlab")))
         }
 
         private fun startDebug(bf: BaseFragment) {

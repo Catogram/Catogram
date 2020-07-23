@@ -49,6 +49,8 @@ dependencies {
     implementation 'com.facebook.rebound:rebound:0.3.8'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 }
 
 android {
@@ -293,7 +295,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 1988
+    defaultConfig.versionCode = 1991
 
     def tgVoipDexFileName = "libtgvoip.dex"
     def tgVoipDexClasses = ["AudioRecordJNI", "AudioTrackJNI", "NativeTgVoipDelegate", "NativeTgVoipInstance", "TgVoipNativeLoader", "Resampler", "VLog"]

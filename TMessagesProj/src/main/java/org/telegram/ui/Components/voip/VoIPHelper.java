@@ -100,7 +100,7 @@ public class VoIPHelper {
 					.setTitle(LocaleController.getString("CG_ConfirmCalling_Header", R.string.CG_ConfirmCalling_Header))
 					.setMessage(AndroidUtilities.replaceTags(LocaleController.formatString("CG_ConfirmCalling_Question", R.string.CG_ConfirmCalling_Question, ContactsController.formatName(user.first_name, user.last_name))))
 					.setPositiveButton(LocaleController.getString("CG_ConfirmCalling_Action", R.string.CG_ConfirmCalling_Action), (dialog, which) -> startCall(user, activity, userFull, true))
-					.setNegativeButton(LocaleController.getString("CG_ConfirmCalling_Action_Cancel", R.string.CG_ConfirmCalling_Action_Cancel), null)
+					.setNeutralButton(LocaleController.getString("CG_ConfirmCalling_Action_Cancel", R.string.CG_ConfirmCalling_Action_Cancel), null)
 					.show();
 			return;
 		}

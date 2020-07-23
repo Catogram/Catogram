@@ -88,7 +88,19 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
+                title = LocaleController.getString("CG_FABLeft", R.string.CG_FABLeft)
+                divider = true
+
+                contract({
+                    return@contract CatogramConfig.forceLeftFab
+                }) {
+                    CatogramConfig.forceLeftFab = it
+                }
+            }
+
+            switch {
                 title = LocaleController.getString("CG_HideKbdOnScroll", R.string.CG_HideKbdOnScroll)
+                divider = true
 
                 contract({
                     return@contract CatogramConfig.hideKeyboardOnScroll

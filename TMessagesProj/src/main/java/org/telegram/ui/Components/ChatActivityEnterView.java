@@ -1922,11 +1922,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                 if (description.hasMimeType("image/gif")) {
                     SendMessagesHelper.prepareSendingDocument(accountInstance, null, null, inputContentInfo.getContentUri(), null, "image/gif", dialog_id, replyingMessageObject, inputContentInfo, null, notify, 0);
                 } else {
-                    if (CatogramConfig.INSTANCE.getKeyboardImageAsSticker()) {
-                        TgxExtras.convertAndSend(accountInstance, inputContentInfo.getContentUri(), dialog_id, replyingMessageObject, inputContentInfo, notify);
-                    } else {
-                        SendMessagesHelper.prepareSendingPhoto(accountInstance, null, inputContentInfo.getContentUri(), dialog_id, replyingMessageObject, null, null, null, inputContentInfo, 0, null, notify, 0);
-                    }
+                    SendMessagesHelper.prepareSendingPhoto(accountInstance, null, inputContentInfo.getContentUri(), dialog_id, replyingMessageObject, null, null, null, inputContentInfo, 0, null, notify, 0);
                 }
 
                 if (delegate != null) {

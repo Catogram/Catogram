@@ -12,3 +12,5 @@ TMessagesProj/config/release.keystore
 TMessagesProj/google-services.json
 TMessagesProj/config/release/release.keystore
 *.li
+*.keystore
+*.aab

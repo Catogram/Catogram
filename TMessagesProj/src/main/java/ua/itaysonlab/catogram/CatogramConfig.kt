@@ -29,7 +29,7 @@ object CatogramConfig {
     var drawerDarken by sharedPreferences.boolean("cg_drawer_darken", false)
     var controversiveNoReading by sharedPreferences.boolean("cg_ct_read", false)
     var controversiveNoSecureFlag by sharedPreferences.boolean("cg_ct_flag", false)
-    var useBiometricPrompt by sharedPreferences.boolean("cg_newbiometric", false)
+    var useBiometricPrompt by sharedPreferences.boolean("cg_newbiometric", true)
     var accentNotification by sharedPreferences.boolean("cg_notification_accent", false)
     var contactsNever by sharedPreferences.boolean("contactsNever", false)
     var searchInActionbar by sharedPreferences.boolean("cg_chats_searchbar", false)
@@ -56,6 +56,7 @@ object CatogramConfig {
     var keyboardImageAsSticker = false
     var forwardNoAuthorship by sharedPreferences.boolean("cg_forward_no_authorship", false)
     var msgForwardDate by sharedPreferences.boolean("cg_msg_fwd_date", false)
+    var forceLeftFab by sharedPreferences.boolean("cg_fab_invertgravity", false)
 
     init {
         CatogramToasts.init(sharedPreferences)

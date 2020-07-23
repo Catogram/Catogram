@@ -171,4 +171,13 @@
     <string name="CG_Translate_Language">Обнаруженный язык</string>
     <string name="CG_Translate_PoweredBy">При помощи</string>
     <string name="CG_ToSaved">Сохранить сообщение</string>
+
+    <string name="CG_FABLeft">\"Новое сообщение\" слева</string>
+    <string name="CG_IntroMessage">**Неофициальная** модификация клиента Telegram.\nИмеет **расширенный функционал** и **улучшенную кастомизацию**.</string>
+
+    <string name="CG_GooglePlay_Donate">Пожертвовать</string>
+    <string name="CG_GooglePlay_Info">Информация</string>
+    <string name="CG_GooglePlay_InfoDesc">Все платежи будут обработаны через Google Play.</string>
+    <string name="CG_GooglePlay_ChooseAmount">Выбор суммы</string>
+    <string name="CG_GooglePlay_Thanks">Спасибо!</string>
 </resources>

@@ -23,26 +23,27 @@ class SecurityPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Privacy", R.string.AS_Header_Privacy)) {
+            switch {
+                title = LocaleController.getString("AS_NoProxyPromo", R.string.AS_NoProxyPromo)
+                divider = true
+
+                contract({
+                    return@contract CatogramConfig.hideProxySponsor
+                }) {
+                    CatogramConfig.hideProxySponsor = it
+                }
+            }
+            
             if (CGControversive.isControversiveFeaturesEnabled()) {
                 switch {
-                    title = LocaleController.getString("AS_NoProxyPromo", R.string.AS_NoProxyPromo)
+                    title = LocaleController.getString("AS_NoTyping", R.string.AS_NoTyping)
                     divider = true
 
                     contract({
-                        return@contract CatogramConfig.hideProxySponsor
+                        return@contract CatogramConfig.noTyping
                     }) {
-                        CatogramConfig.hideProxySponsor = it
+                        CatogramConfig.noTyping = it
                     }
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("AS_NoTyping", R.string.AS_NoTyping)
-
-                contract({
-                    return@contract CatogramConfig.noTyping
-                }) {
-                    CatogramConfig.noTyping = it
                 }
             }
 

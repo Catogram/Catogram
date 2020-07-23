@@ -50,6 +50,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.common.api.Status;
 
 import org.telegram.messenger.AccountInstance;
@@ -118,8 +120,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import ua.itaysonlab.redesign.BottomSlideFragment;
 
-public class LaunchActivity extends AppCompatActivity implements BottomSlideFragment.BottomSlideActivityInterface, ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
-
+public class LaunchActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler, BottomSlideFragment.BottomSlideActivityInterface, ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
+    public BillingProcessor bp;
     private List<BottomSlideFragment> slideFragments = new ArrayList<>();
 
     @Override
@@ -208,6 +210,7 @@ public class LaunchActivity extends AppCompatActivity implements BottomSlideFrag
         ApplicationLoader.postInitApplication();
         AndroidUtilities.checkDisplaySize(this, getResources().getConfiguration());
         currentAccount = UserConfig.selectedAccount;
+
         if (!UserConfig.getInstance(currentAccount).isClientActivated()) {
             Intent intent = getIntent();
             boolean isProxy = false;
@@ -293,6 +296,10 @@ public class LaunchActivity extends AppCompatActivity implements BottomSlideFrag
         }
 
         super.onCreate(savedInstanceState);
+
+        bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAykhjtU7qzFYv4UI8U9uGJITqLTgpvH1SYaMVeMb0EFVABISnKDOWw6eb6LgCU9V+fPOw5TJz/RQ+OrMGuK6DcxZPOxOPRxi0zUAQbP7jiTsYEkUM22gixzKNMI93QgVOxakAl7+c51QMICVLAGFtYZVh+xZ+hX11L+JeSByK8tyPplBliYHOHFsALs3yB9SICZHj18d0hmGjDRcirxr0DMBAaX623EhDzwm/RsL6crK7dPHVWxye4ovYxFMdsx9yi9EAziVx3CCWMN8p9CrVBRDU6pyJ2BLG0a7iGYYVP4JWyFdqrZtzSJWdD8g4rEunsivfH8sl3ICaHO7hnmJaQwIDAQAB", this);
+        bp.initialize();
+
         if (Build.VERSION.SDK_INT >= 24) {
             AndroidUtilities.isInMultiwindow = isInMultiWindowMode();
         }
@@ -4123,5 +4130,25 @@ public class LaunchActivity extends AppCompatActivity implements BottomSlideFrag
             }
         }
         drawerLayoutAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
+        Toast.makeText(this, LocaleController.getString("CG_GooglePlay_Thanks", R.string.CG_GooglePlay_Thanks), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+
+    }
+
+    @Override
+    public void onBillingInitialized() {
+
     }
 }
