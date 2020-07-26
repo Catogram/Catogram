@@ -240,7 +240,7 @@ public class DrawerProfileCell extends FrameLayout {
                 if (CatogramConfig.INSTANCE.getDrawerDarken()) CatogramExtras.darkenBitmap(bitmap);
                 float scaleX = (float) getMeasuredWidth() / (float) bitmap.getWidth();
                 float scaleY = (float) getMeasuredHeight() / (float) bitmap.getHeight();
-                float scale = scaleX < scaleY ? scaleY : scaleX;
+                float scale = Math.max(scaleX, scaleY);
                 int width = (int) (getMeasuredWidth() / scale);
                 int height = (int) (getMeasuredHeight() / scale);
                 int x = (bitmap.getWidth() - width) / 2;
@@ -279,6 +279,14 @@ public class DrawerProfileCell extends FrameLayout {
         if (snowflakesEffect != null) {
             snowflakesEffect.onDraw(this, canvas);
         }
+    }
+
+    public boolean isInAvatar(float x, float y) {
+        return x >= avatarImageView.getLeft() && x <= avatarImageView.getRight() && y >= avatarImageView.getTop() && y <= avatarImageView.getBottom();
+    }
+
+    public boolean hasAvatar() {
+        return avatarImageView.getImageReceiver().hasNotThumb();
     }
 
     public boolean isAccountsShown() {

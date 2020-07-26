@@ -8,6 +8,8 @@
 
 package org.telegram.ui.Components;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -118,7 +120,8 @@ public class RecyclerListView extends SLRecyclerView {
     private static boolean gotAttributes;
 
     private boolean hiddenByEmptyView;
-    public boolean scrollAnimationRunning;
+    public boolean fastScrollAnimationRunning;
+    private boolean animateEmptyView;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -825,7 +828,7 @@ public class RecyclerListView extends SLRecyclerView {
     private AdapterDataObserver observer = new AdapterDataObserver() {
         @Override
         public void onChanged() {
-            checkIfEmpty();
+            checkIfEmpty(true);
             currentFirst = -1;
             if (removeHighlighSelectionRunnable == null) {
                 selectorRect.setEmpty();
@@ -835,12 +838,12 @@ public class RecyclerListView extends SLRecyclerView {
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
-            checkIfEmpty();
+            checkIfEmpty(true);
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
-            checkIfEmpty();
+            checkIfEmpty(true);
         }
     };
 
@@ -1216,13 +1219,18 @@ public class RecyclerListView extends SLRecyclerView {
         if (emptyView == view) {
             return;
         }
+        if (emptyView != null) {
+            emptyView.animate().setListener(null).cancel();
+        }
         emptyView = view;
         if (isHidden) {
             if (emptyView != null) {
+                emptyViewAnimateToVisibility = GONE;
                 emptyView.setVisibility(GONE);
             }
         } else {
-            checkIfEmpty();
+            emptyViewAnimateToVisibility = -1;
+            checkIfEmpty(false);
         }
     }
 
@@ -1323,7 +1331,9 @@ public class RecyclerListView extends SLRecyclerView {
         return super.dispatchTouchEvent(ev);
     }
 
-    private void checkIfEmpty() {
+    int emptyViewAnimateToVisibility;
+
+    private void checkIfEmpty(boolean animated) {
         if (isHidden) {
             return;
         }
@@ -1336,8 +1346,36 @@ public class RecyclerListView extends SLRecyclerView {
         }
         boolean emptyViewVisible = getAdapter().getItemCount() == 0;
         int newVisibility = emptyViewVisible ? VISIBLE : GONE;
-        if (emptyView.getVisibility() != newVisibility) {
+        if (!animateEmptyView || !isAttachedToWindow()) {
+            animated = false;
+        }
+        if (animated) {
+            if (emptyViewAnimateToVisibility != newVisibility) {
+                emptyViewAnimateToVisibility = newVisibility;
+                if (newVisibility == VISIBLE) {
+                    emptyView.animate().setListener(null).cancel();
+                    if (emptyView.getVisibility() == GONE) {
+                        emptyView.setVisibility(VISIBLE);
+                        emptyView.setAlpha(0);
+                    }
+                    emptyView.animate().alpha(1f).setDuration(150).start();
+                } else {
+                    if (emptyView.getVisibility() != GONE) {
+                        emptyView.animate().alpha(0).setDuration(150).setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (emptyView != null) {
+                                    emptyView.setVisibility(GONE);
+                                }
+                            }
+                        }).start();
+                    }
+                }
+            }
+        } else {
+            emptyViewAnimateToVisibility = newVisibility;
             emptyView.setVisibility(newVisibility);
+            emptyView.setAlpha(1f);
         }
         if (hideIfEmpty) {
             newVisibility = emptyViewVisible ? INVISIBLE : VISIBLE;
@@ -1366,7 +1404,7 @@ public class RecyclerListView extends SLRecyclerView {
             return;
         }
         isHidden = false;
-        checkIfEmpty();
+        checkIfEmpty(false);
     }
 
     @Override
@@ -1580,7 +1618,7 @@ public class RecyclerListView extends SLRecyclerView {
         if (adapter != null) {
             adapter.registerAdapterDataObserver(observer);
         }
-        checkIfEmpty();
+        checkIfEmpty(false);
     }
 
     @Override
@@ -1772,16 +1810,20 @@ public class RecyclerListView extends SLRecyclerView {
         return pinnedHeader;
     }
 
-    public boolean isScrollAnimationRunning() {
-        return scrollAnimationRunning;
+    public boolean isFastScrollAnimationRunning() {
+        return fastScrollAnimationRunning;
     }
 
     @Override
     public void requestLayout() {
-        if (scrollAnimationRunning) {
+        if (fastScrollAnimationRunning) {
             return;
         }
         super.requestLayout();
+    }
+
+    public void setAnimateEmptyView(boolean animate) {
+        animateEmptyView = animate;
     }
 
     public static class FoucsableOnTouchListener implements OnTouchListener {

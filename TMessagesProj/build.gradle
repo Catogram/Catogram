@@ -27,22 +27,24 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.biometric:biometric:1.0.1'
+    implementation 'com.google.android.material:material:1.3.0-alpha01'
     implementation 'androidx.exifinterface:exifinterface:1.2.0'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
-    implementation 'com.google.android.material:material:1.3.0-alpha01'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.sharetarget:sharetarget:1.0.0"
 
     compileOnly 'org.checkerframework:checker-qual:2.5.2'
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.0'
-    implementation 'com.google.firebase:firebase-config:19.1.4'
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+    implementation 'com.google.firebase:firebase-config:19.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.play:core:1.7.3'
+
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-vision:16.2.0'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.android.play:core:1.7.3'
 
     implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
     implementation 'com.facebook.rebound:rebound:0.3.8'
@@ -56,9 +58,8 @@ android {
         jvmTarget = '1.8'
     }
 
-    compileSdkVersion 29
-
-    buildToolsVersion '29.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.1'
     ndkVersion "21.1.6352462"
 
     defaultConfig.applicationId = "ua.itaysonlab.messenger"
@@ -293,7 +294,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 1992
+    defaultConfig.versionCode = 2040
 
     def tgVoipDexFileName = "libtgvoip.dex"
     def tgVoipDexClasses = ["AudioRecordJNI", "AudioTrackJNI", "NativeTgVoipDelegate", "NativeTgVoipInstance", "TgVoipNativeLoader", "Resampler", "VLog"]
@@ -388,7 +389,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
-        versionName "CG-6.2.0"
+        versionName "CG_6.3.0"
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
 
