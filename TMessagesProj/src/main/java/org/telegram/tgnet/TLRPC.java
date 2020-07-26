@@ -13,9 +13,12 @@ import android.util.Log;
 
 import org.telegram.messenger.Utilities;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import ua.itaysonlab.catogram.tabs.TabIconManager;
 
 @SuppressWarnings("unchecked")
 public class TLRPC {
@@ -13428,8 +13431,10 @@ public class TLRPC {
             id = stream.readInt32(exception);
             title = stream.readString(exception);
             if ((flags & 33554432) != 0) {
-                //Log.d("CG-Emoticon", Arrays.toString(stream.readStringAsByteArray(exception)));
-                emoticon = stream.readString(exception);
+                byte[] emoji = stream.readStringAsByteArray(exception);
+                TabIconManager.addTab(id, emoji);
+                emoticon = new String(emoji, StandardCharsets.UTF_8);
+                //emoticon = stream.readString(exception);
             }
             int magic = stream.readInt32(exception);
             if (magic != 0x1cb5c415) {

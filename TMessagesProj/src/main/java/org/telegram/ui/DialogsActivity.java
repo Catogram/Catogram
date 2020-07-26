@@ -3049,12 +3049,11 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 }
                 filterTabsView.removeTabs();
 
-                if (!CatogramConfig.INSTANCE.getNewTabs_hideAllChats()) filterTabsView.addTab(Integer.MAX_VALUE, LocaleController.getString("FilterAllChats", R.string.FilterAllChats));
+                if (!CatogramConfig.INSTANCE.getNewTabs_hideAllChats()) filterTabsView.addTab(Integer.MAX_VALUE, LocaleController.getString("FilterAllChats", R.string.FilterAllChats), Integer.MAX_VALUE);
 
                 for (int a = 0, N = filters.size(); a < N; a++) {
                     String name = filters.get(a).name;
-
-                    filterTabsView.addTab(a, name);
+                    filterTabsView.addTab(a, name, filters.get(a).id);
                 }
 
                 id = filterTabsView.getCurrentTabId();

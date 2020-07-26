@@ -37,7 +37,7 @@ import java.util.Arrays;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "1.12.1";
+    public static String CG_VERSION = "1.13";
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -147,11 +147,9 @@ public class CatogramExtras {
             return "\uD83D\uDCC1";
         } else if (base.length() == 0) {
             //Log.d("CG-Test", Arrays.toString(base.getBytes(StandardCharsets.UTF_16BE)));
-
             return "\uD83D\uDDC2";
         } else {
             //Log.d("CG-Test", Arrays.toString(base.getBytes(StandardCharsets.UTF_16BE)));
-
             return base;
         }
     }

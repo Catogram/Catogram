@@ -180,4 +180,16 @@
     <string name="CG_GooglePlay_InfoDesc">Все платежи будут обработаны через Google Play.</string>
     <string name="CG_GooglePlay_ChooseAmount">Выбор суммы</string>
     <string name="CG_GooglePlay_Thanks">Спасибо!</string>
+
+    <string name="CG_TabIconMode_Title">Тип иконки вкладок [нужна перезагрузка]</string>
+    <string name="CG_TabIconMode_Disabled">Отключить</string>
+    <string name="CG_TabIconMode_Append">Добавить к названию вкладки</string>
+    <string name="CG_TabIconMode_Replace">Заменить название вкладки</string>
+
+    <string name="CG_GooglePlay_OTADownloaded">Обновление готово к установке.</string>
+    <string name="CG_GooglePlay_OTADownloaded_Restart">Перезагрузить</string>
+
+    <string name="CG_FlatChannels">Плоская лента каналов</string>
+    <string name="CG_IgnoreBlacklist">Игнорировать пользователей в ЧС</string>
+    <string name="CG_IgnoreBlacklist_Desc">их сообщения будут скрыты</string>
 </resources>

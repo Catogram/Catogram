@@ -180,7 +180,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="ton" />
             </intent-filter>
-            <meta-data android:name="android.service.chooser.chooser_target_service" android:value=".TgChooserTargetService" />
+            <meta-data android:name="android.service.chooser.chooser_target_service" android:value="org.telegram.messenger.TgChooserTargetService" />
         </activity>
         <activity
             android:name="org.telegram.ui.ShareActivity"

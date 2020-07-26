@@ -54,6 +54,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.tabs.TabIconManager;
 
 public class FilterTabsView extends FrameLayout {
 
@@ -69,15 +70,15 @@ public class FilterTabsView extends FrameLayout {
         boolean canPerformActions();
     }
 
-    private class Tab {
+    public class Tab {
         public int id;
         public String title;
         public int titleWidth;
         public int counter;
 
-        public Tab(int i, String t) {
+        public Tab(int i, String t, int tgId) {
             id = i;
-            title = t;
+            title = TabIconManager.injectTabTitle(tgId, t);
         }
 
         public int getWidth(boolean store) {
@@ -628,7 +629,7 @@ public class FilterTabsView extends FrameLayout {
         invalidate();
     }
 
-    public void addTab(int id, String text) {
+    public void addTab(int id, String text, int tgId) {
         int position = tabs.size();
         if (position == 0 && selectedTabId == -1) {
             selectedTabId = id;
@@ -639,7 +640,7 @@ public class FilterTabsView extends FrameLayout {
             currentPosition = position;
         }
 
-        Tab tab = new Tab(id, text);
+        Tab tab = new Tab(id, text, tgId);
         allTabsWidth += tab.getWidth(true) + AndroidUtilities.dp(32);
         tabs.add(tab);
     }

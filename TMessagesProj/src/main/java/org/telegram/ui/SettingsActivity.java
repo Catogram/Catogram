@@ -805,8 +805,8 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         bioRow = rowCount++;
         settingsSectionRow = rowCount++;
         settingsSectionRow2 = rowCount++;
-        notificationRow = rowCount++;
         catogramRaw = rowCount++;
+        notificationRow = rowCount++;
         privacyRow = rowCount++;
         dataRow = rowCount++;
         chatRow = rowCount++;

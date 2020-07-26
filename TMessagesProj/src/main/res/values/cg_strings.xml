@@ -181,4 +181,30 @@
     <string name="CG_GooglePlay_Amount_One" translatable="false">1$</string>
     <string name="CG_GooglePlay_Amount_Two" translatable="false">2$</string>
     <string name="CG_GooglePlay_Amount_Five" translatable="false">5$</string>
+
+    <string name="CG_TabIconMode_Title">Tab icon type [restart needed]</string>
+    <string name="CG_TabIconMode_Disabled">Disabled</string>
+    <string name="CG_TabIconMode_Append">Append to tab title</string>
+    <string name="CG_TabIconMode_Replace">Replace tab title</string>
+
+    <string name="CG_GooglePlay_OTADownloaded">An update is ready to be installed.</string>
+    <string name="CG_GooglePlay_OTADownloaded_Restart">Restart</string>
+
+    <string name="CG_FlatChannels">Flat channel feed</string>
+    <string name="CG_IgnoreBlacklist">Ignore blacklisted users</string>
+    <string name="CG_IgnoreBlacklist_Desc">messages from them will be hidden</string>
+
+    <string name="CG_KangSticker">Add to stickerpack</string>
+    <string name="CG_KangSticker_Err_NoPack_Title">Create a stickerpack?</string>
+    <string name="CG_KangSticker_Err_NoPack_Desc">To add a sticker to your stickerpack, an active stickerpack is needed - but you don\'t have it.\n\nDo you want to create one?\nThis is an automatic process, and the requested sticker will be added after it.</string>
+    <string name="CG_KangSticker_Err_NoPack_Action">Create</string>
+    <string name="CG_Kangs_Manager">Stickerpack manager</string>
+    <string name="CG_Kangs_CreatePack">Create CG stickerpack</string>
+    <string name="CG_Kangs_CreatePack_Desc">This is needed for adding stickers. Don\'t worry, that\'s an automatic process.</string>
+    <string name="CG_Kangs_Delete">Delete CG stickerpack</string>
+    <string name="CG_Kangs_Delete_Desc">This will delete EVERY added sticker!</string>
+
+    <string name="CG_VoiceRecognise">Recognise</string>
+    <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
+    <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
 </resources>

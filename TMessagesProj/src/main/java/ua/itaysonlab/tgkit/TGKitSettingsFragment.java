@@ -37,20 +37,15 @@ import ua.itaysonlab.tgkit.preference.TGKitSettings;
 import ua.itaysonlab.tgkit.preference.types.TGKitHeaderRow;
 import ua.itaysonlab.tgkit.preference.types.TGKitListPreference;
 import ua.itaysonlab.tgkit.preference.types.TGKitSectionRow;
+import ua.itaysonlab.tgkit.preference.types.TGKitSettingsCellRow;
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 import ua.itaysonlab.tgkit.preference.types.TGKitSwitchPreference;
 import ua.itaysonlab.tgkit.preference.types.TGKitTextDetailRow;
 import ua.itaysonlab.tgkit.preference.types.TGKitTextIconRow;
 
 public class TGKitSettingsFragment extends BaseFragment {
-
-    private TGKitSettings settings;
-    private SparseArray<TGKitPreference> positions = new SparseArray<>();
-
-    public TGKitSettingsFragment(TGKitSettings settings) {
-        super();
-        this.settings = settings;
-    }
+    private final TGKitSettings settings;
+    private final SparseArray<TGKitPreference> positions = new SparseArray<>();
 
     public TGKitSettingsFragment(BasePreferencesEntry entry) {
         super();
@@ -120,6 +115,9 @@ public class TGKitSettingsFragment extends BaseFragment {
             } else if (pref instanceof TGKitTextIconRow) {
                 TGKitTextIconRow preference = ((TGKitTextIconRow) pref);
                 if (preference.listener != null) preference.listener.onClick(this);
+            } else if (pref instanceof TGKitSettingsCellRow) {
+                TGKitSettingsCellRow preference = ((TGKitSettingsCellRow) pref);
+                if (preference.listener != null) preference.listener.onClick(this);
             } else if (pref instanceof TGKitListPreference) {
                 TGKitListPreference preference = ((TGKitListPreference) pref);
                 preference.callActionHueta(getParentActivity(), () -> {
@@ -162,7 +160,11 @@ public class TGKitSettingsFragment extends BaseFragment {
                 case 1: {
                     TextSettingsCell textCell = (TextSettingsCell) holder.itemView;
                     textCell.setCanDisable(false);
-                    textCell.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+
+                    TGKitSettingsCellRow pref = (TGKitSettingsCellRow) positions.get(position);
+                    textCell.setTextColor(pref.textColor);
+                    textCell.setText(pref.title, pref.divider);
+
                     break;
                 }
                 case 2: {

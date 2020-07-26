@@ -8,6 +8,7 @@ import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
+import ua.itaysonlab.extras.IconExtras
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference.TGSLContract
 
 class ChatsPreferencesEntry : BasePreferencesEntry {
@@ -46,10 +47,31 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
+            list {
+                title = LocaleController.getString("CG_TabIconMode_Title", R.string.CG_TabIconMode_Title)
+                divider = true
+
+                contract({
+                    return@contract listOf(
+                            Pair(0, LocaleController.getString("CG_TabIconMode_Disabled", R.string.CG_TabIconMode_Disabled)),
+                            Pair(1, LocaleController.getString("CG_TabIconMode_Append", R.string.CG_TabIconMode_Append)),
+                            Pair(2, LocaleController.getString("CG_TabIconMode_Replace", R.string.CG_TabIconMode_Replace))
+                    )
+                }, {
+                    return@contract when (CatogramConfig.newTabs_iconsV2_mode) {
+                        1 -> LocaleController.getString("CG_TabIconMode_Append", R.string.CG_TabIconMode_Append)
+                        2 -> LocaleController.getString("CG_TabIconMode_Replace", R.string.CG_TabIconMode_Replace)
+                        else -> LocaleController.getString("CG_TabIconMode_Disabled", R.string.CG_TabIconMode_Disabled)
+                    }
+                }) {
+                    CatogramConfig.newTabs_iconsV2_mode = it
+                    bf.messagesController.loadRemoteFilters(true)
+                }
+            }
+
             switch {
                 title = LocaleController.getString("CG_NewTabs_RemoveAllChats", R.string.CG_NewTabs_RemoveAllChats)
                 summary = LocaleController.getString("CG_NewTabs_RemoveAllChats_Desc", R.string.CG_NewTabs_RemoveAllChats_Desc)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.newTabs_hideAllChats
@@ -84,6 +106,16 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     if (SharedConfig.smoothKeyboard && bf.parentActivity != null) {
                         bf.parentActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
                     }
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_FlatChannels", R.string.CG_FlatChannels)
+
+                contract({
+                    return@contract CatogramConfig.flatChannelStyle
+                }) {
+                    CatogramConfig.flatChannelStyle = it
                 }
             }
 

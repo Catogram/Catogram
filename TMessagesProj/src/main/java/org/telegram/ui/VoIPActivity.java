@@ -159,6 +159,8 @@ public class VoIPActivity extends AppCompatActivity implements VoIPService.State
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().hide();
+
         if (VoIPService.getSharedInstance() == null) {
             finish();
             return;
@@ -509,6 +511,7 @@ public class VoIPActivity extends AppCompatActivity implements VoIPService.State
         branding.setText(LocaleController.getString("VoipInCallBranding", R.string.VoipInCallBranding));
         Drawable logo = getResources().getDrawable(R.drawable.cg_notification).mutate();
         logo.setAlpha(0xCC);
+        logo.setTint(0xFFFFFFFF);
         logo.setBounds(0, 0, AndroidUtilities.dp(15), AndroidUtilities.dp(15));
         signalBarsDrawable = new SignalBarsDrawable();
         signalBarsDrawable.setBounds(0, 0, signalBarsDrawable.getIntrinsicWidth(), signalBarsDrawable.getIntrinsicHeight());

@@ -118,6 +118,7 @@ import java.util.Map;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import ua.itaysonlab.catogram.PlayOTA;
 import ua.itaysonlab.redesign.BottomSlideFragment;
 
 public class LaunchActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler, BottomSlideFragment.BottomSlideActivityInterface, ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
@@ -299,6 +300,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
 
         bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAykhjtU7qzFYv4UI8U9uGJITqLTgpvH1SYaMVeMb0EFVABISnKDOWw6eb6LgCU9V+fPOw5TJz/RQ+OrMGuK6DcxZPOxOPRxi0zUAQbP7jiTsYEkUM22gixzKNMI93QgVOxakAl7+c51QMICVLAGFtYZVh+xZ+hX11L+JeSByK8tyPplBliYHOHFsALs3yB9SICZHj18d0hmGjDRcirxr0DMBAaX623EhDzwm/RsL6crK7dPHVWxye4ovYxFMdsx9yi9EAziVx3CCWMN8p9CrVBRDU6pyJ2BLG0a7iGYYVP4JWyFdqrZtzSJWdD8g4rEunsivfH8sl3ICaHO7hnmJaQwIDAQAB", this);
         bp.initialize();
+        PlayOTA.init(this);
 
         if (Build.VERSION.SDK_INT >= 24) {
             AndroidUtilities.isInMultiwindow = isInMultiWindowMode();
@@ -2974,6 +2976,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
     @Override
     protected void onResume() {
         super.onResume();
+        PlayOTA.onResume();
         NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.startAllHeavyOperations, 4096);
         MediaController.getInstance().setFeedbackView(actionBarLayout, true);
         ApplicationLoader.mainInterfacePaused = false;

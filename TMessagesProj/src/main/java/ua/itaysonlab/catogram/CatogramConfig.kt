@@ -53,10 +53,14 @@ object CatogramConfig {
     var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", false)
     var useTgxMenuSlideSheet by sharedPreferences.boolean("advanced_tgxslide_sheet", true)
 
-    var keyboardImageAsSticker = false
     var forwardNoAuthorship by sharedPreferences.boolean("cg_forward_no_authorship", false)
     var msgForwardDate by sharedPreferences.boolean("cg_msg_fwd_date", false)
     var forceLeftFab by sharedPreferences.boolean("cg_fab_invertgravity", false)
+
+    var newTabs_iconsV2_mode by sharedPreferences.int("cg_tabs_v2", 0)
+
+    //var flatChannelStyle by sharedPreferences.boolean("cg_flat_channels", false)
+    var flatChannelStyle = true
 
     init {
         CatogramToasts.init(sharedPreferences)
