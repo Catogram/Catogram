@@ -41,7 +41,10 @@ class DrawerSheetFragment: BaseActionedSwipeFragment() {
                 }))
             }
             "settings" -> {
-                (activity as LaunchActivity).presentFragment(SettingsActivity())
+                val args = Bundle();
+                args.putInt("user_id", UserConfig.getInstance(UserConfig.selectedAccount).clientUserId);
+                args.putBoolean("expandPhoto", true);
+                (activity as LaunchActivity).presentFragment(ProfileActivity(args))
             }
         }
         dismiss()

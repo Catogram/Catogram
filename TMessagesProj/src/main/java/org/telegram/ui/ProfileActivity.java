@@ -4753,7 +4753,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
                 infoHeaderRow = rowCount++;
                 if (!isBot && (hasPhone || !hasPhone && !hasInfo)) {
-                    phoneRow = rowCount++;
+                    if (!(user.id == getUserConfig().getClientUserId() && ua.itaysonlab.catogram.CatogramConfig.INSTANCE.getHidePhoneNumber())) phoneRow = rowCount++;
                 }
                 if (userInfo != null && !TextUtils.isEmpty(userInfo.about)) {
                     userInfoRow = rowCount++;

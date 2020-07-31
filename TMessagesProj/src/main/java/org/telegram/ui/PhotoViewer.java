@@ -226,9 +226,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import ua.itaysonlab.catogram.CatogramConfig;
-import ua.itaysonlab.extras.CatogramExtras;
-
 @SuppressWarnings("unchecked")
 public class PhotoViewer implements NotificationCenter.NotificationCenterDelegate, GestureDetector2.OnGestureListener, GestureDetector2.OnDoubleTapListener {
 
@@ -2575,7 +2572,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                     }
                 }
                 if (fromCache) {
-                    MessagesController.getInstance(currentAccount).loadDialogPhotos(avatarsDialogId, CatogramExtras.LOAD_AVATAR_COUNT, 0, false, classGuid);
+                    MessagesController.getInstance(currentAccount).loadDialogPhotos(avatarsDialogId, 80, 0, false, classGuid);
                 }
             }
         } else if (id == NotificationCenter.mediaCountDidLoad) {
@@ -2751,7 +2748,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
     private void showDownloadAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
-        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
+        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
         boolean alreadyDownloading = currentMessageObject != null && currentMessageObject.isVideo() && FileLoader.getInstance(currentMessageObject.currentAccount).isLoadingFile(currentFileNames[0]);
         if (alreadyDownloading) {
@@ -3604,7 +3601,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         sendItem = menu.addItem(gallery_menu_send, R.drawable.msg_forward);
         sendItem.setContentDescription(LocaleController.getString("Forward", R.string.Forward));
 
-        menu.addItem(gallery_menu_save, R.drawable.msg_gallery).setContentDescription(LocaleController.getString("SaveToGallery", R.string.SaveToGallery));
         menuItem = menu.addItem(0, R.drawable.ic_ab_other);
         menuItem.addSubItem(gallery_menu_openin, R.drawable.msg_openin, LocaleController.getString("OpenInExternalApp", R.string.OpenInExternalApp)).setColors(0xfffafafa, 0xfffafafa);
         menuItem.setContentDescription(LocaleController.getString("AccDescrMoreOptions", R.string.AccDescrMoreOptions));
@@ -3937,7 +3933,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
         docNameTextView = new TextView(containerView.getContext());
         docNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-        docNameTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        docNameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         docNameTextView.setSingleLine(true);
         docNameTextView.setMaxLines(1);
         docNameTextView.setEllipsize(TextUtils.TruncateAt.END);
@@ -4223,7 +4219,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             int[] location = new int[2];
             view.getLocationInWindow(location);
             sendPopupWindow.showAtLocation(view, Gravity.LEFT | Gravity.TOP, location[0] + view.getMeasuredWidth() - sendPopupLayout.getMeasuredWidth() + AndroidUtilities.dp(14), location[1] - sendPopupLayout.getMeasuredHeight() - AndroidUtilities.dp(18));
-            ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(view, HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
 
             return false;
         });
@@ -4562,7 +4558,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             textView.setTextColor(Theme.getColor(Theme.key_dialogFloatingButton));
             textView.setGravity(Gravity.CENTER);
-            textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             textView.setText(LocaleController.getString("Done", R.string.Done).toUpperCase());
             textView.setBackgroundDrawable(Theme.getRoundRectSelectorDrawable(0xff49bcf2));
             textView.setPadding(AndroidUtilities.dp(10), 0, AndroidUtilities.dp(10), 0);
@@ -4598,7 +4594,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             textView.setTextColor(0xffffffff);
             textView.setGravity(Gravity.CENTER);
-            textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             textView.setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
             textView.setBackgroundDrawable(Theme.getRoundRectSelectorDrawable(0xffffffff));
             textView.setPadding(AndroidUtilities.dp(10), 0, AndroidUtilities.dp(10), 0);
@@ -4633,7 +4629,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         resetButton.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, 0));
         resetButton.setPadding(AndroidUtilities.dp(20), 0, AndroidUtilities.dp(20), 0);
         resetButton.setText(LocaleController.getString("Reset", R.string.CropReset).toUpperCase());
-        resetButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        resetButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         editorDoneLayout.addView(resetButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.CENTER));
         resetButton.setOnClickListener(v -> photoCropView.reset());
 
@@ -4956,7 +4952,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             Object object = mentionsAdapter.getItem(position);
             if (object instanceof String) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
-                builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
+                builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
                 builder.setMessage(LocaleController.getString("ClearSearch", R.string.ClearSearch));
                 builder.setPositiveButton(LocaleController.getString("ClearButton", R.string.ClearButton).toUpperCase(), (dialogInterface, i) -> mentionsAdapter.clearRecentHashtags());
                 builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
@@ -5015,7 +5011,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         if (Build.VERSION.SDK_INT < 23 || Settings.canDrawOverlays(parentActivity)) {
             return true;
         } else {
-            new AlertDialog.Builder(parentActivity).setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName))
+            new AlertDialog.Builder(parentActivity).setTitle(LocaleController.getString("AppName", R.string.AppName))
                     .setMessage(LocaleController.getString("PermissionDrawAboveOtherApps", R.string.PermissionDrawAboveOtherApps))
                     .setPositiveButton(LocaleController.getString("PermissionOpenSettings", R.string.PermissionOpenSettings), (dialog, which) -> {
                         if (parentActivity != null) {
@@ -5123,12 +5119,12 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         return 0;
     }
 
-	private int getRightInset() {
-		if (lastInsets != null && Build.VERSION.SDK_INT >= 21) {
-			return ((WindowInsets) lastInsets).getSystemWindowInsetRight();
-		}
-		return 0;
-	}
+    private int getRightInset() {
+        if (lastInsets != null && Build.VERSION.SDK_INT >= 21) {
+            return ((WindowInsets) lastInsets).getSystemWindowInsetRight();
+        }
+        return 0;
+    }
 
     private void dismissInternal() {
         try {
@@ -5343,7 +5339,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             x = max;
         }
         videoPreviewFrame.setTranslationX(x);
-     }
+    }
 
     private void showVideoSeekPreviewPosition(boolean show) {
         if (show && videoPreviewFrame.getTag() != null || !show && videoPreviewFrame.getTag() == null) {
@@ -6056,7 +6052,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         return;
                     }
                     AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
-                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
+                    builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
                     builder.setMessage(LocaleController.getString("CantPlayVideo", R.string.CantPlayVideo));
                     builder.setPositiveButton(LocaleController.getString("Open", R.string.Open), (dialog, which) -> {
                         try {
@@ -7450,7 +7446,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                         }
                         AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
                         builder.setMessage(LocaleController.getString("DiscardChanges", R.string.DiscardChanges));
-                        builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
+                        builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
                         builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialogInterface, i) -> switchToEditMode(0));
                         builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
                         showAlertDialog(builder);
@@ -8678,7 +8674,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                     MediaDataController.getInstance(currentAccount).getMediaCount(mergeDialogId, sharedMediaType, classGuid, true);
                 }
             } else if (avatarsDialogId != 0) {
-                MessagesController.getInstance(currentAccount).loadDialogPhotos(avatarsDialogId, CatogramExtras.LOAD_AVATAR_COUNT, 0, true, classGuid);
+                MessagesController.getInstance(currentAccount).loadDialogPhotos(avatarsDialogId, 80, 0, true, classGuid);
             }
         }
         if (currentMessageObject != null && currentMessageObject.isVideo() || currentBotInlineResult != null && (currentBotInlineResult.type.equals("video") || MessageObject.isVideoDocument(currentBotInlineResult.document))) {
@@ -10102,7 +10098,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         if (Instance != null) {
             result = Instance.isVisible && !Instance.disableShowCheck && object != null &&
                     ((Instance.currentFileLocation != null && object.local_id == Instance.currentFileLocation.location.local_id && object.volume_id == Instance.currentFileLocation.location.volume_id && object.dc_id == Instance.currentFileLocation.dc_id) ||
-                     (Instance.currentFileLocationVideo != null && object.local_id == Instance.currentFileLocationVideo.location.local_id && object.volume_id == Instance.currentFileLocationVideo.location.volume_id && object.dc_id == Instance.currentFileLocationVideo.dc_id));
+                            (Instance.currentFileLocationVideo != null && object.local_id == Instance.currentFileLocationVideo.location.local_id && object.volume_id == Instance.currentFileLocationVideo.location.volume_id && object.dc_id == Instance.currentFileLocationVideo.dc_id));
         }
         return result;
     }
@@ -10156,10 +10152,6 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
     public boolean openPhotoWithVideo(final TLRPC.FileLocation fileLocation, ImageLocation videoLocation, final PhotoViewerProvider provider) {
         return openPhoto(null, fileLocation, null, videoLocation, null, null, null, 0, provider, null, 0, 0, true);
-    }
-
-    public boolean openPhoto(final TLRPC.FileLocation fileLocation, final int index, final PhotoViewerProvider provider) {
-        return openPhoto(null, fileLocation, null, null, null, null, index, provider, null, 0, 0, true);
     }
 
     public boolean openPhoto(final TLRPC.FileLocation fileLocation, final ImageLocation imageLocation, final PhotoViewerProvider provider) {
@@ -12372,9 +12364,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         if (discardTap) {
             return false;
         }
-
         float x = e.getX();
-        if (!CatogramConfig.INSTANCE.getProfiles_noEdgeTapping() && checkImageView.getVisibility() != View.VISIBLE) {
+        if (!ua.itaysonlab.catogram.CatogramConfig.INSTANCE.getProfiles_noEdgeTapping() && checkImageView.getVisibility() != View.VISIBLE) {
             int side = Math.min(135, containerView.getMeasuredWidth() / 8);
             if (x < side) {
                 if (leftImage.hasImageSet()) {
