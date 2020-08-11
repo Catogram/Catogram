@@ -227,47 +227,26 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
         int inviteIcon;
         int helpIcon;
         if (CatogramConfig.INSTANCE.getForceNewYearDrawer() || eventType == 0) {
-            newGroupIcon = R.drawable.menu_groups_ny;
-            newSecretIcon = R.drawable.menu_secret_ny;
-            newChannelIcon = R.drawable.menu_channel_ny;
             contactsIcon = R.drawable.menu_contacts_ny;
             callsIcon = R.drawable.menu_calls_ny;
             savedIcon = R.drawable.menu_bookmarks_ny;
             settingsIcon = R.drawable.menu_settings_ny;
-            inviteIcon = R.drawable.menu_invite_ny;
-            helpIcon = R.drawable.menu_help_ny;
         } else if (CatogramConfig.INSTANCE.getForceSVDrawer() || eventType == 1) {
-            newGroupIcon = R.drawable.menu_groups_14;
-            newSecretIcon = R.drawable.menu_secret_14;
-            newChannelIcon = R.drawable.menu_broadcast_14;
             contactsIcon = R.drawable.menu_contacts_14;
             callsIcon = R.drawable.menu_calls_14;
             savedIcon = R.drawable.menu_bookmarks_14;
             settingsIcon = R.drawable.menu_settings_14;
-            inviteIcon = R.drawable.menu_secret_ny;
-            helpIcon = R.drawable.menu_help;
         } else {
-            newGroupIcon = R.drawable.menu_groups;
-            newSecretIcon = R.drawable.menu_secret;
-            newChannelIcon = R.drawable.menu_broadcast;
             contactsIcon = R.drawable.menu_contacts;
             callsIcon = R.drawable.menu_calls;
             savedIcon = R.drawable.menu_saved_cg;
             settingsIcon = R.drawable.menu_settings;
-            inviteIcon = R.drawable.menu_invite;
-            helpIcon = R.drawable.menu_help;
         }
 
-        items.add(new Item(2, LocaleController.getString("NewGroup", R.string.NewGroup), newGroupIcon));
-        items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), newSecretIcon));
-        items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), newChannelIcon));
         items.add(new Item(6, LocaleController.getString("Contacts", R.string.Contacts), contactsIcon));
         items.add(new Item(10, LocaleController.getString("Calls", R.string.Calls), callsIcon));
         items.add(new Item(11, LocaleController.getString("SavedMessages", R.string.SavedMessages), savedIcon));
         items.add(new Item(8, LocaleController.getString("Settings", R.string.Settings), settingsIcon));
-        items.add(null); // divider
-        items.add(new Item(7, LocaleController.getString("InviteFriends", R.string.InviteFriends), inviteIcon));
-        items.add(new Item(9, LocaleController.getString("TelegramFAQ", R.string.TelegramFAQ), helpIcon));
     }
 
     public int getId(int position) {
