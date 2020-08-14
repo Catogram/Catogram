@@ -135,7 +135,7 @@ public class NotificationsController extends BaseController {
         }
         audioManager = (AudioManager) ApplicationLoader.applicationContext.getSystemService(Context.AUDIO_SERVICE);
     }
-    
+
     private static volatile NotificationsController[] Instance = new NotificationsController[UserConfig.MAX_ACCOUNT_COUNT];
 
     public static NotificationsController getInstance(int num) {
@@ -153,7 +153,7 @@ public class NotificationsController extends BaseController {
 
     public NotificationsController(int instance) {
         super(instance);
-        
+
         notificationId = currentAccount + 1;
         notificationGroup = "messages" + (currentAccount == 0 ? "" : currentAccount);
         SharedPreferences preferences = getAccountInstance().getNotificationsSettings();
@@ -2391,7 +2391,7 @@ public class NotificationsController extends BaseController {
 
     @SuppressLint("RestrictedApi")
     private void createNotificationShortcut(NotificationCompat.Builder builder, int did, String name, TLRPC.User user, TLRPC.Chat chat, Person person) {
-        if (Build.VERSION.SDK_INT < 29 || ChatObject.isChannel(chat) && !chat.megagroup || !SharedConfig.chatBubbles) {
+        if (unsupportedNotificationShortcut() || ChatObject.isChannel(chat) && !chat.megagroup) {
             return;
         }
         try {
@@ -2412,10 +2412,7 @@ public class NotificationsController extends BaseController {
             }
             ArrayList<ShortcutInfoCompat> arrayList = new ArrayList<>(1);
             arrayList.add(shortcutBuilder.build());
-            ArrayList<String> ids = new ArrayList<>(1);
-            ids.add(id);
             ShortcutManagerCompat.addDynamicShortcuts(ApplicationLoader.applicationContext, arrayList);
-            ShortcutManagerCompat.removeDynamicShortcuts(ApplicationLoader.applicationContext, ids);
             builder.setShortcutId(id);
             NotificationCompat.BubbleMetadata.Builder bubbleBuilder = new NotificationCompat.BubbleMetadata.Builder();
             Intent intent = new Intent(ApplicationLoader.applicationContext, BubbleActivity.class);
@@ -2863,7 +2860,7 @@ public class NotificationsController extends BaseController {
                         name = LocaleController.getString("NotificationHiddenName", R.string.NotificationHiddenName);
                     }
                 } else {
-                    name = LocaleController.getString("CG_AppName", R.string.CG_AppName);
+                    name = LocaleController.getString("AppName", R.string.AppName);
                 }
                 replace = false;
             } else {
@@ -2890,7 +2887,7 @@ public class NotificationsController extends BaseController {
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ApplicationLoader.applicationContext)
                     .setContentTitle(name)
-                    .setSmallIcon(R.drawable.cg_notification)
+                    .setSmallIcon(R.drawable.notification)
                     .setAutoCancel(true)
                     .setNumber(total_unread_count)
                     .setContentIntent(contentIntent)
@@ -3638,7 +3635,7 @@ public class NotificationsController extends BaseController {
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(ApplicationLoader.applicationContext)
                     .setContentTitle(name)
-                    .setSmallIcon(R.drawable.cg_notification)
+                    .setSmallIcon(R.drawable.notification)
                     .setContentText(text.toString())
                     .setAutoCancel(true)
                     .setNumber(messageObjects.size())
@@ -3755,6 +3752,7 @@ public class NotificationsController extends BaseController {
                 notificationManager.cancel(notificationId);
             }
         }
+        ArrayList<String> ids = new ArrayList<>(holders.size());
         for (int a = 0, size = holders.size(); a < size; a++) {
             NotificationHolder holder = holders.get(a);
             holder.call();
