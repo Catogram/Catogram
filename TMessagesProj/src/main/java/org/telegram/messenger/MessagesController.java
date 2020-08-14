@@ -863,7 +863,6 @@ public class MessagesController extends BaseController implements NotificationCe
                 enc_chats_dict = null;
             }
 
-
             for (int a = 0; a < pinnedDialogs.messages.size(); a++) {
                 TLRPC.Message message = pinnedDialogs.messages.get(a);
                 if (message.to_id.channel_id != 0) {
@@ -880,7 +879,7 @@ public class MessagesController extends BaseController implements NotificationCe
                         continue;
                     }
                 }
-                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false);
+                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false, true);
                 new_dialogMessage.put(messageObject.getDialogId(), messageObject);
             }
 
@@ -2925,7 +2924,7 @@ public class MessagesController extends BaseController implements NotificationCe
                     if (!scheduled) {
                         message.unread = (message.out ? outboxValue : inboxValue) < message.id;
                     }
-                    objects.add(new MessageObject(currentAccount, message, usersLocal, chatsLocal, true));
+                    objects.add(new MessageObject(currentAccount, message, usersLocal, chatsLocal, true, true));
                 }
 
                 ImageLoader.saveMessagesThumbs(messagesRes.messages);
@@ -4112,7 +4111,8 @@ public class MessagesController extends BaseController implements NotificationCe
                                 message.to_id.chat_id = -lower_part;
                             }
                         }
-                        final MessageObject obj = new MessageObject(currentAccount, message, createdDialogIds.contains(message.dialog_id));
+                        boolean isDialogCreated = createdDialogIds.contains(message.dialog_id);
+                        final MessageObject obj = new MessageObject(currentAccount, message, isDialogCreated, isDialogCreated);
                         final ArrayList<MessageObject> objArr = new ArrayList<>();
                         objArr.add(obj);
                         ArrayList<TLRPC.Message> arr = new ArrayList<>();
@@ -4845,7 +4845,7 @@ public class MessagesController extends BaseController implements NotificationCe
                                                 TLRPC.Chat c = res2.chats.get(a);
                                                 chatsDict1.put(c.id, c);
                                             }
-                                            MessageObject messageObject = new MessageObject(currentAccount, res2.messages.get(0), usersDict1, chatsDict1, false);
+                                            MessageObject messageObject = new MessageObject(currentAccount, res2.messages.get(0), usersDict1, chatsDict1, false, true);
                                             dialogMessage.put(did, messageObject);
                                             if (promoDialog.last_message_date == 0) {
                                                 promoDialog.last_message_date = messageObject.messageOwner.date;
@@ -5443,7 +5443,7 @@ public class MessagesController extends BaseController implements NotificationCe
         for (int a = 0; a < size; a++) {
             TLRPC.Message message = messagesRes.messages.get(a);
             message.dialog_id = dialogId;
-            MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, true);
+            MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, true, true);
             messageObject.scheduled = scheduled;
             objects.add(messageObject);
             if (isCache) {
@@ -6093,7 +6093,7 @@ public class MessagesController extends BaseController implements NotificationCe
                         continue;
                     }
                 }
-                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false);
+                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false, true);
                 new_dialogMessage.put(messageObject.getDialogId(), messageObject);
             }
 
@@ -6525,7 +6525,7 @@ public class MessagesController extends BaseController implements NotificationCe
                         continue;
                     }
                 }
-                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false);
+                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false, true);
                 new_dialogMessage.put(messageObject.getDialogId(), messageObject);
             }
 
@@ -7185,7 +7185,7 @@ public class MessagesController extends BaseController implements NotificationCe
                         }
                     }
                 }
-                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false);
+                MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false, true);
                 new_dialogMessage.put(messageObject.getDialogId(), messageObject);
             }
             for (int a = 0; a < dialogsRes.dialogs.size(); a++) {
@@ -8831,7 +8831,8 @@ public class MessagesController extends BaseController implements NotificationCe
                                         message.flags |= TLRPC.MESSAGE_FLAG_MEGAGROUP;
                                     }
 
-                                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, createdDialogIds.contains(dialog_id));
+                                    boolean isDialogCreated = createdDialogIds.contains(dialog_id);
+                                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, isDialogCreated, isDialogCreated);
                                     if ((!obj.isOut() || obj.messageOwner.from_scheduled) && obj.isUnread()) {
                                         pushMessages.add(obj);
                                     }
@@ -9105,7 +9106,8 @@ public class MessagesController extends BaseController implements NotificationCe
                                         message.out = true;
                                     }
 
-                                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, createdDialogIds.contains(message.dialog_id));
+                                    boolean isDialogCreated = createdDialogIds.contains(message.dialog_id);
+                                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, isDialogCreated, isDialogCreated);
 
                                     if ((!obj.isOut() || obj.messageOwner.from_scheduled) && obj.isUnread()) {
                                         pushMessages.add(obj);
@@ -9454,7 +9456,7 @@ public class MessagesController extends BaseController implements NotificationCe
                             continue;
                         }
                     }
-                    MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false);
+                    MessageObject messageObject = new MessageObject(currentAccount, message, usersDict, chatsDict, false, true);
                     new_dialogMessage.put(messageObject.getDialogId(), messageObject);
                 }
                 boolean firstIsFolder = !newPinnedDialogs.isEmpty() && newPinnedDialogs.get(0) instanceof TLRPC.TL_dialogFolder;
@@ -9606,7 +9608,7 @@ public class MessagesController extends BaseController implements NotificationCe
         final ArrayList<TLRPC.Message> messagesArr = new ArrayList<>();
 
         messagesArr.add(message);
-        MessageObject obj = new MessageObject(currentAccount, message, true);
+        MessageObject obj = new MessageObject(currentAccount, message, true, false);
         pushMessages.add(obj);
 
         getMessagesStorage().getStorageQueue().postRunnable(() -> AndroidUtilities.runOnUIThread(() -> getNotificationsController().processNewMessages(pushMessages, true, false, null)));
@@ -9694,7 +9696,7 @@ public class MessagesController extends BaseController implements NotificationCe
                     }
 
                     messagesArr.add(message);
-                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, true);
+                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, true, false);
                     pushMessages.add(obj);
 
                     getMessagesStorage().getStorageQueue().postRunnable(() -> AndroidUtilities.runOnUIThread(() -> getNotificationsController().processNewMessages(pushMessages, true, false, null)));
@@ -9968,7 +9970,8 @@ public class MessagesController extends BaseController implements NotificationCe
                     }
 
                     getMessagesStorage().setLastPtsValue(updates.pts);
-                    final MessageObject obj = new MessageObject(currentAccount, message, createdDialogIds.contains(message.dialog_id));
+                    boolean isDialogCreated = createdDialogIds.contains(message.dialog_id);
+                    final MessageObject obj = new MessageObject(currentAccount, message, isDialogCreated, isDialogCreated);
                     final ArrayList<MessageObject> objArr = new ArrayList<>();
                     objArr.add(obj);
                     ArrayList<TLRPC.Message> arr = new ArrayList<>();
@@ -10558,7 +10561,8 @@ public class MessagesController extends BaseController implements NotificationCe
                     }
                     scheduledMessagesArr.add(message);
 
-                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, createdScheduledDialogIds.contains(message.dialog_id));
+                    boolean isDialogCreated = createdScheduledDialogIds.contains(message.dialog_id);
+                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, isDialogCreated, isDialogCreated);
                     obj.scheduled = true;
 
                     if (scheduledMessages == null) {
@@ -10591,7 +10595,8 @@ public class MessagesController extends BaseController implements NotificationCe
                         message.out = true;
                     }
 
-                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, createdDialogIds.contains(message.dialog_id));
+                    boolean isDialogCreated = createdDialogIds.contains(message.dialog_id);
+                    MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, isDialogCreated, isDialogCreated);
                     if (obj.type == 11) {
                         interfaceUpdateMask |= UPDATE_MASK_CHAT_AVATAR;
                     } else if (obj.type == 10) {
@@ -10846,7 +10851,8 @@ public class MessagesController extends BaseController implements NotificationCe
                             messagesArr = new ArrayList<>();
                         }
                         messagesArr.add(message);
-                        MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, createdDialogIds.contains(uid));
+                        boolean isDialogCreated = createdDialogIds.contains(uid);
+                        MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, isDialogCreated, isDialogCreated);
                         arr.add(obj);
                         if (pushMessages == null) {
                             pushMessages = new ArrayList<>();
@@ -10957,7 +10963,8 @@ public class MessagesController extends BaseController implements NotificationCe
                         messagesArr = new ArrayList<>();
                     }
                     messagesArr.add(newMessage);
-                    MessageObject obj = new MessageObject(currentAccount, newMessage, usersDict, chatsDict, createdDialogIds.contains(newMessage.dialog_id));
+                    boolean isDialogCreated = createdDialogIds.contains(newMessage.dialog_id);
+                    MessageObject obj = new MessageObject(currentAccount, newMessage, usersDict, chatsDict, isDialogCreated, isDialogCreated);
                     if (messages == null) {
                         messages = new LongSparseArray<>();
                     }
@@ -11224,7 +11231,8 @@ public class MessagesController extends BaseController implements NotificationCe
 
                 ImageLoader.saveMessageThumbs(message);
 
-                MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, createdDialogIds.contains(message.dialog_id));
+                boolean isDialogCreated = createdDialogIds.contains(message.dialog_id);
+                MessageObject obj = new MessageObject(currentAccount, message, usersDict, chatsDict, isDialogCreated, isDialogCreated);
 
                 LongSparseArray<ArrayList<MessageObject>> array;
                 if (editingMessages == null) {
@@ -11255,6 +11263,11 @@ public class MessagesController extends BaseController implements NotificationCe
                 }
                 updatesOnMainThread.add(baseUpdate);
             } else if (baseUpdate instanceof TLRPC.TL_updatePhoneCall) {
+                if (updatesOnMainThread == null) {
+                    updatesOnMainThread = new ArrayList<>();
+                }
+                updatesOnMainThread.add(baseUpdate);
+            } else if (baseUpdate instanceof TLRPC.TL_updatePhoneCallSignalingData) {
                 if (updatesOnMainThread == null) {
                     updatesOnMainThread = new ArrayList<>();
                 }
@@ -11717,6 +11730,12 @@ public class MessagesController extends BaseController implements NotificationCe
                         getMediaDataController().saveDraft(did, update.draft, null, true);
                     } else if (baseUpdate instanceof TLRPC.TL_updateReadFeaturedStickers) {
                         getMediaDataController().markFaturedStickersAsRead(false);
+                    } else if (baseUpdate instanceof TLRPC.TL_updatePhoneCallSignalingData) {
+                        TLRPC.TL_updatePhoneCallSignalingData data = (TLRPC.TL_updatePhoneCallSignalingData) baseUpdate;
+                        VoIPService svc = VoIPService.getSharedInstance();
+                        if (svc != null) {
+                            svc.onSignalingData(data);
+                        }
                     } else if (baseUpdate instanceof TLRPC.TL_updatePhoneCall) {
                         TLRPC.TL_updatePhoneCall upd = (TLRPC.TL_updatePhoneCall) baseUpdate;
                         TLRPC.PhoneCall call = upd.phone_call;

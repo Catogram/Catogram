@@ -52,46 +52,52 @@ import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.google.android.gms.common.api.Status;
 
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.BuildVars;
 import org.telegram.messenger.ChatObject;
 import org.telegram.messenger.ContactsController;
-import org.telegram.messenger.LocationController;
-import org.telegram.messenger.MediaDataController;
 import org.telegram.messenger.FileLoader;
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.ImageLoader;
+import org.telegram.messenger.LocaleController;
+import org.telegram.messenger.LocationController;
 import org.telegram.messenger.MediaController;
+import org.telegram.messenger.MediaDataController;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.MessagesStorage;
-import org.telegram.messenger.SendMessagesHelper;
-import org.telegram.messenger.SharedConfig;
-import org.telegram.messenger.UserObject;
-import org.telegram.messenger.Utilities;
-import org.telegram.messenger.ApplicationLoader;
-import org.telegram.messenger.FileLog;
-import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
+import org.telegram.messenger.SendMessagesHelper;
+import org.telegram.messenger.SharedConfig;
+import org.telegram.messenger.UserConfig;
+import org.telegram.messenger.UserObject;
+import org.telegram.messenger.Utilities;
 import org.telegram.messenger.browser.Browser;
 import org.telegram.messenger.camera.CameraController;
+import org.telegram.messenger.voip.VoIPPendingCall;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLRPC;
-import org.telegram.messenger.UserConfig;
-import org.telegram.ui.ActionBar.AlertDialog;
-import org.telegram.ui.Adapters.DrawerLayoutAdapter;
 import org.telegram.ui.ActionBar.ActionBarLayout;
+import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.DrawerLayoutContainer;
+import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.Adapters.DrawerLayoutAdapter;
 import org.telegram.ui.Cells.DrawerAddCell;
 import org.telegram.ui.Cells.DrawerProfileCell;
 import org.telegram.ui.Cells.DrawerUserCell;
 import org.telegram.ui.Cells.LanguageCell;
-import org.telegram.ui.Components.AudioPlayerAlert;
 import org.telegram.ui.Components.AlertsCreator;
+import org.telegram.ui.Components.AudioPlayerAlert;
 import org.telegram.ui.Components.BlockingUpdateView;
 import org.telegram.ui.Components.Easings;
 import org.telegram.ui.Components.EmbedBottomSheet;
@@ -104,10 +110,10 @@ import org.telegram.ui.Components.RecyclerListView;
 import org.telegram.ui.Components.SharingLocationsAlert;
 import org.telegram.ui.Components.SideMenultItemAnimator;
 import org.telegram.ui.Components.StickersAlert;
-import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.TermsOfServiceView;
 import org.telegram.ui.Components.ThemeEditorView;
 import org.telegram.ui.Components.UpdateAppAlertDialog;
+import org.telegram.ui.Components.voip.VoIPPiPView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -1053,6 +1059,8 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             boolean showDialogsList = false;
             boolean showPlayer = false;
             boolean showLocations = false;
+            boolean audioCallUser = false;
+            boolean videoCallUser = false;
 
             photoPathsArray = null;
             videoPath = null;
@@ -1663,7 +1671,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                                     try (Cursor cursor = getContentResolver().query(intent.getData(), null, null, null, null)) {
                                         if (cursor != null) {
                                             if (cursor.moveToFirst()) {
-                                                int accountId = Utilities.parseInt(cursor.getString(cursor.getColumnIndex("account_name")));
+                                                int accountId = Utilities.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_NAME)));
                                                 for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
                                                     if (UserConfig.getInstance(a).getClientUserId() == accountId) {
                                                         intentAccount[0] = a;
@@ -1671,9 +1679,15 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                                                         break;
                                                     }
                                                 }
-                                                int userId = cursor.getInt(cursor.getColumnIndex("DATA4"));
+                                                int userId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.DATA4));
                                                 NotificationCenter.getInstance(intentAccount[0]).postNotificationName(NotificationCenter.closeChats);
                                                 push_user_id = userId;
+                                                String mimeType = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.MIMETYPE));
+                                                if (TextUtils.equals(mimeType, "vnd.android.cursor.item/vnd.org.telegram.messenger.android.call")) {
+                                                    audioCallUser = true;
+                                                } else if (TextUtils.equals(mimeType, "vnd.android.cursor.item/vnd.org.telegram.messenger.android.call.video")) {
+                                                    videoCallUser = true;
+                                                }
                                             }
                                         }
                                     } catch (Exception e) {
@@ -1712,14 +1726,21 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
 
             if (UserConfig.getInstance(currentAccount).isClientActivated()) {
                 if (push_user_id != 0) {
-                    Bundle args = new Bundle();
-                    args.putInt("user_id", push_user_id);
-                    if (push_msg_id != 0)
-                        args.putInt("message_id", push_msg_id);
-                    if (mainFragmentsStack.isEmpty() || MessagesController.getInstance(intentAccount[0]).checkCanOpenChat(args, mainFragmentsStack.get(mainFragmentsStack.size() - 1))) {
-                        ChatActivity fragment = new ChatActivity(args);
-                        if (actionBarLayout.presentFragment(fragment, false, true, true, false)) {
-                            pushOpened = true;
+                    if (audioCallUser) {
+                        VoIPPendingCall.startOrSchedule(this, push_user_id, false);
+                    } else if (videoCallUser) {
+                        VoIPPendingCall.startOrSchedule(this, push_user_id, true);
+                    } else {
+                        Bundle args = new Bundle();
+                        args.putInt("user_id", push_user_id);
+                        if (push_msg_id != 0) {
+                            args.putInt("message_id", push_msg_id);
+                        }
+                        if (mainFragmentsStack.isEmpty() || MessagesController.getInstance(intentAccount[0]).checkCanOpenChat(args, mainFragmentsStack.get(mainFragmentsStack.size() - 1))) {
+                            ChatActivity fragment = new ChatActivity(args);
+                            if (actionBarLayout.presentFragment(fragment, false, true, true, false)) {
+                                pushOpened = true;
+                            }
                         }
                     }
                 } else if (push_chat_id != 0) {
@@ -1900,6 +1921,13 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                     layersActionBarLayout.showLastFragment();
                     rightActionBarLayout.showLastFragment();
                 }
+            }
+
+            if (intent.getAction() != null && intent.getAction().equals("voip")) {
+                VoIPFragment.show(this);
+
+                //Intent i = new Intent(this, VoIPActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ;
+              //  startActivity(i);
             }
 
             intent.setAction(null);
@@ -2919,6 +2947,8 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                 fragment.onRequestPermissionsResultFragment(requestCode, permissions, grantResults);
             }
         }
+
+        VoIPFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void showPermissionErrorAlert(String message) {
@@ -2959,6 +2989,10 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         ConnectionsManager.getInstance(currentAccount).setAppPaused(true, false);
         if (PhotoViewer.hasInstance() && PhotoViewer.getInstance().isVisible()) {
             PhotoViewer.getInstance().onPause();
+        }
+
+        if (VoIPFragment.getInstance() != null) {
+            VoIPFragment.onPause();
         }
     }
 
@@ -3073,6 +3107,10 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             showUpdateActivity(UserConfig.selectedAccount, UserConfig.getInstance(0).pendingAppUpdate, true);
         }
         checkAppUpdate(false);
+
+        if (VoIPFragment.getInstance() != null) {
+            VoIPFragment.getInstance().onResume();
+        }
     }
 
     @Override

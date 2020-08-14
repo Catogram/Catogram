@@ -947,7 +947,7 @@ public class NotificationsController extends BaseController {
                     if (pushMessagesDict.indexOfKey(mid) >= 0) {
                         continue;
                     }
-                    MessageObject messageObject = new MessageObject(currentAccount, message, false);
+                    MessageObject messageObject = new MessageObject(currentAccount, message, false, false);
                     if (isPersonalMessage(messageObject)) {
                         personal_count++;
                     }
@@ -1258,7 +1258,11 @@ public class NotificationsController extends BaseController {
                     } else if (messageObject.messageOwner.action instanceof TLRPC.TL_messageActionGameScore || messageObject.messageOwner.action instanceof TLRPC.TL_messageActionPaymentSent) {
                         return messageObject.messageText.toString();
                     } else if (messageObject.messageOwner.action instanceof TLRPC.TL_messageActionPhoneCall) {
-                        return LocaleController.getString("CallMessageIncomingMissed", R.string.CallMessageIncomingMissed);
+                        if (messageObject.messageOwner.action.video) {
+                            return LocaleController.getString("CallMessageVideoIncomingMissed", R.string.CallMessageVideoIncomingMissed);
+                        } else {
+                            return LocaleController.getString("CallMessageIncomingMissed", R.string.CallMessageIncomingMissed);
+                        }
                     } else if (messageObject.messageOwner.action instanceof TLRPC.TL_messageActionChatAddUser) {
                         int singleUserId = messageObject.messageOwner.action.user_id;
                         if (singleUserId == 0 && messageObject.messageOwner.action.users.size() == 1) {
@@ -1670,7 +1674,11 @@ public class NotificationsController extends BaseController {
                         } else if (messageObject.messageOwner.action instanceof TLRPC.TL_messageActionGameScore || messageObject.messageOwner.action instanceof TLRPC.TL_messageActionPaymentSent) {
                             msg = messageObject.messageText.toString();
                         } else if (messageObject.messageOwner.action instanceof TLRPC.TL_messageActionPhoneCall) {
-                            msg = LocaleController.getString("CallMessageIncomingMissed", R.string.CallMessageIncomingMissed);
+                            if (messageObject.messageOwner.action.video) {
+                                msg = LocaleController.getString("CallMessageVideoIncomingMissed", R.string.CallMessageVideoIncomingMissed);
+                            } else {
+                                msg = LocaleController.getString("CallMessageIncomingMissed", R.string.CallMessageIncomingMissed);
+                            }
                         }
                     } else {
                         if (messageObject.isMediaEmpty()) {
@@ -2375,6 +2383,10 @@ public class NotificationsController extends BaseController {
                 FileLog.e(e);
             }
         });
+    }
+
+    private boolean unsupportedNotificationShortcut() {
+        return Build.VERSION.SDK_INT < 29 || !SharedConfig.chatBubbles;
     }
 
     @SuppressLint("RestrictedApi")
@@ -3182,6 +3194,9 @@ public class NotificationsController extends BaseController {
         boolean waitingForPasscode = AndroidUtilities.needShowPasscode() || SharedConfig.isWaitingForPasscodeEnter;
 
         for (int b = 0, size = sortedDialogs.size(); b < size; b++) {
+            if (holders.size() >= 15) {
+                break;
+            }
             long dialog_id = sortedDialogs.get(b);
             ArrayList<MessageObject> messageObjects = messagesByDialogs.get(dialog_id);
             int max_id = messageObjects.get(0).getId();
@@ -3741,7 +3756,14 @@ public class NotificationsController extends BaseController {
             }
         }
         for (int a = 0, size = holders.size(); a < size; a++) {
-            holders.get(a).call();
+            NotificationHolder holder = holders.get(a);
+            holder.call();
+            if (!unsupportedNotificationShortcut()) {
+                ids.add(holder.notification.getShortcutId());
+            }
+        }
+        if (!unsupportedNotificationShortcut()) {
+            ShortcutManagerCompat.removeDynamicShortcuts(ApplicationLoader.applicationContext, ids);
         }
 
         for (int a = 0; a < oldIdsWear.size(); a++) {

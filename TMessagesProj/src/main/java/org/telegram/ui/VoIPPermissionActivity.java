@@ -1,6 +1,7 @@
 package org.telegram.ui;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,39 +13,53 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.telegram.messenger.voip.VoIPService;
 import org.telegram.ui.Components.voip.VoIPHelper;
 
-public class VoIPPermissionActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+@TargetApi(23)
+public class VoIPPermissionActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 101);
+		VoIPService service = VoIPService.getSharedInstance();
+		boolean isVideoCall = service != null && service.call != null && service.call.video;
+
+		ArrayList<String> permissions = new ArrayList<>();
+		if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+			permissions.add(Manifest.permission.RECORD_AUDIO);
+		}
+		if (isVideoCall && checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			permissions.add(Manifest.permission.CAMERA);
+		}
+		if (permissions.isEmpty()) {
+			requestPermissions(permissions.toArray(new String[0]), isVideoCall ? 102 : 101);
 		}
 	}
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		if (requestCode == 101) {
-			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				if (VoIPService.getSharedInstance() != null)
+		if (requestCode == 101 || requestCode == 102) {
+			boolean allGranted = true;
+			for (int a = 0; a < grantResults.length; a++) {
+				if (grantResults[a] != PackageManager.PERMISSION_GRANTED) {
+					allGranted = false;
+					break;
+				}
+			}
+			if (grantResults.length > 0 && allGranted) {
+				if (VoIPService.getSharedInstance() != null) {
 					VoIPService.getSharedInstance().acceptIncomingCall();
+				}
 				finish();
-				startActivity(new Intent(this, VoIPActivity.class));
+				startActivity(new Intent(this, LaunchActivity.class).setAction("voip"));
 			} else {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-					if (!shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
-						if (VoIPService.getSharedInstance() != null)
-							VoIPService.getSharedInstance().declineIncomingCall();
-						VoIPHelper.permissionDenied(this, new Runnable() {
-							@Override
-							public void run() {
-								finish();
-							}
-						});
-						return;
-					} else {
-						finish();
+				if (!shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
+					if (VoIPService.getSharedInstance() != null) {
+						VoIPService.getSharedInstance().declineIncomingCall();
 					}
+					VoIPHelper.permissionDenied(this, this::finish, requestCode);
+				} else {
+					finish();
 				}
 			}
 		}
