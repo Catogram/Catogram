@@ -35,6 +35,7 @@ dependencies {
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.google.firebase:firebase-config:19.2.0'
+    implementation 'com.google.firebase:firebase-datatransport:17.0.6'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     implementation 'com.google.android.play:core:1.7.3'
@@ -295,7 +296,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2060
+    defaultConfig.versionCode = 2061
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
