@@ -2958,6 +2958,20 @@ public class NotificationsController extends BaseController {
                 }
             }
 
+            String summaryText = LocaleController.formatString("NotificationMessagesPeopleDisplayOrder", R.string.NotificationMessagesPeopleDisplayOrder, LocaleController.formatPluralString("messages", total_unread_count), LocaleController.formatPluralString("FromChats", pushDialogs.size()));
+
+            NotificationCompat.Builder publicBuilder = new NotificationCompat.Builder(ApplicationLoader.applicationContext)
+                    .setSmallIcon(R.drawable.notification)
+                    .setContentText(summaryText)
+                    .setAutoCancel(true)
+                    .setNumber(total_unread_count)
+                    .setColor(0xff11acfa)
+                    .setContentIntent(contentIntent)
+                    .setShowWhen(true)
+                    .setWhen(((long) lastMessageObject.messageOwner.date) * 1000)
+                    .setCategory(NotificationCompat.CATEGORY_MESSAGE);
+            Notification publicNotification = publicBuilder.build();
+
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ApplicationLoader.applicationContext)
                     .setContentTitle(name)
                     .setSmallIcon(R.drawable.cg_notification)
@@ -2968,6 +2982,7 @@ public class NotificationsController extends BaseController {
                     .setGroupSummary(true)
                     .setShowWhen(true)
                     .setWhen(((long) lastMessageObject.messageOwner.date) * 1000)
+                    .setPublicVersion(publicNotification)
                     .setColor(CatogramConfig.INSTANCE.getAccentNotification() ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa);
 
             long[] vibrationPattern = null;
@@ -3181,7 +3196,7 @@ public class NotificationsController extends BaseController {
             if (Build.VERSION.SDK_INT >= 26) {
                 mBuilder.setChannelId(validateChannelId(dialog_id, chatName, vibrationPattern, ledColor, sound, importance, configVibrationPattern, configSound, configImportance));
             }
-            showExtraNotifications(mBuilder, notifyAboutLast, detailText);
+            showExtraNotifications(mBuilder, notifyAboutLast, detailText, publicNotification);
             scheduleNotificationRepeat();
         } catch (Exception e) {
             FileLog.e(e);
@@ -3198,7 +3213,7 @@ public class NotificationsController extends BaseController {
     }
 
     @SuppressLint("InlinedApi")
-    private void showExtraNotifications(NotificationCompat.Builder notificationBuilder, boolean notifyAboutLast, String summary) {
+    private void showExtraNotifications(NotificationCompat.Builder notificationBuilder, boolean notifyAboutLast, String summary, Notification publicNotification) {
         Notification mainNotification = notificationBuilder.build();
         if (Build.VERSION.SDK_INT < 18) {
             notificationManager.notify(notificationId, mainNotification);
@@ -3728,6 +3743,7 @@ public class NotificationsController extends BaseController {
                     .setContentIntent(contentIntent)
                     .extend(wearableExtender)
                     .setSortKey("" + (Long.MAX_VALUE - date))
+                    .setPublicVersion(publicNotification)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE);
 
             Intent dismissIntent = new Intent(ApplicationLoader.applicationContext, NotificationDismissReceiver.class);
