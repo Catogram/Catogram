@@ -2505,7 +2505,7 @@ public class StatisticActivity extends BaseFragment implements NotificationCente
             icons.add(R.drawable.menu_private);
             actions.add(2);
             items.add(LocaleController.getString("StatisticSearchUserHistory", R.string.StatisticSearchUserHistory));
-            icons.add(R.drawable.menu_chats);
+            icons.add(R.drawable.vkui_chats_outline_28);
             actions.add(1);
 
             if (userIsPracticant && currentParticipant == null) {

@@ -23,7 +23,7 @@ class DrawerSheetFragment: BaseActionedSwipeFragment() {
             add(Action("contacts", R.drawable.menu_contacts, LocaleController.getString("Contacts", R.string.Contacts)))
             add(Action("calls", R.drawable.menu_calls, LocaleController.getString("Calls", R.string.Calls)))
             add(Action("saved", R.drawable.menu_saved_cg, LocaleController.getString("SavedMessages", R.string.SavedMessages)))
-            add(Action("settings", R.drawable.menu_settings, LocaleController.getString("Settings", R.string.Settings)))
+            add(Action("settings", R.drawable.vkui_settings_outline_28, LocaleController.getString("Settings", R.string.Settings)))
         }
     }
 

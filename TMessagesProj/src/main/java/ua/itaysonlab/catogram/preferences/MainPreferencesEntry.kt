@@ -25,7 +25,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
         category(LocaleController.getString("AS_Header_Categories", R.string.AS_Header_Categories)) {
             textIcon {
                 title = LocaleController.getString("AS_Header_Appearance", R.string.AS_Header_Appearance)
-                icon = R.drawable.msg_theme
+                icon = R.drawable.ic_palette_outline_28
                 divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createAppearance())
@@ -34,7 +34,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
 
             textIcon {
                 title = LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)
-                icon = R.drawable.menu_chats
+                icon = R.drawable.vkui_chats_outline_28
                 divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createChats())
@@ -43,7 +43,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
 
             textIcon {
                 title = LocaleController.getString("AS_Category_Security", R.string.AS_Category_Security)
-                icon = R.drawable.menu_secret
+                icon = R.drawable.vkui_lock_outline_28
                 divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createSecurity())
@@ -52,7 +52,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
 
             textIcon {
                 title = LocaleController.getString("DebugMenu", R.string.DebugMenu)
-                icon = R.drawable.group_log
+                icon = R.drawable.ic_bug_outline_28
                 divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     startDebug(it)
@@ -61,7 +61,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
 
             textIcon {
                 title = LocaleController.getString("CG_GooglePlay_Donate", R.string.CG_GooglePlay_Donate)
-                icon = R.drawable.round_attach_money_24
+                icon = R.drawable.ic_money_transfer_outline_28
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createDonate())
                 }
