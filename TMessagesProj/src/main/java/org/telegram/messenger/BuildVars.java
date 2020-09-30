@@ -21,7 +21,7 @@ public class BuildVars {
     public static int APP_ID = CATOGRAM_APP_ID;
     public static String APP_HASH = "CATOGRAM_API_HASH";
     public static boolean TON_WALLET_STANDALONE = false;
-    public static int BUILD_VERSION = 2090;
+    public static int BUILD_VERSION = 2092;
     public static String BUILD_VERSION_STRING = "7.1.0";
 
     public static String APPCENTER_HASH = "a5b5c4f5-51da-dedc-9918-d9766a22ca7c";

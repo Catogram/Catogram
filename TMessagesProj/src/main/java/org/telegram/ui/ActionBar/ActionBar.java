@@ -104,7 +104,7 @@ public class ActionBar extends FrameLayout {
     protected BaseFragment parentFragment;
     public ActionBarMenuOnItemClick actionBarMenuOnItemClick;
     private int titleColorToSet = 0;
-    private boolean ovelayTitleAnimation = true;
+    private boolean overlayTitleAnimation;
     private boolean titleAnimationRunning;
     private boolean fromBottom;
 
@@ -286,6 +286,7 @@ public class ActionBar extends FrameLayout {
         }
         if (subtitleTextView != null) {
             subtitleTextView.setVisibility(!TextUtils.isEmpty(value) && !isSearchFieldVisible ? VISIBLE : GONE);
+            subtitleTextView.setAlpha(1f);
             subtitleTextView.setText(value);
         }
     }
@@ -318,6 +319,7 @@ public class ActionBar extends FrameLayout {
             titleTextView[0].setVisibility(value != null && !isSearchFieldVisible ? VISIBLE : INVISIBLE);
             titleTextView[0].setText(value);
         }
+        fromBottom = false;
     }
 
     public void setTitleColor(int color) {
@@ -780,7 +782,7 @@ public class ActionBar extends FrameLayout {
             if (titleTextView[0] != null && titleTextView[0].getVisibility() != GONE || subtitleTextView != null && subtitleTextView.getVisibility() != GONE) {
                 int availableWidth = width - (menu != null ? menu.getMeasuredWidth() : 0) - AndroidUtilities.dp(16) - textLeft - titleRightMargin;
 
-                if (((fromBottom && i == 0) || (!fromBottom && i == 1)) && ovelayTitleAnimation && titleAnimationRunning) {
+                if (((fromBottom && i == 0) || (!fromBottom && i == 1)) && overlayTitleAnimation && titleAnimationRunning) {
                     titleTextView[i].setTextSize(!AndroidUtilities.isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 18 : 20);
                 } else {
                     if (titleTextView[0] != null && titleTextView[0].getVisibility() != GONE && subtitleTextView != null && subtitleTextView.getVisibility() != GONE) {
@@ -840,7 +842,7 @@ public class ActionBar extends FrameLayout {
         for (int i = 0; i < 2; i++) {
             if (titleTextView[i] != null && titleTextView[i].getVisibility() != GONE) {
                 int textTop;
-                if (((fromBottom && i == 0) || (!fromBottom && i == 1)) && ovelayTitleAnimation && titleAnimationRunning) {
+                if (((fromBottom && i == 0) || (!fromBottom && i == 1)) && overlayTitleAnimation && titleAnimationRunning) {
                     textTop = (getCurrentActionBarHeight() - titleTextView[i].getTextHeight()) / 2;
                 } else {
                     if ((subtitleTextView != null && subtitleTextView.getVisibility() != GONE)) {
@@ -1108,12 +1110,11 @@ public class ActionBar extends FrameLayout {
     }
 
     public void setTitleAnimated(CharSequence title, boolean fromBottom, long duration) {
-        if (titleTextView[0] == null) {
+        if (titleTextView[0] == null || title == null) {
             setTitle(title);
             return;
         }
-        this.fromBottom = fromBottom;
-        boolean crossfade =  ovelayTitleAnimation && !TextUtils.isEmpty(subtitleTextView.getText());
+        boolean crossfade =  overlayTitleAnimation && !TextUtils.isEmpty(subtitleTextView.getText());
         if (crossfade) {
             if (subtitleTextView.getVisibility() != View.VISIBLE) {
                 subtitleTextView.setVisibility(View.VISIBLE);
@@ -1131,6 +1132,7 @@ public class ActionBar extends FrameLayout {
         titleTextView[1] = titleTextView[0];
         titleTextView[0] = null;
         setTitle(title);
+        this.fromBottom = fromBottom;
         titleTextView[0].setAlpha(0);
         if (!crossfade) {
             titleTextView[0].setTranslationY(fromBottom ? AndroidUtilities.dp(20) : -AndroidUtilities.dp(20));
@@ -1181,5 +1183,9 @@ public class ActionBar extends FrameLayout {
 
     public ActionBarMenu getActionMode() {
         return actionMode;
+    }
+
+    public void setOverlayTitleAnimation(boolean ovelayTitleAnimation) {
+        this.overlayTitleAnimation = ovelayTitleAnimation;
     }
 }
