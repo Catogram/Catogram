@@ -26,7 +26,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.biometric:biometric:1.0.1'
     implementation 'com.google.android.material:material:1.3.0-alpha01'
-    implementation 'androidx.exifinterface:exifinterface:1.2.0'
+    implementation 'androidx.exifinterface:exifinterface:1.3.0'
+
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.sharetarget:sharetarget:1.0.0"
@@ -35,7 +36,8 @@ dependencies {
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.google.firebase:firebase-config:19.2.0'
-    implementation 'com.google.firebase:firebase-datatransport:17.0.6'
+    implementation 'com.google.firebase:firebase-datatransport:17.0.8'
+    implementation 'com.google.firebase:firebase-appindexing:19.1.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     implementation 'com.google.android.play:core:1.7.3'
@@ -43,7 +45,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-vision:16.2.0'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
 
     implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
     implementation 'com.facebook.rebound:rebound:0.3.8'
@@ -67,8 +69,8 @@ android {
     sourceSets.main.jniLibs.srcDirs = ['./jni/']
 
     externalNativeBuild {
-        ndkBuild {
-            path "jni/Android.mk"
+        cmake {
+            path 'jni/CMakeLists.txt'
         }
     }
 
@@ -281,6 +283,9 @@ android {
             }
         }
         afat {
+            ndk {
+                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            }
             sourceSets.debug {
                 manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
             }
@@ -296,7 +301,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2065
+    defaultConfig.versionCode = 2090
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -331,14 +336,14 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
-        versionName "CG_7.0.1"
+        versionName "CG_7.1.0"
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
 
         externalNativeBuild {
-            ndkBuild {
-                arguments "NDK_APPLICATION_MK:=jni/Application.mk", "APP_PLATFORM:=android-16", "--jobs=16"
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            cmake {
+                version '3.10.2'
+                arguments '-DANDROID_STL=c++_static', '-DANDROID_PLATFORM=android-16', "-j=16"
             }
         }
     }
