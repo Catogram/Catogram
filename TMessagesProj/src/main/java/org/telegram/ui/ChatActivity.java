@@ -16655,6 +16655,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 TranslateAPI.callTranslationDialog(selectedObject, (AppCompatActivity) getParentActivity());
                 break;
             }
+            case 992: {
+                //CatogramConfig.INSTANCE.getKangBridge().prepareKang(selectedObject.getDocument());
+                break;
+            }
             case 991: {
                 ArrayList<MessageObject> obj = new ArrayList<>();
                 obj.add(selectedObject);

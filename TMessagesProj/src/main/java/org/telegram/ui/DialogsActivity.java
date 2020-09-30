@@ -3140,7 +3140,11 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     } else if (onlySelect || folderId != 0) {
                         finishFragment();
                     } else if (parentLayout != null) {
-                        parentLayout.getDrawerLayoutContainer().openDrawer(false);
+                        if (CatogramConfig.INSTANCE.getRedesign_SlideDrawer()) {
+                            new DrawerSheetFragment().show(getParentActivity());
+                        } else {
+                            parentLayout.getDrawerLayoutContainer().openDrawer(false);
+                        }
                     }
                 } else if (id == 1) {
                     SharedConfig.appLocked = !SharedConfig.appLocked;

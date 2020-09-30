@@ -177,7 +177,7 @@ public class ActionBar extends FrameLayout {
     }
 
     public void setOnTitleLongClickListner(View.OnLongClickListener listener) {
-        titleTextView.setOnLongClickListener(listener);
+        titleTextView[0].setOnLongClickListener(listener);
         subtitleTextView.setOnLongClickListener(listener);
     }
 

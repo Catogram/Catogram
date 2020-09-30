@@ -49,23 +49,7 @@ object TgxExtras {
 
     @JvmStatic
     fun convertAndSend(accountInstance: AccountInstance, path: Uri, dialog_id: Long, replyingMessageObject: MessageObject?, inputContentInfo: InputContentInfoCompat, notify: Boolean) {
-        try {
-            val file = File(ApplicationLoader.applicationContext.cacheDir, "CG_TempConvert_${path.hashCode()}.webp")
-            file.createNewFile()
-
-            val os = file.outputStream()
-
-            val bitmap = BitmapFactory.decodeStream(ApplicationLoader.applicationContext.contentResolver.openInputStream(path))
-            bitmap.compress(Bitmap.CompressFormat.WEBP, 100, os)
-            os.close()
-            bitmap.recycle()
-
-            //file.deleteOnExit()
-
-            SendMessagesHelper.prepareSendingDocument(accountInstance, file.absolutePath, file.absolutePath, null, null, "image/webp", dialog_id, replyingMessageObject, null, null, notify, 0)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        
     }
 
     @JvmStatic

@@ -361,9 +361,7 @@ public class DrawerProfileCell extends FrameLayout {
         setArrowState(false);
         nameTextView.setText(UserObject.getUserName(user));
         if (CatogramConfig.INSTANCE.getHidePhoneNumber()) {
-            TLRPC.TL_contacts_resolveUsername req = new TLRPC.TL_contacts_resolveUsername();
-            req.username = username;
-            phoneTextView.setText("@" + username);
+            phoneTextView.setText("@" + user.username);
         } else {
             phoneTextView.setText(PhoneFormat.getInstance().format("+" + user.phone));
         }/*else if (!TextUtils.isEmpty(user.username)) {
