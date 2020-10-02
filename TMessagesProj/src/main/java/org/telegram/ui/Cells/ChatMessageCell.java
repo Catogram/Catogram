@@ -2556,6 +2556,27 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         return false;
     }
 
+    private int getRepliesCount() {
+        if (currentMessagesGroup != null && !currentMessagesGroup.messages.isEmpty()) {
+            MessageObject messageObject = currentMessagesGroup.messages.get(0);
+            return messageObject.getRepliesCount();
+        }
+        return currentMessageObject.getRepliesCount();
+    }
+
+    private ArrayList<TLRPC.Peer> getRecentRepliers() {
+        if (currentMessagesGroup != null && !currentMessagesGroup.messages.isEmpty()) {
+            MessageObject messageObject = currentMessagesGroup.messages.get(0);
+            if (messageObject.messageOwner.replies != null) {
+                return messageObject.messageOwner.replies.recent_repliers;
+            }
+        }
+        if (currentMessageObject.messageOwner.replies != null) {
+            return currentMessageObject.messageOwner.replies.recent_repliers;
+        }
+        return null;
+    }
+
     private boolean isUserDataChanged() {
         if (currentMessageObject != null && (!hasLinkPreview && currentMessageObject.messageOwner.media != null && currentMessageObject.messageOwner.media.webpage instanceof TLRPC.TL_webPage)) {
             return true;
@@ -2572,7 +2593,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (lastViewsCount != currentMessageObject.messageOwner.views) {
             return true;
         }
-        if (lastRepliesCount != currentMessageObject.getRepliesCount()) {
+        if (lastRepliesCount != getRepliesCount()) {
             return true;
         }
         if (lastReactions != currentMessageObject.messageOwner.reactions) {
@@ -2854,7 +2875,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             lastSendState = messageObject.messageOwner.send_state;
             lastDeleteDate = messageObject.messageOwner.destroyTime;
             lastViewsCount = messageObject.messageOwner.views;
-            lastRepliesCount = messageObject.getRepliesCount();
+            lastRepliesCount = getRepliesCount();
             isPressed = false;
             gamePreviewPressed = false;
             sideButtonPressed = false;
@@ -3008,7 +3029,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 linked = messageObject.isLinkedToChat(linkedChatId);
             }
             if ((hasDiscussion && linked || isRepliesChat && !messageObject.isOutOwner()) && (currentPosition == null || (currentPosition.flags & MessageObject.POSITION_FLAG_BOTTOM) != 0)) {
-                int commentCount = messageObject.getRepliesCount();
+                int commentCount = getRepliesCount();
                 if (!messageObject.shouldDrawWithoutBackground() && !messageObject.isAnimatedEmoji()) {
                     drawCommentButton = true;
                     int avatarsOffset = 0;
@@ -3020,13 +3041,14 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         comment = LocaleController.getString("ViewInChat", R.string.ViewInChat);
                     } else {
                         comment = commentCount == 0 ? LocaleController.getString("LeaveAComment", R.string.LeaveAComment) : LocaleController.formatPluralString("CommentsCount", commentCount);
-                        if (commentCount != 0 && !messageObject.messageOwner.replies.recent_repliers.isEmpty()) {
+                        ArrayList<TLRPC.Peer> recentRepliers = getRecentRepliers();
+                        if (commentCount != 0 && recentRepliers != null && !recentRepliers.isEmpty()) {
                             createCommentUI();
-                            int size = messageObject.messageOwner.replies.recent_repliers.size();
+                            int size = recentRepliers.size();
                             for (int a = 0; a < commentAvatarImages.length; a++) {
                                 if (a < size) {
                                     commentAvatarImages[a].setImageCoords(0, 0, AndroidUtilities.dp(24), AndroidUtilities.dp(24));
-                                    int id = MessageObject.getPeerId(messageObject.messageOwner.replies.recent_repliers.get(a));
+                                    int id = MessageObject.getPeerId(recentRepliers.get(a));
                                     TLRPC.User user = null;
                                     TLRPC.Chat chat = null;
                                     if (id > 0) {
@@ -8697,7 +8719,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             timeWidth += viewsTextWidth + Theme.chat_msgInViewsDrawable.getIntrinsicWidth() + AndroidUtilities.dp(10);
         }
         if (hasLinkedChat && isChat && isMegagroup && !isThreadChat && messageObject.hasReplies()) {
-            currentRepliesString = String.format("%s", LocaleController.formatShortNumber(messageObject.getRepliesCount(), null));
+            currentRepliesString = String.format("%s", LocaleController.formatShortNumber(getRepliesCount(), null));
             repliesTextWidth = (int) Math.ceil(Theme.chat_timePaint.measureText(currentRepliesString));
             timeWidth += repliesTextWidth + Theme.chat_msgInRepliesDrawable.getIntrinsicWidth() + AndroidUtilities.dp(10);
         } else {
@@ -10338,7 +10360,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     }
 
     private void drawCaptionLayout(Canvas canvas, StaticLayout captionLayout, boolean selectionOnly, float alpha) {
-        if (currentBackgroundDrawable != null && drawCommentButton) {
+        if (currentBackgroundDrawable != null && drawCommentButton && timeLayout != null) {
             int x;
             float y = layoutHeight - AndroidUtilities.dp(18) - timeLayout.getHeight();
             if (mediaBackground) {
@@ -12593,7 +12615,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             }
 
             if (commentLayout != null) {
-                lastCommentsCount = currentMessageObject.getRepliesCount();
+                lastCommentsCount = getRepliesCount();
                 lastTotalCommentWidth = totalCommentWidth;
                 lastCommentLayout = commentLayout;
                 lastCommentArrowX = commentArrowX;
@@ -12601,7 +12623,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 lastCommentDrawUnread = commentDrawUnread;
             }
             if (repliesLayout != null) {
-                lastRepliesCount = currentMessageObject.getRepliesCount();
+                lastRepliesCount = getRepliesCount();
                 lastRepliesLayout = repliesLayout;
             }
 
@@ -12670,13 +12692,13 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 }
             }
 
-            if (repliesLayout != null && lastRepliesCount != currentMessageObject.getRepliesCount()) {
+            if (repliesLayout != null && lastRepliesCount != getRepliesCount()) {
                 animateRepliesLayout = lastRepliesLayout;
                 animateReplies = true;
                 changed = true;
             }
 
-            if (commentLayout != null && lastCommentsCount != currentMessageObject.getRepliesCount()) {
+            if (commentLayout != null && lastCommentsCount != getRepliesCount()) {
                 animateCommentsLayout = lastCommentLayout;
                 animateTotalCommentWidth = lastTotalCommentWidth;
                 animateCommentArrowX = lastCommentArrowX;
