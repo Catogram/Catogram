@@ -1145,7 +1145,7 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
         };
         selectedTextView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
         selectedTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
-        selectedTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+        selectedTextView.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
         selectedTextView.setGravity(Gravity.LEFT | Gravity.TOP);
         selectedTextView.setVisibility(View.INVISIBLE);
         selectedTextView.setAlpha(0.0f);

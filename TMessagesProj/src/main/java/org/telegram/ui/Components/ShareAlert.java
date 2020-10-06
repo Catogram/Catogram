@@ -872,7 +872,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
                     textView.setTextColor(Theme.getColor(Theme.key_dialogTextBlue2));
                     textView.setGravity(Gravity.CENTER_VERTICAL);
-                    textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+                    textView.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
                     sharesCountLayout.addView(textView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.CENTER_VERTICAL, 8, 0, 20, 0));
                 }
             }

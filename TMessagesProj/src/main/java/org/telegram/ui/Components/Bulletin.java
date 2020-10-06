@@ -634,7 +634,7 @@ public final class Bulletin {
             titleTextView.setSingleLine();
             titleTextView.setTextColor(undoInfoColor);
             titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-            titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
+            titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
             linearLayout.addView(titleTextView);
 
             subtitleTextView = new TextView(context);

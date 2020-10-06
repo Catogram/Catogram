@@ -14,7 +14,7 @@ public class CatogramFontLoader {
 
     public static boolean needRedirect(String path) {
         return CatogramConfig.INSTANCE.getSystemFonts() && (
-                path.equals("fonts/rmedium.ttf")
+                path.equals("fonts/TTCommons-Bold.ttf")
                 || path.equals("fonts/rmediumitalic.ttf")
                 || path.equals("fonts/ritalic.ttf")
                 || path.equals("fonts/rmono.ttf")
@@ -38,7 +38,7 @@ public class CatogramFontLoader {
         if (CatogramConfig.INSTANCE.getSystemFonts()) {
             return sysBold;
         } else {
-            return AndroidUtilities.getTypeface("fonts/rmedium.ttf");
+            return AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf");
         }
     }
 
