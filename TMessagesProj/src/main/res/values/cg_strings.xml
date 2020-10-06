@@ -207,4 +207,5 @@
     <string name="CG_VoiceRecognise">Recognise</string>
     <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
     <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
+    <string name="ActionBarTitle">Chats</string>
 </resources>
