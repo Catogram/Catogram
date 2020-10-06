@@ -178,7 +178,7 @@ public abstract class BottomSlideFragment {
         if (mSlideController != null) {
             Activity act = mSlideController.mActivity;
             ViewGroup decor = (ViewGroup) act.getWindow().getDecorView();
-            //decor.setBackgroundColor(Color.parseColor("#9600FF"));
+            decor.setBackgroundColor(org.telegram.ui.ActionBar.Theme.getColor(org.telegram.ui.ActionBar.Theme.key_windowBackgroundWhite));
 
             mBackgroundView = decor.getChildAt(0);
 
