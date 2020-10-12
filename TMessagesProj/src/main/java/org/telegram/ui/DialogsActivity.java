@@ -1226,7 +1226,6 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                                         args.putInt("folderId", 1); // 1 is the ID of the archive folder.
                                         presentFragment(new DialogsActivity(args));
                                     }, 200);
-                                }
                             }
                         }
 
