@@ -1218,7 +1218,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                                 }
                                 ((DialogCell) view).startOutAnimation();
                                 parentPage.archivePullViewState = ARCHIVE_ITEM_STATE_SHOWED;
-
+                                if (CatogramConfig.INSTANCE.getArchiveOnPull()) {
                                     AndroidUtilities.runOnUIThread(() -> {
                                         // Open the folder.
                                         // Delay was taken from PullForegroundDrawable::startOutAnimation().
@@ -1226,6 +1226,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                                         args.putInt("folderId", 1); // 1 is the ID of the archive folder.
                                         presentFragment(new DialogsActivity(args));
                                     }, 200);
+                              }
                             }
                         }
 

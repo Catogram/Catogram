@@ -48,7 +48,7 @@ object CatogramConfig {
     var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", false)
 
     var slider_stickerAmplifier by sharedPreferences.int("cg_stickamplifier", 100)
-
+    var archiveOnPull by sharedPreferences.boolean("cg_archonpull", true)
     var useCupertinoLib by sharedPreferences.boolean("advanced_cupertino", false)
     var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", false)
     var useTgxMenuSlideSheet by sharedPreferences.boolean("advanced_tgxslide_sheet", true)
