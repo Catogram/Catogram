@@ -78,9 +78,16 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textIcon {
                 title = LocaleController.getString("CG_ToChannel", R.string.CG_ToChannel)
                 value = "@catogram"
-                divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     goToChannel(it)
+                }
+            }
+            textIcon {
+                title = LocaleController.getString("CG_ToChat", R.string.CG_ToChat)
+                value = "@catogram_en"
+                divider = true
+                listener = TGKitTextIconRow.TGTIListener {
+                    goToChat(it)
                 }
             }
         }
@@ -89,6 +96,15 @@ class MainPreferencesEntry : BasePreferencesEntry {
     companion object {
         private fun goToChannel(bf: BaseFragment) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/catogram"))
+            val componentName = ComponentName(bf.parentActivity.packageName, LaunchActivity::class.java.name)
+            intent.component = componentName
+            intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
+            intent.putExtra(Browser.EXTRA_APPLICATION_ID, bf.parentActivity.packageName)
+            bf.parentActivity.startActivity(intent)
+        }
+
+        private fun goToChat(bf: BaseFragment) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/catogram_en"))
             val componentName = ComponentName(bf.parentActivity.packageName, LaunchActivity::class.java.name)
             intent.component = componentName
             intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)

@@ -195,4 +195,5 @@
     <string name="ActionBarTitle">Чаты</string>
     <string name="CG_ArchiveOnPull">Архив при раскрытии</string>
     <string name="CG_ArchiveOnPull_Desc">Автоматически открывать архив при раскрытии в главном меню</string>
+    <string name="CG_ToChat">Открыть официальный чат</string>
 </resources>

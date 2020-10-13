@@ -37,6 +37,7 @@
     <string name="CG_AboutDesc">An experimental Telegram app modification.</string>
     <string name="CG_Donate">Donate</string>
     <string name="CG_ToChannel">Open official channel</string>
+    <string name="CG_ToChat">Open official chat</string>
     <string name="AS_SysEmoji">Use system emoji</string>
     <string name="AS_SysEmojiDesc">can cause bugs, be careful</string>
 
