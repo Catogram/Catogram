@@ -2169,7 +2169,7 @@
     <string name="CreateNewFilter">Create New Folder</string>
     <string name="CreateNewFilterInfo">Create folders for different groups of chats and quickly switch between them.</string>
     <string name="FilterRecommended">Recommended Folders</string>
-    <string name="FilterAllChats">All Chats</string>
+    <string name="FilterAllChats">All</string>
     <string name="FilterAllChatsShort">All</string>
     <string name="FilterReorder">Reorder</string>
     <string name="FilterEdit">Edit folder</string>
