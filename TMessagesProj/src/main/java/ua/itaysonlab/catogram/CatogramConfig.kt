@@ -19,6 +19,7 @@ object CatogramConfig {
     var forcePacman by sharedPreferences.boolean("advanced_forcepacman", false)
     var noRounding by sharedPreferences.boolean("advanced_norounding", false)
     var systemFonts by sharedPreferences.boolean("advanced_systemfonts", false)
+    var systemFontsTT by sharedPreferences.boolean("advanced_systemfonts_tt", false)
     var noVibration by sharedPreferences.boolean("advanced_novibration", false)
     var forceNewYearDrawer by sharedPreferences.boolean("advanced_nydrawer", false)
     var noTyping by sharedPreferences.boolean("advanced_notyping", false)

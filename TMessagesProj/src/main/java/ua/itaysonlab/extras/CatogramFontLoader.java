@@ -36,6 +36,7 @@ public class CatogramFontLoader {
 
     public static Typeface getBold() {
         if (CatogramConfig.INSTANCE.getSystemFonts()) {
+            if (CatogramConfig.INSTANCE.getSystemFontsTT()) return AndroidUtilities.getTypeface("fonts/TTCommons-DemiBold.ttf");
             return sysBold;
         } else {
             return AndroidUtilities.getTypeface("fonts/rmedium.ttf");
@@ -44,6 +45,7 @@ public class CatogramFontLoader {
 
     public static Typeface getBoldItalic() {
         if (CatogramConfig.INSTANCE.getSystemFonts()) {
+            if (CatogramConfig.INSTANCE.getSystemFontsTT()) return AndroidUtilities.getTypeface("fonts/TTCommons-DemiBoldItalic.ttf");
             return sysBoldItalic;
         } else {
             return AndroidUtilities.getTypeface("fonts/rmediumitalic.ttf");
@@ -52,6 +54,7 @@ public class CatogramFontLoader {
 
     public static Typeface getItalic() {
         if (CatogramConfig.INSTANCE.getSystemFonts()) {
+            if (CatogramConfig.INSTANCE.getSystemFontsTT()) return AndroidUtilities.getTypeface("fonts/TTCommons-Italic.ttf");
             return sysItalic;
         } else {
             return AndroidUtilities.getTypeface("fonts/ritalic.ttf");
