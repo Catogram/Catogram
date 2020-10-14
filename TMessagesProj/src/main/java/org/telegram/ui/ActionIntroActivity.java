@@ -436,7 +436,7 @@ public class ActionIntroActivity extends BaseFragment implements LocationControl
                 desctiptionLines[a * 2].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
                 desctiptionLines[a * 2].setText(String.format(LocaleController.isRTL ? ".%d" : "%d.", a + 1));
-                desctiptionLines[a * 2].setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
+                desctiptionLines[a * 2].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
                 desctiptionLines[a * 2 + 1] = new TextView(context);
                 desctiptionLines[a * 2 + 1].setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));

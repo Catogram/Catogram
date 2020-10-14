@@ -6766,7 +6766,7 @@ public class Theme {
         if (!fontsOnly && chat_msgInDrawable == null) {
             chat_infoPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             chat_stickerCommentCountPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-            chat_stickerCommentCountPaint.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
+            chat_stickerCommentCountPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             chat_docNamePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             chat_docNamePaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
             chat_docBackPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

@@ -475,7 +475,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         titleTextView = new TextView(context);
         titleTextView.setTextColor(Theme.getColor(Theme.key_player_actionBarTitle));
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
-        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
+        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         titleTextView.setEllipsize(TextUtils.TruncateAt.END);
         titleTextView.setSingleLine(true);
         playerLayout.addView(titleTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 20, 20, 72, 0));
@@ -692,7 +692,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         emptyTitleTextView.setTextColor(Theme.getColor(Theme.key_dialogEmptyText));
         emptyTitleTextView.setGravity(Gravity.CENTER);
         emptyTitleTextView.setText(LocaleController.getString("NoAudioFound", R.string.NoAudioFound));
-        emptyTitleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
+        emptyTitleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         emptyTitleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
         emptyTitleTextView.setPadding(AndroidUtilities.dp(40), 0, AndroidUtilities.dp(40), 0);
         emptyView.addView(emptyTitleTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 0, 11, 0, 0));

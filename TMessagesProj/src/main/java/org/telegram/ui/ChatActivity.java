@@ -683,10 +683,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         public UnreadCounterTextView(Context context) {
             super(context);
             textPaint.setTextSize(AndroidUtilities.dp(13));
-            textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
+            textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
             layoutPaint.setTextSize(AndroidUtilities.dp(15));
-            layoutPaint.setTypeface(AndroidUtilities.getTypeface("fonts/TTCommons-Bold.ttf"));
+            layoutPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         }
 
         public void setText(CharSequence text, boolean animatedFromBottom) {
