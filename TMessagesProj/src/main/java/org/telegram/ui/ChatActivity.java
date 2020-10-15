@@ -2143,6 +2143,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     }
                     updateChatListViewTopPadding();
                     chatListView.setItemAnimator(null);
+                    chatListView.invalidate();
                 }
 
                 @Override
@@ -2357,6 +2358,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     int chatListViewTop = (int) chatListView.getY();
                     int chatListViewBottom = chatListViewTop + chatListView.getMeasuredHeight();
                     float listTop = chatListView.getTop() + chatListView.getPaddingTop() - AndroidUtilities.dp(4);
+                    if (threadMessageId != 0 && !replyMessageVisible) {
+                        listTop += AndroidUtilities.dp(48);
+                    }
                     MessageObject.GroupedMessages scrimGroup;
                     if (scrimView instanceof ChatMessageCell) {
                         scrimGroup = ((ChatMessageCell) scrimView).getCurrentMessagesGroup();
@@ -2913,6 +2917,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             private boolean wasTrackingVibrate;
             private float replyButtonProgress;
             private long lastReplyButtonAnimationTime;
+            private float cilpTop;
 
             private boolean ignoreLayout;
 
@@ -2932,6 +2937,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (emptyViewContainer != null) {
                     emptyViewContainer.setTranslationY(translationY / 2f);
                 }
+                invalidate();
             }
 
 
@@ -3225,7 +3231,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
             }
 
-
             ArrayList<MessageObject.GroupedMessages> drawingGroups = new ArrayList<>(10);
 
             @Override
@@ -3428,8 +3433,14 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         }
                     }
                 }
-
+                canvas.save();
+                cilpTop = actionBar.getY() + actionBar.getMeasuredHeight() - getY();
+                if (pinnedMessageView != null) {
+                    cilpTop += Math.max(0, AndroidUtilities.dp(48) + pinnedMessageEnterOffset);
+                }
+                canvas.clipRect(0, cilpTop, getMeasuredWidth(), getMeasuredHeight());
                 super.dispatchDraw(canvas);
+                canvas.restore();
             }
 
             @Override
@@ -3439,7 +3450,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 boolean skipDraw = child == scrimView;
                 ChatMessageCell cell;
 
-                if (child.getY() > getMeasuredHeight() || child.getY() + child.getMeasuredHeight() < 0) {
+                if (child.getY() > getMeasuredHeight() || child.getY() + child.getMeasuredHeight() < cilpTop) {
                     skipDraw = true;
                 }
 
@@ -11525,20 +11536,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 boolean updateChat = false;
                 boolean hasFromMe = false;
                 ArrayList<MessageObject> arr = (ArrayList<MessageObject>) args[1];
-                if (currentEncryptedChat != null && arr.size() == 1) {
-                    MessageObject obj = arr.get(0);
-
-                    if (currentEncryptedChat != null && obj.isOut() && obj.messageOwner.action instanceof TLRPC.TL_messageEncryptedAction &&
-                            obj.messageOwner.action.encryptedAction instanceof TLRPC.TL_decryptedMessageActionSetMessageTTL && getParentActivity() != null) {
-                        if (AndroidUtilities.getPeerLayerVersion(currentEncryptedChat.layer) < 17 && currentEncryptedChat.ttl > 0 && currentEncryptedChat.ttl <= 60) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                            builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
-                            builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
-                            builder.setMessage(LocaleController.formatString("CompatibilityChat", R.string.CompatibilityChat, currentUser.first_name, currentUser.first_name));
-                            showDialog(builder.create());
-                        }
-                    }
-                }
 
                 if (chatListItemAniamtor != null) {
                     chatListItemAniamtor.setShouldAnimateEnterFromBottom(true);
@@ -14612,6 +14609,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 animator.addUpdateListener(animation -> {
                     pinnedMessageEnterOffset = (float) animation.getAnimatedValue();
                     invalidateChatListViewTopPadding();
+                    chatListView.invalidate();
                 });
                 pinnedMessageViewAnimator.playTogether(animator);
                 pinnedMessageViewAnimator.setDuration(200);
@@ -14635,6 +14633,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else {
                 pinnedMessageEnterOffset = -AndroidUtilities.dp(50);
                 pinnedMessageView.setVisibility(View.GONE);
+                chatListView.invalidate();
             }
             return true;
         }
@@ -14708,6 +14707,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                 }
                                 pinnedMessageEnterOffset = translationY;
                                 invalidateChatListViewTopPadding();
+                                chatListView.invalidate();
                             }
                         });
                         pinnedMessageView.setVisibility(View.VISIBLE);
@@ -14733,6 +14733,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     } else {
                         pinnedMessageEnterOffset = 0;
                         invalidateChatListViewTopPadding();
+                        chatListView.invalidate();
                         if (firstLoading) {
                             updateChatListViewTopPadding();
                         }
@@ -19935,8 +19936,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_inTimeText));
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_outTimeText));
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_inTimeSelectedText));
-        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_adminText));
-        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_adminSelectedText));
+        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_inAdminText));
+        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_inAdminSelectedText));
+        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_outAdminText));
+        themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_outAdminSelectedText));
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_outTimeSelectedText));
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_inAudioPerformerText));
         themeDescriptions.add(new ThemeDescription(chatListView, 0, new Class[]{ChatMessageCell.class}, null, null, null, Theme.key_chat_inAudioPerformerSelectedText));

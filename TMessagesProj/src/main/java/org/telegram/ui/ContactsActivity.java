@@ -230,7 +230,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 } else if (id == sort_button) {
                     SharedConfig.toggleSortContactsByName();
                     sortByName = SharedConfig.sortContactsByName;
-                    listViewAdapter.setSortType(sortByName ? 1 : 2);
+                    listViewAdapter.setSortType(sortByName ? 1 : 2, false);
                     sortItem.setIcon(sortByName ? R.drawable.contacts_sort_time : R.drawable.contacts_sort_name);
                 }
             }
@@ -334,7 +334,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 }
             }
         };
-        listViewAdapter.setSortType(sortItem != null ? (sortByName ? 1 : 2) : 0);
+        listViewAdapter.setSortType(sortItem != null ? (sortByName ? 1 : 2) : 0, false);
         listViewAdapter.setDisableSections(disableSections);
 
         fragmentView = new FrameLayout(context) {
@@ -862,6 +862,9 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
     public void didReceivedNotification(int id, int account, Object... args) {
         if (id == NotificationCenter.contactsDidLoad) {
             if (listViewAdapter != null) {
+                if (!sortByName) {
+                    listViewAdapter.setSortType(2, true);
+                }
                 listViewAdapter.notifyDataSetChanged();
             }
         } else if (id == NotificationCenter.updateInterfaces) {

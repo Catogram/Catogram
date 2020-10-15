@@ -46,7 +46,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision:16.2.0'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
-
     implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
     implementation 'com.facebook.rebound:rebound:0.3.8'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
@@ -301,7 +300,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2100
+    defaultConfig.versionCode = 2103
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
