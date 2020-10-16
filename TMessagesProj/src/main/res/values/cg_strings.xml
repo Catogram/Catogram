@@ -210,5 +210,5 @@
     <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
     <string name="ActionBarTitle">Chats</string>
     <string name="CG_ArchiveOnPull">Archive on pulldown</string>
-    <string name="CG_ArchiveOnPull_Desc">Automatically open archive on pulldowm</string>
+    <string name="CG_ArchiveOnPull_Desc">Automatically open archive on pulldown</string>
 </resources>
