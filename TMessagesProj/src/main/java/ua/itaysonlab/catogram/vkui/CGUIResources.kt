@@ -1,3 +1,7 @@
 package ua.itaysonlab.catogram.vkui
 
-class CGUIResources
+import android.content.res.Resources
+
+class CGUIResources: Resources() {
+
+}
