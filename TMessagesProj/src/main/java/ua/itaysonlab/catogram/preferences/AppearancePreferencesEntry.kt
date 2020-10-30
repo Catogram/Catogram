@@ -163,18 +163,18 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.systemFonts = it
                 }
             }
-
-            /*switch {
-                title = "TT Commons [beta]"
+            if (CGControversive.isControversiveFeaturesEnabled()) {
+            switch {
+                title = "VK Sans as bold font [alpha]"
                 summary = "enable System Fonts first"
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.systemFontsTT
                 }) {
                     CatogramConfig.systemFontsTT = it
                 }
-            }*/
+            }
+           }
 
             switch {
                 title = LocaleController.getString("AS_Vibration", R.string.AS_Vibration)
