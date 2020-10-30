@@ -19,4 +19,8 @@ public class CGControversive {
     public static boolean noReading() {
         return isControversiveFeaturesEnabled() && CatogramConfig.INSTANCE.getControversiveNoReading();
     }
+
+    public static boolean noPeekTimeout() {
+        return isControversiveFeaturesEnabled();
+    }
 }

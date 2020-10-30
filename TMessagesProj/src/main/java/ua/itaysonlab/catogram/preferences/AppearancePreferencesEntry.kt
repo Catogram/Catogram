@@ -8,6 +8,7 @@ import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
 import org.telegram.ui.LaunchActivity
+import ua.itaysonlab.catogram.CGControversive
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 import ua.itaysonlab.extras.CatogramExtras

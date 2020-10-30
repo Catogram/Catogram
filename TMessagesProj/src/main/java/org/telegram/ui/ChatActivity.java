@@ -226,6 +226,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import kotlin.Unit;
+import ua.itaysonlab.catogram.CGControversive;
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
@@ -1456,28 +1457,30 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
 
         if (chatInvite != null) {
-            int timeout = chatInvite.expires - getConnectionsManager().getCurrentTime();
-            if (timeout < 0) {
-                timeout = 10;
-            }
-            AndroidUtilities.runOnUIThread(chatInviteRunnable = () -> {
-                chatInviteRunnable = null;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                if (ChatObject.isChannel(currentChat) && !currentChat.megagroup) {
-                    builder.setMessage(LocaleController.getString("JoinByPeekChannelText", R.string.JoinByPeekChannelText));
-                    builder.setTitle(LocaleController.getString("JoinByPeekChannelTitle", R.string.JoinByPeekChannelTitle));
-                } else {
-                    builder.setMessage(LocaleController.getString("JoinByPeekGroupText", R.string.JoinByPeekGroupText));
-                    builder.setTitle(LocaleController.getString("JoinByPeekGroupTitle", R.string.JoinByPeekGroupTitle));
+            if (CGControversive.noPeekTimeout()) {
+                int timeout = chatInvite.expires - getConnectionsManager().getCurrentTime();
+                if (timeout < 0) {
+                    timeout = 10;
                 }
-                builder.setPositiveButton(LocaleController.getString("JoinByPeekJoin", R.string.JoinByPeekJoin), (dialogInterface, i) -> {
-                    if (bottomOverlayChatText != null) {
-                        bottomOverlayChatText.callOnClick();
+                AndroidUtilities.runOnUIThread(chatInviteRunnable = () -> {
+                    chatInviteRunnable = null;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+                    if (ChatObject.isChannel(currentChat) && !currentChat.megagroup) {
+                        builder.setMessage(LocaleController.getString("JoinByPeekChannelText", R.string.JoinByPeekChannelText));
+                        builder.setTitle(LocaleController.getString("JoinByPeekChannelTitle", R.string.JoinByPeekChannelTitle));
+                    } else {
+                        builder.setMessage(LocaleController.getString("JoinByPeekGroupText", R.string.JoinByPeekGroupText));
+                        builder.setTitle(LocaleController.getString("JoinByPeekGroupTitle", R.string.JoinByPeekGroupTitle));
                     }
-                });
-                builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), (dialogInterface, i) -> finishFragment());
-                showDialog(builder.create());
-            }, timeout * 1000);
+                    builder.setPositiveButton(LocaleController.getString("JoinByPeekJoin", R.string.JoinByPeekJoin), (dialogInterface, i) -> {
+                        if (bottomOverlayChatText != null) {
+                            bottomOverlayChatText.callOnClick();
+                        }
+                    });
+                    builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), (dialogInterface, i) -> finishFragment());
+                    showDialog(builder.create());
+                }, timeout * 1000);
+            }
         }
         return true;
     }
