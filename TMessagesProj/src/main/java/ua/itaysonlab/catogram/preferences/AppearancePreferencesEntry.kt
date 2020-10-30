@@ -222,12 +222,14 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract listOf(
                             Pair(0, LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)),
                             Pair(1, LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)),
-                            Pair(2, LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer))
+                            Pair(2, LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)),
+                            Pair(3, "Halloween")
                     )
                 }, {
                     return@contract when (CatogramConfig.redesign_messageOption) {
                         1 -> LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)
                         2 -> LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)
+                        3 -> "Halloween"
                         else -> LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)
                     }
                 }) {
@@ -236,14 +238,22 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                         0 -> {
                             CatogramConfig.forceNewYearDrawer = false
                             CatogramConfig.forceSVDrawer = false
+                            CatogramConfig.forceHLDrawer = false
                         }
                         1 -> {
                             CatogramConfig.forceNewYearDrawer = false
                             CatogramConfig.forceSVDrawer = true
+                            CatogramConfig.forceHLDrawer = false
                         }
                         2 -> {
                             CatogramConfig.forceNewYearDrawer = true
                             CatogramConfig.forceSVDrawer = false
+                            CatogramConfig.forceHLDrawer = false
+                        }
+                        3 -> {
+                            CatogramConfig.forceNewYearDrawer = false
+                            CatogramConfig.forceSVDrawer = false
+                            CatogramConfig.forceHLDrawer = true
                         }
                     }
                 }

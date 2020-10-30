@@ -43,6 +43,7 @@ object CatogramConfig {
     var newTabs_noUnread by sharedPreferences.boolean("cg_notabnum", false)
     var newTabs_hideAllChats by sharedPreferences.boolean("cg_ntallchats", false)
     var forceSVDrawer by sharedPreferences.boolean("cg_sv_drawer", false)
+    var forceHLDrawer by sharedPreferences.boolean("cg_hl_drawer", false)
 
     var redesign_messageOption by sharedPreferences.int("cg_messageOption", 3)
     var redesign_iconOption by sharedPreferences.int("cg_iconoption", 0)
