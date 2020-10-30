@@ -94,18 +94,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
-                title = LocaleController.getString("CG_NewRepostUI", R.string.CG_NewRepostUI)
-                summary = LocaleController.getString("CG_NewRepostUI_Desc", R.string.CG_NewRepostUI_Desc)
-                divider = true
-
-                contract({
-                    return@contract CatogramConfig.newRepostUI
-                }) {
-                    CatogramConfig.newRepostUI = it
-                }
-            }
-
-            switch {
                 title = LocaleController.getString("CG_SmoothKbd", R.string.CG_SmoothKbd)
                 summary = LocaleController.getString("CG_SmoothKbd_Desc", R.string.CG_SmoothKbd_Desc)
                 divider = true

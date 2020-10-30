@@ -8,6 +8,9 @@ import org.telegram.messenger.MessagesController
 import ua.itaysonlab.catogram.preferences.ktx.boolean
 import ua.itaysonlab.catogram.preferences.ktx.int
 import ua.itaysonlab.catogram.ui.CatogramToasts
+import ua.itaysonlab.catogram.vkui.icon_replaces.BaseIconReplace
+import ua.itaysonlab.catogram.vkui.icon_replaces.NoIconReplace
+import ua.itaysonlab.catogram.vkui.icon_replaces.VkIconReplace
 
 object CatogramConfig {
     private val sharedPreferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE)
@@ -35,7 +38,6 @@ object CatogramConfig {
     var contactsNever by sharedPreferences.boolean("contactsNever", false)
     var searchInActionbar by sharedPreferences.boolean("cg_chats_searchbar", false)
     var confirmCalls by sharedPreferences.boolean("cg_confirmcalls", false)
-    var newRepostUI by sharedPreferences.boolean("cg_chatrepost_everywhere", false)
     var profiles_noEdgeTapping by sharedPreferences.boolean("cg_prof_edge", false)
     var profiles_openOnTap by sharedPreferences.boolean("cg_prof_open", false)
     var profiles_alwaysExpand by sharedPreferences.boolean("cg_prof_expand", false)
@@ -60,6 +62,15 @@ object CatogramConfig {
     var forceLeftFab by sharedPreferences.boolean("cg_fab_invertgravity", false)
 
     var newTabs_iconsV2_mode by sharedPreferences.int("cg_tabs_v2", 0)
+
+    var iconReplacement by sharedPreferences.int("cg_iconpack", 0)
+
+    fun getIconReplacement(): BaseIconReplace {
+        return when (iconReplacement) {
+            1 -> VkIconReplace()
+            else -> NoIconReplace()
+        }
+    }
 
     //var flatChannelStyle by sharedPreferences.boolean("cg_flat_channels", false)
     var flatChannelStyle = true

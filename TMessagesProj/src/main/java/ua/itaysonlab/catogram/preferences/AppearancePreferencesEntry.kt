@@ -7,6 +7,7 @@ import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
+import org.telegram.ui.LaunchActivity
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 import ua.itaysonlab.extras.CatogramExtras
@@ -36,13 +37,15 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                             Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
                             Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
                             Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)),
-                            Pair(3, LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS))
+                            Pair(3, LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)),
+                            Pair(4, LocaleController.getString("CG_MessageMenuOption_A", R.string.CG_MessageMenuOption_A))
                     )
                 }, {
                     return@contract when (CatogramConfig.redesign_messageOption) {
                         1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
                         2 -> LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)
                         3 -> LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)
+                        4 -> LocaleController.getString("CG_MessageMenuOption_A", R.string.CG_MessageMenuOption_A)
                         else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
                     }
                 }) {
@@ -52,21 +55,31 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                             CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = false
                             CatogramConfig.useTgxMenuSlideSheet = false
+                            CatogramConfig.useAirUiPopup = false
                         }
                         1 -> {
                             CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = true
                             CatogramConfig.useTgxMenuSlideSheet = false
+                            CatogramConfig.useAirUiPopup = false
                         }
                         2 -> {
                             CatogramConfig.useCupertinoLib = true
                             CatogramConfig.useTgxMenuSlide = false
                             CatogramConfig.useTgxMenuSlideSheet = false
+                            CatogramConfig.useAirUiPopup = false
                         }
                         3 -> {
                             CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = false
                             CatogramConfig.useTgxMenuSlideSheet = true
+                            CatogramConfig.useAirUiPopup = false
+                        }
+                        4 -> {
+                            CatogramConfig.useCupertinoLib = false
+                            CatogramConfig.useTgxMenuSlide = false
+                            CatogramConfig.useTgxMenuSlideSheet = false
+                            CatogramConfig.useAirUiPopup = true
                         }
                     }
                 }
@@ -91,6 +104,26 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }) {
                     CatogramConfig.redesign_iconOption = it
                     IconExtras.setIcon(it)
+                }
+            }
+
+            list {
+                title = LocaleController.getString("CG_IconReplacements", R.string.CG_IconReplacements)
+                divider = false
+
+                contractIcons({
+                    return@contractIcons listOf(
+                            Triple(0, LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default), R.drawable.menu_settings),
+                            Triple(1, LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI), R.drawable.settings_outline_28)
+                    )
+                }, {
+                    return@contractIcons when (CatogramConfig.redesign_iconOption) {
+                        1 -> LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI)
+                        else -> LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default)
+                    }
+                }) {
+                    CatogramConfig.iconReplacement = it
+                    (bf.parentActivity as? LaunchActivity)?.reloadResources()
                 }
             }
         }

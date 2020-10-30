@@ -13,42 +13,45 @@ import android.util.TypedValue
 import androidx.annotation.RequiresApi
 import com.google.android.exoplayer2.util.Log
 import org.xmlpull.v1.XmlPullParserException
+import ua.itaysonlab.catogram.CatogramConfig
+import ua.itaysonlab.catogram.vkui.icon_replaces.BaseIconReplace
+import ua.itaysonlab.catogram.vkui.icon_replaces.NoIconReplace
 import java.io.IOException
 import java.io.InputStream
 
 @Suppress("DEPRECATION")
 class CGUIResources(private val wrapped: Resources): Resources(wrapped.assets, wrapped.displayMetrics, wrapped.configuration) {
+    var activeReplacement: BaseIconReplace = CatogramConfig.getIconReplacement()
+    fun reloadReplacements() {
+        activeReplacement = CatogramConfig.getIconReplacement()
+    }
+    
     @SuppressLint("UseCompatLoadingForDrawables")
     @Throws(NotFoundException::class)
     override fun getDrawable(id: Int): Drawable? {
-        logAnId("getDrawable/legacy", id)
-        return wrapped.getDrawable(id)
+        return wrapped.getDrawable(activeReplacement.wrap(id))
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Throws(NotFoundException::class)
     override fun getDrawable(id: Int, theme: Theme?): Drawable? {
-        logAnId("getDrawable", id)
-        return wrapped.getDrawable(id, theme)
+        return wrapped.getDrawable(activeReplacement.wrap(id), theme)
     }
 
     @Throws(NotFoundException::class)
     override fun getDrawableForDensity(id: Int, density: Int): Drawable? {
-        logAnId("getDrawableForDensity/legacy", id)
-        return wrapped.getDrawableForDensity(id, density)
+        return wrapped.getDrawableForDensity(activeReplacement.wrap(id), density)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     override fun getDrawableForDensity(id: Int, density: Int, theme: Theme?): Drawable? {
-        logAnId("getDrawableForDensity", id)
-        return wrapped.getDrawableForDensity(id, density, theme)
+        return wrapped.getDrawableForDensity(activeReplacement.wrap(id), density, theme)
     }
 
     private fun logAnId(str: String, id: Int) {
         Log.d("CGUIResources", "[$str] >> id: $id {name: ${getResourceName(id)}}")
     }
-
 
     //
 

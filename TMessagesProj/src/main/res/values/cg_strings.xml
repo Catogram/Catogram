@@ -127,6 +127,7 @@
     <string name="CG_MessageMenuOption_TGX">Telegram X-styled (slide)</string>
     <string name="CG_MessageMenuOption_CL">CupertinoLib (beta, iOS-styled)</string>
     <string name="CG_MessageMenuOption_TGXS">Telegram X-styled (classic)</string>
+    <string name="CG_MessageMenuOption_A">Modern popup</string>
     <string name="CG_MessageMenuOption_Default">Default</string>
 
     <string name="CG_NewDrawer">Use the new drawer</string>
@@ -211,4 +212,8 @@
     <string name="ActionBarTitle">Chats</string>
     <string name="CG_ArchiveOnPull">Archive on pulldown</string>
     <string name="CG_ArchiveOnPull_Desc">Automatically open archive on pulldown</string>
+
+    <string name="CG_IconReplacements">Icon replacements</string>
+    <string name="CG_IconReplacement_VKUI">VKUI Icons</string>
+    <string name="CG_IconReplacement_Default">Default</string>
 </resources>

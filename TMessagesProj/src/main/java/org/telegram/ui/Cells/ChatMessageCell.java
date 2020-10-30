@@ -135,9 +135,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 
-import ru.utkacraft.cupertinolib.popup.ContextTouchListener;
 import ua.itaysonlab.catogram.CatogramConfig;
-import ua.itaysonlab.extras.TgxExtras;
+import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
 
 public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate, ImageReceiver.ImageReceiverDelegate, DownloadController.FileDownloadProgressListener, TextSelectionHelper.SelectableView {
 

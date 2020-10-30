@@ -130,8 +130,6 @@ import java.util.List;
 import java.util.Locale;
 
 import ua.itaysonlab.CatogramLogger;
-import ua.itaysonlab.catogram.CatogramConfig;
-import ua.itaysonlab.extras.TgxExtras;
 
 public class ChatActivityEnterView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
 

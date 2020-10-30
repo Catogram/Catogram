@@ -1,20 +1,13 @@
-package ua.itaysonlab.extras
+package ua.itaysonlab.catogram.message_ctx_menu
 
 import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import androidx.core.view.inputmethod.InputContentInfoCompat
-import com.google.android.exoplayer2.util.Log
 import org.telegram.messenger.*
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment
 import ua.itaysonlab.redesign.sheet.TgxMessageMenuSheetFragment
 import ua.itaysonlab.redesign.slides.TgxMessageMenuFragment
-import java.io.File
-import java.io.FileOutputStream
 
 object TgxExtras {
     @JvmStatic

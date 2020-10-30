@@ -1,4 +1,4 @@
-package ua.itaysonlab.extras;
+package ua.itaysonlab.catogram.message_ctx_menu;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.utkacraft.cupertinolib.popup.contextmenu2.ContextMenu2;
+import ua.itaysonlab.extras.CatogramExtras;
 
 public class CupertinoExtras {
     public static int lighten(int color, float factor) {

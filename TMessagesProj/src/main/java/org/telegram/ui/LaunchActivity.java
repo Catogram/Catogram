@@ -153,6 +153,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         if (res == null) res = new CGUIResources(super.getResources());
         return res;
     }
+    public void reloadResources() {
+        res.reloadReplacements();
+    }
 
     @Override
     public void addBackPressedListener(BottomSlideFragment fragment) {

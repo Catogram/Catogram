@@ -13,7 +13,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -45,7 +44,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -85,7 +83,6 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -99,7 +96,6 @@ import androidx.recyclerview.widget.ChatListItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManagerFixed;
 
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
-import com.google.android.exoplayer2.util.Log;
 
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.AndroidUtilities;
@@ -231,6 +227,7 @@ import java.util.regex.Pattern;
 
 import kotlin.Unit;
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
 import ua.itaysonlab.catogram.ui.CatogramToasts;
 
@@ -1743,7 +1740,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     Integer end = ids.get(ids.size() - 1);
                     for (int i = 0; i < messages.size(); i++) {
                         Integer msgId = messages.get(i).getId();
-                        if (msgId > begin && msgId < end && !selectedMessagesIds[0].contains(msgId)) {
+                        if (msgId > begin && msgId < end && !(selectedMessagesIds[0].indexOfKey(msgId) >= 0)) {
                             addToSelectedMessages(messages.get(i), true);
                             updateActionModeTitle();
                             updateVisibleRows();
@@ -6696,11 +6693,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlert() {
-        if (CatogramConfig.INSTANCE.getNewRepostUI()) {
-            showShareAlert();
-        } else {
-            openForward();
-        }
+        openForward();
     }
 
     private void createCGShareAlertSelected() {
@@ -6708,39 +6701,16 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlertSelected(boolean noAuthor) {
-        if (CatogramConfig.INSTANCE.getNewRepostUI()) {
-            forwardingMessage = selectedObject;
-            forwardingMessageGroup = selectedObjectGroup;
-            ArrayList<MessageObject> fmessages = new ArrayList<>();
-            if (forwardingMessageGroup == null) {
-                fmessages.add(forwardingMessage);
-            } else fmessages.addAll(forwardingMessageGroup.messages);
-            showDialog(new ShareAlert(getParentActivity(), fmessages, null, ChatObject.isChannel(currentChat), null, false) {
-                @Override
-                public void dismissInternal() {
-                    super.dismissInternal();
-                    AndroidUtilities.requestAdjustResize(getParentActivity(), classGuid);
-                    if (chatActivityEnterView.getVisibility() == View.VISIBLE) {
-                        fragmentView.requestLayout();
-                    }
-                    hideActionMode();
-                    updatePinnedMessageView(true);
-                }
-            });
-            AndroidUtilities.setAdjustResizeToNothing(getParentActivity(), classGuid);
-            fragmentView.requestLayout();
-        } else {
-            forwardingMessage = selectedObject;
-            forwardingMessageGroup = selectedObjectGroup;
-            Bundle args = new Bundle();
-            args.putBoolean("onlySelect", true);
-            args.putInt("dialogsType", 3);
-            args.putInt("messagesCount", forwardingMessageGroup == null ? 1 : forwardingMessageGroup.messages.size());
-            args.putInt("hasPoll", forwardingMessage.isPoll() ? (forwardingMessage.isPublicPoll() ? 2 : 1) : 0);
-            DialogsActivity fragment = new DialogsActivity(args);
-            fragment.setDelegate(this);
-            presentFragment(fragment);
-        }
+        forwardingMessage = selectedObject;
+        forwardingMessageGroup = selectedObjectGroup;
+        Bundle args = new Bundle();
+        args.putBoolean("onlySelect", true);
+        args.putInt("dialogsType", 3);
+        args.putInt("messagesCount", forwardingMessageGroup == null ? 1 : forwardingMessageGroup.messages.size());
+        args.putInt("hasPoll", forwardingMessage.isPoll() ? (forwardingMessage.isPublicPoll() ? 2 : 1) : 0);
+        DialogsActivity fragment = new DialogsActivity(args);
+        fragment.setDelegate(this);
+        presentFragment(fragment);
     }
 
     private void showShareAlert() {
@@ -15630,7 +15600,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         return false;
     }
 
-    private void updatePinnedMessageView(boolean animated) {
+    public void updatePinnedMessageView(boolean animated) {
         updatePinnedMessageView(animated, 0);
     }
 
@@ -17598,7 +17568,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
 
             String text = selectedObject.messageText.toString();
-            if (text != null && !TextUtils.isEmpty(text) && !selectedObject.isService()) {
+            if (text != null && !TextUtils.isEmpty(text)) {
                 items.add(LocaleController.getString("CG_Translate", R.string.CG_Translate));
                 options.add(990);
                 icons.add(R.drawable.round_translate_24);
@@ -17609,13 +17579,13 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             icons.add(R.drawable.menu_saved_cg);
 
             if (CatogramConfig.INSTANCE.getUseCupertinoLib()) {
-                ua.itaysonlab.extras.CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption);
+                CupertinoExtras.initViewHolder(options, items, icons, getParentActivity(), chatListView, getParentActivity().findViewById(android.R.id.content), chatListView.getChildViewHolder(v), message.isOutOwner(), message.needDrawAvatar(), this::processSelectedOption);
                 return;
             }
 
             if (CatogramConfig.INSTANCE.getUseTgxMenuSlide()) {
                 AndroidUtilities.hideKeyboard(getParentActivity().findViewById(android.R.id.content));
-                ua.itaysonlab.extras.TgxExtras.createSlideMenu(options, items, icons, getParentActivity(), (id) -> {
+                TgxExtras.createSlideMenu(options, items, icons, getParentActivity(), (id) -> {
                     this.processSelectedOption(id);
                     return Unit.INSTANCE;
                 }).show(getParentActivity());
@@ -17624,10 +17594,18 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
             if (CatogramConfig.INSTANCE.getUseTgxMenuSlideSheet()) {
                 AndroidUtilities.hideKeyboard(getParentActivity().findViewById(android.R.id.content));
-                ua.itaysonlab.extras.TgxExtras.createSheetMenu(options, items, icons, getParentActivity(), (id) -> {
+                TgxExtras.createSheetMenu(options, items, icons, getParentActivity(), (id) -> {
                     this.processSelectedOption(id);
                     return Unit.INSTANCE;
                 }).show(((AppCompatActivity) getParentActivity()).getSupportFragmentManager(), null);
+                return;
+            }
+
+            if (CatogramConfig.INSTANCE.getUseAirUiPopup()) {
+                AirExtras.showAirMenu(options, items, icons, getParentActivity(), v, (id) -> {
+                    this.processSelectedOption(id);
+                    return Unit.INSTANCE;
+                });
                 return;
             }
 

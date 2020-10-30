@@ -3583,7 +3583,7 @@ public class MediaDataController extends BaseController {
                 ShortcutManagerCompat.removeDynamicShortcuts(ApplicationLoader.applicationContext, arrayList);
                 if (Build.VERSION.SDK_INT >= 30) {
                     ShortcutManager shortcutManager = ApplicationLoader.applicationContext.getSystemService(ShortcutManager.class);
-                    shortcutManager.removeLongLivedShortcuts(arrayList);
+                    //shortcutManager.removeLongLivedShortcuts(arrayList); TODO
                 }
             } else {
                 int lower_id = (int) did;
