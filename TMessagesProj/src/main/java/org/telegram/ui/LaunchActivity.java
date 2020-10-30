@@ -19,6 +19,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -139,11 +140,19 @@ import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import ua.itaysonlab.catogram.PlayOTA;
+import ua.itaysonlab.catogram.vkui.CGUIResources;
 import ua.itaysonlab.redesign.BottomSlideFragment;
 
 public class LaunchActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler, BottomSlideFragment.BottomSlideActivityInterface, ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
     public BillingProcessor bp;
     private List<BottomSlideFragment> slideFragments = new ArrayList<>();
+
+    private CGUIResources res = null;
+    @Override
+    public Resources getResources() {
+        if (res == null) res = new CGUIResources(super.getResources());
+        return res;
+    }
 
     @Override
     public void addBackPressedListener(BottomSlideFragment fragment) {

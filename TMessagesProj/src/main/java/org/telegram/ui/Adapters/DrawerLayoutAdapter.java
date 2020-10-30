@@ -257,7 +257,7 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
             contactsIcon = R.drawable.menu_contacts;
             callsIcon = R.drawable.menu_calls;
             savedIcon = R.drawable.menu_saved_cg;
-            settingsIcon = R.drawable.vkui_settings_outline_28;
+            settingsIcon = R.drawable.menu_settings;
         }
 
         items.add(new Item(6, LocaleController.getString("Contacts", R.string.Contacts), contactsIcon));

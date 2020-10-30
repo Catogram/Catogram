@@ -2278,7 +2278,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             botButton = new ImageView(context);
             botButton.setImageDrawable(botButtonDrawablel = new ReplaceableIconDrawable(context));
             botButtonDrawablel.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_messagePanelIcons), PorterDuff.Mode.MULTIPLY));
-            botButtonDrawablel.setIcon(R.drawable.ic_keyboard_bots_outline_28, false);
+            botButtonDrawablel.setIcon(R.drawable.input_bot2, false);
             botButton.setScaleType(ImageView.ScaleType.CENTER);
             if (Build.VERSION.SDK_INT >= 21) {
                 botButton.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.getColor(Theme.key_listSelector)));
@@ -2314,7 +2314,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             });
 
             notifyButton = new ImageView(context);
-            notifyButton.setImageResource(silent ? R.drawable.ic_notification_disable_outline_28 : R.drawable.vkui_notifications_28);
+            notifyButton.setImageResource(silent ? R.drawable.input_notify_off : R.drawable.input_notify_on);
             notifyButton.setContentDescription(silent ? LocaleController.getString("AccDescrChanSilentOn", R.string.AccDescrChanSilentOn) : LocaleController.getString("AccDescrChanSilentOff", R.string.AccDescrChanSilentOff));
             notifyButton.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_messagePanelIcons), PorterDuff.Mode.MULTIPLY));
             notifyButton.setScaleType(ImageView.ScaleType.CENTER);
@@ -2330,7 +2330,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                 @Override
                 public void onClick(View v) {
                     silent = !silent;
-                    notifyButton.setImageResource(silent ? R.drawable.ic_notification_disable_outline_28 : R.drawable.vkui_notifications_28);
+                    notifyButton.setImageResource(silent ? R.drawable.input_notify_off : R.drawable.input_notify_on);
                     MessagesController.getNotificationsSettings(currentAccount).edit().putBoolean("silent_" + dialog_id, silent).commit();
                     NotificationsController.getInstance(currentAccount).updateServerNotificationsSettings(dialog_id);
                     try {
@@ -2354,7 +2354,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
 
             attachButton = new ImageView(context);
             attachButton.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_messagePanelIcons), PorterDuff.Mode.MULTIPLY));
-            attachButton.setImageResource(R.drawable.ic_attach_outline_28);
+            attachButton.setImageResource(R.drawable.input_attach);
             attachButton.setScaleType(ImageView.ScaleType.CENTER);
             if (Build.VERSION.SDK_INT >= 21) {
                 attachButton.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.getColor(Theme.key_listSelector)));
@@ -2658,7 +2658,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         audioSendButton = new ImageView(context);
         audioSendButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         audioSendButton.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_messagePanelIcons), PorterDuff.Mode.MULTIPLY));
-        audioSendButton.setImageResource(R.drawable.ic_voice_outline_28);
+        audioSendButton.setImageResource(R.drawable.input_mic);
         audioSendButton.setPadding(0, 0, AndroidUtilities.dp(4), 0);
         audioSendButton.setContentDescription(LocaleController.getString("AccDescrVoiceMessage", R.string.AccDescrVoiceMessage));
         audioSendButton.setFocusable(true);
@@ -2669,7 +2669,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             videoSendButton = new ImageView(context);
             videoSendButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             videoSendButton.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chat_messagePanelIcons), PorterDuff.Mode.MULTIPLY));
-            videoSendButton.setImageResource(R.drawable.ic_videocam_outline_28);
+            videoSendButton.setImageResource(R.drawable.input_video);
             videoSendButton.setPadding(0, 0, AndroidUtilities.dp(4), 0);
             videoSendButton.setContentDescription(LocaleController.getString("AccDescrVideoMessage", R.string.AccDescrVideoMessage));
             videoSendButton.setFocusable(true);
@@ -2706,13 +2706,13 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         });
 
         if (isInScheduleMode()) {
-            sendButtonDrawable = context.getResources().getDrawable(R.drawable.ic_calendar_outline_28).mutate();
-            sendButtonInverseDrawable = context.getResources().getDrawable(R.drawable.ic_calendar_outline_28).mutate();
-            inactinveSendButtonDrawable = context.getResources().getDrawable(R.drawable.ic_calendar_outline_28).mutate();
+            sendButtonDrawable = context.getResources().getDrawable(R.drawable.input_schedule).mutate();
+            sendButtonInverseDrawable = context.getResources().getDrawable(R.drawable.input_schedule).mutate();
+            inactinveSendButtonDrawable = context.getResources().getDrawable(R.drawable.input_schedule).mutate();
         } else {
-            sendButtonDrawable = context.getResources().getDrawable(R.drawable.ic_arrow_up_outline_28).mutate();
-            sendButtonInverseDrawable = context.getResources().getDrawable(R.drawable.ic_arrow_up_outline_28).mutate();
-            inactinveSendButtonDrawable = context.getResources().getDrawable(R.drawable.ic_arrow_up_outline_28).mutate();
+            sendButtonDrawable = context.getResources().getDrawable(R.drawable.ic_send).mutate();
+            sendButtonInverseDrawable = context.getResources().getDrawable(R.drawable.ic_send).mutate();
+            inactinveSendButtonDrawable = context.getResources().getDrawable(R.drawable.ic_send).mutate();
         }
         sendButton = new View(context) {
 
@@ -3054,12 +3054,12 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                 ActionBarMenuSubItem cell = new ActionBarMenuSubItem(getContext());
                 if (num == 0) {
                     if (UserObject.isUserSelf(user)) {
-                        cell.setTextAndIcon(LocaleController.getString("SetReminder", R.string.SetReminder), R.drawable.ic_calendar_outline_28);
+                        cell.setTextAndIcon(LocaleController.getString("SetReminder", R.string.SetReminder), R.drawable.msg_schedule);
                     } else {
-                        cell.setTextAndIcon(LocaleController.getString("ScheduleMessage", R.string.ScheduleMessage), R.drawable.ic_calendar_outline_28);
+                        cell.setTextAndIcon(LocaleController.getString("ScheduleMessage", R.string.ScheduleMessage), R.drawable.msg_schedule);
                     }
                 } else if (num == 1) {
-                    cell.setTextAndIcon(LocaleController.getString("SendWithoutSound", R.string.SendWithoutSound), R.drawable.ic_notification_disable_outline_28);
+                    cell.setTextAndIcon(LocaleController.getString("SendWithoutSound", R.string.SendWithoutSound), R.drawable.input_notify_off);
                 }
                 cell.setMinimumWidth(AndroidUtilities.dp(196));
                 sendPopupLayout.addView(cell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48));
@@ -5863,7 +5863,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             canWriteToChannel = ChatObject.isChannel(currentChat) && (currentChat.creator || currentChat.admin_rights != null && currentChat.admin_rights.post_messages) && !currentChat.megagroup;
             if (notifyButton != null) {
                 notifyVisible = canWriteToChannel;
-                notifyButton.setImageResource(silent ? R.drawable.ic_notification_disable_outline_28 : R.drawable.vkui_notifications_28);
+                notifyButton.setImageResource(silent ? R.drawable.input_notify_off : R.drawable.input_notify_on);
             }
             if (attachLayout != null) {
                 updateFieldRight(attachLayout.getVisibility() == VISIBLE ? 1 : 0);
@@ -5936,14 +5936,14 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             }
             if (botReplyMarkup != null) {
                 if (isPopupShowing() && currentPopupContentType == 1) {
-                    botButtonDrawablel.setIcon(R.drawable.ic_keyboard_outline_28, true);
+                    botButtonDrawablel.setIcon(R.drawable.input_keyboard, true);
                     botButton.setContentDescription(LocaleController.getString("AccDescrShowKeyboard", R.string.AccDescrShowKeyboard));
                 } else {
-                     botButtonDrawablel.setIcon(R.drawable.ic_keyboard_bots_outline_28, true);
+                    botButtonDrawablel.setIcon(R.drawable.input_bot2, true);
                     botButton.setContentDescription(LocaleController.getString("AccDescrBotKeyboard", R.string.AccDescrBotKeyboard));
                 }
             } else {
-                 botButtonDrawablel.setIcon(R.drawable.ic_chevron_right_circle_outline_28, true);
+                botButtonDrawablel.setIcon(R.drawable.input_bot1, true);
                 botButton.setContentDescription(LocaleController.getString("AccDescrBotCommands", R.string.AccDescrBotCommands));
             }
         } else {
@@ -6773,13 +6773,13 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             emojiButtonAnimation = null;
         }
         if (nextIcon == 0) {
-            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.ic_keyboard_outline_28);
+            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.input_keyboard);
         } else if (nextIcon == 1) {
-            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.ic_smile_outline_28);
+            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.input_smile);
         } else if (nextIcon == 2) {
-            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.ic_sticker_outline_28);
+            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.input_sticker);
         } else if (nextIcon == 3) {
-            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.ic_picture_outline_28);
+            emojiButton[animated ? 1 : 0].setImageResource(R.drawable.input_gif);
         }
         emojiButton[animated ? 1 : 0].setTag(nextIcon == 2 ? 1 : null);
         currentEmojiIcon = nextIcon;
