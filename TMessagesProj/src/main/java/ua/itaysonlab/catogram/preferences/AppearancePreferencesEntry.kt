@@ -117,7 +117,7 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                             Triple(1, LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI), R.drawable.settings_outline_28)
                     )
                 }, {
-                    return@contractIcons when (CatogramConfig.redesign_iconOption) {
+                    return@contractIcons when (CatogramConfig.iconReplacement) {
                         1 -> LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI)
                         else -> LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default)
                     }
