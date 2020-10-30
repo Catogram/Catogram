@@ -208,7 +208,7 @@ public class SharedConfig {
 
     public static void loadConfig() {
         synchronized (sync) {
-            if (configLoaded) {
+            if (configLoaded || ApplicationLoader.applicationContext == null) {
                 return;
             }
 
