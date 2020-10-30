@@ -1077,7 +1077,8 @@ public class ActionBarLayout extends FrameLayout {
                     fragment.onTransitionAnimationEnd(true, false);
                     fragment.onBecomeFullyVisible();
                 };
-                if (!fragment.needDelayOpenAnimation()) {
+                boolean noDelay;
+                if (noDelay = !fragment.needDelayOpenAnimation()) {
                     if (currentFragment != null) {
                         currentFragment.onTransitionAnimationStart(false, false);
                     }
@@ -1108,6 +1109,12 @@ public class ActionBarLayout extends FrameLayout {
                                     return;
                                 }
                                 waitingForKeyboardCloseRunnable = null;
+                                if (!noDelay) {
+                                    if (currentFragment != null) {
+                                        currentFragment.onTransitionAnimationStart(false, false);
+                                    }
+                                    fragment.onTransitionAnimationStart(true, false);
+                                }
                                 startLayoutAnimation(true, true, preview);
                             }
                         };
