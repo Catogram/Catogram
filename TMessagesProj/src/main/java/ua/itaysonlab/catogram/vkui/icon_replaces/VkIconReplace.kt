@@ -20,19 +20,19 @@ class VkIconReplace: BaseIconReplace() {
             // Settings - CG
             R.drawable.msg_theme to R.drawable.palette_outline_28,
             R.drawable.group_log to R.drawable.grid_square_outline_28,
-            R.drawable.round_attach_money_24 to R.drawable.payment_card_outline_28
+            R.drawable.round_attach_money_24 to R.drawable.payment_card_outline_28,
             // Messages
-            R.drawable.input_bot2 to R.drawable.keyboard_bots_outline_28
-            R.drawable.input_notify_off to R.drawable.notification_disable_outline_28
-            R.drawable.input_notify_on to R.drawable.vkui_notifications_28
-            R.drawable.input_attach to R.drawable.attach_outline_28
-            R.drawable.input_mic to R.drawable.voice_outline_28
-            R.drawable.input_video to R.drawable.videocam_outline_28
-            R.drawable.input_schedule to R.drawable.calendar_outline_28
-            R.drawable.input_keyboard to R.drawable.keyboard_outline_28
-            R.drawable.input_bot1 to R.drawable.chevron_right_circle_outline_28
-            R.drawable.input_smile to R.drawable.smile_outline_28
-            R.drawable.input_sticker to R.drawable.sticker_outline_28
-            R.drawable.input_gif to R.drawable.picture_outline_28
+            R.drawable.input_bot2 to R.drawable.keyboard_bots_outline_28,
+            R.drawable.input_notify_off to R.drawable.notification_disable_outline_28,
+            R.drawable.input_notify_on to R.drawable.notifications_28,
+            R.drawable.input_attach to R.drawable.attach_outline_28,
+            R.drawable.input_mic to R.drawable.voice_outline_28,
+            R.drawable.input_video to R.drawable.videocam_outline_28,
+            R.drawable.input_schedule to R.drawable.calendar_outline_28,
+            R.drawable.input_keyboard to R.drawable.keyboard_outline_28,
+            R.drawable.input_bot1 to R.drawable.chevron_right_circle_outline_28,
+            R.drawable.input_smile to R.drawable.smile_outline_28,
+            R.drawable.input_sticker to R.drawable.sticker_outline_28,
+            R.drawable.input_gif to R.drawable.picture_outline_28,
     )
 }
