@@ -131,7 +131,7 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }
             }
 
-            switch {
+            /*switch {
                 title = "TT Commons [beta]"
                 summary = "enable System Fonts first"
                 divider = true
@@ -141,7 +141,7 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }) {
                     CatogramConfig.systemFontsTT = it
                 }
-            }
+            }*/
 
             switch {
                 title = LocaleController.getString("AS_Vibration", R.string.AS_Vibration)
