@@ -3373,13 +3373,13 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                         if (currentTopViewAnimation != null && currentTopViewAnimation.equals(animation)) {
                             currentTopViewAnimation = null;
                         }
-                        NotificationCenter.getGlobalInstance().onAnimationFinish(notificationsIndex);
+                        NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                     }
                 });
                 currentTopViewAnimation.setDuration(250);
                 currentTopViewAnimation.setInterpolator(CubicBezierInterpolator.DEFAULT);
                 currentTopViewAnimation.start();
-                notificationsIndex = NotificationCenter.getGlobalInstance().setAnimationInProgress(notificationsIndex, null);
+                notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
             } else {
                 topViewEnterProgress = 1f;
                 topView.setTranslationY(0);
@@ -3679,6 +3679,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
     public void setDialogId(long id, int account) {
         dialog_id = id;
         if (currentAccount != account) {
+            NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.recordStarted);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.recordStartError);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.recordStopped);
@@ -6628,12 +6629,12 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                             if (delegate != null) {
                                 delegate.bottomPanelTranslationYChanged(0);
                             }
-                            NotificationCenter.getGlobalInstance().onAnimationFinish(notificationsIndex);
+                            NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                             requestLayout();
                         }
                     });
                     panelAnimation.start();
-                    notificationsIndex = NotificationCenter.getGlobalInstance().setAnimationInProgress(notificationsIndex, null);
+                    notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
                     requestLayout();
                 }
             }
@@ -6671,11 +6672,11 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                                 if (delegate != null) {
                                     delegate.bottomPanelTranslationYChanged(0);
                                 }
-                                NotificationCenter.getInstance(UserConfig.selectedAccount).onAnimationFinish(notificationsIndex);
+                                NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                                 requestLayout();
                             }
                         });
-                        notificationsIndex = NotificationCenter.getInstance(UserConfig.selectedAccount).setAnimationInProgress(notificationsIndex, null);
+                        notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
                         panelAnimation.start();
                         requestLayout();
                     } else {
@@ -6715,14 +6716,14 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                                 panelAnimation = null;
                                 botKeyboardView.setTranslationY(0);
                                 botKeyboardView.setVisibility(GONE);
-                                NotificationCenter.getInstance(UserConfig.selectedAccount).onAnimationFinish(notificationsIndex);
+                                NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                                 if (delegate != null) {
                                     delegate.bottomPanelTranslationYChanged(0);
                                 }
                                 requestLayout();
                             }
                         });
-                        notificationsIndex = NotificationCenter.getInstance(UserConfig.selectedAccount).setAnimationInProgress(notificationsIndex, null);
+                        notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
                         panelAnimation.start();
                         requestLayout();
                     } else {
@@ -7004,11 +7005,11 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                                         delegate.bottomPanelTranslationYChanged(0);
                                     }
                                     requestLayout();
-                                    NotificationCenter.getGlobalInstance().onAnimationFinish(notificationsIndex);
+                                    NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                                 }
                             });
                             panelAnimation.start();
-                            notificationsIndex = NotificationCenter.getGlobalInstance().setAnimationInProgress(notificationsIndex, null);
+                            notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
                             requestLayout();
                         }
                     }
@@ -7389,12 +7390,12 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     public void onAnimationEnd(Animator animation) {
                         stickersExpansionAnim = null;
                         emojiView.setLayerType(LAYER_TYPE_NONE, null);
-                        NotificationCenter.getGlobalInstance().onAnimationFinish(notificationsIndex);
+                        NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                     }
                 });
                 stickersExpansionAnim = anims;
                 emojiView.setLayerType(LAYER_TYPE_HARDWARE, null);
-                notificationsIndex = NotificationCenter.getGlobalInstance().setAnimationInProgress(notificationsIndex, null);
+                notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
                 stickersExpansionProgress = 0f;
                 sizeNotifierLayout.invalidate();
                 anims.start();
@@ -7437,14 +7438,14 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                         if (keyboardVisible && isPopupShowing()) {
                             showPopup(0, currentPopupContentType);
                         }
-                        NotificationCenter.getGlobalInstance().onAnimationFinish(notificationsIndex);
+                        NotificationCenter.getInstance(currentAccount).onAnimationFinish(notificationsIndex);
                     }
                 });
                 stickersExpansionProgress = 1f;
                 sizeNotifierLayout.invalidate();
                 stickersExpansionAnim = anims;
                 emojiView.setLayerType(LAYER_TYPE_HARDWARE, null);
-                notificationsIndex = NotificationCenter.getGlobalInstance().setAnimationInProgress(notificationsIndex, null);
+                notificationsIndex = NotificationCenter.getInstance(currentAccount).setAnimationInProgress(notificationsIndex, null);
                 anims.start();
             } else {
                 stickersExpansionProgress = 0;

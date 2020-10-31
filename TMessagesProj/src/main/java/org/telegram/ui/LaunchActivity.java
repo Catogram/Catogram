@@ -2287,7 +2287,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         }
 
         if (isVoipIntent) {
-            VoIPFragment.show(this);
+            VoIPFragment.show(this, intentAccount[0]);
         }
 
         intent.setAction(null);
