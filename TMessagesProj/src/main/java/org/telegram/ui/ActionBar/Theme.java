@@ -4001,7 +4001,7 @@ public class Theme {
                 new int[]    {                            34,                            47,                            52,                            48,                            54,          0,          0,          0,          0,          0,          0,          0,          0,          0 }
         );
         themes.add(themeInfo);
-        themesDict.put("Night", themeInfo);
+        themesDict.put("AMOLED", themeInfo);
 
         String themesString = themeConfig.getString("themes2", null);
 
