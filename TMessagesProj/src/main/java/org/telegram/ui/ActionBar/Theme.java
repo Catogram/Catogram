@@ -3982,6 +3982,27 @@ public class Theme {
         themes.add(themeInfo);
         themesDict.put("Night", themeInfo);
 
+        themeInfo = new ThemeInfo();
+        themeInfo.name = "AMOLED";
+        themeInfo.assetName = "amoled.attheme";
+        themeInfo.previewBackgroundColor = 0xff000000;
+        themeInfo.previewInColor = 0xff989ba3;
+        themeInfo.previewOutColor = 0xffa4bff9;
+        themeInfo.sortIndex = 4;
+        themeInfo.setAccentColorOptions(
+                new int[]    {                    0xFF6ABE3F,                    0xFF8D78E3,                    0xFFDE5E7E,                    0xFF5977E8,                    0xFFDBC11A, 0xff3e88f7, 0xff4ab5d3, 0xff4ab841, 0xffd95576, 0xffe27d2b, 0xff936cda, 0xffd04336, 0xffe8ae1c, 0xff7988a3 },
+                new int[]    {                    0xFF8A5294,                    0xFFB46C1B,                    0xFFAF4F6F,                    0xFF266E8D,                    0xFF744EB7, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+                new int[]    {                    0xFF6855BB,                    0xFFA53B4A,                    0xFF62499C,                    0xFF2F919D,                    0xFF298B95, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+                new int[]    {                    0xFF020702,                    0xFF111314,                    0xFF040304,                    0xFF0B0C0C,                    0xFF060607, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+                new int[]    {                    0xFF0F0E10,                    0xFF080809,                    0xFF050505,                    0xFF0E0E10,                    0xFF0D0D10, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+                new int[]    {                             9,                            10,                            11,                            12,                            13,          0,          1,          2,          3,          4,          5,          6,          7,          8 },
+                new String[] { "YIxYGEALQVADAAAAA3QbEH0AowY", "9LW_RcoOSVACAAAAFTk3DTyXN-M", "O-wmAfBPSFADAAAA4zINVfD_bro", "F5oWoCs7QFACAAAAgf2bD_mg8Bw", "-Xc-np9y2VMCAAAARKr0yNNPYW0",         "",         "",         "",         "",         "",         "",         "",         "",         "" },
+                new int[]    {                            45,                           135,                             0,                           180,                             0,          0,          0,          0,          0,          0,          0,          0,          0,          0 },
+                new int[]    {                            34,                            47,                            52,                            48,                            54,          0,          0,          0,          0,          0,          0,          0,          0,          0 }
+        );
+        themes.add(themeInfo);
+        themesDict.put("Night", themeInfo);
+
         String themesString = themeConfig.getString("themes2", null);
 
         for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
