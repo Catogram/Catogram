@@ -1,6 +1,7 @@
 package ua.itaysonlab
 
 import android.content.Context
+import androidx.core.graphics.ColorUtils
 import bruhcollective.itaysonlab.airui.core.externalapi.ExternalApiProviders
 import bruhcollective.itaysonlab.airui.core.externalapi.providers.AccentColorProvider
 import bruhcollective.itaysonlab.airui.core.externalapi.providers.DarkModeProvider
@@ -16,7 +17,7 @@ object CatogramInit {
 
         ExternalApiProviders.darkModeProvider = object: DarkModeProvider() {
             override fun provide(ctx: Context): Boolean {
-                return Theme.isCurrentThemeNight()
+                return ColorUtils.calculateLuminance(Theme.getColor(Theme.key_windowBackgroundWhite)) < 0.5f
             }
         }
     }
