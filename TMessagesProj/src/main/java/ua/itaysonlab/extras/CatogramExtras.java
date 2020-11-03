@@ -37,7 +37,7 @@ import java.util.Arrays;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "2.2.1";
+    public static String CG_VERSION = "2.3";
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -116,9 +116,10 @@ public class CatogramExtras {
     public static void setAccountBitmap(TLRPC.User user) {
         if (user.photo != null) {
             try {
-                final File photo = FileLoader.getPathToAttach(user.photo.photo_small, true);
+                final File photo = FileLoader.getPathToAttach(user.photo.photo_big, true);
                 byte[] photoData = new byte[(int) photo.length()];
-                FileInputStream photoIn = null;
+                
+                FileInputStream photoIn;
                 photoIn = new FileInputStream(photo);
                 new DataInputStream(photoIn).readFully(photoData);
                 photoIn.close();

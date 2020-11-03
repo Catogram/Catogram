@@ -51,9 +51,7 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ua.itaysonlab.catogram.ui.SLRecyclerView;
-
-public class RecyclerListView extends SLRecyclerView {
+public class RecyclerListView extends RecyclerView {
 
     private OnItemClickListener onItemClickListener;
     private OnItemClickListenerExtended onItemClickListenerExtended;
