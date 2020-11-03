@@ -34,5 +34,10 @@ class VkIconReplace: BaseIconReplace() {
             R.drawable.input_smile to R.drawable.smile_outline_28,
             R.drawable.input_sticker to R.drawable.sticker_outline_28,
             R.drawable.input_gif to R.drawable.picture_outline_28,
+            // Drawer
+            R.drawable.msg_archive to R.drawable.archive_outline_28,
+            R.drawable.menu_contacts to R.drawable.user_outline_28,
+            R.drawable.menu_calls to R.drawable.phone_outline_28,
+            R.drawable.menu_saved_cg to R.drawable.ic_billhead_outline_28,
     )
 }

@@ -120,7 +120,7 @@ public class TGKitSettingsFragment extends BaseFragment {
                 if (preference.listener != null) preference.listener.onClick(this);
             } else if (pref instanceof TGKitListPreference) {
                 TGKitListPreference preference = ((TGKitListPreference) pref);
-                preference.callActionHueta(getParentActivity(), () -> {
+                preference.callActionHueta(getParentActivity(), view, x, y, () -> {
                     if (view instanceof TextDetailSettingsCell) ((TextDetailSettingsCell) view).setTextAndValue(preference.title, preference.contract.getValue(), preference.divider);
                 });
             }
