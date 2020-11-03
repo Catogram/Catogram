@@ -273,7 +273,7 @@ public class DialogsAdapter extends RecyclerListView.SelectionAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        hasHints = folderId == 0 && !isOnlySelect && !MessagesController.getInstance(currentAccount).hintDialogs.isEmpty();
+        hasHints = folderId == 0 && dialogsType == 0 && !isOnlySelect && !MessagesController.getInstance(currentAccount).hintDialogs.isEmpty();
         super.notifyDataSetChanged();
     }
 
@@ -375,7 +375,7 @@ public class DialogsAdapter extends RecyclerListView.SelectionAdapter {
                     @Override
                     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
                         int size = DialogsActivity.getDialogsArray(currentAccount, dialogsType, folderId, dialogsListFrozen).size();
-                        boolean hasArchive = MessagesController.getInstance(currentAccount).dialogs_dict.get(DialogObject.makeFolderDialogId(1)) != null;
+                        boolean hasArchive = dialogsType == 0 && MessagesController.getInstance(currentAccount).dialogs_dict.get(DialogObject.makeFolderDialogId(1)) != null;
                         View parent = (View) getParent();
                         int height;
                         int paddingTop = parent.getPaddingTop();
@@ -434,8 +434,10 @@ public class DialogsAdapter extends RecyclerListView.SelectionAdapter {
                     cell.useSeparator = (i != getItemCount() - 1);
                 }
                 cell.fullSeparator = dialog.pinned && nextDialog != null && !nextDialog.pinned;
-                if (AndroidUtilities.isTablet()) {
-                    cell.setDialogSelected(dialog.id == openedDialogId);
+                if (dialogsType == 0) {
+                    if (AndroidUtilities.isTablet()) {
+                        cell.setDialogSelected(dialog.id == openedDialogId);
+                    }
                 }
                 cell.setChecked(selectedDialogs.contains(dialog.id), false);
                 cell.setDialog(dialog, dialogsType, folderId);
