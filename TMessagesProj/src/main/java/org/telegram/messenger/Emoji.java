@@ -27,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Spannable;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
 import android.view.View;
@@ -239,6 +240,7 @@ public class Emoji {
         private DrawableInfo info;
         private boolean fullSize = false;
         private static Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
+        private static Paint textPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
         private static Rect rect = new Rect();
 
         public EmojiDrawable(DrawableInfo i) {
@@ -261,11 +263,12 @@ public class Emoji {
 
         @Override
         public void draw(Canvas canvas) {
-            /*if (MessagesController.getInstance().useSystemEmoji) {
-                //textPaint.setTextSize(getBounds().width());
+            if (SharedConfig.useSystemEmoji) {
+                textPaint.setTextSize(getBounds().width());
                 canvas.drawText(EmojiData.data[info.page][info.emojiIndex], getBounds().left, getBounds().bottom, textPaint);
                 return;
-            }*/
+            }
+
             if (!isLoaded()) {
                 loadEmoji(info.page, info.page2);
                 canvas.drawRect(getBounds(), placeholderPaint);
@@ -345,9 +348,9 @@ public class Emoji {
             s = Spannable.Factory.getInstance().newSpannable(cs.toString());
         }
 
-        if (SharedConfig.useSystemEmoji) {
-            return s;
-        }
+        //if (SharedConfig.useSystemEmoji) {
+        //    return s;
+        //}
 
         long buf = 0;
         int emojiCount = 0;
