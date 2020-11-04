@@ -20,7 +20,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             switch {
                 title = LocaleController.getString("CG_NewDrawer", R.string.CG_NewDrawer)
                 summary = LocaleController.getString("CG_NewDrawer_Desc", R.string.CG_NewDrawer_Desc)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.redesign_SlideDrawer
@@ -31,7 +30,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             list {
                 title = LocaleController.getString("CG_MessageMenuOption", R.string.CG_MessageMenuOption)
-                divider = true
 
                 contract({
                     return@contract listOf(
@@ -88,7 +86,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             list {
                 title = LocaleController.getString("AS_ChangeIcon", R.string.AS_ChangeIcon)
-                divider = true
 
                 contractIcons({
                     return@contractIcons listOf(
@@ -110,7 +107,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             list {
                 title = LocaleController.getString("CG_IconReplacements", R.string.CG_IconReplacements)
-                divider = false
 
                 contractIcons({
                     return@contractIcons listOf(
@@ -133,7 +129,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             switch {
                 title = LocaleController.getString("AS_HideUserPhone", R.string.AS_HideUserPhone)
                 summary = LocaleController.getString("AS_HideUserPhoneSummary", R.string.AS_HideUserPhoneSummary)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.hidePhoneNumber
@@ -145,7 +140,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             switch {
                 title = LocaleController.getString("AS_NoRounding", R.string.AS_NoRounding)
                 summary = LocaleController.getString("AS_NoRoundingSummary", R.string.AS_NoRoundingSummary)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.noRounding
@@ -156,7 +150,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("AS_SystemFonts", R.string.AS_SystemFonts)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.systemFonts
@@ -164,22 +157,22 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.systemFonts = it
                 }
             }
-            if (CGControversive.isControversiveFeaturesEnabled()) {
-            switch {
-                title = "VK Sans as bold font [alpha]"
-                summary = "enable System Fonts first"
 
-                contract({
-                    return@contract CatogramConfig.systemFontsTT
-                }) {
-                    CatogramConfig.systemFontsTT = it
+            if (CGControversive.isControversiveFeaturesEnabled()) {
+                switch {
+                    title = "VK Sans as bold font [alpha]"
+                    summary = "enable System Fonts first"
+
+                    contract({
+                        return@contract CatogramConfig.systemFontsTT
+                    }) {
+                        CatogramConfig.systemFontsTT = it
+                    }
                 }
             }
-           }
 
             switch {
                 title = LocaleController.getString("AS_Vibration", R.string.AS_Vibration)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.noVibration
@@ -191,7 +184,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             switch {
                 title = LocaleController.getString("AS_FlatSB", R.string.AS_FlatSB)
                 summary = LocaleController.getString("AS_FlatSB_Desc", R.string.AS_FlatSB_Desc)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.flatStatusbar
@@ -203,7 +195,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("AS_FlatAB", R.string.AS_FlatAB)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.flatActionbar
@@ -214,7 +205,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("CG_ConfirmCalls", R.string.CG_ConfirmCalls)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.confirmCalls
@@ -250,7 +240,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
         category(LocaleController.getString("AS_DrawerCategory", R.string.AS_DrawerCategory)) {
             list {
                 title = LocaleController.getString("AS_ForceIcons", R.string.AS_ForceIcons)
-                divider = true
 
                 contract({
                     return@contract listOf(
@@ -295,7 +284,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("AS_DrawerAvatar", R.string.AS_DrawerAvatar)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.drawerAvatar
@@ -306,7 +294,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("AS_DrawerBlur", R.string.AS_DrawerBlur)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.drawerBlur
@@ -330,7 +317,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             switch {
                 title = LocaleController.getString("AS_ForceNY", R.string.AS_ForceNY)
                 summary = LocaleController.getString("AS_ForceNYSummary", R.string.AS_ForceNYSummary)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.forceNewYear
@@ -342,7 +328,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             switch {
                 title = LocaleController.getString("AS_ForcePacman", R.string.AS_ForcePacman)
                 summary = LocaleController.getString("AS_ForcePacmanSummary", R.string.AS_ForcePacmanSummary)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.forcePacman

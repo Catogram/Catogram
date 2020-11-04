@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Browser
 import android.view.WindowManager
 import org.telegram.messenger.*
@@ -26,7 +27,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textIcon {
                 title = LocaleController.getString("AS_Header_Appearance", R.string.AS_Header_Appearance)
                 icon = R.drawable.msg_theme
-                divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createAppearance())
                 }
@@ -35,7 +35,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textIcon {
                 title = LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)
                 icon = R.drawable.menu_chats
-                divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createChats())
                 }
@@ -44,7 +43,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textIcon {
                 title = LocaleController.getString("AS_Category_Security", R.string.AS_Category_Security)
                 icon = R.drawable.menu_secret
-                divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createSecurity())
                 }
@@ -53,7 +51,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textIcon {
                 title = LocaleController.getString("DebugMenu", R.string.DebugMenu)
                 icon = R.drawable.group_log
-                divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     startDebug(it)
                 }
@@ -72,7 +69,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textDetail {
                 title = "Catogram " + CatogramExtras.CG_VERSION + " [" + BuildVars.BUILD_VERSION_STRING + "]"
                 detail = LocaleController.getString("CG_AboutDesc", R.string.CG_AboutDesc)
-                divider = true
             }
 
             textIcon {
@@ -113,7 +109,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
         }
 
         private fun startDebug(bf: BaseFragment) {
-            val builder = AlertDialog.Builder(bf.parentActivity)
+            val builder = AlertDialog.Builder(bf.getParentActivity())
             builder.setTitle(LocaleController.getString("DebugMenu", R.string.DebugMenu))
             val items: Array<CharSequence?> = arrayOf(
                     LocaleController.getString("DebugMenuImportContacts", R.string.DebugMenuImportContacts),
@@ -128,19 +124,20 @@ class MainPreferencesEntry : BasePreferencesEntry {
                     if (BuildVars.DEBUG_PRIVATE_VERSION) "Check for app updates" else null,
                     LocaleController.getString("DebugMenuReadAllDialogs", R.string.DebugMenuReadAllDialogs),
                     if (SharedConfig.pauseMusicOnRecord) LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) else LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
-                    if (BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet()) if (SharedConfig.smoothKeyboard) LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) else LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard) else null
+                    if (BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() && Build.VERSION.SDK_INT >= 23) if (SharedConfig.smoothKeyboard) LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) else LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard) else null,
+                    if (Build.VERSION.SDK_INT >= 29) if (SharedConfig.chatBubbles) "Disable chat bubbles" else "Enable chat bubbles" else null
             )
             builder.setItems(items) { dialog: DialogInterface?, which: Int ->
                 if (which == 0) {
-                    UserConfig.getInstance(bf.currentAccount).syncContacts = true
-                    UserConfig.getInstance(bf.currentAccount).saveConfig(false)
-                    ContactsController.getInstance(bf.currentAccount).forceImportContacts()
+                    bf.getUserConfig().syncContacts = true
+                    bf.getUserConfig().saveConfig(false)
+                    bf.getContactsController().forceImportContacts()
                 } else if (which == 1) {
-                    ContactsController.getInstance(bf.currentAccount).loadContacts(false, 0)
+                    bf.getContactsController().loadContacts(false, 0)
                 } else if (which == 2) {
-                    ContactsController.getInstance(bf.currentAccount).resetImportedContacts()
+                    bf.getContactsController().resetImportedContacts()
                 } else if (which == 3) {
-                    MessagesController.getInstance(bf.currentAccount).forceResetDialogs()
+                    bf.getMessagesController().forceResetDialogs()
                 } else if (which == 4) {
                     BuildVars.LOGS_ENABLED = !BuildVars.LOGS_ENABLED
                     val sharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("systemConfig", Context.MODE_PRIVATE)
@@ -148,11 +145,13 @@ class MainPreferencesEntry : BasePreferencesEntry {
                 } else if (which == 5) {
                     SharedConfig.toggleInappCamera()
                 } else if (which == 6) {
-                    MessagesStorage.getInstance(bf.currentAccount).clearSentMedia()
+                    bf.getMessagesStorage().clearSentMedia()
                     SharedConfig.setNoSoundHintShowed(false)
                     val editor = MessagesController.getGlobalMainSettings().edit()
-                    editor.remove("archivehint").remove("archivehint_l").remove("gifhint").remove("soundHint").remove("themehint").commit()
+                    editor.remove("archivehint").remove("proximityhint").remove("archivehint_l").remove("gifhint").remove("soundHint").remove("themehint").remove("filterhint").commit()
                     SharedConfig.textSelectionHintShows = 0
+                    SharedConfig.lockRecordAudioVideoHint = 0
+                    SharedConfig.stickersReorderingHintUsed = false
                 } else if (which == 7) {
                     VoIPHelper.showCallDebugSettings(bf.parentActivity)
                 } else if (which == 8) {
@@ -160,14 +159,16 @@ class MainPreferencesEntry : BasePreferencesEntry {
                 } else if (which == 9) {
                     (bf.parentActivity as LaunchActivity).checkAppUpdate(true)
                 } else if (which == 10) {
-                    MessagesStorage.getInstance(bf.currentAccount).readAllDialogs(-1)
+                    bf.getMessagesStorage().readAllDialogs(-1)
                 } else if (which == 11) {
                     SharedConfig.togglePauseMusicOnRecord()
                 } else if (which == 12) {
                     SharedConfig.toggleSmoothKeyboard()
-                    if (SharedConfig.smoothKeyboard && bf.parentActivity != null) {
-                        bf.parentActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+                    if (SharedConfig.smoothKeyboard && bf.getParentActivity() != null) {
+                        bf.parentActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
                     }
+                } else if (which == 13) {
+                    SharedConfig.toggleChatBubbles()
                 }
             }
             builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null)

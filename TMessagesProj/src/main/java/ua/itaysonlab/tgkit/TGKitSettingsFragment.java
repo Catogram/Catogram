@@ -49,7 +49,7 @@ public class TGKitSettingsFragment extends BaseFragment {
 
     public TGKitSettingsFragment(BasePreferencesEntry entry) {
         super();
-        this.settings = entry.getPreferences(this);
+        this.settings = entry.getProcessedPrefs(this);
     }
 
     private ListAdapter listAdapter;

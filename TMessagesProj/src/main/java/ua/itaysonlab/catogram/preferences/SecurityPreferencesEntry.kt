@@ -25,7 +25,6 @@ class SecurityPreferencesEntry : BasePreferencesEntry {
         category(LocaleController.getString("AS_Header_Privacy", R.string.AS_Header_Privacy)) {
             switch {
                 title = LocaleController.getString("AS_NoProxyPromo", R.string.AS_NoProxyPromo)
-                divider = true
 
                 contract({
                     return@contract CatogramConfig.hideProxySponsor
@@ -37,7 +36,6 @@ class SecurityPreferencesEntry : BasePreferencesEntry {
             if (CGControversive.isControversiveFeaturesEnabled()) {
                 switch {
                     title = LocaleController.getString("AS_NoTyping", R.string.AS_NoTyping)
-                    divider = true
 
                     contract({
                         return@contract CatogramConfig.noTyping

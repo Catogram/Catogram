@@ -532,7 +532,7 @@ public class BaseFragment {
         return getAccountInstance().getMessagesController();
     }
 
-    protected ContactsController getContactsController() {
+    public ContactsController getContactsController() {
         return getAccountInstance().getContactsController();
     }
 
