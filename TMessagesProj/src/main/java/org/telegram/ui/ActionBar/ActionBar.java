@@ -93,7 +93,7 @@ public class ActionBar extends FrameLayout {
     private Runnable lastRunnable;
     private boolean titleOverlayShown;
     private Runnable titleActionRunnable;
-    private boolean castShadows = true;
+    private boolean castShadows = !CatogramConfig.INSTANCE.getFlatActionbar();
 
     protected boolean isSearchFieldVisible;
     protected int itemsBackgroundColor;
@@ -1087,6 +1087,7 @@ public class ActionBar extends FrameLayout {
     }
 
     public void setCastShadows(boolean value) {
+        if (CatogramConfig.INSTANCE.getFlatActionbar()) return;
         castShadows = value;
     }
 
