@@ -34,11 +34,11 @@ public class TGKitListPreference extends TGKitPreference {
 
         if (contract.hasIcons()) {
             for (Triple<Integer, String, Integer> act : contract.getOptionsIcons()) {
-                actions.add(new SelectiveMenuAdapter.Item(String.valueOf(act.getFirst()), act.getSecond(), null, ContextCompat.getDrawable(pr, act.getThird()), contract.getValue().equals(act.getSecond())));
+                actions.add(new SelectiveMenuAdapter.Item(String.valueOf(act.getFirst()), act.getSecond(), null, ContextCompat.getDrawable(pr, act.getThird()), contract.getValue().equals(act.getSecond()), false));
             }
         } else {
             for (Pair<Integer, String> act : contract.getOptions()) {
-                actions.add(new SelectiveMenuAdapter.Item(String.valueOf(act.first), act.second, null, null, contract.getValue().equals(act.second)));
+                actions.add(new SelectiveMenuAdapter.Item(String.valueOf(act.first), act.second, null, null, contract.getValue().equals(act.second), false));
             }
         }
 
