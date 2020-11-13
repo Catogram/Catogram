@@ -6,6 +6,7 @@ import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
+import ua.itaysonlab.catogram.CGControversive
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 import ua.itaysonlab.extras.IconExtras
@@ -142,6 +143,16 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.msgForwardDate
                 }) {
                     CatogramConfig.msgForwardDate = it
+                }
+            }
+
+            if (CGControversive.isControversiveFeaturesEnabled()) switch {
+                title = LocaleController.getString("CG_HideMsgIfUserBlocked", R.string.CG_HideMsgIfUserBlocked)
+
+                contract({
+                    return@contract CatogramConfig.hideUserIfBlocked
+                }) {
+                    CatogramConfig.hideUserIfBlocked = it
                 }
             }
         }

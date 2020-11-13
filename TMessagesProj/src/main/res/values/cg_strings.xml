@@ -216,4 +216,7 @@
     <string name="CG_IconReplacements">Icon replacements</string>
     <string name="CG_IconReplacement_VKUI">VKUI Icons</string>
     <string name="CG_IconReplacement_Default">Default</string>
+
+    <string name="CG_HideMsgIfUserBlocked">Hide messages if user is blocked</string>
+    <string name="CG_OldNotification">Default notification icon</string>
 </resources>

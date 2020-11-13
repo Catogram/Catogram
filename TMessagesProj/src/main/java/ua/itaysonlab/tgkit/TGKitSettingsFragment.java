@@ -120,8 +120,8 @@ public class TGKitSettingsFragment extends BaseFragment {
                 if (preference.listener != null) preference.listener.onClick(this);
             } else if (pref instanceof TGKitListPreference) {
                 TGKitListPreference preference = ((TGKitListPreference) pref);
-                preference.callActionHueta(getParentActivity(), view, x, y, () -> {
-                    if (view instanceof TextDetailSettingsCell) ((TextDetailSettingsCell) view).setTextAndValue(preference.title, preference.contract.getValue(), preference.divider);
+                preference.callActionHueta(this, getParentActivity(), view, x, y, () -> {
+                    if (view instanceof TextDetailSettingsCell) ((TextDetailSettingsCell) view).setTextAndValue(preference.title, preference.getContract().getValue(), preference.getDivider());
                 });
             }
         });
@@ -201,7 +201,7 @@ public class TGKitSettingsFragment extends BaseFragment {
                     TextDetailSettingsCell settingsCell = (TextDetailSettingsCell) holder.itemView;
                     TGKitListPreference pref = (TGKitListPreference) positions.get(position);
                     settingsCell.setMultilineDetail(true);
-                    settingsCell.setTextAndValue(pref.title, pref.contract.getValue(), pref.divider);
+                    settingsCell.setTextAndValue(pref.title, pref.getContract().getValue(), pref.getDivider());
                     break;
                 }
             }
@@ -218,7 +218,7 @@ public class TGKitSettingsFragment extends BaseFragment {
                 int position = holder.getAdapterPosition();
                 TextDetailSettingsCell checkCell = (TextDetailSettingsCell) holder.itemView;
                 TGKitListPreference pref = ((TGKitListPreference) positions.get(position));
-                checkCell.setTextAndValue(pref.title, pref.contract.getValue(), pref.divider);
+                checkCell.setTextAndValue(pref.title, pref.getContract().getValue(), pref.getDivider());
             }
         }
 

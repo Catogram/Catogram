@@ -158,6 +158,16 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }
             }
 
+            switch {
+                title = LocaleController.getString("CG_OldNotification", R.string.CG_OldNotification)
+
+                contract({
+                    return@contract CatogramConfig.oldNotificationIcon
+                }) {
+                    CatogramConfig.oldNotificationIcon = it
+                }
+            }
+
             if (CGControversive.isControversiveFeaturesEnabled()) {
                 switch {
                     title = "VK Sans as bold font [alpha]"

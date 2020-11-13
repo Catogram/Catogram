@@ -199,4 +199,6 @@
     <string name="CG_ToChat">Открыть официальный чат</string>
 
     <string name="CG_IconReplacements">Замена иконок</string>
+    <string name="CG_HideMsgIfUserBlocked">Скрывать сообщения если пользователь заблокирован</string>
+    <string name="CG_OldNotification">Стандартная иконка уведомлений</string>
 </resources>

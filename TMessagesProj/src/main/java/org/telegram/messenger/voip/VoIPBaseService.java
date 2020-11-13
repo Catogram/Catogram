@@ -90,6 +90,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import ua.itaysonlab.catogram.CGFeatureHooks;
+
 /**
  * Created by grishka on 21.07.17.
  */
@@ -546,7 +548,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 		Notification.Builder builder = new Notification.Builder(this)
 				.setContentTitle(LocaleController.getString("VoipOutgoingCall", R.string.VoipOutgoingCall))
 				.setContentText(name)
-				.setSmallIcon(R.drawable.cg_notification)
+				.setSmallIcon(CGFeatureHooks.getProperNotificationIcon())
 				.setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			Intent endIntent = new Intent(this, VoIPActionsReceiver.class);
@@ -1128,7 +1130,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 		Notification.Builder builder = new Notification.Builder(this)
 				.setContentTitle(video ? LocaleController.getString("VoipInVideoCallBranding", R.string.VoipInVideoCallBranding) : LocaleController.getString("VoipInCallBranding", R.string.VoipInCallBranding))
 				.setContentText(name)
-				.setSmallIcon(R.drawable.cg_notification)
+				.setSmallIcon(CGFeatureHooks.getProperNotificationIcon())
 				.setSubText(subText)
 				.setContentIntent(PendingIntent.getActivity(this, 0, intent, 0));
 		Uri soundProviderUri = Uri.parse("content://" + BuildConfig.APPLICATION_ID + ".call_sound_provider/start_ringing");

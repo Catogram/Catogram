@@ -65,6 +65,8 @@ object CatogramConfig {
     var newTabs_iconsV2_mode by sharedPreferences.int("cg_tabs_v2", 0)
 
     var iconReplacement by sharedPreferences.int("cg_iconpack", 0)
+    var hideUserIfBlocked by sharedPreferences.boolean("cg_hide_msg_if_blocked", false)
+    var oldNotificationIcon by sharedPreferences.boolean("cg_old_notification", false)
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {

@@ -65,6 +65,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import ua.itaysonlab.catogram.CGFeatureHooks;
+
 @SuppressLint("NewApi")
 public class VoIPService extends VoIPBaseService {
 
@@ -246,7 +248,7 @@ public class VoIPService extends VoIPBaseService {
 		if (callIShouldHavePutIntoIntent != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			NotificationsController.checkOtherNotificationsChannel();
 			Notification.Builder bldr = new Notification.Builder(this, NotificationsController.OTHER_NOTIFICATIONS_CHANNEL)
-					.setSmallIcon(R.drawable.cg_notification)
+					.setSmallIcon(CGFeatureHooks.getProperNotificationIcon())
 					.setContentTitle(LocaleController.getString("VoipOutgoingCall", R.string.VoipOutgoingCall))
 					.setShowWhen(false);
 			startForeground(ID_ONGOING_CALL_NOTIFICATION, bldr.build());
