@@ -3271,7 +3271,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     }
                 } else if (slidingView != null && (e == null || e.getPointerId(0) == startedTrackingPointerId && (e.getAction() == MotionEvent.ACTION_CANCEL || e.getAction() == MotionEvent.ACTION_UP || e.getAction() == MotionEvent.ACTION_POINTER_UP))) {
                     if (e != null && e.getAction() != MotionEvent.ACTION_CANCEL && Math.abs(slidingView.getNonAnimationTranslationX(false)) >= AndroidUtilities.dp(50)) {
-                        showFieldPanelForReply(slidingView.getMessageObject());
+                        CGFeatureHooks.injectChatActivityMsgSlideAction(ChatActivity.this, slidingView.getMessageObject(), ChatObject.isChannel(currentChat), classGuid);
                     }
                     endTrackingX = slidingView.getSlidingOffsetX();
                     if (endTrackingX == 0) {
@@ -17450,11 +17450,11 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             options.add(2);
                             icons.add(R.drawable.msg_forward);
                         }
-//                        if (message.messageOwner.forwards > 0 && (BuildVars.DEBUG_PRIVATE_VERSION || ChatObject.hasAdminRights(getCurrentChat()))) {
-//                            items.add(LocaleController.getString("ViewStats", R.string.ViewStats));
-//                            options.add(28);
-//                            icons.add(R.drawable.msg_stats);
-//                        }
+                        if (message.messageOwner.forwards > 0 && (ChatObject.hasAdminRights(getCurrentChat()))) {
+                            items.add(LocaleController.getString("ViewStats", R.string.ViewStats));
+                            options.add(28);
+                            icons.add(R.drawable.msg_stats);
+                        }
                         if (allowUnpin) {
                             items.add(LocaleController.getString("UnpinMessage", R.string.UnpinMessage));
                             options.add(14);
@@ -20003,12 +20003,13 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         if (isAvatarPreviewerEnabled()) {
                             // CG-TODO: Advanced ban/promote
                             final boolean enableMention = currentChat != null && (bottomOverlayChat == null || bottomOverlayChat.getVisibility() != View.VISIBLE) && (bottomOverlay == null || bottomOverlay.getVisibility() != View.VISIBLE);
-                            final AvatarPreviewer.MenuItem[] menuItems = new AvatarPreviewer.MenuItem[2 + (enableMention ? 1 : 0)];
+                            final AvatarPreviewer.MenuItem[] menuItems = new AvatarPreviewer.MenuItem[2 + (enableMention ? 1 : 0) + CGFeatureHooks.injectChatActivityAvatarArraySize(ChatActivity.this)];
                             menuItems[0] = AvatarPreviewer.MenuItem.OPEN_PROFILE;
                             menuItems[1] = AvatarPreviewer.MenuItem.SEND_MESSAGE;
                             if (enableMention) {
                                 menuItems[2] = AvatarPreviewer.MenuItem.MENTION;
                             }
+                            CGFeatureHooks.injectChatActivityAvatarArrayItems(ChatActivity.this, menuItems, enableMention);
                             final TLRPC.UserFull userFull = getMessagesController().getUserFull(user.id);
                             final AvatarPreviewer.Data data;
                             if (userFull != null) {
@@ -20029,6 +20030,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                             appendMention(user);
                                             break;
                                     }
+
+                                    CGFeatureHooks.injectChatActivityAvatarOnClick(ChatActivity.this, item, user);
                                 });
                                 return true;
                             }

@@ -219,4 +219,9 @@
 
     <string name="CG_HideMsgIfUserBlocked">Hide messages if user is blocked</string>
     <string name="CG_OldNotification">Default notification icon</string>
+
+    <string name="CG_MsgSlideAction">Action on message swipe</string>
+    <string name="CG_MsgSlideAction_Reply">Reply</string>
+    <string name="CG_MsgSlideAction_Save">Save message</string>
+    <string name="CG_MsgSlideAction_Share">Share</string>
 </resources>

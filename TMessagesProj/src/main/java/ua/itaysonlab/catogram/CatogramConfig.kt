@@ -26,7 +26,6 @@ object CatogramConfig {
     var systemFontsTT by sharedPreferences.boolean("advanced_systemfonts_tt", false)
     var noVibration by sharedPreferences.boolean("advanced_novibration", false)
     var forceNewYearDrawer by sharedPreferences.boolean("advanced_nydrawer", false)
-    var noTyping by sharedPreferences.boolean("advanced_notyping", false)
     var drawerAvatar by sharedPreferences.boolean("cg_drawer_avatar", false)
     var flatStatusbar by sharedPreferences.boolean("cg_flat_statusbar", false)
     var flatActionbar by sharedPreferences.boolean("cg_flat_actionbar", false)
@@ -67,6 +66,8 @@ object CatogramConfig {
     var iconReplacement by sharedPreferences.int("cg_iconpack", 0)
     var hideUserIfBlocked by sharedPreferences.boolean("cg_hide_msg_if_blocked", false)
     var oldNotificationIcon by sharedPreferences.boolean("cg_old_notification", false)
+
+    var messageSlideAction by sharedPreferences.int("cg_msgslide_action", 0)
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {

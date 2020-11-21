@@ -146,6 +146,26 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
+            list {
+                title = LocaleController.getString("CG_MsgSlideAction", R.string.CG_MsgSlideAction)
+
+                contract({
+                    return@contract listOf(
+                            Pair(0, LocaleController.getString("CG_MsgSlideAction_Reply", R.string.CG_MsgSlideAction_Reply)),
+                            Pair(1, LocaleController.getString("CG_MsgSlideAction_Save", R.string.CG_MsgSlideAction_Save)),
+                            Pair(2, LocaleController.getString("CG_MsgSlideAction_Share", R.string.CG_MsgSlideAction_Share))
+                    )
+                }, {
+                    return@contract when (CatogramConfig.newTabs_iconsV2_mode) {
+                        1 -> LocaleController.getString("CG_MsgSlideAction_Reply", R.string.CG_MsgSlideAction_Reply)
+                        2 -> LocaleController.getString("CG_MsgSlideAction_Save", R.string.CG_MsgSlideAction_Save)
+                        else -> LocaleController.getString("CG_MsgSlideAction_Share", R.string.CG_MsgSlideAction_Share)
+                    }
+                }) {
+                    CatogramConfig.messageSlideAction = it
+                }
+            }
+
             if (CGControversive.isControversiveFeaturesEnabled()) switch {
                 title = LocaleController.getString("CG_HideMsgIfUserBlocked", R.string.CG_HideMsgIfUserBlocked)
 

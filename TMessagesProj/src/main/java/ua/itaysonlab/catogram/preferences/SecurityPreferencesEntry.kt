@@ -32,18 +32,6 @@ class SecurityPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.hideProxySponsor = it
                 }
             }
-            
-            if (CGControversive.isControversiveFeaturesEnabled()) {
-                switch {
-                    title = LocaleController.getString("AS_NoTyping", R.string.AS_NoTyping)
-
-                    contract({
-                        return@contract CatogramConfig.noTyping
-                    }) {
-                        CatogramConfig.noTyping = it
-                    }
-                }
-            }
 
             switch {
                 title = LocaleController.getString("AS_ForwardNoAuthorship", R.string.AS_ForwardNoAuthorship)
