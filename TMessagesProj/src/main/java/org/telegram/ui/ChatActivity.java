@@ -20001,7 +20001,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     @Override
                     public boolean didLongPressUserAvatar(ChatMessageCell cell, TLRPC.User user, float touchX, float touchY) {
                         if (isAvatarPreviewerEnabled()) {
-                            // CG-TODO: Advanced ban/promote
                             final boolean enableMention = currentChat != null && (bottomOverlayChat == null || bottomOverlayChat.getVisibility() != View.VISIBLE) && (bottomOverlay == null || bottomOverlay.getVisibility() != View.VISIBLE);
                             final AvatarPreviewer.MenuItem[] menuItems = new AvatarPreviewer.MenuItem[2 + (enableMention ? 1 : 0) + CGFeatureHooks.injectChatActivityAvatarArraySize(ChatActivity.this)];
                             menuItems[0] = AvatarPreviewer.MenuItem.OPEN_PROFILE;

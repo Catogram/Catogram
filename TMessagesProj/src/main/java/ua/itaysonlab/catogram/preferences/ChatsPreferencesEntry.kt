@@ -6,7 +6,10 @@ import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
+import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.catogram.CGControversive
+import ua.itaysonlab.catogram.CGFeatureHooks
+import ua.itaysonlab.catogram.CGFeatureHooks.getReplyIconDrawable
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 import ua.itaysonlab.extras.IconExtras
@@ -178,13 +181,15 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                             Pair(2, LocaleController.getString("CG_MsgSlideAction_Share", R.string.CG_MsgSlideAction_Share))
                     )
                 }, {
-                    return@contract when (CatogramConfig.newTabs_iconsV2_mode) {
-                        1 -> LocaleController.getString("CG_MsgSlideAction_Reply", R.string.CG_MsgSlideAction_Reply)
-                        2 -> LocaleController.getString("CG_MsgSlideAction_Save", R.string.CG_MsgSlideAction_Save)
-                        else -> LocaleController.getString("CG_MsgSlideAction_Share", R.string.CG_MsgSlideAction_Share)
+                    return@contract when (CatogramConfig.messageSlideAction) {
+                        1 -> LocaleController.getString("CG_MsgSlideAction_Save", R.string.CG_MsgSlideAction_Save)
+                        2 -> LocaleController.getString("CG_MsgSlideAction_Share", R.string.CG_MsgSlideAction_Share)
+                        else -> LocaleController.getString("CG_MsgSlideAction_Reply", R.string.CG_MsgSlideAction_Reply)
                     }
                 }) {
                     CatogramConfig.messageSlideAction = it
+                    Theme.chat_replyIconDrawable = bf.parentActivity.resources.getDrawable(CGFeatureHooks.getReplyIconDrawable())
+                    Theme.setDrawableColorByKey(Theme.chat_replyIconDrawable, Theme.key_chat_serviceIcon)
                 }
             }
 

@@ -29,6 +29,15 @@ object CGFeatureHooks {
     }
 
     @JvmStatic
+    fun getReplyIconDrawable(): Int {
+        return when (CatogramConfig.messageSlideAction) {
+            1 -> R.drawable.menu_saved_cg
+            2 -> R.drawable.share_arrow
+            else -> R.drawable.fast_reply
+        }
+    }
+
+    @JvmStatic
     fun injectChatActivityMsgSlideAction(cf: ChatActivity, msg: MessageObject, isChannel: Boolean, classGuid: Int) {
         when (CatogramConfig.messageSlideAction) {
             0 -> {

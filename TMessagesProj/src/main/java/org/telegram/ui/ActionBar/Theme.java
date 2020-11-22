@@ -115,6 +115,8 @@ import java.util.Locale;
 import androidx.annotation.UiThread;
 import androidx.core.graphics.ColorUtils;
 
+import ua.itaysonlab.catogram.CGFeatureHooks;
+
 public class Theme {
 
     public static final String DEFAULT_BACKGROUND_SLUG = "d";
@@ -6976,7 +6978,7 @@ public class Theme {
 
             chat_shareDrawable = createRoundRectDrawable(AndroidUtilities.dp(16), 0xffffffff);
             chat_shareIconDrawable = resources.getDrawable(R.drawable.share_arrow).mutate();
-            chat_replyIconDrawable = resources.getDrawable(R.drawable.fast_reply);
+            chat_replyIconDrawable = resources.getDrawable(CGFeatureHooks.getReplyIconDrawable());
             chat_goIconDrawable = resources.getDrawable(R.drawable.message_arrow);
 
             chat_fileMiniStatesDrawable[0][0] = createCircleDrawableWithIcon(AndroidUtilities.dp(22), R.drawable.audio_mini_arrow);
