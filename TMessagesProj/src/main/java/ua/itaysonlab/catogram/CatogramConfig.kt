@@ -53,6 +53,7 @@ object CatogramConfig {
 
     var slider_stickerAmplifier by sharedPreferences.int("cg_stickamplifier", 100)
     var archiveOnPull by sharedPreferences.boolean("cg_archonpull", true)
+    var syncPins by sharedPreferences.boolean("cg_syncpins", false)
     var useCupertinoLib by sharedPreferences.boolean("advanced_cupertino", false)
     var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", false)
     var useTgxMenuSlideSheet by sharedPreferences.boolean("advanced_tgxslide_sheet", true)

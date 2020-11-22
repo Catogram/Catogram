@@ -206,4 +206,6 @@
     <string name="CG_MsgSlideAction_Reply">Ответить</string>
     <string name="CG_MsgSlideAction_Save">Сохранить сообщение</string>
     <string name="CG_MsgSlideAction_Share">Поделится</string>
+    <string name="CG_SyncPins">Синхронизировать закрепленные чаты</string>
+    <string name="CG_SyncPins_Desc">Отключив это вы сможете установить неограниченное количество закрепленных чатов</string>
 </resources>

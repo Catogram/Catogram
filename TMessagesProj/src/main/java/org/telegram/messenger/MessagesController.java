@@ -9919,19 +9919,23 @@ public class MessagesController extends BaseController implements NotificationCe
                 } else {
                     newTaskId = taskId;
                 }
-
-                getConnectionsManager().sendRequest(req, (response, error) -> {
-                    if (newTaskId != 0) {
-                        getMessagesStorage().removePendingTask(newTaskId);
+                if (CatogramConfig.INSTANCE.getSyncPins()) {
+                    getConnectionsManager().sendRequest(req, (response, error) -> {
+                        if (newTaskId != 0) {
+                            getMessagesStorage().removePendingTask(newTaskId);
+                            }
+                        });
                     }
-                });
+                }
             }
-        }
         getMessagesStorage().setDialogPinned(did, dialog.pinnedNum);
         return true;
     }
 
     public void loadPinnedDialogs(final int folderId, final long newDialogId, final ArrayList<Long> order) {
+        if (CatogramConfig.INSTANCE.getSyncPins()) {
+            return;
+        }
         if (loadingPinnedDialogs.indexOfKey(folderId) >= 0 || getUserConfig().isPinnedDialogsLoaded(folderId)) {
             return;
         }

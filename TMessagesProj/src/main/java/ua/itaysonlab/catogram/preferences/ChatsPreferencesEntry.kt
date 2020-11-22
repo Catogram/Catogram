@@ -93,6 +93,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
+                title = LocaleController.getString("CG_syncPins", R.string.CG_SyncPins)
+                summary = LocaleController.getString("CG_syncPins_Desc", R.string.CG_SyncPins_Desc)
+
+                contract({
+                    return@contract CatogramConfig.syncPins
+                }) {
+                    CatogramConfig.syncPins = it
+                }
+            }
+
+            switch {
                 title = LocaleController.getString("CG_SmoothKbd", R.string.CG_SmoothKbd)
                 summary = LocaleController.getString("CG_SmoothKbd_Desc", R.string.CG_SmoothKbd_Desc)
 

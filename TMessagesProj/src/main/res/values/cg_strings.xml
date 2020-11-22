@@ -224,4 +224,6 @@
     <string name="CG_MsgSlideAction_Reply">Reply</string>
     <string name="CG_MsgSlideAction_Save">Save message</string>
     <string name="CG_MsgSlideAction_Share">Share</string>
+    <string name="CG_SyncPins">Sync pinned chats</string>
+    <string name="CG_SyncPins_Desc">Disabling this will allow you to have unlimited amount of pinned chats</string>
 </resources>
