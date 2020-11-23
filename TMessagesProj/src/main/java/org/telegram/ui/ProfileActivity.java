@@ -2376,10 +2376,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 presentFragment(new SessionsActivity(0));
             } else if (position == questionRow) {
                 showDialog(AlertsCreator.createSupportAlert(ProfileActivity.this));
-            } else if (position == faqRow) {
-                Browser.openUrl(getParentActivity(), LocaleController.getString("TelegramFaqUrl", R.string.TelegramFaqUrl));
-            } else if (position == policyRow) {
-                Browser.openUrl(getParentActivity(), LocaleController.getString("PrivacyPolicyUrl", R.string.PrivacyPolicyUrl));
             } else if (position == sendLogsRow) {
                 sendLogs();
             } else if (position == clearLogsRow) {

@@ -38,6 +38,7 @@
 
     <string name="CG_AboutDesc">Экспериметальная модификация официального приложения Telegram.</string>
     <string name="CG_Donate">Поддержать разработку</string>
+    <string name="CG_DonatDesc">Помогите нам купить PS5</string>
     <string name="CG_ToChannel">Открыть официальный канал</string>
 
     <string name="DebugMenu">Меню отладки</string>
@@ -208,4 +209,5 @@
     <string name="CG_MsgSlideAction_Share">Поделится</string>
     <string name="CG_SyncPins">Синхронизировать закрепленные чаты</string>
     <string name="CG_SyncPins_Desc">Отключив это вы сможете установить неограниченное количество закрепленных чатов</string>
+    <string name="CG_RearCam">Использовать заднюю камеру вместо фронтальной</string>
 </resources>

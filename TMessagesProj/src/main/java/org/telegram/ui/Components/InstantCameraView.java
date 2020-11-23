@@ -102,6 +102,7 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL;
+import ua.itaysonlab.catogram.CatogramConfig;
 
 @TargetApi(18)
 public class InstantCameraView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate {
@@ -115,7 +116,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
     private ImageView muteImageView;
     private float progress;
     private CameraInfo selectedCamera;
-    private boolean isFrontface = true;
+    private boolean isFrontface = CatogramConfig.INSTANCE.getRearCam;
     private volatile boolean cameraReady;
     private AnimatorSet muteAnimation;
     private TLRPC.InputFile file;

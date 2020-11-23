@@ -81,13 +81,22 @@ class MainPreferencesEntry : BasePreferencesEntry {
             textIcon {
                 title = LocaleController.getString("CG_ToChat", R.string.CG_ToChat)
                 value = "@catogram_en"
-                divider = true
                 listener = TGKitTextIconRow.TGTIListener {
                     goToChat(it)
                 }
             }
+            textIcon {
+                title = LocaleController.getString("CG_GooglePlay_Donate", R.string.CG_GooglePlay_Donate)
+                divider = true
+                detail = LocaleController.getString("CG_DonatDesc", R.string.CG_DonatDesc)
+                listener = TGKitTextIconRow.TGTIListener {
+                    it.presentFragment(CatogramPreferencesNavigator.createDonate())
+                }
+            }
         }
+
     }
+}
 
     companion object {
         private fun goToChannel(bf: BaseFragment) {

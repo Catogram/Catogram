@@ -36,6 +36,7 @@
 
     <string name="CG_AboutDesc">An experimental Telegram app modification.</string>
     <string name="CG_Donate">Donate</string>
+    <string name="CG_DonatDesc">Help us to buy PS5</string>
     <string name="CG_ToChannel">Open official channel</string>
     <string name="CG_ToChat">Open official chat</string>
     <string name="AS_SysEmoji">Use system emoji</string>
@@ -226,4 +227,5 @@
     <string name="CG_MsgSlideAction_Share">Share</string>
     <string name="CG_SyncPins">Sync pinned chats</string>
     <string name="CG_SyncPins_Desc">Disabling this will allow you to have unlimited amount of pinned chats</string>
+    <string name="CG_SyncPins">Use rear camera instead of frontal for video messages</string>
 </resources>
