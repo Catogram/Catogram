@@ -56,15 +56,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
-            textIcon {
-                title = LocaleController.getString("CG_GooglePlay_Donate", R.string.CG_GooglePlay_Donate)
-                icon = R.drawable.round_attach_money_24
-                listener = TGKitTextIconRow.TGTIListener {
-                    it.presentFragment(CatogramPreferencesNavigator.createDonate())
-                }
-            }
-        }
-
         category(LocaleController.getString("AS_Header_About", R.string.AS_Header_About)) {
             textDetail {
                 title = "Catogram " + CatogramExtras.CG_VERSION + " [" + BuildVars.BUILD_VERSION_STRING + "]"
@@ -94,9 +85,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
                 }
             }
         }
-
     }
-}
 
     companion object {
         private fun goToChannel(bf: BaseFragment) {
@@ -121,20 +110,20 @@ class MainPreferencesEntry : BasePreferencesEntry {
             val builder = AlertDialog.Builder(bf.getParentActivity())
             builder.setTitle(LocaleController.getString("DebugMenu", R.string.DebugMenu))
             val items: Array<CharSequence?> = arrayOf(
-                    LocaleController.getString("DebugMenuImportContacts", R.string.DebugMenuImportContacts),
-                    LocaleController.getString("DebugMenuReloadContacts", R.string.DebugMenuReloadContacts),
-                    LocaleController.getString("DebugMenuResetContacts", R.string.DebugMenuResetContacts),
-                    LocaleController.getString("DebugMenuResetDialogs", R.string.DebugMenuResetDialogs),
-                    if (BuildVars.LOGS_ENABLED) LocaleController.getString("DebugMenuDisableLogs", R.string.DebugMenuDisableLogs) else LocaleController.getString("DebugMenuEnableLogs", R.string.DebugMenuEnableLogs),
-                    if (SharedConfig.inappCamera) LocaleController.getString("DebugMenuDisableCamera", R.string.DebugMenuDisableCamera) else LocaleController.getString("DebugMenuEnableCamera", R.string.DebugMenuEnableCamera),
-                    LocaleController.getString("DebugMenuClearMediaCache", R.string.DebugMenuClearMediaCache),
-                    LocaleController.getString("DebugMenuCallSettings", R.string.DebugMenuCallSettings),
-                    null,
-                    if (BuildVars.DEBUG_PRIVATE_VERSION) "Check for app updates" else null,
-                    LocaleController.getString("DebugMenuReadAllDialogs", R.string.DebugMenuReadAllDialogs),
-                    if (SharedConfig.pauseMusicOnRecord) LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) else LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
-                    if (BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() && Build.VERSION.SDK_INT >= 23) if (SharedConfig.smoothKeyboard) LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) else LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard) else null,
-                    if (Build.VERSION.SDK_INT >= 29) if (SharedConfig.chatBubbles) "Disable chat bubbles" else "Enable chat bubbles" else null
+                        LocaleController.getString("DebugMenuImportContacts", R.string.DebugMenuImportContacts),
+                        LocaleController.getString("DebugMenuReloadContacts", R.string.DebugMenuReloadContacts),
+                        LocaleController.getString("DebugMenuResetContacts", R.string.DebugMenuResetContacts),
+                        LocaleController.getString("DebugMenuResetDialogs", R.string.DebugMenuResetDialogs),
+                        if (BuildVars.LOGS_ENABLED) LocaleController.getString("DebugMenuDisableLogs", R.string.DebugMenuDisableLogs) else LocaleController.getString("DebugMenuEnableLogs", R.string.DebugMenuEnableLogs),
+                        if (SharedConfig.inappCamera) LocaleController.getString("DebugMenuDisableCamera", R.string.DebugMenuDisableCamera) else LocaleController.getString("DebugMenuEnableCamera", R.string.DebugMenuEnableCamera),
+                        LocaleController.getString("DebugMenuClearMediaCache", R.string.DebugMenuClearMediaCache),
+                        LocaleController.getString("DebugMenuCallSettings", R.string.DebugMenuCallSettings),
+                        null,
+                        if (BuildVars.DEBUG_PRIVATE_VERSION) "Check for app updates" else null,
+                        LocaleController.getString("DebugMenuReadAllDialogs", R.string.DebugMenuReadAllDialogs),
+                        if (SharedConfig.pauseMusicOnRecord) LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) else LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
+                        if (BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() && Build.VERSION.SDK_INT >= 23) if (SharedConfig.smoothKeyboard) LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) else LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard) else null,
+                        if (Build.VERSION.SDK_INT >= 29) if (SharedConfig.chatBubbles) "Disable chat bubbles" else "Enable chat bubbles" else null
             )
             builder.setItems(items) { dialog: DialogInterface?, which: Int ->
                 if (which == 0) {
