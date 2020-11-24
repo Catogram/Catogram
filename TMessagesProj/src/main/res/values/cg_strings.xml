@@ -231,4 +231,6 @@
     <string name="CG_RearCam_Desc">Instead of frontal for video messages</string>
     <string name="CG_EnableSwipePIP">Enable Picture-in-Picture for videos</string>
     <string name="CG_EnableSwipePIP_Desc">by swiping in the video player</string>
+    <string name="CG_TelegramThemes">Official themes</string>
+    <string name="CG_TelegramThemes_Desc">Show official themes instead of VKUI in chat settings</string>
 </resources>

@@ -18,6 +18,17 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
     override fun getPreferences(bf: BaseFragment) = tgKitScreen(LocaleController.getString("AS_Header_Appearance", R.string.AS_Header_Appearance)) {
         category(LocaleController.getString("AS_RedesignCategory", R.string.AS_RedesignCategory)) {
             switch {
+                title = LocaleController.getString("CG_TelegramThemes", R.string.CG_TelegramThemes)
+                summary = LocaleController.getString("CG_TelegramThemes_Desc", R.string.CG_TelegramThemes_Desc)
+
+                contract({
+                    return@contract CatogramConfig.redesign_TelegramThemes
+                }) {
+                    CatogramConfig.redesign_TelegramThemes = it
+                }
+            }
+
+            switch {
                 title = LocaleController.getString("CG_NewDrawer", R.string.CG_NewDrawer)
                 summary = LocaleController.getString("CG_NewDrawer_Desc", R.string.CG_NewDrawer_Desc)
 

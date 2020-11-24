@@ -15,7 +15,7 @@
     <string name="AS_ForceNYSummary">перезапустите приложение для применения</string>
     <string name="AS_ForcePacman">Форсировать анимацию Pacman</string>
     <string name="AS_ForcePacmanSummary">при архивации чата</string>
-    <string name="AS_ForceFireworks">Форсировать фейрверки в шторке</string>
+    <string name="AS_ForceFireworks">Форсировать фейерверки в шторке</string>
     <string name="AS_ForceFireworksSummary">отключит снегопад при включении</string>
     <string name="AS_SystemFonts">Использовать системные шрифты</string>
 
@@ -147,7 +147,7 @@
     <string name="CG_MessageButton_Option_Saved">В облако</string>
 
     <string name="CG_ConfirmCalling_Header">Подтвердить звонок</string>
-    <string name="CG_ConfirmCalling_Question">Позовнить %s?</string>
+    <string name="CG_ConfirmCalling_Question">Позвонить %s?</string>
     <string name="CG_ConfirmCalling_Action">Подтвердить</string>
     <string name="CG_ConfirmCalling_Action_Cancel">Отменить</string>
 
@@ -206,11 +206,13 @@
     <string name="CG_MsgSlideAction">Действие при свайпе по сообщению</string>
     <string name="CG_MsgSlideAction_Reply">Ответить</string>
     <string name="CG_MsgSlideAction_Save">Сохранить сообщение</string>
-    <string name="CG_MsgSlideAction_Share">Поделится</string>
+    <string name="CG_MsgSlideAction_Share">Поделиться</string>
     <string name="CG_SyncPins">Синхронизировать закрепленные чаты</string>
     <string name="CG_SyncPins_Desc">Отключив это вы сможете установить неограниченное количество закрепленных чатов</string>
     <string name="CG_RearCam">Использовать заднюю камеру</string>
     <string name="CG_RearCam">Для записи видео сообщений</string>
     <string name="CG_EnableSwipePIP">Включить "картинка-в-картинке" для видео</string>
     <string name="CG_EnableSwipePIP_Desc">при свайпах в видеоплеере</string>
+    <string name="CG_TelegramThemes">Официальные темы</string>
+    <string name="CG_TelegramThemes_Desc">Показывать официальные темы вместо VKUI в настройке чатов</string>
 </resources>
