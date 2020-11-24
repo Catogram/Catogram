@@ -2376,6 +2376,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 presentFragment(new SessionsActivity(0));
             } else if (position == questionRow) {
                 showDialog(AlertsCreator.createSupportAlert(ProfileActivity.this));
+            } else if (position == policyRow) {
+                Browser.openUrl(getParentActivity(), LocaleController.getString("PrivacyPolicyUrl", R.string.PrivacyPolicyUrl));
             } else if (position == sendLogsRow) {
                 sendLogs();
             } else if (position == clearLogsRow) {
@@ -4841,7 +4843,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 devicesSectionRow = rowCount++;
                 helpHeaderRow = rowCount++;
                 questionRow = rowCount++;
-                faqRow = rowCount++;
+                //faqRow = rowCount++;
                 policyRow = rowCount++;
                 if (BuildVars.LOGS_ENABLED || BuildVars.DEBUG_PRIVATE_VERSION) {
                     helpSectionCell = rowCount++;
@@ -4851,9 +4853,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     sendLogsRow = rowCount++;
                     clearLogsRow = rowCount++;
                 }
-                if (BuildVars.DEBUG_PRIVATE_VERSION) {
-                    switchBackendRow = rowCount++;
-                }
+                switchBackendRow = rowCount++;
                 versionRow = rowCount++;
             } else {
                 boolean hasInfo = userInfo != null && !TextUtils.isEmpty(userInfo.about) || user != null && !TextUtils.isEmpty(user.username);
