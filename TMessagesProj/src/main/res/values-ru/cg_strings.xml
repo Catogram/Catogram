@@ -210,7 +210,7 @@
     <string name="CG_SyncPins">Синхронизировать закрепленные чаты</string>
     <string name="CG_SyncPins_Desc">Отключив это вы сможете установить неограниченное количество закрепленных чатов</string>
     <string name="CG_RearCam">Использовать заднюю камеру</string>
-    <string name="CG_RearCam">Для записи видео сообщений</string>
+    <string name="CG_RearCam_Desc">Для записи видео сообщений</string>
     <string name="CG_EnableSwipePIP">Включить "картинка-в-картинке" для видео</string>
     <string name="CG_EnableSwipePIP_Desc">при свайпах в видеоплеере</string>
     <string name="CG_TelegramThemes">Официальные темы</string>

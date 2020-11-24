@@ -91,8 +91,8 @@
 
     <string name="CG_ChatMenu_RestorePin">Повернути закріплене повідомлення</string>
     <string name="CG_ChatMenu_HidePin">Приховати закріплене повідомлення</string>
-    <string name="CG_ChatMenu_ToChannel">Прив'язаний канал</string>
-    <string name="CG_ChannelMenu_ToChat">Прив'язаний чат</string>
+    <string name="CG_ChatMenu_ToChannel">Прив\'язаний канал</string>
+    <string name="CG_ChannelMenu_ToChat">Прив\'язаний чат</string>
 
     <string name="AS_Header_Chats">Діалоги</string>
     <string name="CG_NewRepostUI">Увімкнути новий UI репостів всюди</string>
@@ -215,7 +215,7 @@
     <string name="CG_Proximity">Використовувати сенсор близькості</string>
     <string name="CG_Proximity_Desc">Відключивши це ви позбудетеся від дратівливих дій сенсора близькості (особливо при прослуховуванні голосового повідомлення)</string>
     <string name="CG_RearCam">Використовувати задню камеру</string>
-    <string name="CG_RearCam">Для запису відео повідомлень</string>
+    <string name="CG_RearCam_Desc">Для запису відео повідомлень</string>
     <string name="CG_EnableSwipePIP">Увімкнути "картинка-в-картинці" для відео</string>
     <string name="CG_EnableSwipePIP_Desc">при свайпах в відеоплеєрі</string>
 	

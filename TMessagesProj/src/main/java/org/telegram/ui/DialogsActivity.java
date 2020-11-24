@@ -4549,7 +4549,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             int maxPinnedCount;
             if (viewPages[0].dialogsType == 7 || viewPages[0].dialogsType == 8) {
                 maxPinnedCount = 100 - filter.alwaysShow.size();
-            } else if (folderId != 0 || filter != null || !CatogramConfig.INSTANCE.getSyncPins) {
+            } else if (folderId != 0 || filter != null || !CatogramConfig.INSTANCE.getSyncPins()) {
                 maxPinnedCount = getMessagesController().maxFolderPinnedDialogsCount;
             } else {
                 maxPinnedCount = getMessagesController().maxPinnedDialogsCount;

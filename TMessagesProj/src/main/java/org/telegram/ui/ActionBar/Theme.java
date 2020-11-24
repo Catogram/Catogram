@@ -3880,7 +3880,7 @@ public class Theme {
 
         ThemeInfo themeInfo = new ThemeInfo();
         themeInfo.name = "Blue";
-        if (Catogram.INSTANCE.getRedesign_TelegramThemes()) {
+        if (CatogramConfig.INSTANCE.getRedesign_TelegramThemes()) {
             themeInfo.assetName = "bluebubbles.attheme";
             themeInfo.previewBackgroundColor = 0xff95beec;
             themeInfo.previewInColor = 0xffffffff;
@@ -3901,7 +3901,7 @@ public class Theme {
             themeInfo.assetName = "vkold.attheme";
             themeInfo.previewInColor = Color.parseColor("#A8D0F8");
             themeInfo.previewBackgroundColor = Color.parseColor("#EBF0F5");
-            themeInfo.previewOutColor = Color.parseColor("#FFFFF");
+            themeInfo.previewOutColor = Color.parseColor("#FFFFFF");
         }
         themeInfo.currentAccentId = DEFALT_THEME_ACCENT_ID;
         themeInfo.sortIndex = 1;
@@ -3910,7 +3910,7 @@ public class Theme {
 
         themeInfo = new ThemeInfo();
         themeInfo.name = "Dark Blue";
-        if (Catogram.INSTANCE.getRedesign_TelegramThemes()) {
+        if (CatogramConfig.INSTANCE.getRedesign_TelegramThemes()) {
             themeInfo.assetName = "darkblue.attheme";
             themeInfo.previewBackgroundColor = 0xff5f6e82;
             themeInfo.previewInColor = 0xff76869c;
@@ -3928,9 +3928,9 @@ public class Theme {
             );
         } else {
                 themeInfo.assetName = "vkdark.attheme";
-                themeInfo.previewBackgroundColor = color.parseColor("#171717");
-                themeInfo.previewInColor = color.parseColor("#454647");
-                themeInfo.previewOutColor = color.parseColor("#2C2D2E");
+                themeInfo.previewBackgroundColor = Color.parseColor("#FF171717");
+                themeInfo.previewInColor = Color.parseColor("#FF454647");
+                themeInfo.previewOutColor = Color.parseColor("#FF2C2D2E");
         }
         themeInfo.sortIndex = 2;
         themes.add(themeInfo);
