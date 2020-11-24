@@ -484,7 +484,11 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
             textureOverlayView.setImageResource(R.drawable.icplaceholder);
         }
         cameraReady = false;
-        isFrontface = CatogramConfig.INSTANCE.getRearCam();
+        if (CatogramConfig.INSTANCE.getRearCam()) {
+            isFrontface = false;
+        } else {
+            isFrontface = true;
+        }
         selectedCamera = null;
         recordedTime = 0;
         progress = 0;
