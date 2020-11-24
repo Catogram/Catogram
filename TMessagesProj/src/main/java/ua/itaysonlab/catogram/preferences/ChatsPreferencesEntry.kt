@@ -116,7 +116,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
-
             switch {
                 title = LocaleController.getString("CG_SmoothKbd", R.string.CG_SmoothKbd)
                 summary = LocaleController.getString("CG_SmoothKbd_Desc", R.string.CG_SmoothKbd_Desc)
