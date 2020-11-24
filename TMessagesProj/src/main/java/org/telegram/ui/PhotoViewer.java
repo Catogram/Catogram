@@ -233,6 +233,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+
 @SuppressWarnings("unchecked")
 public class PhotoViewer implements NotificationCenter.NotificationCenterDelegate, GestureDetector2.OnGestureListener, GestureDetector2.OnDoubleTapListener {
 
@@ -13235,7 +13237,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     }
 
     private boolean enableSwipeToPiP() {
-        if (!BuildVars.DEBUG_PRIVATE_VERSION) {
+        if (!CatogramConfig.INSTANCE.getEnableSwipeToPIP()) {
             return false;
         }
         boolean permissionsEnabled = Build.VERSION.SDK_INT < 23 || Settings.canDrawOverlays(parentActivity);

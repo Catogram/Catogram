@@ -70,6 +70,7 @@ object CatogramConfig {
     var oldNotificationIcon by sharedPreferences.boolean("cg_old_notification", false)
 
     var messageSlideAction by sharedPreferences.int("cg_msgslide_action", 0)
+    var enableSwipeToPIP by sharedPreferences.boolean("cg_swipe_to_pip", false)
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {

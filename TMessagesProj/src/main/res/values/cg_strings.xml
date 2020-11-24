@@ -227,5 +227,7 @@
     <string name="CG_MsgSlideAction_Share">Share</string>
     <string name="CG_SyncPins">Sync pinned chats</string>
     <string name="CG_SyncPins_Desc">Disabling this will allow you to have unlimited amount of pinned chats</string>
-    <string name="CG_SyncPins">Use rear camera instead of frontal for video messages</string>
+    <string name="CG_RearCam">Use rear camera instead of frontal for video messages</string>
+    <string name="CG_EnableSwipePIP">Enable Picture-in-Picture for videos</string>
+    <string name="CG_EnableSwipePIP_Desc">by swiping in the video player</string>
 </resources>

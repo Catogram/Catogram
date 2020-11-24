@@ -217,6 +217,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
+                title = LocaleController.getString("CG_EnableSwipePIP", R.string.CG_EnableSwipePIP)
+                summary = LocaleController.getString("CG_EnableSwipePIP_Desc", R.string.CG_EnableSwipePIP_Desc)
+
+                contract({
+                    return@contract CatogramConfig.enableSwipeToPIP
+                }) {
+                    CatogramConfig.enableSwipeToPIP = it
+                }
+            }
+
+            switch {
                 title = LocaleController.getString("CG_NewAvaHeader_OpenOnTap", R.string.CG_NewAvaHeader_OpenOnTap)
                 summary = LocaleController.getString("CG_NewAvaHeader_OpenOnTap_Desc", R.string.CG_NewAvaHeader_OpenOnTap_Desc)
 
