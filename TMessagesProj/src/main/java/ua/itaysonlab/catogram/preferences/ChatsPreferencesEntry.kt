@@ -107,7 +107,8 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
-                title = LocaleController.getString("CG_rearCam", R.string.CG_RearCam)
+                title = LocaleController.getString("CG_RearCam", R.string.CG_RearCam)
+                summary = LocaleController.getString("CG_RearCam_Desc", R.string.CG_RearCam_Desc)
 
                 contract({
                     return@contract CatogramConfig.rearCam
