@@ -116,7 +116,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
     private ImageView muteImageView;
     private float progress;
     private CameraInfo selectedCamera;
-    private boolean isFrontface = CatogramConfig.INSTANCE.getRearCam();
+    private boolean isFrontface = true;
     private volatile boolean cameraReady;
     private AnimatorSet muteAnimation;
     private TLRPC.InputFile file;
@@ -484,7 +484,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
             textureOverlayView.setImageResource(R.drawable.icplaceholder);
         }
         cameraReady = false;
-        isFrontface = true;
+        isFrontface = CatogramConfig.INSTANCE.getRearCam();
         selectedCamera = null;
         recordedTime = 0;
         progress = 0;
