@@ -121,13 +121,13 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
 
                 contractIcons({
                     return@contractIcons listOf(
-                            Triple(0, LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default), R.drawable.menu_settings),
-                            Triple(1, LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI), R.drawable.settings_outline_28)
+                            Triple(0, LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI), R.drawable.settings_outline_28),
+                            Triple(1, LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default), R.drawable.menu_settings)
                     )
                 }, {
                     return@contractIcons when (CatogramConfig.iconReplacement) {
-                        1 -> LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI)
-                        else -> LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default)
+                        1 -> LocaleController.getString("CG_IconReplacement_Default", R.string.CG_IconReplacement_Default)
+                        else -> LocaleController.getString("CG_IconReplacement_VKUI", R.string.CG_IconReplacement_VKUI)
                     }
                 }) {
                     CatogramConfig.iconReplacement = it
