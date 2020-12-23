@@ -11,14 +11,12 @@ import android.text.TextUtils;
 import android.util.Base64;
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.BaseController;
-import org.telegram.messenger.BuildConfig;
 import org.telegram.messenger.BuildVars;
 import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.EmuDetector;
@@ -1253,15 +1251,59 @@ public class ConnectionsManager extends BaseController {
         }
 
         protected NativeByteBuffer doInBackground(Void... voids) {
-            Utilities.stageQueue.postRunnable(() -> {
+            try {
+                if (native_isTestBackend(currentAccount) != 0) {
+                    throw new Exception("test backend");
+                }
+                firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+                String currentValue = firebaseRemoteConfig.getString("ipconfigv3");
                 if (BuildVars.LOGS_ENABLED) {
                     FileLog.d("failed to get firebase result");
                     FileLog.d("start dns txt task");
                 }
-                DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
-                task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
-                currentTask = task;
-            });
+
+                firebaseRemoteConfig.fetch(0).addOnCompleteListener(finishedTask -> {
+                    final boolean success = finishedTask.isSuccessful();
+                    Utilities.stageQueue.postRunnable(() -> {
+                        if (success) {
+                            firebaseRemoteConfig.activate().addOnCompleteListener(finishedTask2 -> {
+                                currentTask = null;
+                                String config = firebaseRemoteConfig.getString("ipconfigv3");
+                                if (!TextUtils.isEmpty(config)) {
+                                    byte[] bytes = Base64.decode(config, Base64.DEFAULT);
+                                    try {
+                                        NativeByteBuffer buffer = new NativeByteBuffer(bytes.length);
+                                        buffer.writeBytes(bytes);
+                                        int date = (int) (firebaseRemoteConfig.getInfo().getFetchTimeMillis() / 1000);
+                                        native_applyDnsConfig(currentAccount, buffer.address, AccountInstance.getInstance(currentAccount).getUserConfig().getClientPhone(), date);
+                                    } catch (Exception e) {
+                                        FileLog.e(e);
+                                    }
+                                } else {
+                                    if (BuildVars.LOGS_ENABLED) {
+                                        FileLog.d("failed to get firebase result");
+                                        FileLog.d("start dns txt task");
+                                    }
+                                    DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
+                                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+                                    currentTask = task;
+                                }
+                            });
+                        }
+                    });
+                });
+            } catch (Throwable e) {
+                Utilities.stageQueue.postRunnable(() -> {
+                    if (BuildVars.LOGS_ENABLED) {
+                        FileLog.d("failed to get firebase result");
+                        FileLog.d("start dns txt task");
+                    }
+                    DnsTxtLoadTask task = new DnsTxtLoadTask(currentAccount);
+                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+                    currentTask = task;
+                });
+                FileLog.e(e);
+            }
             return null;
         }
 

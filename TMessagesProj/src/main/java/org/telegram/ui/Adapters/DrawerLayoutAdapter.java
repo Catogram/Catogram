@@ -11,10 +11,12 @@ package org.telegram.ui.Adapters;
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
+import android.content.pm.PackageManager;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.R;
@@ -44,6 +46,7 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
     private boolean accountsShown;
     private DrawerProfileCell profileCell;
     private SideMenultItemAnimator itemAnimator;
+    private boolean hasGps;
 
     public DrawerLayoutAdapter(Context context, SideMenultItemAnimator animator) {
         mContext = context;
@@ -51,6 +54,11 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
         accountsShown = UserConfig.getActivatedAccountsCount() > 1 && MessagesController.getGlobalMainSettings().getBoolean("accountsShown", true);
         Theme.createDialogsResources(context);
         resetItems();
+        try {
+            hasGps = ApplicationLoader.applicationContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
+        } catch (Throwable e) {
+            hasGps = false;
+        }
     }
 
     private int getAccountRowsCount() {
@@ -243,37 +251,60 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
         int settingsIcon;
         int inviteIcon;
         int helpIcon;
+        int peopleNearbyIcon;
         if (CatogramConfig.INSTANCE.getForceNewYearDrawer() || eventType == 0) {
+            newGroupIcon = R.drawable.menu_groups_ny;
+            //newSecretIcon = R.drawable.menu_secret_ny;
+            //newChannelIcon = R.drawable.menu_channel_ny;
             contactsIcon = R.drawable.menu_contacts_ny;
             callsIcon = R.drawable.menu_calls_ny;
             savedIcon = R.drawable.menu_bookmarks_ny;
             settingsIcon = R.drawable.menu_settings_ny;
+            inviteIcon = R.drawable.menu_invite_ny;
+            helpIcon = R.drawable.menu_help_ny;
+            peopleNearbyIcon = R.drawable.menu_nearby_ny;
         } else if (CatogramConfig.INSTANCE.getForceSVDrawer() || eventType == 1) {
+            newGroupIcon = R.drawable.menu_groups_14;
+            //newSecretIcon = R.drawable.menu_secret_14;
+            //newChannelIcon = R.drawable.menu_broadcast_14;
             contactsIcon = R.drawable.menu_contacts_14;
             callsIcon = R.drawable.menu_calls_14;
             savedIcon = R.drawable.menu_bookmarks_14;
             settingsIcon = R.drawable.menu_settings_14;
             inviteIcon = R.drawable.menu_secret_ny;
             helpIcon = R.drawable.menu_help;
+            peopleNearbyIcon = R.drawable.menu_secret_14;
         } else if (CatogramConfig.INSTANCE.getForceHLDrawer() || eventType == 2) {
             newGroupIcon = R.drawable.menu_groups_hw;
-            newSecretIcon = R.drawable.menu_secret_hw;
-            newChannelIcon = R.drawable.menu_broadcast_hw;
+            //newSecretIcon = R.drawable.menu_secret_hw;
+            //newChannelIcon = R.drawable.menu_broadcast_hw;
             contactsIcon = R.drawable.menu_contacts_hw;
             callsIcon = R.drawable.menu_calls_hw;
             savedIcon = R.drawable.menu_bookmarks_hw;
             settingsIcon = R.drawable.menu_settings_hw;
             inviteIcon = R.drawable.menu_invite_hw;
             helpIcon = R.drawable.menu_help_hw;
+            peopleNearbyIcon = R.drawable.menu_secret_hw;
         } else {
+            newGroupIcon = R.drawable.menu_groups;
+            //newSecretIcon = R.drawable.menu_secret;
+            //newChannelIcon = R.drawable.menu_broadcast;
             contactsIcon = R.drawable.menu_contacts;
             callsIcon = R.drawable.menu_calls;
             savedIcon = R.drawable.menu_saved_cg;
             settingsIcon = R.drawable.menu_settings;
+            inviteIcon = R.drawable.menu_invite;
+            helpIcon = R.drawable.menu_help;
+            peopleNearbyIcon = R.drawable.menu_nearby;
         }
-
+        items.add(new Item(2, LocaleController.getString("NewGroup", R.string.NewGroup), newGroupIcon));
+        //items.add(new Item(3, LocaleController.getString("NewSecretChat", R.string.NewSecretChat), newSecretIcon));
+        //items.add(new Item(4, LocaleController.getString("NewChannel", R.string.NewChannel), newChannelIcon));
         items.add(new Item(6, LocaleController.getString("Contacts", R.string.Contacts), contactsIcon));
         items.add(new Item(10, LocaleController.getString("Calls", R.string.Calls), callsIcon));
+        if (hasGps) {
+            items.add(new Item(12, LocaleController.getString("PeopleNearby", R.string.PeopleNearby), peopleNearbyIcon));
+        }
         items.add(new Item(11, LocaleController.getString("SavedMessages", R.string.SavedMessages), savedIcon));
         items.add(new Item(1001, LocaleController.getString("ArchivedChats", R.string.ArchivedChats), R.drawable.msg_archive));
         items.add(new Item(8, LocaleController.getString("Settings", R.string.Settings), settingsIcon));

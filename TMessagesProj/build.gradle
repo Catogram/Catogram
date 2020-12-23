@@ -35,24 +35,22 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.biometric:biometric:1.0.1'
     implementation 'com.google.android.material:material:1.3.0-alpha03'
-    implementation 'androidx.exifinterface:exifinterface:1.3.1'
-
-    implementation 'androidx.exifinterface:exifinterface:1.3.1'
+    implementation 'androidx.exifinterface:exifinterface:1.3.2'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.sharetarget:sharetarget:1.0.0"
 
     compileOnly 'org.checkerframework:checker-qual:2.5.2'
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.3.0'
-    implementation 'com.google.firebase:firebase-config:19.2.0'
-    implementation 'com.google.firebase:firebase-datatransport:17.0.8'
+    
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+    implementation 'com.google.firebase:firebase-config:20.0.2'
+    implementation 'com.google.firebase:firebase-datatransport:17.0.10'
     implementation 'com.google.firebase:firebase-appindexing:19.1.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-
     implementation 'com.google.android.play:core:1.8.3'
 
-    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-vision:16.2.0'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
@@ -60,7 +58,7 @@ dependencies {
     implementation 'com.facebook.rebound:rebound:0.3.8'
 
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 }
 
 android {
@@ -69,7 +67,7 @@ android {
     }
 
     compileSdkVersion 30
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '30.0.3'
     ndkVersion "21.3.6528147"
 
     defaultConfig.applicationId = "ua.itaysonlab.messenger"
@@ -133,8 +131,10 @@ android {
             signingConfig signingConfigs.debug
             applicationIdSuffix ".beta"
             minifyEnabled false
+            shrinkResources false
             multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk.debugSymbolLevel = 'FULL'
         }
 
         /*debugAsan {
@@ -174,6 +174,7 @@ android {
             minifyEnabled true
             multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk.debugSymbolLevel = 'FULL'
         }
 
         release {
@@ -184,6 +185,7 @@ android {
             shrinkResources true
             multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk.debugSymbolLevel = 'FULL'
         }
     }
 
@@ -320,7 +322,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2140
+    defaultConfig.versionCode = 2195
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -338,8 +340,8 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
-        versionName "CG_7.2.1"
+        targetSdkVersion 29
+        versionName "CG_7.3.0"
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
 
