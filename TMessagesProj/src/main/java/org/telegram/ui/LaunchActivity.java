@@ -927,6 +927,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                 }
             }
         }
+        if (SharedConfig.noStatusBar) {
+            getWindow().setStatusBarColor(0);
+        }
     }
 
     public void switchToAccount(int account, boolean removeAll) {
