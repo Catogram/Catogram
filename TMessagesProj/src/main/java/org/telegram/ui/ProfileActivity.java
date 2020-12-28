@@ -2466,7 +2466,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             } else if (position == addMemberRow) {
                 openAddMember();
             } else if (position == usernameRow) {
-                if (!processCopyUsername())
                 if (currentChat != null) {
                     try {
                         Intent intent = new Intent(Intent.ACTION_SEND);
