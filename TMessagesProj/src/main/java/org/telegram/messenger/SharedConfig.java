@@ -514,6 +514,8 @@ public class SharedConfig {
                     days = 7;
                 } else if (keepMedia == 1) {
                     days = 30;
+                } else if (keepMedia == 1001) {
+                    days = 1;
                 } else {
                     days = 3;
                 }
