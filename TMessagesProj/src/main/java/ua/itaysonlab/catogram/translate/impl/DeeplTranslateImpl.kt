@@ -10,4 +10,8 @@ class DeeplTranslateImpl: BaseTranslationImpl() {
     override fun detectLang(txt: String, callback: (String) -> Unit) {
         TODO("Not yet implemented")
     }
+
+    override fun supportedLanguages(): List<String> {
+        TODO("Not yet implemented")
+    }
 }

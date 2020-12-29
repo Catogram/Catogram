@@ -9,7 +9,6 @@ import java.net.URLEncoder
 
 class YandexTranslateImpl: BaseTranslationImpl() {
     private val listOfSupportedLangs = listOf("en", "de", "fr", "it", "ru", "tr", "es", "zh", "ja", "ko", "am", "ar", "az", "bg", "cs", "da", "el", "et", "fa", "fi", "he", "hi", "hr", "hu", "hy", "id", "is", "ka", "km", "lo", "lt", "lv", "ms", "my", "ne", "nl", "no", "pl", "pt", "ro", "sk", "sl", "sr", "sv", "th", "tl", "uk", "vi")
-
     override fun supportsDetection() = true
 
     companion object {
@@ -37,5 +36,9 @@ class YandexTranslateImpl: BaseTranslationImpl() {
                 callback.invoke(rst)
             }
         }
+    }
+
+    override fun supportedLanguages(): List<String> {
+        return listOfSupportedLangs
     }
 }

@@ -33,6 +33,11 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         }
     }
 
+    private fun getAutoIsoLang(): String {
+        val iso = LocaleController.getLocaleStringIso639()
+        return if (impl.clazz.supportedLanguages().contains(iso)) iso else impl.clazz.supportedLanguages()[0]
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,7 +55,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         vview.trsl_txt.text = LocaleController.getString("CG_Translate_Translated", R.string.CG_Translate_Translated)
 
         impl.clazz.detectLang(txt) {
-            impl.clazz.translateText(txt, it, LocaleController.getLocaleStringIso639()) { text ->
+            impl.clazz.translateText(txt, it, getAutoIsoLang()) { text ->
                 vview.orig.text = txt
                 vview.trsl.text = text
 
