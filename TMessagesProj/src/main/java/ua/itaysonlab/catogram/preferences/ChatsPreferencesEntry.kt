@@ -73,7 +73,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("CG_NewTabs_RemoveAllChats", R.string.CG_NewTabs_RemoveAllChats)
-                summary = LocaleController.getString("CG_NewTabs_RemoveAllChats_Desc", R.string.CG_NewTabs_RemoveAllChats_Desc)
+                //summary = LocaleController.getString("CG_NewTabs_RemoveAllChats_Desc", R.string.CG_NewTabs_RemoveAllChats_Desc)
 
                 contract({
                     return@contract CatogramConfig.newTabs_hideAllChats

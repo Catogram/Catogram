@@ -3505,7 +3505,7 @@ public class NotificationsController extends BaseController {
                     .setGroupSummary(true)
                     .setShowWhen(true)
                     .setWhen(((long) lastMessageObject.messageOwner.date) * 1000)
-                    .setPublicVersion(publicNotification)
+                    //.setPublicVersion(publicNotification)
                     .setColor(CatogramConfig.INSTANCE.getAccentNotification() ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa);
 
             long[] vibrationPattern = null;
@@ -4205,7 +4205,7 @@ public class NotificationsController extends BaseController {
                     .setContentIntent(contentIntent)
                     .extend(wearableExtender)
                     .setSortKey("" + (Long.MAX_VALUE - date))
-                    .setPublicVersion(publicNotification)
+                    //.setPublicVersion(publicNotification)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE);
 
             Intent dismissIntent = new Intent(ApplicationLoader.applicationContext, NotificationDismissReceiver.class);
