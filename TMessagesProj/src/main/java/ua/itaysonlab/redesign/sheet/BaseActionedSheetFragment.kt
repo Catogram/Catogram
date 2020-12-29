@@ -69,6 +69,11 @@ abstract class BaseActionedSheetFragment: BottomSheetDialogFragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dialog!!.window!!.navigationBarColor = Theme.getColor(Theme.key_windowBackgroundWhite)
+    }
+
     data class Action(
             val id: String,
             @DrawableRes val icon: Int,
