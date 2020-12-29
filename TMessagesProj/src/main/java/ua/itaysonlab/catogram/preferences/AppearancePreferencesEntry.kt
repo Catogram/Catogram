@@ -46,50 +46,28 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract listOf(
                             Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
                             Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
-                            Pair(2, LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)),
-                            Pair(3, LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)),
-                            Pair(4, LocaleController.getString("CG_MessageMenuOption_A", R.string.CG_MessageMenuOption_A))
+                            Pair(2, LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)),
                     )
                 }, {
                     return@contract when (CatogramConfig.redesign_messageOption) {
                         1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
-                        2 -> LocaleController.getString("CG_MessageMenuOption_CL", R.string.CG_MessageMenuOption_CL)
-                        3 -> LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)
-                        4 -> LocaleController.getString("CG_MessageMenuOption_A", R.string.CG_MessageMenuOption_A)
+                        2 -> LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)
                         else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
                     }
                 }) {
                     CatogramConfig.redesign_messageOption = it
                     when (CatogramConfig.redesign_messageOption) {
                         0 -> {
-                            CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = false
                             CatogramConfig.useTgxMenuSlideSheet = false
-                            CatogramConfig.useAirUiPopup = false
                         }
                         1 -> {
-                            CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = true
                             CatogramConfig.useTgxMenuSlideSheet = false
-                            CatogramConfig.useAirUiPopup = false
                         }
                         2 -> {
-                            CatogramConfig.useCupertinoLib = true
-                            CatogramConfig.useTgxMenuSlide = false
-                            CatogramConfig.useTgxMenuSlideSheet = false
-                            CatogramConfig.useAirUiPopup = false
-                        }
-                        3 -> {
-                            CatogramConfig.useCupertinoLib = false
                             CatogramConfig.useTgxMenuSlide = false
                             CatogramConfig.useTgxMenuSlideSheet = true
-                            CatogramConfig.useAirUiPopup = false
-                        }
-                        4 -> {
-                            CatogramConfig.useCupertinoLib = false
-                            CatogramConfig.useTgxMenuSlide = false
-                            CatogramConfig.useTgxMenuSlideSheet = false
-                            CatogramConfig.useAirUiPopup = true
                         }
                     }
                 }

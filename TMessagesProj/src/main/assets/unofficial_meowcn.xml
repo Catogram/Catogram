@@ -3731,8 +3731,6 @@
    <string name="AS_GroupID">id</string>
    <string name="CatogramVersion">Catogram～ %1$s</string>
    <string name="AV_ThemeBased">.动态</string>
-   <string name="AS_CupertinoLib">重新设计的消息菜单</string>
-   <string name="AS_CupertinoLibSummary">假装是苹果</string>
    <string name="AS_Header_Categories">分类</string>
    <string name="AS_Header_About">关于</string>
    <string name="CG_AboutDesc">一个以猫为元素的客戶端</string>

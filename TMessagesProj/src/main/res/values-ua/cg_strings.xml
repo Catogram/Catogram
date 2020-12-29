@@ -30,8 +30,6 @@
     <string name="CatogramVersion">Catogram %1$s</string>
     <string name="AV_ThemeBased">Динамічна</string>
 
-    <string name="AS_CupertinoLib">Редизайн меню повідомлення (бета)</string>
-    <string name="AS_CupertinoLibSummary">відповідає дизайну додатку Telegram для iOS</string>
 
     <string name="AS_Header_Categories">Категорії</string>
     <string name="AS_Header_About">Про Catogram</string>
@@ -128,7 +126,6 @@
 
     <string name="CG_MessageMenuOption">Стиль меню повідомлення</string>
     <string name="CG_MessageMenuOption_TGX">В стилі Telegram X (слайд-меню)</string>
-    <string name="CG_MessageMenuOption_CL">CupertinoLib (бета, в стилі iOS)</string>
     <string name="CG_MessageMenuOption_TGXS">В стилі Telegram X (класичний)</string>
     <string name="CG_MessageMenuOption_A">Сучасний стиль</string>
     <string name="CG_MessageMenuOption_Default">За замовчуванням</string>

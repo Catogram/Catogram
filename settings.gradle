@@ -1,2 +1,1 @@
-include ':TMessagesProj', ':CupertinoLib', ':airui-core', ':airui-miui'
-project(':CupertinoLib').projectDir = new File('CupertinoLib')
+include ':TMessagesProj'
