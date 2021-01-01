@@ -1138,7 +1138,11 @@ public class MessagesController extends BaseController implements NotificationCe
 
                     allDialogs.clear();
                     for (int a = 0, size = dialogs_dict.size(); a < size; a++) {
-                        allDialogs.add(dialogs_dict.valueAt(a));
+                        TLRPC.Dialog dialog = dialogs_dict.valueAt(a);
+                        if (deletingDialogs.indexOfKey(dialog.id) >= 0) {
+                            continue;
+                        }
+                        allDialogs.add(dialog);
                     }
                     sortDialogs(null);
                     getNotificationCenter().postNotificationName(NotificationCenter.dialogsNeedReload);
@@ -5816,15 +5820,13 @@ public class MessagesController extends BaseController implements NotificationCe
             ImageLoader.saveMessagesThumbs(messagesRes.messages);
         }
         boolean isInitialLoading = offset_date == 0 && max_id == 0;
-        boolean requestByTime;
+        boolean reload;
         if (mode == 1) {
-            requestByTime = ((SystemClock.elapsedRealtime() - lastScheduledServerQueryTime.get(dialogId, 0L)) > 60 * 1000);
-        } else if (mode == 2) {
-            requestByTime = false;
+            reload = ((SystemClock.elapsedRealtime() - lastScheduledServerQueryTime.get(dialogId, 0L)) > 60 * 1000);
         } else {
-            requestByTime = (SystemClock.elapsedRealtime() - lastServerQueryTime.get(dialogId, 0L)) > 60 * 1000;
+            reload = resCount == 0 && (!isInitialLoading || (SystemClock.elapsedRealtime() - lastServerQueryTime.get(dialogId, 0L)) > 60 * 1000);
         }
-        if (high_id != 1 && lower_id != 0 && isCache && (resCount == 0 && (!isInitialLoading || requestByTime))) {
+        if (high_id != 1 && lower_id != 0 && isCache && reload) {
             int hash;
             if (mode == 2) {
                 hash = 0;
@@ -6700,7 +6702,11 @@ public class MessagesController extends BaseController implements NotificationCe
 
                 allDialogs.clear();
                 for (int a = 0, size = dialogs_dict.size(); a < size; a++) {
-                    allDialogs.add(dialogs_dict.valueAt(a));
+                    TLRPC.Dialog dialog = dialogs_dict.valueAt(a);
+                    if (deletingDialogs.indexOfKey(dialog.id) >= 0) {
+                        continue;
+                    }
+                    allDialogs.add(dialog);
                 }
                 sortDialogs(null);
                 dialogsEndReached.put(0, true);
@@ -7272,7 +7278,11 @@ public class MessagesController extends BaseController implements NotificationCe
 
                 allDialogs.clear();
                 for (int a = 0, size = dialogs_dict.size(); a < size; a++) {
-                    allDialogs.add(dialogs_dict.valueAt(a));
+                    TLRPC.Dialog dialog = dialogs_dict.valueAt(a);
+                    if (deletingDialogs.indexOfKey(dialog.id) >= 0) {
+                        continue;
+                    }
+                    allDialogs.add(dialog);
                 }
                 sortDialogs(migrate ? chatsDict : null);
                 
@@ -7834,7 +7844,11 @@ public class MessagesController extends BaseController implements NotificationCe
 
                 allDialogs.clear();
                 for (int a = 0, size = dialogs_dict.size(); a < size; a++) {
-                    allDialogs.add(dialogs_dict.valueAt(a));
+                    TLRPC.Dialog dialog = dialogs_dict.valueAt(a);
+                    if (deletingDialogs.indexOfKey(dialog.id) >= 0) {
+                        continue;
+                    }
+                    allDialogs.add(dialog);
                 }
                 sortDialogs(null);
                 getNotificationCenter().postNotificationName(NotificationCenter.dialogsNeedReload);
@@ -10137,7 +10151,11 @@ public class MessagesController extends BaseController implements NotificationCe
                         if (added) {
                             allDialogs.clear();
                             for (int a = 0, size = dialogs_dict.size(); a < size; a++) {
-                                allDialogs.add(dialogs_dict.valueAt(a));
+                                TLRPC.Dialog dialog = dialogs_dict.valueAt(a);
+                                if (deletingDialogs.indexOfKey(dialog.id) >= 0) {
+                                    continue;
+                                }
+                                allDialogs.add(dialog);
                             }
                         }
                         sortDialogs(null);
@@ -10992,7 +11010,6 @@ public class MessagesController extends BaseController implements NotificationCe
         ArrayList<Integer> contactsIds = null;
         ArrayList<ImageLoader.MessageThumb> messageThumbs = null;
 
-        boolean checkForUsers = true;
         ConcurrentHashMap<Integer, TLRPC.User> usersDict;
         ConcurrentHashMap<Integer, TLRPC.Chat> chatsDict;
         if (usersArr != null) {
@@ -11002,7 +11019,6 @@ public class MessagesController extends BaseController implements NotificationCe
                 usersDict.put(user.id, user);
             }
         } else {
-            checkForUsers = false;
             usersDict = users;
         }
         if (chatsArr != null) {
@@ -11012,11 +11028,7 @@ public class MessagesController extends BaseController implements NotificationCe
                 chatsDict.put(chat.id, chat);
             }
         } else {
-            checkForUsers = false;
             chatsDict = chats;
-        }
-        if (fromGetDifference) {
-            checkForUsers = false;
         }
 
         if (usersArr != null || chatsArr != null) {
@@ -11069,7 +11081,7 @@ public class MessagesController extends BaseController implements NotificationCe
                         putChat(chat, true);
                     }
                 }
-                if (checkForUsers) {
+                if (!fromGetDifference) {
                     if (chat_id != 0) {
                         if (chat == null) {
                             if (BuildVars.LOGS_ENABLED) {
