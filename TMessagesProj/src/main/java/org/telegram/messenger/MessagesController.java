@@ -9976,7 +9976,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public void loadPinnedDialogs(final int folderId, final long newDialogId, final ArrayList<Long> order) {
-        if (CatogramConfig.INSTANCE.getSyncPins()) {
+        if (!CatogramConfig.INSTANCE.getSyncPins()) {
             return;
         }
         if (loadingPinnedDialogs.indexOfKey(folderId) >= 0 || getUserConfig().isPinnedDialogsLoaded(folderId)) {
