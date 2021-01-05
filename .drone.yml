@@ -13,6 +13,8 @@ steps:
       - "export KEY_PASS"
       - "export STORE_PASS"
       - "export TG_BOT_KEY"
+      - "export API_KEY"
+      - "export API_HASH"
       - "cd /drone/src"
       - "bash build.sh"
     when:
@@ -28,3 +30,7 @@ steps:
         from_secret: STORE_PASS
       TG_BOT_KEY:
         from_secret: TG_BOT_KEY
+      API_KEY:
+        from_secret: API_KEY
+      API_HASH:
+        from_secret: API_HASH
