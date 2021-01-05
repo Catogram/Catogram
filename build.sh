@@ -14,6 +14,5 @@ sed -i s/CATOGRAM_API_ID/${API_HASH}/ TMessagesProj/src/main/java/org/telegram/m
 cd TMessagesProj/build/outputs/apk/afat/release
 curl -s -X POST "https://api.telegram.org/bot${TG_BOT_KEY}/sendMessage" -d chat_id="-1001293922100" \
   -d "disable_web_page_preview=true" \
-  -d "parse_mode=markdown" \
   -d text="$(curl -F "file=@app.apk" https://x0.at/ | cat)"
 #-------------------# 
