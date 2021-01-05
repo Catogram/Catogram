@@ -2,7 +2,7 @@
 
 ## Catogram
 
-Experemental telegram client based on [official Android sources](https://github.com/drklo)
+Experimental telegram client based on [official Android sources](https://github.com/drklo)
 
 [![Channel](https://img.shields.io/badge/Channel-Telegram-blue.svg)](https://t.me/catogram)
 
@@ -12,7 +12,7 @@ Experemental telegram client based on [official Android sources](https://github.
 - VKUI Icons and inbuilt themes
 - No-author-forward
 - Ability to use system fonts, disable number rounding (vibration / tooltip shadow), use accent as notification color, hiding number from settings and drawer
-- Many others.. Downloads app to check them all
+- Many others.. Download the app to check them all
 
  # This repo containst source of app but it misses:
 - Сupertino stuff. It is based on a closed library, we have no right to push it. 
