@@ -21,6 +21,7 @@ steps:
       branch:
         include:
           - drone
+          - main
     environment:
       KEY_ALIAS:
         from_secret: KEY_ALIAS
