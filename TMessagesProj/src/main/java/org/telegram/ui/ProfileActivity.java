@@ -5082,7 +5082,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     sendLogsRow = rowCount++;
                     clearLogsRow = rowCount++;
                 }
-                switchBackendRow = rowCount++;
+                if (BuildVars.DEBUG_PRIVATE_VERSION) {
+                    switchBackendRow = rowCount++;
+                }
                 versionRow = rowCount++;
             } else {
                 boolean hasInfo = userInfo != null && !TextUtils.isEmpty(userInfo.about) || user != null && !TextUtils.isEmpty(user.username);
