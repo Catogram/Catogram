@@ -37,7 +37,7 @@ dependencies {
     implementation "androidx.sharetarget:sharetarget:1.0.0"
 
     compileOnly 'org.checkerframework:checker-qual:2.5.2'
-    compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
+    compileOnly 'org.checkerframework:checker-compat-qual:2.5.5'
     
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
     implementation 'com.google.firebase:firebase-config:20.0.2'
