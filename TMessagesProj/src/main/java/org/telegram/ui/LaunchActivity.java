@@ -600,6 +600,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                     Bundle args = new Bundle();
                     args.putInt("folderId", 1);
                     presentFragment(new DialogsActivity(args));
+                    drawerLayoutContainer.closeDrawer(false);
                 } else if (id == 12) {
                     if (Build.VERSION.SDK_INT >= 23) {
                         if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
