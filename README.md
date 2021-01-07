@@ -2,7 +2,7 @@
 
 ## Catogram
 
-Experimental telegram client based on [official Android sources](https://github.com/drklo)
+Experimental telegram client based on [official Android sources](https://github.com/DrKLO/Telegram)
 
 [![Channel](https://img.shields.io/badge/Channel-Telegram-blue.svg)](https://t.me/catogram)
 
