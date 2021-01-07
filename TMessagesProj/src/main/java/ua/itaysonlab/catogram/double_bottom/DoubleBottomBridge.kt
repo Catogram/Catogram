@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram.double_bottom
 
+import org.telegram.messenger.SharedConfig
 import org.telegram.messenger.UserConfig
 
 /**
@@ -14,7 +15,7 @@ object DoubleBottomBridge {
     }
 
     fun isDbConfigAvailable(): Boolean {
-        return (System.currentTimeMillis() <= DoubleBottomStorageBridge.dbTimerExpireDate) && UserConfig.getActivatedAccountsCount() > 1
+        return (System.currentTimeMillis() <= DoubleBottomStorageBridge.dbTimerExpireDate) && UserConfig.getActivatedAccountsCount() > 1 && SharedConfig.passcodeHash.isNotEmpty()
     }
 
     fun isDbSetupCompleted(): Boolean {
