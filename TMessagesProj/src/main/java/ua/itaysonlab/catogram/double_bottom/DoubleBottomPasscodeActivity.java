@@ -76,6 +76,20 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
     private final static int pin_item = 2;
     private final static int password_item = 3;
 
+    public static String getHash(String passcode) {
+        try {
+            byte[] passcodeBytes = passcode.getBytes("UTF-8");
+            byte[] bytes = new byte[32 + passcodeBytes.length];
+            System.arraycopy(SharedConfig.passcodeSalt, 0, bytes, 0, 16);
+            System.arraycopy(passcodeBytes, 0, bytes, 16, passcodeBytes.length);
+            System.arraycopy(SharedConfig.passcodeSalt, 0, bytes, passcodeBytes.length + 16, 16);
+            return Utilities.bytesToHex(Utilities.computeSHA256(bytes, 0, bytes.length));
+        } catch (Exception e) {
+            FileLog.e(e);
+            return null;
+        }
+    }
+
     interface DBPAListener {
         void onPasscodeEntered(String passcodeHash, byte[] passcodeSalt, int type);
     }

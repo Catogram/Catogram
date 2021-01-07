@@ -32,6 +32,7 @@ class DoubleBottomPreferencesEntry : BasePreferencesEntry {
         bf.presentFragment(DoubleBottomPasscodeActivity(1) { hash, salt, type ->
             DoubleBottomStorageBridge.storageInstance = DoubleBottomStorageBridge.storageInstance.also {
                 it.map[profile.id.toString()] = DoubleBottomStorageBridge.DBAccountData(
+                        id = profile.id,
                         type = type,
                         hash = hash,
                         salt = Base64.encodeToString(salt, Base64.DEFAULT)

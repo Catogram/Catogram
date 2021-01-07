@@ -21,4 +21,23 @@ object DoubleBottomBridge {
     fun isDbSetupCompleted(): Boolean {
         return DoubleBottomStorageBridge.storageInstance.map.isNotEmpty()
     }
+
+    // return -1 if no account is found
+    @JvmStatic fun checkPasscodeForAnyOfAccounts(code: String): Int {
+        if (!isDbSetupCompleted()) return -1
+
+        val masterHash = DoubleBottomPasscodeActivity.getHash(code)
+        return DoubleBottomStorageBridge.storageInstance.map.filter {
+            it.value.hash == masterHash
+        }.get(0)?.id ?: -1
+    }
+
+    @JvmStatic fun findLocalAccIdByTgId(id: Int): Int {
+        for (i in 0 until UserConfig.MAX_ACCOUNT_COUNT) {
+            val uc = UserConfig.getInstance(i)
+            if (uc.isClientActivated && uc.currentUser.id == id) return i
+        }
+
+        return 0
+    }
 }

@@ -57,11 +57,13 @@ import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.support.fingerprint.FingerprintManagerCompat;
 import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.LaunchActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge;
 import ua.itaysonlab.catogram.security.CGBiometricPrompt;
 
 public class PasscodeView extends FrameLayout {
@@ -780,8 +782,11 @@ public class PasscodeView extends FrameLayout {
                 onPasscodeError();
                 return;
             }
-            // TODO: create a DB checker
-            if (!SharedConfig.checkPasscode(password)) {
+
+            int accId = DoubleBottomBridge.checkPasscodeForAnyOfAccounts(password);
+            if (accId != -1) {
+                ((LaunchActivity) getContext()).switchToAccount(DoubleBottomBridge.findLocalAccIdByTgId(accId), true);
+            } else if (!SharedConfig.checkPasscode(password)) {
                 SharedConfig.increaseBadPasscodeTries();
                 if (SharedConfig.passcodeRetryInMs > 0) {
                     checkRetryTextView();
