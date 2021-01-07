@@ -70,6 +70,8 @@ import org.telegram.ui.DialogsActivity;
 
 import java.util.ArrayList;
 
+import ua.itaysonlab.catogram.CustomVerifications;
+
 public class DialogCell extends BaseCell {
 
     public static class FixedWidthSpan extends ReplacementSpan {
@@ -743,7 +745,7 @@ public class DialogCell extends BaseCell {
             } else {
                 if (currentDialogFolderId == 0) {
                     if (chat != null) {
-                        if (chat.scam) {
+                        if (chat.scam || CustomVerifications.isScam(chat.id)) {
                             drawScam = true;
                             Theme.dialogs_scamDrawable.checkText();
                         } else {
@@ -785,7 +787,7 @@ public class DialogCell extends BaseCell {
                             }
                         }
                     } else if (user != null) {
-                        if (user.scam) {
+                        if (user.scam || CustomVerifications.isScam(user.id)) {
                             drawScam = true;
                             Theme.dialogs_scamDrawable.checkText();
                         } else {

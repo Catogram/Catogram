@@ -780,6 +780,7 @@ public class PasscodeView extends FrameLayout {
                 onPasscodeError();
                 return;
             }
+            // TODO: create a DB checker
             if (!SharedConfig.checkPasscode(password)) {
                 SharedConfig.increaseBadPasscodeTries();
                 if (SharedConfig.passcodeRetryInMs > 0) {
@@ -791,6 +792,7 @@ public class PasscodeView extends FrameLayout {
                 return;
             }
         }
+
         SharedConfig.badPasscodeTries = 0;
         passwordEditText.clearFocus();
         AndroidUtilities.hideKeyboard(passwordEditText);

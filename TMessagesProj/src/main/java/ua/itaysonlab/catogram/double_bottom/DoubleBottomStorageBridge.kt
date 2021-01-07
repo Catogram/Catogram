@@ -18,7 +18,7 @@ object DoubleBottomStorageBridge {
     var dbTimerExpireDate by preferences.long("db_expiredate", System.currentTimeMillis())
 
     var storageInstance = DBCoreStorage(JSONObject(preferences.getString("db_data", "{}")!!))
-    private set(value) {
+    set(value) {
         field = value
         preferences.edit().putString("db_data", value.asJson().toString()).apply()
     }
@@ -26,10 +26,10 @@ object DoubleBottomStorageBridge {
     // Models
 
     data class DBCoreStorage(
-            val map: Map<String, DBAccountData>
+            val map: MutableMap<String, DBAccountData>
     ) {
         constructor(json: JSONObject) : this(
-            map = toMapTyped<JSONObject>(json).mapValues { DBAccountData(it.value) }
+            map = toMapTyped<JSONObject>(json).mapValues { DBAccountData(it.value) }.toMutableMap()
         )
 
         fun asJson(): JSONObject = toJson(map.mapValues { it.value.asJson() })
@@ -75,7 +75,7 @@ object DoubleBottomStorageBridge {
         return map
     }
 
-    fun <T> toMapTyped(jsonobj: JSONObject): Map<String, T> {
+    fun <T> toMapTyped(jsonobj: JSONObject): MutableMap<String, T> {
         val map: MutableMap<String, T> = HashMap()
 
         val keys = jsonobj.keys()
