@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram.double_bottom
 
+import com.google.android.exoplayer2.util.Log
 import org.telegram.messenger.SharedConfig
 import org.telegram.messenger.UserConfig
 
@@ -27,7 +28,9 @@ object DoubleBottomBridge {
         if (!isDbSetupCompleted()) return -1
 
         val masterHash = DoubleBottomPasscodeActivity.getHash(code)
+        Log.d("DoubleBottom", "masterHash: $masterHash")
         return DoubleBottomStorageBridge.storageInstance.map.filter {
+            Log.d("DoubleBottom", "hash for ${it.key}: ${it.value.hash}")
             it.value.hash == masterHash
         }.get(0)?.id ?: -1
     }
