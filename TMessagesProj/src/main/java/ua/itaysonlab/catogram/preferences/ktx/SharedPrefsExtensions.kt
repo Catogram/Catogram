@@ -37,6 +37,18 @@ class BooleanPreference(
     }
 }
 
+class LongPreference(
+        private val sharedPreferences: SharedPreferences,
+        private val key: String,
+        private val defaultValue: Long
+) : ReadWriteProperty<Any, Long> {
+    override fun getValue(thisRef: Any, property: KProperty<*>): Long = sharedPreferences.getLong(key, defaultValue)
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: Long) {
+        sharedPreferences.edit().putLong(key, value).commit()
+    }
+}
+
 fun SharedPreferences.int(key: String, defaultValue: Int): ReadWriteProperty<Any, Int> = IntPreference(this, key, defaultValue)
 fun SharedPreferences.boolean(key: String, defaultValue: Boolean): ReadWriteProperty<Any, Boolean> = BooleanPreference(this, key, defaultValue)
 fun SharedPreferences.string(key: String, defaultValue: String): ReadWriteProperty<Any, String> = StringPreference(this, key, defaultValue)
+fun SharedPreferences.long(key: String, defaultValue: Long): ReadWriteProperty<Any, Long> = LongPreference(this, key, defaultValue)

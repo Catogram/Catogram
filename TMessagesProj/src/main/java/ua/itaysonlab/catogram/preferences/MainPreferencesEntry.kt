@@ -14,6 +14,7 @@ import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.Components.voip.VoIPHelper
 import org.telegram.ui.LaunchActivity
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge
 import ua.itaysonlab.catogram.preferences.ktx.category
 import ua.itaysonlab.catogram.preferences.ktx.textDetail
 import ua.itaysonlab.catogram.preferences.ktx.textIcon
@@ -37,6 +38,16 @@ class MainPreferencesEntry : BasePreferencesEntry {
                 icon = R.drawable.menu_chats
                 listener = TGKitTextIconRow.TGTIListener {
                     it.presentFragment(CatogramPreferencesNavigator.createChats())
+                }
+            }
+
+            if (DoubleBottomBridge.isDbConfigAvailable()) {
+                textIcon {
+                    title = LocaleController.getString("AS_Header_DoubleBottom", R.string.AS_Header_DoubleBottom)
+                    icon = R.drawable.menu_chats
+                    listener = TGKitTextIconRow.TGTIListener {
+                        it.presentFragment(CatogramPreferencesNavigator.createDB())
+                    }
                 }
             }
 

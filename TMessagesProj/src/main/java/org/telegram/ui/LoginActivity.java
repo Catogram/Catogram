@@ -118,6 +118,8 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge;
+
 @SuppressLint("HardwareIds")
 public class LoginActivity extends BaseFragment {
 
@@ -999,6 +1001,7 @@ public class LoginActivity extends BaseFragment {
             if (newAccount) {
                 newAccount = false;
                 ((LaunchActivity) getParentActivity()).switchToAccount(currentAccount, false);
+                DoubleBottomBridge.INSTANCE.startTimer();
                 finishFragment();
             } else {
                 final Bundle args = new Bundle();

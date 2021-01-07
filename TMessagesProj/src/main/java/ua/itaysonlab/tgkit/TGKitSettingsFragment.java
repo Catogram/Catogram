@@ -204,6 +204,9 @@ public class TGKitSettingsFragment extends BaseFragment {
                     settingsCell.setTextAndValue(pref.title, pref.getContract().getValue(), pref.getDivider());
                     break;
                 }
+                case 8: {
+                    ((TextInfoPrivacyCell) holder.itemView).setText(positions.get(position).title);
+                }
             }
         }
 
@@ -263,6 +266,8 @@ public class TGKitSettingsFragment extends BaseFragment {
                     view = new StickerSliderCell(mContext);
                     view.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
                     break;
+                case 8:
+                    view = new TextInfoPrivacyCell(mContext);
             }
             view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
             return new RecyclerListView.Holder(view);
