@@ -43,7 +43,7 @@ class DoubleBottomPreferencesEntry : BasePreferencesEntry {
     private fun getProfiles(): List<TLRPC.User> {
         val list = mutableListOf<TLRPC.User>()
 
-        for (i in 0..UserConfig.MAX_ACCOUNT_COUNT) {
+        for (i in 0 until UserConfig.MAX_ACCOUNT_COUNT) {
             val uc = UserConfig.getInstance(i)
             if (uc.isClientActivated) list.add(uc.currentUser)
         }
