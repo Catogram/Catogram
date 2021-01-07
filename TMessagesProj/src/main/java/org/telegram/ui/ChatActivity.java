@@ -234,6 +234,7 @@ import kotlin.Unit;
 import ua.itaysonlab.catogram.CGControversive;
 import ua.itaysonlab.catogram.CGFeatureHooks;
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.CustomVerifications;
 import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
 import ua.itaysonlab.catogram.ui.CatogramToasts;
@@ -11375,7 +11376,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         } else if (chatMode == MODE_PINNED) {
             avatarContainer.setTitle(LocaleController.formatPluralString("PinnedMessagesCount", getPinnedMessagesCount()));
         } else if (currentChat != null) {
-            avatarContainer.setTitle(currentChat.title, currentChat.scam);
+            avatarContainer.setTitle(currentChat.title, currentChat.scam || CustomVerifications.isScam(currentChat.id));
         } else if (currentUser != null) {
             if (currentUser.self) {
                 avatarContainer.setTitle(LocaleController.getString("SavedMessages", R.string.SavedMessages));
@@ -11383,10 +11384,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (!TextUtils.isEmpty(currentUser.phone)) {
                     avatarContainer.setTitle(PhoneFormat.getInstance().format("+" + currentUser.phone));
                 } else {
-                    avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam);
+                    avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id));
                 }
             } else {
-                avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam);
+                avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id));
             }
         }
         setParentActivityTitle(avatarContainer.getTitleTextView().getText());

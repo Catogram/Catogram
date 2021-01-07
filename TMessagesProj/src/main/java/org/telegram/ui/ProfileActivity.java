@@ -174,6 +174,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator;
+import ua.itaysonlab.catogram.CustomVerifications;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate {
 
@@ -5352,12 +5353,12 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 Drawable leftIcon = currentEncryptedChat != null ? getLockIconDrawable() : null;
                 Drawable rightIcon = null;
                 if (a == 0) {
-                    if (user.scam) {
+                    if (user.scam || CustomVerifications.isScam(user.id)) {
                         rightIcon = getScamDrawable();
                     } else {
                         rightIcon = getMessagesController().isDialogMuted(dialog_id != 0 ? dialog_id : (long) user_id) ? Theme.chat_muteIconDrawable : null;
                     }
-                } else if (user.scam) {
+                } else if (user.scam || CustomVerifications.isScam(user.id)) {
                     rightIcon = getScamDrawable();
                 } else if (user.verified) {
                     rightIcon = getVerifiedCrossfadeDrawable();
@@ -5449,7 +5450,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 }
                 nameTextView[a].setLeftDrawable(null);
                 if (a != 0) {
-                    if (chat.scam) {
+                    if (chat.scam || CustomVerifications.isScam(chat.id)) {
                         nameTextView[a].setRightDrawable(getScamDrawable());
                     } else if (chat.verified) {
                         nameTextView[a].setRightDrawable(getVerifiedCrossfadeDrawable());
@@ -5457,7 +5458,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         nameTextView[a].setRightDrawable(null);
                     }
                 } else {
-                    if (chat.scam) {
+                    if (chat.scam || CustomVerifications.isScam(chat.id)) {
                         nameTextView[a].setRightDrawable(getScamDrawable());
                     } else {
                         nameTextView[a].setRightDrawable(getMessagesController().isDialogMuted(-chat_id) ? Theme.chat_muteIconDrawable : null);
