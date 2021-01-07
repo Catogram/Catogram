@@ -230,4 +230,8 @@
     <string name="CG_EnableSwipePIP_Desc">by swiping in the video player</string>
     <string name="CG_TelegramThemes">Official themes</string>
     <string name="CG_TelegramThemes_Desc">Show official themes instead of VKUI in chat settings</string>
+
+    <string name="AS_Header_DoubleBottom">Double Bottom</string>
+    <string name="CG_DB_Accounts">Available Accounts</string>
+    <string name="CG_DB_AccountsHint">Double Bottom allows you to set a passcode for a different account.\n\nThis adds a password to a standard one, so don\'t forget to enable the original applock feature.</string>
 </resources>
