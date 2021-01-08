@@ -9,5 +9,7 @@ object CustomVerifications {
 
     @JvmStatic
     fun isScam(id: Int) = SCAM_IDS.contains(id.toString())
+    
+    @JvmStatic
     fun isVerified(id: Int) = VERIF_IDS.contains(id.toString())
 }
