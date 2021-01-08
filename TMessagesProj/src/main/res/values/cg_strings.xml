@@ -240,4 +240,6 @@
     <string name="CG_DB_Prefs_Fingerprint">Account on fingerprint unlock</string>
     <string name="CG_DB_Prefs_Hide">Hide configured accounts in switcher</string>
     <string name="CG_DB_Prefs_NotSet">Not set</string>
+
+    <string name="CG_ViewAdminsShortcut">View admins</string>
 </resources>

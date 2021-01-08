@@ -215,4 +215,14 @@
 
     <string name="CG_GhostMode">Нечиталка</string>
     <string name="CG_GhostMode_Desc">Никакие чаты не будут помечены, как прочитанные</string>
+
+    <string name="AS_Header_DoubleBottom">Двойное дно</string>
+    <string name="CG_DB_Accounts">Доступные аккаунты</string>
+    <string name="CG_DB_AccountsHint">Двойное дно позволяет установить пароли на разные аккаунты.\n\nПри установке пароля на уже настроенный аккаунт старый пароль будет заменен.</string>
+    <string name="CG_DB_Prefs">Дополнительные настройки</string>
+    <string name="CG_DB_Prefs_Fingerprint">Аккаунт при разблокировке через отпечаток</string>
+    <string name="CG_DB_Prefs_Hide">Спрятать настроенные аккаунты в переключателе</string>
+    <string name="CG_DB_Prefs_NotSet">Не установлено</string>
+
+    <string name="CG_ViewAdminsShortcut">Администраторы</string>
 </resources>
