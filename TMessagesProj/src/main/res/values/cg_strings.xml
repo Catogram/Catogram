@@ -230,6 +230,8 @@
     <string name="CG_EnableSwipePIP_Desc">by swiping in the video player</string>
     <string name="CG_TelegramThemes">Official themes</string>
     <string name="CG_TelegramThemes_Desc">Show official themes instead of VKUI in chat settings</string>
+    <string name="CG_GhostMode">Ghost mode</string>
+    <string name="CG_GhostMode_Desc">Any chats you\'ll ever go to won\'t marked as read</string>
 
     <string name="AS_Header_DoubleBottom">Double Bottom</string>
     <string name="CG_DB_Accounts">Available Accounts</string>
