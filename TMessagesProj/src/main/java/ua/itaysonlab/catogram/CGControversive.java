@@ -1,15 +1,11 @@
 package ua.itaysonlab.catogram;
 
-import android.content.pm.PackageManager;
-
 import org.telegram.messenger.ApplicationLoader;
+import org.telegram.messenger.BuildConfig;
 
 public class CGControversive {
     public static boolean isControversiveFeaturesEnabled() {
-        if ("com.android.vending".equals(ApplicationLoader.applicationContext.getPackageManager().getInstallerPackageName(BuildConfig.APPLICATION_ID)) {
-            return false;
-        }
-        else return true;
+        return "com.android.vending".equals(ApplicationLoader.applicationContext.getPackageManager().getInstallerPackageName(BuildConfig.APPLICATION_ID));
     }
 
     public static boolean noReading() {
