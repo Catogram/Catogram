@@ -8057,6 +8057,8 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     private void completeReadTask(ReadTask task) {
+        if (CatogramConfig.INSTANCE.getGhostMode()) return;
+
         int lower_part = (int) task.dialogId;
         int high_id = (int) (task.dialogId >> 32);
 
@@ -8106,6 +8108,8 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     private void checkReadTasks() {
+        if (CatogramConfig.INSTANCE.getGhostMode()) return;
+
         long time = SystemClock.elapsedRealtime();
         for (int a = 0, size = readTasks.size(); a < size; a++) {
             ReadTask task = readTasks.get(a);
@@ -8132,6 +8136,8 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public void markDialogAsReadNow(final long dialogId, long replyId) {
+        if (CatogramConfig.INSTANCE.getGhostMode()) return;
+
         Utilities.stageQueue.postRunnable(() -> {
             if (replyId != 0) {
                 ReadTask currentReadTask = threadsReadTasksMap.get(replyId);
@@ -8154,6 +8160,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public void markMentionsAsRead(long dialogId) {
+        if (CatogramConfig.INSTANCE.getGhostMode()) return;
         if ((int) dialogId == 0) {
             return;
         }
@@ -8166,6 +8173,8 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public void markDialogAsRead(long dialogId, int maxPositiveId, int maxNegativeId, int maxDate, boolean popup, long threadId, int countDiff, boolean readNow, int scheduledCount) {
+        if (CatogramConfig.INSTANCE.getGhostMode()) return;
+
         int lower_part = (int) dialogId;
         int high_id = (int) (dialogId >> 32);
         boolean createReadTask;

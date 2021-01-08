@@ -212,4 +212,7 @@
     <string name="CG_EnableSwipePIP_Desc">при свайпах в видеоплеере</string>
     <string name="CG_TelegramThemes">Официальные темы</string>
     <string name="CG_TelegramThemes_Desc">Показывать официальные темы вместо VKUI в настройке чатов</string>
+
+    <string name="CG_GhostMode">Нечиталка</string>
+    <string name="CG_GhostMode_Desc">Никакие чаты не будут помечены, как прочитанные</string>
 </resources>

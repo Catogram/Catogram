@@ -171,6 +171,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
+            switch {
+                title = LocaleController.getString("CG_GhostMode", R.string.CG_GhostMode)
+                summary = LocaleController.getString("CG_GhostMode_Desc", R.string.CG_GhostMode_Desc)
+
+                contract({
+                    return@contract CatogramConfig.ghostMode
+                }) {
+                    CatogramConfig.ghostMode = it
+                }
+            }
+
             list {
                 title = LocaleController.getString("CG_MsgSlideAction", R.string.CG_MsgSlideAction)
 
