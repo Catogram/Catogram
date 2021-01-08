@@ -34,7 +34,7 @@ class DoubleBottomPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("CG_DB_Prefs", R.string.CG_DB_Prefs)) {
-            list {
+            /*list {
                 title = LocaleController.getString("CG_DB_Prefs_Fingerprint", R.string.CG_DB_Prefs_Fingerprint)
 
                 val accs = getProfiles()
@@ -56,7 +56,7 @@ class DoubleBottomPreferencesEntry : BasePreferencesEntry {
                 }) {
                     DoubleBottomStorageBridge.fingerprintAccount = it
                 }
-            }
+            }*/
 
             switch {
                 title = LocaleController.getString("CG_DB_Prefs_Hide", R.string.CG_DB_Prefs_Hide)

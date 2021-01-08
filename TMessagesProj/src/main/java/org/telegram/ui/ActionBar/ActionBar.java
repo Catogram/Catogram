@@ -245,6 +245,7 @@ public class ActionBar extends FrameLayout {
                 if (Theme.canStartHolidayAnimation()) {
                     snowflakesEffect = new SnowflakesEffect();
                 }
+
                 if (snowflakesEffect != null) {
                     snowflakesEffect.onDraw(this, canvas);
                 } else if (fireworksEffect != null) {
