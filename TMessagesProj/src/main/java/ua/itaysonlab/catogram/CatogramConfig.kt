@@ -70,7 +70,8 @@ object CatogramConfig {
     var messageSlideAction by sharedPreferences.int("cg_msgslide_action", 0)
     var enableSwipeToPIP by sharedPreferences.boolean("cg_swipe_to_pip", false)
 
-    var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
+    var ghostMode = false
+    //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
