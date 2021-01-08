@@ -46,6 +46,7 @@ object CatogramConfig {
     var forceHLDrawer by sharedPreferences.boolean("cg_hl_drawer", false)
 
     var redesign_messageOption by sharedPreferences.int("cg_messageOption", 3)
+    var redesign_forceDrawerIconsOption by sharedPreferences.int("cg_drawerIconsOption", 0)
     var redesign_iconOption by sharedPreferences.int("cg_iconoption", 0)
     var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", false)
     var redesign_TelegramThemes by sharedPreferences.boolean("cg_redesign_telegramthemes", false)

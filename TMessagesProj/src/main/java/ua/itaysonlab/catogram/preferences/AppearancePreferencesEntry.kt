@@ -248,15 +248,15 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                             Pair(3, "Halloween")
                     )
                 }, {
-                    return@contract when (CatogramConfig.redesign_messageOption) {
+                    return@contract when (CatogramConfig.redesign_forceDrawerIconsOption) {
                         1 -> LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)
                         2 -> LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)
                         3 -> "Halloween"
                         else -> LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)
                     }
                 }) {
-                    CatogramConfig.redesign_messageOption = it
-                    when (CatogramConfig.redesign_messageOption) {
+                    CatogramConfig.redesign_forceDrawerIconsOption = it
+                    when (CatogramConfig.redesign_forceDrawerIconsOption) {
                         0 -> {
                             CatogramConfig.forceNewYearDrawer = false
                             CatogramConfig.forceSVDrawer = false
