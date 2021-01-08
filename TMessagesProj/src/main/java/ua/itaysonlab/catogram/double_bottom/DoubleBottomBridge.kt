@@ -29,10 +29,13 @@ object DoubleBottomBridge {
 
         val masterHash = DoubleBottomPasscodeActivity.getHash(code)
         Log.d("DoubleBottom", "masterHash: $masterHash")
-        return DoubleBottomStorageBridge.storageInstance.map.filter {
-            Log.d("DoubleBottom", "hash for ${it.key}: ${it.value.hash}")
-            it.value.hash == masterHash
-        }.get(0)?.id ?: -1
+
+        DoubleBottomStorageBridge.storageInstance.map.values.forEach {
+            Log.d("DoubleBottom", "hash for ${it.id}: ${it.hash}")
+            if (it.hash == masterHash) return it.id
+        }
+
+        return -1
     }
 
     @JvmStatic fun findLocalAccIdByTgId(id: Int): Int {
