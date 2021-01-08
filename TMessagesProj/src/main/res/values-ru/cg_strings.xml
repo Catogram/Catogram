@@ -204,8 +204,8 @@
     <string name="CG_MsgSlideAction_Reply">Ответить</string>
     <string name="CG_MsgSlideAction_Save">Сохранить сообщение</string>
     <string name="CG_MsgSlideAction_Share">Поделиться</string>
-    <string name="CG_SyncPins">Синхронизировать закрепленные чаты</string>
-    <string name="CG_SyncPins_Desc">Отключив это вы сможете установить неограниченное количество закрепленных чатов</string>
+    <string name="CG_SyncPins">Синхронизация закрепленных чатов</string>
+    <string name="CG_SyncPins_Desc">Отключив это вы сможете закрепить неограниченное количество чатов</string>
     <string name="CG_RearCam">Использовать заднюю камеру</string>
     <string name="CG_RearCam_Desc">Для записи видео сообщений</string>
     <string name="CG_EnableSwipePIP">Включить "картинка-в-картинке" для видео</string>
