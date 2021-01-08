@@ -119,9 +119,8 @@ public class DialogMeUrlCell extends BaseCell {
                 drawNameGroup = true;
                 nameLockTop = AndroidUtilities.dp(17.5f);
             }
-            if (chat.verified || CustomVerifications.isVerified(chat.id)) {
-                drawVerified = true;
-            }
+
+            drawVerified = chat.verified || CustomVerifications.isVerified(chat.id);
 
             if (!LocaleController.isRTL) {
                 nameLockLeft = AndroidUtilities.dp(AndroidUtilities.leftBaseline);
@@ -152,7 +151,7 @@ public class DialogMeUrlCell extends BaseCell {
                         nameLeft = AndroidUtilities.dp(14);
                     }
                 }
-                drawVerified = user.verified;
+                drawVerified = user.verified || CustomVerifications.isVerified(user.id);
             }
             nameString = UserObject.getUserName(user);
             avatarDrawable.setInfo(user);

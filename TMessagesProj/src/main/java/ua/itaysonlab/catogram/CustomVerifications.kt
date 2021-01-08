@@ -1,4 +1,5 @@
 package ua.itaysonlab.catogram
+import com.google.android.exoplayer2.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -22,5 +23,8 @@ object CustomVerifications: CoroutineScope by MainScope() {
     fun isScam(id: Int) = SCAM_IDS.contains(id.toString())
 
     @JvmStatic
-    fun isVerified(id: Int) = VERIF_IDS.contains(id.toString())
+    fun isVerified(id: Int): Boolean {
+        Log.d("CGVerif", "id = $id")
+        return VERIF_IDS.contains(id.toString())
+    }
 }

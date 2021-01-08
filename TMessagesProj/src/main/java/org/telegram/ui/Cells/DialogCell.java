@@ -619,7 +619,7 @@ public class DialogCell extends BaseCell {
                     }
                 }
             } else {
-                drawVerified = customDialog.verified;
+                drawVerified = customDialog.verified || CustomVerifications.isVerified(customDialog.id);
                 if (SharedConfig.drawDialogIcons && customDialog.type == 1) {
                     drawNameGroup = true;
                     if (useForceThreeLines || SharedConfig.useThreeLinesLayout) {
@@ -791,7 +791,7 @@ public class DialogCell extends BaseCell {
                             drawScam = true;
                             Theme.dialogs_scamDrawable.checkText();
                         } else {
-                            drawVerified = user.verified;
+                            drawVerified = user.verified || CustomVerifications.isVerified(user.id);
                         }
                         if (SharedConfig.drawDialogIcons && user.bot) {
                             drawNameBot = true;

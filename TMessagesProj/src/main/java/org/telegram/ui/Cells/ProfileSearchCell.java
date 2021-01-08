@@ -290,7 +290,7 @@ public class ProfileSearchCell extends BaseCell {
                 } else {
                     nameLockTop = AndroidUtilities.dp(21);
                 }
-                drawCheck = user.verified;
+                drawCheck = user.verified || CustomVerifications.isVerified(user.id);
             }
         }
 
