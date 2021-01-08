@@ -118,7 +118,9 @@ public class DialogMeUrlCell extends BaseCell {
                 drawNameGroup = true;
                 nameLockTop = AndroidUtilities.dp(17.5f);
             }
-            drawVerified = chat.verified;
+            if (chat.verified || CustomVerifications.isVerified(chat.id)) {
+                drawVerified = true;
+            }
 
             if (!LocaleController.isRTL) {
                 nameLockLeft = AndroidUtilities.dp(AndroidUtilities.leftBaseline);

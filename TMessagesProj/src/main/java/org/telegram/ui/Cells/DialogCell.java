@@ -748,8 +748,8 @@ public class DialogCell extends BaseCell {
                         if (chat.scam || CustomVerifications.isScam(chat.id)) {
                             drawScam = true;
                             Theme.dialogs_scamDrawable.checkText();
-                        } else {
-                            drawVerified = chat.verified;
+                        } else if (chat.verified || CustomVerifications.isVerified(chat.id)) {
+                            drawVerified = true;
                         }
                         if (SharedConfig.drawDialogIcons) {
                             if (useForceThreeLines || SharedConfig.useThreeLinesLayout) {
