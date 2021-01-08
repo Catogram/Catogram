@@ -10,16 +10,11 @@ package ua.itaysonlab.catogram.double_bottom;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.text.method.PasswordTransformationMethod;
@@ -29,16 +24,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.telegram.messenger.AndroidUtilities;
-import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.NotificationCenter;
@@ -47,28 +38,20 @@ import org.telegram.messenger.SharedConfig;
 import org.telegram.messenger.Utilities;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.ActionBarMenu;
-import org.telegram.ui.ActionBar.ActionBarMenuItem;
 import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.ActionBar.ThemeDescription;
-import org.telegram.ui.Cells.TextCheckCell;
-import org.telegram.ui.Cells.TextInfoPrivacyCell;
-import org.telegram.ui.Cells.TextSettingsCell;
 import org.telegram.ui.Components.EditTextBoldCursor;
 import org.telegram.ui.Components.LayoutHelper;
-import org.telegram.ui.Components.RecyclerListView;
 
 import java.util.ArrayList;
 
 public class DoubleBottomPasscodeActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
     private TextView titleTextView;
     private EditTextBoldCursor passwordEditText;
-    private TextView dropDown;
-    private ActionBarMenuItem dropDownContainer;
-    private Drawable dropDownDrawable;
 
     private int type;
-    private int currentPasswordType = 0;
+    private int currentPasswordType = SharedConfig.passcodeType;
     private int passcodeSetStep = 0;
     private String firstPassword;
 
@@ -239,27 +222,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
 
             if (type == 1) {
                 frameLayout.setTag(Theme.key_windowBackgroundWhite);
-                dropDownContainer = new ActionBarMenuItem(context, menu, 0, 0);
-                dropDownContainer.setSubMenuOpenSide(1);
-                dropDownContainer.addSubItem(pin_item, LocaleController.getString("PasscodePIN", R.string.PasscodePIN));
-                dropDownContainer.addSubItem(password_item, LocaleController.getString("PasscodePassword", R.string.PasscodePassword));
-                actionBar.addView(dropDownContainer, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT, AndroidUtilities.isTablet() ? 64 : 56, 0, 40, 0));
-                dropDownContainer.setOnClickListener(view -> dropDownContainer.toggleSubMenu());
-
-                dropDown = new TextView(context);
-                dropDown.setGravity(Gravity.LEFT);
-                dropDown.setSingleLine(true);
-                dropDown.setLines(1);
-                dropDown.setMaxLines(1);
-                dropDown.setEllipsize(TextUtils.TruncateAt.END);
-                dropDown.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle));
-                dropDown.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
-                dropDownDrawable = context.getResources().getDrawable(R.drawable.ic_arrow_drop_down).mutate();
-                dropDownDrawable.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarDefaultTitle), PorterDuff.Mode.MULTIPLY));
-                dropDown.setCompoundDrawablesWithIntrinsicBounds(null, null, dropDownDrawable, null);
-                dropDown.setCompoundDrawablePadding(AndroidUtilities.dp(4));
-                dropDown.setPadding(0, 0, AndroidUtilities.dp(10), 0);
-                dropDownContainer.addView(dropDown, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 16, 0, 0, 1));
             } else {
                 actionBar.setTitle(LocaleController.getString("Passcode", R.string.Passcode));
             }
@@ -281,7 +243,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
                 }
             }, 200);
         }
-        fixLayoutInternal();
     }
 
     @Override
@@ -302,14 +263,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
     }
 
     private void updateDropDownTextView() {
-        if (dropDown != null) {
-            if (currentPasswordType == 0) {
-                dropDown.setText(LocaleController.getString("PasscodePIN", R.string.PasscodePIN));
-            } else if (currentPasswordType == 1) {
-                dropDown.setText(LocaleController.getString("PasscodePassword", R.string.PasscodePassword));
-            }
-        }
-
         if (type == 1 && currentPasswordType == 0) {
             InputFilter[] filterArray = new InputFilter[1];
             filterArray[0] = new InputFilter.LengthFilter(4);
@@ -335,7 +288,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
         } else {
             actionBar.setTitle(LocaleController.getString("PasscodePassword", R.string.PasscodePassword));
         }
-        dropDownContainer.setVisibility(View.GONE);
         titleTextView.setText(LocaleController.getString("ReEnterYourPasscode", R.string.ReEnterYourPasscode));
         firstPassword = passwordEditText.getText().toString();
         passwordEditText.setText("");
@@ -390,21 +342,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
         AndroidUtilities.shakeView(titleTextView, 2, 0);
     }
 
-    private void fixLayoutInternal() {
-        if (dropDownContainer != null) {
-            if (!AndroidUtilities.isTablet()) {
-                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) dropDownContainer.getLayoutParams();
-                layoutParams.topMargin = (Build.VERSION.SDK_INT >= 21 ? AndroidUtilities.statusBarHeight : 0);
-                dropDownContainer.setLayoutParams(layoutParams);
-            }
-            if (!AndroidUtilities.isTablet() && ApplicationLoader.applicationContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                dropDown.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-            } else {
-                dropDown.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-            }
-        }
-    }
-
     @Override
     public ArrayList<ThemeDescription> getThemeDescriptions() {
         ArrayList<ThemeDescription> themeDescriptions = new ArrayList<>();
@@ -424,8 +361,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
         themeDescriptions.add(new ThemeDescription(passwordEditText, ThemeDescription.FLAG_TEXTCOLOR, null, null, null, null, Theme.key_windowBackgroundWhiteBlackText));
         themeDescriptions.add(new ThemeDescription(passwordEditText, ThemeDescription.FLAG_BACKGROUNDFILTER, null, null, null, null, Theme.key_windowBackgroundWhiteInputField));
         themeDescriptions.add(new ThemeDescription(passwordEditText, ThemeDescription.FLAG_BACKGROUNDFILTER | ThemeDescription.FLAG_DRAWABLESELECTEDSTATE, null, null, null, null, Theme.key_windowBackgroundWhiteInputFieldActivated));
-        themeDescriptions.add(new ThemeDescription(dropDown, ThemeDescription.FLAG_TEXTCOLOR, null, null, null, null, Theme.key_actionBarDefaultTitle));
-        themeDescriptions.add(new ThemeDescription(dropDown, 0, null, null, new Drawable[]{dropDownDrawable}, null, Theme.key_actionBarDefaultTitle));
 
         return themeDescriptions;
     }

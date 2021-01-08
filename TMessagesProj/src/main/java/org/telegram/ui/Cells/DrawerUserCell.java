@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,9 @@ import org.telegram.ui.Components.AvatarDrawable;
 import org.telegram.ui.Components.BackupImageView;
 import org.telegram.ui.Components.GroupCreateCheckBox;
 import org.telegram.ui.Components.LayoutHelper;
+
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge;
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomStorageBridge;
 
 public class DrawerUserCell extends FrameLayout {
 
@@ -93,6 +97,12 @@ public class DrawerUserCell extends FrameLayout {
         imageView.getImageReceiver().setCurrentAccount(account);
         imageView.setImage(ImageLocation.getForUser(user, false), "50_50", avatarDrawable, user);
         checkBox.setVisibility(account == UserConfig.selectedAccount ? VISIBLE : INVISIBLE);
+
+        if (DoubleBottomStorageBridge.INSTANCE.getHideAccountsInSwitcher() && !DoubleBottomBridge.INSTANCE.isDbActivatedForAccount(
+                UserConfig.getInstance(accountNumber).getCurrentUser().id
+        )) {
+            setVisibility(View.GONE);
+        }
     }
 
     public int getAccountNumber() {
@@ -104,6 +114,11 @@ public class DrawerUserCell extends FrameLayout {
         if (UserConfig.getActivatedAccountsCount() <= 1 || !NotificationsController.getInstance(accountNumber).showBadgeNumber) {
             return;
         }
+
+        if (DoubleBottomStorageBridge.INSTANCE.getHideAccountsInSwitcher() && !DoubleBottomBridge.INSTANCE.isDbActivatedForAccount(
+                UserConfig.getInstance(accountNumber).getCurrentUser().id
+        )) return;
+
         int counter = MessagesStorage.getInstance(accountNumber).getMainUnreadCount();
         if (counter <= 0) {
             return;

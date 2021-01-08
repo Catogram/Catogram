@@ -1,6 +1,5 @@
 package ua.itaysonlab.catogram.double_bottom
 
-import com.google.android.exoplayer2.util.Log
 import org.telegram.messenger.SharedConfig
 import org.telegram.messenger.UserConfig
 
@@ -23,15 +22,20 @@ object DoubleBottomBridge {
         return DoubleBottomStorageBridge.storageInstance.map.isNotEmpty()
     }
 
+    fun isDbActivatedForAccount(id: Int): Boolean {
+        DoubleBottomStorageBridge.storageInstance.map.values.forEach {
+            if (it.id == id) return true
+        }
+
+        return false
+    }
+
     // return -1 if no account is found
     @JvmStatic fun checkPasscodeForAnyOfAccounts(code: String): Int {
         if (!isDbSetupCompleted()) return -1
 
         val masterHash = DoubleBottomPasscodeActivity.getHash(code)
-        Log.d("DoubleBottom", "masterHash: $masterHash")
-
         DoubleBottomStorageBridge.storageInstance.map.values.forEach {
-            Log.d("DoubleBottom", "hash for ${it.id}: ${it.hash}")
             if (it.hash == masterHash) return it.id
         }
 

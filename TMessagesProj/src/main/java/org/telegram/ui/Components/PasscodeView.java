@@ -64,6 +64,7 @@ import java.util.Locale;
 
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge;
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomStorageBridge;
 import ua.itaysonlab.catogram.security.CGBiometricPrompt;
 
 public class PasscodeView extends FrameLayout {
@@ -784,7 +785,7 @@ public class PasscodeView extends FrameLayout {
             }
 
             int accId = DoubleBottomBridge.checkPasscodeForAnyOfAccounts(password);
-            if (accId != -1) {
+            if (accId != -1 && getContext() instanceof LaunchActivity) {
                 ((LaunchActivity) getContext()).switchToAccount(DoubleBottomBridge.findLocalAccIdByTgId(accId), true);
             } else if (!SharedConfig.checkPasscode(password)) {
                 SharedConfig.increaseBadPasscodeTries();
@@ -795,6 +796,10 @@ public class PasscodeView extends FrameLayout {
                 passwordEditText2.eraseAllCharacters(true);
                 onPasscodeError();
                 return;
+            }
+        } else {
+            if (DoubleBottomStorageBridge.INSTANCE.getFingerprintAccount() != -1 && getContext() instanceof LaunchActivity) {
+                ((LaunchActivity) getContext()).switchToAccount(DoubleBottomBridge.findLocalAccIdByTgId(DoubleBottomStorageBridge.INSTANCE.getFingerprintAccount()), true);
             }
         }
 

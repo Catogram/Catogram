@@ -44,7 +44,7 @@ class MainPreferencesEntry : BasePreferencesEntry {
             if (DoubleBottomBridge.isDbConfigAvailable()) {
                 textIcon {
                     title = LocaleController.getString("AS_Header_DoubleBottom", R.string.AS_Header_DoubleBottom)
-                    icon = R.drawable.menu_chats
+                    icon = R.drawable.menu_secret
                     listener = TGKitTextIconRow.TGTIListener {
                         it.presentFragment(CatogramPreferencesNavigator.createDB())
                     }

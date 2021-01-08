@@ -5,17 +5,22 @@ import android.content.SharedPreferences
 import org.json.JSONArray
 import org.json.JSONObject
 import org.telegram.messenger.ApplicationLoader
+import ua.itaysonlab.catogram.preferences.ktx.boolean
+import ua.itaysonlab.catogram.preferences.ktx.int
 import ua.itaysonlab.catogram.preferences.ktx.long
+import ua.itaysonlab.catogram.preferences.ktx.string
 
 // Used for storing data
 object DoubleBottomStorageBridge {
-    //const val DB_TIMER_END = 2 * 60 * 1000 // 2 minutes
-    const val DB_TIMER_END = 25 * 60 * 1000 // 25 minutes for dev version
+    const val DB_TIMER_END = 2 * 60 * 1000 // 2 minutes
+    //const val DB_TIMER_END = 25 * 60 * 1000 // 25 minutes for dev version
 
     private val preferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("dbconfig", Activity.MODE_PRIVATE)
 
     // Preferences
     var dbTimerExpireDate by preferences.long("db_expiredate", System.currentTimeMillis())
+    var fingerprintAccount by preferences.int("db_fp_login", -1)
+    var hideAccountsInSwitcher by preferences.boolean("db_hide_accs", false)
 
     var storageInstance = DBCoreStorage(JSONObject(preferences.getString("db_data", "{}")!!))
     set(value) {
