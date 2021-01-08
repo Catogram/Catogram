@@ -333,7 +333,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private final static int edit_avatar = 34;
     private final static int delete_avatar = 35;
     private final static int add_photo = 36;
-    private final static int view_admins_item = 23;
 
     private Rect rect = new Rect();
 
