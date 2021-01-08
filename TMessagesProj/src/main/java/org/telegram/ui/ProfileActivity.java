@@ -5360,7 +5360,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     }
                 } else if (user.scam || CustomVerifications.isScam(user.id)) {
                     rightIcon = getScamDrawable();
-                } else if (user.verified) {
+                } else if (user.verified || CustomVerifications.isVerified(user.id)) {
                     rightIcon = getVerifiedCrossfadeDrawable();
                 }
                 nameTextView[a].setLeftDrawable(leftIcon);
