@@ -324,6 +324,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private final static int start_secret_chat = 20;
     private final static int gallery_menu_save = 21;
     private final static int view_discussion = 22;
+    private final static int view_admins_item = 23;
 
     private final static int edit_name = 30;
     private final static int logout = 31;
@@ -1811,6 +1812,13 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     }
                 } else if (id == add_photo) {
                     onWriteButtonClick();
+                } else if (id == view_admins_item) {
+                    Bundle args = new Bundle();
+                    args.putInt("chat_id", currentChat.id);
+                    args.putInt("type", ChatUsersActivity.TYPE_ADMIN);
+                    args.putBoolean("showRecents", false);
+                    ChatUsersActivity fragment = new ChatUsersActivity(args);
+                    presentFragment(fragment);
                 }
             }
         });
@@ -5595,6 +5603,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     editItemVisible = true;
                 }
                 if (chatInfo != null) {
+                    if (chat.megagroup && !ChatObject.hasAdminRights(chat)) {
+                        otherItem.addSubItem(view_admins_item, R.drawable.group_admin, LocaleController.getString("CG_ViewAdminsShortcut", R.string.CG_ViewAdminsShortcut));
+                    }
                     if (chat.megagroup && ChatObject.canManageCalls(chat) && chatInfo.call == null) {
                         otherItem.addSubItem(call_item, R.drawable.msg_voicechat, LocaleController.getString("StartVoipChat", R.string.StartVoipChat));
                         hasVoiceChatItem = true;
