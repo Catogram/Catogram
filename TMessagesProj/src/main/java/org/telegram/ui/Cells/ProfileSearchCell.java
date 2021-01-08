@@ -34,6 +34,7 @@ import org.telegram.messenger.UserConfig;
 import org.telegram.ui.Components.AvatarDrawable;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.NotificationsSettingsActivity;
+import ua.itaysonlab.catogram.CustomVerifications;
 
 public class ProfileSearchCell extends BaseCell {
 

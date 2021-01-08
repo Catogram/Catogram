@@ -29,6 +29,7 @@ import org.telegram.messenger.UserObject;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.AvatarDrawable;
+import ua.itaysonlab.catogram.CustomVerifications;
 
 public class DialogMeUrlCell extends BaseCell {
 
