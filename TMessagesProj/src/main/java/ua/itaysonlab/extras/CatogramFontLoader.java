@@ -13,7 +13,7 @@ public class CatogramFontLoader {
     private static Typeface sysMono = Typeface.MONOSPACE;
 
     public static boolean needRedirect(String path) {
-        return CatogramConfig.INSTANCE.getSystemFonts() && (
+        return (
                 path.equals("fonts/rmedium.ttf")
                 || path.equals("fonts/rmediumitalic.ttf")
                 || path.equals("fonts/ritalic.ttf")
@@ -35,35 +35,20 @@ public class CatogramFontLoader {
     }
 
     public static Typeface getBold() {
-        if (CatogramConfig.INSTANCE.getSystemFonts()) {
-            if (CatogramConfig.INSTANCE.getSystemFontsTT()) return AndroidUtilities.getTypeface("fonts/VKSans-DemiBold.ttf");
-            return sysBold;
-        } else {
-            return AndroidUtilities.getTypeface("fonts/rmedium.ttf");
-        }
+        if (CatogramConfig.INSTANCE.getSystemFontsTT()) return AndroidUtilities.getTypeface("fonts/VKSans-DemiBold.ttf");
+        return sysBold;
     }
 
     public static Typeface getBoldItalic() {
-        if (CatogramConfig.INSTANCE.getSystemFonts()) {
-            return sysBoldItalic;
-        } else {
-            return AndroidUtilities.getTypeface("fonts/rmediumitalic.ttf");
-        }
+        return sysBoldItalic;
     }
 
     public static Typeface getItalic() {
-        if (CatogramConfig.INSTANCE.getSystemFonts()) {
-            return sysItalic;
-        } else {
-            return AndroidUtilities.getTypeface("fonts/ritalic.ttf");
-        }
+        return sysItalic;
+        
     }
 
     public static Typeface getMono() {
-        if (CatogramConfig.INSTANCE.getSystemFonts()) {
-            return sysMono;
-        } else {
-            return AndroidUtilities.getTypeface("fonts/rmono.ttf");
-        }
+        return sysMono;
     }
 }

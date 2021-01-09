@@ -137,16 +137,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 }
             }
 
-            switch {
-                title = LocaleController.getString("AS_SystemFonts", R.string.AS_SystemFonts)
-
-                contract({
-                    return@contract CatogramConfig.systemFonts
-                }) {
-                    CatogramConfig.systemFonts = it
-                }
-            }
-
             if (CGControversive.isControversiveFeaturesEnabled()) {
                 switch {
                     title = "VK Sans as bold font [alpha]"

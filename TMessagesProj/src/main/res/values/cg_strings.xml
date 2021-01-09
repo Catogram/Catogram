@@ -8,7 +8,6 @@
     <string name="AS_HideUserPhoneSummary">in drawer and settings</string>
     <string name="AS_NoRounding">Disable number rounding</string>
     <string name="AS_NoRoundingSummary">1.2K -> 1234</string>
-    <string name="AS_SystemFonts">Use system fonts</string>
     <string name="AS_Vibration">Disable vibration</string>
 
     <string name="AS_Header_Fun">Funny things</string>
