@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.net.URL
+import ua.itaysonlab.catogram.CGControversive;
 
 object CustomVerifications: CoroutineScope by MainScope() {
     // all guys from those list asked to mark them as scam or verified so don't think we're marking guys we don't like like this xd
@@ -23,10 +24,14 @@ object CustomVerifications: CoroutineScope by MainScope() {
     }
 
     @JvmStatic
-    fun isScam(id: Int) = SCAM_IDS.contains(id.toString())
+    fun isScam(id: Int): Boolean {
+        if (!CGControversive.isControversiveFeaturesEnabled()) return false
+        return SCAM_IDS.contains(id.toString())
+    }
 
     @JvmStatic
     fun isVerified(id: Int): Boolean {
+        if (!CGControversive.isControversiveFeaturesEnabled()) return false
         return VERIF_IDS.contains(id.toString())
     }
 }
