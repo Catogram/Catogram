@@ -14,8 +14,11 @@ object CustomVerifications: CoroutineScope by MainScope() {
 
     init {
         launch(Dispatchers.IO) {
-            SCAM_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/scam.txt").readText().lines()
-            VERIF_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/verif.txt").readText().lines()
+            try {
+                SCAM_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/scam.txt").readText().lines()
+                VERIF_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/verif.txt").readText().lines()
+            }
+            catch (e: Exception) { }
         }
     }
 
@@ -24,7 +27,6 @@ object CustomVerifications: CoroutineScope by MainScope() {
 
     @JvmStatic
     fun isVerified(id: Int): Boolean {
-        Log.d("CGVerif", "id = $id")
         return VERIF_IDS.contains(id.toString())
     }
 }
