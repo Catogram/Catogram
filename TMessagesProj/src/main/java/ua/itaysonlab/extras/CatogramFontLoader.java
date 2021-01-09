@@ -7,8 +7,8 @@ import org.telegram.messenger.AndroidUtilities;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramFontLoader {
-    private static Typeface sysBold = Typeface.create(Typeface.DEFAULT, Typeface.BOLD);
-    private static Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
+    private static Typeface sysBold = Typeface.create(Typeface.DEFAULT, 700, false);
+    private static Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, 700, true);
     private static Typeface sysItalic = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC);
     private static Typeface sysMono = Typeface.MONOSPACE;
 
