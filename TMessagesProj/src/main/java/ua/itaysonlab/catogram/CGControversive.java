@@ -5,7 +5,7 @@ import org.telegram.messenger.BuildConfig;
 
 public class CGControversive {
     public static boolean isControversiveFeaturesEnabled() {
-        return "com.android.vending".equals(ApplicationLoader.applicationContext.getPackageManager().getInstallerPackageName(BuildConfig.APPLICATION_ID));
+        return !"com.android.vending".equals(ApplicationLoader.applicationContext.getPackageManager().getInstallerPackageName(BuildConfig.APPLICATION_ID));
     }
 
     public static boolean noReading() {
