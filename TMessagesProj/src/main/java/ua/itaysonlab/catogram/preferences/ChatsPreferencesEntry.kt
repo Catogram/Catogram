@@ -131,7 +131,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
-            switch {
+            /* switch {
                 title = LocaleController.getString("CG_FlatChannels", R.string.CG_FlatChannels)
 
                 contract({
@@ -139,7 +139,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }) {
                     CatogramConfig.flatChannelStyle = it
                 }
-            }
+            } */
 
             switch {
                 title = LocaleController.getString("CG_FABLeft", R.string.CG_FABLeft)
