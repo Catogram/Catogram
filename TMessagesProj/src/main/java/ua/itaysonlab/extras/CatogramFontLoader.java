@@ -1,14 +1,16 @@
 package ua.itaysonlab.extras;
 
 import android.graphics.Typeface;
+import android.os.Build;
 
 import org.telegram.messenger.AndroidUtilities;
 
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramFontLoader {
-    private static Typeface sysBold = Typeface.create(Typeface.DEFAULT, 700, false);
-    private static Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, 700, true);
+    
+    private static Typeface sysBold = Typeface.create(Typeface.DEFAULT, Typeface.BOLD);
+    private static Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
     private static Typeface sysItalic = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC);
     private static Typeface sysMono = Typeface.MONOSPACE;
 
@@ -36,11 +38,21 @@ public class CatogramFontLoader {
 
     public static Typeface getBold() {
         if (CatogramConfig.INSTANCE.getSystemFontsTT()) return AndroidUtilities.getTypeface("fonts/VKSans-DemiBold.ttf");
-        return sysBold;
+        if (Build.VERSION.SDK_INT >= 28) {
+            return Typeface.create(Typeface.DEFAULT, 700, false);
+        }
+        else {
+            return sysBold;
+        }
     }
 
     public static Typeface getBoldItalic() {
-        return sysBoldItalic;
+        if (Build.VERSION.SDK_INT >= 28) {
+            return Typeface.create(Typeface.DEFAULT, 700, true);
+        }
+        else {
+            return sysBoldItalic;
+        }
     }
 
     public static Typeface getItalic() {
