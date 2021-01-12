@@ -6,7 +6,6 @@ import ua.itaysonlab.catogram.translate.impl.BaseTranslationImpl
 import ua.itaysonlab.catogram.translate.impl.DeeplTranslateImpl
 import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl
 import ua.itaysonlab.catogram.translate.impl.YandexTranslateImpl
-import ua.itaysonlab.redesign.sheet.TranslationSheetFragment
 
 object TranslateAPI {
     enum class TranslationImpl(val uiName: String, val clazz: BaseTranslationImpl) {

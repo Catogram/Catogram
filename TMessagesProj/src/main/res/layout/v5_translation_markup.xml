@@ -1,66 +1,150 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:minHeight="100dp"
-    android:layout_height="wrap_content">
-    <ScrollView
+    android:layout_height="wrap_content"
+    android:background="@drawable/vk_rounded_background"
+    android:minHeight="100.0dip"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#ff000000"
+            android:textSize="23sp"
+            tools:text="Translator" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/tvDivider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#FFE0E0E0" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/mk_ct"
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/orig_txt"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:paddingStart="16dp"
-                android:textSize="13sp"
-                style="@style/TextAppearance.MaterialComponents.Overline"
-                android:textColor="?android:textColorPrimary"
-                tools:text="Original"
+
+            <LinearLayout
+                android:id="@+id/mk_ct"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/orig"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:textSize="16sp"
-                android:textColor="?android:textColorPrimary"
-                tools:text="Original"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/trsl_txt"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:paddingStart="16dp"
-                android:textSize="13sp"
-                style="@style/TextAppearance.MaterialComponents.Overline"
-                android:textColor="?android:textColorPrimary"
-                tools:text="Translated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/trsl"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:textSize="16sp"
-                android:textColor="?android:textColorPrimary"
-                tools:text="Original"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </ScrollView>
-    <ProgressBar
-        android:id="@+id/mk_ld"
-        android:layout_gravity="center"
-        android:layout_width="56dp"
-        android:layout_height="56dp" />
-</FrameLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/orig_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/rounded_background"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            tools:text="Original"
+                            android:id="@+id/orig_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="#FF818C99"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/orig"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/trsl_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rounded_background"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            tools:text="Translated"
+                            android:id="@+id/trsl_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="true"
+                            android:textColor="#FF818C99"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/trsl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginBottom="14dp"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/mk_ld"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+</LinearLayout>
