@@ -70,6 +70,10 @@ object CatogramConfig {
     var messageSlideAction by sharedPreferences.int("cg_msgslide_action", 0)
     var enableSwipeToPIP by sharedPreferences.boolean("cg_swipe_to_pip", false)
 
+    var hqRoundVideos by sharedPreferences.boolean("cg_hq_roundvideos", false)
+    var hqRoundVideoAudio by sharedPreferences.boolean("cg_hq_roundvideo_audio", false)
+    var stereoVoices by sharedPreferences.boolean("cg_hq_voices_stereo", false)
+
     var ghostMode = false
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 

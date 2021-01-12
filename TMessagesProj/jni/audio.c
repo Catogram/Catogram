@@ -283,7 +283,7 @@ void cleanupRecorder() {
     memset(&og, 0, sizeof(ogg_page));
 }
 
-int initRecorder(const char *path, opus_int32 sampleRate) {
+int initRecorder(const char *path, opus_int32 sampleRate, opus_int32 channelCount, opus_int32 selfBitrate) {
     cleanupRecorder();
 
     coding_rate = sampleRate;
@@ -305,7 +305,7 @@ int initRecorder(const char *path, opus_int32 sampleRate) {
     inopt.rawmode = 1;
     inopt.ignorelength = 1;
     inopt.samplesize = 16;
-    inopt.channels = 1;
+    inopt.channels = channelCount;
     inopt.skip = 0;
     
     comment_init(&inopt.comments, &inopt.comments_length, opus_get_version_string());
@@ -315,14 +315,14 @@ int initRecorder(const char *path, opus_int32 sampleRate) {
         return 0;
     }
     
-    header.channels = 1;
+    header.channels = channelCount;
     header.channel_mapping = 0;
     header.input_sample_rate = rate;
     header.gain = inopt.gain;
-    header.nb_streams = 1;
+    header.nb_streams = channelCount; //channelCount? was 1
     
     int result = OPUS_OK;
-    _encoder = opus_encoder_create(coding_rate, 1, OPUS_APPLICATION_AUDIO, &result);
+    _encoder = opus_encoder_create(coding_rate, channelCount, OPUS_APPLICATION_VOIP, &result);
     if (result != OPUS_OK) {
         LOGE("Error cannot create encoder: %s", opus_strerror(result));
         return 0;
@@ -331,7 +331,7 @@ int initRecorder(const char *path, opus_int32 sampleRate) {
     min_bytes = max_frame_bytes = (1275 * 3 + 7) * header.nb_streams;
     _packet = malloc(max_frame_bytes);
     
-    result = opus_encoder_ctl(_encoder, OPUS_SET_BITRATE(bitrate));
+    result = opus_encoder_ctl(_encoder, OPUS_SET_BITRATE(selfBitrate));
     result = opus_encoder_ctl(_encoder, OPUS_SET_COMPLEXITY(10));
     if (result != OPUS_OK) {
         LOGE("Error OPUS_SET_BITRATE returned: %s", opus_strerror(result));
@@ -496,10 +496,10 @@ int writeFrame(uint8_t *framePcmBytes, uint32_t frameByteCount) {
     return 1;
 }
 
-JNIEXPORT jint Java_org_telegram_messenger_MediaController_startRecord(JNIEnv *env, jclass class, jstring path, jint sampleRate) {
+JNIEXPORT jint Java_org_telegram_messenger_MediaController_startRecord(JNIEnv *env, jclass class, jstring path, jint sampleRate, jint channelCount, jint selfBitrate) {
     const char *pathStr = (*env)->GetStringUTFChars(env, path, 0);
 
-    int32_t result = initRecorder(pathStr, sampleRate);
+    int32_t result = initRecorder(pathStr, sampleRate, channelCount, selfBitrate);
     
     if (pathStr != 0) {
         (*env)->ReleaseStringUTFChars(env, path, pathStr);

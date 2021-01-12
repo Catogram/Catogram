@@ -39,6 +39,39 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
         }
 
+        category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
+            switch {
+                title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
+
+                contract({
+                    return@contract CatogramConfig.hqRoundVideos
+                }) {
+                    CatogramConfig.hqRoundVideos = it
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_HqRoundVideosAudio", R.string.CG_HqRoundVideosAudio)
+
+                contract({
+                    return@contract CatogramConfig.hqRoundVideoAudio
+                }) {
+                    CatogramConfig.hqRoundVideoAudio = it
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_StereoVoices", R.string.CG_StereoVoices)
+                summary = LocaleController.getString("CG_StereoVoices_Desc", R.string.CG_StereoVoices_Desc)
+
+                contract({
+                    return@contract CatogramConfig.stereoVoices
+                }) {
+                    CatogramConfig.stereoVoices = it
+                }
+            }
+        }
+
         category(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header)) {
             switch {
                 title = LocaleController.getString("CG_NewTabs_NoCounter", R.string.CG_NewTabs_NoCounter)
