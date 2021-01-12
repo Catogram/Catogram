@@ -36,7 +36,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
     }
 
     private fun getAutoIsoLang(): String {
-        val iso = LocaleController.getInstance().currentLocaleInfo.baseLangCode
+        val iso = LocaleController.getLocaleStringIso639()
         return if (impl.clazz.supportedLanguages().contains(iso)) iso else impl.clazz.supportedLanguages()[0]
     }
 
