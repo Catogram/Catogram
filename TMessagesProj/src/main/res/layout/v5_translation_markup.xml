@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/vk_rounded_background"
+    tools:backgroundTint="#a0a0a0"
     android:minHeight="100.0dip"
     android:orientation="vertical">
 

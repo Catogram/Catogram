@@ -44,8 +44,13 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialog!!.window!!.navigationBarColor = Theme.getColor(Theme.key_windowBackgroundWhite)
-        vview.backgroundTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhite))
+        val whiteBg = Theme.getColor(Theme.key_windowBackgroundWhite)
+        val blackText = Theme.getColor(Theme.key_windowBackgroundWhiteBlackText)
+        val grayColor = Theme.getColor(Theme.key_windowBackgroundWhiteGrayText)
+        val grayBg = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundGray))
+
+        dialog!!.window!!.navigationBarColor = whiteBg
+        vview.backgroundTintList = ColorStateList.valueOf(whiteBg)
 
         vview.close.setOnClickListener {
             dismiss()
@@ -55,23 +60,21 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
             AndroidUtilities.addToClipboard(vview.trsl.text.toString())
         }
 
-        val blackText = Theme.getColor(Theme.key_windowBackgroundWhiteBlackText)
-        val grayColor = Theme.getColor(Theme.key_windowBackgroundWhiteGrayText)
-        val grayBg = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundGray))
-
         vview.copyText.visibility = View.GONE
         vview.mk_ct.visibility = View.INVISIBLE
         vview.mk_ld.visibility = View.VISIBLE
 
         vview.tvTitle.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle))
-        vview.tvDivider.backgroundTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_divider))
+        vview.tvDivider.backgroundTintList = ColorStateList.valueOf(grayColor)
 
         vview.orig_txt.setTextColor(grayColor)
         vview.trsl_txt.setTextColor(grayColor)
         vview.orig_txt_lang.setTextColor(grayColor)
         vview.trsl_txt_lang.setTextColor(grayColor)
+
         vview.orig_txt.text = LocaleController.getString("CG_Translate_Orig", R.string.CG_Translate_Orig)
         vview.trsl_txt.text = LocaleController.getString("CG_Translate_Translated", R.string.CG_Translate_Translated)
+        vview.tvTitle.text = LocaleController.getString("CG_Translator", R.string.CG_Translator)
 
         vview.orig_card.backgroundTintList = grayBg
         vview.trsl_card.backgroundTintList = grayBg

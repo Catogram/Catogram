@@ -163,6 +163,7 @@
 
     <string name="CG_ForwardMsgDate">Show forwarded message date</string>
     <string name="CG_Translate">Translate</string>
+    <string name="CG_Translator">Translator</string>
     <string name="CG_Translate_Orig">Original</string>
     <string name="CG_Translate_Translated">Translated</string>
     <string name="CG_Translate_Language">Detected language</string>
