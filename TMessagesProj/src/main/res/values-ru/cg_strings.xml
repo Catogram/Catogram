@@ -231,4 +231,8 @@
     <string name="CG_HqRoundVideosAudio">Высокое качество звука круглых видео</string>
     <string name="CG_StereoVoices">Записывать аудиосообщения в стерео</string>
     <string name="CG_StereoVoices_Desc">может неподдерживатся вашим устройством!</string>
+    <string name="CG_VoiceEnhancements">Улучшения звука</string>
+    <string name="CG_VoiceEnhancements_Desc">включает нормализацию голоса и подавление шума</string>
+    <string name="CG_Voip_ForceEnhancements">Форсировать улучшения звука при VoIP</string>
+    <string name="CG_Voip_ForceEnhancements_Desc">включает AEC/NS даже при отсуствии поддержки сервером</string>
 </resources>

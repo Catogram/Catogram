@@ -247,4 +247,8 @@
     <string name="CG_HqRoundVideosAudio">High bitrate on round video\'s sound</string>
     <string name="CG_StereoVoices">Record voices in stereo</string>
     <string name="CG_StereoVoices_Desc">can be unsupported by your device!</string>
+    <string name="CG_VoiceEnhancements">Voice Enhancements</string>
+    <string name="CG_VoiceEnhancements_Desc">Noise Suppression and voice normalization</string>
+    <string name="CG_Voip_ForceEnhancements">Force VoIP Voice Enhancements</string>
+    <string name="CG_Voip_ForceEnhancements_Desc">enables AEC/NS even if server doesn\'t support it</string>
 </resources>
