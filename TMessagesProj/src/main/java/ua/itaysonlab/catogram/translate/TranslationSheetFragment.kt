@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram.translate
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         return if (impl.clazz.supportedLanguages().contains(iso)) iso else impl.clazz.supportedLanguages()[0]
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,6 +55,10 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
             AndroidUtilities.addToClipboard(vview.trsl.text.toString())
         }
 
+        val blackText = Theme.getColor(Theme.key_windowBackgroundWhiteBlackText)
+        val grayColor = Theme.getColor(Theme.key_windowBackgroundWhiteGrayText)
+        val grayBg = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundGray))
+
         vview.copyText.visibility = View.GONE
         vview.mk_ct.visibility = View.INVISIBLE
         vview.mk_ld.visibility = View.VISIBLE
@@ -60,21 +66,26 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         vview.tvTitle.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle))
         vview.tvDivider.backgroundTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_divider))
 
-        vview.orig_txt.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText))
-        vview.trsl_txt.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText))
+        vview.orig_txt.setTextColor(grayColor)
+        vview.trsl_txt.setTextColor(grayColor)
+        vview.orig_txt_lang.setTextColor(grayColor)
+        vview.trsl_txt_lang.setTextColor(grayColor)
         vview.orig_txt.text = LocaleController.getString("CG_Translate_Orig", R.string.CG_Translate_Orig)
         vview.trsl_txt.text = LocaleController.getString("CG_Translate_Translated", R.string.CG_Translate_Translated)
 
-        vview.orig_card.backgroundTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundGray))
-        vview.trsl_card.backgroundTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundGray))
+        vview.orig_card.backgroundTintList = grayBg
+        vview.trsl_card.backgroundTintList = grayBg
 
-        vview.orig.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
-        vview.trsl.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+        vview.orig.setTextColor(blackText)
+        vview.trsl.setTextColor(blackText)
 
-        impl.clazz.detectLang(txt) {
-            impl.clazz.translateText(txt, it, getAutoIsoLang()) { text ->
+        impl.clazz.detectLang(txt) { detectedLang ->
+            impl.clazz.translateText(txt, detectedLang, getAutoIsoLang()) { text ->
                 vview.orig.text = txt
                 vview.trsl.text = text
+                
+                vview.orig_txt_lang.text = " • $detectedLang"
+                vview.trsl_txt_lang.text = " • ${getAutoIsoLang()}"
 
                 vview.mk_ct.visibility = View.VISIBLE
                 vview.mk_ld.visibility = View.INVISIBLE
