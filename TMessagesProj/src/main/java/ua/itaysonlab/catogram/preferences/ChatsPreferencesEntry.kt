@@ -41,6 +41,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
             switch {
+                title = LocaleController.getString("CG_RearCam", R.string.CG_RearCam)
+                summary = LocaleController.getString("CG_RearCam_Desc", R.string.CG_RearCam_Desc)
+
+                contract({
+                    return@contract CatogramConfig.rearCam
+                }) {
+                    CatogramConfig.rearCam = it
+                }
+            }
+            
+            switch {
                 title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
 
                 contract({
@@ -158,17 +169,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.syncPins
                 }) {
                     CatogramConfig.syncPins = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_RearCam", R.string.CG_RearCam)
-                summary = LocaleController.getString("CG_RearCam_Desc", R.string.CG_RearCam_Desc)
-
-                contract({
-                    return@contract CatogramConfig.rearCam
-                }) {
-                    CatogramConfig.rearCam = it
                 }
             }
 
