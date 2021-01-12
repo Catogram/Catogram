@@ -46,6 +46,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
 
         val whiteBg = Theme.getColor(Theme.key_windowBackgroundWhite)
         val blackText = Theme.getColor(Theme.key_windowBackgroundWhiteBlackText)
+        val blackColor = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
         val grayColor = Theme.getColor(Theme.key_windowBackgroundWhiteGrayText)
         val grayBg = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundGray))
 
@@ -59,6 +60,9 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         vview.copyText.setOnClickListener {
             AndroidUtilities.addToClipboard(vview.trsl.text.toString())
         }
+
+        vview.close.imageTintList = blackColor
+        vview.copyText.imageTintList = blackColor
 
         vview.copyText.visibility = View.GONE
         vview.mk_ct.visibility = View.INVISIBLE
