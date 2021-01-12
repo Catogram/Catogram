@@ -68,7 +68,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         vview.mk_ct.visibility = View.INVISIBLE
         vview.mk_ld.visibility = View.VISIBLE
 
-        vview.tvTitle.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle))
+        vview.tvTitle.setTextColor(blackText)
         vview.tvDivider.backgroundTintList = ColorStateList.valueOf(grayColor)
 
         vview.orig_txt.setTextColor(grayColor)
