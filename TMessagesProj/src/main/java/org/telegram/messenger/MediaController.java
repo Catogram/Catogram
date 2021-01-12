@@ -3329,6 +3329,8 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
                 recordReplyingTopMsg = replyToTopMsg;
                 fileBuffer.rewind();
 
+                InstantVideoBridge.initVoiceEnhancements(audioRecorder);
+
                 audioRecorder.startRecording();
             } catch (Exception e) {
                 FileLog.e(e);
@@ -3336,7 +3338,9 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
                 stopRecord();
                 recordingAudioFile.delete();
                 recordingAudioFile = null;
+
                 try {
+                    InstantVideoBridge.releaseVoiceEnhancements();
                     audioRecorder.release();
                     audioRecorder = null;
                 } catch (Exception e2) {
@@ -3429,6 +3433,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
             requestAudioFocus(false);
         }
         try {
+            InstantVideoBridge.releaseVoiceEnhancements();
             if (audioRecorder != null) {
                 audioRecorder.release();
                 audioRecorder = null;

@@ -70,6 +70,28 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.stereoVoices = it
                 }
             }
+
+            switch {
+                title = LocaleController.getString("CG_VoiceEnhancements", R.string.CG_VoiceEnhancements)
+                summary = LocaleController.getString("CG_VoiceEnhancements_Desc", R.string.CG_VoiceEnhancements_Desc)
+
+                contract({
+                    return@contract CatogramConfig.voicesAgc
+                }) {
+                    CatogramConfig.voicesAgc = it
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_Voip_ForceEnhancements", R.string.CG_Voip_ForceEnhancements)
+                summary = LocaleController.getString("CG_Voip_ForceEnhancements", R.string.CG_Voip_ForceEnhancements_Desc)
+
+                contract({
+                    return@contract CatogramConfig.voicesAgc
+                }) {
+                    CatogramConfig.voicesAgc = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header)) {
