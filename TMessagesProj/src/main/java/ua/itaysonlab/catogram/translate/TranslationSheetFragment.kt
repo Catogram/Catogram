@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.v5_translation_markup.view.*
+import org.telegram.messenger.AndroidUtilities
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.MessageObject
 import org.telegram.messenger.R
@@ -44,7 +45,15 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
         dialog!!.window!!.navigationBarColor = Theme.getColor(Theme.key_windowBackgroundWhite)
         vview.backgroundTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhite))
 
+        vview.close.setOnClickListener {
+            dismiss()
+        }
 
+        vview.copyText.setOnClickListener {
+            AndroidUtilities.addToClipboard(vview.trsl.text.toString())
+        }
+
+        vview.copyText.visibility = View.GONE
         vview.mk_ct.visibility = View.INVISIBLE
         vview.mk_ld.visibility = View.VISIBLE
 
@@ -69,6 +78,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
 
                 vview.mk_ct.visibility = View.VISIBLE
                 vview.mk_ld.visibility = View.INVISIBLE
+                vview.copyText.visibility = View.VISIBLE
             }
         }
     }
