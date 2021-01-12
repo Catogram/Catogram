@@ -97,12 +97,6 @@ public class DrawerUserCell extends FrameLayout {
         imageView.getImageReceiver().setCurrentAccount(account);
         imageView.setImage(ImageLocation.getForUser(user, false), "50_50", avatarDrawable, user);
         checkBox.setVisibility(account == UserConfig.selectedAccount ? VISIBLE : INVISIBLE);
-
-        if (DoubleBottomStorageBridge.INSTANCE.getHideAccountsInSwitcher() && !DoubleBottomBridge.INSTANCE.isDbActivatedForAccount(
-                UserConfig.getInstance(accountNumber).getCurrentUser().id
-        )) {
-            setVisibility(View.GONE);
-        }
     }
 
     public int getAccountNumber() {
@@ -114,10 +108,6 @@ public class DrawerUserCell extends FrameLayout {
         if (UserConfig.getActivatedAccountsCount() <= 1 || !NotificationsController.getInstance(accountNumber).showBadgeNumber) {
             return;
         }
-
-        if (DoubleBottomStorageBridge.INSTANCE.getHideAccountsInSwitcher() && !DoubleBottomBridge.INSTANCE.isDbActivatedForAccount(
-                UserConfig.getInstance(accountNumber).getCurrentUser().id
-        )) return;
 
         int counter = MessagesStorage.getInstance(accountNumber).getMainUnreadCount();
         if (counter <= 0) {
