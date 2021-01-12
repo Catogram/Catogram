@@ -37,6 +37,8 @@ import java.util.Collections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge;
+import ua.itaysonlab.catogram.double_bottom.DoubleBottomStorageBridge;
 
 public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
 
@@ -222,7 +224,14 @@ public class DrawerLayoutAdapter extends RecyclerListView.SelectionAdapter {
         accountNumbers.clear();
         for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
             if (UserConfig.getInstance(a).isClientActivated()) {
-                accountNumbers.add(a);
+                if (DoubleBottomStorageBridge.INSTANCE.getHideAccountsInSwitcher()
+                        && DoubleBottomBridge.INSTANCE.isDbActivatedForAccount(UserConfig.getInstance(a).getCurrentUser().id)
+                        && UserConfig.getInstance(a).getCurrentUser().id != UserConfig.getInstance(UserConfig.selectedAccount).getCurrentUser().id
+                ) {
+                    //
+                } else {
+                    accountNumbers.add(a);
+                }
             }
         }
         Collections.sort(accountNumbers, (o1, o2) -> {
