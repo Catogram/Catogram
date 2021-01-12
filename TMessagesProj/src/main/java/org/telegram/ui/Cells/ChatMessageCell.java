@@ -761,6 +761,11 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     private SparseArray<Rect> accessibilityVirtualViewBounds = new SparseArray<>();
     private int currentFocusedVirtualView = -1;
 
+    private boolean isBlockedUserMessage() {
+        return MessagesController.getInstance(currentAccount).blockePeers.indexOfKey(
+                currentMessageObject.getFromChatId()) >= 0 && CatogramConfig.INSTANCE.getHideUserIfBlocked();
+    }
+
     public ChatMessageCell(Context context) {
         super(context);
 
@@ -2731,6 +2736,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         }
         statusDrawableAnimationInProgress = false;
     }
+    
 
     @Override
     protected void onAttachedToWindow() {
@@ -5767,6 +5773,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             }
             transitionParams.lastStatusDrawableParams = -1;
             statusDrawableAnimationInProgress = false;
+        }
+        if (isBlockedUserMessage()) {
+            totalHeight = 0;
         }
         updateWaveform();
         updateButtonState(false, dataChanged && !messageObject.cancelEditing, true);
