@@ -94,9 +94,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
 
+import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
+
 public class MediaController implements AudioManager.OnAudioFocusChangeListener, NotificationCenter.NotificationCenterDelegate, SensorEventListener {
 
-    private native int startRecord(String path, int sampleRate);
+    private native int startRecord(String path, int sampleRate, int channelCount, int selfBitrate);
     private native int writeFrame(ByteBuffer frame, int len);
     private native void stopRecord();
     public static native int isOpusFile(String path);
@@ -831,7 +833,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
         recordQueue.postRunnable(() -> {
             try {
                 sampleRate = 48000;
-                int minBuferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
+                int minBuferSize = AudioRecord.getMinBufferSize(sampleRate, InstantVideoBridge.getInstantAudioChannelType(), AudioFormat.ENCODING_PCM_16BIT);
                 if (minBuferSize <= 0) {
                     minBuferSize = 1280;
                 }
@@ -3309,7 +3311,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
             recordingAudioFile = new File(FileLoader.getDirectory(FileLoader.MEDIA_DIR_CACHE), FileLoader.getAttachFileName(recordingAudio));
 
             try {
-                if (startRecord(recordingAudioFile.getAbsolutePath(), 48000) == 0) {
+                if (startRecord(recordingAudioFile.getAbsolutePath(), 48000, InstantVideoBridge.getInstantAudioChannelCount(), InstantVideoBridge.getVoiceBitrate()) == 0) {
                     AndroidUtilities.runOnUIThread(() -> {
                         recordStartRunnable = null;
                         NotificationCenter.getInstance(currentAccount).postNotificationName(NotificationCenter.recordStartError, guid);
@@ -3317,7 +3319,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
                     return;
                 }
 
-                audioRecorder = new AudioRecord(MediaRecorder.AudioSource.DEFAULT, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, recordBufferSize);
+                audioRecorder = new AudioRecord(MediaRecorder.AudioSource.DEFAULT, sampleRate, InstantVideoBridge.getInstantAudioChannelType(), AudioFormat.ENCODING_PCM_16BIT, recordBufferSize);
                 recordStartTime = System.currentTimeMillis();
                 recordTimeCount = 0;
                 samplesCount = 0;

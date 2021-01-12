@@ -103,6 +103,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL;
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
 
 @TargetApi(18)
 public class InstantCameraView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate {
@@ -673,7 +674,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
                 long endTime = videoEditedInfo.endTime >= 0 ? videoEditedInfo.endTime : videoEditedInfo.estimatedDuration;
                 videoEditedInfo.estimatedDuration = endTime - startTime;
                 videoEditedInfo.estimatedSize = Math.max(1, (long) (size * (videoEditedInfo.estimatedDuration / totalDuration)));
-                videoEditedInfo.bitrate = 400000;
+                videoEditedInfo.bitrate = InstantVideoBridge.getInstantBitrate();
                 if (videoEditedInfo.startTime > 0) {
                     videoEditedInfo.startTime *= 1000;
                 }
@@ -1609,19 +1610,8 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
         };
 
         public void startRecording(File outputFile, android.opengl.EGLContext sharedContext) {
-            int resolution;
-            int bitrate;
-            String model = Build.DEVICE;
-            if (model == null) {
-                model = "";
-            }
-            if (model.startsWith("zeroflte") || model.startsWith("zenlte")) {
-                resolution = 320;
-                bitrate = 600000;
-            } else {
-                resolution = 240;
-                bitrate = 400000;
-            }
+            int resolution = InstantVideoBridge.getInstantResolution();
+            int bitrate = InstantVideoBridge.getInstantBitrate();
 
             videoFile = outputFile;
             videoWidth = resolution;
@@ -2087,7 +2077,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
 
         private void prepareEncoder() {
             try {
-                int recordBufferSize = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
+                int recordBufferSize = AudioRecord.getMinBufferSize(44100, InstantVideoBridge.getInstantAudioChannelType(), AudioFormat.ENCODING_PCM_16BIT);
                 if (recordBufferSize <= 0) {
                     recordBufferSize = 3584;
                 }
@@ -2098,7 +2088,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
                 for (int a = 0; a < 3; a++) {
                     buffers.add(new AudioBufferInfo());
                 }
-                audioRecorder = new AudioRecord(MediaRecorder.AudioSource.DEFAULT, 44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+                audioRecorder = new AudioRecord(MediaRecorder.AudioSource.DEFAULT, 44100, InstantVideoBridge.getInstantAudioChannelType(), AudioFormat.ENCODING_PCM_16BIT, bufferSize);
                 audioRecorder.startRecording();
                 if (BuildVars.LOGS_ENABLED) {
                     FileLog.d("initied audio record with channels " + audioRecorder.getChannelCount() + " sample rate = " + audioRecorder.getSampleRate() + " bufferSize = " + bufferSize);
@@ -2113,8 +2103,8 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
                 MediaFormat audioFormat = new MediaFormat();
                 audioFormat.setString(MediaFormat.KEY_MIME, AUDIO_MIME_TYPE);
                 audioFormat.setInteger(MediaFormat.KEY_SAMPLE_RATE, 44100);
-                audioFormat.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 1);
-                audioFormat.setInteger(MediaFormat.KEY_BIT_RATE, 32000);
+                audioFormat.setInteger(MediaFormat.KEY_CHANNEL_COUNT, InstantVideoBridge.getInstantAudioChannelCount());
+                audioFormat.setInteger(MediaFormat.KEY_BIT_RATE, InstantVideoBridge.getInstantAudioBitrate());
                 audioFormat.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 2048 * AudioBufferInfo.MAX_SAMPLES);
 
                 audioEncoder = MediaCodec.createEncoderByType(AUDIO_MIME_TYPE);
