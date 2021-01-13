@@ -230,12 +230,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kotlin.Pair;
 import kotlin.Unit;
 import ua.itaysonlab.catogram.CGControversive;
 import ua.itaysonlab.catogram.CGFeatureHooks;
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.CustomVerifications;
 import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
+import ua.itaysonlab.catogram.stickers.StickerDownloader;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
 import ua.itaysonlab.catogram.ui.CatogramToasts;
 
@@ -18060,6 +18062,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             options.add(6);
                             icons.add(R.drawable.msg_shareout);
                         } else if (type == 7) {
+                            items.add(LocaleController.getString("CG_SaveSticker", R.string.CG_SaveSticker));
+                            options.add(993);
+                            icons.add(R.drawable.msg_download);
                             if (selectedObject.isMask()) {
                                 items.add(LocaleController.getString("AddToMasks", R.string.AddToMasks));
                                 options.add(9);
@@ -18098,6 +18103,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             }
                         } else if (type == 9) {
                             TLRPC.Document document = selectedObject.getDocument();
+                            items.add(LocaleController.getString("CG_SaveSticker", R.string.CG_SaveSticker));
+                            options.add(993);
+                            icons.add(R.drawable.msg_gallery);
                             if (!getMediaDataController().isStickerInFavorites(document)) {
                                 if (MessageObject.isStickerHasSet(document)) {
                                     items.add(LocaleController.getString("AddToFavorites", R.string.AddToFavorites));
@@ -18743,6 +18751,26 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
             case 902: {
                 createCGShareAlertSelected(true);
+                break;
+            }
+            case 993: {
+                if (Build.VERSION.SDK_INT >= 23 && getParentActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    getParentActivity().requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 4);
+                    return;
+                }
+                try {
+                    Pair<String, String> stickerPng = new StickerDownloader(selectedObject).download();
+                    MediaController.saveFile(stickerPng.getSecond(), getParentActivity(), 2, stickerPng.getFirst(), "image/png");
+                    File tmpStickerPng = new File(stickerPng.getFirst());
+                    tmpStickerPng.delete();
+                } catch (Exception exc) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
+                    builder.setMessage(LocaleController.getString("CG_FailedToSaveSticker", R.string.CG_FailedToSaveSticker));
+                    builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
+                    showDialog(builder.create());
+                    exc.printStackTrace();
+                }
                 break;
             }
             case 3: {
