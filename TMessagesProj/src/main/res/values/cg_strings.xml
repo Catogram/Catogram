@@ -252,4 +252,6 @@
     <string name="CG_VoiceEnhancements_Desc">Noise Suppression and voice normalization</string>
     <string name="CG_Voip_ForceEnhancements">Force VoIP Voice Enhancements</string>
     <string name="CG_Voip_ForceEnhancements_Desc">enables AEC/NS even if server doesn\'t support it</string>
+    <string name="CG_AudioFocus">Mute music while playing voices or videos</string>
+    <string name="CG_AudioFocus_Desc">If disabled then the music will be quieter, but won\'t turn off</string>
 </resources>

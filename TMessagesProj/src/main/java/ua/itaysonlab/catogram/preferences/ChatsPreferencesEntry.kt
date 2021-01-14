@@ -50,6 +50,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.rearCam = it
                 }
             }
+
+            switch {
+                title = LocaleController.getString("CG_AudioFocus", R.string.CG_AudioFocus)
+                summary = LocaleController.getString("CG_AudioFocus_Desc", R.string.CG_AudioFocus_Desc)
+
+                contract({
+                    return@contract CatogramConfig.audioFocus
+                }) {
+                    CatogramConfig.audioFocus = it
+                }
+            }
             
             switch {
                 title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)

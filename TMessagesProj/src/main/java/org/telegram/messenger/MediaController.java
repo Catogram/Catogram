@@ -95,6 +95,7 @@ import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
 
 import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
+import ua.itaysonlab.catogram.CatogramConfig;
 
 public class MediaController implements AudioManager.OnAudioFocusChangeListener, NotificationCenter.NotificationCenterDelegate, SensorEventListener {
 
@@ -2324,8 +2325,8 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
 
     private void checkAudioFocus(MessageObject messageObject) {
         int neededAudioFocus;
-        if (messageObject.isVoice() || messageObject.isRoundVideo()) {
-            if (useFrontSpeaker) {
+        if (messageObject.isVoice() || messageObject.isVideo() || messageObject.isRoundVideo()) {
+            if (CatogramConfig.INSTANCE.getAudioFocus()) {
                 neededAudioFocus = 3;
             } else {
                 neededAudioFocus = 2;
