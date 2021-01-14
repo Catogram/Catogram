@@ -55,6 +55,7 @@ object CatogramConfig {
     var syncPins by sharedPreferences.boolean("cg_syncpins", true)
     var rearCam by sharedPreferences.boolean("cg_rearcam", false)
     var audioFocus by sharedPreferences.boolean("cg_audiofocus", false)
+    var enableProximity by sharedPreferences.boolean("cg_enableproximity", true)
     var useTgxMenuSlide by sharedPreferences.boolean("advanced_tgxslide", false)
     var useTgxMenuSlideSheet by sharedPreferences.boolean("advanced_tgxslide_sheet", false)
 

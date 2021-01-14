@@ -61,6 +61,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.audioFocus = it
                 }
             }
+
+            switch {
+                title = LocaleController.getString("CG_Proximity", R.string.CG_Proximity)
+                summary = LocaleController.getString("CG_Proximity_Desc", R.string.CG_Proximity_Desc)
+
+                contract({
+                    return@contract CatogramConfig.enableProximity
+                }) {
+                    CatogramConfig.enableProximity = it
+                }
+            }
             
             switch {
                 title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
