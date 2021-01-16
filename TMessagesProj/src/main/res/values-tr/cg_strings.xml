@@ -3,7 +3,7 @@
     <!-- by iTaysonLab -->
     <string name="AdvancedSettings">Catogram Preferences</string>
     <string name="AS_Header_Appearance">Appearance</string>
-    <string name="AS_HideUserPhone">Hide phone number</string>
+    <string name="AS_HideUserPhone">Telefon numarayı gizle</string>
     <string name="AS_HideUserPhoneSummary">in drawer and settings</string>
     <string name="AS_NoRounding">Disable number rounding</string>
     <string name="AS_NoRoundingSummary">1.2K -&gt; 1234</string>
@@ -37,11 +37,11 @@
     <string name="AS_DrawerCategory">Drawer</string>
     <string name="AS_FlatSB">Flat statusbar</string>
     <string name="AS_FlatAB">Disable toolbar shadow</string>
-    <string name="AS_FlatSB_Desc">only for Android 6+</string>
+    <string name="AS_FlatSB_Desc">sadece Android 6+ içindir</string>
     <string name="AS_RedesignCategory">Redesign</string>
     <string name="CG_Filters_Header">Dialog filter</string>
     <string name="CG_Filters_PM">Private Messages</string>
-    <string name="CG_Filters_Secret">Secret Chats</string>
+    <string name="CG_Filters_Secret">Gizli chat</string>
     <string name="CG_Filters_Channels">Channels</string>
     <string name="CG_Filters_Chats">Groups</string>
     <string name="CG_Filters_Bots">Bots</string>
