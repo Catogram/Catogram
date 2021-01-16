@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram Tercihleri</string>
+    <string name="AdvancedSettings">Catogram ayarları</string>
     <string name="AS_Header_Appearance">Görünüm</string>
     <string name="AS_HideUserPhone">Telefon numarasını gizle</string>
     <string name="AS_HideUserPhoneSummary">menü ve ayarlarda</string>
