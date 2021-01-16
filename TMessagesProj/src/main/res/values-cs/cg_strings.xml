@@ -60,7 +60,7 @@
     <string name="AS_BiometricDesc">allows face scanning on devices like Pixel 4</string>
     <string name="CG_Biometric_Subtitle">App authentication</string>
     <string name="CG_Biometric_Negative">Enter PIN</string>
-    <string name="AS_Header_Notification">Notifications</string>
+    <string name="AS_Header_Notification">Notifikace</string>
     <string name="AS_AccentNotify">Accent color as notification color</string>
     <string name="CG_Never">NEVER</string>
     <string name="AS_Filters_ReplaceFAB">Replace FAB behaviour</string>
