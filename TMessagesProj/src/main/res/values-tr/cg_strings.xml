@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram ayarları</string>
+    <string name="AdvancedSettings">Catogram Tercihleri</string>
     <string name="AS_Header_Appearance">Görünüm</string>
-    <string name="AS_HideUserPhone">Telefon numarayı gizle</string>
+    <string name="AS_HideUserPhone">Telefon numarasını gizle</string>
     <string name="AS_HideUserPhoneSummary">menü ve ayarlarda</string>
     <string name="AS_NoRounding">Numara yuvarlamayı devre dışı bırak</string>
     <string name="AS_NoRoundingSummary">1.2K -&gt; 1234</string>
@@ -51,7 +51,7 @@
     <string name="AS_Filters_Count_Desc">okunmamış mesaj sayısı yerine</string>
     <string name="AS_Filters_THint">Filtre menüsü ipucunu göster</string>
     <string name="AS_Filters_THintDesc">araç çubuğu alt başlığında</string>
-    <string name="CG_Filters_GenericHint">Lütfen bu ayarın yeniden başlatmalarda kaydedileceğini unutmayın.</string>
+    <string name="CG_Filters_GenericHint">Lütfen bu ayarın yeniden başlatıldığında kaydedileceğini unutmayın.</string>
     <string name="CG_Filters_ToolbarHint">filtreyi değiştirmek için basılı tut</string>
     <string name="CG_Filters_AlsoFABHint">Ayrıca \"Yaz\" kayan işlem düğmesini basılı tutarak da filtreyi değiştirebilirsin.</string>
     <string name="AS_Category_Security">Güvenlik</string>
@@ -70,8 +70,8 @@
     <string name="CG_ChatMenu_ToChannel">Bağlantılı kanal</string>
     <string name="CG_ChannelMenu_ToChat">Bağlantılı sohbet</string>
     <string name="AS_Header_Chats">Sohbetler</string>
-    <string name="CG_NewRepostUI">Force new repost UI everywhere</string>
-    <string name="CG_NewRepostUI_Desc">like the repost button in chats</string>
+    <string name="CG_NewRepostUI">Yeni ileti ara yüzünü her yerde kullanmaya zorla</string>
+    <string name="CG_NewRepostUI_Desc">sohbetlerdeki ilet butonu gibi</string>
     <string name="CG_ConfirmCalls">Çağrı yapmadan önce sor</string>
     <string name="CG_ABSearch">Araç çubuğunda arama butonu</string>
     <string name="CG_ABSearch_Desc">sohbet penceresinde</string>
@@ -111,7 +111,7 @@
     <string name="CG_ConfirmCalling_Header">Onayla</string>
     <string name="CG_ConfirmCalling_Question">%s\'i aramak istiyor musunuz?</string>
     <string name="CG_ConfirmCalling_Action">Onayla</string>
-    <string name="CG_ConfirmCalling_Action_Cancel">Iptal</string>
+    <string name="CG_ConfirmCalling_Action_Cancel">İptal</string>
     <string name="AS_ForceIcons">Menü ikon stili</string>
     <string name="AS_ForceNY_Drawer">Yeni Yıl</string>
     <string name="AS_ForceSV_Drawer">St. Valentine</string>
@@ -206,4 +206,6 @@
     <string name="CG_Donate_Desc">Aşağıdan bir bağış yöntemi seçin \n1,5 Dolar veya 100 Rus rublesinden fazla bağış yaparsanız, hediye olarak size bir doğrulandı rozeti veya dolandırıcılık rozeti verilebilir. \nÖdeme açıklamasında kimliğinizi ve istediğiniz rozeti belirtin.</string>
     <string name="CG_Donate_Method">Yöntem seç</string>
     <string name="CG_Mono_Desc">5375414117420108 // kopyalamak için tıkla</string>
+    <string name="CG_Source">Source code</string>
+    <string name="CG_Crowdin">Help with translation</string>
 </resources>
