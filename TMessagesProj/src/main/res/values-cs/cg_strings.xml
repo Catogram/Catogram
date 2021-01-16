@@ -41,11 +41,11 @@
     <string name="AS_RedesignCategory">Redesign</string>
     <string name="CG_Filters_Header">Dialog filter</string>
     <string name="CG_Filters_PM">Private Messages</string>
-    <string name="CG_Filters_Secret">Secret Chats</string>
-    <string name="CG_Filters_Channels">Channels</string>
-    <string name="CG_Filters_Chats">Groups</string>
-    <string name="CG_Filters_Bots">Bots</string>
-    <string name="CG_Filters_All">All chats</string>
+    <string name="CG_Filters_Secret">Tajný chat</string>
+    <string name="CG_Filters_Channels">Kanály</string>
+    <string name="CG_Filters_Chats">Skupiny</string>
+    <string name="CG_Filters_Bots">Roboti</string>
+    <string name="CG_Filters_All">Všechny chaty</string>
     <string name="AS_Filters_Header">Chat filters</string>
     <string name="AS_Filters_Count">Show chat count in chooser</string>
     <string name="AS_Filters_Count_Desc">instead of unread messages count</string>
@@ -77,7 +77,7 @@
     <string name="CG_ABSearch_Desc">in the chat window</string>
     <string name="CG_SmoothKbd">Smooth keyboard animation</string>
     <string name="CG_SmoothKbd_Desc">uses official Telegram implementation</string>
-    <string name="CG_Header_Profile">Profiles</string>
+    <string name="CG_Header_Profile">Profily</string>
     <string name="CG_NewAvaHeader_NoEdgeTapping">Block edge tapping</string>
     <string name="CG_NewAvaHeader_NoEdgeTapping_Desc">you still can scroll images</string>
     <string name="CG_NewAvaHeader_OpenOnTap">Open in fullscreen on tap</string>
@@ -98,7 +98,7 @@
     <string name="CG_MessageMenuOption_TGX">Telegram X-styled (slide)</string>
     <string name="CG_MessageMenuOption_TGXS">Telegram X-styled (classic)</string>
     <string name="CG_MessageMenuOption_A">Modern popup</string>
-    <string name="CG_MessageMenuOption_Default">Default</string>
+    <string name="CG_MessageMenuOption_Default">Výchozí</string>
     <string name="CG_NewDrawer">Use the new drawer</string>
     <string name="CG_NewDrawer_Desc">not compatible with multiaccount</string>
     <string name="CG_MessageButton_Override">Override message action button</string>
@@ -115,10 +115,10 @@
     <string name="AS_ForceIcons">Drawer icons style</string>
     <string name="AS_ForceNY_Drawer">Nový rok</string>
     <string name="AS_ForceSV_Drawer">St. Valentine</string>
-    <string name="AS_ForceDefault_Drawer">Default</string>
+    <string name="AS_ForceDefault_Drawer">Výchozí</string>
     <string name="AS_KbdWebp">Send media from keyboard as stickers</string>
     <string name="AS_KbdWebp_Desc">for SKeyboard, GBoard and others</string>
-    <string name="AS_ChangeIcon">Application icon</string>
+    <string name="AS_ChangeIcon">Ikona aplikace</string>
     <string name="AS_ChangeIcon_Old">Výchozí</string>
     <string name="AS_ChangeIcon_AltBlue">New Blue (by @RKBDI)</string>
     <string name="AS_ChangeIcon_AltOrange">New Orange (by @RKBDI)</string>
@@ -134,13 +134,13 @@
     <string name="CG_ToSaved">Save message</string>
     <string name="CG_FABLeft">\"New chat\" on the left</string>
     <string name="CG_IntroMessage">An **unofficial** Telegram client modification.\nIt has **additional features** and **improved customization**.</string>
-    <string name="CG_GooglePlay_Donate">Donate</string>
-    <string name="CG_GooglePlay_Info">Information</string>
-    <string name="CG_GooglePlay_InfoDesc">All payments will be processed by Google Play.</string>
+    <string name="CG_GooglePlay_Donate">Příspěvek</string>
+    <string name="CG_GooglePlay_Info">Informace</string>
+    <string name="CG_GooglePlay_InfoDesc">Všechny platby jsou provedeny skrze Google Play.</string>
     <string name="CG_GooglePlay_ChooseAmount">Choose an amount</string>
-    <string name="CG_GooglePlay_Thanks">Thanks!</string>
+    <string name="CG_GooglePlay_Thanks">Díky!</string>
     <string name="CG_TabIconMode_Title">Tab icon type [restart needed]</string>
-    <string name="CG_TabIconMode_Disabled">Disabled</string>
+    <string name="CG_TabIconMode_Disabled">Zakázáno</string>
     <string name="CG_TabIconMode_Append">Append to tab title</string>
     <string name="CG_TabIconMode_Replace">Replace tab title</string>
     <string name="CG_GooglePlay_OTADownloaded">An update is ready to be installed.</string>
@@ -206,4 +206,6 @@
     <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you may be given a verification checkmark or a scam mark as a gift.\nSpecify your ID in the comment to the payment and the desired mark.</string>
     <string name="CG_Donate_Method">Choose method</string>
     <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
+    <string name="CG_Source">Source code</string>
+    <string name="CG_Crowdin">Help with translation</string>
 </resources>
