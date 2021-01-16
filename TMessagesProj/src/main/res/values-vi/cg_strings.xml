@@ -73,9 +73,9 @@
     <string name="CG_NewRepostUI">Bắt buộc sử dụng UI đăng lại mới ở mọi nơi</string>
     <string name="CG_NewRepostUI_Desc">ví dụ như nút đăng lại trong cuộc trò chuyện</string>
     <string name="CG_ConfirmCalls">Hỏi trước khi gọi</string>
-    <string name="CG_ABSearch">Search button in toolbar</string>
-    <string name="CG_ABSearch_Desc">in the chat window</string>
-    <string name="CG_SmoothKbd">Smooth keyboard animation</string>
+    <string name="CG_ABSearch">Nút tìm kiếm trên thanh công cụ</string>
+    <string name="CG_ABSearch_Desc">trong cửa sổ cuộc trò chuyện</string>
+    <string name="CG_SmoothKbd">Hoạt ảnh bàn phím mượt mà</string>
     <string name="CG_SmoothKbd_Desc">uses official Telegram implementation</string>
     <string name="CG_Header_Profile">Profiles</string>
     <string name="CG_NewAvaHeader_NoEdgeTapping">Block edge tapping</string>
