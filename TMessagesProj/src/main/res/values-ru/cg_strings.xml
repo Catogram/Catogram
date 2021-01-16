@@ -206,4 +206,6 @@
     <string name="CG_Donate_Desc">При донате от суммы 1.5$ или 100 российских рублей вам, в качестве подарка, может быть выдана галочка верификации или пометка скам.\nУкажите свой ID в комментарии к платежу и желаемую пометку.</string>
     <string name="CG_Donate_Method">Выберите метод</string>
     <string name="CG_Mono_Desc">5375414117420108 // нажмите, чтобы скопировать</string>
+    <string name="CG_Source">Исходный код</string>
+    <string name="CG_Crowdin">Помогите с переводом</string>
 </resources>

@@ -80,6 +80,18 @@ class MainPreferencesEntry : BasePreferencesEntry {
                     }
                 }
                 textIcon {
+                    title = LocaleController.getString("CG_Source", R.string.CG_Source)
+                    listener = TGKitTextIconRow.TGTIListener {
+                        goToGithub(it)
+                    }
+                }
+                textIcon {
+                    title = LocaleController.getString("CG_Crowdin", R.string.CG_Crowdin)
+                    listener = TGKitTextIconRow.TGTIListener {
+                        goToCrowdin(it)
+                    }
+                }
+                textIcon {
                     title = LocaleController.getString("CG_GooglePlay_Donate", R.string.CG_GooglePlay_Donate)
                     divider = true
                     value = LocaleController.getString("CG_DonatDesc", R.string.CG_DonatDesc)
@@ -108,6 +120,16 @@ class MainPreferencesEntry : BasePreferencesEntry {
             intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
             intent.putExtra(Browser.EXTRA_APPLICATION_ID, bf.parentActivity.packageName)
             bf.parentActivity.startActivity(intent)
+        }
+        private fun goToCrowdin(bf: BaseFragment) {
+            val openURL = Intent(android.content.Intent.ACTION_VIEW)
+            openURL.data = Uri.parse("https://crowdin.com/project/catogram")
+            bf.parentActivity.startActivity(openURL)
+        }
+        private fun goToGithub(bf: BaseFragment) {
+            val openURL = Intent(android.content.Intent.ACTION_VIEW)
+            openURL.data = Uri.parse("https://github.com/Catogram/Catogram")
+            bf.parentActivity.startActivity(openURL)
         }
     }
 }
