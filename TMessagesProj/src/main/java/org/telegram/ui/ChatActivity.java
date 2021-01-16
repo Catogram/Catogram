@@ -18103,6 +18103,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             }
                         } else if (type == 9) {
                             TLRPC.Document document = selectedObject.getDocument();
+                            items.add(LocaleController.getString("CG_SaveSticker", R.string.CG_SaveSticker));
+                            options.add(993);
+                            icons.add(R.drawable.msg_download);
                             if (!getMediaDataController().isStickerInFavorites(document)) {
                                 if (MessageObject.isStickerHasSet(document)) {
                                     items.add(LocaleController.getString("AddToFavorites", R.string.AddToFavorites));
