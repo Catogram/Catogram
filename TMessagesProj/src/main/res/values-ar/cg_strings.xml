@@ -208,4 +208,6 @@
 روبل روسي، قد يتم إعطاؤك علامة تحقق او علامة احتيال كهدية. حدد الID الخاص بك على تيليجرام في التعليق على الدفع وقم بتحديد العلامة التي ترغب بها.</string>
     <string name="CG_Donate_Method">اختيار الطريقة</string>
     <string name="CG_Mono_Desc">انقر للنسخ // 5375414117420108</string>
+    <string name="CG_Source">Source code</string>
+    <string name="CG_Crowdin">Help with translation</string>
 </resources>
