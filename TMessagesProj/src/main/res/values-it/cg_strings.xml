@@ -39,7 +39,7 @@
     <string name="AS_FlatAB">Disabilita l\'ombra della toolbar</string>
     <string name="AS_FlatSB_Desc">solo per Android 6+</string>
     <string name="AS_RedesignCategory">Redesign</string>
-    <string name="CG_Filters_Header">Filtro dialogo</string>
+    <string name="CG_Filters_Header">Filtro di dialogo</string>
     <string name="CG_Filters_PM">Messaggi privati</string>
     <string name="CG_Filters_Secret">Chat Segrete</string>
     <string name="CG_Filters_Channels">Canali</string>
@@ -51,7 +51,7 @@
     <string name="AS_Filters_Count_Desc">al posto del contatore dei messaggi non letti</string>
     <string name="AS_Filters_THint">Mostra suggerimento nel menu del filtro</string>
     <string name="AS_Filters_THintDesc">sottotitoli nella toolbar</string>
-    <string name="CG_Filters_GenericHint">Questa opzione si salverà tramite un riavvio.</string>
+    <string name="CG_Filters_GenericHint">Si prega di notare che questa opzione si salverà tramite un riavvio.</string>
     <string name="CG_Filters_ToolbarHint">mantieni per cambiare filtro</string>
     <string name="CG_Filters_AlsoFABHint">Puoi anche cambiare filtro tenendo premuto sul bottone flottante \"Scrivi\".</string>
     <string name="AS_Category_Security">Sicurezza</string>
@@ -91,10 +91,10 @@
     <string name="CG_NewTabs_RemoveAllChats">Nascondi la cartella \"Tutte le chat\" [riavvio richiesto]</string>
     <string name="CG_NewTabs_RemoveAllChats_Desc">premi \"indietro\" nella pagina home per aprirlo</string>
     <string name="CG_NewTabs_Emoticons">Mostra le emoticons invece dei titoli per le tab [è necessario il riavvio]</string>
-    <string name="CG_NewTabs_Emoticons_Desc">questo è sincronizzato al Cloud da Telegram</string>
+    <string name="CG_NewTabs_Emoticons_Desc">questo è sincronizzato al cloud da Telegram</string>
     <string name="CG_NewTabs_EmoticonsAppend">Aggiungi le emoticons ai titoli delle tab [è necessario il riavvio]</string>
     <string name="CG_NewTabs_EmoticonsAppend_Desc">quando l\'opzione \"invece che\" è spenta</string>
-    <string name="CG_MessageMenuOption">Stile menu messaggio</string>
+    <string name="CG_MessageMenuOption">Stile del menu del messaggio</string>
     <string name="CG_MessageMenuOption_TGX">Stile Telegram X (scorrimento)</string>
     <string name="CG_MessageMenuOption_TGXS">Stile Telegram X (classico)</string>
     <string name="CG_MessageMenuOption_A">Popup Moderno</string>
