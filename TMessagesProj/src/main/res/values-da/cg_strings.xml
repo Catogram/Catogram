@@ -206,4 +206,6 @@
     <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you may be given a verification checkmark or a scam mark as a gift.\nSpecify your ID in the comment to the payment and the desired mark.</string>
     <string name="CG_Donate_Method">Choose method</string>
     <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
+    <string name="CG_Source">Source code</string>
+    <string name="CG_Crowdin">Help with translation</string>
 </resources>
