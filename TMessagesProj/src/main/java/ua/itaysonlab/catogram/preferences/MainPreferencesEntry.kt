@@ -81,12 +81,14 @@ class MainPreferencesEntry : BasePreferencesEntry {
                 }
                 textIcon {
                     title = LocaleController.getString("CG_Source", R.string.CG_Source)
+                    value = "Github"
                     listener = TGKitTextIconRow.TGTIListener {
                         goToGithub(it)
                     }
                 }
                 textIcon {
                     title = LocaleController.getString("CG_Crowdin", R.string.CG_Crowdin)
+                    value = "Crowdin"
                     listener = TGKitTextIconRow.TGTIListener {
                         goToCrowdin(it)
                     }
