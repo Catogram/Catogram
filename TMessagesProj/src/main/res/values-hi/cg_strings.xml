@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram Preferences</string>
+    <string name="AdvancedSettings">कैटोटार विकल्प</string>
     <string name="AS_Header_Appearance">Appearance</string>
     <string name="AS_HideUserPhone">Hide phone number</string>
     <string name="AS_HideUserPhoneSummary">in drawer and settings</string>
