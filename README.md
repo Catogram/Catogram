@@ -14,6 +14,6 @@ Experimental telegram client based on [official Android sources](https://github.
 - Ability to use system fonts, disable number rounding (vibration / tooltip shadow), use accent as notification color, hiding number from settings and drawer
 - Many others.. Download the app to check them all
 
- # This repo containst source of app but it misses:
-- Сupertino stuff. It is based on a closed library, we have no right to push it. 
+ # This repo contains the source of the app but lacks:
+- СupertinoLib. It is based on a closed library, we have no right to push it. 
 - AirUI. Our private library, won't be pushed.
