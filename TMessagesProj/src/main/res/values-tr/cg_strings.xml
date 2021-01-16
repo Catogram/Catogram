@@ -14,12 +14,12 @@
     <string name="AS_ForcePacman">Pacman animasyonuna zorla</string>
     <string name="AS_ForcePacmanSummary">sohbet arşivlerken</string>
     <string name="AS_Header_Privacy">Gizlilik</string>
-    <string name="AS_NoProxyPromo">Proxy sponsoru gösterme</string>
+    <string name="AS_NoProxyPromo">Proxy sponsorunu gösterme</string>
     <string name="AS_NoTyping">Yazıyor durumunu gönderme</string>
     <string name="AS_DisableFlagSecure">Gizli sohbetler ve ödemelerde ekran görüntülerini aktifleştir</string>
     <string name="AS_Hidden">Gizli</string>
-    <string name="AS_UserID">Kullanıcı ID</string>
-    <string name="AS_GroupID">Grup ID</string>
+    <string name="AS_UserID">Kullanıcı Kimliği</string>
+    <string name="AS_GroupID">Grup Kimliği</string>
     <string name="CatogramVersion">Catogram %1$s</string>
     <string name="AV_ThemeBased">Dinamik</string>
     <string name="AS_Header_Categories">Kategoriler</string>
@@ -75,7 +75,7 @@
     <string name="CG_ConfirmCalls">Çağrı yapmadan önce sor</string>
     <string name="CG_ABSearch">Araç çubuğunda arama butonu</string>
     <string name="CG_ABSearch_Desc">sohbet penceresinde</string>
-    <string name="CG_SmoothKbd">Pürüssüz klavye animasyonu</string>
+    <string name="CG_SmoothKbd">Pürüzsüz klavye animasyonu</string>
     <string name="CG_SmoothKbd_Desc">resmi Telegram uygulamasını kullanır</string>
     <string name="CG_Header_Profile">Profiller</string>
     <string name="CG_NewAvaHeader_NoEdgeTapping">Kenar dokunuşunu engelle</string>
@@ -133,7 +133,7 @@
     <string name="CG_Translate_PoweredBy">Güçlendiren</string>
     <string name="CG_ToSaved">Mesajı kaydet</string>
     <string name="CG_FABLeft">Sol tarafta \"Yeni sohbet\"</string>
-    <string name="CG_IntroMessage">**Resmi olmayan** Telegram uygulaması modifikasyonu.\n**Ek özellikler** ve **geliştirilmiş özelleştirme**ye sahip.</string>
+    <string name="CG_IntroMessage">**Resmi olmayan** Telegram uygulaması.\n**Ek özellikler** ve **geliştirilmiş özelleştirme**ye sahip.</string>
     <string name="CG_GooglePlay_Donate">Bağış Yap</string>
     <string name="CG_GooglePlay_Info">Bilgilendirme</string>
     <string name="CG_GooglePlay_InfoDesc">Tüm ödemeler Google Play ile gerçekleştirilecektir.</string>
@@ -206,6 +206,6 @@
     <string name="CG_Donate_Desc">Aşağıdan bir bağış yöntemi seçin \n1,5 Dolar veya 100 Rus rublesinden fazla bağış yaparsanız, hediye olarak size bir doğrulandı rozeti veya dolandırıcılık rozeti verilebilir. \nÖdeme açıklamasında kimliğinizi ve istediğiniz rozeti belirtin.</string>
     <string name="CG_Donate_Method">Yöntem seç</string>
     <string name="CG_Mono_Desc">5375414117420108 // kopyalamak için tıkla</string>
-    <string name="CG_Source">Source code</string>
-    <string name="CG_Crowdin">Help with translation</string>
+    <string name="CG_Source">Kaynak kodu</string>
+    <string name="CG_Crowdin">Çeviriye yardım et</string>
 </resources>
