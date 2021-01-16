@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram Preferences</string>
-    <string name="AS_Header_Appearance">Appearance</string>
+    <string name="AdvancedSettings">Catogram ayarları</string>
+    <string name="AS_Header_Appearance">Görünüm</string>
     <string name="AS_HideUserPhone">Telefon numarayı gizle</string>
     <string name="AS_HideUserPhoneSummary">in drawer and settings</string>
     <string name="AS_NoRounding">Disable number rounding</string>
