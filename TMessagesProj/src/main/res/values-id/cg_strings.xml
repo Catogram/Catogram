@@ -4,7 +4,7 @@
     <string name="AdvancedSettings">Pengaturan Catogram</string>
     <string name="AS_Header_Appearance">Tampilan</string>
     <string name="AS_HideUserPhone">Sembunyikan nomor telepon</string>
-    <string name="AS_HideUserPhoneSummary">in drawer and settings</string>
+    <string name="AS_HideUserPhoneSummary">Tampilan dan pengaturan</string>
     <string name="AS_NoRounding">Matikan pembulatan nomor</string>
     <string name="AS_NoRoundingSummary">1.2K -&gt; 1234</string>
     <string name="AS_Vibration">Matikan getaran</string>
