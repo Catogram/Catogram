@@ -114,7 +114,7 @@
     <string name="CG_ConfirmCalling_Action_Cancel">Отменить</string>
     <string name="AS_ForceIcons">Стиль иконок в шторке</string>
     <string name="AS_ForceNY_Drawer">Новый Год</string>
-    <string name="AS_ForceSV_Drawer">St. Valentine</string>
+    <string name="AS_ForceSV_Drawer">Св. Валентин</string>
     <string name="AS_ForceDefault_Drawer">По умолчанию</string>
     <string name="AS_KbdWebp">Отправлять фото из клавиатуры как стикеры</string>
     <string name="AS_KbdWebp_Desc">для SKeyboard, GBoard и других</string>
@@ -148,7 +148,7 @@
     <string name="CG_FlatChannels">Плоская лента каналов</string>
     <string name="CG_IgnoreBlacklist">Игнорировать пользователей в ЧС</string>
     <string name="CG_IgnoreBlacklist_Desc">их сообщения будут скрыты</string>
-    <string name="CG_KangSticker">Добавить в стикерпак</string>
+    <string name="CG_KangSticker">Добавить в стикер-пак</string>
     <string name="CG_KangSticker_Err_NoPack_Title">Создать стикерпак?</string>
     <string name="CG_KangSticker_Err_NoPack_Desc">Чтобы добавить стикеры, нужен активный стикерпак, но у вас его нет.\n\nВы хотите создать его?\nЭто автоматический процесс, и после него нужный стикер будет добавлен.</string>
     <string name="CG_KangSticker_Err_NoPack_Action">Создать</string>
@@ -208,5 +208,5 @@
     <string name="CG_Mono_Desc">5375414117420108 // нажмите, чтобы скопировать</string>
     <string name="CG_Source">Исходный код</string>
     <string name="CG_Crowdin">Помогите с переводом</string>
-    <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
+    <string name="CG_StickerSavedHint">Стикер сохранен в загрузки</string>
 </resources>
