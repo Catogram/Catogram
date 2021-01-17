@@ -18031,9 +18031,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                     icons.add(R.drawable.msg_gallery);
                                 }
                             }
-                            items.add("Clear from cache");
+                            items.add(LocaleController.getString("CG_ClearFromCache", R.string.CG_ClearFromCache));
                             options.add(994);
-                            icons.add(R.drawable.msg_delete);
+                            icons.add(R.drawable.clear_data_outline_28);
                         } else if (type == 5) {
                             items.add(LocaleController.getString("ApplyLocalizationFile", R.string.ApplyLocalizationFile));
                             options.add(5);
@@ -18064,9 +18064,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             items.add(LocaleController.getString("ShareFile", R.string.ShareFile));
                             options.add(6);
                             icons.add(R.drawable.msg_shareout);
-                            items.add("Clear from cache");
+                            items.add(LocaleController.getString("CG_ClearFromCache", R.string.CG_ClearFromCache));
                             options.add(994);
-                            icons.add(R.drawable.msg_delete);
+                            icons.add(R.drawable.clear_data_outline_28);
                         } else if (type == 7) {
                             items.add(LocaleController.getString("CG_SaveSticker", R.string.CG_SaveSticker));
                             options.add(993);
@@ -18216,9 +18216,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                 options.add(4);
                                 icons.add(R.drawable.msg_gallery);
                             }
-                            items.add("Clear from cache");
+                            items.add(LocaleController.getString("CG_ClearFromCache", R.string.CG_ClearFromCache));
                             options.add(994);
-                            icons.add(R.drawable.msg_delete);
+                            icons.add(R.drawable.clear_data_outline_28);
                         } else if (type == 5) {
                             items.add(LocaleController.getString("ApplyLocalizationFile", R.string.ApplyLocalizationFile));
                             options.add(5);
@@ -18792,6 +18792,18 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     selectedObjectToEditCaption = null;
                     return;
                 }
+                ChatMessageCell messageCell = null;
+                int count = chatListView.getChildCount();
+                for (int a = 0; a < count; a++) {
+                    View child = chatListView.getChildAt(a);
+                    if (child instanceof ChatMessageCell) {
+                        ChatMessageCell cell = (ChatMessageCell) child;
+                        if (cell.getMessageObject() == selectedObject) {
+                            messageCell = cell;
+                            break;
+                        }
+                    }
+                }
                 String fileName = FileLoader.getDocumentFileName(selectedObject.getDocument());
                 if (TextUtils.isEmpty(fileName)) {
                     fileName = selectedObject.getFileName();
@@ -18809,7 +18821,12 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 File file = new File(path);
                 boolean isDeleted = file.delete();
                 if (isDeleted) {
-                    Toast.makeText(getParentActivity(), "File deleted from cache successfully.", Toast.LENGTH_SHORT).show();
+                    selectedObject.mediaExists = false;
+                    if (messageCell != null) {
+                        messageCell.updateButtonState(false, true, false);
+                    }
+                    undoView.setInfoText(LocaleController.formatString("CG_ClearedFromCache", R.string.CG_ClearedFromCache));
+                    undoView.showWithAction(0, UndoView.ACTION_CACHE_WAS_CLEARED, null, null);
                 }
                 else {
                     Toast.makeText(getParentActivity(), "Looks like something went wrong.", Toast.LENGTH_SHORT).show();
