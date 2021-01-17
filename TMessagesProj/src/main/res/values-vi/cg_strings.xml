@@ -208,4 +208,5 @@
     <string name="CG_Mono_Desc">5375414117420108 // nhấn để sao chép</string>
     <string name="CG_Source">Mã nguồn</string>
     <string name="CG_Crowdin">Trợ giúp dịch thuật</string>
+    <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
 </resources>
