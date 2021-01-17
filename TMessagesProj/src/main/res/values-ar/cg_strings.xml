@@ -210,4 +210,5 @@
     <string name="CG_Mono_Desc">انقر للنسخ // 5375414117420108</string>
     <string name="CG_Source">مصدر البرنامج</string>
     <string name="CG_Crowdin">ساعد فالترجمة</string>
+    <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
 </resources>
