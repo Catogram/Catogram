@@ -196,7 +196,7 @@
     <string name="CG_StereoVoices">录制立体声</string>
     <string name="CG_StereoVoices_Desc">不能保证此功能在任何设备生效！</string>
     <string name="CG_VoiceEnhancements">语音增强</string>
-    <string name="CG_VoiceEnhancements_Desc">降噪与语音逼真化</string>
+    <string name="CG_VoiceEnhancements_Desc">开启降噪，同时使声音听起来更正常</string>
     <string name="CG_Voip_ForceEnhancements">增强 VoIP 语音</string>
     <string name="CG_Voip_ForceEnhancements_Desc">强制启用可能无法对服务器所生效的 AEC/NS</string>
     <string name="CG_AudioFocus">录制时暂停音乐播放</string>
