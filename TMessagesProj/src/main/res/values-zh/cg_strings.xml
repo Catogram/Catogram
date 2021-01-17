@@ -24,7 +24,7 @@
     <string name="AV_ThemeBased">动态</string>
     <string name="AS_Header_Categories">Catogram 客制化</string>
     <string name="AS_Header_About">关于 Catogram</string>
-    <string name="CG_AboutDesc">\"An experimental Telegram app modification.\"\n“一个实验性的 Telegram 修改版。”\n汉化版本: GitHub 1.0.1 Hey!\n汉化作者：TG@Fengzh 汉化团队 X 其他翻译贡献者 X YOU</string>
+    <string name="CG_AboutDesc">\"An experimental Telegram app modification.\"\n“一个实验性的 Telegram 修改版。”\n汉化版本: RC-1.0.5.4 Kana （Base GitHub 1.0.1）\n汉化作者：TG@Fengzh 汉化团队 X 其他翻译贡献者 X YOU</string>
     <string name="CG_Donate">官方捐赠通道</string>
     <string name="CG_DonatDesc">给我买台 PS5！（误）</string>
     <string name="CG_ToChannel">官方通知频道</string>
