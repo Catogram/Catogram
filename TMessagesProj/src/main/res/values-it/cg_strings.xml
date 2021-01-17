@@ -208,5 +208,5 @@
     <string name="CG_Mono_Desc">5375414117420108 // clicca per copiare</string>
     <string name="CG_Source">Codice sorgente</string>
     <string name="CG_Crowdin">Aiuto con le traduzioni</string>
-    <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
+    <string name="CG_StickerSavedHint">Sticker salvato nei download</string>
 </resources>
