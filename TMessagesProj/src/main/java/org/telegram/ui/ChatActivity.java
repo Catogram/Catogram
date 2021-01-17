@@ -1041,6 +1041,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int text_underline = 56;
 
     private final static int search = 40;
+    private final static int to_beginning = 41;
+    private final static int to_linked = 42;
 
     private final static int id_chat_compose_panel = 1000;
 
@@ -1938,6 +1940,15 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         chatActivityEnterView.getEditField().setSelectionOverride(editTextStart, editTextEnd);
                         chatActivityEnterView.getEditField().makeSelectedRegular();
                     }
+                } else if (id == to_beginning) {
+                    jumpToDate();
+                } else if (id == to_linked) {
+                    Bundle args = new Bundle();
+                    args.putInt("chat_id", chatInfo.linked_chat_id);
+                    if (!getMessagesController().checkCanOpenChat(args, ChatActivity.this)) {
+                        return;
+                    }
+                    presentFragment(new ChatActivity(args));
                 }
             }
         });
@@ -2126,6 +2137,14 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
             if (!CatogramConfig.INSTANCE.getSearchInActionbar() && searchItem != null) {
                 headerItem.addSubItem(search, R.drawable.msg_search, LocaleController.getString("Search", R.string.Search));
+            }
+
+            if (currentChat != null && chatInfo.linked_chat_id != 0) {
+                headerItem.addSubItem(to_linked, R.drawable.link_circle_outline_28, LocaleController.getString("CG_ToLinkedChat", R.string.CG_ToLinkedChat));
+            }
+
+            if (currentChat != null) {
+                headerItem.addSubItem(to_beginning, R.drawable.arrow_up_outline_28, LocaleController.getString("CG_ToBeginning", R.string.CG_ToBeginning));
             }
 
             if (currentChat != null && !currentChat.creator) {
@@ -7699,6 +7718,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
         }
         return groupedMessages;
+    }
+
+    private void jumpToDate() {
+        jumpToDate(2);
     }
 
     private void jumpToDate(int date) {
