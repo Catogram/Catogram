@@ -206,6 +206,6 @@
     <string name="CG_Donate_Desc">在下方选择一个捐赠渠道\n如果您支付 &gt;= 1.5 美元或 100 卢布，您有可能获得官方标记（蓝色小勾勾）或骗子标记（ spam 标记，参见 @trump ）作为礼物。\n请在付款时备注您的 ID 和想要的标记。\n（译者注：应该是在 Catogram 内部进行标记，并不会影响您的账号本体功能，使用其他 Telegram 亦不会显示（我瞎猜的））</string>
     <string name="CG_Donate_Method">选择方式</string>
     <string name="CG_Mono_Desc">5375414117420108 // 点按以复制</string>
-    <string name="CG_Source">源码</string>
-    <string name="CG_Crowdin">参与翻译工作</string>
+    <string name="CG_Source">查看应用源码</string>
+    <string name="CG_Crowdin">改进应用翻译</string>
 </resources>
