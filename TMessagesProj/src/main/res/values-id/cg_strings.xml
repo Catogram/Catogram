@@ -208,4 +208,5 @@
     <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
     <string name="CG_Source">Source code</string>
     <string name="CG_Crowdin">Help with translation</string>
+    <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
 </resources>
