@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">الاعدادات الإضافية 
+    <string name="AdvancedSettings">الإعدادات الإضافية 
 من iTaysonLab</string>
     <string name="AS_Header_Appearance">المظهر</string>
-    <string name="AS_HideUserPhone">اخفاء رقم الهاتف</string>
+    <string name="AS_HideUserPhone">إخفاء رقم الهاتف</string>
     <string name="AS_HideUserPhoneSummary">في الدرج والإعدادات</string>
-    <string name="AS_NoRounding">ايقاف تقريب العدد</string>
-    <string name="AS_NoRoundingSummary">١.٢ ألف - ١٢٣٤</string>
-    <string name="AS_Vibration">ايقاف الاهتزاز</string>
+    <string name="AS_NoRounding">إيقاف تقريب العدد</string>
+    <string name="AS_NoRoundingSummary">١.٢ ألف &gt;- ١٢٣٤</string>
+    <string name="AS_Vibration">إيقاف الاهتزاز</string>
     <string name="AS_Header_Fun">أشياء مضحكة</string>
-    <string name="AS_ForceNY">اجبار مظهر السنة الجديدة</string>
+    <string name="AS_ForceNY">إجبار مظهر السنة الجديدة</string>
     <string name="AS_ForceNYSummary">اعد تشغيل التطبيق لتطبيق الشكل</string>
     <string name="AS_ForcePacman">اجبار شكل تحرك باكمان</string>
     <string name="AS_ForcePacmanSummary">عند وضع الدردشة فالأرشيف</string>
@@ -31,13 +31,13 @@
     <string name="CG_ToChannel">افتح القناة الرسمية</string>
     <string name="CG_ToChat">فتح الدردشة الرسمية</string>
     <string name="AS_SysEmoji">استخدم تعابير النظام</string>
-    <string name="AS_SysEmojiDesc">يمكن ان يحدث اخطاء، كن منتبها</string>
+    <string name="AS_SysEmojiDesc">يمكن أن يحدث اخطاء، كن منتبها</string>
     <string name="AS_DrawerAvatar">الصورة الشخصية كخلفية راسية</string>
     <string name="AS_DrawerBlur">اضفاء ضبايية على خلفية الرأسية</string>
     <string name="AS_DrawerDarken">تعتيم راسية الخلفية</string>
     <string name="AS_DrawerCategory">درج</string>
     <string name="AS_FlatSB">شريط اشعارات مسطح</string>
-    <string name="AS_FlatAB">عطل ظل شريط الادوات</string>
+    <string name="AS_FlatAB">عطل ظل شريط الأدوات</string>
     <string name="AS_FlatSB_Desc">فقط لنظام تشغيل اندرويد 6+</string>
     <string name="AS_RedesignCategory">اعادة تصميم</string>
     <string name="CG_Filters_Header">تنقية مربع الحوار</string>
@@ -49,10 +49,10 @@
     <string name="CG_Filters_All">جميع المحادثات</string>
     <string name="AS_Filters_Header">تنقية الدردشة</string>
     <string name="AS_Filters_Count">اظهر عدد الدردشة في الاختيار</string>
-    <string name="AS_Filters_Count_Desc">بدلا من عدد السائل غير المقروئة</string>
+    <string name="AS_Filters_Count_Desc">بدلا من عدد السائل غير المقروءة</string>
     <string name="AS_Filters_THint">اظهر تلميح لقائمة التنقية</string>
     <string name="AS_Filters_THintDesc">العنوان في شريط الادوات</string>
-    <string name="CG_Filters_GenericHint">الرجاء العلم ان هذا الخيار سوف يتم حفظه بعد اعادة تشغيل التطبيق.</string>
+    <string name="CG_Filters_GenericHint">الرجاء العلم أن هذا الخيار سوف يتم حفظه بعد إعادة تشغيل التطبيق.</string>
     <string name="CG_Filters_ToolbarHint">اضغط مطولا لتغيير التنقية</string>
     <string name="CG_Filters_AlsoFABHint">يمكنك ايضا تغيير التنقية بالضغط المستمر على الزر العائم\"اكتب\".</string>
     <string name="AS_Category_Security">الحماية</string>
@@ -208,6 +208,6 @@
 روبل روسي، قد يتم إعطاؤك علامة تحقق او علامة احتيال كهدية. حدد الID الخاص بك على تيليجرام في التعليق على الدفع وقم بتحديد العلامة التي ترغب بها.</string>
     <string name="CG_Donate_Method">اختيار الطريقة</string>
     <string name="CG_Mono_Desc">انقر للنسخ // 5375414117420108</string>
-    <string name="CG_Source">Source code</string>
-    <string name="CG_Crowdin">Help with translation</string>
+    <string name="CG_Source">مصدر البرنامج</string>
+    <string name="CG_Crowdin">ساعد فالترجمة</string>
 </resources>
