@@ -18763,6 +18763,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     MediaController.saveFile(stickerPng.getSecond(), getParentActivity(), 2, stickerPng.getFirst(), "image/png");
                     File tmpStickerPng = new File(stickerPng.getFirst());
                     tmpStickerPng.delete();
+                    undoView.setInfoText(LocaleController.formatString("CG_StickerSavedHint", R.string.CG_StickerSavedHint));
+                    undoView.showWithAction(0, UndoView.ACTION_CACHE_WAS_CLEARED, null, null);
                 } catch (Exception exc) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                     builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
