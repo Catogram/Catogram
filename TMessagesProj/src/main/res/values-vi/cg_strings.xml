@@ -183,11 +183,11 @@
     <string name="CG_SaveSticker">Lưu nhãn dán</string>
     <string name="CG_FailedToSaveSticker">Lưu nhãn dán thất bại. Nhãn dán có thể chưa được tải.</string>
     <string name="AS_Header_DoubleBottom">Hai Đáy</string>
-    <string name="CG_DB_Accounts">Available Accounts</string>
-    <string name="CG_DB_AccountsHint">Double Bottom allows you to set a passcode for a different account.\n\nTrying to set a password to a configured account will replace the older one.</string>
-    <string name="CG_DB_Prefs">Additional Preferences</string>
-    <string name="CG_DB_Prefs_Fingerprint">Account on fingerprint unlock</string>
-    <string name="CG_DB_Prefs_Hide">Hide configured accounts in switcher</string>
+    <string name="CG_DB_Accounts">Tài khoản sẵn có</string>
+    <string name="CG_DB_AccountsHint">Hai Đáy cho phép bạn đặt mật khẩu cho một tài khoản khác.\n\nViệc đặt mật khẩu cho một tài khoản đã được thiết lập sẽ thay thế mật khẩu cũ.</string>
+    <string name="CG_DB_Prefs">Tuỳ chỉnh bổ sung</string>
+    <string name="CG_DB_Prefs_Fingerprint">Mở khoá tài khoản bằng vân tay</string>
+    <string name="CG_DB_Prefs_Hide">Ẩn tài khoản đã thiết lập ở khu chuyển đổi</string>
     <string name="CG_DB_Prefs_NotSet">Chưa đặt</string>
     <string name="CG_ViewAdminsShortcut">Xem quản trị viên</string>
     <string name="AS_Header_Record">Phương tiện</string>
@@ -203,9 +203,9 @@
     <string name="CG_AudioFocus_Desc">Nếu tắt thì nhạc sẽ yên lặng hơn, nhưng sẽ không tắt</string>
     <string name="CG_Proximity">Bật hành động cảm biến</string>
     <string name="CG_Proximity_Desc">Bằng việc tắt nó đi bạn sẽ loại bỏ được việc màn hình tắt gây khó chịu khi nghe tin nhắn thoại (khởi động lại để áp dụng)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you may be given a verification checkmark or a scam mark as a gift.\nSpecify your ID in the comment to the payment and the desired mark.</string>
-    <string name="CG_Donate_Method">Choose method</string>
-    <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
-    <string name="CG_Source">Source code</string>
-    <string name="CG_Crowdin">Help with translation</string>
+    <string name="CG_Donate_Desc">Chọn phương thức donate bên dưới\nNếu bạn donate &gt;= hơn $1.5 hay 100 rúp Nga, bạn có thể được phần quà là dấu tick đã xác minh hoặc dấu scam.\nChỉ rõ ID ở phần nhận xét của thanh toán và loại dấu hiệu mong muốn.</string>
+    <string name="CG_Donate_Method">Chọn phương thức</string>
+    <string name="CG_Mono_Desc">5375414117420108 // nhấn để sao chép</string>
+    <string name="CG_Source">Mã nguồn</string>
+    <string name="CG_Crowdin">Trợ giúp dịch thuật</string>
 </resources>
