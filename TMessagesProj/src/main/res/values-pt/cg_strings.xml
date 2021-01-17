@@ -209,4 +209,8 @@
     <string name="CG_Source">Código fonte</string>
     <string name="CG_Crowdin">Ajude com a tradução</string>
     <string name="CG_StickerSavedHint">Sticker salvo em downloads</string>
+    <string name="CG_CacheClearedHint">Arquivo limpo do cache</string>
+    <string name="CG_FailedToClear">Falha ao limpar do cache</string>
+    <string name="CG_ClearFromCache">Limpar do cache</string>
+    <string name="CG_ClearedFromCache">Limpado do cache</string>
 </resources>
