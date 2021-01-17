@@ -185,7 +185,6 @@ public class Browser {
         if (tryTelegraph) {
             try {
                 String host = uri.getHost().toLowerCase();
-                if (isTelegraphUrl(host, true) || uri.toString().toLowerCase().contains("telegram.org/faq")) {
                     final AlertDialog[] progressDialog = new AlertDialog[]{new AlertDialog(context, 3)};
 
                     Uri finalUri = uri;
@@ -223,7 +222,6 @@ public class Browser {
                         }
                     }, 1000);
                     return;
-                }
             } catch (Exception ignore) {
 
             }
