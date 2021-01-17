@@ -208,4 +208,6 @@
     <string name="CG_Mono_Desc">5375414117420108 // нажмите, чтобы скопировать</string>
     <string name="CG_Source">Исходный код</string>
     <string name="CG_Crowdin">Помогите с переводом</string>
+    <string name="CG_ToBeginning">В начало</string>
+    <string name="CG_ToLinkedChat">Привязанный чат</string>
 </resources>
