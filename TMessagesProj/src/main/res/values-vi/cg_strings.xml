@@ -209,4 +209,8 @@
     <string name="CG_Source">Mã nguồn</string>
     <string name="CG_Crowdin">Trợ giúp dịch thuật</string>
     <string name="CG_StickerSavedHint">Đã lưu nhãn dán vào thư mục tải xuống</string>
+    <string name="CG_CacheClearedHint">File cleared from cache</string>
+    <string name="CG_FailedToClear">Failed to clear from cache</string>
+    <string name="CG_ClearFromCache">Clear from cache</string>
+    <string name="CG_ClearedFromCache">Cleared from cache</string>
 </resources>
