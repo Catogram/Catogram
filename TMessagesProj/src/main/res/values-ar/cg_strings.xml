@@ -211,4 +211,8 @@
     <string name="CG_Source">مصدر البرنامج</string>
     <string name="CG_Crowdin">ساعد فالترجمة</string>
     <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
+    <string name="CG_CacheClearedHint">File cleared from cache</string>
+    <string name="CG_FailedToClear">Failed to clear from cache</string>
+    <string name="CG_ClearFromCache">Clear from cache</string>
+    <string name="CG_ClearedFromCache">Cleared from cache</string>
 </resources>
