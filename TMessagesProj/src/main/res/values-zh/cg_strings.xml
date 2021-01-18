@@ -198,7 +198,7 @@
     <string name="CG_VoiceEnhancements">语音增强</string>
     <string name="CG_VoiceEnhancements_Desc">开启降噪，同时使声音听起来更正常</string>
     <string name="CG_Voip_ForceEnhancements">增强 VoIP 语音</string>
-    <string name="CG_Voip_ForceEnhancements_Desc">强制启用 AEC/NS ，哪怕服务器并不支持</string>
+    <string name="CG_Voip_ForceEnhancements_Desc">强制启用 AEC/NS ，即使服务器并不支持</string>
     <string name="CG_AudioFocus">播放语音或视频时暂停后台音乐播放</string>
     <string name="CG_AudioFocus_Desc">关闭该选项时，播放语音或视频时音乐会减小音量，但并不会停止</string>
     <string name="CG_Proximity">启用距离传感器</string>
@@ -213,6 +213,6 @@
     <string name="CG_FailedToClear">清除失败</string>
     <string name="CG_ClearFromCache">清除缓存</string>
     <string name="CG_ClearedFromCache">已清除缓存</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
+    <string name="CG_ToBeginning">回到开头</string>
+    <string name="CG_ToLinkedChat">连接的群组</string>
 </resources>
