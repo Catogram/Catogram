@@ -210,11 +210,11 @@
     <string name="CG_Mono_Desc">انقر للنسخ // 5375414117420108</string>
     <string name="CG_Source">مصدر البرنامج</string>
     <string name="CG_Crowdin">ساعد فالترجمة</string>
-    <string name="CG_StickerSavedHint">Sticker saved to downloads</string>
+    <string name="CG_StickerSavedHint">تم حفظ الملصق في التنزيلات</string>
     <string name="CG_CacheClearedHint">File cleared from cache</string>
     <string name="CG_FailedToClear">Failed to clear from cache</string>
-    <string name="CG_ClearFromCache">Clear from cache</string>
-    <string name="CG_ClearedFromCache">Cleared from cache</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
+    <string name="CG_ClearFromCache">المسح من ذاكرة تيليجرام المؤقتة</string>
+    <string name="CG_ClearedFromCache">تم المسح</string>
+    <string name="CG_ToBeginning">انتقل إلى بداية الدردشة</string>
+    <string name="CG_ToLinkedChat">الدردشة التي تم ربطها</string>
 </resources>
