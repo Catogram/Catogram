@@ -211,8 +211,8 @@
     <string name="CG_Source">مصدر البرنامج</string>
     <string name="CG_Crowdin">ساعد فالترجمة</string>
     <string name="CG_StickerSavedHint">تم حفظ الملصق في التنزيلات</string>
-    <string name="CG_CacheClearedHint">File cleared from cache</string>
-    <string name="CG_FailedToClear">Failed to clear from cache</string>
+    <string name="CG_CacheClearedHint">تم مسح الملف من الذاكرة المؤقتة</string>
+    <string name="CG_FailedToClear">فشل المسح من ذاكرة التخزين</string>
     <string name="CG_ClearFromCache">المسح من ذاكرة تيليجرام المؤقتة</string>
     <string name="CG_ClearedFromCache">تم المسح</string>
     <string name="CG_ToBeginning">انتقل إلى بداية الدردشة</string>
