@@ -101,12 +101,12 @@
     <string name="CG_MessageMenuOption_Default">По умолчанию</string>
     <string name="CG_NewDrawer">Использовать новую шторку</string>
     <string name="CG_NewDrawer_Desc">несовместимо с мультиаккаунтом</string>
-    <string name="CG_MessageButton_Override">Override message action button</string>
-    <string name="CG_MessageButton_Override_Desc">enables it on own messages</string>
-    <string name="CG_MessageButton_Out">Outgoing messages</string>
-    <string name="CG_MessageButton_In">Incoming messages</string>
-    <string name="CG_MessageButton_Option_Share">Share [default]</string>
-    <string name="CG_MessageButton_Option_Edit">Edit [your only]</string>
+    <string name="CG_MessageButton_Override">Кнопка замены действия сообщение</string>
+    <string name="CG_MessageButton_Override_Desc">позволяет это сделать в собственных сообщениях</string>
+    <string name="CG_MessageButton_Out">Исходящие сообщения</string>
+    <string name="CG_MessageButton_In">Входящие сообщения</string>
+    <string name="CG_MessageButton_Option_Share">Поделиться [default]</string>
+    <string name="CG_MessageButton_Option_Edit">Изменить [персонально]</string>
     <string name="CG_MessageButton_Option_Saved">В облако</string>
     <string name="CG_ConfirmCalling_Header">Подтвердить звонок</string>
     <string name="CG_ConfirmCalling_Question">Позвонить %s?</string>
@@ -194,7 +194,7 @@
     <string name="CG_HqRoundVideos">Высокое качество круглых видео</string>
     <string name="CG_HqRoundVideosAudio">Высокое качество звука круглых видео</string>
     <string name="CG_StereoVoices">Записывать аудиосообщения в стерео</string>
-    <string name="CG_StereoVoices_Desc">может неподдерживатся вашим устройством!</string>
+    <string name="CG_StereoVoices_Desc">может не поддерживаться вашим устройством!</string>
     <string name="CG_VoiceEnhancements">Улучшения звука</string>
     <string name="CG_VoiceEnhancements_Desc">включает нормализацию голоса и подавление шума</string>
     <string name="CG_Voip_ForceEnhancements">Форсировать улучшения звука при VoIP</string>
@@ -213,6 +213,6 @@
     <string name="CG_FailedToClear">Ошибка при удалении из кеша</string>
     <string name="CG_ClearFromCache">Удалить из кеша</string>
     <string name="CG_ClearedFromCache">Удалено из кеша</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
+    <string name="CG_ToBeginning">В начало</string>
+    <string name="CG_ToLinkedChat">Связанный чат</string>
 </resources>
