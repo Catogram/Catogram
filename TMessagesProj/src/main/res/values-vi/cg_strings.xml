@@ -213,6 +213,4 @@
     <string name="CG_FailedToClear">Xoá khỏi cache thất bại</string>
     <string name="CG_ClearFromCache">Xoá khỏi cache</string>
     <string name="CG_ClearedFromCache">Đã xoá khỏi cache</string>
-    <string name="CG_ToBeginning">Về đầu</string>
-    <string name="CG_ToLinkedChat">Cuộc trò chuyện đã liên kết</string>
 </resources>
