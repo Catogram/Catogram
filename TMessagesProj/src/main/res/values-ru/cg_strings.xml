@@ -164,7 +164,7 @@
     <string name="CG_ArchiveOnPull">Архив при раскрытии</string>
     <string name="CG_ArchiveOnPull_Desc">Автоматически открывать архив при раскрытии в главном меню</string>
     <string name="CG_IconReplacements">Замена иконок</string>
-    <string name="CG_IconReplacement_VKUI">Иконки VKUI</string>
+    <string name="CG_IconReplacement_VKUI">VKUI иконки</string>
     <string name="CG_IconReplacement_Default">Стандартная</string>
     <string name="CG_HideMsgIfUserBlocked">Скрывать сообщения если пользователь заблокирован</string>
     <string name="CG_OldNotification">Стандартная иконка уведомлений</string>
