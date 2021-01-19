@@ -213,6 +213,4 @@
     <string name="CG_FailedToClear">Impossibile cancellare dalle cache</string>
     <string name="CG_ClearFromCache">Cancella dalle cache</string>
     <string name="CG_ClearedFromCache">Cancellato dalle cache</string>
-    <string name="CG_ToBeginning">Per Iniziare</string>
-    <string name="CG_ToLinkedChat">Chat Collegata</string>
 </resources>
