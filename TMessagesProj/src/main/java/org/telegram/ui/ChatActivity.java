@@ -18057,7 +18057,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             }
                             items.add(LocaleController.getString("CG_ClearFromCache", R.string.CG_ClearFromCache));
                             options.add(994);
-                            icons.add(R.drawable.clear_data_outline_28);
+                            icons.add(R.drawable.clear_cache);
                         } else if (type == 5) {
                             items.add(LocaleController.getString("ApplyLocalizationFile", R.string.ApplyLocalizationFile));
                             options.add(5);
@@ -18090,7 +18090,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             icons.add(R.drawable.msg_shareout);
                             items.add(LocaleController.getString("CG_ClearFromCache", R.string.CG_ClearFromCache));
                             options.add(994);
-                            icons.add(R.drawable.clear_data_outline_28);
+                            icons.add(R.drawable.clear_cache);
                         } else if (type == 7) {
                             items.add(LocaleController.getString("CG_SaveSticker", R.string.CG_SaveSticker));
                             options.add(993);
@@ -18242,7 +18242,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             }
                             items.add(LocaleController.getString("CG_ClearFromCache", R.string.CG_ClearFromCache));
                             options.add(994);
-                            icons.add(R.drawable.clear_data_outline_28);
+                            icons.add(R.drawable.clear_cache);
                         } else if (type == 5) {
                             items.add(LocaleController.getString("ApplyLocalizationFile", R.string.ApplyLocalizationFile));
                             options.add(5);
