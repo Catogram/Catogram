@@ -213,6 +213,4 @@
     <string name="CG_FailedToClear">Помилка при видаленні з кеша</string>
     <string name="CG_ClearFromCache">Видалити з кеша</string>
     <string name="CG_ClearedFromCache">Видалено з кеша</string>
-    <string name="CG_ToBeginning">До початку</string>
-    <string name="CG_ToLinkedChat">Прив\'язаний чат</string>
 </resources>
