@@ -208,4 +208,11 @@
     <string name="CG_Mono_Desc">5375414117420108 // nhấn để sao chép</string>
     <string name="CG_Source">Mã nguồn</string>
     <string name="CG_Crowdin">Trợ giúp dịch thuật</string>
+    <string name="CG_StickerSavedHint">Đã lưu nhãn dán vào thư mục tải xuống</string>
+    <string name="CG_CacheClearedHint">Đã xoá tệp khỏi cache</string>
+    <string name="CG_FailedToClear">Xoá khỏi cache thất bại</string>
+    <string name="CG_ClearFromCache">Xoá khỏi cache</string>
+    <string name="CG_ClearedFromCache">Đã xoá khỏi cache</string>
+    <string name="CG_ToBeginning">Về đầu</string>
+    <string name="CG_ToLinkedChat">Cuộc trò chuyện đã liên kết</string>
 </resources>
