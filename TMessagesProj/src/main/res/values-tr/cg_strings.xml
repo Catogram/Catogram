@@ -213,6 +213,4 @@
     <string name="CG_FailedToClear">Failed to clear from cache</string>
     <string name="CG_ClearFromCache">Clear from cache</string>
     <string name="CG_ClearedFromCache">Cleared from cache</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Bağlantılı sik</string>
 </resources>
