@@ -209,8 +209,8 @@
     <string name="CG_Source">Quell-Code</string>
     <string name="CG_Crowdin">Hilf bei Übersetzungen mit</string>
     <string name="CG_StickerSavedHint">Sticker in Downloads gespeichert</string>
-    <string name="CG_CacheClearedHint">File cleared from cache</string>
-    <string name="CG_FailedToClear">Failed to clear from cache</string>
-    <string name="CG_ClearFromCache">Clear from cache</string>
-    <string name="CG_ClearedFromCache">Cleared from cache</string>
+    <string name="CG_CacheClearedHint">Datei aus dem Cache gelöscht</string>
+    <string name="CG_FailedToClear">Fehler beim Löschen von Cache</string>
+    <string name="CG_ClearFromCache">Lösche aus dem Cache</string>
+    <string name="CG_ClearedFromCache">Aus dem Cache gelöscht</string>
 </resources>
