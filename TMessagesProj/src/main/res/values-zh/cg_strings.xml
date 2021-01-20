@@ -126,7 +126,7 @@
     <string name="AS_ForwardNoAuthorship_Desc">这会让您所进行的所有转发均不显示原作者</string>
     <string name="CG_ForwardMsgDate">显示被转发原消息所发送的时间</string>
     <string name="CG_Translate">翻译</string>
-    <string name="CG_Translator">翻译者</string>
+    <string name="CG_Translator">翻译</string>
     <string name="CG_Translate_Orig">原文</string>
     <string name="CG_Translate_Translated">译文</string>
     <string name="CG_Translate_Language">自动检测</string>
