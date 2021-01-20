@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram 高级选项</string>
+    <string name="AdvancedSettings">高级设定</string>
     <string name="AS_Header_Appearance">外观相关</string>
     <string name="AS_HideUserPhone">隐藏手机号码</string>
     <string name="AS_HideUserPhoneSummary">在侧边栏与设置页</string>
@@ -12,7 +12,7 @@
     <string name="AS_ForceNY">新年永不停</string>
     <string name="AS_ForceNYSummary">设定每天都是新年，启用选项后请重启客户端</string>
     <string name="AS_ForcePacman">一直吃豆人</string>
-    <string name="AS_ForcePacmanSummary">仅在归档聊天时生效</string>
+    <string name="AS_ForcePacmanSummary">只在归档聊天生效</string>
     <string name="AS_Header_Privacy">保护您的隐私</string>
     <string name="AS_NoProxyPromo">不显示代理赞助频道</string>
     <string name="AS_NoTyping">不要发送输入状况</string>
@@ -24,21 +24,21 @@
     <string name="AV_ThemeBased">动态</string>
     <string name="AS_Header_Categories">Catogram 客制化</string>
     <string name="AS_Header_About">关于 Catogram</string>
-    <string name="CG_AboutDesc">一个实验性的 Telegram 修改版客户端。</string>
+    <string name="CG_AboutDesc">\"An experimental Telegram app modification.\"\n“一个实验性的 Telegram 修改版。”\n汉化版本: RC-1.0.5.4 Kana （Base GitHub 1.0.1）\n汉化作者：TG@Fengzh 汉化团队 X 其他翻译贡献者 X YOU</string>
     <string name="CG_Donate">官方捐赠通道</string>
-    <string name="CG_DonatDesc">给我买台 PS5！（误）</string>
+    <string name="CG_DonatDesc">使应用变得更好</string>
     <string name="CG_ToChannel">官方通知频道</string>
     <string name="CG_ToChat">官方讨论群组</string>
     <string name="AS_SysEmoji">使用系统 Emoji</string>
     <string name="AS_SysEmojiDesc">可能会有问题，在使用时请注意</string>
-    <string name="AS_DrawerAvatar">使用头像作为侧栏背景</string>
+    <string name="AS_DrawerAvatar">头像背景</string>
     <string name="AS_DrawerBlur">背景模糊</string>
     <string name="AS_DrawerDarken">暗色遮罩</string>
     <string name="AS_DrawerCategory">抽屉</string>
     <string name="AS_FlatSB">沉浸/透明系统状态栏</string>
-    <string name="AS_FlatAB">关闭工具栏阴影</string>
+    <string name="AS_FlatAB">无工具栏阴影</string>
     <string name="AS_FlatSB_Desc">对 搭载 Android 6 及以上的设备生效</string>
-    <string name="AS_RedesignCategory">焕然一新</string>
+    <string name="AS_RedesignCategory">设计重置</string>
     <string name="CG_Filters_Header">对话过滤器</string>
     <string name="CG_Filters_PM">私人消息</string>
     <string name="CG_Filters_Secret">私密对话</string>
@@ -107,7 +107,7 @@
     <string name="CG_MessageButton_In">传入的消息</string>
     <string name="CG_MessageButton_Option_Share">分享 [default]</string>
     <string name="CG_MessageButton_Option_Edit">编辑 [仅对自己有效]</string>
-    <string name="CG_MessageButton_Option_Saved">上 云</string>
+    <string name="CG_MessageButton_Option_Saved">上传云端</string>
     <string name="CG_ConfirmCalling_Header">确认通话</string>
     <string name="CG_ConfirmCalling_Question">向 %s 拨打电话吗?</string>
     <string name="CG_ConfirmCalling_Action">确认</string>
@@ -120,8 +120,8 @@
     <string name="AS_KbdWebp_Desc">像是 SKeyboard, GBoard 或其他输入法</string>
     <string name="AS_ChangeIcon">应用图标</string>
     <string name="AS_ChangeIcon_Old">默认</string>
-    <string name="AS_ChangeIcon_AltBlue">全新的蓝色 (来自 @RKBDI)</string>
-    <string name="AS_ChangeIcon_AltOrange">全新的橙色 (来自 @RKBDI)</string>
+    <string name="AS_ChangeIcon_AltBlue">New Blue (by @RKBDI)</string>
+    <string name="AS_ChangeIcon_AltOrange">New Orange (by @RKBDI)</string>
     <string name="AS_ForwardNoAuthorship">无来源转发 [beta]</string>
     <string name="AS_ForwardNoAuthorship_Desc">这会让您所进行的所有转发均不显示原作者</string>
     <string name="CG_ForwardMsgDate">显示被转发原消息所发送的时间</string>
@@ -196,7 +196,7 @@
     <string name="CG_StereoVoices">录制立体声</string>
     <string name="CG_StereoVoices_Desc">不能保证此功能在任何设备生效！</string>
     <string name="CG_VoiceEnhancements">语音增强</string>
-    <string name="CG_VoiceEnhancements_Desc">开启降噪，同时使声音听起来更正常</string>
+    <string name="CG_VoiceEnhancements_Desc">在语音时一并启用噪声抑制</string>
     <string name="CG_Voip_ForceEnhancements">增强 VoIP 语音</string>
     <string name="CG_Voip_ForceEnhancements_Desc">强制启用 AEC/NS ，即使服务器并不支持</string>
     <string name="CG_AudioFocus">播放语音或视频时暂停后台音乐播放</string>
