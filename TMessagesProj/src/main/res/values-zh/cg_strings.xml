@@ -120,8 +120,8 @@
     <string name="AS_KbdWebp_Desc">像是 SKeyboard, GBoard 或其他输入法</string>
     <string name="AS_ChangeIcon">应用图标</string>
     <string name="AS_ChangeIcon_Old">默认</string>
-    <string name="AS_ChangeIcon_AltBlue">New Blue (by @RKBDI)</string>
-    <string name="AS_ChangeIcon_AltOrange">New Orange (by @RKBDI)</string>
+    <string name="AS_ChangeIcon_AltBlue">蓝色图标 (来自 @RKBDI)</string>
+    <string name="AS_ChangeIcon_AltOrange">橙色图标 (来自 @RKBDI)</string>
     <string name="AS_ForwardNoAuthorship">无来源转发 [beta]</string>
     <string name="AS_ForwardNoAuthorship_Desc">这会让您所进行的所有转发均不显示原作者</string>
     <string name="CG_ForwardMsgDate">显示被转发原消息所发送的时间</string>
@@ -135,7 +135,7 @@
     <string name="CG_FABLeft">将 \"新对话\" 按钮反方向放置</string>
     <string name="CG_IntroMessage">一个 **非官方的** Telegram 客户端。\n拥有 **一些高级选项** 和 **更本土化的体验**。</string>
     <string name="CG_GooglePlay_Donate">官方捐赠通道</string>
-    <string name="CG_GooglePlay_Info">信息</string>
+    <string name="CG_GooglePlay_Info">提示</string>
     <string name="CG_GooglePlay_InfoDesc">需要 Google Play 服务才能完成本次支付流程</string>
     <string name="CG_GooglePlay_ChooseAmount">选择一个项目以继续</string>
     <string name="CG_GooglePlay_Thanks">谢谢您!</string>
@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">关闭该选项时，播放语音或视频时音乐会减小音量，但并不会停止</string>
     <string name="CG_Proximity">启用距离传感器</string>
     <string name="CG_Proximity_Desc">关闭该选项后，在聆听语音消息时将不再使用距离传感器判断是否应当关闭屏幕。若您聆听语音时遭遇烦人的自动息屏，请关闭该项。 (重启生效)</string>
-    <string name="CG_Donate_Desc">在下方选择一个捐赠渠道\n如果您支付 &gt;= 1.5 美元或 100 卢布，您有可能获得官方标记（蓝色小勾勾）或骗子标记（ spam 标记，参见 @trump ）作为礼物。\n请在付款时备注您的 ID 和想要的标记。\n（译者注：应该是在 Catogram 内部进行标记，并不会影响您的账号本体功能，使用其他 Telegram 亦不会显示（我瞎猜的））</string>
+    <string name="CG_Donate_Desc">请在下方选择一个捐赠渠道\n如果您支付 &gt;= 1.5 美元或 100 卢布，您有可能获得官方标记（蓝色小勾勾）或骗子标记（ spam 标记，参见 @trump ）作为礼物。\n请在付款时备注您的 ID 和想要的标记。\n（译者注：应该是在 Catogram 内部进行标记，并不会影响您的账号本体功能，使用其他 Telegram 第三方版本亦不会显示（我猜的））</string>
     <string name="CG_Donate_Method">选择捐赠方式</string>
     <string name="CG_Mono_Desc">5375414117420108 // 点按以复制</string>
     <string name="CG_Source">查看应用源码</string>
