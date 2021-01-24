@@ -209,8 +209,8 @@
     <string name="CG_Source">Kaynak kodu</string>
     <string name="CG_Crowdin">Çeviriye yardım et</string>
     <string name="CG_StickerSavedHint">Stickerlerin bokunu ye</string>
-    <string name="CG_CacheClearedHint">File cleared from cache</string>
-    <string name="CG_FailedToClear">Failed to clear from cache</string>
-    <string name="CG_ClearFromCache">Clear from cache</string>
-    <string name="CG_ClearedFromCache">Cleared from cache</string>
+    <string name="CG_CacheClearedHint">Dosya önbellekten silindi</string>
+    <string name="CG_FailedToClear">Önbellekten silinemedi</string>
+    <string name="CG_ClearFromCache">Önbellekten sil</string>
+    <string name="CG_ClearedFromCache">Önbellkten silindi</string>
 </resources>
