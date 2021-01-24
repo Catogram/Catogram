@@ -23,11 +23,11 @@
     <string name="CatogramVersion">Catogram %1$s</string>
     <string name="AV_ThemeBased">Dinamik</string>
     <string name="AS_Header_Categories">Siktergit</string>
-    <string name="AS_Header_About">Catogram neden bok gibi</string>
+    <string name="AS_Header_About">Catogram Hakkında</string>
     <string name="CG_AboutDesc">Deneysel bir Telegram salah.</string>
     <string name="CG_Donate">Bağış Yap</string>
     <string name="CG_DonatDesc">Annen neden bok yemeyi seviyor PS5</string>
-    <string name="CG_ToChannel">Resmi stoplamers kanalı aç</string>
+    <string name="CG_ToChannel">Resmi kanalı aç</string>
     <string name="CG_ToChat">Resmi sohbeti aç</string>
     <string name="AS_SysEmoji">Sistem ifadelerini kullan</string>
     <string name="AS_SysEmojiDesc">hatalara sebep olabilir, dikkatli ol</string>
@@ -37,9 +37,9 @@
     <string name="AS_DrawerCategory">Menü</string>
     <string name="AS_FlatSB">Düz durum çubuğu</string>
     <string name="AS_FlatAB">Araç çubuğu gölgesini devre dışı bırak</string>
-    <string name="AS_FlatSB_Desc">sadece Android 6+ için pornografi</string>
+    <string name="AS_FlatSB_Desc">sadece Android 6+ için</string>
     <string name="AS_RedesignCategory">Yeniden tasarla</string>
-    <string name="CG_Filters_Header">Dildo filtresi</string>
+    <string name="CG_Filters_Header">Diyalog filtresi</string>
     <string name="CG_Filters_PM">Özel Mesajlar</string>
     <string name="CG_Filters_Secret">Gizli Sohbetler</string>
     <string name="CG_Filters_Channels">Kanallar</string>
@@ -99,7 +99,7 @@
     <string name="CG_MessageMenuOption_TGXS">Telegram X stili (klasik)</string>
     <string name="CG_MessageMenuOption_A">Modern açılır pencere</string>
     <string name="CG_MessageMenuOption_Default">Varsayılan</string>
-    <string name="CG_NewDrawer">Yeni sik</string>
+    <string name="CG_NewDrawer">Yeni menüyü kullan</string>
     <string name="CG_NewDrawer_Desc">çoklu hesap kullanımına uygun değil</string>
     <string name="CG_MessageButton_Override">Mesaj aksiyonu butonunun üzerine yaz</string>
     <string name="CG_MessageButton_Override_Desc">kendi mesajlarında bunu etkinleştirir</string>
@@ -132,7 +132,7 @@
     <string name="CG_Translate_Language">Tespit edilen dil</string>
     <string name="CG_Translate_PoweredBy">Güçlendiren</string>
     <string name="CG_ToSaved">Mesajı kaydet</string>
-    <string name="CG_FABLeft">Sol tarafta \"Yeni sohbet\"</string>
+    <string name="CG_FABLeft">\"Yeni sohbet\" butonu sol tarafta</string>
     <string name="CG_IntroMessage">**Resmi olmayan** Telegram uygulaması.\n**Ek özellikler** ve **geliştirilmiş özelleştirme**ye sahip.</string>
     <string name="CG_GooglePlay_Donate">Bağış Yap</string>
     <string name="CG_GooglePlay_Info">Bilgilendirme</string>
@@ -208,9 +208,9 @@
     <string name="CG_Mono_Desc">5375414117420108 // kopyalamak için tıkla</string>
     <string name="CG_Source">Kaynak kodu</string>
     <string name="CG_Crowdin">Çeviriye yardım et</string>
-    <string name="CG_StickerSavedHint">Stickerlerin bokunu ye</string>
+    <string name="CG_StickerSavedHint">Çıkartma indirilenler kaydedildi</string>
     <string name="CG_CacheClearedHint">Dosya önbellekten silindi</string>
     <string name="CG_FailedToClear">Önbellekten silinemedi</string>
     <string name="CG_ClearFromCache">Önbellekten sil</string>
-    <string name="CG_ClearedFromCache">Önbellkten silindi</string>
+    <string name="CG_ClearedFromCache">Önbellekten silindi</string>
 </resources>
