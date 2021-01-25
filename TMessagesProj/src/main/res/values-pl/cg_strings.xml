@@ -33,9 +33,9 @@
     <string name="AS_SysEmojiDesc">może wywoływać błędy, bądź ostrożny</string>
     <string name="AS_DrawerAvatar">Awatar jako tło nagłówka</string>
     <string name="AS_DrawerBlur">Rozmaż tło nagłówka</string>
-    <string name="AS_DrawerDarken">Darken header background</string>
-    <string name="AS_DrawerCategory">Drawer</string>
-    <string name="AS_FlatSB">Flat statusbar</string>
+    <string name="AS_DrawerDarken">Przyciemnij tło</string>
+    <string name="AS_DrawerCategory">Szuflada</string>
+    <string name="AS_FlatSB">Płaski pasek statusu</string>
     <string name="AS_FlatAB">Disable toolbar shadow</string>
     <string name="AS_FlatSB_Desc">only for Android 6+</string>
     <string name="AS_RedesignCategory">Redesign</string>
