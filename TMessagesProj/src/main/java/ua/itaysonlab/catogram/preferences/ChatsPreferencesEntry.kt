@@ -172,6 +172,19 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)) {
+
+            switch {
+                title = LocaleController.getString("CG_NewRepostUI", R.string.CG_NewRepostUI)
+                summary = LocaleController.getString("CG_NewRepostUI_Desc", R.string.CG_NewRepostUI_Desc)
+                divider = true
+
+                contract({
+                    return@contract CatogramConfig.newRepostUI
+                }) {
+                    CatogramConfig.newRepostUI = it
+                }
+            }
+            
             switch {
                 title = LocaleController.getString("CG_archiveOnPull", R.string.CG_ArchiveOnPull)
                 summary = LocaleController.getString("CG_archiveOnPull_Desc", R.string.CG_ArchiveOnPull_Desc)
