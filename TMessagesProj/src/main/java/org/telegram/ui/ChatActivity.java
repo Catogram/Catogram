@@ -6904,20 +6904,39 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlertSelected() {
-        createCGShareAlertSelected(false);
-    }
-
-    private void createCGShareAlertSelected(boolean noAuthor) {
-        forwardingMessage = selectedObject;
-        forwardingMessageGroup = selectedObjectGroup;
-        Bundle args = new Bundle();
-        args.putBoolean("onlySelect", true);
-        args.putInt("dialogsType", 3);
-        args.putInt("messagesCount", forwardingMessageGroup == null ? 1 : forwardingMessageGroup.messages.size());
-        args.putInt("hasPoll", forwardingMessage.isPoll() ? (forwardingMessage.isPublicPoll() ? 2 : 1) : 0);
-        DialogsActivity fragment = new DialogsActivity(args);
-        fragment.setDelegate(this);
-        presentFragment(fragment);
+        if (CatogramConfig.INSTANCE.getNewRepostUI()) {
+            forwardingMessage = selectedObject;
+            forwardingMessageGroup = selectedObjectGroup;
+            ArrayList<MessageObject> fmessages = new ArrayList<>();
+            if (forwardingMessageGroup == null) {
+                fmessages.add(forwardingMessage);
+            } else fmessages.addAll(forwardingMessageGroup.messages);
+            showDialog(new ShareAlert(getParentActivity(), fmessages, null, ChatObject.isChannel(currentChat), null, false) {
+                @Override
+                public void dismissInternal() {
+                    super.dismissInternal();
+                    AndroidUtilities.requestAdjustResize(getParentActivity(), classGuid);
+                    if (chatActivityEnterView.getVisibility() == View.VISIBLE) {
+                        fragmentView.requestLayout();
+                    }
+                    hideActionMode();
+                    updatePinnedMessageView(true);
+                }
+            });
+            AndroidUtilities.setAdjustResizeToNothing(getParentActivity(), classGuid);
+            fragmentView.requestLayout();
+        } else {
+            forwardingMessage = selectedObject;
+            forwardingMessageGroup = selectedObjectGroup;
+            Bundle args = new Bundle();
+            args.putBoolean("onlySelect", true);
+            args.putInt("dialogsType", 3);
+            args.putInt("messagesCount", forwardingMessageGroup == null ? 1 : forwardingMessageGroup.messages.size());
+            args.putInt("hasPoll", forwardingMessage.isPoll() ? (forwardingMessage.isPublicPoll() ? 2 : 1) : 0);
+            DialogsActivity fragment = new DialogsActivity(args);
+            fragment.setDelegate(this);
+            presentFragment(fragment);
+        }
     }
 
     private void showShareAlert() {
@@ -18780,10 +18799,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 ArrayList<MessageObject> obj = new ArrayList<>();
                 obj.add(selectedObject);
                 SendMessagesHelper.getInstance(0).sendMessage(obj, UserConfig.getInstance(currentAccount).clientUserId, true, 0);
-                break;
-            }
-            case 902: {
-                createCGShareAlertSelected(true);
                 break;
             }
             case 993: {
