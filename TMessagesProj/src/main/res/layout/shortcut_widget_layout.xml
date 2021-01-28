@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="0px"
-        android:divider="#00000000"
-        tools:listitem="@layout/collection_widget_list_item"/>
+        android:divider="#00000000"/>
 
     <TextView
         android:id="@+id/empty_view"
