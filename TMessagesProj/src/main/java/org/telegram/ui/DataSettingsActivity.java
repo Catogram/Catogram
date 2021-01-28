@@ -655,7 +655,7 @@ public class DataSettingsActivity extends BaseFragment {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = null;
+            View view;
             switch (viewType) {
                 case 0:
                     view = new ShadowSectionCell(mContext);
