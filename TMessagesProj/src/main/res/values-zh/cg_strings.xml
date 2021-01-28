@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">高级设定</string>
+    <string name="AdvancedSettings">Catogram 高级选项</string>
     <string name="AS_Header_Appearance">外观相关</string>
     <string name="AS_HideUserPhone">隐藏手机号码</string>
     <string name="AS_HideUserPhoneSummary">在侧边栏与设置页</string>
@@ -12,7 +12,7 @@
     <string name="AS_ForceNY">新年永不停</string>
     <string name="AS_ForceNYSummary">设定每天都是新年，启用选项后请重启客户端</string>
     <string name="AS_ForcePacman">一直吃豆人</string>
-    <string name="AS_ForcePacmanSummary">只在归档聊天生效</string>
+    <string name="AS_ForcePacmanSummary">仅在归档聊天时生效</string>
     <string name="AS_Header_Privacy">保护您的隐私</string>
     <string name="AS_NoProxyPromo">不显示代理赞助频道</string>
     <string name="AS_NoTyping">不要发送输入状况</string>
@@ -24,21 +24,21 @@
     <string name="AV_ThemeBased">动态</string>
     <string name="AS_Header_Categories">Catogram 客制化</string>
     <string name="AS_Header_About">关于 Catogram</string>
-    <string name="CG_AboutDesc">\"An experimental Telegram app modification.\"\n“一个实验性的 Telegram 修改版。”\n汉化版本: GitHub 1.0.1 Hey!\n汉化作者：TG@Fengzh 汉化团队 X 其他翻译贡献者 X YOU</string>
+    <string name="CG_AboutDesc">一个实验性的 Telegram 修改版客户端。</string>
     <string name="CG_Donate">官方捐赠通道</string>
     <string name="CG_DonatDesc">给我买台 PS5！（误）</string>
     <string name="CG_ToChannel">官方通知频道</string>
     <string name="CG_ToChat">官方讨论群组</string>
     <string name="AS_SysEmoji">使用系统 Emoji</string>
     <string name="AS_SysEmojiDesc">可能会有问题，在使用时请注意</string>
-    <string name="AS_DrawerAvatar">头像背景</string>
+    <string name="AS_DrawerAvatar">使用头像作为侧栏背景</string>
     <string name="AS_DrawerBlur">背景模糊</string>
     <string name="AS_DrawerDarken">暗色遮罩</string>
     <string name="AS_DrawerCategory">抽屉</string>
     <string name="AS_FlatSB">沉浸/透明系统状态栏</string>
-    <string name="AS_FlatAB">无工具栏阴影</string>
+    <string name="AS_FlatAB">关闭工具栏阴影</string>
     <string name="AS_FlatSB_Desc">对 搭载 Android 6 及以上的设备生效</string>
-    <string name="AS_RedesignCategory">设计重置</string>
+    <string name="AS_RedesignCategory">焕然一新</string>
     <string name="CG_Filters_Header">对话过滤器</string>
     <string name="CG_Filters_PM">私人消息</string>
     <string name="CG_Filters_Secret">私密对话</string>
@@ -64,7 +64,7 @@
     <string name="AS_AccentNotify">为其染上颜色</string>
     <string name="CG_Never">从不</string>
     <string name="AS_Filters_ReplaceFAB">替换</string>
-    <string name="AS_Filters_ReplaceFABDesc">启用后：\n单击→切换过滤器\n长按→原始功能（创建）</string>
+    <string name="AS_Filters_ReplaceFABDesc">启用后：\n单击→切换过滤器\n长按→原始功能(创建)</string>
     <string name="CG_ChatMenu_RestorePin">还原置顶消息</string>
     <string name="CG_ChatMenu_HidePin">隐藏置顶消息</string>
     <string name="CG_ChatMenu_ToChannel">连接的频道</string>
@@ -95,8 +95,8 @@
     <string name="CG_NewTabs_EmoticonsAppend">在 tab 的标题之后附加表情符号 [需要重启]</string>
     <string name="CG_NewTabs_EmoticonsAppend_Desc">当 \"替换\" 选项关闭时</string>
     <string name="CG_MessageMenuOption">聊天菜单</string>
-    <string name="CG_MessageMenuOption_TGX">Telegram X-styled (平滑)</string>
-    <string name="CG_MessageMenuOption_TGXS">Telegram X-styled (经典)</string>
+    <string name="CG_MessageMenuOption_TGX">Telegram X 风格 (平滑)</string>
+    <string name="CG_MessageMenuOption_TGXS">Telegram X 风格 (经典)</string>
     <string name="CG_MessageMenuOption_A">崭新的弹出动画</string>
     <string name="CG_MessageMenuOption_Default">默认</string>
     <string name="CG_NewDrawer">账户抽屉</string>
@@ -150,7 +150,7 @@
     <string name="CG_IgnoreBlacklist_Desc">来自这些人的消息将被隐藏</string>
     <string name="CG_KangSticker">加入贴纸包</string>
     <string name="CG_KangSticker_Err_NoPack_Title">想要新建一个贴纸包吗？</string>
-    <string name="CG_KangSticker_Err_NoPack_Desc">要想添加一个贴纸到您的贴纸包中，一个可使用的贴纸包是必须的，可是你并没有啊！\n\n现在创建一个吗？\n这是全自动的，并且目前这张贴纸也将在稍后加入其中。</string>
+    <string name="CG_KangSticker_Err_NoPack_Desc">要想添加一个贴纸到您的贴纸包中，一个可使用的贴纸包是必须的，可是你并没有啊！\n\n现在创建一个吗？\n该过程是全自动的，并且目前这张贴纸也将在稍后加入其中。</string>
     <string name="CG_KangSticker_Err_NoPack_Action">创建</string>
     <string name="CG_Kangs_Manager">贴纸包管理员</string>
     <string name="CG_Kangs_CreatePack">创建一个 Catogram 贴纸包</string>
@@ -179,7 +179,7 @@
     <string name="CG_EnableSwipePIP">操作画中画视频</string>
     <string name="CG_EnableSwipePIP_Desc">可以滑动画中画视频</string>
     <string name="CG_TelegramThemes">官方主题</string>
-    <string name="CG_TelegramThemes_Desc">只在聊天设置中生效（作为演示用途）</string>
+    <string name="CG_TelegramThemes_Desc">聊天设置中使用官方主题，而非 VKUI</string>
     <string name="CG_SaveSticker">保存贴纸</string>
     <string name="CG_FailedToSaveSticker">保存此贴纸失败，这很有可能是因为贴纸尚未加载完成所导致的</string>
     <string name="AS_Header_DoubleBottom">双按钮</string>
@@ -198,14 +198,21 @@
     <string name="CG_VoiceEnhancements">语音增强</string>
     <string name="CG_VoiceEnhancements_Desc">开启降噪，同时使声音听起来更正常</string>
     <string name="CG_Voip_ForceEnhancements">增强 VoIP 语音</string>
-    <string name="CG_Voip_ForceEnhancements_Desc">强制启用可能无法对服务器所生效的 AEC/NS</string>
-    <string name="CG_AudioFocus">录制时暂停音乐播放</string>
-    <string name="CG_AudioFocus_Desc">在关闭情况下，录制时依然会继续播放音乐</string>
+    <string name="CG_Voip_ForceEnhancements_Desc">强制启用 AEC/NS ，即使服务器并不支持</string>
+    <string name="CG_AudioFocus">播放语音或视频时暂停后台音乐播放</string>
+    <string name="CG_AudioFocus_Desc">关闭该选项时，播放语音或视频时音乐会减小音量，但并不会停止</string>
     <string name="CG_Proximity">启用距离传感器</string>
     <string name="CG_Proximity_Desc">关闭该选项后，在聆听语音消息时将不再使用距离传感器判断是否应当关闭屏幕。若您聆听语音时遭遇烦人的自动息屏，请关闭该项。 (重启生效)</string>
     <string name="CG_Donate_Desc">在下方选择一个捐赠渠道\n如果您支付 &gt;= 1.5 美元或 100 卢布，您有可能获得官方标记（蓝色小勾勾）或骗子标记（ spam 标记，参见 @trump ）作为礼物。\n请在付款时备注您的 ID 和想要的标记。\n（译者注：应该是在 Catogram 内部进行标记，并不会影响您的账号本体功能，使用其他 Telegram 亦不会显示（我瞎猜的））</string>
-    <string name="CG_Donate_Method">选择方式</string>
+    <string name="CG_Donate_Method">选择捐赠方式</string>
     <string name="CG_Mono_Desc">5375414117420108 // 点按以复制</string>
     <string name="CG_Source">查看应用源码</string>
     <string name="CG_Crowdin">改进应用翻译</string>
+    <string name="CG_StickerSavedHint">贴纸已保存至下载目录</string>
+    <string name="CG_CacheClearedHint">缓存文件已清除</string>
+    <string name="CG_FailedToClear">清除失败</string>
+    <string name="CG_ClearFromCache">清除缓存</string>
+    <string name="CG_ClearedFromCache">已清除缓存</string>
+    <string name="CG_ToBeginning">回到开头</string>
+    <string name="CG_ToLinkedChat">连接的群组</string>
 </resources>

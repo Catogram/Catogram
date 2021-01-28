@@ -373,13 +373,11 @@ public class DrawerProfileCell extends FrameLayout {
         nameTextView.setText(UserObject.getUserName(user));
         if (CatogramConfig.INSTANCE.getHidePhoneNumber()) {
             phoneTextView.setText("@" + user.username);
+        } else if (CatogramConfig.INSTANCE.getFakePhoneNumber()) {
+            phoneTextView.setText(PhoneFormat.getInstance().format("+71234567890"));
         } else {
             phoneTextView.setText(PhoneFormat.getInstance().format("+" + user.phone));
-        }/*else if (!TextUtils.isEmpty(user.username)) {
-            phoneTextView.setText("@" + user.username);
-        } else {
-            phoneTextView.setText(LocaleController.getString("MobileHidden",R.string.MobileHidden));
-        }*/
+        }
         AvatarDrawable avatarDrawable = new AvatarDrawable(user);
         avatarDrawable.setColor(Theme.getColor(Theme.key_avatar_backgroundInProfileBlue));
         avatarImageView.setImage(ImageLocation.getForUser(user, false), "50_50", avatarDrawable, user);

@@ -17,6 +17,7 @@ object CatogramConfig {
 
     var hideProxySponsor by sharedPreferences.boolean("advanced_hideproxysponsor", true)
     var hidePhoneNumber by sharedPreferences.boolean("advanced_hidephonenumber", true)
+    var fakePhoneNumber by sharedPreferences.boolean("advanced_fakephonenumber", false)
     var forceNewYear by sharedPreferences.boolean("advanced_forcenewyear", false)
     var forcePacman by sharedPreferences.boolean("advanced_forcepacman", false)
     var noRounding by sharedPreferences.boolean("advanced_norounding", false)
@@ -64,6 +65,8 @@ object CatogramConfig {
     var forceLeftFab by sharedPreferences.boolean("cg_fab_invertgravity", false)
 
     var newTabs_iconsV2_mode by sharedPreferences.int("cg_tabs_v2", 0)
+
+    var newRepostUI by sharedPreferences.boolean("cg_chatrepost_everywhere", false)
 
     var iconReplacement by sharedPreferences.int("cg_iconpack", 0)
     var hideUserIfBlocked by sharedPreferences.boolean("cg_hide_msg_if_blocked", false)
