@@ -213,4 +213,8 @@
     <string name="CG_FailedToClear">Fehler beim Löschen von Cache</string>
     <string name="CG_ClearFromCache">Lösche aus dem Cache</string>
     <string name="CG_ClearedFromCache">Aus dem Cache gelöscht</string>
+    <string name="CG_ToBeginning">To Beginning</string>
+    <string name="CG_ToLinkedChat">Linked Chat</string>
+    <string name="CG_FakeUserPhone">Fake phone number</string>
+    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
 </resources>
