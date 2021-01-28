@@ -213,8 +213,8 @@
     <string name="CG_FailedToClear">Impossibile cancellare dalle cache</string>
     <string name="CG_ClearFromCache">Cancella dalle cache</string>
     <string name="CG_ClearedFromCache">Cancellato dalle cache</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
+    <string name="CG_ToBeginning">Per Iniziare</string>
+    <string name="CG_ToLinkedChat">Chat Collegata</string>
+    <string name="CG_FakeUserPhone">Numero di telefono fittizio</string>
+    <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono fittizio nel drawer e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
 </resources>
