@@ -213,4 +213,8 @@
     <string name="CG_FailedToClear">Önbellekten silinemedi</string>
     <string name="CG_ClearFromCache">Önbellekten sil</string>
     <string name="CG_ClearedFromCache">Önbellekten silindi</string>
+    <string name="CG_ToBeginning">To Beginning</string>
+    <string name="CG_ToLinkedChat">Linked Chat</string>
+    <string name="CG_FakeUserPhone">Fake phone number</string>
+    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
 </resources>
