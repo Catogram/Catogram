@@ -2465,10 +2465,11 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         Runnable cancelRunnable = null;
 
         String content;
+        InputStream inputStream = null;
         try {
             int linesCount = 0;
-            InputStream in = getContentResolver().openInputStream(importUri);
-            BufferedReader r = new BufferedReader(new InputStreamReader(in));
+            inputStream = getContentResolver().openInputStream(importUri);
+            BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder total = new StringBuilder();
             for (String line; (line = r.readLine()) != null && linesCount < 100; ) {
                 total.append(line).append('\n');
@@ -2478,6 +2479,14 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         } catch (Exception e) {
             FileLog.e(e);
             return;
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (Exception e2) {
+                FileLog.e(e2);
+            }
         }
         final TLRPC.TL_messages_checkHistoryImport req = new TLRPC.TL_messages_checkHistoryImport();
         req.import_head = content;
@@ -3444,6 +3453,8 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         final int account = dialogsFragment != null ? dialogsFragment.getCurrentAccount() : currentAccount;
 
         if (exportingChatUri != null) {
+            Uri uri = exportingChatUri;
+            ArrayList<Uri> documentsUris = documentsUrisArray != null ? new ArrayList<>(documentsUrisArray) : null;
             final AlertDialog progressDialog = new AlertDialog(this, 3);
             SendMessagesHelper.getInstance(account).prepareImportHistory(dids.get(0), exportingChatUri, documentsUrisArray, (result) -> {
                 if (result != 0) {
@@ -3461,7 +3472,12 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                     fragment.setOpenImport();
                     actionBarLayout.presentFragment(fragment, dialogsFragment != null || param, dialogsFragment == null, true, false);
                 } else {
-                    dialogsFragment.finishFragment();
+                    documentsUrisArray = documentsUris;
+                    if (documentsUrisArray == null) {
+                        documentsUrisArray = new ArrayList<>();
+                    }
+                    documentsUrisArray.add(0, uri);
+                    openDialogsToSend(true);
                 }
                 try {
                     progressDialog.dismiss();
