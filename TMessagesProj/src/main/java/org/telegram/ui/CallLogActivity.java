@@ -650,28 +650,6 @@ public class CallLogActivity extends BaseFragment implements NotificationCenter.
 		ConnectionsManager.getInstance(currentAccount).bindRequestToGuid(reqId, classGuid);
 	}
 
-<<<<<<< HEAD
-	private void confirmAndDelete(final CallLogRow row) {
-		if (getParentActivity() == null) {
-			return;
-		}
-		new AlertDialog.Builder(getParentActivity())
-				.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName))
-				.setMessage(LocaleController.getString("ConfirmDeleteCallLog", R.string.ConfirmDeleteCallLog))
-				.setPositiveButton(LocaleController.getString("Delete", R.string.Delete), (dialog, which) -> {
-					ArrayList<Integer> ids = new ArrayList<>();
-					for (TLRPC.Message msg : row.calls) {
-						ids.add(msg.id);
-					}
-					MessagesController.getInstance(currentAccount).deleteMessages(ids, null, null, 0, 0, false, false);
-				})
-				.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null)
-				.show()
-				.setCanceledOnTouchOutside(true);
-	}
-
-=======
->>>>>>> 77bbe5bae... Update to 7.4.0 (2221)
 	@Override
 	public void onResume() {
 		super.onResume();

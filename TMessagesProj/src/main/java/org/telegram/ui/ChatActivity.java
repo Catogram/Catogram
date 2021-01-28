@@ -20987,7 +20987,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             if (enableMention) {
                                 menuItems[2] = AvatarPreviewer.MenuItem.MENTION;
                             }
-                            // CGFeatureHooks.injectChatActivityAvatarArrayItems(ChatActivity.this, menuItems, enableMention);
+                            CGFeatureHooks.injectChatActivityAvatarArrayItems(ChatActivity.this, menuItems, enableMention);
                             final TLRPC.UserFull userFull = getMessagesController().getUserFull(user.id);
                             final AvatarPreviewer.Data data;
                             if (userFull != null) {
@@ -21009,7 +21009,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                             break;
                                     }
 
-                                    // CGFeatureHooks.injectChatActivityAvatarOnClick(ChatActivity.this, item, user);
+                                    CGFeatureHooks.injectChatActivityAvatarOnClick(ChatActivity.this, item, user);
                                 });
                                 return true;
                             }
