@@ -248,7 +248,7 @@ import ua.itaysonlab.catogram.ui.CatogramToasts;
 @SuppressWarnings("unchecked")
 public class ChatActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, LocationActivity.LocationActivityDelegate, ChatAttachAlertDocumentLayout.DocumentSelectActivityDelegate {
 
-    protected TLRPC.Chat currentChat;
+    public TLRPC.Chat currentChat;
     protected TLRPC.User currentUser;
     protected TLRPC.EncryptedChat currentEncryptedChat;
     private boolean userBlocked;
@@ -264,7 +264,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private FrameLayout progressView;
     private View progressView2;
     private FrameLayout bottomOverlay;
-    protected ChatActivityEnterView chatActivityEnterView;
+    public ChatActivityEnterView chatActivityEnterView;
     private ChatActivityEnterTopView chatActivityEnterTopView;
     private int chatActivityEnterViewAnimateFromTop;
     private boolean chatActivityEnterViewAnimateBeforeSending;
@@ -594,7 +594,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
     private ChatObject.Call groupCall;
     private boolean createGroupCall;
-    protected TLRPC.ChatFull chatInfo;
+    public TLRPC.ChatFull chatInfo;
     protected TLRPC.UserFull userInfo;
 
     private SparseArray<TLRPC.BotInfo> botInfo = new SparseArray<>();
@@ -16446,7 +16446,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
     }
 
-    private void updatePinnedMessageView(boolean animated, int animateToNext) {
+    public void updatePinnedMessageView(boolean animated, int animateToNext) {
         if (pinnedMessageView == null || chatMode != 0) {
             return;
         }
@@ -20980,13 +20980,13 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     public boolean didLongPressUserAvatar(ChatMessageCell cell, TLRPC.User user, float touchX, float touchY) {
                         if (isAvatarPreviewerEnabled()) {
                             final boolean enableMention = currentChat != null && (bottomOverlayChat == null || bottomOverlayChat.getVisibility() != View.VISIBLE) && (bottomOverlay == null || bottomOverlay.getVisibility() != View.VISIBLE);
-                            final AvatarPreviewer.MenuItem[] menuItems = new AvatarPreviewer.MenuItem[2 + (enableMention ? 1 : 0) + CGFeatureHooks.injectChatActivityAvatarArraySize(ChatActivity.this)];
+                            final AvatarPreviewer.MenuItem[] menuItems = new AvatarPreviewer.MenuItem[2 + (enableMention ? 1 : 0)];
                             menuItems[0] = AvatarPreviewer.MenuItem.OPEN_PROFILE;
                             menuItems[1] = AvatarPreviewer.MenuItem.SEND_MESSAGE;
                             if (enableMention) {
                                 menuItems[2] = AvatarPreviewer.MenuItem.MENTION;
                             }
-                            CGFeatureHooks.injectChatActivityAvatarArrayItems(ChatActivity.this, menuItems, enableMention);
+                            // CGFeatureHooks.injectChatActivityAvatarArrayItems(ChatActivity.this, menuItems, enableMention);
                             final TLRPC.UserFull userFull = getMessagesController().getUserFull(user.id);
                             final AvatarPreviewer.Data data;
                             if (userFull != null) {
@@ -21008,7 +21008,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                                             break;
                                     }
 
-                                    CGFeatureHooks.injectChatActivityAvatarOnClick(ChatActivity.this, item, user);
+                                    // CGFeatureHooks.injectChatActivityAvatarOnClick(ChatActivity.this, item, user);
                                 });
                                 return true;
                             }
