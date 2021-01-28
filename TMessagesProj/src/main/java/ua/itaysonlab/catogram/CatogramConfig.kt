@@ -17,6 +17,7 @@ object CatogramConfig {
 
     var hideProxySponsor by sharedPreferences.boolean("advanced_hideproxysponsor", true)
     var hidePhoneNumber by sharedPreferences.boolean("advanced_hidephonenumber", true)
+    var fakePhoneNumber by sharedPreferences.boolean("advanced_fakephonenumber", false)
     var forceNewYear by sharedPreferences.boolean("advanced_forcenewyear", false)
     var forcePacman by sharedPreferences.boolean("advanced_forcepacman", false)
     var noRounding by sharedPreferences.boolean("advanced_norounding", false)

@@ -127,6 +127,17 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
+                title = LocaleController.getString("CG_FakeUserPhone", R.string.CG_FakeUserPhone)
+                summary = LocaleController.getString("CG_FakeUserPhoneSummary", R.string.CG_FakeUserPhoneSummary)
+
+                contract({
+                    return@contract CatogramConfig.fakePhoneNumber
+                }) {
+                    CatogramConfig.fakePhoneNumber = it
+                }
+            }
+
+            switch {
                 title = LocaleController.getString("AS_NoRounding", R.string.AS_NoRounding)
                 summary = LocaleController.getString("AS_NoRoundingSummary", R.string.AS_NoRoundingSummary)
 
