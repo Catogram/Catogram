@@ -7037,6 +7037,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         });
         AndroidUtilities.setAdjustResizeToNothing(getParentActivity(), classGuid);
         fragmentView.requestLayout();
+    }
         
     private void updateBulletinLayout() {
         Bulletin bulletin = Bulletin.getVisibleBulletin();
