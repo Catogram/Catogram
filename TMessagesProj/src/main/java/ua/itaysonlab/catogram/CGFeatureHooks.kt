@@ -1,6 +1,8 @@
 package ua.itaysonlab.catogram
 
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import org.telegram.messenger.*
 import org.telegram.tgnet.TLRPC
 import org.telegram.ui.AvatarPreviewer
@@ -12,6 +14,23 @@ import org.telegram.ui.Components.ShareAlert
 // I've created this so CG features can be injected in a source file with 1 line only (maybe)
 // Because manual editing of drklo's sources harms your mental health.
 object CGFeatureHooks {
+    @JvmStatic
+    fun showForwardMenu(sa: ShareAlert, field: FrameLayout) {
+        CGFeatureJavaHooks.createPopupWindow(sa.container, field, sa.context, listOf(
+                CGFeatureJavaHooks.PopupItem(
+                        if (CatogramConfig.forwardNoAuthorship) {
+                            LocaleController.getString("CG_FwdMenu_DisableNoForward", R.string.CG_FwdMenu_DisableNoForward)
+                        } else {
+                            LocaleController.getString("CG_FwdMenu_EnableNoForward", R.string.CG_FwdMenu_EnableNoForward)
+                        },
+                        R.drawable.msg_forward
+                ) {
+                    // Toggle!
+                    CatogramConfig.forwardNoAuthorship = !CatogramConfig.forwardNoAuthorship
+                }
+        ))
+    }
+
     @JvmStatic
     fun hookHideWhenBlocked(cell: ChatMessageCell, act: ChatActivity) {
         if (!CGControversive.isControversiveFeaturesEnabled()) return

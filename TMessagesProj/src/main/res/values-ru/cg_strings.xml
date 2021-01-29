@@ -215,4 +215,6 @@
     <string name="CG_ClearedFromCache">Удалено из кеша</string>
     <string name="CG_ToBeginning">В начало</string>
     <string name="CG_ToLinkedChat">Связанный чат</string>
+    <string name="CG_FwdMenu_EnableNoForward">Удалять автора сообщений</string>
+    <string name="CG_FwdMenu_DisableNoForward">Не удалять автора сообщений</string>
 </resources>

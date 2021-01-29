@@ -236,8 +236,6 @@ public class LinkActionView extends LinearLayout {
                 container = bottomSheet.getContainer();
             }
 
-
-
             if (container != null) {
                 float x = 0;
                 float y;
