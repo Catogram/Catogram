@@ -219,4 +219,6 @@
     <string name="CG_ToLinkedChat">الدردشة التي تم ربطها</string>
     <string name="CG_FakeUserPhone">إظهار رقم هاتف مزيف</string>
     <string name="CG_FakeUserPhoneSummary">إظهار رقم هاتف مزيف في الدرج والإعدادات (يجب تعطيل إخفاء تفضيل رقم الهاتف)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
+    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
 </resources>
