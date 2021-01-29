@@ -217,4 +217,6 @@
     <string name="CG_ToLinkedChat">Chat Collegata</string>
     <string name="CG_FakeUserPhone">Numero di telefono fittizio</string>
     <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono fittizio nel drawer e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
+    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
 </resources>
