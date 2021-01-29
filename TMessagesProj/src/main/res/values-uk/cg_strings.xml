@@ -217,4 +217,6 @@
     <string name="CG_ToLinkedChat">Прив\'язаний чат</string>
     <string name="CG_FakeUserPhone">Підроблений номер телефона</string>
     <string name="CG_FakeUserPhoneSummary">показувати підроблений номер телефону в шторці та налаштуваннях (функція прихованого номеру має бути вимкненна в налаштуваннях)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
+    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
 </resources>
