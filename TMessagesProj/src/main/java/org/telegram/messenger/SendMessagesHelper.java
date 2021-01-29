@@ -2911,6 +2911,11 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     }
                 }
             } else {
+                boolean canSendStickers = true;
+                if (lower_id < 0) {
+                    TLRPC.Chat chat = getMessagesController().getChat(-lower_id);
+                    canSendStickers = ChatObject.canSendStickers(chat);
+                }
                 if (message != null) {
                     if (encryptedChat != null) {
                         newMsg = new TLRPC.TL_message_secret();
@@ -2926,7 +2931,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                             webPage = null;
                         }
                     }
-                    if (message.length() < 30 && webPage == null && (entities == null || entities.isEmpty()) && getMessagesController().diceEmojies.contains(message.replace("\ufe0f", "")) && encryptedChat == null && scheduleDate == 0) {
+                    if (canSendStickers && message.length() < 30 && webPage == null && (entities == null || entities.isEmpty()) && getMessagesController().diceEmojies.contains(message.replace("\ufe0f", "")) && encryptedChat == null && scheduleDate == 0) {
                         TLRPC.TL_messageMediaDice mediaDice = new TLRPC.TL_messageMediaDice();
                         mediaDice.emoticon = message;
                         mediaDice.value = -1;
@@ -3035,8 +3040,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                         newMsg = new TLRPC.TL_message();
                     }
                     if (lower_id < 0) {
-                        TLRPC.Chat chat = getMessagesController().getChat(-lower_id);
-                        if (chat != null && !ChatObject.canSendStickers(chat)) {
+                        if (!canSendStickers) {
                             for (int a = 0, N = document.attributes.size(); a < N; a++) {
                                 if (document.attributes.get(a) instanceof TLRPC.TL_documentAttributeAnimated) {
                                     document.attributes.remove(a);
