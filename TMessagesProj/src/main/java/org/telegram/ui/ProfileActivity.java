@@ -5446,12 +5446,12 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 Drawable leftIcon = currentEncryptedChat != null ? getLockIconDrawable() : null;
                 Drawable rightIcon = null;
                 if (a == 0) {
-                    if (user.scam || user.fake || CustomVerifications.isScam(user.id)) {
+                    if (user.scam || user.fake || CustomVerifications.isScam(user.id) || CustomVerifications.isFake(user.id)) {
                         rightIcon = getScamDrawable(user.scam || CustomVerifications.isScam(user.id) ? 0 : 1);
                     } else {
                         rightIcon = getMessagesController().isDialogMuted(dialog_id != 0 ? dialog_id : (long) user_id) ? Theme.chat_muteIconDrawable : null;
                     }
-                } else if (user.scam || user.fake || CustomVerifications.isScam(user.id)) {
+                } else if (user.scam || user.fake || CustomVerifications.isScam(user.id) || CustomVerifications.isFake(user.id)) {
                     rightIcon = getScamDrawable(user.scam || CustomVerifications.isScam(user.id) ? 0 : 1);
                 } else if (user.verified || CustomVerifications.isVerified(user.id)) {
                     rightIcon = getVerifiedCrossfadeDrawable();

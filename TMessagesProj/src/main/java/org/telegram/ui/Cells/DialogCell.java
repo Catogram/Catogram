@@ -795,7 +795,7 @@ public class DialogCell extends BaseCell {
                         if (user.scam || CustomVerifications.isScam(user.id)) {
                             drawScam = 1;
                             Theme.dialogs_scamDrawable.checkText();
-                        } else if (user.fake) {
+                        } else if (user.fake || CustomVerifications.isFake(user.id)) {
                             drawScam = 2;
                             Theme.dialogs_fakeDrawable.checkText();
                         } else {

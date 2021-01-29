@@ -11526,10 +11526,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (!TextUtils.isEmpty(currentUser.phone)) {
                     avatarContainer.setTitle(PhoneFormat.getInstance().format("+" + currentUser.phone));
                 } else {
-                    avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id), currentUser.fake);
+                    avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id), currentUser.fake || CustomVerifications.isFake(currentUser.id));
                 }
             } else {
-                avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id), currentUser.fake);
+                avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id), currentUser.fake || CustomVerifications.isFake(currentUser.id));
             }
         }
         setParentActivityTitle(avatarContainer.getTitleTextView().getText());

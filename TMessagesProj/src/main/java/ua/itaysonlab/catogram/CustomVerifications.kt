@@ -12,12 +12,14 @@ object CustomVerifications: CoroutineScope by MainScope() {
 
     var SCAM_IDS = listOf<String>()
     var VERIF_IDS = listOf<String>()
+    var FAKE_IDS = listOf<String>()
 
     init {
         launch(Dispatchers.IO) {
             try {
                 SCAM_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/scam.txt").readText().lines()
                 VERIF_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/verif.txt").readText().lines()
+                FAKE_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/fake.txt").readText().lines()
             }
             catch (e: Exception) { }
         }
@@ -33,5 +35,11 @@ object CustomVerifications: CoroutineScope by MainScope() {
     fun isVerified(id: Int): Boolean {
         if (!CGControversive.isControversiveFeaturesEnabled()) return false
         return VERIF_IDS.contains(id.toString())
+    }
+
+    @JvmStatic
+    fun isFake(id: Int): Boolean {
+        if (!CGControversive.isControversiveFeaturesEnabled()) return false
+        return FAKE_IDS.contains(id.toString())
     }
 }
