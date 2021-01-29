@@ -30,7 +30,7 @@ public class CGFeatureJavaHooks {
     public static void setColorFilterToRemoteView(RemoteViews rv, int id, int color) {
         try {
              Method m = RemoteViews.class.getDeclaredMethod("setDrawableTint", int.class, boolean.class, int.class, PorterDuff.Mode.class);
-             m.invoke(rv, id, true, color, PorterDuff.Mode.MULTIPLY)
+             m.invoke(rv, id, true, color, PorterDuff.Mode.MULTIPLY);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -28,7 +28,7 @@ object CGFeatureHooks {
         CGFeatureJavaHooks.setColorFilterToRemoteView(rv, id, Theme.getColor(Theme.key_windowBackgroundWhite))
     }
 
-    private var currentPopup: ActionBarPopupWindow.ActionBarPopupWindowLayout? = null
+    private var currentPopup: ActionBarPopupWindow? = null
 
     @JvmStatic
     fun showForwardMenu(sa: ShareAlert, field: FrameLayout) {
