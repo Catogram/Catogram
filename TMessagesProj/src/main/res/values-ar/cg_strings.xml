@@ -215,8 +215,8 @@
     <string name="CG_FailedToClear">فشل المسح من ذاكرة التخزين</string>
     <string name="CG_ClearFromCache">المسح من ذاكرة تيليجرام المؤقتة</string>
     <string name="CG_ClearedFromCache">تم المسح</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
+    <string name="CG_ToBeginning">انتقل إلى بداية الدردشة</string>
+    <string name="CG_ToLinkedChat">الدردشة التي تم ربطها</string>
+    <string name="CG_FakeUserPhone">إظهار رقم هاتف مزيف</string>
+    <string name="CG_FakeUserPhoneSummary">إظهار رقم هاتف مزيف في الدرج والإعدادات (يجب تعطيل إخفاء تفضيل رقم الهاتف)</string>
 </resources>
