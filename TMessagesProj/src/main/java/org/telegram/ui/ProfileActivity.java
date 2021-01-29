@@ -5131,9 +5131,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     setAvatarSectionRow = rowCount++;
                 }
                 numberSectionRow = rowCount++;
-                if (!(user.id == getUserConfig().getClientUserId())) {
-                    numberRow = rowCount++;
-                }
+                numberRow = rowCount++;
                 setUsernameRow = rowCount++;
                 bioRow = rowCount++;
                 settingsSectionRow = rowCount++;
