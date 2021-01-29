@@ -48,6 +48,7 @@ public class ShortcutWidgetProvider extends AppWidgetProvider {
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.shortcut_widget_layout);
         rv.setRemoteAdapter(appWidgetId, R.id.list_view, intent2);
         rv.setEmptyView(R.id.list_view, R.id.empty_view);
+        ua.itaysonlab.catogram.CGFeatureHooks.colorWidgetBackground(rv, R.id.shortcut_root);
 
         Intent intent = new Intent(ApplicationLoader.applicationContext, LaunchActivity.class);
         intent.setAction("com.tmessages.openchat" + Math.random() + Integer.MAX_VALUE);

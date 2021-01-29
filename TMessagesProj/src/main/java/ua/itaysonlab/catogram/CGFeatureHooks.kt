@@ -3,8 +3,10 @@ package ua.itaysonlab.catogram
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.RemoteViews
 import org.telegram.messenger.*
 import org.telegram.tgnet.TLRPC
+import org.telegram.ui.ActionBar.Theme
 import org.telegram.ui.AvatarPreviewer
 import org.telegram.ui.Cells.ChatMessageCell
 import org.telegram.ui.ChatActivity
@@ -14,6 +16,17 @@ import org.telegram.ui.Components.ShareAlert
 // I've created this so CG features can be injected in a source file with 1 line only (maybe)
 // Because manual editing of drklo's sources harms your mental health.
 object CGFeatureHooks {
+    @JvmStatic
+    fun colorFeedWidgetItem(rv: RemoteViews) {
+        rv.setTextColor(R.id.feed_widget_item_text, Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+    }
+
+    @JvmStatic
+    fun colorWidgetBackground(rv: RemoteViews, id: Int) {
+        // Man, I love relection!
+        CGFeatureJavaHooks.setColorFilterToRemoteView(rv, id, Theme.getColor(Theme.key_windowBackgroundWhite))
+    }
+
     @JvmStatic
     fun showForwardMenu(sa: ShareAlert, field: FrameLayout) {
         CGFeatureJavaHooks.createPopupWindow(sa.container, field, sa.context, listOf(

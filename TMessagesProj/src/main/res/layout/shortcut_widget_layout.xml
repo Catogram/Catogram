@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/shortcut_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/popup_fixed_alert">
