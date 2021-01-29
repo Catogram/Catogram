@@ -6,6 +6,7 @@ repositories {
     mavenCentral()
     google()
     jcenter()
+    maven { url "https://jitpack.io" }
     flatDir {
         dirs 'libs'
     }
@@ -35,6 +36,8 @@ dependencies {
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.sharetarget:sharetarget:1.1.0"
+
+    implementation 'com.github.ChickenHook:RestrictionBypass:2.2'
 
     compileOnly 'org.checkerframework:checker-qual:3.9.1'
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.5'
