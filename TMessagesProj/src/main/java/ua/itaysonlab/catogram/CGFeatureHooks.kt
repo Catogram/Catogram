@@ -12,6 +12,7 @@ import org.telegram.ui.Cells.ChatMessageCell
 import org.telegram.ui.ChatActivity
 import org.telegram.ui.ChatRightsEditActivity
 import org.telegram.ui.Components.ShareAlert
+import org.telegram.ui.ActionBar.ActionBarPopupWindow
 
 // I've created this so CG features can be injected in a source file with 1 line only (maybe)
 // Because manual editing of drklo's sources harms your mental health.
@@ -27,9 +28,11 @@ object CGFeatureHooks {
         CGFeatureJavaHooks.setColorFilterToRemoteView(rv, id, Theme.getColor(Theme.key_windowBackgroundWhite))
     }
 
+    private var currentPopup: ActionBarPopupWindow.ActionBarPopupWindowLayout? = null
+
     @JvmStatic
     fun showForwardMenu(sa: ShareAlert, field: FrameLayout) {
-        CGFeatureJavaHooks.createPopupWindow(sa.container, field, sa.context, listOf(
+        currentPopup = CGFeatureJavaHooks.createPopupWindow(sa.container, field, sa.context, listOf(
                 CGFeatureJavaHooks.PopupItem(
                         if (CatogramConfig.forwardNoAuthorship) {
                             LocaleController.getString("CG_FwdMenu_DisableNoForward", R.string.CG_FwdMenu_DisableNoForward)
@@ -40,6 +43,8 @@ object CGFeatureHooks {
                 ) {
                     // Toggle!
                     CatogramConfig.forwardNoAuthorship = !CatogramConfig.forwardNoAuthorship
+                    currentPopup?.dismiss()
+                    currentPopup = null
                 }
         ))
     }
