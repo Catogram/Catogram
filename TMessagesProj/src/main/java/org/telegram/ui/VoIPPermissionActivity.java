@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.voip.VoIPService;
 import org.telegram.ui.Components.voip.VoIPHelper;
 
@@ -32,7 +33,11 @@ public class VoIPPermissionActivity extends Activity {
 			permissions.add(Manifest.permission.CAMERA);
 		}
 		if (permissions.isEmpty()) {
-			requestPermissions(permissions.toArray(new String[0]), isVideoCall ? 102 : 101);
+			try {
+				requestPermissions(permissions.toArray(new String[0]), isVideoCall ? 102 : 101);
+			} catch (Exception e) {
+				FileLog.e(e);
+			}
 		}
 	}
 
