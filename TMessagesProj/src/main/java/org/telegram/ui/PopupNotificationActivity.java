@@ -160,6 +160,7 @@ public class PopupNotificationActivity extends AppCompatActivity implements Noti
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Theme.createDialogsResources(this);
         Theme.createChatResources(this, false);
 
         AndroidUtilities.fillStatusBarHeight(this);
