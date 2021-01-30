@@ -213,10 +213,10 @@
     <string name="CG_FailedToClear">Xoá khỏi cache thất bại</string>
     <string name="CG_ClearFromCache">Xoá khỏi cache</string>
     <string name="CG_ClearedFromCache">Đã xoá khỏi cache</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
+    <string name="CG_ToBeginning">Về đầu</string>
+    <string name="CG_ToLinkedChat">Cuộc trò chuyện đã liên kết</string>
+    <string name="CG_FakeUserPhone">Số điện thoại giả</string>
+    <string name="CG_FakeUserPhoneSummary">hiện số điện thoại giả trong ngăn kéo và cài đặt (tùy chọn ẩn số điện thoại phải được tắt)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Tắt chuyển tiếp tên người gửi</string>
+    <string name="CG_FwdMenu_DisableNoForward">Bật chuyển tiếp tên người gửi</string>
 </resources>
