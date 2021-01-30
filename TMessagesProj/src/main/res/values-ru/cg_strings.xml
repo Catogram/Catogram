@@ -213,10 +213,10 @@
     <string name="CG_FailedToClear">Ошибка при удалении из кеша</string>
     <string name="CG_ClearFromCache">Удалить из кеша</string>
     <string name="CG_ClearedFromCache">Удалено из кеша</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
+    <string name="CG_ToBeginning">В начало</string>
+    <string name="CG_ToLinkedChat">Привязанный чат</string>
+    <string name="CG_FakeUserPhone">Поддельный номер в настройках</string>
+    <string name="CG_FakeUserPhoneSummary">визуально подделывает номер телефона в настройках (скрытие номера телефона должно быть отключено)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Скрыть авторство при пересылке</string>
+    <string name="CG_FwdMenu_DisableNoForward">Включить авторство при пересылке</string>
 </resources>
