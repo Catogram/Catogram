@@ -24,6 +24,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Spannable;
@@ -32,6 +33,7 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.text.style.CharacterStyle;
+import android.text.style.StyleSpan;
 import android.util.LongSparseArray;
 import android.util.SparseArray;
 
@@ -4307,12 +4309,24 @@ public class MediaDataController extends BaseController {
                 run.replace(newStyleRun);
             }
         }
+
         if (baseSpan instanceof TextStyleSpan) {
+            // dirty-fix to use Android's style system!
+
+            if (run.flags == (TextStyleSpan.FLAG_STYLE_BOLD + TextStyleSpan.FLAG_STYLE_ITALIC)) {
+                return new StyleSpan(Typeface.BOLD_ITALIC);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_BOLD) {
+                return new StyleSpan(Typeface.BOLD);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_ITALIC) {
+                return new StyleSpan(Typeface.ITALIC);
+            }
+
             return new TextStyleSpan(run);
         } else if (baseSpan instanceof URLSpanReplacement) {
             URLSpanReplacement span = (URLSpanReplacement) baseSpan;
             return new URLSpanReplacement(span.getURL(), run);
         }
+
         return null;
     }
 
@@ -4497,6 +4511,12 @@ public class MediaDataController extends BaseController {
         return runs;
     }
 
+    private TLRPC.MessageEntity createMessageEntity(TLRPC.MessageEntity entity, int spanStart, int spanEnd) {
+        entity.offset = spanStart;
+        entity.length = spanEnd - spanStart;
+        return entity;
+    }
+
     public ArrayList<TLRPC.MessageEntity> getEntities(CharSequence[] message, boolean allowStrike) {
         if (message == null || message[0] == null) {
             return null;
@@ -4579,6 +4599,34 @@ public class MediaDataController extends BaseController {
 
         if (message[0] instanceof Spanned) {
             Spanned spannable = (Spanned) message[0];
+
+            StyleSpan[] sdkSpans = spannable.getSpans(0, message[0].length(), StyleSpan.class);
+            for (StyleSpan sdkSpan : sdkSpans) {
+                int spanStart = spannable.getSpanStart(sdkSpan);
+                int spanEnd = spannable.getSpanEnd(sdkSpan);
+
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
+
+                if (entities == null) {
+                    entities = new ArrayList<>();
+                }
+
+                switch (sdkSpan.getStyle()) {
+                    case Typeface.BOLD:
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityBold(), spanStart, spanEnd));
+                        break;
+                    case Typeface.ITALIC:
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityItalic(), spanStart, spanEnd));
+                        break;
+                    case Typeface.BOLD_ITALIC:
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityBold(), spanStart, spanEnd));
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityItalic(), spanStart, spanEnd));
+                        break;
+                }
+            }
+
             TextStyleSpan[] spans = spannable.getSpans(0, message[0].length(), TextStyleSpan.class);
             if (spans != null && spans.length > 0) {
                 for (int a = 0; a < spans.length; a++) {
