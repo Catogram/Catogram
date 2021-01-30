@@ -18,7 +18,7 @@ class VkIconReplace: BaseIconReplace() {
             R.drawable.menu_help to R.drawable.help_outline_28,
             R.drawable.menu_policy to R.drawable.check_shield_outline_28,
             R.drawable.menu_notifications to R.drawable.notifications_28,
-            R.drawable.menu_devices to R.laptop_outline_28,
+            R.drawable.menu_devices to R.drawable.laptop_outline_28,
             // Settings - CG
             R.drawable.msg_theme to R.drawable.palette_outline_28,
             R.drawable.group_log to R.drawable.grid_square_outline_28,
