@@ -213,10 +213,10 @@
     <string name="CG_FailedToClear">Önbellekten silinemedi</string>
     <string name="CG_ClearFromCache">Önbellekten sil</string>
     <string name="CG_ClearedFromCache">Önbellekten silindi</string>
-    <string name="CG_ToBeginning">To Beginning</string>
-    <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
+    <string name="CG_ToBeginning">Başlangıca</string>
+    <string name="CG_ToLinkedChat">Bağlantılı Sohbet</string>
+    <string name="CG_FakeUserPhone">Sahte telefon numarası</string>
+    <string name="CG_FakeUserPhoneSummary">çekmecede ve ayarlarda sahte telefon numarası göster (telefon numarasını gizle seçeneği devre dışı bırakılır)</string>
+    <string name="CG_FwdMenu_EnableNoForward">İlet yazarlığını devre dışı bırak</string>
+    <string name="CG_FwdMenu_DisableNoForward">İlet yazarlığını etkinleştir</string>
 </resources>
