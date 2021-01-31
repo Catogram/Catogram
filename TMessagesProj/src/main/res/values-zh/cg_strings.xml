@@ -24,7 +24,7 @@
     <string name="AV_ThemeBased">Dynamic</string>
     <string name="AS_Header_Categories">Catogram 客制化</string>
     <string name="AS_Header_About">关于 Catogram</string>
-    <string name="CG_AboutDesc">\"An experimental Telegram app modification.\"\n“一个实验性的 Telegram 修改版。”\n汉化版本: RC-1.0.5.4 Kana （Base GitHub 1.0.1）\n汉化作者：TG@Fengzh 汉化团队 X 其他翻译贡献者 X YOU</string>
+    <string name="CG_AboutDesc">\"An experimental Telegram app modification.\"\n“一个实验性的 Telegram 修改版。”\n汉化版本: RC-1.0.6.1 📝 （Base GitHub 1.0.1）\n汉化作者：TG@Fengzh 汉化团队 X 其他翻译贡献者 X YOU</string>
     <string name="CG_Donate">官方捐赠通道</string>
     <string name="CG_DonatDesc">使应用变得更好</string>
     <string name="CG_ToChannel">官方通知频道</string>
@@ -70,8 +70,8 @@
     <string name="CG_ChatMenu_ToChannel">Linked channel</string>
     <string name="CG_ChannelMenu_ToChat">Linked chat</string>
     <string name="AS_Header_Chats">聊天对话</string>
-    <string name="CG_NewRepostUI">Force new repost UI everywhere</string>
-    <string name="CG_NewRepostUI_Desc">like the repost button in chats</string>
+    <string name="CG_NewRepostUI">强制使用新UI</string>
+    <string name="CG_NewRepostUI_Desc">例如聊天当中的转发按钮</string>
     <string name="CG_ConfirmCalls">通话拨出提醒</string>
     <string name="CG_ABSearch">Search button in toolbar</string>
     <string name="CG_ABSearch_Desc">in the chat window</string>
@@ -110,8 +110,8 @@
     <string name="CG_MessageButton_Option_Saved">上传云端</string>
     <string name="CG_ConfirmCalling_Header">Confirm call</string>
     <string name="CG_ConfirmCalling_Question">Call to %s?</string>
-    <string name="CG_ConfirmCalling_Action">Confirm</string>
-    <string name="CG_ConfirmCalling_Action_Cancel">Cancel</string>
+    <string name="CG_ConfirmCalling_Action">确认</string>
+    <string name="CG_ConfirmCalling_Action_Cancel">取消</string>
     <string name="AS_ForceIcons">图标风格［需要重启应用］</string>
     <string name="AS_ForceNY_Drawer">New Year</string>
     <string name="AS_ForceSV_Drawer">St. Valentine</string>
@@ -215,8 +215,8 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
+    <string name="CG_FakeUserPhone">虚假手机号码</string>
+    <string name="CG_FakeUserPhoneSummary">在侧边栏与设置页显示虚假的电话号码（与“隐藏手机号码”功能冲突）</string>
     <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
 </resources>
