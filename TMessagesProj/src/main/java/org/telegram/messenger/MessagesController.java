@@ -57,6 +57,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.CGControversive;
 
 public class MessagesController extends BaseController implements NotificationCenter.NotificationCenterDelegate {
 
@@ -13592,7 +13593,7 @@ public class MessagesController extends BaseController implements NotificationCe
         }
         for (int a = 0, N = reasons.size(); a < N; a++) {
             TLRPC.TL_restrictionReason reason = reasons.get(a);
-            if ("all".equals(reason.platform) || "android".equals(reason.platform)) {
+            if ("all".equals(reason.platform) || "android".equals(reason.platform) && !CGControversive.isControversiveFeaturesEnabled()) {
                 return reason.text;
             }
         }
@@ -13637,7 +13638,7 @@ public class MessagesController extends BaseController implements NotificationCe
         } else {
             reason = getRestrictionReason(user.restriction_reason);
         }
-        if (reason != null) {
+        if (reason != null && !CGControversive.isControversiveFeaturesEnabled()) {
             showCantOpenAlert(fragment, reason);
             return false;
         }
