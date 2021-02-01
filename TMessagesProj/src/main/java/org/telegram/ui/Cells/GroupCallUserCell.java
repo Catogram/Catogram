@@ -187,7 +187,7 @@ public class GroupCallUserCell extends FrameLayout {
         super(context);
 
         dividerPaint = new Paint();
-        dividerPaint.setColor(Theme.getColor(Theme.key_voipgroup_actionBar));
+        dividerPaint.setColor(Theme.getColor(Theme.key_divider));
 
         avatarDrawable = new AvatarDrawable();
         setClipChildren(false);
@@ -197,7 +197,7 @@ public class GroupCallUserCell extends FrameLayout {
         addView(avatarImageView, LayoutHelper.createFrame(46, 46, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, LocaleController.isRTL ? 0 : 11, 6, LocaleController.isRTL ? 11 : 0, 0));
 
         nameTextView = new SimpleTextView(context);
-        nameTextView.setTextColor(Theme.getColor(Theme.key_voipgroup_nameText));
+        nameTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
         nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setTextSize(16);
         nameTextView.setDrawablePadding(AndroidUtilities.dp(6));
@@ -258,7 +258,7 @@ public class GroupCallUserCell extends FrameLayout {
                 addView(statusTextView[a], LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, LocaleController.isRTL ? 54 : 67, 32, LocaleController.isRTL ? 67 : 54, 0));
             } else {
                 if (a == 0) {
-                    statusTextView[a].setTextColor(Theme.getColor(Theme.key_voipgroup_listeningText));
+                    statusTextView[a].setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText));
                     statusTextView[a].setText(LocaleController.getString("Listening", R.string.Listening));
                 } else if (a == 1) {
                     statusTextView[a].setTextColor(Theme.getColor(Theme.key_voipgroup_speakingText));
@@ -794,7 +794,7 @@ public class GroupCallUserCell extends FrameLayout {
                     }
 
                     if (invalidateColor) {
-                        int color = ColorUtils.blendARGB(Theme.getColor(Theme.key_voipgroup_speakingText), isMuted == 2 ? Theme.getColor(Theme.key_voipgroup_mutedByAdminIcon) : Theme.getColor(Theme.key_voipgroup_listeningText), progressToMuted);
+                        int color = ColorUtils.blendARGB(Theme.getColor(Theme.key_voipgroup_speakingText), isMuted == 2 ? Theme.getColor(Theme.key_voipgroup_mutedByAdminIcon) : Theme.getColor(Theme.key_windowBackgroundWhiteBlueText), progressToMuted);
                         blobDrawable.paint.setColor(ColorUtils.setAlphaComponent(color, (int) (255 * WaveDrawable.CIRCLE_ALPHA_2)));
                     }
                 }
