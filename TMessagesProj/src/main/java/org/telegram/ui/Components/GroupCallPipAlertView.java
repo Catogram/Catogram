@@ -120,6 +120,7 @@ public class GroupCallPipAlertView extends LinearLayout implements VoIPBaseServi
 
         soundButton = new VoIPToggleButton(context, 44f);
         soundButton.setTextSize(12);
+        soundButton.setTextColor(Color.WHITE);
         soundButton.setOnClickListener(v -> {
             if (VoIPService.getSharedInstance() == null) {
                 return;
@@ -131,6 +132,7 @@ public class GroupCallPipAlertView extends LinearLayout implements VoIPBaseServi
 
         muteButton = new VoIPToggleButton(context, 44f);
         muteButton.setTextSize(12);
+        muteButton.setTextColor(Color.WHITE);
         muteButton.setOnClickListener(v -> {
             if (VoIPService.getSharedInstance() != null) {
                 if (VoIPService.getSharedInstance().mutedByAdmin()) {
@@ -151,9 +153,9 @@ public class GroupCallPipAlertView extends LinearLayout implements VoIPBaseServi
 
         leaveButton = new VoIPToggleButton(context, 44f);
         leaveButton.setTextSize(12);
+        leaveButton.setTextColor(Color.WHITE);
         leaveButton.setData(R.drawable.calls_decline, 0xffffffff, 0xFFCE4A4A, 0.3f, false, LocaleController.getString("VoipGroupLeave", R.string.VoipGroupLeave), false, false);
         leaveButton.setOnClickListener(v -> GroupCallActivity.onLeaveClick(getContext(), () -> GroupCallPip.updateVisibility(context), Build.VERSION.SDK_INT < 23 || Settings.canDrawOverlays(context)));
-
 
         VoIPButtonsLayout buttonsContainer = new VoIPButtonsLayout(context);
         buttonsContainer.setChildSize(68);
