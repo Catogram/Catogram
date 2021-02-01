@@ -2792,6 +2792,18 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             linearLayout.addView(volumeLayout, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 0));
 
             volumeSlider = new VolumeSlider(getContext(), participant);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                volumeSlider.setClipToOutline(true);
+                volumeSlider.setOutlineProvider(new ViewOutlineProvider() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void getOutline(View view, Outline outline) {
+                        outline.setRoundRect(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight(), AndroidUtilities.dp(6));
+                    }
+                });
+            }
+
             volumeLayout.addView(volumeSlider, LayoutHelper.MATCH_PARENT, 48);
         }
 
