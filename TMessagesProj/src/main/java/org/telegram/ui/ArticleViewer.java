@@ -876,7 +876,7 @@ public class ArticleViewer implements NotificationCenter.NotificationCenterDeleg
                     int dx = Math.max(0, (int) (event.getX() - startedTrackingX));
                     int dy = Math.abs((int) event.getY() - startedTrackingY);
                     tracker.addMovement(event);
-                    if (maybeStartTracking && !startedTracking && dx >= AndroidUtilities.getPixelsInCM(0.4f, true) && Math.abs(dx) / 3 > dy) {
+                    if (maybeStartTracking && !startedTracking && dx >= AndroidUtilities.getPixelsInCM(0.1f, true) && Math.abs(dx) / 3 > dy) {
                         prepareForMoving(event);
                     } else if (startedTracking) {
                         pressedLinkOwnerLayout = null;
