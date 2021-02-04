@@ -220,9 +220,7 @@
     <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
     <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will turn off all notifications. Use it when you are tired</string>
-    <string name="CG_SilenceBlocked">Silence blocked users</string>
-    <string name="CG_SilenceBlocked_desc">You will no longer receive notifications from blocked users</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, you will receive notifications only from contacts</string>
+    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
+    <string name="CG_Silence">Total silence</string>
+    <string name="CG_Silence_desc">Will turn off all notifications</string>
 </resources>
