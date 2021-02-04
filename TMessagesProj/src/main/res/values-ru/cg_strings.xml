@@ -219,7 +219,7 @@
     <string name="CG_FakeUserPhoneSummary">визуально подделывает номер телефона в настройках (скрытие номера телефона должно быть отключено)</string>
     <string name="CG_FwdMenu_EnableNoForward">Скрыть авторство при пересылке</string>
     <string name="CG_FwdMenu_DisableNoForward">Включить авторство при пересылке</string>
-    <string name="CG_DND">Do not disturb</string>
+    <string name="CG_DND">Не беспокоить</string>
     <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
     <string name="CG_Silence">Total silence</string>
     <string name="CG_Silence_desc">Will turn off all notifications</string>
