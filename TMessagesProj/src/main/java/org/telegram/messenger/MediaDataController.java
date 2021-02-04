@@ -70,6 +70,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
@@ -4300,6 +4301,24 @@ public class MediaDataController extends BaseController {
         }
     }
 
+    private static CharacterStyle tgToSdkSpan(CharacterStyle baseSpan, @Nullable TextStyleSpan.TextStyleRun baseRun) {
+        if (baseSpan instanceof TextStyleSpan) {
+            TextStyleSpan.TextStyleRun run = baseRun == null ? ((TextStyleSpan) baseSpan).getTextStyleRun() : baseRun;
+
+            if (run.flags == (TextStyleSpan.FLAG_STYLE_BOLD + TextStyleSpan.FLAG_STYLE_ITALIC)) {
+                return new StyleSpan(Typeface.BOLD_ITALIC);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_BOLD) {
+                return new StyleSpan(Typeface.BOLD);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_ITALIC) {
+                return new StyleSpan(Typeface.ITALIC);
+            }
+
+            return new TextStyleSpan(run);
+        } else {
+            return baseSpan;
+        }
+    }
+
     private static CharacterStyle createNewSpan(CharacterStyle baseSpan, TextStyleSpan.TextStyleRun textStyleRun, TextStyleSpan.TextStyleRun newStyleRun, boolean allowIntersection) {
         TextStyleSpan.TextStyleRun run = new TextStyleSpan.TextStyleRun(textStyleRun);
         if (newStyleRun != null) {
@@ -4311,17 +4330,7 @@ public class MediaDataController extends BaseController {
         }
 
         if (baseSpan instanceof TextStyleSpan) {
-            // dirty-fix to use Android's style system!
-
-            if (run.flags == (TextStyleSpan.FLAG_STYLE_BOLD + TextStyleSpan.FLAG_STYLE_ITALIC)) {
-                return new StyleSpan(Typeface.BOLD_ITALIC);
-            } else if (run.flags == TextStyleSpan.FLAG_STYLE_BOLD) {
-                return new StyleSpan(Typeface.BOLD);
-            } else if (run.flags == TextStyleSpan.FLAG_STYLE_ITALIC) {
-                return new StyleSpan(Typeface.ITALIC);
-            }
-
-            return new TextStyleSpan(run);
+            return tgToSdkSpan(baseSpan, run);
         } else if (baseSpan instanceof URLSpanReplacement) {
             URLSpanReplacement span = (URLSpanReplacement) baseSpan;
             return new URLSpanReplacement(span.getURL(), run);
@@ -4359,7 +4368,7 @@ public class MediaDataController extends BaseController {
                     if (spanStart > start && end > spanEnd) {
                         editable.setSpan(createNewSpan(oldSpan, textStyleRun, newStyleRun, allowIntersection), spanStart, spanEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         if (span != null) {
-                            editable.setSpan(new TextStyleSpan(new TextStyleSpan.TextStyleRun(newStyleRun)), spanEnd, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            editable.setSpan(tgToSdkSpan(new TextStyleSpan(new TextStyleSpan.TextStyleRun(newStyleRun)), null), spanEnd, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
                         end = spanStart;
                     } else {
@@ -4390,7 +4399,7 @@ public class MediaDataController extends BaseController {
                 }
             }
             if (span != null && start < end) {
-                editable.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable.setSpan(tgToSdkSpan(span, null), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         } catch (Exception e) {
             FileLog.e(e);
