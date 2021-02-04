@@ -3180,6 +3180,10 @@ public class NotificationsController extends BaseController {
     }
 
     private void showOrUpdateNotification(boolean notifyAboutLast) {
+        if (CatogramConfig.INSTANCE.getTotalSilence()) {
+            dismissNotification();
+            return;
+        }
         if (!getUserConfig().isClientActivated() || pushMessages.isEmpty() || !SharedConfig.showNotificationsForAllAccounts && currentAccount != UserConfig.selectedAccount) {
             dismissNotification();
             return;
@@ -3340,6 +3344,10 @@ public class NotificationsController extends BaseController {
             }
 
             if (!notifyAboutLast || !value || MediaController.getInstance().isRecordingAudio() || silent == 1) {
+                notifyDisabled = true;
+            }
+
+            if (CatogramConfig.INSTANCE.getSilenceDND()) {
                 notifyDisabled = true;
             }
 

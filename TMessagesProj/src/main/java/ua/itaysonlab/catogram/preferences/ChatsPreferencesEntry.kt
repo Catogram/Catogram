@@ -127,6 +127,33 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
         }
 
+        category(LocaleController.getString("AS_Header_Notification", R.string.AS_Header_Notification)) {
+
+            switch {
+                title = LocaleController.getString("CG_DND", R.string.CG_DND)
+                summary = LocaleController.getString("CG_DND_desc", R.string.CG_DND_desc)
+
+
+                contract({
+                    return@contract CatogramConfig.silenceDND
+                }) {
+                    CatogramConfig.silenceDND = it
+                }
+            }
+
+            switch {
+                title = LocaleController.getString("CG_Silence", R.string.CG_Silence)
+                summary = LocaleController.getString("CG_Silence_desc", R.string.CG_Silence_desc)
+
+
+                contract({
+                    return@contract CatogramConfig.totalSilence
+                }) {
+                    CatogramConfig.totalSilence = it
+                }
+            }
+        }
+
         category(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header)) {
             switch {
                 title = LocaleController.getString("CG_NewTabs_NoCounter", R.string.CG_NewTabs_NoCounter)

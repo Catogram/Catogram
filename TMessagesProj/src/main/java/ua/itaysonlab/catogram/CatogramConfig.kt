@@ -81,6 +81,9 @@ object CatogramConfig {
     var voicesAgc by sharedPreferences.boolean("cg_hq_voices_agc", false)
     var overrideVoipEnhancements by sharedPreferences.boolean("cg_hq_voip_overrideservercfg", false)
 
+    var silenceDND by sharedPreferences.boolean("cg_dnd", false)
+    var totalSilence by sharedPreferences.boolean("cg_silence", false)
+
     var ghostMode = false
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 
