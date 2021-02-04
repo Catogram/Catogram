@@ -219,7 +219,7 @@
     <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono fittizio nel drawer e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
     <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
-    <string name="CG_DND">Do not disturb</string>
+    <string name="CG_DND">Non disturbare</string>
     <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
     <string name="CG_Silence">Total silence</string>
     <string name="CG_Silence_desc">Will turn off all notifications</string>
