@@ -215,4 +215,14 @@
     <string name="CG_ClearedFromCache">Видалено з кеша</string>
     <string name="CG_ToBeginning">До початку</string>
     <string name="CG_ToLinkedChat">Прив\'язаний чат</string>
+    <string name="CG_FakeUserPhone">Підроблений номер телефона</string>
+    <string name="CG_FakeUserPhoneSummary">показувати підроблений номер телефону в шторці та налаштуваннях (функція прихованого номеру має бути вимкненна в налаштуваннях)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Вимкнути авторство під час пересилання</string>
+    <string name="CG_FwdMenu_DisableNoForward">Увімкнути авторство під час пересилання</string>
+    <string name="CG_DND">Не турбувати</string>
+    <string name="CG_DND_desc">Вимикає звук усіх сповіщень. Корисно, якщо ви хочете бачити сповіщення, але перебуваєте там, де звук бажано вимикати</string>
+    <string name="CG_Silence">Повна тиша</string>
+    <string name="CG_Silence_desc">Вимикає усі сповіщення</string>
+    <string name="CG_SilenceNonContacts">Тиша від відсутніх у контактах</string>
+    <string name="CG_SilenceNonContacts_desc">Якщо увімкнено, сповіщення зі звуком надходитимуть лише від ваших контактів. Ви можете додати людину до контактів навіть без номера телефону, зробіть це у її профілі</string>
 </resources>
