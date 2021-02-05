@@ -219,10 +219,10 @@
     <string name="CG_FakeUserPhoneSummary">hiện số điện thoại giả trong ngăn kéo và cài đặt (tùy chọn ẩn số điện thoại phải được tắt)</string>
     <string name="CG_FwdMenu_EnableNoForward">Tắt chuyển tiếp tên người gửi</string>
     <string name="CG_FwdMenu_DisableNoForward">Bật chuyển tiếp tên người gửi</string>
-    <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
-    <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
+    <string name="CG_DND">Không làm phiền</string>
+    <string name="CG_DND_desc">Tắt tiếng mọi thông báo. Hữu dụng khi bạn không được phát tiếng động nhưng vẫn cần xem thông báo</string>
+    <string name="CG_Silence">Im lặng hoàn toàn</string>
+    <string name="CG_Silence_desc">Tắt toàn bộ thông báo</string>
+    <string name="CG_SilenceNonContacts">Tắt tiếng những người không trong danh bạ</string>
+    <string name="CG_SilenceNonContacts_desc">Nếu bật, thông báo chỉ có tiếng nếu người gửi nằm trong danh bạ của bạn. Bạn có thể thêm một người vào danh bạ kể cả khi không có số điện thoại, làm việc này ở hồ sơ của họ</string>
 </resources>
