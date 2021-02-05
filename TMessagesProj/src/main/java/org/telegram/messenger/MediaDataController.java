@@ -4317,8 +4317,6 @@ public class MediaDataController extends BaseController {
                 return new StyleSpan(Typeface.ITALIC);
             } else if (run.flags == TextStyleSpan.FLAG_STYLE_MONO) {
                 return new TypefaceSpan("monospace");
-            } else if (run.flags == TextStyleSpan.FLAG_STYLE_UNDERLINE) {
-                return new UnderlineSpan();
             } else if (run.flags == TextStyleSpan.FLAG_STYLE_STRIKE) {
                 return new StrikethroughSpan();
             }
@@ -4536,14 +4534,6 @@ public class MediaDataController extends BaseController {
         return entity;
     }
 
-    private boolean checkSpanInclusion(int spanStart, int spanEnd, CharacterStyle span, ArrayList<TLRPC.MessageEntity> entities) {
-        if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
-            return true;
-        }
-
-        return false;
-    }
-
     public ArrayList<TLRPC.MessageEntity> getEntities(CharSequence[] message, boolean allowStrike) {
         if (message == null || message[0] == null) {
             return null;
@@ -4632,7 +4622,9 @@ public class MediaDataController extends BaseController {
                 int spanStart = spannable.getSpanStart(styleSpan);
                 int spanEnd = spannable.getSpanEnd(styleSpan);
 
-                if (checkSpanInclusion(spanStart, spanEnd, styleSpan, entities)) continue;
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
 
                 if (entities == null) {
                     entities = new ArrayList<>();
@@ -4657,7 +4649,9 @@ public class MediaDataController extends BaseController {
                 int spanStart = spannable.getSpanStart(typefaceSpan);
                 int spanEnd = spannable.getSpanEnd(typefaceSpan);
 
-                if (checkSpanInclusion(spanStart, spanEnd, typefaceSpan, entities)) continue;
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
 
                 if (entities == null) {
                     entities = new ArrayList<>();
@@ -4673,27 +4667,15 @@ public class MediaDataController extends BaseController {
                 int spanStart = spannable.getSpanStart(strikeSpan);
                 int spanEnd = spannable.getSpanEnd(strikeSpan);
 
-                if (checkSpanInclusion(spanStart, spanEnd, strikeSpan, entities)) continue;
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
 
                 if (entities == null) {
                     entities = new ArrayList<>();
                 }
 
                 entities.add(createMessageEntity(new TLRPC.TL_messageEntityStrike(), spanStart, spanEnd));
-            }
-
-            UnderlineSpan[] underlineSpans = spannable.getSpans(0, message[0].length(), UnderlineSpan.class);
-            for (UnderlineSpan underlineSpan : underlineSpans) {
-                int spanStart = spannable.getSpanStart(underlineSpan);
-                int spanEnd = spannable.getSpanEnd(underlineSpan);
-
-                if (checkSpanInclusion(spanStart, spanEnd, underlineSpan, entities)) continue;
-
-                if (entities == null) {
-                    entities = new ArrayList<>();
-                }
-
-                entities.add(createMessageEntity(new TLRPC.TL_messageEntityUnderline(), spanStart, spanEnd));
             }
 
             TextStyleSpan[] spans = spannable.getSpans(0, message[0].length(), TextStyleSpan.class);
