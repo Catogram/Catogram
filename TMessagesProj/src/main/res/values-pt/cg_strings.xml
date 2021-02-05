@@ -215,10 +215,10 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
+    <string name="CG_FakeUserPhone">Número de telefone falso</string>
+    <string name="CG_FakeUserPhoneSummary">mostrar número de telefone falso na gaveta e configurações (a opção de ocultar o número de telefone deve ser desativada)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Desativar autoria</string>
+    <string name="CG_FwdMenu_DisableNoForward">Ativar autoria</string>
     <string name="CG_DND">Do not disturb</string>
     <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
     <string name="CG_Silence">Total silence</string>
