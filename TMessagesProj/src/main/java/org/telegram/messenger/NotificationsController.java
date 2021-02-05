@@ -3351,7 +3351,7 @@ public class NotificationsController extends BaseController {
                 notifyDisabled = true;
             }
 
-            if (CatogramConfig.INSTANCE.getSilenceNonContacts() && chat == null && getContactsController().contactsDict.get(user_id) == null) {
+            if (CatogramConfig.INSTANCE.getSilenceNonContacts() && getContactsController().contactsDict.get(user_id) == null) {
                 notifyDisabled = true;
             }
 
