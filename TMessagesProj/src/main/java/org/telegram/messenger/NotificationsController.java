@@ -3351,6 +3351,10 @@ public class NotificationsController extends BaseController {
                 notifyDisabled = true;
             }
 
+            if (CatogramConfig.INSTANCE.getSilenceNonContacts() && chat == null && getContactsController().contactsDict.get(user_id) == null) {
+                notifyDisabled = true;
+            }
+
             if (!notifyDisabled && dialog_id == override_dialog_id && chat != null) {
                 int notifyMaxCount;
                 int notifyDelay;

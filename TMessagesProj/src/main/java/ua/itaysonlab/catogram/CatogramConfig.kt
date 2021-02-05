@@ -83,6 +83,7 @@ object CatogramConfig {
 
     var silenceDND by sharedPreferences.boolean("cg_dnd", false)
     var totalSilence by sharedPreferences.boolean("cg_silence", false)
+    var silenceNonContacts by sharedPreferences.boolean("cg_silence_non_contacts", false)
 
     var ghostMode = false
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)

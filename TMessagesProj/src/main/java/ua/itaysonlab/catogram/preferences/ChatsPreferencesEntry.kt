@@ -152,6 +152,18 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.totalSilence = it
                 }
             }
+
+            switch {
+                title = LocaleController.getString("CG_SilenceNonContacts", R.string.CG_SilenceNonContacts)
+                summary = LocaleController.getString("CG_SilenceNonContacts_desc", R.string.CG_SilenceNonContacts_desc)
+
+
+                contract({
+                    return@contract CatogramConfig.silenceNonContacts
+                }) {
+                    CatogramConfig.silenceNonContacts = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Filters_Header", R.string.AS_Filters_Header)) {
