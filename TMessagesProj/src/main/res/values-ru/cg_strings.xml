@@ -215,6 +215,14 @@
     <string name="CG_ClearedFromCache">Удалено из кеша</string>
     <string name="CG_ToBeginning">В начало</string>
     <string name="CG_ToLinkedChat">Связанный чат</string>
+    <string name="CG_FakeUserPhone">Поддельный номер в настройках</string>
+    <string name="CG_FakeUserPhoneSummary">визуально подделывает номер телефона в настройках (скрытие номера телефона должно быть отключено)</string>
     <string name="CG_FwdMenu_EnableNoForward">Удалять автора сообщений</string>
     <string name="CG_FwdMenu_DisableNoForward">Не удалять автора сообщений</string>
+    <string name="CG_DND">Не беспокоить</string>
+    <string name="CG_DND_desc">Заглушит все оповещения. Полезно, если вы не хотите шуметь, но хотите видеть уведомления</string>
+    <string name="CG_Silence">Абсолютная тишина</string>
+    <string name="CG_Silence_desc">Отключит все оповещения</string>
+    <string name="CG_SilenceNonContacts">Заглушить не-контакты</string>
+    <string name="CG_SilenceNonContacts_desc">Оповещения со звуком будут приходить только от контактов</string>
 </resources>
