@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -271,6 +272,7 @@ public class Emoji {
             }
             if (SharedConfig.useSystemEmoji) {
                 String emoji = fixEmoji(EmojiData.data[info.page][info.emojiIndex]);
+                textPaint.setTypeface(Typeface.createFromFile("/system/fonts/NotoSansSymbols-Regular-Subsetted.ttf"));
                 textPaint.setTextSize(b.height() * 0.8f);
                 canvas.drawText(emoji,  0, emoji.length(), b.left, b.bottom - b.height() * 0.225f, textPaint);
                 return;
