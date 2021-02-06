@@ -160,7 +160,7 @@
     <string name="CG_VoiceRecognise">Recognise</string>
     <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
     <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
-    <string name="ActionBarTitle">Chats</string>
+    <string name="ActionBarTitle">聊天对话</string>
     <string name="CG_ArchiveOnPull">下拉展开归档</string>
     <string name="CG_ArchiveOnPull_Desc">启用在下拉时进入归档</string>
     <string name="CG_IconReplacements">UI 图标</string>
