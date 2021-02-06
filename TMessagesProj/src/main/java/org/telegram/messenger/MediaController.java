@@ -2169,7 +2169,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
                 return Integer.compare(mid2, mid1);
             } else {
                 if (group1 != 0 && group1 == group2) {
-                    return Integer.compare(mid2, mid1);
+                    return Integer.compare(mid1, mid2);
                 }
                 return Integer.compare(mid1, mid2);
             }
