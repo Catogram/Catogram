@@ -215,14 +215,14 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
-    <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
-    <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
+    <string name="CG_FakeUserPhone">Nomor telepon palsu</string>
+    <string name="CG_FakeUserPhoneSummary">memperlihatkan nomor palsu di drawer dan setelan (fitur nomor palsu harus di nonaktifkan)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Menonaktifkan penerusan pesan mencantumkan nama</string>
+    <string name="CG_FwdMenu_DisableNoForward">Aktifkan penerusan pesan mencantumkan nama</string>
+    <string name="CG_DND">Jangan ganggu</string>
+    <string name="CG_DND_desc">Akan mensenyapkan semua notifikasi, berguna apabila anda tidak diperbolehkan membuat suara tetapi masih perlu melihat notifikasi</string>
+    <string name="CG_Silence">Sepenuhnya senyap</string>
+    <string name="CG_Silence_desc">Akan mematikan semua notifikasi</string>
+    <string name="CG_SilenceNonContacts">Senyapkan non-kontak</string>
+    <string name="CG_SilenceNonContacts_desc">Jika diaktifkan, notifikasi dengan suara hanya berbunyi dari kontak. Anda bisa menambahkan orang ke kontak bahkan tanpa nomor telepon, lakukan itu di profil mereka</string>
 </resources>
