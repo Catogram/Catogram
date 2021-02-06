@@ -221,10 +221,10 @@
     <string name="CG_FakeUserPhoneSummary">إظهار رقم هاتف مزيف في الدرج والإعدادات (يجب تعطيل إخفاء تفضيل رقم الهاتف)</string>
     <string name="CG_FwdMenu_EnableNoForward">تعطيل نظام التوجيه من غير اسم</string>
     <string name="CG_FwdMenu_DisableNoForward">تشغيل نظام التوجيه من غير اسم</string>
-    <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
-    <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
+    <string name="CG_DND">عدم الإزعاج</string>
+    <string name="CG_DND_desc">سيتم كتم جميع الإشعارات. مفيد للاستعمال إذا لم يُسمح لك بإحداث ضوضاء ولكنك ما زلت بحاجة إلى الرؤية </string>
+    <string name="CG_Silence">صمت تام</string>
+    <string name="CG_Silence_desc">سيتم إيقاف تشغيل جميع الإشعارات</string>
+    <string name="CG_SilenceNonContacts">صمت الرسائل من جهات غير الاتصال</string>
+    <string name="CG_SilenceNonContacts_desc">في حالة التفعيل، ستأتي الإشعارات بالصوت من جهات الاتصال فقط. يمكنك إضافة شخص إلى جهات الاتصال الخاصة بك حتى بدون رقم الهاتف ، قم بذلك في الملف التعريف الخاص بهم</string>
 </resources>
