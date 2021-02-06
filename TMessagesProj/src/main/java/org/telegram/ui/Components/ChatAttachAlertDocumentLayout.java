@@ -60,6 +60,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
@@ -77,17 +81,21 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
         }
     }
 
+    private ExecutorService asyncExecutor = Executors.newSingleThreadExecutor();
+
     private RecyclerListView listView;
     private ListAdapter listAdapter;
     private SearchAdapter searchAdapter;
     private LinearLayoutManager layoutManager;
     private ActionBarMenuItem searchItem;
     private ActionBarMenuItem sortItem;
+    private EmptyTextProgressView progressView;
 
     private boolean sendPressed;
 
     private boolean ignoreLayout;
 
+    private View currentEmptyView;
     private LinearLayout emptyView;
     private ImageView emptyImageView;
     private TextView emptyTitleTextView;
@@ -109,6 +117,8 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
     private boolean allowMusic;
 
     private boolean searching;
+    private boolean loadingFiles;
+    private boolean loadingRecents;
 
     private boolean sortByName;
 
@@ -157,7 +167,6 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
         super(alert, context);
         allowMusic = music;
         sortByName = SharedConfig.sortFilesByName;
-        loadRecentFiles();
 
         searching = false;
 
@@ -208,6 +217,10 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
         editText.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
         editText.setCursorColor(Theme.getColor(Theme.key_dialogTextBlack));
         editText.setHintTextColor(Theme.getColor(Theme.key_chat_messagePanelHint));
+
+        progressView = new EmptyTextProgressView(context);
+        progressView.showProgress();
+        addView(progressView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
 
         sortItem = menu.addItem(sort_button, sortByName ? R.drawable.contacts_sort_time : R.drawable.contacts_sort_name);
         sortItem.setContentDescription(LocaleController.getString("AccDescrContactSorting", R.string.AccDescrContactSorting));
@@ -390,9 +403,8 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
             return onItemClick(view, item);
         });
 
-        listRoots();
         updateSearchButton();
-        updateEmptyView();
+        loadRecentFiles();
     }
 
     @Override
@@ -404,6 +416,7 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
         } catch (Exception e) {
             FileLog.e(e);
         }
+        asyncExecutor.shutdown();
         parentAlert.actionBar.closeSearchField();
         ActionBarMenu menu = parentAlert.actionBar.createMenu();
         menu.removeView(sortItem);
@@ -597,30 +610,41 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
     }
 
     public void loadRecentFiles() {
-        try {
-            File[] files = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).listFiles();
-            for (int a = 0; a < files.length; a++) {
-                File file = files[a];
-                if (file.isDirectory()) {
-                    continue;
+        loadingRecents = true;
+        updateEmptyView();
+        asyncExecutor.execute(() -> {
+            try {
+                File[] files = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).listFiles();
+                if (files == null) files = new File[0];
+
+                for (int a = 0; a < files.length; a++) {
+                    File file = files[a];
+                    if (file.isDirectory()) continue;
+
+                    ListItem item = new ListItem();
+                    item.title = file.getName();
+                    item.file = file;
+                    String fname = file.getName();
+                    String[] sp = fname.split("\\.");
+                    item.ext = sp.length > 1 ? sp[sp.length - 1] : "?";
+                    item.subtitle = AndroidUtilities.formatFileSize(file.length());
+                    fname = fname.toLowerCase();
+                    if (fname.endsWith(".jpg") || fname.endsWith(".png") || fname.endsWith(".gif") || fname.endsWith(".jpeg")) {
+                        item.thumb = file.getAbsolutePath();
+                    }
+                    recentItems.add(item);
                 }
-                ListItem item = new ListItem();
-                item.title = file.getName();
-                item.file = file;
-                String fname = file.getName();
-                String[] sp = fname.split("\\.");
-                item.ext = sp.length > 1 ? sp[sp.length - 1] : "?";
-                item.subtitle = AndroidUtilities.formatFileSize(file.length());
-                fname = fname.toLowerCase();
-                if (fname.endsWith(".jpg") || fname.endsWith(".png") || fname.endsWith(".gif") || fname.endsWith(".jpeg")) {
-                    item.thumb = file.getAbsolutePath();
-                }
-                recentItems.add(item);
+
+                sortRecentItems();
+                AndroidUtilities.runOnUIThread(() -> {
+                    loadingRecents = false;
+                    updateEmptyView();
+                    if (currentDir == null) listRoots();
+                });
+            } catch (Exception e) {
+                FileLog.e(e);
             }
-            sortRecentItems();
-        } catch (Exception e) {
-            FileLog.e(e);
-        }
+        });
     }
 
     private void sortRecentItems() {
@@ -706,14 +730,14 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
     }
 
     private void updateEmptyViewPosition() {
-        if (emptyView.getVisibility() != VISIBLE) {
+        if (currentEmptyView.getVisibility() != VISIBLE) {
             return;
         }
         View child = listView.getChildAt(0);
         if (child == null) {
             return;
         }
-        emptyView.setTranslationY((emptyView.getMeasuredHeight() - getMeasuredHeight() + child.getTop()) / 2);
+        currentEmptyView.setTranslationY((currentEmptyView.getMeasuredHeight() - getMeasuredHeight() + child.getTop()) / 2);
     }
 
     private void updateEmptyView() {
@@ -723,13 +747,26 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
             emptyTitleTextView.setText(LocaleController.getString("NoFilesFound", R.string.NoFilesFound));
             emptySubtitleTextView.setText(LocaleController.getString("NoFilesInfo", R.string.NoFilesInfo));
         }
+
+        if (loadingFiles || loadingRecents) {
+            currentEmptyView = progressView;
+            emptyView.setVisibility(View.GONE);
+            listView.setVisibility(View.INVISIBLE);
+        } else {
+            currentEmptyView = emptyView;
+            progressView.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+        }
+
         boolean visible;
         if (listView.getAdapter() == searchAdapter) {
             visible = searchAdapter.searchResult.isEmpty();
+        } else if (loadingFiles || loadingRecents) {
+            visible = true;
         } else {
             visible = listAdapter.getItemCount() == 1;
         }
-        emptyView.setVisibility(visible ? VISIBLE : GONE);
+        currentEmptyView.setVisibility(visible ? VISIBLE : GONE);
         updateEmptyViewPosition();
     }
 
@@ -793,6 +830,8 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
     }
 
     private boolean listFiles(File dir) {
+        if (loadingFiles) return true;
+
         hasFiles = false;
         if (!dir.canRead()) {
             if (dir.getAbsolutePath().startsWith(Environment.getExternalStorageDirectory().toString())
@@ -825,52 +864,66 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
         }
         currentDir = dir;
         items.clear();
-        for (int a = 0; a < files.length; a++) {
-            File file = files[a];
-            if (file.getName().indexOf('.') == 0) {
-                continue;
-            }
-            ListItem item = new ListItem();
-            item.title = file.getName();
-            item.file = file;
-            if (file.isDirectory()) {
-                item.icon = R.drawable.files_folder;
-                item.subtitle = LocaleController.getString("Folder", R.string.Folder);
-            } else {
-                hasFiles = true;
-                String fname = file.getName();
-                String[] sp = fname.split("\\.");
-                item.ext = sp.length > 1 ? sp[sp.length - 1] : "?";
-                item.subtitle = AndroidUtilities.formatFileSize(file.length());
-                fname = fname.toLowerCase();
-                if (fname.endsWith(".jpg") || fname.endsWith(".png") || fname.endsWith(".gif") || fname.endsWith(".jpeg")) {
-                    item.thumb = file.getAbsolutePath();
+
+        loadingFiles = true;
+        updateEmptyView();
+
+        asyncExecutor.execute(() -> {
+            for (int a = 0; a < files.length; a++) {
+                File file = files[a];
+                if (file.getName().indexOf('.') == 0) {
+                    continue;
                 }
+                ListItem item = new ListItem();
+                item.title = file.getName();
+                item.file = file;
+                if (file.isDirectory()) {
+                    item.icon = R.drawable.files_folder;
+                    item.subtitle = LocaleController.getString("Folder", R.string.Folder);
+                } else {
+                    hasFiles = true;
+                    String fname = file.getName();
+                    String[] sp = fname.split("\\.");
+                    item.ext = sp.length > 1 ? sp[sp.length - 1] : "?";
+                    item.subtitle = AndroidUtilities.formatFileSize(file.length());
+                    fname = fname.toLowerCase();
+                    if (fname.endsWith(".jpg") || fname.endsWith(".png") || fname.endsWith(".gif") || fname.endsWith(".jpeg")) {
+                        item.thumb = file.getAbsolutePath();
+                    }
+                }
+                items.add(item);
             }
-            items.add(item);
-        }
-        ListItem item = new ListItem();
-        item.title = "..";
-        if (history.size() > 0) {
-            HistoryEntry entry = history.get(history.size() - 1);
-            if (entry.dir == null) {
-                item.subtitle = LocaleController.getString("Folder", R.string.Folder);
+
+            ListItem item = new ListItem();
+            item.title = "..";
+            if (history.size() > 0) {
+                HistoryEntry entry = history.get(history.size() - 1);
+                if (entry.dir == null) {
+                    item.subtitle = LocaleController.getString("Folder", R.string.Folder);
+                } else {
+                    item.subtitle = entry.dir.toString();
+                }
             } else {
-                item.subtitle = entry.dir.toString();
+                item.subtitle = LocaleController.getString("Folder", R.string.Folder);
             }
-        } else {
-            item.subtitle = LocaleController.getString("Folder", R.string.Folder);
-        }
-        item.icon = R.drawable.files_folder;
-        item.file = null;
-        items.add(0, item);
-        sortFileItems();
-        updateSearchButton();
-        AndroidUtilities.clearDrawableAnimation(listView);
-        scrolling = true;
-        int top = getTopForScroll();
-        listAdapter.notifyDataSetChanged();
-        layoutManager.scrollToPositionWithOffset(0, top);
+
+            item.icon = R.drawable.files_folder;
+            item.file = null;
+            items.add(0, item);
+            sortFileItems();
+
+            AndroidUtilities.runOnUIThread(() -> {
+                updateSearchButton();
+                AndroidUtilities.clearDrawableAnimation(listView);
+                loadingFiles = false;
+                scrolling = true;
+                int top = getTopForScroll();
+                updateEmptyView();
+                listAdapter.notifyDataSetChanged();
+                layoutManager.scrollToPositionWithOffset(0, top);
+            });
+        });
+
         return true;
     }
 
@@ -1301,6 +1354,9 @@ public class ChatAttachAlertDocumentLayout extends ChatAttachAlert.AttachAlertLa
 
         themeDescriptions.add(new ThemeDescription(listView, ThemeDescription.FLAG_SELECTOR, null, null, null, null, Theme.key_listSelector));
         themeDescriptions.add(new ThemeDescription(listView, 0, new Class[]{View.class}, Theme.dividerPaint, null, null, Theme.key_divider));
+
+        themeDescriptions.add(new ThemeDescription(progressView, ThemeDescription.FLAG_TEXTCOLOR, null, null, null, null, Theme.key_emptyListPlaceholder));
+        themeDescriptions.add(new ThemeDescription(progressView, ThemeDescription.FLAG_PROGRESSBAR, null, null, null, null, Theme.key_progressCircle));
 
         themeDescriptions.add(new ThemeDescription(listView, ThemeDescription.FLAG_TEXTCOLOR, new Class[]{SharedDocumentCell.class}, new String[]{"nameTextView"}, null, null, null, Theme.key_windowBackgroundWhiteBlackText));
         themeDescriptions.add(new ThemeDescription(listView, ThemeDescription.FLAG_TEXTCOLOR, new Class[]{SharedDocumentCell.class}, new String[]{"dateTextView"}, null, null, null, Theme.key_windowBackgroundWhiteGrayText3));
