@@ -194,11 +194,11 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                                         musicQueues.put(did, arrayList1);
                                     }
                                     MessageObject messageObject = new MessageObject(currentAccount, message, false, true);
-                                    arrayList.add(0, messageObject);
+                                    arrayList.add(messageObject);
                                     MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder().setMediaId(did + "_" + arrayList.size());
                                     builder.setTitle(messageObject.getMusicTitle());
                                     builder.setSubtitle(messageObject.getMusicAuthor());
-                                    arrayList1.add(0, new MediaSessionCompat.QueueItem(builder.build(), arrayList1.size()));
+                                    arrayList1.add(new MediaSessionCompat.QueueItem(builder.build(), arrayList1.size()));
                                 }
                             }
                         }
@@ -366,7 +366,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
 
         @Override
         public void onSkipToQueueItem(long queueId) {
-            MediaController.getInstance().playMessageAtIndex((int) queueId);
+            MediaController.getInstance().playMessageAtIndex((MediaController.getInstance().getPlaylist().size()) - 1 - (int) queueId);
             handlePlayRequest();
         }
 
@@ -493,7 +493,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
         }
         stateBuilder.setState(state, position, 1.0f, SystemClock.elapsedRealtime());
         if (playingMessageObject != null) {
-            stateBuilder.setActiveQueueItemId(MediaController.getInstance().getPlayingMessageObjectNum());
+            stateBuilder.setActiveQueueItemId(Math.max(0, (MediaController.getInstance().getPlaylist().size() - 1) - MediaController.getInstance().getPlayingMessageObjectNum()));
         } else {
             stateBuilder.setActiveQueueItemId(0);
         }
