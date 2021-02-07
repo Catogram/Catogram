@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.v5_translation_markup.view.*
 import org.telegram.messenger.AndroidUtilities
@@ -14,6 +15,7 @@ import org.telegram.messenger.LocaleController
 import org.telegram.messenger.MessageObject
 import org.telegram.messenger.R
 import org.telegram.ui.ActionBar.Theme
+import org.telegram.messenger.ApplicationLoader
 
 class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.TranslationImpl): BottomSheetDialogFragment() {
     private lateinit var vview: View
@@ -59,6 +61,8 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
 
         vview.copyText.setOnClickListener {
             AndroidUtilities.addToClipboard(vview.trsl.text.toString())
+            Toast.makeText(ApplicationLoader.applicationContext, LocaleController.getString("TextCopied", R.string.TextCopied), Toast.LENGTH_SHORT).show()
+            dismiss()
         }
 
         vview.close.imageTintList = blackColor
