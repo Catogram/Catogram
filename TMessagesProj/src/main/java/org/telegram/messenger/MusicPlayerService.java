@@ -525,11 +525,21 @@ public class MusicPlayerService extends Service implements NotificationCenter.No
             }
         } else if (id == NotificationCenter.messagePlayingDidSeek) {
             MessageObject messageObject = MediaController.getInstance().getPlayingMessageObject();
+            long progress = Math.round(messageObject.audioPlayerDuration * (float) args[1]) * 1000L;
+
             if (remoteControlClient != null && Build.VERSION.SDK_INT >= 18) {
-                long progress = Math.round(messageObject.audioPlayerDuration * (float) args[1]) * 1000L;
                 remoteControlClient.setPlaybackState(MediaController.getInstance().isMessagePaused() ? RemoteControlClient.PLAYSTATE_PAUSED : RemoteControlClient.PLAYSTATE_PLAYING,
                         progress,
                         MediaController.getInstance().isMessagePaused() ? 0f : 1f);
+            }
+
+            if (mediaSession != null && playbackState != null && Build.VERSION.SDK_INT >= 21) {
+                playbackState.setState(MediaController.getInstance().isMessagePaused() ? PlaybackStateCompat.STATE_PAUSED : PlaybackStateCompat.STATE_PLAYING,
+                        progress,
+                        MediaController.getInstance().isMessagePaused() ? 0 : 1)
+                        .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_PLAY | PlaybackStateCompat.ACTION_PAUSE | PlaybackStateCompat.ACTION_SEEK_TO | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS | PlaybackStateCompat.ACTION_SKIP_TO_NEXT);
+
+                mediaSession.setPlaybackState(playbackState.build());
             }
         } else if (id == NotificationCenter.httpFileDidLoad) {
             final String path = (String) args[0];
