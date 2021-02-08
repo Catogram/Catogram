@@ -219,8 +219,8 @@
     <string name="CG_ToLinkedChat">الدردشة التي تم ربطها</string>
     <string name="CG_FakeUserPhone">إظهار رقم هاتف مزيف</string>
     <string name="CG_FakeUserPhoneSummary">إظهار رقم هاتف مزيف في الدرج والإعدادات (يجب تعطيل إخفاء تفضيل رقم الهاتف)</string>
-    <string name="CG_FwdMenu_EnableNoForward">تعطيل نظام التوجيه من غير اسم</string>
-    <string name="CG_FwdMenu_DisableNoForward">تشغيل نظام التوجيه من غير اسم</string>
+    <string name="CG_FwdMenu_EnableNoForward">توجيه الرسائل من غير اسم</string>
+    <string name="CG_FwdMenu_DisableNoForward">توجيه الرسائل مع الأسم</string>
     <string name="CG_DND">عدم الإزعاج</string>
     <string name="CG_DND_desc">سيتم كتم جميع الإشعارات. مفيد للاستعمال إذا لم يُسمح لك بإحداث ضوضاء ولكنك ما زلت بحاجة إلى الرؤية </string>
     <string name="CG_Silence">صمت تام</string>
