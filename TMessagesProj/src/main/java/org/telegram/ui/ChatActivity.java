@@ -20873,7 +20873,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (longPress) {
                 BottomSheet.Builder builder = new BottomSheet.Builder(getParentActivity());
                 builder.setTitle(urlFinal);
-                builder.setItems(new CharSequence[]{LocaleController.getString("Open", R.string.Open), LocaleController.getString("Copy", R.string.Copy)}, (dialog, which) -> {
+                builder.setItems(new CharSequence[]{LocaleController.getString("Open", R.string.Open), LocaleController.getString("Copy", R.string.Copy), LocaleController.getString("ShareLink", R.string.ShareLink)}, (dialog, which) -> {
                     if (which == 0) {
                         if (AndroidUtilities.shouldShowUrlInAlert(urlFinal)) {
                             AlertsCreator.showOpenUrlAlert(ChatActivity.this, urlFinal, true, true, false);
@@ -20894,6 +20894,15 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             undoView.showWithAction(0, UndoView.ACTION_PHONE_COPIED, null);
                         } else {
                             undoView.showWithAction(0, UndoView.ACTION_LINK_COPIED, null);
+                        }
+                    } else if (which == 2) {
+                        try {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/plain");
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, urlFinal);
+                            getParentActivity().startActivityForResult(Intent.createChooser(shareIntent, LocaleController.getString("ShareLink", R.string.ShareLink)), 500);
+                        } catch (Exception e) {
+                            FileLog.e(e);
                         }
                     }
                 });
