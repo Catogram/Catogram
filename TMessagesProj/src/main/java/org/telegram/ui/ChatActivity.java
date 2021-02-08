@@ -20035,6 +20035,19 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 ChatMessageCell cell = (ChatMessageCell) view;
                 MessageObject messageObject = cell.getMessageObject();
 
+                boolean shouldUpdateReply = false;
+
+                if (messageObject.replyMessageObject != null) {
+                    if (messagesDict[0].indexOfKey(messageObject.replyMessageObject.getId()) >= 0) {
+                        cell.getMessageObject().replyMessageObject = messagesDict[0].get(messageObject.replyMessageObject.getId());
+                    } else {
+                        cell.getMessageObject().replyMessageObject = null;
+                        cell.getMessageObject().messageOwner.reply_to = null;
+                    }
+
+                    shouldUpdateReply = true;
+                }
+
                 boolean disableSelection = false;
                 boolean selected = false;
                 if (actionBar.isActionModeShowed() || reportType >= 0) {
@@ -20055,10 +20068,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
 
                 if (!cell.getMessageObject().deleted || cell.linkedChatId != linkedChatId) {
-                    cell.setIsUpdating(true);
+                    cell.setIsUpdating(true, shouldUpdateReply);
                     cell.linkedChatId = chatInfo != null ? chatInfo.linked_chat_id : 0;
                     cell.setMessageObject(cell.getMessageObject(), cell.getCurrentMessagesGroup(), cell.isPinnedBottom(), cell.isPinnedTop());
-                    cell.setIsUpdating(false);
+                    cell.setIsUpdating(false, false);
                 }
                 if (cell != scrimView) {
                     cell.setCheckPressed(!disableSelection, disableSelection && selected);

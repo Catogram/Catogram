@@ -328,6 +328,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     private boolean attachedToWindow;
 
     private boolean isUpdating;
+    private boolean isUpdatingReply;
 
     private RadialProgress2 radialProgress;
     private RadialProgress2 videoRadialProgress;
@@ -2878,7 +2879,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         boolean dataChanged = currentMessageObject != null && currentMessageObject.getId() == messageObject.getId() && lastSendState == MessageObject.MESSAGE_SEND_STATE_EDITING && messageObject.isSent()
                 || currentMessageObject == messageObject && (isUserDataChanged() || photoNotSet)
                 || lastPostAuthor != messageObject.messageOwner.post_author
-                || wasPinned != isPinned;
+                || wasPinned != isPinned
+                || isUpdatingReply;
         boolean groupChanged = groupedMessages != currentMessagesGroup;
         boolean pollChanged = false;
         if (drawCommentButton || drawSideButton == 3 && !((hasDiscussion && messageObject.isLinkedToChat(linkedChatId) || isRepliesChat) && (currentPosition == null || currentPosition.siblingHeights == null && (currentPosition.flags & MessageObject.POSITION_FLAG_BOTTOM) != 0 || currentPosition.siblingHeights != null && (currentPosition.flags & MessageObject.POSITION_FLAG_TOP) == 0))) {
@@ -6423,8 +6425,17 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         }
     }
 
+    public void setIsUpdating(boolean update, boolean reply) {
+        isUpdating = update;
+        isUpdatingReply = reply;
+    }
+
     public void setIsUpdating(boolean value) {
-        isUpdating = true;
+        isUpdating = value;
+    }
+
+    public void setIsUpdatingReply(boolean value) {
+        isUpdatingReply = value;
     }
 
     public void setMessageObject(MessageObject messageObject, MessageObject.GroupedMessages groupedMessages, boolean bottomNear, boolean topNear) {
