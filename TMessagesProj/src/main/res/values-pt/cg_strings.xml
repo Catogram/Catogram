@@ -222,7 +222,7 @@
     <string name="CG_DND">Não perturbe</string>
     <string name="CG_DND_desc">Silenciará todas as notificações. Útil se você não tem permissão para fazer barulho, mas ainda precisa ver as notificações</string>
     <string name="CG_Silence">Silêncio total</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
+    <string name="CG_Silence_desc">Desligará todas as notificações</string>
+    <string name="CG_SilenceNonContacts">Silenciar não contatos</string>
+    <string name="CG_SilenceNonContacts_desc">Se ativado, as notificações com som virão apenas dos contatos. Você pode adicionar uma pessoa aos seus contatos mesmo sem um número de telefone, faça isso no perfil dela</string>
 </resources>
