@@ -25,7 +25,6 @@ object CatogramConfig {
     var noVibration by sharedPreferences.boolean("advanced_novibration", false)
     var forceNewYearDrawer by sharedPreferences.boolean("advanced_nydrawer", false)
     var drawerAvatar by sharedPreferences.boolean("cg_drawer_avatar", false)
-    var flatStatusbar by sharedPreferences.boolean("cg_flat_statusbar", true)
     var flatActionbar by sharedPreferences.boolean("cg_flat_actionbar", false)
     var drawerBlur by sharedPreferences.boolean("cg_drawer_blur", false)
     var drawerDarken by sharedPreferences.boolean("cg_drawer_darken", false)
