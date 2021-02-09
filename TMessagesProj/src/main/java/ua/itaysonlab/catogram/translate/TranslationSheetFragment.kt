@@ -38,8 +38,8 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
     }
 
     private fun getAutoIsoLang(): String {
-        val iso = LocaleController.getLocaleStringIso639()
-        return if (impl.clazz.supportedLanguages().contains(iso)) iso else impl.clazz.supportedLanguages()[0]
+        val iso = LocaleController.getString("LanguageCode", R.string.LanguageCode)
+        return if (impl.clazz.supportedLanguages().contains(iso)) iso else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("pt_BR")) impl.clazz.supportedLanguages()[38] else impl.clazz.supportedLanguages()[0]
     }
 
     @SuppressLint("SetTextI18n")
