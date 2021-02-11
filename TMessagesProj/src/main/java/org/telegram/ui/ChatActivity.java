@@ -64,7 +64,6 @@ import android.text.style.CharacterStyle;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
-import android.util.Log;
 import android.util.LongSparseArray;
 import android.util.Property;
 import android.util.SparseArray;
@@ -13735,7 +13734,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
             }
             if (changed) {
-                updateVisibleRows();
+                updateVisibleRows(true);
             }
         } else if (id == NotificationCenter.messagePlayingDidStart) {
             MessageObject messageObject = (MessageObject) args[0];
@@ -15691,7 +15690,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     chatAdapter.notifyItemRangeChanged(chatAdapter.messagesStartRow, messages.size());
                 }
             }
-            updateVisibleRows();
+            updateVisibleRows(true);
         } else if (threadMessageId == 0) {
             first_unread_id = 0;
             last_message_id = 0;
@@ -20008,6 +20007,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void updateVisibleRows() {
+        updateVisibleRows(false);
+    }
+
+    private void updateVisibleRows(boolean isDeletionPending) {
         if (chatListView == null) {
             return;
         }
@@ -20037,16 +20040,20 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 MessageObject messageObject = cell.getMessageObject();
 
                 boolean shouldUpdateReply = false;
-
                 if (messageObject.replyMessageObject != null) {
                     if (messagesDict[0].indexOfKey(messageObject.replyMessageObject.getId()) >= 0) {
-                        cell.getMessageObject().replyMessageObject = messagesDict[0].get(messageObject.replyMessageObject.getId());
+                        MessageObject msg = messagesDict[0].get(messageObject.replyMessageObject.getId());
+                        if (msg.messageText.hashCode() != messageObject.replyMessageObject.messageText.hashCode()) {
+                            cell.getMessageObject().replyMessageObject = msg;
+                            shouldUpdateReply = true;
+                        }
                     } else {
-                        cell.getMessageObject().replyMessageObject = null;
-                        cell.getMessageObject().messageOwner.reply_to = null;
+                        if (isDeletionPending) {
+                            cell.getMessageObject().replyMessageObject = null;
+                            cell.getMessageObject().messageOwner.reply_to = null;
+                            shouldUpdateReply = true;
+                        }
                     }
-
-                    shouldUpdateReply = true;
                 }
 
                 boolean disableSelection = false;
