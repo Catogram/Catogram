@@ -20031,7 +20031,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
         }
         int count = chatListView.getChildCount();
-        MessageObject editingMessageObject = chatActivityEnterView != null ? chatActivityEnterView.getEditingMessageObject() : null;
         int linkedChatId = chatInfo != null ? chatInfo.linked_chat_id : 0;
         for (int a = 0; a < count; a++) {
             View view = chatListView.getChildAt(a);
@@ -20041,18 +20040,13 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                 boolean shouldUpdateReply = false;
                 if (messageObject.isReply()) {
-                    if (messagesDict[0].indexOfKey(messageObject.replyMessageObject.getId()) >= 0 && updateMode == 2) {
-                        MessageObject msg = messagesDict[0].get(messageObject.replyMessageObject.getId());
-                        if (msg.messageText.hashCode() != messageObject.replyMessageObject.messageText.hashCode()) {
-                            cell.getMessageObject().replyMessageObject = msg;
-                            shouldUpdateReply = true;
-                        }
-                    } else {
-                        if (updateMode == 1) {
-                            cell.getMessageObject().replyMessageObject = null;
-                            cell.getMessageObject().messageOwner.reply_to = null;
-                            shouldUpdateReply = true;
-                        }
+                    if (updateMode == 1 && messagesDict[0].indexOfKey(messageObject.replyMessageObject.getId()) < 0) {
+                        cell.getMessageObject().replyMessageObject = null;
+                        cell.getMessageObject().messageOwner.reply_to = null;
+                        shouldUpdateReply = true;
+                    } else if (updateMode == 2 && messageObject.replyMessageObject.getId() == editingMessageObject.getId()) {
+                        cell.getMessageObject().replyMessageObject = editingMessageObject;
+                        shouldUpdateReply = true;
                     }
                 }
 
