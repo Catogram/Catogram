@@ -294,6 +294,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private boolean isInLandscapeMode;
     private boolean allowPullingDown;
     private boolean isPulledDown;
+    private int maxAvatarHeight;
 
     private Paint whitePaint = new Paint();
 
@@ -3270,7 +3271,11 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     }
 
     private void openAvatar() {
-        if (listView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) {
+        openAvatar(false);
+    }
+
+    private void openAvatar(boolean skipDragChecks) {
+        if (!skipDragChecks && listView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) {
             return;
         }
         if (user_id != 0) {
@@ -4034,6 +4039,10 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
 
             listView.setOverScrollMode(extraHeight > AndroidUtilities.dp(88f) && extraHeight < listView.getMeasuredWidth() - newTop ? View.OVER_SCROLL_NEVER : View.OVER_SCROLL_ALWAYS);
 
+            if (isPulledDown && extraHeight == maxAvatarHeight) {
+                openAvatar(true);
+            }
+
             if (writeButton != null) {
                 writeButton.setTranslationY((actionBar.getOccupyStatusBar() ? AndroidUtilities.statusBarHeight : 0) + ActionBar.getCurrentActionBarHeight() + extraHeight + searchTransitionOffset - AndroidUtilities.dp(29.5f));
 
@@ -4351,6 +4360,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         }
 
         int viewWidth = AndroidUtilities.isTablet() ? AndroidUtilities.dp(490) : AndroidUtilities.displaySize.x;
+        maxAvatarHeight = viewWidth;
         ActionBarMenuItem item = avatarsViewPagerIndicatorView.getSecondaryMenuItem();
         int extra = 0;
         if (editItemVisible) {
