@@ -51,6 +51,7 @@ object CatogramConfig {
     var redesign_TelegramThemes by sharedPreferences.boolean("cg_redesign_telegramthemes", false)
 
     var slider_stickerAmplifier by sharedPreferences.int("cg_stickamplifier", 100)
+    var fullRecentStickers by sharedPreferences.boolean("cg_fullrecentstickers", false)
     var archiveOnPull by sharedPreferences.boolean("cg_archonpull", true)
     var syncPins by sharedPreferences.boolean("cg_syncpins", true)
     var rearCam by sharedPreferences.boolean("cg_rearcam", false)
