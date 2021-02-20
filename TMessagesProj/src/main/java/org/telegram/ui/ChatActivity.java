@@ -5970,12 +5970,12 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
             @Override
             public void onSwitchRecordMode(boolean video) {
-                showVoiceHint(false, video);
+                //showVoiceHint(false, video);
             }
 
             @Override
             public void onPreAudioVideoRecord() {
-                showVoiceHint(true, false);
+                //showVoiceHint(true, false);
             }
 
             @Override
@@ -15902,7 +15902,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 int showCount = preferences.getInt(key, 0);
                 if (showCount < 3) {
                     if (Utilities.random.nextFloat() <= 0.2f) {
-                        showVoiceHint(false, chatActivityEnterView.isInVideoMode());
+                        //showVoiceHint(false, chatActivityEnterView.isInVideoMode());
                         preferences.edit().putInt(key, ++showCount).commit();
                     }
                 }
