@@ -293,6 +293,13 @@ public class DrawerLayoutContainer extends FrameLayout {
         parentActionBarLayout = layout;
     }
 
+    public void closeDrawer() {
+        if (drawerPosition != 0) {
+            setDrawerPosition(0);
+            onDrawerAnimationEnd(false);
+        }
+    }
+
     public void setAllowOpenDrawer(boolean value, boolean animated) {
         if (CatogramConfig.INSTANCE.getRedesign_SlideDrawer()) value = false;
         allowOpenDrawer = value;
