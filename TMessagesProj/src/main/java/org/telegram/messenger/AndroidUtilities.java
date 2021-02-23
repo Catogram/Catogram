@@ -2170,18 +2170,12 @@ public class AndroidUtilities {
     }*/
 
     public static void startAppCenter(Activity context) {
+        
     }
 
-    public static void checkForCrashes(Activity context) {
-
-    }
-
-    public static void checkForUpdates(Activity context) {
-
-    }
-
-    public static void unregisterUpdates() {
-
+    private static long lastUpdateCheckTime;
+    public static void checkForUpdates() {
+        
     }
 
     public static void addToClipboard(CharSequence str) {
