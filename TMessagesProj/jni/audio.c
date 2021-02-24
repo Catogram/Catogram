@@ -331,7 +331,7 @@ int initRecorder(const char *path, opus_int32 sampleRate, opus_int32 channelCoun
     min_bytes = max_frame_bytes = (1275 * 3 + 7) * header.nb_streams;
     _packet = malloc(max_frame_bytes);
     
-    result = opus_encoder_ctl(_encoder, OPUS_SET_BITRATE(selfBitrate));
+    result = opus_encoder_ctl(_encoder, OPUS_SET_BITRATE(OPUS_BITRATE_MAX));
     result = opus_encoder_ctl(_encoder, OPUS_SET_COMPLEXITY(10));
     if (result != OPUS_OK) {
         LOGE("Error OPUS_SET_BITRATE returned: %s", opus_strerror(result));
@@ -438,7 +438,7 @@ int writeFrame(uint8_t *framePcmBytes, uint32_t frameByteCount) {
             memset(paddedFrameBytes + nb_samples * 2, 0, cur_frame_size * 2 - nb_samples * 2);
         }
         
-        nbBytes = opus_encode(_encoder, (opus_int16 *)paddedFrameBytes, cur_frame_size, _packet, max_frame_bytes / 10);
+        nbBytes = opus_encode(_encoder, (opus_int16 *)paddedFrameBytes, cur_frame_size, _packet, max_frame_bytes);
         if (freePaddedFrameBytes) {
             free(paddedFrameBytes);
         }

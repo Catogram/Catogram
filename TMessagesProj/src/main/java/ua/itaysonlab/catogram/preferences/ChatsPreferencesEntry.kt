@@ -37,6 +37,16 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     }
                 }
             }
+            switch {
+                title = LocaleController.getString("CG_RecentStickers", R.string.CG_RecentStickers)
+                summary = LocaleController.getString("CG_RecentStickers_desc", R.string.CG_RecentStickers_desc)
+
+                contract({
+                    return@contract CatogramConfig.fullRecentStickers
+                }) {
+                    CatogramConfig.fullRecentStickers = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {

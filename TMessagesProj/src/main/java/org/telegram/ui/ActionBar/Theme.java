@@ -4176,6 +4176,16 @@ public class Theme {
         themesDict.put("Night", themeInfo);
 
         themeInfo = new ThemeInfo();
+        themeInfo.name = "Graphite";
+        themeInfo.assetName = "graphite.attheme";
+        themeInfo.previewBackgroundColor = 0xff7a7e89;
+        themeInfo.previewInColor = 0xff989ba3;
+        themeInfo.previewOutColor = 0xffa4bff9;
+        themeInfo.sortIndex = 5;
+        themes.add(themeInfo);
+        themesDict.put("Graphite", themeInfo);
+
+        themeInfo = new ThemeInfo();
         themeInfo.name = "AMOLED";
         themeInfo.assetName = "amoled.attheme";
         themeInfo.previewBackgroundColor = 0xff000000;

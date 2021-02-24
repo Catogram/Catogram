@@ -49,6 +49,6 @@ object TgxExtras {
     fun createForwardTimeName(obj: MessageObject, orig: CharSequence): String {
         if (!CatogramConfig.msgForwardDate) return orig.toString()
         //return orig.toString()
-        return "$orig [${LocaleController.formatDate(obj.messageOwner.fwd_from.date.toLong())}]"
+        return "$orig (${LocaleController.formatDate(obj.messageOwner.fwd_from.date.toLong())})"
     }
 }

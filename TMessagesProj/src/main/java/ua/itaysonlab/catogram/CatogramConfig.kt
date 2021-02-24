@@ -25,7 +25,6 @@ object CatogramConfig {
     var noVibration by sharedPreferences.boolean("advanced_novibration", false)
     var forceNewYearDrawer by sharedPreferences.boolean("advanced_nydrawer", false)
     var drawerAvatar by sharedPreferences.boolean("cg_drawer_avatar", false)
-    var flatStatusbar by sharedPreferences.boolean("cg_flat_statusbar", true)
     var flatActionbar by sharedPreferences.boolean("cg_flat_actionbar", false)
     var drawerBlur by sharedPreferences.boolean("cg_drawer_blur", false)
     var drawerDarken by sharedPreferences.boolean("cg_drawer_darken", false)
@@ -52,6 +51,7 @@ object CatogramConfig {
     var redesign_TelegramThemes by sharedPreferences.boolean("cg_redesign_telegramthemes", false)
 
     var slider_stickerAmplifier by sharedPreferences.int("cg_stickamplifier", 100)
+    var fullRecentStickers by sharedPreferences.boolean("cg_fullrecentstickers", false)
     var archiveOnPull by sharedPreferences.boolean("cg_archonpull", true)
     var syncPins by sharedPreferences.boolean("cg_syncpins", true)
     var rearCam by sharedPreferences.boolean("cg_rearcam", false)

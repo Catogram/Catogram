@@ -37,7 +37,7 @@ import java.util.Arrays;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "3.4";
+    public static String CG_VERSION = "3.5";
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -98,7 +98,7 @@ public class CatogramExtras {
     }
 
     @ColorInt public static int getLightStatusbarColor() {
-        if (CatogramConfig.INSTANCE.getFlatStatusbar()) {
+        if (SharedConfig.noStatusBar) {
             return 0x00000000;
         } else {
             return 0x0f000000;
@@ -106,7 +106,7 @@ public class CatogramExtras {
     }
 
     @ColorInt public static int getDarkStatusbarColor() {
-        if (CatogramConfig.INSTANCE.getFlatStatusbar()) {
+        if (SharedConfig.noStatusBar) {
             return 0x00000000;
         } else {
             return 0x33000000;

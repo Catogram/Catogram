@@ -176,9 +176,9 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                 summary = LocaleController.getString("AS_FlatSB_Desc", R.string.AS_FlatSB_Desc)
 
                 contract({
-                    return@contract CatogramConfig.flatStatusbar
+                    return@contract SharedConfig.noStatusBar
                 }) {
-                    CatogramConfig.flatStatusbar = it
+                    SharedConfig.toggleNoStatusBar()
                     bf.parentActivity.window.statusBarColor = if (Theme.getColor(Theme.key_actionBarDefault, null, true) == Color.WHITE) CatogramExtras.getLightStatusbarColor() else CatogramExtras.getDarkStatusbarColor()
                 }
             }

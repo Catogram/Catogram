@@ -129,7 +129,6 @@ public class DrawerLayoutContainer extends FrameLayout {
                 }
             });
             setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-            if (CatogramConfig.INSTANCE.getFlatStatusbar()) ((Activity) context).getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
         shadowLeft = getResources().getDrawable(R.drawable.menu_shadow);
@@ -292,6 +291,13 @@ public class DrawerLayoutContainer extends FrameLayout {
 
     public void setParentActionBarLayout(ActionBarLayout layout) {
         parentActionBarLayout = layout;
+    }
+
+    public void closeDrawer() {
+        if (drawerPosition != 0) {
+            setDrawerPosition(0);
+            onDrawerAnimationEnd(false);
+        }
     }
 
     public void setAllowOpenDrawer(boolean value, boolean animated) {

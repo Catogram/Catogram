@@ -33,7 +33,7 @@ public class FeedWidgetProvider extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
         for (int a = 0; a < appWidgetIds.length; a++) {
-            SharedPreferences preferences = context.getSharedPreferences("feed_widget", Activity.MODE_PRIVATE);
+            SharedPreferences preferences = context.getSharedPreferences("shortcut_widget", Activity.MODE_PRIVATE);
             preferences.edit().remove("account" + appWidgetIds[a]).remove("dialogId" + appWidgetIds[a]).commit();
         }
     }
@@ -45,11 +45,10 @@ public class FeedWidgetProvider extends AppWidgetProvider {
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.feed_widget_layout);
         rv.setRemoteAdapter(appWidgetId, R.id.list_view, intent2);
         rv.setEmptyView(R.id.list_view, R.id.empty_view);
-        ua.itaysonlab.catogram.CGFeatureHooks.colorWidgetBackground(rv, R.id.feed_root);
 
         Intent intent = new Intent(ApplicationLoader.applicationContext, LaunchActivity.class);
         intent.setAction("com.tmessages.openchat" + Math.random() + Integer.MAX_VALUE);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         PendingIntent contentIntent = PendingIntent.getActivity(ApplicationLoader.applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
