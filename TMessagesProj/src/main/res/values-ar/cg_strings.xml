@@ -227,6 +227,6 @@
     <string name="CG_Silence_desc">سيتم إيقاف تشغيل جميع الإشعارات</string>
     <string name="CG_SilenceNonContacts">صمت الرسائل من جهات غير الاتصال</string>
     <string name="CG_SilenceNonContacts_desc">في حالة التفعيل، ستأتي الإشعارات بالصوت من جهات الاتصال فقط. يمكنك إضافة شخص إلى جهات الاتصال الخاصة بك حتى بدون رقم الهاتف ، قم بذلك في الملف التعريف الخاص بهم</string>
-    <string name="CG_RecentStickers">Show full list</string>
+    <string name="CG_RecentStickers">عرض القائمة الكاملة</string>
     <string name="CG_RecentStickers_desc">of recent stickers</string>
 </resources>
