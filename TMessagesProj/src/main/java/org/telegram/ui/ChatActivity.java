@@ -6750,10 +6750,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         });
         searchCalendarButton.setContentDescription(LocaleController.getString("JumpToDate", R.string.JumpToDate));
 
-        searchCountText = new SimpleTextView(context);
-        searchCountText.setTextColor(Theme.getColor(Theme.key_chat_searchPanelText));
-        searchCountText.setTextSize(15);
-        searchCountText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        searchCountText = new SearchCounterView(context);
+        // searchCountText.setTextColor(Theme.getColor(Theme.key_chat_searchPanelText));
+        // searchCountText.setTextSize(15);
+        // searchCountText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         searchCountText.setGravity(Gravity.LEFT);
         searchContainer.addView(searchCountText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 0, 0, 108, 0));
 
