@@ -219,10 +219,12 @@
     <string name="CG_FakeUserPhoneSummary">çekmecede ve ayarlarda sahte telefon numarası göster (telefon numarasını gizle seçeneği devre dışı bırakılır)</string>
     <string name="CG_FwdMenu_EnableNoForward">İlet yazarlığını devre dışı bırak</string>
     <string name="CG_FwdMenu_DisableNoForward">İlet yazarlığını etkinleştir</string>
-    <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
-    <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
+    <string name="CG_DND">Rahatsız etme</string>
+    <string name="CG_DND_desc">Bütün bildirimleri susturacak. Ses için müsait değilsen, yine de bildirimleri görmek istiyorsan kullanışlı</string>
+    <string name="CG_Silence">Hepten sessiz</string>
+    <string name="CG_Silence_desc">Tüm bildirimleri kapatacak</string>
+    <string name="CG_SilenceNonContacts">Rehberde olmayanlara sessizlik</string>
+    <string name="CG_SilenceNonContacts_desc">Etkinleştiğinde bildirim sesi sadece rehberinde olan kişilerden gelecek. Rehberine birini telefon numarasına ihtiyaç duymadan ekleyebilirsin profiline girip</string>
+    <string name="CG_RecentStickers">Show full list</string>
+    <string name="CG_RecentStickers_desc">of recent stickers</string>
 </resources>
