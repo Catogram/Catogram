@@ -225,4 +225,6 @@
     <string name="CG_Silence_desc">Tắt toàn bộ thông báo</string>
     <string name="CG_SilenceNonContacts">Tắt tiếng những người không trong danh bạ</string>
     <string name="CG_SilenceNonContacts_desc">Nếu bật, thông báo chỉ có tiếng nếu người gửi nằm trong danh bạ của bạn. Bạn có thể thêm một người vào danh bạ kể cả khi không có số điện thoại, làm việc này ở hồ sơ của họ</string>
+    <string name="CG_RecentStickers">Hiện đầy đủ danh sách</string>
+    <string name="CG_RecentStickers_desc">của nhãn dán gần đây</string>
 </resources>

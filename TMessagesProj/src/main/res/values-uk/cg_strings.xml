@@ -225,4 +225,6 @@
     <string name="CG_Silence_desc">Вимикає усі сповіщення</string>
     <string name="CG_SilenceNonContacts">Тиша від відсутніх у контактах</string>
     <string name="CG_SilenceNonContacts_desc">Якщо увімкнено, сповіщення зі звуком надходитимуть лише від ваших контактів. Ви можете додати людину до контактів навіть без номера телефону, зробіть це у її профілі</string>
+    <string name="CG_RecentStickers">Show full list</string>
+    <string name="CG_RecentStickers_desc">of recent stickers</string>
 </resources>
