@@ -21,7 +21,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21-2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.30"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2-native-mt'
 
@@ -29,14 +29,14 @@ dependencies {
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.biometric:biometric:1.0.1'
-    implementation 'com.google.android.material:material:1.3.0-rc01'
+    implementation 'androidx.biometric:biometric:1.1.0'
+    implementation 'com.google.android.material:material:1.4.0-alpha01'
     implementation 'androidx.exifinterface:exifinterface:1.3.2'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.sharetarget:sharetarget:1.1.0"
     
-    compileOnly 'org.checkerframework:checker-qual:3.9.1'
+    compileOnly 'org.checkerframework:checker-qual:3.10.0'
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.5'
     
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-datatransport:17.0.11'
     implementation 'com.google.firebase:firebase-appindexing:19.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.google.android.play:core:1.9.0'
+    implementation 'com.google.android.play:core:1.9.1'
 
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-vision:20.1.3'
