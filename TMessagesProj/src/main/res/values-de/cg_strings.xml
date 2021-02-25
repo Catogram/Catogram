@@ -215,16 +215,16 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
+    <string name="CG_FakeUserPhone">Fake Telefonnummer</string>
+    <string name="CG_FakeUserPhoneSummary">zeig eine fake Telefonnummer im Hamburger-Menü und den Einstellungen (Telefonnummer unkenntlich machen muss deaktiviert sein)</string>
     <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
-    <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
-    <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
-    <string name="CG_RecentStickers">Show full list</string>
-    <string name="CG_RecentStickers_desc">of recent stickers</string>
+    <string name="CG_DND">Bitte nicht stören</string>
+    <string name="CG_DND_desc">Erzwingt stille Nachrichten. Praktisch wenn man leise sein muss, aber trotzdem Benachrichtigungen erhalten will</string>
+    <string name="CG_Silence">Komplette Stille</string>
+    <string name="CG_Silence_desc">Schaltet alle Benachrichtigungen aus</string>
+    <string name="CG_SilenceNonContacts">Stille nicht-Kontakte</string>
+    <string name="CG_SilenceNonContacts_desc">Wenn aktiviert werden nur Benachrichtigungen von Kontakten mit Sound zugestellt. Personen ohne Telefonnummer können in ihrem Profil zu den Kontakten hinzugefügt werden</string>
+    <string name="CG_RecentStickers">Zeige vollständige Liste</string>
+    <string name="CG_RecentStickers_desc">von zuletzt verwendeten Sticker an</string>
 </resources>
