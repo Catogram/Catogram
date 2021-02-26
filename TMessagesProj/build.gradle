@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.facebook.rebound:rebound:0.3.8'
 
     implementation 'com.anjlab.android.iab.v3:library:1.1.0'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }
 
 android {
