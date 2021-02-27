@@ -157,7 +157,7 @@
     <string name="CG_Kangs_CreatePack_Desc">这是为了添加贴纸所需要的。无须担心，这些操作将会自动完成。</string>
     <string name="CG_Kangs_Delete">删除 CG 贴纸包</string>
     <string name="CG_Kangs_Delete_Desc">这将会删除所有添加的贴纸！</string>
-    <string name="CG_VoiceRecognise">Recognise</string>
+    <string name="CG_VoiceRecognise">语音识别</string>
     <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
     <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
     <string name="ActionBarTitle">聊天对话</string>
@@ -182,12 +182,12 @@
     <string name="CG_TelegramThemes_Desc">只在聊天设置中生效（作为演示用途）</string>
     <string name="CG_SaveSticker">保存贴纸</string>
     <string name="CG_FailedToSaveSticker">保存此贴纸失败，这很有可能是因为贴纸尚未加载完成所导致的</string>
-    <string name="AS_Header_DoubleBottom">Double Bottom</string>
-    <string name="CG_DB_Accounts">Available Accounts</string>
-    <string name="CG_DB_AccountsHint">Double Bottom allows you to set a passcode for a different account.\n\nTrying to set a password to a configured account will replace the older one.</string>
-    <string name="CG_DB_Prefs">Additional Preferences</string>
+    <string name="AS_Header_DoubleBottom">双层按钮</string>
+    <string name="CG_DB_Accounts">可用账户</string>
+    <string name="CG_DB_AccountsHint">双层按钮允许您为不同的账号设置不同的密码。\n\n尝试为已配置的帐户设置密码将会把密码替换成新的的密码</string>
+    <string name="CG_DB_Prefs">附加设置</string>
     <string name="CG_DB_Prefs_Fingerprint">Account on fingerprint unlock</string>
-    <string name="CG_DB_Prefs_Hide">Hide configured accounts in switcher</string>
+    <string name="CG_DB_Prefs_Hide">隐藏已配置隐藏账户（在切换用户处）</string>
     <string name="CG_DB_Prefs_NotSet">暂未设置</string>
     <string name="CG_ViewAdminsShortcut">管理员列表</string>
     <string name="AS_Header_Record">媒体录制</string>
@@ -213,7 +213,7 @@
     <string name="CG_FailedToClear">无法清除已缓存文件</string>
     <string name="CG_ClearFromCache">清除此文件已缓存资源</string>
     <string name="CG_ClearedFromCache">已清除此文件已缓存资源</string>
-    <string name="CG_ToBeginning">查找第一条消息</string>
+    <string name="CG_ToBeginning">查找首条消息</string>
     <string name="CG_ToLinkedChat">链接至聊天</string>
     <string name="CG_FakeUserPhone">伪造手机号码</string>
     <string name="CG_FakeUserPhoneSummary">在侧边栏与设置页显示虚假的电话号码（注：与 “隐藏手机号码” 功能冲突）</string>
@@ -226,7 +226,7 @@
     <string name="CG_SilenceNonContacts">联系人通知</string>
     <string name="CG_SilenceNonContacts_desc">如果启用，应用将只会向您推送来自联系人的通知时发出通知音，您可以添加一些人到您的联系人列表（即使不向这些人显示电话号码），您可以在对方的用户资料中进行操作</string>
     <string name="CG_RecentStickers">显示完整列表</string>
-    <string name="CG_RecentStickers_desc">of recent stickers</string>
+    <string name="CG_RecentStickers_desc">显示最近发送的贴纸（完整）</string>
     <string name="CG_VKsans">VKSans</string>
     <string name="CG_VKsans_desc">加粗字体</string>
 </resources>
