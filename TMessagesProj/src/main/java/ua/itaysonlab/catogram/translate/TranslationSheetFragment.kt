@@ -39,7 +39,7 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
 
     private fun getAutoIsoLang(): String {
         val iso = LocaleController.getString("LanguageCode", R.string.LanguageCode)
-        return if (impl.clazz.supportedLanguages().contains(iso)) iso else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("pt_BR")) impl.clazz.supportedLanguages()[38] else impl.clazz.supportedLanguages()[0]
+        return if (impl.clazz.supportedLanguages().contains(iso)) iso else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("pt_BR")) impl.clazz.supportedLanguages()[38] else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("zh_hans")) impl.clazz.supportedLanguages()[7] else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("zh_hant")) impl.clazz.supportedLanguages()[7] else impl.clazz.supportedLanguages()[0]
     }
 
     @SuppressLint("SetTextI18n")
