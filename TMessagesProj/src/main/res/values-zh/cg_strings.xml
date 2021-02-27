@@ -101,8 +101,8 @@
     <string name="CG_MessageMenuOption_Default">默认</string>
     <string name="CG_NewDrawer">账户抽屉</string>
     <string name="CG_NewDrawer_Desc">如果需要使用多账户系统，请关闭此功能</string>
-    <string name="CG_MessageButton_Override">Override message action button</string>
-    <string name="CG_MessageButton_Override_Desc">enables it on own messages</string>
+    <string name="CG_MessageButton_Override">覆盖消息操作按钮</string>
+    <string name="CG_MessageButton_Override_Desc">只在自己发送的消息上生效</string>
     <string name="CG_MessageButton_Out">Outgoing messages</string>
     <string name="CG_MessageButton_In">Incoming messages</string>
     <string name="CG_MessageButton_Option_Share">分享 ［默认］</string>
@@ -146,8 +146,8 @@
     <string name="CG_GooglePlay_OTADownloaded">更新已经下载完成</string>
     <string name="CG_GooglePlay_OTADownloaded_Restart">重新启动应用</string>
     <string name="CG_FlatChannels">扁平设计的频道信息流</string>
-    <string name="CG_IgnoreBlacklist">Ignore blacklisted users</string>
-    <string name="CG_IgnoreBlacklist_Desc">messages from them will be hidden</string>
+    <string name="CG_IgnoreBlacklist">忽略黑名单用户发言</string>
+    <string name="CG_IgnoreBlacklist_Desc">他们所发送的消息将会对您隐藏</string>
     <string name="CG_KangSticker">添加至贴纸包</string>
     <string name="CG_KangSticker_Err_NoPack_Title">创建一个贴纸表情包？</string>
     <string name="CG_KangSticker_Err_NoPack_Desc">如果您想为您的贴纸包新增贴纸，那么首先需要拥有一个贴纸包 - 但是您现在一个贴纸包都没有。\n\n您现在想要创建一个吗？\n这个操作将会在您允许之后自动化完成，并且在之后新增贴纸时无需重复本操作。</string>
@@ -225,8 +225,8 @@
     <string name="CG_Silence_desc">启用则会关闭所有通知</string>
     <string name="CG_SilenceNonContacts">联系人通知</string>
     <string name="CG_SilenceNonContacts_desc">如果启用，应用将只会向您推送来自联系人的通知时发出通知音，您可以添加一些人到您的联系人列表（即使不向这些人显示电话号码），您可以在对方的用户资料中进行操作</string>
-    <string name="CG_RecentStickers">Show full list</string>
+    <string name="CG_RecentStickers">显示完整列表</string>
     <string name="CG_RecentStickers_desc">of recent stickers</string>
     <string name="CG_VKsans">VKSans</string>
-    <string name="CG_VKsans_desc">as bold font</string>
+    <string name="CG_VKsans_desc">加粗字体</string>
 </resources>
