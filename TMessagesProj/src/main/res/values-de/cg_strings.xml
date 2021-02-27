@@ -227,4 +227,6 @@
     <string name="CG_SilenceNonContacts_desc">Wenn aktiviert werden nur Benachrichtigungen von Kontakten mit Sound zugestellt. Personen ohne Telefonnummer können in ihrem Profil zu den Kontakten hinzugefügt werden</string>
     <string name="CG_RecentStickers">Zeige vollständige Liste</string>
     <string name="CG_RecentStickers_desc">von zuletzt verwendeten Sticker an</string>
+    <string name="CG_VKsans">VKSans</string>
+    <string name="CG_VKsans_desc">as bold font</string>
 </resources>
