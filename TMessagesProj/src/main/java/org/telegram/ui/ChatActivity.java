@@ -1868,7 +1868,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     if (getParentActivity() == null) {
                         return;
                     }
-                    if (id == auto_delete_timer || id == clear_history && currentEncryptedChat == null && (currentUser != null && !UserObject.isUserSelf(currentUser) && !UserObject.isDeleted(currentUser) || ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES) && (!ChatObject.isChannel(currentChat) || currentChat.megagroup && TextUtils.isEmpty(currentChat.username)))) {
+                    if (id == auto_delete_timer || id == clear_history && currentEncryptedChat == null && (currentUser != null && !UserObject.isUserSelf(currentUser) && !UserObject.isDeleted(currentUser) || ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES))) {
                         ClearHistoryAlert alert = new ClearHistoryAlert(getParentActivity(), currentUser, currentChat, id != auto_delete_timer);
                         alert.setDelegate(new ClearHistoryAlert.ClearHistoryAlertDelegate() {
                             @Override
@@ -1890,9 +1890,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     final boolean isChat = (int) dialog_id < 0 && (int) (dialog_id >> 32) != 1;
 
                     AlertsCreator.createClearOrDeleteDialogAlert(ChatActivity.this, id == clear_history, currentChat, currentUser, currentEncryptedChat != null, true, (param) -> {
-                        if (id == clear_history && ChatObject.isChannel(currentChat) && (!currentChat.megagroup || !TextUtils.isEmpty(currentChat.username))) {
-                            getMessagesController().deleteDialog(dialog_id, 2, param);
-                        } else {
                             if (id != clear_history) {
                                 getNotificationCenter().removeObserver(ChatActivity.this, NotificationCenter.closeChats);
                                 getNotificationCenter().postNotificationName(NotificationCenter.closeChats);
@@ -1901,7 +1898,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             } else {
                                 performHistoryClear(param);
                             }
-                        }
                     });
                 } else if (id == share_contact) {
                     if (currentUser == null || getParentActivity() == null) {
@@ -2222,10 +2218,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (currentEncryptedChat != null) {
                 timeItem2 = headerItem.addSubItem(chat_enc_timer, R.drawable.msg_timer, LocaleController.getString("SetTimer", R.string.SetTimer));
             }
-            if (!ChatObject.isChannel(currentChat) || currentChat.megagroup && TextUtils.isEmpty(currentChat.username)) {
+            if (ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES)) {
                 headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory));
-            } else if (ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES)) {
-                headerItem.addSubItem(auto_delete_timer, R.drawable.msg_timer, LocaleController.getString("AutoDeleteSetTimer", R.string.AutoDeleteSetTimer));
             }
             if (currentUser == null || !currentUser.self) {
                 muteItem = headerItem.addSubItem(mute, R.drawable.msg_mute, null);
