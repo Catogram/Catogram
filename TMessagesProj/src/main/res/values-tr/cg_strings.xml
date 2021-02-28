@@ -225,8 +225,8 @@
     <string name="CG_Silence_desc">Tüm bildirimleri kapatacak</string>
     <string name="CG_SilenceNonContacts">Rehberde olmayanlara sessizlik</string>
     <string name="CG_SilenceNonContacts_desc">Etkinleştiğinde bildirim sesi sadece rehberinde olan kişilerden gelecek. Rehberine birini telefon numarasına ihtiyaç duymadan ekleyebilirsin profiline girip</string>
-    <string name="CG_RecentStickers">Show full list</string>
-    <string name="CG_RecentStickers_desc">of recent stickers</string>
+    <string name="CG_RecentStickers">Tam listeyi göster</string>
+    <string name="CG_RecentStickers_desc">son çıkartmalar için</string>
     <string name="CG_VKsans">VKSans</string>
-    <string name="CG_VKsans_desc">as bold font</string>
+    <string name="CG_VKsans_desc">kalın yazı tipi olarak</string>
 </resources>
