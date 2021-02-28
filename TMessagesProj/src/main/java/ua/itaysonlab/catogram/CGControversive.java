@@ -5,14 +5,14 @@ import org.telegram.messenger.BuildConfig;
 
 public class CGControversive {
     public static boolean isControversiveFeaturesEnabled() {
-        return !"com.android.vending".equals(ApplicationLoader.applicationContext.getPackageManager().getInstallerPackageName(BuildConfig.APPLICATION_ID));
+        return false;
     }
 
     public static boolean noReading() {
-        return isControversiveFeaturesEnabled() && CatogramConfig.INSTANCE.getControversiveNoReading();
+        return false;
     }
 
     public static boolean noPeekTimeout() {
-        return isControversiveFeaturesEnabled();
+        return false;
     }
 }
