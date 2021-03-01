@@ -103,8 +103,8 @@
     <string name="CG_NewDrawer_Desc">如果需要使用多账户系统，请关闭此功能</string>
     <string name="CG_MessageButton_Override">覆盖消息操作按钮</string>
     <string name="CG_MessageButton_Override_Desc">只在自己发送的消息上生效</string>
-    <string name="CG_MessageButton_Out">Outgoing messages</string>
-    <string name="CG_MessageButton_In">Incoming messages</string>
+    <string name="CG_MessageButton_Out">发出的消息</string>
+    <string name="CG_MessageButton_In">受到的消息</string>
     <string name="CG_MessageButton_Option_Share">分享 ［默认］</string>
     <string name="CG_MessageButton_Option_Edit">编辑 ［对自己有效］</string>
     <string name="CG_MessageButton_Option_Saved">上传至云端</string>
@@ -158,8 +158,8 @@
     <string name="CG_Kangs_Delete">删除 CG 贴纸包</string>
     <string name="CG_Kangs_Delete_Desc">这将会删除所有添加的贴纸！</string>
     <string name="CG_VoiceRecognise">语音识别</string>
-    <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
-    <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
+    <string name="CG_VoiceRecognise_Started">语音消息转换开始！</string>
+    <string name="CG_VoiceRecognise_Error">语言消息转换失败！原因：[%s]</string>
     <string name="ActionBarTitle">聊天对话</string>
     <string name="CG_ArchiveOnPull">下拉展开归档</string>
     <string name="CG_ArchiveOnPull_Desc">启用在下拉时进入归档</string>
@@ -186,7 +186,7 @@
     <string name="CG_DB_Accounts">可用账户</string>
     <string name="CG_DB_AccountsHint">双层按钮允许您为不同的账号设置不同的密码。\n\n尝试为已配置的帐户设置密码将会把密码替换成新的的密码</string>
     <string name="CG_DB_Prefs">附加设置</string>
-    <string name="CG_DB_Prefs_Fingerprint">Account on fingerprint unlock</string>
+    <string name="CG_DB_Prefs_Fingerprint">使用指纹解锁此账号</string>
     <string name="CG_DB_Prefs_Hide">隐藏已配置隐藏账户（在切换用户处）</string>
     <string name="CG_DB_Prefs_NotSet">暂未设置</string>
     <string name="CG_ViewAdminsShortcut">管理员列表</string>
