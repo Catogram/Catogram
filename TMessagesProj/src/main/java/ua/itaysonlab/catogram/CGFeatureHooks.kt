@@ -28,6 +28,12 @@ object CGFeatureHooks {
         CGFeatureJavaHooks.setColorFilterToRemoteView(rv, id, Theme.getColor(Theme.key_windowBackgroundWhite))
     }
 
+    @JvmStatic
+    fun switchNoAuthor(b: Boolean) {
+        // ...
+        CatogramConfig.legacyNoAuthorship = b
+    }
+
     private var currentPopup: ActionBarPopupWindow? = null
 
     @JvmStatic

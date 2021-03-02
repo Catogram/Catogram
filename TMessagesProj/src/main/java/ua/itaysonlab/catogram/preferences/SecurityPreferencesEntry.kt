@@ -32,17 +32,6 @@ class SecurityPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.hideProxySponsor = it
                 }
             }
-
-            switch {
-                title = LocaleController.getString("AS_ForwardNoAuthorship", R.string.AS_ForwardNoAuthorship)
-                summary = LocaleController.getString("AS_ForwardNoAuthorship_Desc", R.string.AS_ForwardNoAuthorship_Desc)
-
-                contract({
-                    return@contract CatogramConfig.forwardNoAuthorship
-                }) {
-                    CatogramConfig.forwardNoAuthorship = it
-                }
-            }
         }
     }
 }
