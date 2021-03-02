@@ -227,6 +227,5 @@
     <string name="CG_SilenceNonContacts_desc">Jeśli włączone, powiadomienia będą sygnalizowane dźwiękiem tylko w przypadku kontaków. Możesz dodać osobę do kontaktów nawet bez numeru telefonu. Zrób to w ich profilu</string>
     <string name="CG_RecentStickers">Pokaż pełną listę</string>
     <string name="CG_RecentStickers_desc">ostatnich naklejek</string>
-    <string name="CG_VKsans">VKSans</string>
-    <string name="CG_VKsans_desc">as bold font</string>
+    <string name="CG_Without_Authorship">Without authorship</string>
 </resources>
