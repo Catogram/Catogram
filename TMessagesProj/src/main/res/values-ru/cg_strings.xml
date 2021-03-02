@@ -224,7 +224,8 @@
     <string name="CG_Silence">Абсолютная тишина</string>
     <string name="CG_Silence_desc">Отключит все оповещения</string>
     <string name="CG_SilenceNonContacts">Заглушить не-контакты</string>
-    <string name="CG_SilenceNonContacts_desc">Оповещения со звуком будут приходить только от контактов</string>
-    <string name="CG_RecentStickers">Показывать полный список</string>
+    <string name="CG_SilenceNonContacts_desc">Если включено, то оповещения со звуком будут приходить только от контактов. Вы можете добавить человека в контакты без наличия его номера телефона</string>
+    <string name="CG_RecentStickers">Показать полный список</string>
     <string name="CG_RecentStickers_desc">недавних стикеров</string>
+    <string name="CG_Without_Authorship">Without authorship</string>
 </resources>
