@@ -4849,6 +4849,13 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
             pinnedMessageView.addView(pinnedListButton, LayoutHelper.createFrame(36, 48, Gravity.RIGHT | Gravity.TOP, 0, 0, 7, 0));
             pinnedListButton.setOnClickListener(v -> openPinnedMessagesList(false));
+            pinnedListButton.setOnLongClickListener(v -> {
+                SharedPreferences preferences = MessagesController.getNotificationsSettings(currentAccount);
+                preferences.edit().putInt("pin_" + dialog_id, pinnedMessageIds.get(0)).commit();
+                updatePinnedMessageView(true);
+                CatogramToasts.notifyAboutUnpin();
+                return true;
+            });
 
             closePinned = new ImageView(context);
             closePinned.setImageResource(R.drawable.miniplayer_close);
