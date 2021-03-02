@@ -1193,6 +1193,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         int migrated_to = arguments.getInt("migrated_to", 0);
         scrollToTopOnResume = arguments.getBoolean("scrollToTopOnResume", false);
         needRemovePreviousSameChatActivity = arguments.getBoolean("need_remove_previous_same_chat_activity", true);
+
         if (chatId != 0) {
             currentChat = getMessagesController().getChat(chatId);
             if (currentChat == null) {
@@ -1835,8 +1836,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         }
                     }
                 } else if (id == forward) {
-                    createCGShareAlert();
-                    //openForward();
+                    CGFeatureHooks.switchNoAuthor(false);
+                    openForward();
                 } else if (id == save_to) {
                     ArrayList<MessageObject> messageObjects = new ArrayList<>();
                     for (int a = 1; a >= 0; a--) {
@@ -6897,7 +6898,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         bottomOverlayImage.setOnClickListener(v -> undoView.showWithAction(dialog_id, UndoView.ACTION_TEXT_INFO, LocaleController.getString("BroadcastGroupInfo", R.string.BroadcastGroupInfo)));
 
         replyButton = new TextView(context);
-        replyButton.setText(LocaleController.getString("Reply", R.string.Reply));
+        replyButton.setText(LocaleController.getString("CG_Without_Authorship", R.string.CG_Without_Authorship));
         replyButton.setGravity(Gravity.CENTER_VERTICAL);
         replyButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         replyButton.setPadding(AndroidUtilities.dp(14), 0, AndroidUtilities.dp(21), 0);
@@ -6909,21 +6910,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         replyButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
         replyButton.setOnClickListener(v -> {
-            MessageObject messageObject = null;
-            for (int a = 1; a >= 0; a--) {
-                if (messageObject == null && selectedMessagesIds[a].size() != 0) {
-                    messageObject = messagesDict[a].get(selectedMessagesIds[a].keyAt(0));
-                }
-                selectedMessagesIds[a].clear();
-                selectedMessagesCanCopyIds[a].clear();
-                selectedMessagesCanStarIds[a].clear();
-            }
-            hideActionMode();
-            if (messageObject != null && (messageObject.messageOwner.id > 0 || messageObject.messageOwner.id < 0 && currentEncryptedChat != null)) {
-                showFieldPanelForReply(messageObject);
-            }
-            updatePinnedMessageView(true);
-            updateVisibleRows();
+            CGFeatureHooks.switchNoAuthor(true);
+            openForward(); 
         });
         bottomMessagesActionContainer.addView(replyButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.LEFT | Gravity.TOP));
 
@@ -6939,7 +6927,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         image = context.getResources().getDrawable(R.drawable.input_forward).mutate();
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         forwardButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
-        forwardButton.setOnClickListener(v -> createCGShareAlert());
+        forwardButton.setOnClickListener(v -> {
+            CGFeatureHooks.switchNoAuthor(false);
+            openForward(); 
+        });
         bottomMessagesActionContainer.addView(forwardButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.RIGHT | Gravity.TOP));
 
         contentView.addView(searchContainer, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 51, Gravity.BOTTOM));
@@ -7042,10 +7033,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         return fragmentView;
     }
 
-    private void createCGShareAlert() {
-        openForward();
-    }
-
     private void createCGShareAlertSelected() {
         if (CatogramConfig.INSTANCE.getNewRepostUI()) {
             forwardingMessage = selectedObject;
@@ -7069,6 +7056,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             AndroidUtilities.setAdjustResizeToNothing(getParentActivity(), classGuid);
             fragmentView.requestLayout();
         } else {
+            CGFeatureHooks.switchNoAuthor(false);
             forwardingMessage = selectedObject;
             forwardingMessageGroup = selectedObjectGroup;
             Bundle args = new Bundle();
@@ -9987,7 +9975,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (forwardingMessages != null) {
                 ArrayList<MessageObject> messagesToForward = forwardingMessages;
                 forwardingMessages = null;
-                forwardMessages(messagesToForward, CatogramConfig.INSTANCE.getForwardNoAuthorship(), notify, scheduleDate != 0 && scheduleDate != 0x7ffffffe ? scheduleDate + 1 : scheduleDate);
+                forwardMessages(messagesToForward, CatogramConfig.INSTANCE.getLegacyNoAuthorship(), notify, scheduleDate != 0 && scheduleDate != 0x7ffffffe ? scheduleDate + 1 : scheduleDate);
             }
             chatActivityEnterView.setForceShowSendButton(false, false);
             if (!waitingForSendingMessageLoad) {

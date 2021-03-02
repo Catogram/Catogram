@@ -283,4 +283,5 @@
     <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
     <string name="CG_RecentStickers">Show full list</string>
     <string name="CG_RecentStickers_desc">of recent stickers</string>
+    <string name="CG_Without_Authorship">Without authorship</string>
 </resources>

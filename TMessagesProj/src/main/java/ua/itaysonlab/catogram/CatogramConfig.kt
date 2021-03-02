@@ -61,6 +61,7 @@ object CatogramConfig {
     var useTgxMenuSlideSheet by sharedPreferences.boolean("advanced_tgxslide_sheet", false)
 
     var forwardNoAuthorship by sharedPreferences.boolean("cg_forward_no_authorship", false)
+    var legacyNoAuthorship by sharedPreferences.boolean("cg_legacy_no_authorship", false)
     var msgForwardDate by sharedPreferences.boolean("cg_msg_fwd_date", false)
     var forceLeftFab by sharedPreferences.boolean("cg_fab_invertgravity", false)
 
