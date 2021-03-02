@@ -817,7 +817,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                         childTop = commentView.getBottom();
                     }
                 } else if (child == filterTabsView || child == searchTabsView || child == filtersView) {
-                    childTop = actionBar.getMeasuredHeight();
+                    childTop = onlySelect ? 0 : actionBar.getMeasuredHeight();
                 } else if (child == searchViewPager) {
                     childTop = (onlySelect ? 0 : actionBar.getMeasuredHeight()) + topPadding;
                 } else if (child instanceof ViewPage) {
