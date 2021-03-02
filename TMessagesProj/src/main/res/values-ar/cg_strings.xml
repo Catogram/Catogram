@@ -229,4 +229,5 @@
     <string name="CG_SilenceNonContacts_desc">في حالة التفعيل، ستأتي الإشعارات بالصوت من جهات الاتصال فقط. يمكنك إضافة شخص إلى جهات الاتصال الخاصة بك حتى بدون رقم الهاتف ، قم بذلك في الملف التعريف الخاص بهم</string>
     <string name="CG_RecentStickers">عرض القائمة الكاملة</string>
     <string name="CG_RecentStickers_desc">للملصقات</string>
+    <string name="CG_Without_Authorship">Without authorship</string>
 </resources>
