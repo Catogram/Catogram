@@ -227,5 +227,5 @@
     <string name="CG_SilenceNonContacts_desc">Se attivato, i suoni di notifica proverranno solo dai contatti. Puoi aggiungere una persona ai tuoi contatti anche senza il numero di telefono, tramite il loro profilo</string>
     <string name="CG_RecentStickers">Mostra la lista intera</string>
     <string name="CG_RecentStickers_desc">di sticker recenti</string>
-    <string name="CG_Without_Authorship">Without authorship</string>
+    <string name="CG_Without_Authorship">Senza firma</string>
 </resources>
