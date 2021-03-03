@@ -19,5 +19,6 @@ Experimental telegram client based on [official Android sources](https://github.
 
  # Thanks to:
 - [Nekogram](https://gitlab.com/Nekogram/Nekogram)
+- [Nekogram Lite](https://github.com/satouriko/nekolite)
 - [Forkgram](https://github.com/Forkgram/TelegramAndroid)
 - [KangramX](https://github.com/alissonlauffer/KangramX)
