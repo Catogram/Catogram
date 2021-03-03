@@ -815,10 +815,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     } else {
                         childTop = commentView.getBottom();
                     }
-                } else if (child == filterTabsView) {
+                } else if (child == filterTabsView || child == searchTabsView || child == filtersView) {
                     childTop = actionBar.getMeasuredHeight();
-                } else if (child == searchListView || child == searchEmptyView) {
-                    childTop = (onlySelect && initialDialogsType != 3 ? 0 : actionBar.getMeasuredHeight()) + topPadding;
+                } else if (child == searchViewPager) {
+                    childTop = (onlySelect && initialDialogsType != 3 ? 0 : actionBar.getMeasuredHeight()) + topPadding + (searchTabsView == null ? 0 : AndroidUtilities.dp(44));
                 } else if (child instanceof ViewPage) {
                     if (initialDialogsType == 3 || !onlySelect) {
                         if (filterTabsView != null && filterTabsView.getVisibility() == VISIBLE) {
