@@ -11485,9 +11485,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                     int newVisibility;
 
-                    if (chatMode == MODE_SCHEDULED || !allowChatActions || selectedMessagesIds[0].size() != 0 && selectedMessagesIds[1].size() != 0) {
-                        newVisibility = View.GONE;
-                    } else if (selectedCount == 1) {
+                    if (selectedCount == 1) {
                         newVisibility = View.VISIBLE;
                     } else {
                         newVisibility = View.VISIBLE;
