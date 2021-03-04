@@ -3377,7 +3377,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
     public void requestAudioFocus(boolean request) {
         if (request) {
             if (!hasRecordAudioFocus && SharedConfig.pauseMusicOnRecord) {
-                int result = NotificationsController.audioManager.requestAudioFocus(audioRecordFocusChangedListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                int result = NotificationsController.audioManager.requestAudioFocus(audioRecordFocusChangedListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
                 if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                     hasRecordAudioFocus = true;
                 }
