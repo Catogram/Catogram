@@ -233,4 +233,5 @@
     <string name="SyncDeviceOn">Information about your device won\'t be sent</string>
     <string name="SyncDeviceOff">Information about your device will be sent</string>
     <string name="SyncDevice">Don\'t send information about device</string>
+    <string name="SyncDevice_desc">Your model will be \'Moore\' and Android version will be \'Meow\'.\nRestart app to take effect</string>
 </resources>
