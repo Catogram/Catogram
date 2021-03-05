@@ -228,4 +228,7 @@
     <string name="CG_RecentStickers">Показывать полный список</string>
     <string name="CG_RecentStickers_desc">з недавніх стікерів</string>
     <string name="CG_Without_Authorship">Without authorship</string>
+    <string name="SyncDeviceOn">Information about your device won\'t be sent</string>
+    <string name="SyncDeviceOff">Information about your device will be sent</string>
+    <string name="SyncDevice">Don\'t send information about device</string>
 </resources>
