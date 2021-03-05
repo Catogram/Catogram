@@ -230,4 +230,7 @@
     <string name="CG_RecentStickers">عرض القائمة الكاملة</string>
     <string name="CG_RecentStickers_desc">للملصقات</string>
     <string name="CG_Without_Authorship">توجيه من غير اسم</string>
+    <string name="SyncDeviceOn">Information about your device won\'t be sent</string>
+    <string name="SyncDeviceOff">Information about your device will be sent</string>
+    <string name="SyncDevice">Don\'t send information about device</string>
 </resources>
