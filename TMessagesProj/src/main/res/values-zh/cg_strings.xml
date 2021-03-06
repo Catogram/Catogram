@@ -219,7 +219,7 @@
     <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
     <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
-    <string name="CG_DND">Do not disturb</string>
+    <string name="CG_DND">請勿打擾</string>
     <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
     <string name="CG_Silence">Total silence</string>
     <string name="CG_Silence_desc">Will turn off all notifications</string>
@@ -228,8 +228,8 @@
     <string name="CG_RecentStickers">Show full list</string>
     <string name="CG_RecentStickers_desc">of recent stickers</string>
     <string name="CG_Without_Authorship">Without authorship</string>
-    <string name="SyncDeviceOn">Information about your device won\'t be sent</string>
-    <string name="SyncDeviceOff">Information about your device will be sent</string>
-    <string name="SyncDevice">Don\'t send information about device</string>
+    <string name="SyncDeviceOn">不會傳送裝置資料</string>
+    <string name="SyncDeviceOff">會傳送裝置資料</string>
+    <string name="SyncDevice">不要傳送裝置資料</string>
     <string name="SyncDevice_desc">Your model will be \'Moore\' and Android version will be \'Meow\'.\nRestart app to take effect</string>
 </resources>
