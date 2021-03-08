@@ -225,11 +225,11 @@
     <string name="CG_Silence_desc">Disattiverà tutte le notifiche</string>
     <string name="CG_SilenceNonContacts">Silenzia i non-contatti</string>
     <string name="CG_SilenceNonContacts_desc">Se attivato, i suoni di notifica proverranno solo dai contatti. Puoi aggiungere una persona ai tuoi contatti anche senza il numero di telefono, tramite il loro profilo</string>
-    <string name="CG_RecentStickers">Mostra la lista intera</string>
+    <string name="CG_RecentStickers">Mostra la lista completa</string>
     <string name="CG_RecentStickers_desc">di sticker recenti</string>
     <string name="CG_Without_Authorship">Senza firma</string>
-    <string name="SyncDeviceOn">Information about your device won\'t be sent</string>
-    <string name="SyncDeviceOff">Information about your device will be sent</string>
-    <string name="SyncDevice">Don\'t send information about device</string>
-    <string name="SyncDevice_desc">Your model will be \'Moore\' and Android version will be \'Meow\'.\nRestart app to take effect</string>
+    <string name="SyncDeviceOn">Le informazioni relative al tuo dispositivo non saranno inviate</string>
+    <string name="SyncDeviceOff">Le informazioni relative al tuo dispositivo saranno inviate</string>
+    <string name="SyncDevice">Non inviare informazioni relative al dispositivo</string>
+    <string name="SyncDevice_desc">Il tuo modello sarà \'Moore\' e la versione Android sarà \'Meow\'.\nRiavvia l\'app per applicare le modifiche</string>
 </resources>
