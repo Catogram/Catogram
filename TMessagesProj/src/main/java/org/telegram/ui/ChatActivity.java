@@ -13615,11 +13615,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                 builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
                 if (reason == 0) {
-                    if (currentChat.has_link) {
-                        builder.setMessage(LocaleController.getString("ChannelCantOpenBannedByAdmin", R.string.ChannelCantOpenBannedByAdmin));
-                    } else {
-                        builder.setMessage(LocaleController.getString("ChannelCantOpenPrivate", R.string.ChannelCantOpenPrivate));
-                    }
+                        builder.setMessage(LocaleController.getString("CG_Private", R.string.CG_Private));
                 } else if (reason == 1) {
                     builder.setMessage(LocaleController.getString("ChannelCantOpenNa", R.string.ChannelCantOpenNa));
                 } else if (reason == 2) {
