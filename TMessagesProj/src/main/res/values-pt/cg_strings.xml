@@ -225,8 +225,8 @@
     <string name="CG_Silence_desc">Desligará todas as notificações</string>
     <string name="CG_SilenceNonContacts">Silenciar não contatos</string>
     <string name="CG_SilenceNonContacts_desc">Se ativado, as notificações com som virão apenas dos contatos. Você pode adicionar uma pessoa aos seus contatos mesmo sem um número de telefone, faça isso no perfil dela</string>
-    <string name="CG_RecentStickers">Show full list</string>
-    <string name="CG_RecentStickers_desc">of recent stickers</string>
-    <string name="CG_Without_Authorship">Without authorship</string>
-    <string name="CG_Private">This channel is private</string>
+    <string name="CG_RecentStickers">Mostrar lista completa</string>
+    <string name="CG_RecentStickers_desc">de stickers recentes</string>
+    <string name="CG_Without_Authorship">Sem autoria</string>
+    <string name="CG_Private">Este canal é privado</string>
 </resources>
