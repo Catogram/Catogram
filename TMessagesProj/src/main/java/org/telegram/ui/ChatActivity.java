@@ -19068,12 +19068,12 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (fromId > 0) {
                     TLRPC.User user = getMessagesController().getUser(fromId);
                     if (user != null) {
-                        str = ContactsController.formatName(user.first_name, user.last_name) + "[" + formattedTime + "] :\n";
+                        str = ContactsController.formatName(user.first_name, user.last_name) + " [" + formattedTime + "] :\n";
                     }
                 } else if (fromId < 0) {
                     TLRPC.Chat chat = getMessagesController().getChat(-fromId);
                     if (chat != null) {
-                        str = chat.title + "[" + formattedTime + ":\n";
+                        str = chat.title + " [" + formattedTime + ":\n";
                     }
                 }
             }
