@@ -228,8 +228,5 @@
     <string name="CG_RecentStickers">Hiện đầy đủ danh sách</string>
     <string name="CG_RecentStickers_desc">của nhãn dán gần đây</string>
     <string name="CG_Without_Authorship">Không có quyền sở hữu tác giả</string>
-    <string name="SyncDeviceOn">Thông tin về thiết bị của bạn sẽ không được gửi</string>
-    <string name="SyncDeviceOff">Thông tin về thiết bị của bạn sẽ được gửi</string>
-    <string name="SyncDevice">Không gửi thông tin về thiết bị</string>
-    <string name="SyncDevice_desc">Model của bạn sẽ là \'Moore\' và phiên bản Android sẽ là \'Meow\'.\nKhởi động lại ứng dụng để có hiệu lực</string>
+    <string name="CG_Private">This channel is private</string>
 </resources>
