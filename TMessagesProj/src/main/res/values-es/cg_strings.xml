@@ -228,8 +228,5 @@
     <string name="CG_RecentStickers">Mostrar toda la lista</string>
     <string name="CG_RecentStickers_desc">de stickers recientes</string>
     <string name="CG_Without_Authorship">Sin citar</string>
-    <string name="SyncDeviceOn">No se enviará información sobre el dispositivo</string>
-    <string name="SyncDeviceOff">Se enviará información sobre el dispositivo</string>
-    <string name="SyncDevice">No enviar información del dispositivo</string>
-    <string name="SyncDevice_desc">Your model will be \'Moore\' and Android version will be \'Meow\'.\nRestart app to take effect</string>
+    <string name="CG_Private">This channel is private</string>
 </resources>
