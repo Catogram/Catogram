@@ -2230,9 +2230,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (currentEncryptedChat != null) {
                 timeItem2 = headerItem.addSubItem(chat_enc_timer, R.drawable.msg_timer, LocaleController.getString("SetTimer", R.string.SetTimer));
             }
-            if (ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES)) {
-                headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory));
-            }
+            headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory));
             if (currentUser == null || !currentUser.self) {
                 muteItem = headerItem.addSubItem(mute, R.drawable.msg_mute, null);
             }
