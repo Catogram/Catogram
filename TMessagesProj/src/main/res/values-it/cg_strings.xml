@@ -215,10 +215,10 @@
     <string name="CG_ClearedFromCache">Cancellato dalle cache</string>
     <string name="CG_ToBeginning">Per Iniziare</string>
     <string name="CG_ToLinkedChat">Chat Collegata</string>
-    <string name="CG_FakeUserPhone">Numero di telefono fittizio</string>
-    <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono fittizio nel drawer e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disabilita inoltro con firma</string>
-    <string name="CG_FwdMenu_DisableNoForward">Abilita inoltro con firma</string>
+    <string name="CG_FakeUserPhone">Numero di telefono falso</string>
+    <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono falso nel menu laterale e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Disabilita l\'inoltro con firma</string>
+    <string name="CG_FwdMenu_DisableNoForward">Abilita l\'inoltro con firma</string>
     <string name="CG_DND">Non disturbare</string>
     <string name="CG_DND_desc">Silenzierà tutte le notifiche. È utile se non ti è permesso fare rumore ma hai bisogno di vedere le notifiche</string>
     <string name="CG_Silence">Silenzio totale</string>
