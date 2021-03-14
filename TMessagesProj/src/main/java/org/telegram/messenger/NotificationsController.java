@@ -3960,6 +3960,14 @@ public class NotificationsController extends BaseController {
                 }
             }
 
+            if (chat != null) {
+                Person.Builder personBuilder = new Person.Builder().setName(name);
+                if (avatalFile != null && avatalFile.exists() && Build.VERSION.SDK_INT >= 28) {
+                    loadRoundAvatar(avatalFile, personBuilder);
+                }
+                personCache.put(-chat.id, personBuilder.build());
+            }
+
             NotificationCompat.Action wearReplyAction = null;
 
             if ((!isChannel || isSupergroup) && canReply && !SharedConfig.isWaitingForPasscodeEnter && selfUserId != lowerId && !UserObject.isReplyUser(lowerId)) {

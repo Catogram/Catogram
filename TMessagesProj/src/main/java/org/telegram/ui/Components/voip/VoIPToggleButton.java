@@ -86,7 +86,7 @@ public class VoIPToggleButton extends FrameLayout {
             TextView textView = new TextView(context);
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11);
-            textView.setTextColor(Color.WHITE);
+            textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             textView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
             addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, radius + 4, 0, 0));
             this.textView[i] = textView;
@@ -106,6 +106,12 @@ public class VoIPToggleButton extends FrameLayout {
     public void setTextSize(int size) {
         for (int i = 0; i < 2; i++) {
             textView[i].setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+        }
+    }
+
+    public void setTextColor(int color) {
+        for (int i = 0; i < 2; i++) {
+            textView[i].setTextColor(color);
         }
     }
 

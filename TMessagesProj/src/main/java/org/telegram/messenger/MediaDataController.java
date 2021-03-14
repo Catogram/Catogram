@@ -24,6 +24,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Spannable;
@@ -32,6 +33,11 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.text.style.CharacterStyle;
+import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
+import android.text.style.TypefaceSpan;
+import android.text.style.URLSpan;
+import android.text.style.UnderlineSpan;
 import android.util.LongSparseArray;
 import android.util.SparseArray;
 
@@ -68,6 +74,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
@@ -4298,6 +4305,28 @@ public class MediaDataController extends BaseController {
         }
     }
 
+    private static CharacterStyle tgToSdkSpan(CharacterStyle baseSpan, @Nullable TextStyleSpan.TextStyleRun baseRun) {
+        if (baseSpan instanceof TextStyleSpan) {
+            TextStyleSpan.TextStyleRun run = baseRun == null ? ((TextStyleSpan) baseSpan).getTextStyleRun() : baseRun;
+
+            if (run.flags == (TextStyleSpan.FLAG_STYLE_BOLD + TextStyleSpan.FLAG_STYLE_ITALIC)) {
+                return new StyleSpan(Typeface.BOLD_ITALIC);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_BOLD) {
+                return new StyleSpan(Typeface.BOLD);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_ITALIC) {
+                return new StyleSpan(Typeface.ITALIC);
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_MONO) {
+                return new TypefaceSpan("monospace");
+            } else if (run.flags == TextStyleSpan.FLAG_STYLE_STRIKE) {
+                return new StrikethroughSpan();
+            }
+
+            return new TextStyleSpan(run);
+        } else {
+            return baseSpan;
+        }
+    }
+
     private static CharacterStyle createNewSpan(CharacterStyle baseSpan, TextStyleSpan.TextStyleRun textStyleRun, TextStyleSpan.TextStyleRun newStyleRun, boolean allowIntersection) {
         TextStyleSpan.TextStyleRun run = new TextStyleSpan.TextStyleRun(textStyleRun);
         if (newStyleRun != null) {
@@ -4307,12 +4336,14 @@ public class MediaDataController extends BaseController {
                 run.replace(newStyleRun);
             }
         }
+
         if (baseSpan instanceof TextStyleSpan) {
-            return new TextStyleSpan(run);
+            return tgToSdkSpan(baseSpan, run);
         } else if (baseSpan instanceof URLSpanReplacement) {
             URLSpanReplacement span = (URLSpanReplacement) baseSpan;
             return new URLSpanReplacement(span.getURL(), run);
         }
+
         return null;
     }
 
@@ -4345,7 +4376,7 @@ public class MediaDataController extends BaseController {
                     if (spanStart > start && end > spanEnd) {
                         editable.setSpan(createNewSpan(oldSpan, textStyleRun, newStyleRun, allowIntersection), spanStart, spanEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         if (span != null) {
-                            editable.setSpan(new TextStyleSpan(new TextStyleSpan.TextStyleRun(newStyleRun)), spanEnd, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            editable.setSpan(tgToSdkSpan(new TextStyleSpan(new TextStyleSpan.TextStyleRun(newStyleRun)), null), spanEnd, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         }
                         end = spanStart;
                     } else {
@@ -4376,7 +4407,7 @@ public class MediaDataController extends BaseController {
                 }
             }
             if (span != null && start < end) {
-                editable.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable.setSpan(tgToSdkSpan(span, null), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         } catch (Exception e) {
             FileLog.e(e);
@@ -4497,6 +4528,12 @@ public class MediaDataController extends BaseController {
         return runs;
     }
 
+    private TLRPC.MessageEntity createMessageEntity(TLRPC.MessageEntity entity, int spanStart, int spanEnd) {
+        entity.offset = spanStart;
+        entity.length = spanEnd - spanStart;
+        return entity;
+    }
+
     public ArrayList<TLRPC.MessageEntity> getEntities(CharSequence[] message, boolean allowStrike) {
         if (message == null || message[0] == null) {
             return null;
@@ -4579,6 +4616,68 @@ public class MediaDataController extends BaseController {
 
         if (message[0] instanceof Spanned) {
             Spanned spannable = (Spanned) message[0];
+
+            StyleSpan[] styleSpans = spannable.getSpans(0, message[0].length(), StyleSpan.class);
+            for (StyleSpan styleSpan : styleSpans) {
+                int spanStart = spannable.getSpanStart(styleSpan);
+                int spanEnd = spannable.getSpanEnd(styleSpan);
+
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
+
+                if (entities == null) {
+                    entities = new ArrayList<>();
+                }
+
+                switch (styleSpan.getStyle()) {
+                    case Typeface.BOLD:
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityBold(), spanStart, spanEnd));
+                        break;
+                    case Typeface.ITALIC:
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityItalic(), spanStart, spanEnd));
+                        break;
+                    case Typeface.BOLD_ITALIC:
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityBold(), spanStart, spanEnd));
+                        entities.add(createMessageEntity(new TLRPC.TL_messageEntityItalic(), spanStart, spanEnd));
+                        break;
+                }
+            }
+
+            TypefaceSpan[] typefaceSpans = spannable.getSpans(0, message[0].length(), TypefaceSpan.class);
+            for (TypefaceSpan typefaceSpan : typefaceSpans) {
+                int spanStart = spannable.getSpanStart(typefaceSpan);
+                int spanEnd = spannable.getSpanEnd(typefaceSpan);
+
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
+
+                if (entities == null) {
+                    entities = new ArrayList<>();
+                }
+
+                if (typefaceSpan.getFamily().equals("monospace")) {
+                    entities.add(createMessageEntity(new TLRPC.TL_messageEntityCode(), spanStart, spanEnd));
+                }
+            }
+
+            StrikethroughSpan[] strikeSpans = spannable.getSpans(0, message[0].length(), StrikethroughSpan.class);
+            for (StrikethroughSpan strikeSpan : strikeSpans) {
+                int spanStart = spannable.getSpanStart(strikeSpan);
+                int spanEnd = spannable.getSpanEnd(strikeSpan);
+
+                if (checkInclusion(spanStart, entities, false) || checkInclusion(spanEnd, entities, true) || checkIntersection(spanStart, spanEnd, entities)) {
+                    continue;
+                }
+
+                if (entities == null) {
+                    entities = new ArrayList<>();
+                }
+
+                entities.add(createMessageEntity(new TLRPC.TL_messageEntityStrike(), spanStart, spanEnd));
+            }
+
             TextStyleSpan[] spans = spannable.getSpans(0, message[0].length(), TextStyleSpan.class);
             if (spans != null && spans.length > 0) {
                 for (int a = 0; a < spans.length; a++) {
@@ -4660,6 +4759,20 @@ public class MediaDataController extends BaseController {
                     entity.offset = spannable.getSpanStart(spansUrlReplacement[b]);
                     entity.length = Math.min(spannable.getSpanEnd(spansUrlReplacement[b]), message[0].length()) - entity.offset;
                     entity.url = spansUrlReplacement[b].getURL();
+                    entities.add(entity);
+                }
+            }
+
+            URLSpan[] androidUrlSpans = spannable.getSpans(0, message[0].length(), URLSpan.class);
+            if (androidUrlSpans != null && androidUrlSpans.length > 0) {
+                if (entities == null) {
+                    entities = new ArrayList<>();
+                }
+                for (int b = 0; b < androidUrlSpans.length; b++) {
+                    TLRPC.TL_messageEntityTextUrl entity = new TLRPC.TL_messageEntityTextUrl();
+                    entity.offset = spannable.getSpanStart(androidUrlSpans[b]);
+                    entity.length = Math.min(spannable.getSpanEnd(androidUrlSpans[b]), message[0].length()) - entity.offset;
+                    entity.url = androidUrlSpans[b].getURL();
                     entities.add(entity);
                 }
             }

@@ -2132,10 +2132,21 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 @Override
                 public void onTextChanged(EditText editText) {
                     showMessagesSearchListView(false);
+
                     if (searchingForUser) {
                         mentionsAdapter.searchUsernameOrHashtag("@" + editText.getText().toString(), 0, messages, true, true);
                     } else if (searchingUserMessages == null && searchingChatMessages == null && searchUserButton != null && TextUtils.equals(editText.getText(), LocaleController.getString("SearchFrom", R.string.SearchFrom))) {
                         searchUserButton.callOnClick();
+                    }
+
+                    if (searchUserButton != null) {
+                        if (editText.getText().length() > 0) {
+                            searchUserButton.setVisibility(View.INVISIBLE);
+                            searchCalendarButton.setVisibility(View.INVISIBLE);
+                        } else {
+                            searchUserButton.setVisibility(View.VISIBLE);
+                            searchCalendarButton.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
 
@@ -2219,9 +2230,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (currentEncryptedChat != null) {
                 timeItem2 = headerItem.addSubItem(chat_enc_timer, R.drawable.msg_timer, LocaleController.getString("SetTimer", R.string.SetTimer));
             }
-            if (ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_DELETE_MESSAGES)) {
-                headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory));
-            }
+            headerItem.addSubItem(clear_history, R.drawable.msg_clear, LocaleController.getString("ClearHistory", R.string.ClearHistory));
             if (currentUser == null || !currentUser.self) {
                 muteItem = headerItem.addSubItem(mute, R.drawable.msg_mute, null);
             }
@@ -6181,7 +6190,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     }
                     updatePinnedMessageView(true);
                     updateBottomOverlay();
-                    updateVisibleRows();
+                    updateVisibleRows(2);
                 }
             }
 
@@ -6711,8 +6720,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             searchUserButton.setOnClickListener(view -> {
                 mentionLayoutManager.setReverseLayout(true);
                 mentionsAdapter.setSearchingMentions(true);
-                searchCalendarButton.setVisibility(View.GONE);
-                searchUserButton.setVisibility(View.GONE);
                 searchingForUser = true;
                 searchingUserMessages = null;
                 searchingChatMessages = null;
@@ -6720,6 +6727,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 searchItem.setSearchFieldCaption(LocaleController.getString("SearchFrom", R.string.SearchFrom));
                 AndroidUtilities.showKeyboard(searchItem.getSearchField());
                 searchItem.clearSearchText();
+                searchCalendarButton.setVisibility(View.GONE);
+                searchUserButton.setVisibility(View.GONE);
             });
             searchUserButton.setContentDescription(LocaleController.getString("AccDescrSearchByUser", R.string.AccDescrSearchByUser));
         }
@@ -11485,7 +11494,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
                     int newVisibility = View.VISIBLE;
 
-                    if (replyButton.getVisibility() != newVisibility) {
+                    if (replyButton.getVisibility() != newVisibility || replyButtonAnimation != null) {
                         if (replyButtonAnimation != null) {
                             replyButtonAnimation.cancel();
                         }
@@ -13604,11 +13613,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                 builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
                 if (reason == 0) {
-                    if (currentChat.has_link) {
-                        builder.setMessage(LocaleController.getString("ChannelCantOpenBannedByAdmin", R.string.ChannelCantOpenBannedByAdmin));
-                    } else {
-                        builder.setMessage(LocaleController.getString("ChannelCantOpenPrivate", R.string.ChannelCantOpenPrivate));
-                    }
+                        builder.setMessage(LocaleController.getString("CG_Private", R.string.CG_Private));
                 } else if (reason == 1) {
                     builder.setMessage(LocaleController.getString("ChannelCantOpenNa", R.string.ChannelCantOpenNa));
                 } else if (reason == 2) {
@@ -13723,7 +13728,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
             }
             if (changed) {
-                updateVisibleRows();
+                updateVisibleRows(1);
             }
         } else if (id == NotificationCenter.messagePlayingDidStart) {
             MessageObject messageObject = (MessageObject) args[0];
@@ -15679,7 +15684,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     chatAdapter.notifyItemRangeChanged(chatAdapter.messagesStartRow, messages.size());
                 }
             }
-            updateVisibleRows();
+            updateVisibleRows(1);
         } else if (threadMessageId == 0) {
             first_unread_id = 0;
             last_message_id = 0;
@@ -19051,17 +19056,18 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private String getMessageContent(MessageObject messageObject, int previousUid, boolean name) {
         String str = "";
         if (name) {
+            String formattedTime = LocaleController.getInstance().formatterDay.format((long) (messageObject.messageOwner.date) * 1000);
             int fromId = messageObject.getFromChatId();
             if (previousUid != fromId) {
                 if (fromId > 0) {
                     TLRPC.User user = getMessagesController().getUser(fromId);
                     if (user != null) {
-                        str = ContactsController.formatName(user.first_name, user.last_name) + ":\n";
+                        str = ContactsController.formatName(user.first_name, user.last_name) + " [" + formattedTime + "] :\n";
                     }
                 } else if (fromId < 0) {
                     TLRPC.Chat chat = getMessagesController().getChat(-fromId);
                     if (chat != null) {
-                        str = chat.title + ":\n";
+                        str = chat.title + " [" + formattedTime + ":\n";
                     }
                 }
             }
@@ -19995,6 +20001,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void updateVisibleRows() {
+        updateVisibleRows(0);
+    }
+
+    private void updateVisibleRows(int updateMode) {
         if (chatListView == null) {
             return;
         }
@@ -20015,13 +20025,24 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
         }
         int count = chatListView.getChildCount();
-        MessageObject editingMessageObject = chatActivityEnterView != null ? chatActivityEnterView.getEditingMessageObject() : null;
         int linkedChatId = chatInfo != null ? chatInfo.linked_chat_id : 0;
         for (int a = 0; a < count; a++) {
             View view = chatListView.getChildAt(a);
             if (view instanceof ChatMessageCell) {
                 ChatMessageCell cell = (ChatMessageCell) view;
                 MessageObject messageObject = cell.getMessageObject();
+
+                boolean shouldUpdateReply = false;
+                if (messageObject.isReply()) {
+                    if (updateMode == 1 && messagesDict[0].indexOfKey(messageObject.replyMessageObject.getId()) < 0) {
+                        cell.getMessageObject().replyMessageObject = null;
+                        cell.getMessageObject().messageOwner.reply_to = null;
+                        shouldUpdateReply = true;
+                    } else if (updateMode == 2 && messageObject.replyMessageObject.getId() == editingMessageObject.getId()) {
+                        cell.getMessageObject().replyMessageObject = editingMessageObject;
+                        shouldUpdateReply = true;
+                    }
+                }
 
                 boolean disableSelection = false;
                 boolean selected = false;
@@ -20043,10 +20064,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
 
                 if (!cell.getMessageObject().deleted || cell.linkedChatId != linkedChatId) {
-                    cell.setIsUpdating(true);
+                    cell.setIsUpdating(true, shouldUpdateReply);
                     cell.linkedChatId = chatInfo != null ? chatInfo.linked_chat_id : 0;
                     cell.setMessageObject(cell.getMessageObject(), cell.getCurrentMessagesGroup(), cell.isPinnedBottom(), cell.isPinnedTop());
-                    cell.setIsUpdating(false);
+                    cell.setIsUpdating(false, false);
                 }
                 if (cell != scrimView) {
                     cell.setCheckPressed(!disableSelection, disableSelection && selected);

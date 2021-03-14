@@ -1533,7 +1533,13 @@ public class Theme {
         }
 
         public boolean isDark() {
-            return "Dark Blue".equals(name) || "Night".equals(name);
+            String themeName = name;
+
+            if (info != null && info.settings != null) {
+                themeName = getBaseThemeKey(info.settings);
+            }
+
+            return "Dark Blue".equals(themeName) || "Night".equals(themeName);
         }
 
         public boolean isLight() {

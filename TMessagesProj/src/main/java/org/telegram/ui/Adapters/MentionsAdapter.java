@@ -758,10 +758,10 @@ public class MentionsAdapter extends RecyclerListView.SelectionAdapter {
                         object = user;
                         id = user.id;
                     }
-                    if (!TextUtils.isEmpty(username) && username.toLowerCase().startsWith(usernameString) ||
+                    if ((!TextUtils.isEmpty(username) && username.toLowerCase().startsWith(usernameString) ||
                             !TextUtils.isEmpty(firstName) && firstName.toLowerCase().startsWith(usernameString) ||
                             !TextUtils.isEmpty(lastName) && lastName.toLowerCase().startsWith(usernameString) ||
-                            hasSpace && ContactsController.formatName(firstName, lastName).toLowerCase().startsWith(usernameString)) {
+                            hasSpace && ContactsController.formatName(firstName, lastName).toLowerCase().startsWith(usernameString)) && !(object instanceof TLRPC.TL_chat)) {
                         newResult.add(object);
                         newMap.put(id, object);
                     }

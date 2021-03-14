@@ -228,4 +228,5 @@
     <string name="CG_RecentStickers">Показать полный список</string>
     <string name="CG_RecentStickers_desc">недавних стикеров</string>
     <string name="CG_Without_Authorship">Без авторства</string>
+    <string name="CG_Private">Это приватный канал</string>
 </resources>
