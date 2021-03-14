@@ -74,7 +74,7 @@
 
     <application
         android:name="org.telegram.messenger.ApplicationLoader"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:hardwareAccelerated="@bool/useHardwareAcceleration"
         android:icon="@mipmap/cg_launcher_alt_blue"
         android:largeHeap="true"
