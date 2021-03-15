@@ -8640,11 +8640,13 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     private void updateContainerFlags(boolean actionBarVisible) {
         if (sendPhotoType != SELECT_TYPE_AVATAR && containerView != null) {
             WindowInsetsControllerCompat insetController = WindowCompat.getInsetsController(parentActivity.getWindow(), containerView);
-            insetController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
             if (actionBarVisible) {
+                WindowCompat.setDecorFitsSystemWindows(parentActivity.getWindow(), true);
                 insetController.show(WindowInsetsCompat.Type.systemBars());
             } else {
+                WindowCompat.setDecorFitsSystemWindows(parentActivity.getWindow(), false);
                 insetController.hide(WindowInsetsCompat.Type.systemBars());
+                insetController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
             }
         }
 
