@@ -694,6 +694,9 @@ public class NotificationsController extends BaseController {
                         messageObject.messageOwner.silent && (messageObject.messageOwner.action instanceof TLRPC.TL_messageActionContactSignUp || messageObject.messageOwner.action instanceof TLRPC.TL_messageActionUserJoined))) {
                     continue;
                 }
+                if (CatogramConfig.INSTANCE.getHideUserIfBlocked() && getMessagesController().blockePeers.indexOfKey(messageObject.getSenderId()) >= 0) {
+                    continue;
+                }
                 long mid = messageObject.getId();
                 long random_id = messageObject.isFcmMessage() ? messageObject.messageOwner.random_id : 0;
                 long dialog_id = messageObject.getDialogId();
@@ -4048,6 +4051,9 @@ public class NotificationsController extends BaseController {
             }
             for (int a = messageObjects.size() - 1; a >= 0; a--) {
                 MessageObject messageObject = messageObjects.get(a);
+                if (CatogramConfig.INSTANCE.getHideUserIfBlocked() && getMessagesController().blockePeers.indexOfKey(messageObject.getSenderId()) >= 0) {
+                    continue;
+                }
                 String message = getShortStringForMessage(messageObject, senderName, preview);
                 if (dialog_id == selfUserId) {
                     senderName[0] = name;
