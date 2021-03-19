@@ -17,9 +17,9 @@ object CustomVerifications: CoroutineScope by MainScope() {
     init {
         launch(Dispatchers.IO) {
             try {
-                SCAM_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/scam.txt").readText().lines()
-                VERIF_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/verif.txt").readText().lines()
-                FAKE_IDS = URL("https://raw.githubusercontent.com/Catogram/Catogram/verification/fake.txt").readText().lines()
+                SCAM_IDS = URL("https://raw.githubusercontent.com/ctwoon/galo4ki/main/scam.txt").readText().lines()
+                VERIF_IDS = URL("https://raw.githubusercontent.com/ctwoon/galo4ki/main/verif.txt").readText().lines()
+                FAKE_IDS = URL("https://raw.githubusercontent.com/ctwoon/galo4ki/main/fake.txt").readText().lines()
             }
             catch (e: Exception) { }
         }
