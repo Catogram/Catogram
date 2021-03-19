@@ -134,6 +134,7 @@ import org.telegram.ui.Components.StickerSetBulletinLayout;
 import org.telegram.ui.Components.StickersAlert;
 import org.telegram.ui.Components.TermsOfServiceView;
 import org.telegram.ui.Components.ThemeEditorView;
+import org.telegram.ui.Components.UndoView;
 import org.telegram.ui.Components.UpdateAppAlertDialog;
 import org.telegram.ui.Components.voip.VoIPHelper;
 
@@ -212,6 +213,8 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
     private ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener;
 
     private ActionMode visibleActionMode;
+
+    private boolean wasMutedByAdmin;
 
     private ImageView themeSwitchImageView;
     private View themeSwitchSunView;
@@ -1004,24 +1007,28 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             if (drawerLayoutAdapter != null) {
                 drawerLayoutAdapter.notifyDataSetChanged();
             }
-            for (BaseFragment fragment : actionBarLayout.fragmentsStack) {
-                fragment.onFragmentDestroy();
-            }
-            actionBarLayout.fragmentsStack.clear();
-            if (AndroidUtilities.isTablet()) {
-                for (BaseFragment fragment : layersActionBarLayout.fragmentsStack) {
-                    fragment.onFragmentDestroy();
-                }
-                layersActionBarLayout.fragmentsStack.clear();
-                for (BaseFragment fragment : rightActionBarLayout.fragmentsStack) {
-                    fragment.onFragmentDestroy();
-                }
-                rightActionBarLayout.fragmentsStack.clear();
-            }
+            clearFragments();
             Intent intent2 = new Intent(this, IntroActivity.class);
             startActivity(intent2);
             onFinish();
             finish();
+        }
+    }
+
+    public static void clearFragments() {
+        for (BaseFragment fragment : mainFragmentsStack) {
+            fragment.onFragmentDestroy();
+        }
+        mainFragmentsStack.clear();
+        if (AndroidUtilities.isTablet()) {
+            for (BaseFragment fragment : layerFragmentsStack) {
+                fragment.onFragmentDestroy();
+            }
+            layerFragmentsStack.clear();
+            for (BaseFragment fragment : rightFragmentsStack) {
+                fragment.onFragmentDestroy();
+            }
+            rightFragmentsStack.clear();
         }
     }
 
@@ -1042,6 +1049,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.fileDidLoad);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.fileDidFailToLoad);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.historyImportProgressChanged);
+            NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.groupCallUpdated);
         }
         currentAccount = UserConfig.selectedAccount;
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.appDidLogout);
@@ -1055,6 +1063,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.fileDidLoad);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.fileDidFailToLoad);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.historyImportProgressChanged);
+        NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.groupCallUpdated);
     }
 
     private void checkLayout() {
@@ -1543,6 +1552,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                         String message = null;
                         String phone = null;
                         String game = null;
+                        String voicechat = null;
                         String phoneHash = null;
                         String lang = null;
                         String theme = null;
@@ -1702,6 +1712,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                                                 botUser = data.getQueryParameter("start");
                                                 botChat = data.getQueryParameter("startgroup");
                                                 game = data.getQueryParameter("game");
+                                                voicechat = data.getQueryParameter("voicechat");
                                                 threadId = Utilities.parseInt(data.getQueryParameter("thread"));
                                                 if (threadId == 0) {
                                                     threadId = null;
@@ -1738,6 +1749,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                                             botUser = data.getQueryParameter("start");
                                             botChat = data.getQueryParameter("startgroup");
                                             game = data.getQueryParameter("game");
+                                            voicechat = data.getQueryParameter("voicechat");
                                             messageId = Utilities.parseInt(data.getQueryParameter("post"));
                                             if (messageId == 0) {
                                                 messageId = null;
@@ -2020,11 +2032,11 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                                 args.putString("phone", phone);
                                 args.putString("hash", phoneHash);
                                 AndroidUtilities.runOnUIThread(() -> presentFragment(new CancelAccountDeletionActivity(args)));
-                            } else if (username != null || group != null || sticker != null || message != null || game != null || auth != null || unsupportedUrl != null || lang != null || code != null || wallPaper != null || channelId != null || theme != null || login != null) {
+                            } else if (username != null || group != null || sticker != null || message != null || game != null || voicechat != null || auth != null || unsupportedUrl != null || lang != null || code != null || wallPaper != null || channelId != null || theme != null || login != null) {
                                 if (message != null && message.startsWith("@")) {
                                     message = " " + message;
                                 }
-                                runLinkRequest(intentAccount[0], username, group, sticker, botUser, botChat, message, hasUrl, messageId, channelId, threadId, commentId, game, auth, lang, unsupportedUrl, code, login, wallPaper, theme, 0);
+                                runLinkRequest(intentAccount[0], username, group, sticker, botUser, botChat, message, hasUrl, messageId, channelId, threadId, commentId, game, auth, lang, unsupportedUrl, code, login, wallPaper, theme, voicechat, 0);
                             } else {
                                 try (Cursor cursor = getContentResolver().query(intent.getData(), null, null, null, null)) {
                                     if (cursor != null) {
@@ -2119,7 +2131,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                             AlertsCreator.createCallDialogAlert(lastFragment, lastFragment.getMessagesController().getUser(push_user_id), videoCallUser);
                         }
                     } else {
-                        VoIPPendingCall.startOrSchedule(this, push_user_id, videoCallUser);
+                        VoIPPendingCall.startOrSchedule(this, push_user_id, videoCallUser, AccountInstance.getInstance(intentAccount[0]));
                     }
                 } else {
                     Bundle args = new Bundle();
@@ -2263,7 +2275,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                 final boolean videoCall = videoCallUser;
                 contactsFragment.setDelegate((user, param, activity) -> {
                     final TLRPC.UserFull userFull = MessagesController.getInstance(currentAccount).getUserFull(user.id);
-                    VoIPHelper.startCall(user, videoCall, userFull != null && userFull.video_calls_available, LaunchActivity.this, userFull);
+                    VoIPHelper.startCall(user, videoCall, userFull != null && userFull.video_calls_available, LaunchActivity.this, userFull, AccountInstance.getInstance(intentAccount[0]));
                 });
                 actionBarLayout.presentFragment(contactsFragment, actionBarLayout.getLastFragment() instanceof ContactsActivity, true, true, false);
                 if (AndroidUtilities.isTablet()) {
@@ -2404,6 +2416,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         if (isVoipIntent) {
             VoIPFragment.show(this, intentAccount[0]);
         }
+        if (!showGroupVoip && GroupCallActivity.groupCallInstance != null) {
+            GroupCallActivity.groupCallInstance.dismiss();
+        }
 
         intent.setAction(null);
         //FileLog.d("UI create18 time = " + (SystemClock.elapsedRealtime() - ApplicationLoader.startTime));
@@ -2439,6 +2454,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             PhotoViewer.getInstance().closePhoto(false, true);
         } else if (ArticleViewer.hasInstance() && ArticleViewer.getInstance().isVisible()) {
             ArticleViewer.getInstance().close(false, true);
+        }
+        if (GroupCallActivity.groupCallInstance != null) {
+            GroupCallActivity.groupCallInstance.dismiss();
         }
 
         if (!animated) {
@@ -2580,6 +2598,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                     } else if (ArticleViewer.hasInstance() && ArticleViewer.getInstance().isVisible()) {
                         ArticleViewer.getInstance().close(false, true);
                     }
+                    if (GroupCallActivity.groupCallInstance != null) {
+                        GroupCallActivity.groupCallInstance.dismiss();
+                    }
 
                     drawerLayoutContainer.setAllowOpenDrawer(false, false);
                     if (AndroidUtilities.isTablet()) {
@@ -2627,6 +2648,10 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         }
     }
 
+    private void openGroupCall(AccountInstance accountInstance, TLRPC.Chat chat, String hash) {
+        VoIPHelper.startCall(chat, null, hash, false, this, mainFragmentsStack.get(mainFragmentsStack.size() - 1), accountInstance);
+    }
+
     private void runLinkRequest(final int intentAccount,
                                 final String username,
                                 final String group,
@@ -2647,13 +2672,14 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                                 final String loginToken,
                                 final TLRPC.TL_wallPaper wallPaper,
                                 final String theme,
+                                final String voicechat,
                                 final int state) {
         if (state == 0 && UserConfig.getActivatedAccountsCount() >= 2 && auth != null) {
             AlertsCreator.createAccountSelectDialog(this, account -> {
                 if (account != intentAccount) {
                     switchToAccount(account, true);
                 }
-                runLinkRequest(account, username, group, sticker, botUser, botChat, message, hasUrl, messageId, channelId, threadId, commentId, game, auth, lang, unsupportedUrl, code, loginToken, wallPaper, theme, 1);
+                runLinkRequest(account, username, group, sticker, botUser, botChat, message, hasUrl, messageId, channelId, threadId, commentId, game, auth, lang, unsupportedUrl, code, loginToken, wallPaper, theme, voicechat, 1);
             }).show();
             return;
         } else if (code != null) {
@@ -2686,7 +2712,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                 if (!LaunchActivity.this.isFinishing()) {
                     boolean hideProgressDialog = true;
                     final TLRPC.TL_contacts_resolvedPeer res = (TLRPC.TL_contacts_resolvedPeer) response;
-                    if (error == null && actionBarLayout != null && (game == null || game != null && !res.users.isEmpty())) {
+                    if (error == null && actionBarLayout != null && (game == null && voicechat == null || game != null && !res.users.isEmpty() || voicechat != null && !res.chats.isEmpty())) {
                         MessagesController.getInstance(intentAccount).putUsers(res.users, false);
                         MessagesController.getInstance(intentAccount).putChats(res.chats, false);
                         MessagesStorage.getInstance(intentAccount).putUsersAndChats(res.users, res.chats, false, true);
@@ -2743,6 +2769,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                             } else if (ArticleViewer.hasInstance() && ArticleViewer.getInstance().isVisible()) {
                                 ArticleViewer.getInstance().close(false, true);
                             }
+                            if (GroupCallActivity.groupCallInstance != null) {
+                                GroupCallActivity.groupCallInstance.dismiss();
+                            }
                             drawerLayoutContainer.setAllowOpenDrawer(false, false);
                             if (AndroidUtilities.isTablet()) {
                                 actionBarLayout.showLastFragment();
@@ -2797,7 +2826,10 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                             if (messageId != null) {
                                 args.putInt("message_id", messageId);
                             }
-                            BaseFragment lastFragment = !mainFragmentsStack.isEmpty() ? mainFragmentsStack.get(mainFragmentsStack.size() - 1) : null;
+                            if (voicechat != null) {
+                                args.putString("voicechat", voicechat);
+                            }
+                            BaseFragment lastFragment = !mainFragmentsStack.isEmpty() && voicechat == null ? mainFragmentsStack.get(mainFragmentsStack.size() - 1) : null;
                             if (lastFragment == null || MessagesController.getInstance(intentAccount).checkCanOpenChat(args, lastFragment)) {
                                 if (isBot && lastFragment instanceof ChatActivity && ((ChatActivity) lastFragment).getDialogId() == dialog_id) {
                                     ((ChatActivity) lastFragment).setBotUser(botUser);
@@ -3698,6 +3730,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.fileDidLoad);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.fileDidFailToLoad);
             NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.historyImportProgressChanged);
+            NotificationCenter.getInstance(currentAccount).removeObserver(this, NotificationCenter.groupCallUpdated);
         }
 
         NotificationCenter.getGlobalInstance().removeObserver(this, NotificationCenter.needShowAlert);
@@ -3977,7 +4010,10 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
     @Override
     protected void onResume() {
         super.onResume();
-        //PlayOTA.onResume();
+        if (Theme.selectedAutoNightType == Theme.AUTO_NIGHT_TYPE_SYSTEM) {
+            Theme.checkAutoNightThemeConditions();
+        }
+        checkWasMutedByAdmin(true);
         //FileLog.d("UI resume time = " + (SystemClock.elapsedRealtime() - ApplicationLoader.startTime));
         NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.startAllHeavyOperations, 4096);
         MediaController.getInstance().setFeedbackView(actionBarLayout, true);
@@ -4416,6 +4452,56 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
                     BulletinFactory.of(fragment).createErrorBulletin((String)args[1]).show();
                 }
             }
+        } else if (id == NotificationCenter.groupCallUpdated) {
+            checkWasMutedByAdmin(false);
+        }
+    }
+
+    private void checkWasMutedByAdmin(boolean checkOnly) {
+        VoIPService voIPService = VoIPService.getSharedInstance();
+        if (voIPService != null && voIPService.groupCall != null) {
+            boolean wasMuted = wasMutedByAdmin;
+            ChatObject.Call call = voIPService.groupCall;
+            TLRPC.InputPeer peer = voIPService.getGroupCallPeer();
+            int did;
+            if (peer != null) {
+                if (peer.user_id != 0) {
+                    did = peer.user_id;
+                } else if (peer.chat_id != 0) {
+                    did = -peer.chat_id;
+                } else {
+                    did = -peer.channel_id;
+                }
+            } else {
+                did = UserConfig.getInstance(currentAccount).clientUserId;
+            }
+            TLRPC.TL_groupCallParticipant participant = call.participants.get(did);
+            wasMutedByAdmin = participant != null && !participant.can_self_unmute && participant.muted && participant.raise_hand_rating != 0;
+
+            if (!checkOnly && wasMuted && !wasMutedByAdmin && GroupCallActivity.groupCallInstance == null) {
+                if (!mainFragmentsStack.isEmpty()) {
+                    TLRPC.Chat chat = voIPService.getChat();
+                    BaseFragment fragment = actionBarLayout.fragmentsStack.get(actionBarLayout.fragmentsStack.size() - 1);
+                    if (fragment instanceof ChatActivity) {
+                        ChatActivity chatActivity = (ChatActivity) fragment;
+                        if (chatActivity.getDialogId() == -chat.id) {
+                            chat = null;
+                        }
+                        chatActivity.getUndoView().showWithAction(0, UndoView.ACTION_VOIP_CAN_NOW_SPEAK, chat);
+                    } else if (fragment instanceof DialogsActivity) {
+                        DialogsActivity dialogsActivity = (DialogsActivity) fragment;
+                        dialogsActivity.getUndoView().showWithAction(0, UndoView.ACTION_VOIP_CAN_NOW_SPEAK, chat);
+                    } else if (fragment instanceof ProfileActivity) {
+                        ProfileActivity profileActivity = (ProfileActivity) fragment;
+                        profileActivity.getUndoView().showWithAction(0, UndoView.ACTION_VOIP_CAN_NOW_SPEAK, chat);
+                    }
+                    if (VoIPService.getSharedInstance() != null) {
+                        VoIPService.getSharedInstance().playAllowTalkSound();
+                    }
+                }
+            }
+        } else {
+            wasMutedByAdmin = false;
         }
     }
 
