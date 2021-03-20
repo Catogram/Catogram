@@ -5877,6 +5877,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 }
             } else {
                 if (chatInfo != null) {
+                    if (chat.megagroup && !ChatObject.hasAdminRights(chat)) {
+                        otherItem.addSubItem(view_admins_item, R.drawable.users_outline_28, LocaleController.getString("CG_ViewAdminsShortcut", R.string.CG_ViewAdminsShortcut));
+                    }
                     if (ChatObject.canManageCalls(chat) && chatInfo.call == null) {
                         otherItem.addSubItem(call_item, R.drawable.msg_voicechat, LocaleController.getString("StartVoipChat", R.string.StartVoipChat));
                         hasVoiceChatItem = true;
