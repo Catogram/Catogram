@@ -2333,7 +2333,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             }
         }));
 
-        otherItem = new ActionBarMenuItem(context, null, 0, Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+        otherItem = new ActionBarMenuItem(context, null, 0, Theme.getColor(Theme.key_actionBarDefaultIcon));
         otherItem.setLongClickEnabled(false);
         otherItem.setIcon(R.drawable.ic_ab_other);
         otherItem.setContentDescription(LocaleController.getString("AccDescrMoreOptions", R.string.AccDescrMoreOptions));
@@ -2365,7 +2365,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
         pipItem.setLongClickEnabled(false);
         pipItem.setIcon(R.drawable.msg_voice_pip);
         pipItem.setContentDescription(LocaleController.getString("AccDescrPipMode", R.string.AccDescrPipMode));
-        pipItem.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.getColor(Theme.key_voipgroup_actionBarItemsSelector), 6));
+        pipItem.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.getColor(Theme.key_actionBarDefaultIcon), 6));
         pipItem.setOnClickListener(v -> {
             if (Build.VERSION.SDK_INT < 23 || Settings.canDrawOverlays(parentActivity)) {
                 GroupCallPip.clearForce();
@@ -2379,7 +2379,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             @Override
             protected TextView createTextView() {
                 TextView textView = new TextView(context);
-                textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText));
+                textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                 textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                 textView.setGravity(Gravity.LEFT | Gravity.TOP);
@@ -2592,10 +2592,10 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 cell.setColors(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText), Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             } else if (child instanceof GroupCallUserCell) {
                 GroupCallUserCell cell = (GroupCallUserCell) child;
-                cell.setGrayIconColor(Theme.key_windowBackgroundWhiteGrayText, Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+                cell.setGrayIconColor(Theme.key_windowBackgroundWhiteBlackText, Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             } else if (child instanceof GroupCallInvitedCell) {
                 GroupCallInvitedCell cell = (GroupCallInvitedCell) child;
-                cell.setGrayIconColor(Theme.key_windowBackgroundWhiteGrayText, Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
+                cell.setGrayIconColor(Theme.key_windowBackgroundWhiteBlackText, Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
             }
         }
 
