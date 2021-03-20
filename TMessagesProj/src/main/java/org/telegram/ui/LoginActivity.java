@@ -1388,7 +1388,6 @@ public class LoginActivity extends BaseFragment {
             proxyButton.setOnClickListener(view -> presentFragment(new ProxyListActivity()));
             addView(proxyButton, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT, 0, 4, 0, 0));
 
-            if (newAccount) {
                 checkBoxCell = new CheckBoxCell(context, 2);
                 checkBoxCell.setText(LocaleController.getString("SyncContacts", R.string.SyncContacts), "", syncContacts, false);
                 addView(checkBoxCell, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.LEFT | Gravity.TOP, 0, 0, 0, 0));
@@ -1420,7 +1419,6 @@ public class LoginActivity extends BaseFragment {
                         }
                     }
                 });
-            }
 
             HashMap<String, String> languageMap = new HashMap<>();
             try {
