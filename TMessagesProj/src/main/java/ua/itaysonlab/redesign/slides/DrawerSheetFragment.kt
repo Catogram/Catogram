@@ -23,6 +23,7 @@ class DrawerSheetFragment: BaseActionedSwipeFragment() {
             add(Action("contacts", R.drawable.menu_contacts, LocaleController.getString("Contacts", R.string.Contacts)))
             add(Action("calls", R.drawable.menu_calls, LocaleController.getString("Calls", R.string.Calls)))
             add(Action("saved", R.drawable.menu_saved_cg, LocaleController.getString("SavedMessages", R.string.SavedMessages)))
+            add(Action("archive", R.drawable.msg_archive, LocaleController.getString("ArchivedChats", R.string.ArchivedChats)))
             add(Action("settings", R.drawable.menu_settings, LocaleController.getString("Settings", R.string.Settings)))
         }
     }
@@ -38,6 +39,11 @@ class DrawerSheetFragment: BaseActionedSwipeFragment() {
             "saved" -> {
                 (activity as LaunchActivity).presentFragment(ChatActivity(Bundle().apply {
                     putInt("user_id", UserConfig.getInstance(UserConfig.selectedAccount).getClientUserId())
+                }))
+            }
+            "archive" -> {
+                (activity as LaunchActivity).presentFragment(DialogsActivity(Bundle().apply {
+                    putInt("folderId", 1)
                 }))
             }
             "settings" -> {
