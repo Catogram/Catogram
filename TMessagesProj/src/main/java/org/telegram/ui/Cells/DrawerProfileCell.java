@@ -57,6 +57,7 @@ import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.RLottieDrawable;
 import org.telegram.ui.Components.RLottieImageView;
 import org.telegram.ui.Components.SnowflakesEffect;
+import org.telegram.messenger.AccountInstance;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -372,7 +373,7 @@ public class DrawerProfileCell extends FrameLayout {
         setArrowState(false);
         nameTextView.setText(UserObject.getUserName(user));
         if (CatogramConfig.INSTANCE.getHidePhoneNumber()) {
-            phoneTextView.setText("@" + user.username);
+            phoneTextView.setText(user.username != null ? "@" + user.username : String.valueOf(AccountInstance.getInstance(UserConfig.selectedAccount).getUserConfig().clientUserId));
         } else if (CatogramConfig.INSTANCE.getFakePhoneNumber()) {
             phoneTextView.setText(PhoneFormat.getInstance().format("+71234567890"));
         } else {
