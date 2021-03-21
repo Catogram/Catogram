@@ -142,7 +142,7 @@ public class BottomSheet extends Dialog {
     private boolean disableScroll;
     private float currentPanTranslationY;
 
-    protected String navBarColorKey = Theme.key_windowBackgroundGray;
+    protected String navBarColorKey = Theme.key_chat_messagePanelBackground;
     protected int navBarColor;
 
     private OnDismissListener onHideListener;

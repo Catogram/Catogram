@@ -927,12 +927,11 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
     }
 
     private void checkSystemBarColors() {
+        int color = Theme.getColor(Theme.key_chat_messagePanelBackground, null, true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int color = Theme.getColor(Theme.key_actionBarDefault, null, true);
             AndroidUtilities.setLightStatusBar(getWindow(), color == Color.WHITE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 final Window window = getWindow();
-                color = Theme.getColor(Theme.key_windowBackgroundGray, null, true);
                 if (window.getNavigationBarColor() != color) {
                     window.setNavigationBarColor(color);
                     final float brightness = AndroidUtilities.computePerceivedBrightness(color);

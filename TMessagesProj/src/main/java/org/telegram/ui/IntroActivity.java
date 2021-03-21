@@ -82,7 +82,7 @@ public class IntroActivity extends AppCompatActivity implements NotificationCent
 
     private void initCG() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int color = Theme.getColor(Theme.key_windowBackgroundGray, null, true);
+            int color = Theme.getColor(Theme.key_chat_messagePanelBackground, null, true);
             getWindow().setStatusBarColor(color);
             AndroidUtilities.setLightStatusBar(getWindow(), color == Color.WHITE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
