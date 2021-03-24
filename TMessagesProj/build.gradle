@@ -1,9 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 repositories {
     mavenCentral()
     google()
     jcenter()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 configurations {
@@ -16,38 +21,53 @@ configurations.all {
 }
 
 dependencies {
-    implementation 'androidx.core:core:1.3.2'
-    implementation 'androidx.palette:palette:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.30"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2-native-mt'
+
+    implementation 'androidx.core:core-ktx:1.5.0-beta01'
+    implementation 'androidx.palette:palette-ktx:1.0.0'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.biometric:biometric:1.1.0'
+    implementation 'com.google.android.material:material:1.4.0-alpha01'
     implementation 'androidx.exifinterface:exifinterface:1.3.2'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.sharetarget:sharetarget:1.1.0"
-
-    compileOnly 'org.checkerframework:checker-qual:2.5.2'
-    compileOnly 'org.checkerframework:checker-compat-qual:2.5.0'
+    implementation 'androidx.media:media:1.2.1'
+    
+    compileOnly 'org.checkerframework:checker-qual:3.10.0'
+    compileOnly 'org.checkerframework:checker-compat-qual:2.5.5'
+    
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
     implementation 'com.google.firebase:firebase-config:20.0.4'
     implementation 'com.google.firebase:firebase-datatransport:17.0.11'
     implementation 'com.google.firebase:firebase-appindexing:19.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.play:core:1.9.1'
+
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation 'com.google.android.gms:play-services-vision:16.2.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
-    implementation 'com.google.android.gms:play-services-wallet:18.1.2'
     implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
-    implementation 'com.stripe:stripe-android:2.0.2'
-    implementation files('libs/libgsaverification-client.aar')
+    implementation 'com.facebook.rebound:rebound:0.3.8'
 
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }
 
 android {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     compileSdkVersion 30
     buildToolsVersion '30.0.3'
-    ndkVersion "21.1.6352462"
+    ndkVersion "21.3.6528147"
 
-    defaultConfig.applicationId = "org.telegram.messenger"
+    defaultConfig.applicationId = "ua.itaysonlab.messenger"
 
     sourceSets.main.jniLibs.srcDirs = ['./jni/']
 
@@ -61,6 +81,13 @@ android {
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
         disable 'BlockedPrivateApi'
+    }
+
+    sourceSets.main {
+        res.srcDirs = [
+                'src/main/res',
+                'src/main/res-vkui'
+        ]
     }
 
     dexOptions {
@@ -77,17 +104,21 @@ android {
     signingConfigs {
         debug {
             storeFile file("config/release.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            storePassword System.getenv('STORE_PASS')
+            keyAlias System.getenv('KEY_ALIAS')
+            keyPassword System.getenv('KEY_PASS')
         }
 
         release {
             storeFile file("config/release.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            storePassword System.getenv('STORE_PASS')
+            keyAlias System.getenv('KEY_ALIAS')
+            keyPassword System.getenv('KEY_PASS')
         }
+    }
+
+    packagingOptions {
+        exclude "DebugProbesKt.bin"
     }
 
     buildTypes {
@@ -148,9 +179,9 @@ android {
             jniDebuggable false
             signingConfig signingConfigs.release
             minifyEnabled true
-            shrinkResources false
+            shrinkResources true
             multiDexEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             ndk.debugSymbolLevel = 'FULL'
         }
     }
@@ -305,7 +336,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionName "7.6.0"
 

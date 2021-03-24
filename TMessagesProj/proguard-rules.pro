@@ -95,5 +95,8 @@
 -dontwarn javax.annotation.**
 
 # Use -keep to explicitly keep any other classes shrinking would remove
--dontoptimize
--dontobfuscate
+#-dontoptimize
+#-dontobfuscate
+-renamesourcefileattribute
+-repackageclasses
+-allowaccessmodification
