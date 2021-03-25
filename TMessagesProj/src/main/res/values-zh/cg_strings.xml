@@ -228,5 +228,5 @@
     <string name="CG_RecentStickers">显示完整列表</string>
     <string name="CG_RecentStickers_desc">显示最近发送的贴纸（完整）</string>
     <string name="CG_Without_Authorship">无来源转发</string>
-    <string name="CG_Private">This channel is private</string>
+    <string name="CG_Private">这个频道是私有的</string>
 </resources>
