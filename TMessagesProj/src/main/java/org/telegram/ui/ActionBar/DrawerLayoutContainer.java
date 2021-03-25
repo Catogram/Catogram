@@ -139,7 +139,7 @@ public class DrawerLayoutContainer extends FrameLayout {
                     return insets.consumeSystemWindowInsets();
                 }
             });
-            setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+            setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
 
         shadowLeft = getResources().getDrawable(R.drawable.menu_shadow);
