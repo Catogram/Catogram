@@ -933,11 +933,9 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 final Window window = getWindow();
                 color = Theme.getColor(Theme.key_windowBackgroundGray, null, true);
-                if (window.getNavigationBarColor() != color) {
-                    window.setNavigationBarColor(color);
-                    final float brightness = AndroidUtilities.computePerceivedBrightness(color);
-                    AndroidUtilities.setLightNavigationBar(getWindow(), brightness >= 0.721f);
-                }
+                window.setNavigationBarColor(Theme.getColor(Theme.key_chat_messagePanelBackground, null, true));
+                final float brightness = AndroidUtilities.computePerceivedBrightness(color);
+                AndroidUtilities.setLightNavigationBar(getWindow(), brightness >= 0.721f);
             }
         }
         if (SharedConfig.noStatusBar) {
