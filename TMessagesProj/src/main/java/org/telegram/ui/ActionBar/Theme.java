@@ -4080,6 +4080,13 @@ public class Theme {
             themeInfo.previewInColor = 0xffffffff;
             themeInfo.previewOutColor = 0xffd0e6ff;
             themeInfo.firstAccentIsDefault = true;
+        }
+        else {
+            themeInfo.assetName = "vkold.attheme";
+            themeInfo.previewInColor = Color.parseColor("#A8D0F8");
+            themeInfo.previewBackgroundColor = Color.parseColor("#EBF0F5");
+            themeInfo.previewOutColor = Color.parseColor("#FFFFFF");
+        }
             themeInfo.setAccentColorOptions(
                 new int[]    { 0xFF5890C5,                     0xFF239853,                    0xFFCE5E82,                    0xFF7F63C3,                    0xFF2491AD,                    0xFF299C2F,                    0xFF8854B4, 0xFF328ACF, 0xFF43ACC7, 0xFF52AC44, 0xFFCD5F93, 0xFFD28036, 0xFF8366CC, 0xFFCE4E57, 0xFFD3AE40, 0xFF7B88AB },
                 new int[]    { 0xFFB8E18D,                     0xFFFAFBCC,                    0xFFFFF9DC,                    0xFFC14F6E,                    0xFFD1BD1B,                    0xFFFFFAC9,                    0xFFFCF6D8, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
@@ -4091,12 +4098,6 @@ public class Theme {
                 new int[]    {          0,                            180,                            45,                             0,                            45,                           180,                             0,          0,          0,          0,          0,          0,          0,          0,          0,          0 },
                 new int[]    {          0,                             52,                            46,                            57,                            45,                            64,                            52,          0,          0,          0,          0,          0,          0,          0,          0,          0 }
             );
-        } else {
-            themeInfo.assetName = "vkold.attheme";
-            themeInfo.previewInColor = Color.parseColor("#A8D0F8");
-            themeInfo.previewBackgroundColor = Color.parseColor("#EBF0F5");
-            themeInfo.previewOutColor = Color.parseColor("#FFFFFF");
-        }
         themeInfo.currentAccentId = DEFALT_THEME_ACCENT_ID;
         themeInfo.sortIndex = 1;
         themes.add(currentDayTheme = currentTheme = defaultTheme = themeInfo);
@@ -4109,6 +4110,13 @@ public class Theme {
             themeInfo.previewBackgroundColor = 0xff5f6e82;
             themeInfo.previewInColor = 0xff76869c;
             themeInfo.previewOutColor = 0xff82a8e3;
+        }
+        else {
+                themeInfo.assetName = "vkdark.attheme";
+                themeInfo.previewBackgroundColor = Color.parseColor("#FF171717");
+                themeInfo.previewInColor = Color.parseColor("#FF454647");
+                themeInfo.previewOutColor = Color.parseColor("#FF2C2D2E");
+        }
             themeInfo.setAccentColorOptions(
                 new int[]    {                    0xFF927BD4,                    0xFF698AFB,                    0xFF23A7F0,                    0xFF7B71D1,                    0xFF69B955,                    0xFF2990EA,                    0xFF7082E9,                    0xFF66BAED, 0xff3685fa, 0xff46c8ed, 0xff4ab841, 0xffeb7cb1, 0xffee902a, 0xffa281f0, 0xffd34324, 0xffeebd34, 0xff7f8fab, 0xff3581e3 },
                 new int[]    {                    0xFF9D5C99,                    0xFF635545,                    0xFF31818B,                    0xFFAD6426,                    0xFF4A7034,                    0xFF335D82,                    0xFF36576F,                    0xFF597563, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
@@ -4120,12 +4128,6 @@ public class Theme {
                 new int[]    {                           225,                            45,                           225,                           135,                            45,                           225,                            45,                             0,          0,          0,          0,          0,          0,          0,          0,          0,          0,          0 },
                 new int[]    {                            40,                            40,                            31,                            50,                            25,                            34,                            35,                            50,          0,          0,          0,          0,          0,          0,          0,          0,          0,          0 }
             );
-        } else {
-                themeInfo.assetName = "vkdark.attheme";
-                themeInfo.previewBackgroundColor = Color.parseColor("#FF171717");
-                themeInfo.previewInColor = Color.parseColor("#FF454647");
-                themeInfo.previewOutColor = Color.parseColor("#FF2C2D2E");
-        }
         themeInfo.sortIndex = 2;
         themes.add(themeInfo);
         themesDict.put("Dark Blue", currentNightTheme = themeInfo);
