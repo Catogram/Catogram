@@ -216,7 +216,7 @@
     <string name="CG_ToBeginning">Per Iniziare</string>
     <string name="CG_ToLinkedChat">Chat Collegata</string>
     <string name="CG_FakeUserPhone">Numero di telefono fittizio</string>
-    <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono fittizio nel menu laterale e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
+    <string name="CG_FakeUserPhoneSummary">mostra un numero di telefono fittizio nel menu di navigazione e nelle impostazioni (l\'impostazione nascondi il numero di telefono deve essere disabilitata)</string>
     <string name="CG_FwdMenu_EnableNoForward">Disabilita inoltro con citazione</string>
     <string name="CG_FwdMenu_DisableNoForward">Abilita inoltro con citazione</string>
     <string name="CG_DND">Non disturbare</string>
