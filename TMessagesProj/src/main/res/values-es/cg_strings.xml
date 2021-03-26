@@ -228,5 +228,5 @@
     <string name="CG_RecentStickers">Mostrar toda la lista</string>
     <string name="CG_RecentStickers_desc">de stickers recientes</string>
     <string name="CG_Without_Authorship">Sin citar</string>
-    <string name="CG_Private">This channel is private</string>
+    <string name="CG_Private">Este canal es privado</string>
 </resources>
