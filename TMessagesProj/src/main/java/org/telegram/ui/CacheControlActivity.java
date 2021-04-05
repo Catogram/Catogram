@@ -77,6 +77,8 @@ public class CacheControlActivity extends BaseFragment {
 
     private int databaseRow;
     private int databaseInfoRow;
+    private int forceCleanRow;
+    private int forceCleanInfoRow;
     private int keepMediaHeaderRow;
     private int keepMediaInfoRow;
     private int cacheInfoRow;
@@ -124,6 +126,8 @@ public class CacheControlActivity extends BaseFragment {
         cacheInfoRow = rowCount++;
         databaseRow = rowCount++;
         databaseInfoRow = rowCount++;
+        forceCleanRow = rowCount++;
+        forceCleanInfoRow = rowCount++;
 
         databaseSize = MessagesStorage.getInstance(currentAccount).getDatabaseSize();
 
@@ -259,6 +263,10 @@ public class CacheControlActivity extends BaseFragment {
     }
 
     private void cleanupFolders() {
+        cleanupFolders(false);
+    }
+
+    private void cleanupFolders(boolean skipViewCheck) {
         final AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
         progressDialog.setCanCacnel(false);
         progressDialog.showDelayed(500);
@@ -266,7 +274,7 @@ public class CacheControlActivity extends BaseFragment {
             boolean imagesCleared = false;
             long clearedSize = 0;
             for (int a = 0; a < 7; a++) {
-                if (clearViewData[a] == null || !clearViewData[a].clear) {
+                if ((clearViewData[a] == null || !clearViewData[a].clear) && !skipViewCheck) {
                     continue;
                 }
                 int type = -1;
@@ -405,6 +413,9 @@ public class CacheControlActivity extends BaseFragment {
             }
             if (position == databaseRow) {
                 clearDatabase();
+            } else if (position == forceCleanRow) {
+                cleanupFolders(true);
+                onBackPressed();
             } else if (position == storageUsageRow) {
                 if (totalSize <= 0 || getParentActivity() == null) {
                     return;
@@ -656,7 +667,7 @@ public class CacheControlActivity extends BaseFragment {
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int position = holder.getAdapterPosition();
-            return position == databaseRow || (position == storageUsageRow && (totalSize > 0) && !calculating);
+            return position == databaseRow || position == forceCleanRow || (position == storageUsageRow && (totalSize > 0) && !calculating);
         }
 
         @Override
@@ -731,6 +742,8 @@ public class CacheControlActivity extends BaseFragment {
                     TextSettingsCell textCell = (TextSettingsCell) holder.itemView;
                     if (position == databaseRow) {
                         textCell.setTextAndValue(LocaleController.getString("ClearLocalDatabase", R.string.ClearLocalDatabase), AndroidUtilities.formatFileSize(databaseSize), false);
+                    } else if (position == forceCleanRow) {
+                        textCell.setText(LocaleController.getString("CG_ForceClean", R.string.CG_ForceClean), false);
                     }
                     break;
                 case 1:
@@ -743,6 +756,9 @@ public class CacheControlActivity extends BaseFragment {
                         privacyCell.setBackgroundDrawable(Theme.getThemedDrawable(mContext, R.drawable.greydivider, Theme.key_windowBackgroundGrayShadow));
                     } else if (position == keepMediaInfoRow) {
                         privacyCell.setText(AndroidUtilities.replaceTags(LocaleController.getString("KeepMediaInfo", R.string.KeepMediaInfo)));
+                        privacyCell.setBackgroundDrawable(Theme.getThemedDrawable(mContext, R.drawable.greydivider, Theme.key_windowBackgroundGrayShadow));
+                    } else if (position == forceCleanInfoRow) {
+                        privacyCell.setText(AndroidUtilities.replaceTags(LocaleController.getString("CG_ForceCleanInfo", R.string.CG_ForceCleanInfo)));
                         privacyCell.setBackgroundDrawable(Theme.getThemedDrawable(mContext, R.drawable.greydivider, Theme.key_windowBackgroundGrayShadow));
                     }
                     break;
@@ -763,7 +779,7 @@ public class CacheControlActivity extends BaseFragment {
 
         @Override
         public int getItemViewType(int i) {
-            if (i == databaseInfoRow || i == cacheInfoRow || i == keepMediaInfoRow) {
+            if (i == databaseInfoRow || i == forceCleanInfoRow || i == cacheInfoRow || i == keepMediaInfoRow) {
                 return 1;
             }
             if (i == storageUsageRow) {

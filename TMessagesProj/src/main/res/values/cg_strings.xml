@@ -285,4 +285,7 @@
     <string name="CG_RecentStickers_desc">of recent stickers</string>
     <string name="CG_Without_Authorship">Without authorship</string>
     <string name="CG_Private">This channel is private</string>
+
+    <string name="CG_ForceClean">Force Clear Telegram Cache</string>
+    <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
 </resources>
