@@ -93,14 +93,6 @@ class MainPreferencesEntry : BasePreferencesEntry {
                         goToCrowdin(it)
                     }
                 }
-                textIcon {
-                    title = LocaleController.getString("CG_GooglePlay_Donate", R.string.CG_GooglePlay_Donate)
-                    divider = true
-                    value = LocaleController.getString("CG_DonatDesc", R.string.CG_DonatDesc)
-                    listener = TGKitTextIconRow.TGTIListener {
-                        it.presentFragment(CatogramPreferencesNavigator.createDonate())
-                    }
-                }
             }
         }
     }

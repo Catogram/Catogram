@@ -10,7 +10,6 @@ object CatogramPreferencesNavigator {
     fun createChats() = TGKitSettingsFragment(ChatsPreferencesEntry())
     fun createAppearance() = TGKitSettingsFragment(AppearancePreferencesEntry())
     fun createSecurity() = TGKitSettingsFragment(SecurityPreferencesEntry())
-    fun createDonate() = TGKitSettingsFragment(GPDonateEntry())
 
     fun createDB() = TGKitSettingsFragment(DoubleBottomPreferencesEntry())
 }
