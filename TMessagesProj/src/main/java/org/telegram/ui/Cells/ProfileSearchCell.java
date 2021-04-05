@@ -34,7 +34,6 @@ import org.telegram.messenger.UserConfig;
 import org.telegram.ui.Components.AvatarDrawable;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.NotificationsSettingsActivity;
-import ua.itaysonlab.catogram.CustomVerifications;
 
 public class ProfileSearchCell extends BaseCell {
 
@@ -251,7 +250,7 @@ public class ProfileSearchCell extends BaseCell {
                         nameLockTop = AndroidUtilities.dp(24);
                     }
                 }
-                if (chat.verified || CustomVerifications.isVerified(chat.id)) {
+                if (chat.verified) {
                     drawCheck = true;
                 }
                 else drawCheck = false;
@@ -290,7 +289,7 @@ public class ProfileSearchCell extends BaseCell {
                 } else {
                     nameLockTop = AndroidUtilities.dp(21);
                 }
-                drawCheck = user.verified || CustomVerifications.isVerified(user.id);
+                drawCheck = user.verified;
             }
         }
 

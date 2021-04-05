@@ -71,7 +71,6 @@ import org.telegram.ui.SwipeGestureSettingsView;
 
 import java.util.ArrayList;
 
-import ua.itaysonlab.catogram.CustomVerifications;
 
 public class DialogCell extends BaseCell {
 
@@ -645,7 +644,7 @@ public class DialogCell extends BaseCell {
                     }
                 }
             } else {
-                drawVerified = customDialog.verified || CustomVerifications.isVerified(customDialog.id);
+                drawVerified = customDialog.verified;
                 if (SharedConfig.drawDialogIcons && customDialog.type == 1) {
                     drawNameGroup = true;
                     if (useForceThreeLines || SharedConfig.useThreeLinesLayout) {
@@ -771,13 +770,13 @@ public class DialogCell extends BaseCell {
             } else {
                 if (currentDialogFolderId == 0) {
                     if (chat != null) {
-                        if (chat.scam || CustomVerifications.isScam(chat.id)) {
+                        if (chat.scam) {
                             drawScam = 1;
                             Theme.dialogs_scamDrawable.checkText();
                         } else if (chat.fake) {
                             drawScam = 2;
                             Theme.dialogs_fakeDrawable.checkText();
-                        } else if (chat.verified || CustomVerifications.isVerified(chat.id)) {
+                        } else if (chat.verified) {
                             drawVerified = chat.verified;
                         }
                         if (SharedConfig.drawDialogIcons) {
@@ -816,14 +815,14 @@ public class DialogCell extends BaseCell {
                             }
                         }
                     } else if (user != null) {
-                        if (user.scam || CustomVerifications.isScam(user.id)) {
+                        if (user.scam) {
                             drawScam = 1;
                             Theme.dialogs_scamDrawable.checkText();
-                        } else if (user.fake || CustomVerifications.isFake(user.id)) {
+                        } else if (user.fake) {
                             drawScam = 2;
                             Theme.dialogs_fakeDrawable.checkText();
                         } else {
-                            drawVerified = user.verified || CustomVerifications.isVerified(user.id);
+                            drawVerified = user.verified;
                         }
                         if (SharedConfig.drawDialogIcons && user.bot) {
                             drawNameBot = true;
@@ -1940,9 +1939,6 @@ public class DialogCell extends BaseCell {
                     if (mask == 0) {
                         clearingDialog = MessagesController.getInstance(currentAccount).isClearingDialog(dialog.id);
                         message = MessagesController.getInstance(currentAccount).dialogMessage.get(dialog.id);
-                        if (message != null && ua.itaysonlab.catogram.CatogramConfig.INSTANCE.getHideUserIfBlocked()  && MessagesController.getInstance(currentAccount).blockePeers.indexOfKey(message.getSenderId()) >= 0) {
-                            message = null;
-                        }
                         lastUnreadState = message != null && message.isUnread();
                         if (dialog instanceof TLRPC.TL_dialogFolder) {
                             unreadCount = MessagesStorage.getInstance(currentAccount).getArchiveUnreadCount();

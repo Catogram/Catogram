@@ -242,7 +242,6 @@ import kotlin.Unit;
 import ua.itaysonlab.catogram.CGControversive;
 import ua.itaysonlab.catogram.CGFeatureHooks;
 import ua.itaysonlab.catogram.CatogramConfig;
-import ua.itaysonlab.catogram.CustomVerifications;
 import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
 import ua.itaysonlab.catogram.stickers.StickerDownloader;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
@@ -1500,30 +1499,28 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
 
         if (chatInvite != null) {
-            if (CGControversive.noPeekTimeout()) {
-                int timeout = chatInvite.expires - getConnectionsManager().getCurrentTime();
-                if (timeout < 0) {
-                    timeout = 10;
-                }
-                AndroidUtilities.runOnUIThread(chatInviteRunnable = () -> {
-                    chatInviteRunnable = null;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-                    if (ChatObject.isChannel(currentChat) && !currentChat.megagroup) {
-                        builder.setMessage(LocaleController.getString("JoinByPeekChannelText", R.string.JoinByPeekChannelText));
-                        builder.setTitle(LocaleController.getString("JoinByPeekChannelTitle", R.string.JoinByPeekChannelTitle));
-                    } else {
-                        builder.setMessage(LocaleController.getString("JoinByPeekGroupText", R.string.JoinByPeekGroupText));
-                        builder.setTitle(LocaleController.getString("JoinByPeekGroupTitle", R.string.JoinByPeekGroupTitle));
-                    }
-                    builder.setPositiveButton(LocaleController.getString("JoinByPeekJoin", R.string.JoinByPeekJoin), (dialogInterface, i) -> {
-                        if (bottomOverlayChatText != null) {
-                            bottomOverlayChatText.callOnClick();
-                        }
-                    });
-                    builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), (dialogInterface, i) -> finishFragment());
-                    showDialog(builder.create());
-                }, timeout * 1000);
+            int timeout = chatInvite.expires - getConnectionsManager().getCurrentTime();
+            if (timeout < 0) {
+                timeout = 10;
             }
+            AndroidUtilities.runOnUIThread(chatInviteRunnable = () -> {
+                chatInviteRunnable = null;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+                if (ChatObject.isChannel(currentChat) && !currentChat.megagroup) {
+                    builder.setMessage(LocaleController.getString("JoinByPeekChannelText", R.string.JoinByPeekChannelText));
+                    builder.setTitle(LocaleController.getString("JoinByPeekChannelTitle", R.string.JoinByPeekChannelTitle));
+                } else {
+                    builder.setMessage(LocaleController.getString("JoinByPeekGroupText", R.string.JoinByPeekGroupText));
+                    builder.setTitle(LocaleController.getString("JoinByPeekGroupTitle", R.string.JoinByPeekGroupTitle));
+                }
+                builder.setPositiveButton(LocaleController.getString("JoinByPeekJoin", R.string.JoinByPeekJoin), (dialogInterface, i) -> {
+                    if (bottomOverlayChatText != null) {
+                        bottomOverlayChatText.callOnClick();
+                    }
+                });
+                builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), (dialogInterface, i) -> finishFragment());
+                showDialog(builder.create());
+            }, timeout * 1000);
         }
         return true;
     }
@@ -11634,7 +11631,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         } else if (chatMode == MODE_PINNED) {
             avatarContainer.setTitle(LocaleController.formatPluralString("PinnedMessagesCount", getPinnedMessagesCount()));
         } else if (currentChat != null) {
-            avatarContainer.setTitle(currentChat.title, currentChat.scam || CustomVerifications.isScam(currentChat.id), currentChat.fake);
+            avatarContainer.setTitle(currentChat.title, currentChat.scam, currentChat.fake);
         } else if (currentUser != null) {
             if (currentUser.self) {
                 avatarContainer.setTitle(LocaleController.getString("SavedMessages", R.string.SavedMessages));
@@ -11642,10 +11639,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (!TextUtils.isEmpty(currentUser.phone)) {
                     avatarContainer.setTitle(PhoneFormat.getInstance().format("+" + currentUser.phone));
                 } else {
-                    avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id), currentUser.fake || CustomVerifications.isFake(currentUser.id));
+                    avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam, currentUser.fake);
                 }
             } else {
-                avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam || CustomVerifications.isScam(currentUser.id), currentUser.fake || CustomVerifications.isFake(currentUser.id));
+                avatarContainer.setTitle(UserObject.getUserName(currentUser), currentUser.scam, currentUser.fake);
             }
         }
         setParentActivityTitle(avatarContainer.getTitleTextView().getText());
@@ -22188,8 +22185,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             chatListItemAnimator.onGreetingStickerTransition(holder, greetingsViewContainer);
                         }
                     }
-
-                    CGFeatureHooks.hookHideWhenBlocked(messageCell, ChatActivity.this);
                 } else if (view instanceof ChatActionCell) {
                     ChatActionCell actionCell = (ChatActionCell) view;
                     actionCell.setMessageObject(message);

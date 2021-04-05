@@ -179,7 +179,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator;
-import ua.itaysonlab.catogram.CustomVerifications;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate {
 
@@ -5582,14 +5581,14 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 Drawable leftIcon = currentEncryptedChat != null ? getLockIconDrawable() : null;
                 Drawable rightIcon = null;
                 if (a == 0) {
-                    if (user.scam || user.fake || CustomVerifications.isScam(user.id) || CustomVerifications.isFake(user.id)) {
-                        rightIcon = getScamDrawable(user.scam || CustomVerifications.isScam(user.id) ? 0 : 1);
+                    if (user.scam || user.fake) {
+                        rightIcon = getScamDrawable(user.scam ? 0 : 1);
                     } else {
                         rightIcon = getMessagesController().isDialogMuted(dialog_id != 0 ? dialog_id : (long) user_id) ? Theme.chat_muteIconDrawable : null;
                     }
-                } else if (user.scam || user.fake || CustomVerifications.isScam(user.id) || CustomVerifications.isFake(user.id)) {
-                    rightIcon = getScamDrawable(user.scam || CustomVerifications.isScam(user.id) ? 0 : 1);
-                } else if (user.verified || CustomVerifications.isVerified(user.id)) {
+                } else if (user.scam || user.fake) {
+                    rightIcon = getScamDrawable(user.scam ? 0 : 1);
+                } else if (user.verified) {
                     rightIcon = getVerifiedCrossfadeDrawable();
                 }
                 nameTextView[a].setLeftDrawable(leftIcon);
@@ -5679,16 +5678,16 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 }
                 nameTextView[a].setLeftDrawable(null);
                 if (a != 0) {
-                    if (chat.scam || chat.fake || CustomVerifications.isScam(chat.id)) {
-                        nameTextView[a].setRightDrawable(getScamDrawable(chat.scam || CustomVerifications.isScam(chat.id) ? 0 : 1));
-                    } else if (chat.verified || CustomVerifications.isVerified(chat.id)) {
+                    if (chat.scam || chat.fake) {
+                        nameTextView[a].setRightDrawable(getScamDrawable(chat.scam ? 0 : 1));
+                    } else if (chat.verified) {
                         nameTextView[a].setRightDrawable(getVerifiedCrossfadeDrawable());
                     } else {
                         nameTextView[a].setRightDrawable(null);
                     }
                 } else {
-                    if (chat.scam || chat.fake || CustomVerifications.isScam(chat.id)) {
-                        nameTextView[a].setRightDrawable(getScamDrawable(chat.scam || CustomVerifications.isScam(chat.id) ? 0 : 1));
+                    if (chat.scam || chat.fake) {
+                        nameTextView[a].setRightDrawable(getScamDrawable(chat.scam ? 0 : 1));
                     } else {
                         nameTextView[a].setRightDrawable(getMessagesController().isDialogMuted(-chat_id) ? Theme.chat_muteIconDrawable : null);
                     }

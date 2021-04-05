@@ -28,7 +28,6 @@ object CatogramConfig {
     var flatActionbar by sharedPreferences.boolean("cg_flat_actionbar", false)
     var drawerBlur by sharedPreferences.boolean("cg_drawer_blur", false)
     var drawerDarken by sharedPreferences.boolean("cg_drawer_darken", false)
-    var controversiveNoReading by sharedPreferences.boolean("cg_ct_read", false)
     var controversiveNoSecureFlag by sharedPreferences.boolean("cg_ct_flag", false)
     var useBiometricPrompt by sharedPreferences.boolean("cg_newbiometric", true)
     var accentNotification by sharedPreferences.boolean("cg_notification_accent", false)
@@ -70,7 +69,6 @@ object CatogramConfig {
     var newRepostUI by sharedPreferences.boolean("cg_chatrepost_everywhere", false)
 
     var iconReplacement by sharedPreferences.int("cg_iconpack", 0)
-    var hideUserIfBlocked by sharedPreferences.boolean("cg_hide_msg_if_blocked", false)
     var oldNotificationIcon by sharedPreferences.boolean("cg_old_notification", false)
 
     var messageSlideAction by sharedPreferences.int("cg_msgslide_action", 0)

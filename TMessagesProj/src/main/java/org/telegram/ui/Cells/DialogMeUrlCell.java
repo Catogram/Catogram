@@ -29,7 +29,6 @@ import org.telegram.messenger.UserObject;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.AvatarDrawable;
-import ua.itaysonlab.catogram.CustomVerifications;
 
 public class DialogMeUrlCell extends BaseCell {
 
@@ -120,7 +119,7 @@ public class DialogMeUrlCell extends BaseCell {
                 nameLockTop = AndroidUtilities.dp(17.5f);
             }
 
-            drawVerified = chat.verified || CustomVerifications.isVerified(chat.id);
+            drawVerified = chat.verified;
 
             if (!LocaleController.isRTL) {
                 nameLockLeft = AndroidUtilities.dp(AndroidUtilities.leftBaseline);
@@ -151,7 +150,7 @@ public class DialogMeUrlCell extends BaseCell {
                         nameLeft = AndroidUtilities.dp(14);
                     }
                 }
-                drawVerified = user.verified || CustomVerifications.isVerified(user.id);
+                drawVerified = user.verified;
             }
             nameString = UserObject.getUserName(user);
             avatarDrawable.setInfo(user);

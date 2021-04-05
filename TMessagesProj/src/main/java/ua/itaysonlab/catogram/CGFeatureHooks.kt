@@ -56,17 +56,6 @@ object CGFeatureHooks {
     }
 
     @JvmStatic
-    fun hookHideWhenBlocked(cell: ChatMessageCell, act: ChatActivity) {
-        if (!CGControversive.isControversiveFeaturesEnabled()) return
-        if (CatogramConfig.hideUserIfBlocked && cell.messageObject.isFromUser) {
-            val isBlocked = act.messagesController.blockePeers.indexOfKey((cell.messageObject.messageOwner.from_id as TLRPC.TL_peerUser).user_id) >= 0
-            cell.visibility = if (isBlocked) View.GONE else View.VISIBLE
-        } else {
-            cell.visibility = View.VISIBLE
-        }
-    }
-
-    @JvmStatic
     fun getProperNotificationIcon(): Int {
         return if (CatogramConfig.oldNotificationIcon) R.drawable.notification else R.drawable.cg_notification
     }

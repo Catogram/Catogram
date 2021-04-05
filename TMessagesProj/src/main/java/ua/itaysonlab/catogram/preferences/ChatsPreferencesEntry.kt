@@ -342,16 +342,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     Theme.setDrawableColorByKey(Theme.chat_replyIconDrawable, Theme.key_chat_serviceIcon)
                 }
             }
-
-            if (CGControversive.isControversiveFeaturesEnabled()) switch {
-                title = LocaleController.getString("CG_HideMsgIfUserBlocked", R.string.CG_HideMsgIfUserBlocked)
-
-                contract({
-                    return@contract CatogramConfig.hideUserIfBlocked
-                }) {
-                    CatogramConfig.hideUserIfBlocked = it
-                }
-            }
         }
 
         category(LocaleController.getString("CG_Header_Profile", R.string.CG_Header_Profile)) {
