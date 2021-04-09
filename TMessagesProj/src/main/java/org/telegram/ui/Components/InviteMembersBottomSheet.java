@@ -158,7 +158,7 @@ public class InviteMembersBottomSheet extends UsersAlertBase implements Notifica
 
                 position--;
                 if (position >= 0 && position < localCount) {
-                    object = searchAdapter.searchResult.get(position);
+                    object = (TLObject) searchAdapter.searchResult.get(position);
                 } else if (position >= localCount && position < localServerCount + localCount) {
                     object = searchAdapter.searchAdapterHelper.getLocalServerSearch().get(position - localCount);
                 } else if (position > localCount + localServerCount && position <= globalCount + localCount + localServerCount) {
@@ -681,7 +681,7 @@ public class InviteMembersBottomSheet extends UsersAlertBase implements Notifica
 
     private class SearchAdapter extends RecyclerListView.SelectionAdapter {
 
-        private ArrayList<TLObject> searchResult = new ArrayList<>();
+        private ArrayList<Object> searchResult = new ArrayList<>();
         private ArrayList<CharSequence> searchResultNames = new ArrayList<>();
         private final SearchAdapterHelper searchAdapterHelper;
         private int currentItemsCount;
@@ -754,7 +754,7 @@ public class InviteMembersBottomSheet extends UsersAlertBase implements Notifica
 
                     position--;
                     if (position >= 0 && position < localCount) {
-                        object = searchResult.get(position);
+                        object = (TLObject) searchResult.get(position);
                     } else if (position >= localCount && position < localServerCount + localCount) {
                         object = searchAdapterHelper.getLocalServerSearch().get(position - localCount);
                     } else if (position > localCount + localServerCount && position <= globalCount + localCount + localServerCount) {
@@ -867,7 +867,7 @@ public class InviteMembersBottomSheet extends UsersAlertBase implements Notifica
             return count;
         }
 
-        private void updateSearchResults(final ArrayList<TLObject> users, final ArrayList<CharSequence> names) {
+        private void updateSearchResults(final ArrayList<Object> users, final ArrayList<CharSequence> names) {
             AndroidUtilities.runOnUIThread(() -> {
                 searchRunnable = null;
                 searchResult = users;
@@ -916,7 +916,7 @@ public class InviteMembersBottomSheet extends UsersAlertBase implements Notifica
                             search[1] = search2;
                         }
 
-                        ArrayList<TLObject> resultArray = new ArrayList<>();
+                        ArrayList<Object> resultArray = new ArrayList<>();
                         ArrayList<CharSequence> resultArrayNames = new ArrayList<>();
 
                         for (int a = 0; a < contacts.size(); a++) {
