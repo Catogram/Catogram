@@ -56,7 +56,7 @@ public abstract class FourierTransform {
         }
 
         if (whichAverage == LINAVG) {
-            int avgWidth = (int) spectrum.length / averages.length;
+            int avgWidth = spectrum.length / averages.length;
             for (int i = 0; i < averages.length; i++) {
                 float avg = 0;
                 int j;

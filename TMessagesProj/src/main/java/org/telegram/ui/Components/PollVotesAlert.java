@@ -1034,10 +1034,7 @@ public class PollVotesAlert extends BottomSheet {
 
         @Override
         public boolean isEnabled(int section, int row) {
-            if (section == 0 || row == 0 || queries != null && !queries.isEmpty()) {
-                return false;
-            }
-            return true;
+            return section != 0 && row != 0 && (queries == null || queries.isEmpty());
         }
 
         @Override

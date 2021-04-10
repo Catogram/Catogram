@@ -172,11 +172,7 @@ public class PhotoViewerCaptionEnterView extends FrameLayout implements Notifica
             @Override
             protected void onSelectionChanged(int selStart, int selEnd) {
                 super.onSelectionChanged(selStart, selEnd);
-                if (selStart != selEnd) {
-                    fixHandleView(false);
-                } else {
-                    fixHandleView(true);
-                }
+                fixHandleView(selStart == selEnd);
             }
 
             @Override

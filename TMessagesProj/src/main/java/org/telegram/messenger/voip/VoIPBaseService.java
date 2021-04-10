@@ -1118,11 +1118,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 	}
 
 	public void onAudioFocusChange(int focusChange) {
-		if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-			hasAudioFocus = true;
-		} else {
-			hasAudioFocus = false;
-		}
+        hasAudioFocus = focusChange == AudioManager.AUDIOFOCUS_GAIN;
 	}
 
 	protected void updateBluetoothHeadsetState(boolean connected) {

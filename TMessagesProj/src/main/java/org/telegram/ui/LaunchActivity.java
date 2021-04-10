@@ -186,11 +186,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
     public void setDisableLightStatusBar(boolean isLight) {
         int color = Theme.getColor(Theme.key_actionBarDefault, null, true);
         if (color != Color.WHITE) return;
-        if (!isLight) {
-            AndroidUtilities.setLightStatusBar(getWindow(), true);
-        } else {
-            AndroidUtilities.setLightStatusBar(getWindow(), false);
-        }
+        AndroidUtilities.setLightStatusBar(getWindow(), !isLight);
     }
 
     private static final String EXTRA_ACTION_TOKEN = "actions.fulfillment.extra.ACTION_TOKEN";

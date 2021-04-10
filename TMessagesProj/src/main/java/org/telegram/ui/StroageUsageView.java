@@ -213,7 +213,7 @@ class StroageUsageView extends FrameLayout {
                     progress = (float) animation.getAnimatedValue();
                     invalidate();
                 });
-                valueAnimator.start();;
+                valueAnimator.start();
             }
 
             if (progress2 != p2) {
@@ -225,7 +225,7 @@ class StroageUsageView extends FrameLayout {
                     progress2 = (float) animation.getAnimatedValue();
                     invalidate();
                 });
-                valueAnimator2.start();;
+                valueAnimator2.start();
             }
         }
 

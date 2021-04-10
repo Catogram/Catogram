@@ -3171,11 +3171,7 @@ public class NotificationsController extends BaseController {
             AudioAttributes.Builder builder = new AudioAttributes.Builder();
             builder.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION);
             builder.setUsage(AudioAttributes.USAGE_NOTIFICATION);
-            if (sound != null) {
-                notificationChannel.setSound(sound, builder.build());
-            } else {
-                notificationChannel.setSound(null, builder.build());
-            }
+            notificationChannel.setSound(sound, builder.build());
             if (BuildVars.LOGS_ENABLED) {
                 FileLog.d("create new channel " + channelId);
             }

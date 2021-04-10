@@ -2455,10 +2455,7 @@ public class ChatAttachAlertPhotoLayout extends ChatAttachAlert.AttachAlertLayou
                 }
             }
         }
-        if (hasTtl) {
-            return false;
-        }
-        return true;
+        return !hasTtl;
     }
 
     @Override

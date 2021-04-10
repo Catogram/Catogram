@@ -695,10 +695,7 @@ public class FilterCreateActivity extends BaseFragment {
     }
 
     private boolean hasChanges() {
-        hasUserChanged = false;
-        if (filter.alwaysShow.size() != newAlwaysShow.size()) {
-            hasUserChanged = true;
-        }
+        hasUserChanged = filter.alwaysShow.size() != newAlwaysShow.size();
         if (filter.neverShow.size() != newNeverShow.size()) {
             hasUserChanged = true;
         }

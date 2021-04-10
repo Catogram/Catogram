@@ -579,11 +579,7 @@ public class ChatAttachAlertPollLayout extends ChatAttachAlert.AttachAlertLayout
         if (count < 2 || quizPoll && checksCount < 1) {
             enabled = false;
         }
-        if (!TextUtils.isEmpty(solutionString) || !TextUtils.isEmpty(questionString) || hasAnswers) {
-            allowNesterScroll = false;
-        } else {
-            allowNesterScroll = true;
-        }
+        allowNesterScroll = TextUtils.isEmpty(solutionString) && TextUtils.isEmpty(questionString) && !hasAnswers;
         parentAlert.setAllowNestedScroll(allowNesterScroll);
         parentAlert.doneItem.setEnabled(quizPoll && checksCount == 0 || enabled);
         parentAlert.doneItem.setAlpha(enabled ? 1.0f : 0.5f);
@@ -1025,9 +1021,7 @@ public class ChatAttachAlertPollLayout extends ChatAttachAlert.AttachAlertLayout
                             RecyclerView.ViewHolder holder = listView.findContainingViewHolder(this);
                             if (holder != null) {
                                 int position = holder.getAdapterPosition();
-                                if (answersCount == 10 && position == answerStartRow + answersCount - 1) {
-                                    return false;
-                                }
+                                return answersCount != 10 || position != answerStartRow + answersCount - 1;
                             }
                             return true;
                         }

@@ -6151,11 +6151,7 @@ public class PassportActivity extends BaseFragment implements NotificationCenter
             return false;
         }
 
-        if (id != null && Utilities.bytesToLong(Utilities.computeSHA256(secret)) != id) {
-            return false;
-        }
-
-        return true;
+        return id == null || Utilities.bytesToLong(Utilities.computeSHA256(secret)) == id;
     }
 
     private byte[] getRandomSecret() {

@@ -21,6 +21,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.CyclicBarrier;
@@ -230,7 +231,7 @@ public class WearDataLayerListenerService extends WearableListenerService {
 			AndroidUtilities.runOnUIThread(() -> {
 				try {
 					ApplicationLoader.postInitApplication();
-					String data = new String(messageEvent.getData(), "UTF-8");
+					String data = new String(messageEvent.getData(), StandardCharsets.UTF_8);
 					JSONObject r = new JSONObject(data);
 					CharSequence text = r.getString("text");
 					if (text == null || text.length() == 0) {

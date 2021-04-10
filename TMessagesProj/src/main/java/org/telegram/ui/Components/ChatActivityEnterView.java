@@ -7375,10 +7375,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         if (recordingAudioVideo) {
             return false;
         }
-        if ((videoSendButton != null) && isInVideoMode() && recordedAudioPanel != null && recordedAudioPanel.getVisibility() == View.VISIBLE) {
-            return false;
-        }
-        return true;
+        return (videoSendButton == null) || !isInVideoMode() || recordedAudioPanel == null || recordedAudioPanel.getVisibility() != View.VISIBLE;
     }
 
     public int getHeightWithTopView() {

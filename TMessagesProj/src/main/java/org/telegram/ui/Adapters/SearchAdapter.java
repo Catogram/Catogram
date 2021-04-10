@@ -255,10 +255,7 @@ public class SearchAdapter extends RecyclerListView.SelectionAdapter {
             return false;
         } else if (i > localCount && i < localCount + phoneCount) {
             return false;
-        } else if (i > localCount + phoneCount && i <= globalCount + phoneCount + localCount) {
-            return true;
-        }
-        return false;
+        } else return i > localCount + phoneCount && i <= globalCount + phoneCount + localCount;
     }
 
     public Object getItem(int i) {

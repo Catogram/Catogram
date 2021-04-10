@@ -100,7 +100,7 @@ public class VoiceMessageEnterTransition {
                 int clipBottom = 0;
                 if (getMeasuredHeight() > 0) {
                     clipBottom = (int) (getMeasuredHeight() * (1f - progress) + listViewBottom * progress);
-                    canvas.saveLayerAlpha(0, getMeasuredHeight() - AndroidUtilities.dp(400), getMeasuredWidth(), getMeasuredHeight(), 255, canvas.ALL_SAVE_FLAG);
+                    canvas.saveLayerAlpha(0, getMeasuredHeight() - AndroidUtilities.dp(400), getMeasuredWidth(), getMeasuredHeight(), 255, Canvas.ALL_SAVE_FLAG);
                 } else {
                     canvas.save();
                 }

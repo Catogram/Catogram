@@ -734,10 +734,7 @@ public class ManageLinksActivity extends BaseFragment {
                 return true;
             } else if (position == revokeAllRow) {
                 return true;
-            } else if (position >= adminsStartRow && position < adminsEndRow) {
-                return true;
-            }
-            return false;
+            } else return position >= adminsStartRow && position < adminsEndRow;
         }
 
         @Override
@@ -1265,11 +1262,7 @@ public class ManageLinksActivity extends BaseFragment {
             if (drawState != lastDrawingState && lastDrawingState >= 0) {
                 animateFromState = lastDrawingState;
                 animateToStateProgress = 0f;
-                if (hasProgress(animateFromState) && !hasProgress(drawState)) {
-                    animateHideExpiring = true;
-                } else {
-                    animateHideExpiring = false;
-                }
+                animateHideExpiring = hasProgress(animateFromState) && !hasProgress(drawState);
             }
 
             lastDrawingState = drawState;

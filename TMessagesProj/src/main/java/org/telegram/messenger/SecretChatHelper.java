@@ -1541,11 +1541,8 @@ public class SecretChatHelper extends BaseController {
             return false;
         }
         int padding = is.limit() - 28 - len;
-        if (version == 2 && (padding < 12 || padding > 1024) || version == 1 && padding > 15) {
-            return false;
-        }
+        return (version != 2 || (padding >= 12 && padding <= 1024)) && (version != 1 || padding <= 15);
         //
-        return true;
     }
 
     protected ArrayList<TLRPC.Message> decryptMessage(TLRPC.EncryptedMessage message) {

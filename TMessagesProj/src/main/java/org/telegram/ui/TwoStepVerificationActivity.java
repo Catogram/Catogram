@@ -390,17 +390,12 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
 
     public static boolean canHandleCurrentPassword(TLRPC.TL_account_password password, boolean login) {
         if (login) {
-            if (password.current_algo instanceof TLRPC.TL_passwordKdfAlgoUnknown) {
-                return false;
-            }
+            return !(password.current_algo instanceof TLRPC.TL_passwordKdfAlgoUnknown);
         } else {
-            if (password.new_algo instanceof TLRPC.TL_passwordKdfAlgoUnknown ||
-                    password.current_algo instanceof TLRPC.TL_passwordKdfAlgoUnknown ||
-                    password.new_secure_algo instanceof TLRPC.TL_securePasswordKdfAlgoUnknown) {
-                return false;
-            }
+            return !(password.new_algo instanceof TLRPC.TL_passwordKdfAlgoUnknown) &&
+                    !(password.current_algo instanceof TLRPC.TL_passwordKdfAlgoUnknown) &&
+                    !(password.new_secure_algo instanceof TLRPC.TL_securePasswordKdfAlgoUnknown);
         }
-        return true;
     }
 
     public static void initPasswordNewAlgo(TLRPC.TL_account_password password) {

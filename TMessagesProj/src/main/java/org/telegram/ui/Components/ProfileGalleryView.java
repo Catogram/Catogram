@@ -712,7 +712,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
 
         @Override
         public int getItemPosition(Object object) {
-            final int idx = objects.indexOf((Item) object);
+            final int idx = objects.indexOf(object);
             return idx == -1 ? POSITION_NONE : idx;
         }
 

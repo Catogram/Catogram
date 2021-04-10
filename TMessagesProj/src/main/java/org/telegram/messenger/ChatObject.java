@@ -934,9 +934,7 @@ public class ChatObject {
                     value = false;
                     break;
             }
-            if (value) {
-                return true;
-            }
+            return value;
         }
         return false;
     }
@@ -967,10 +965,7 @@ public class ChatObject {
                     chat instanceof TLRPC.TL_channel_old)) {
                 return true;
             }
-            if (chat.default_banned_rights == null || getBannedRight(chat.default_banned_rights, action)) {
-                return false;
-            }
-            return true;
+            return chat.default_banned_rights != null && !getBannedRight(chat.default_banned_rights, action);
         }
         return false;
     }
@@ -1054,15 +1049,10 @@ public class ChatObject {
 
     public static boolean canAddBotsToChat(TLRPC.Chat chat) {
         if (isChannel(chat)) {
-            if (chat.megagroup && (chat.admin_rights != null && (chat.admin_rights.post_messages || chat.admin_rights.add_admins) || chat.creator)) {
-                return true;
-            }
+            return chat.megagroup && (chat.admin_rights != null && (chat.admin_rights.post_messages || chat.admin_rights.add_admins) || chat.creator);
         } else {
-            if (chat.migrated_to == null) {
-                return true;
-            }
+            return chat.migrated_to == null;
         }
-        return false;
     }
 
     public static boolean canPinMessages(TLRPC.Chat chat) {

@@ -1859,13 +1859,9 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                 }
             }
             if (backupMyMessagesGradientAccentColor != 0) {
-                if (backupMyMessagesGradientAccentColor != accent.myMessagesGradientAccentColor) {
-                    return true;
-                }
+                return backupMyMessagesGradientAccentColor != accent.myMessagesGradientAccentColor;
             } else {
-                if (accent.myMessagesGradientAccentColor != 0) {
-                    return true;
-                }
+                return accent.myMessagesGradientAccentColor != 0;
             }
         }
         return false;

@@ -142,7 +142,7 @@ public class AvatarPreviewer {
         void onMenuClick(MenuItem item);
     }
 
-    public static enum MenuItem {
+    public enum MenuItem {
         OPEN_PROFILE("OpenProfile", R.string.OpenProfile, R.drawable.msg_openprofile),
         OPEN_CHANNEL("OpenChannel2", R.string.OpenChannel2, R.drawable.msg_channel),
         OPEN_GROUP("OpenGroup2", R.string.OpenGroup2, R.drawable.msg_discussion),

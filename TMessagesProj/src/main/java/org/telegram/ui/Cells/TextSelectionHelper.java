@@ -1225,11 +1225,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 if (selectedView != null) {
                     CharSequence charSequence = getText(selectedView, false);
-                    if (multiselect || selectionStart <= 0 && selectionEnd >= charSequence.length() - 1) {
-                        menu.getItem(1).setVisible(false);
-                    } else {
-                        menu.getItem(1).setVisible(true);
-                    }
+                    menu.getItem(1).setVisible(!multiselect && (selectionStart > 0 || selectionEnd < charSequence.length() - 1));
                 }
                 return true;
             }
@@ -1429,8 +1425,9 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
 
 
     public static class Callback {
-        public void onStateChanged(boolean isSelected){};
-        public void onTextCopied(){};
+        public void onStateChanged(boolean isSelected){}
+
+        public void onTextCopied(){}
     }
 
     protected void fillLayoutForOffset(int offset, LayoutBlock layoutBlock) {
@@ -1909,7 +1906,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                 x = layout.getWidth();
             }
             if (y > layout.getLineBottom(layout.getLineCount() - 1)) {
-                y = (int) (layout.getLineBottom(layout.getLineCount() - 1) - 1);
+                y = layout.getLineBottom(layout.getLineCount() - 1) - 1;
             }
 
             for (int i = 0; i < layout.getLineCount(); i++) {
@@ -2547,10 +2544,7 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
             if ((firstV >= startViewPosition && firstV <= endViewPosition) || (lastV >= startViewPosition && lastV <= endViewPosition)) {
                 return true;
             }
-            if (startViewPosition >= firstV && endViewPosition <= lastV) {
-                return true;
-            }
-            return false;
+            return startViewPosition >= firstV && endViewPosition <= lastV;
         }
     }
 

@@ -4508,11 +4508,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         votingFor = null;
                     }
 
-                    if (currentMessageObject.checkedVotes.contains(button.answer)) {
-                        pollCheckBox[a].setChecked(true, false);
-                    } else {
-                        pollCheckBox[a].setChecked(false, false);
-                    }
+                    pollCheckBox[a].setChecked(currentMessageObject.checkedVotes.contains(button.answer), false);
                 }
                 if (hasDifferent && restPercent != 0) {
                     Collections.sort(sortedPollButtons, (o1, o2) -> {
@@ -13884,11 +13880,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     drawClock = false;
                     drawError = true;
                 } else if (currentMessageObject.isSent()) {
-                    if (!currentMessageObject.scheduled && !currentMessageObject.isUnread()) {
-                        drawCheck1 = true;
-                    } else {
-                        drawCheck1 = false;
-                    }
+                    drawCheck1 = !currentMessageObject.scheduled && !currentMessageObject.isUnread();
                     drawCheck2 = true;
                     drawClock = false;
                     drawError = false;

@@ -154,9 +154,7 @@ public class VoIPService extends VoIPBaseService {
 		if (call != null) {
 			int selfId = getSelfId();
 			TLRPC.TL_groupCallParticipant participant = call.participants.get(selfId);
-			if (participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(chat)) {
-				return true;
-			}
+            return participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(chat);
 		}
 		return false;
 	}

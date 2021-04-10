@@ -1562,12 +1562,8 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     @Override
                     public void needOpenSearch(MotionEvent ev, EditTextBoldCursor editText) {
                         if (!enterEventSent) {
-                            if (ev.getX() > editText.getLeft() && ev.getX() < editText.getRight()
-                                    && ev.getY() > editText.getTop() && ev.getY() < editText.getBottom()) {
-                                makeFocusable(groupVoipInviteAlert, null, editText, true);
-                            } else {
-                                makeFocusable(groupVoipInviteAlert, null, editText, false);
-                            }
+                            makeFocusable(groupVoipInviteAlert, null, editText, ev.getX() > editText.getLeft() && ev.getX() < editText.getRight()
+                                    && ev.getY() > editText.getTop() && ev.getY() < editText.getBottom());
                         }
                     }
                 });
@@ -3865,10 +3861,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             if (type == 1) {
                 GroupCallUserCell userCell = (GroupCallUserCell) holder.itemView;
                 return !userCell.isSelfUser() || userCell.isHandRaised();
-            } else if (type == 3) {
-                return false;
-            }
-            return true;
+            } else return type != 3;
         }
 
         @Override

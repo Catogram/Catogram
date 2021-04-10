@@ -513,31 +513,21 @@ public class MessagesController extends BaseController implements NotificationCe
                 if (user != null) {
                     if (!user.bot) {
                         if (user.self || user.contact || contactsController.isContact(lowerId)) {
-                            if ((flags & DIALOG_FILTER_FLAG_CONTACTS) != 0) {
-                                return true;
-                            }
+                            return (flags & DIALOG_FILTER_FLAG_CONTACTS) != 0;
                         } else {
-                            if ((flags & DIALOG_FILTER_FLAG_NON_CONTACTS) != 0) {
-                                return true;
-                            }
+                            return (flags & DIALOG_FILTER_FLAG_NON_CONTACTS) != 0;
                         }
                     } else {
-                        if ((flags & DIALOG_FILTER_FLAG_BOTS) != 0) {
-                            return true;
-                        }
+                        return (flags & DIALOG_FILTER_FLAG_BOTS) != 0;
                     }
                 }
             } else if (lowerId < 0) {
                 TLRPC.Chat chat = messagesController.getChat(-lowerId);
                 if (chat != null) {
                     if (ChatObject.isChannel(chat) && !chat.megagroup) {
-                        if ((flags & DIALOG_FILTER_FLAG_CHANNELS) != 0) {
-                            return true;
-                        }
+                        return (flags & DIALOG_FILTER_FLAG_CHANNELS) != 0;
                     } else {
-                        if ((flags & DIALOG_FILTER_FLAG_GROUPS) != 0) {
-                            return true;
-                        }
+                        return (flags & DIALOG_FILTER_FLAG_GROUPS) != 0;
                     }
                 }
             }
@@ -2747,9 +2737,7 @@ public class MessagesController extends BaseController implements NotificationCe
                     getUserConfig().setCurrentUser(user);
                     getUserConfig().saveConfig(true);
                 }
-                if (oldUser != null && user.status != null && oldUser.status != null && user.status.expires != oldUser.status.expires) {
-                    return true;
-                }
+                return oldUser != null && user.status != null && oldUser.status != null && user.status.expires != oldUser.status.expires;
             } else if (oldUser == null) {
                 users.put(user.id, user);
             } else if (oldUser.min) {
@@ -3122,7 +3110,7 @@ public class MessagesController extends BaseController implements NotificationCe
         if (array == null) {
             return null;
         }
-        TLRPC.ChannelParticipant participant = (TLRPC.ChannelParticipant) array.get(uid);
+        TLRPC.ChannelParticipant participant = array.get(uid);
         if (participant == null) {
             return null;
         }
@@ -13512,9 +13500,7 @@ public class MessagesController extends BaseController implements NotificationCe
             return true;
         } else if (mute_type == 3) {
             int mute_until = notificationsPreferences.getInt("notifyuntil_" + dialog_id, 0);
-            if (mute_until >= getConnectionsManager().getCurrentTime()) {
-                return true;
-            }
+            return mute_until >= getConnectionsManager().getCurrentTime();
         }
         return false;
     }
@@ -13587,9 +13573,7 @@ public class MessagesController extends BaseController implements NotificationCe
                     }
                 }
             }
-            if (changed) {
-                return true;
-            }
+            return changed;
         }
         return false;
     }

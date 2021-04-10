@@ -218,7 +218,7 @@ public class EmojiView extends FrameLayout implements NotificationCenter.Notific
     private int popupWidth;
     private int popupHeight;
     private int emojiSize;
-    private int location[] = new int[2];
+    private int[] location = new int[2];
     private int stickersTabOffset;
     private int recentTabBum = -2;
     private int favTabBum = -2;
@@ -4150,7 +4150,7 @@ public class EmojiView extends FrameLayout implements NotificationCenter.Notific
                                         return;
                                     }
                                     loadingUrl[0] = true;
-                                    final AlertDialog progressDialog[] = new AlertDialog[]{new AlertDialog(getContext(), 3)};
+                                    final AlertDialog[] progressDialog = new AlertDialog[]{new AlertDialog(getContext(), 3)};
 
                                     TLRPC.TL_messages_getEmojiURL req = new TLRPC.TL_messages_getEmojiURL();
                                     req.lang_code = lastSearchAlias != null ? lastSearchAlias : lastSearchKeyboardLanguage[0];

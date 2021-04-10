@@ -1352,12 +1352,8 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
             @Override
             public boolean onInterceptTouchEvent(MotionEvent ev) {
                 if (!enterCommentEventSent) {
-                    if (ev.getX() > commentTextView.getEditText().getLeft() && ev.getX() < commentTextView.getEditText().getRight()
-                            && ev.getY() > commentTextView.getEditText().getTop() && ev.getY() < commentTextView.getEditText().getBottom()) {
-                        makeFocusable(commentTextView.getEditText(), true);
-                    } else {
-                        makeFocusable(commentTextView.getEditText(), false);
-                    }
+                    makeFocusable(commentTextView.getEditText(), ev.getX() > commentTextView.getEditText().getLeft() && ev.getX() < commentTextView.getEditText().getRight()
+                            && ev.getY() > commentTextView.getEditText().getTop() && ev.getY() < commentTextView.getEditText().getBottom());
                 }
                 return super.onInterceptTouchEvent(ev);
             }
@@ -2189,18 +2185,12 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
 
     @Override
     protected boolean onCustomMeasure(View view, int width, int height) {
-        if (photoLayout.onCustomMeasure(view, width, height)) {
-            return true;
-        }
-        return false;
+        return photoLayout.onCustomMeasure(view, width, height);
     }
 
     @Override
     protected boolean onCustomLayout(View view, int left, int top, int right, int bottom) {
-        if (photoLayout.onCustomLayout(view, left, top, right, bottom)) {
-            return true;
-        }
-        return false;
+        return photoLayout.onCustomLayout(view, left, top, right, bottom);
     }
 
     public void onPause() {

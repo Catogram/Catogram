@@ -54,6 +54,7 @@ import org.telegram.ui.ThemeSetUrlActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -222,7 +223,7 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
                         if (bytes[a] == '\n') {
                             linesRead++;
                             int len = a - start + 1;
-                            String line = new String(bytes, start, len - 1, "UTF-8");
+                            String line = new String(bytes, start, len - 1, StandardCharsets.UTF_8);
                             if (line.startsWith("WLS=")) {
                                 String wallpaperLink = line.substring(4);
                                 Uri uri = Uri.parse(wallpaperLink);
@@ -379,11 +380,7 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
             } else if (themeInfo.getPreviewBackgroundColor() != 0) {
                 hsv = AndroidUtilities.rgbToHsv(Color.red(themeInfo.getPreviewBackgroundColor()), Color.green(themeInfo.getPreviewBackgroundColor()), Color.blue(themeInfo.getPreviewBackgroundColor()));
             }
-            if (hsv != null && hsv[1] <= 0.1f && hsv[2] >= 0.96f) {
-                hasWhiteBackground = true;
-            } else {
-                hasWhiteBackground = false;
-            }
+            hasWhiteBackground = hsv != null && hsv[1] <= 0.1f && hsv[2] >= 0.96f;
             if (themeInfo.getPreviewBackgroundColor() == 0 && themeInfo.previewParsed && backgroundDrawable == null) {
                 BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.catstile).mutate();
                 bitmapShader = new BitmapShader(drawable.getBitmap(), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);

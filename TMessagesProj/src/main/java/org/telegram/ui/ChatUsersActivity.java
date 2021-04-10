@@ -2891,9 +2891,7 @@ public class ChatUsersActivity extends BaseFragment implements NotificationCente
                 Object object = cell.getCurrentObject();
                 if (type != TYPE_ADMIN && object instanceof TLRPC.User) {
                     TLRPC.User user = (TLRPC.User) object;
-                    if (user.self) {
-                        return false;
-                    }
+                    return !user.self;
                 }
                 return true;
             }
@@ -3417,10 +3415,7 @@ public class ChatUsersActivity extends BaseFragment implements NotificationCente
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
             if (areItemsTheSame(oldItemPosition, newItemPosition)) {
-                if (restricted1SectionRow == newItemPosition) {
-                    return false;
-                }
-                return true;
+                return restricted1SectionRow != newItemPosition;
             }
             return false;
         }

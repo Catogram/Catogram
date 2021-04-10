@@ -1189,11 +1189,7 @@ public class PhotoPickerActivity extends BaseFragment implements NotificationCen
 
     private void onListItemClick(View view, Object item) {
         boolean add;
-        if (addToSelectedPhotos(item, -1) == -1) {
-            add = true;
-        } else {
-            add = false;
-        }
+        add = addToSelectedPhotos(item, -1) == -1;
         if (view instanceof SharedDocumentCell) {
             Integer index = (Integer) view.getTag();
             MediaController.PhotoEntry photoEntry = selectedAlbum.photos.get(index);

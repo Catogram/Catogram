@@ -251,9 +251,7 @@ public class AudioRecordJNI {
 			if (impl != null && impl.matcher(desc.implementor).find()) {
 				return true;
 			}
-			if (name != null && name.matcher(desc.name).find()) {
-				return true;
-			}
+            return name != null && name.matcher(desc.name).find();
 		}
 		return false;
 	}

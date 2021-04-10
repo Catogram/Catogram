@@ -4656,11 +4656,7 @@ public class Theme {
             int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
             int minutes = calendar.get(Calendar.MINUTE);
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            if ((monthOfYear == 0 && dayOfMonth == 1 && minutes <= 10 && hour == 0) || CatogramConfig.INSTANCE.getForceNewYear()) {
-                canStartHolidayAnimation = true;
-            } else {
-                canStartHolidayAnimation = false;
-            }
+            canStartHolidayAnimation = (monthOfYear == 0 && dayOfMonth == 1 && minutes <= 10 && hour == 0) || CatogramConfig.INSTANCE.getForceNewYear();
             if (dialogs_holidayDrawable == null) {
                 if ((monthOfYear == 11 && dayOfMonth >= (BuildVars.DEBUG_PRIVATE_VERSION ? 29 : 31) && dayOfMonth <= 31 || monthOfYear == 0 && dayOfMonth == 1) || CatogramConfig.INSTANCE.getForceNewYear()) {
                     dialogs_holidayDrawable = ApplicationLoader.applicationContext.getResources().getDrawable(R.drawable.newyear);

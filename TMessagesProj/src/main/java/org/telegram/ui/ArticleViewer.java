@@ -5501,10 +5501,7 @@ public class ArticleViewer implements NotificationCenter.NotificationCenterDeleg
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int type = holder.getItemViewType();
-            if (type == 23 || type == 24) {
-                return true;
-            }
-            return false;
+            return type == 23 || type == 24;
         }
 
         @Override
@@ -11348,29 +11345,21 @@ public class ArticleViewer implements NotificationCenter.NotificationCenterDeleg
                 }
             } else if (view instanceof BlockCollageCell) {
                 ImageReceiver imageReceiver = getImageReceiverFromListView(((BlockCollageCell) view).innerListView, pageBlock, coords);
-                if (imageReceiver != null) {
-                    return imageReceiver;
-                }
+                return imageReceiver;
             } else if (view instanceof BlockSlideshowCell) {
                 ImageReceiver imageReceiver = getImageReceiverFromListView(((BlockSlideshowCell) view).innerListView, pageBlock, coords);
-                if (imageReceiver != null) {
-                    return imageReceiver;
-                }
+                return imageReceiver;
             } else if (view instanceof BlockListItemCell) {
                 BlockListItemCell blockListItemCell = (BlockListItemCell) view;
                 if (blockListItemCell.blockLayout != null) {
                     ImageReceiver imageReceiver = getImageReceiverView(blockListItemCell.blockLayout.itemView, pageBlock, coords);
-                    if (imageReceiver != null) {
-                        return imageReceiver;
-                    }
+                    return imageReceiver;
                 }
             } else if (view instanceof BlockOrderedListItemCell) {
                 BlockOrderedListItemCell blockOrderedListItemCell = (BlockOrderedListItemCell) view;
                 if (blockOrderedListItemCell.blockLayout != null) {
                     ImageReceiver imageReceiver = getImageReceiverView(blockOrderedListItemCell.blockLayout.itemView, pageBlock, coords);
-                    if (imageReceiver != null) {
-                        return imageReceiver;
-                    }
+                    return imageReceiver;
                 }
             }
             return null;

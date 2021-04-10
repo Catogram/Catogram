@@ -113,10 +113,7 @@ public class ActionBarLayout extends FrameLayout {
 
         @Override
         public boolean hasOverlappingRendering() {
-            if (Build.VERSION.SDK_INT >= 28) {
-                return true;
-            }
-            return false;
+            return Build.VERSION.SDK_INT >= 28;
         }
 
         @Override

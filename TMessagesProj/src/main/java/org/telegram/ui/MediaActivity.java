@@ -2783,10 +2783,7 @@ public class MediaActivity extends BaseFragment implements NotificationCenter.No
             int globalCount = globalSearch.size();
             if (i >= 0 && i < localCount) {
                 return false;
-            } else if (i > localCount && i <= globalCount + localCount) {
-                return true;
-            }
-            return false;
+            } else return i > localCount && i <= globalCount + localCount;
         }
 
         public MessageObject getItem(int i) {

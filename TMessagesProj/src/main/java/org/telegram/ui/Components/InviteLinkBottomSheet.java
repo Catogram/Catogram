@@ -779,14 +779,8 @@ public class InviteLinkBottomSheet extends BottomSheet {
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
             int position = holder.getAdapterPosition();
             if (position == creatorRow) {
-                if (invite.admin_id == UserConfig.getInstance(currentAccount).clientUserId) {
-                    return false;
-                }
-                return true;
-            } else if (position >= usersStartRow && position < usersEndRow) {
-                return true;
-            }
-            return false;
+                return invite.admin_id != UserConfig.getInstance(currentAccount).clientUserId;
+            } else return position >= usersStartRow && position < usersEndRow;
         }
     }
 

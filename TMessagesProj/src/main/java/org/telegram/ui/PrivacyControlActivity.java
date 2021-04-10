@@ -672,10 +672,7 @@ public class PrivacyControlActivity extends BaseFragment implements Notification
         }
         Collections.sort(initialMinus);
         Collections.sort(currentMinus);
-        if (!initialMinus.equals(currentMinus)) {
-            return true;
-        }
-        return false;
+        return !initialMinus.equals(currentMinus);
     }
 
     private void updateRows(boolean animated) {

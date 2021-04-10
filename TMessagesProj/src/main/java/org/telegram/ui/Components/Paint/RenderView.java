@@ -405,9 +405,7 @@ public class RenderView extends TextureView {
             }
 
             if (!eglContext.equals(egl10.eglGetCurrentContext()) || !eglSurface.equals(egl10.eglGetCurrentSurface(EGL10.EGL_DRAW))) {
-                if (!egl10.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext)) {
-                    return false;
-                }
+                return egl10.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext);
             }
             return true;
         }

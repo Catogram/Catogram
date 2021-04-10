@@ -396,7 +396,7 @@ public class UsersAlertBase extends BottomSheet {
             runShadowAnimation(true);
         }
         if (scrollOffsetY != newOffset) {
-            listView.setTopGlowOffset(scrollOffsetY = (int) (newOffset));
+            listView.setTopGlowOffset(scrollOffsetY = newOffset);
             frameLayout.setTranslationY(scrollOffsetY);
             emptyView.setTranslationY(scrollOffsetY);
             containerView.invalidate();

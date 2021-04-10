@@ -405,11 +405,7 @@ public class LoginActivity extends BaseFragment {
                 views[a].setVisibility(View.VISIBLE);
                 views[a].onShow();
                 currentDoneType = DONE_TYPE_FLOATING;
-                if (a == 1 || a == 2 || a == 3 || a == 4 || a == 8) {
-                    showDoneButton(false, false);
-                } else {
-                    showDoneButton(true, false);
-                }
+                showDoneButton(a != 1 && a != 2 && a != 3 && a != 4 && a != 8, false);
                 if (a == 1 || a == 2 || a == 3 || a == 4) {
                     currentDoneType = DONE_TYPE_ACTION;
                 }

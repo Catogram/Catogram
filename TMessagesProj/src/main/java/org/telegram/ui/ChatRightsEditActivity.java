@@ -910,13 +910,9 @@ public class ChatRightsEditActivity extends BaseFragment {
             } else {
                 adminRights.post_messages = adminRights.edit_messages = false;
             }
-            if (!adminRights.change_info && !adminRights.post_messages && !adminRights.edit_messages &&
+            adminRights.other = !adminRights.change_info && !adminRights.post_messages && !adminRights.edit_messages &&
                     !adminRights.delete_messages && !adminRights.ban_users && !adminRights.invite_users &&
-                    !adminRights.pin_messages && !adminRights.add_admins && !adminRights.anonymous && !adminRights.manage_call) {
-                adminRights.other = true;
-            } else {
-                adminRights.other = false;
-            }
+                    !adminRights.pin_messages && !adminRights.add_admins && !adminRights.anonymous && !adminRights.manage_call;
             MessagesController.getInstance(currentAccount).setUserAdminRole(chatId, currentUser, adminRights, currentRank, isChannel, getFragmentForAlert(1), isAddingNew);
             if (delegate != null) {
                 delegate.didSetRights(
