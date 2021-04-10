@@ -934,7 +934,9 @@ public class ChatObject {
                     value = false;
                     break;
             }
-            return value;
+            if (value) {
+                return true;
+            }
         }
         return false;
     }
