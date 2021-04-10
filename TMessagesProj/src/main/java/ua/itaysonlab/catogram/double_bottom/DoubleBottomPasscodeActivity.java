@@ -44,13 +44,14 @@ import org.telegram.ui.ActionBar.ThemeDescription;
 import org.telegram.ui.Components.EditTextBoldCursor;
 import org.telegram.ui.Components.LayoutHelper;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class DoubleBottomPasscodeActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
     private TextView titleTextView;
     private EditTextBoldCursor passwordEditText;
 
-    private int type;
+    private final int type;
     private int currentPasswordType = SharedConfig.passcodeType;
     private int passcodeSetStep = 0;
     private String firstPassword;
@@ -61,7 +62,7 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
 
     public static String getHash(String passcode) {
         try {
-            byte[] passcodeBytes = passcode.getBytes("UTF-8");
+            byte[] passcodeBytes = passcode.getBytes(StandardCharsets.UTF_8);
             byte[] bytes = new byte[32 + passcodeBytes.length];
             System.arraycopy(SharedConfig.passcodeSalt, 0, bytes, 0, 16);
             System.arraycopy(passcodeBytes, 0, bytes, 16, passcodeBytes.length);
@@ -77,7 +78,7 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
         void onPasscodeEntered(String passcodeHash, byte[] passcodeSalt, int type);
     }
 
-    private DBPAListener listener;
+    private final DBPAListener listener;
 
     public DoubleBottomPasscodeActivity(int type, DBPAListener listener) {
         super();
@@ -313,7 +314,7 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
 
             try {
                 byte[] passcodeSalt = SharedConfig.passcodeSalt;
-                byte[] passcodeBytes = firstPassword.getBytes("UTF-8");
+                byte[] passcodeBytes = firstPassword.getBytes(StandardCharsets.UTF_8);
                 byte[] bytes = new byte[32 + passcodeBytes.length];
                 System.arraycopy(passcodeSalt, 0, bytes, 0, 16);
                 System.arraycopy(passcodeBytes, 0, bytes, 16, passcodeBytes.length);

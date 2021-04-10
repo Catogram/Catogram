@@ -139,7 +139,7 @@ public class TGKitSettingsFragment extends BaseFragment {
 
     private class ListAdapter extends RecyclerListView.SelectionAdapter {
 
-        private Context mContext;
+        private final Context mContext;
 
         ListAdapter(Context context) {
             mContext = context;

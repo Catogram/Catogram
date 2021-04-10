@@ -16,12 +16,12 @@ import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 
 public class GenericSliderCell extends FrameLayout {
     private TGKitSliderPreference.TGSLContract contract;
-    private SeekBarView sizeBar;
+    private final SeekBarView sizeBar;
 
     private int startRadius;
     private int endRadius;
 
-    private TextPaint textPaint;
+    private final TextPaint textPaint;
 
     public GenericSliderCell setContract(TGKitSliderPreference.TGSLContract contract) {
         this.contract = contract;

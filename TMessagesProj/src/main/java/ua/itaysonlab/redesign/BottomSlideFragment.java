@@ -53,7 +53,7 @@ public abstract class BottomSlideFragment {
     private View mView;
     private boolean dismissed;
     private BottomSlideController mSlideController;
-    private Application.ActivityLifecycleCallbacks callbacks = new Application.ActivityLifecycleCallbacks() {
+    private final Application.ActivityLifecycleCallbacks callbacks = new Application.ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
             mSlideController.mActivity = activity;

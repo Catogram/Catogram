@@ -51,19 +51,19 @@ public class BottomSheetSwipeComponent extends FrameLayout {
     /**
      * View touch slop
      */
-    private int touchSlop;
+    private final int touchSlop;
 
     /**
      * Reusable rects
      */
-    private Rect ignoreRect = new Rect();
+    private final Rect ignoreRect = new Rect();
 
     /**
      * Current measured sheet height
      */
     private int sheetHeight;
 
-    private GestureDetectorCompat detector = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
+    private final GestureDetectorCompat detector = new GestureDetectorCompat(getContext(), new GestureDetector.SimpleOnGestureListener() {
         @Override
         public boolean onDown(MotionEvent e) {
             return true;

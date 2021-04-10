@@ -17,12 +17,12 @@ import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 
 public class StickerSliderCell extends FrameLayout {
     private TGKitSliderPreference.TGSLContract contract;
-    private SeekBarView sizeBar;
+    private final SeekBarView sizeBar;
 
     private int startRadius;
     private int endRadius;
 
-    private TextPaint textPaint;
+    private final TextPaint textPaint;
 
     public StickerSliderCell setContract(TGKitSliderPreference.TGSLContract contract) {
         this.contract = contract;

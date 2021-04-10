@@ -1,4 +1,3 @@
 package ua.itaysonlab.catogram.voicerec
 
-object WitAiBridge {
-}
+object WitAiBridge

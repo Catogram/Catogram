@@ -87,15 +87,15 @@ object CGFeatureHooks {
                         super.dismissInternal()
                         AndroidUtilities.requestAdjustResize(cf.parentActivity, classGuid)
                         if (cf.chatActivityEnterView.visibility == View.VISIBLE) {
-                            cf.fragmentView.requestLayout();
+                            cf.fragmentView.requestLayout()
                         }
                         //cf.hideActionMode()
                         cf.updatePinnedMessageView(true)
                     }
                 })
 
-                AndroidUtilities.setAdjustResizeToNothing(cf.parentActivity, classGuid);
-                cf.fragmentView.requestLayout();
+                AndroidUtilities.setAdjustResizeToNothing(cf.parentActivity, classGuid)
+                cf.fragmentView.requestLayout()
             }
         }
     }
