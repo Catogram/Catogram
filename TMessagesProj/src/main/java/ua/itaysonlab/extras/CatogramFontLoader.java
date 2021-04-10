@@ -3,10 +3,6 @@ package ua.itaysonlab.extras;
 import android.graphics.Typeface;
 import android.os.Build;
 
-import org.telegram.messenger.AndroidUtilities;
-
-import ua.itaysonlab.catogram.CatogramConfig;
-
 public class CatogramFontLoader {
     private static final Typeface sysBold = Typeface.create(Typeface.DEFAULT, Typeface.BOLD);
     private static final Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC);

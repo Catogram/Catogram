@@ -1,9 +1,7 @@
 package ua.itaysonlab.catogram.tabs
 
 import android.content.Context
-import com.google.android.exoplayer2.util.Log
 import org.telegram.messenger.ApplicationLoader
-import org.telegram.ui.Components.FilterTabsView
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.extras.CatogramExtras
 import java.io.File

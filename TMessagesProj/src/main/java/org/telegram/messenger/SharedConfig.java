@@ -19,6 +19,8 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.SparseArray;
 
+import androidx.core.content.pm.ShortcutManagerCompat;
+
 import org.json.JSONObject;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.SerializedData;
@@ -30,11 +32,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import ua.itaysonlab.catogram.CatogramConfig;
-import androidx.core.content.pm.ShortcutManagerCompat;
-
-import com.google.android.exoplayer2.util.Log;
 
 public class SharedConfig {
 

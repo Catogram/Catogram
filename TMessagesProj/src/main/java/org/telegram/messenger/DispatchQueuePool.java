@@ -2,10 +2,10 @@ package org.telegram.messenger;
 
 import android.os.SystemClock;
 
+import androidx.annotation.UiThread;
+
 import java.util.HashMap;
 import java.util.LinkedList;
-
-import androidx.annotation.UiThread;
 
 public class DispatchQueuePool {
 

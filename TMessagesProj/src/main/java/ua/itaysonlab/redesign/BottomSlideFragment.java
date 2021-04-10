@@ -2,7 +2,6 @@ package ua.itaysonlab.redesign;
 
 import android.app.Activity;
 import android.app.Application;
-import android.graphics.Color;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.os.Handler;

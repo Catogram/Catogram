@@ -62,8 +62,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
-import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.CGControversive;
+import ua.itaysonlab.catogram.CatogramConfig;
 
 public class MessagesController extends BaseController implements NotificationCenter.NotificationCenterDelegate {
 

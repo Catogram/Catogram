@@ -14,7 +14,6 @@ import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -30,9 +29,6 @@ import org.telegram.ui.Components.AvatarDrawable;
 import org.telegram.ui.Components.BackupImageView;
 import org.telegram.ui.Components.GroupCreateCheckBox;
 import org.telegram.ui.Components.LayoutHelper;
-
-import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge;
-import ua.itaysonlab.catogram.double_bottom.DoubleBottomStorageBridge;
 
 public class DrawerUserCell extends FrameLayout {
 

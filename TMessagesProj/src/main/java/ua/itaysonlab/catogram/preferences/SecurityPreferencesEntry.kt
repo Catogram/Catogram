@@ -3,7 +3,6 @@ package ua.itaysonlab.catogram.preferences
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.ui.ActionBar.BaseFragment
-import ua.itaysonlab.catogram.CGControversive
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
 

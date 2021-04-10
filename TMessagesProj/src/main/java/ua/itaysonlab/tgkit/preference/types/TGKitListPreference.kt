@@ -1,13 +1,10 @@
 package ua.itaysonlab.tgkit.preference.types
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.util.Pair
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.Components.AlertsCreator
-import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.tgkit.preference.TGKitPreference
 
 class TGKitListPreference : TGKitPreference() {

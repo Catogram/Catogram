@@ -96,8 +96,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
 
-import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
 import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
 
 public class MediaController implements AudioManager.OnAudioFocusChangeListener, NotificationCenter.NotificationCenterDelegate, SensorEventListener {
 

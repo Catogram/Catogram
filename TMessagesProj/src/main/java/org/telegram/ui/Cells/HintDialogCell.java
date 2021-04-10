@@ -11,8 +11,6 @@ package org.telegram.ui.Cells;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.RectF;
-import android.text.Layout;
-import android.text.StaticLayout;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;

@@ -15,7 +15,6 @@ import com.google.android.exoplayer2.util.Log
 import org.xmlpull.v1.XmlPullParserException
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.vkui.icon_replaces.BaseIconReplace
-import ua.itaysonlab.catogram.vkui.icon_replaces.NoIconReplace
 import java.io.IOException
 import java.io.InputStream
 

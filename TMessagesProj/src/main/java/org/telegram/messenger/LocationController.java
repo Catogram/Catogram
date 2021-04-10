@@ -44,8 +44,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import ua.itaysonlab.catogram.CGControversive;
-
 public class LocationController extends BaseController implements NotificationCenter.NotificationCenterDelegate, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private LongSparseArray<SharingLocationInfo> sharingLocationsMap = new LongSparseArray<>();

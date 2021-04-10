@@ -1,18 +1,16 @@
 package ua.itaysonlab.catogram
 
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RemoteViews
 import org.telegram.messenger.*
 import org.telegram.tgnet.TLRPC
+import org.telegram.ui.ActionBar.ActionBarPopupWindow
 import org.telegram.ui.ActionBar.Theme
 import org.telegram.ui.AvatarPreviewer
-import org.telegram.ui.Cells.ChatMessageCell
 import org.telegram.ui.ChatActivity
 import org.telegram.ui.ChatRightsEditActivity
 import org.telegram.ui.Components.ShareAlert
-import org.telegram.ui.ActionBar.ActionBarPopupWindow
 
 // I've created this so CG features can be injected in a source file with 1 line only (maybe)
 // Because manual editing of drklo's sources harms your mental health.

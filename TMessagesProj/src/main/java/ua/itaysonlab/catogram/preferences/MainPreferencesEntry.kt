@@ -1,17 +1,13 @@
 package ua.itaysonlab.catogram.preferences
 
 import android.content.ComponentName
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.provider.Browser
-import android.view.WindowManager
-import org.telegram.messenger.*
-import org.telegram.ui.ActionBar.AlertDialog
+import org.telegram.messenger.BuildVars
+import org.telegram.messenger.LocaleController
+import org.telegram.messenger.R
 import org.telegram.ui.ActionBar.BaseFragment
-import org.telegram.ui.Components.voip.VoIPHelper
 import org.telegram.ui.LaunchActivity
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator
 import ua.itaysonlab.catogram.double_bottom.DoubleBottomBridge

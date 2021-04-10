@@ -68,9 +68,9 @@ import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RLottieDrawable;
 import org.telegram.ui.Components.RLottieImageView;
 
-import ua.itaysonlab.catogram.EditTextAutoFill;
-
 import java.util.ArrayList;
+
+import ua.itaysonlab.catogram.EditTextAutoFill;
 
 public class TwoStepVerificationSetupActivity extends BaseFragment {
 

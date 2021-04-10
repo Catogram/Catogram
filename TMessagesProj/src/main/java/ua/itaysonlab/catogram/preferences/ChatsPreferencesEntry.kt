@@ -7,12 +7,9 @@ import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
-import ua.itaysonlab.catogram.CGControversive
 import ua.itaysonlab.catogram.CGFeatureHooks
-import ua.itaysonlab.catogram.CGFeatureHooks.getReplyIconDrawable
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
-import ua.itaysonlab.extras.IconExtras
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference.TGSLContract
 
 class ChatsPreferencesEntry : BasePreferencesEntry {

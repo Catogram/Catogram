@@ -8,7 +8,6 @@ import org.telegram.messenger.ApplicationLoader
 import ua.itaysonlab.catogram.preferences.ktx.boolean
 import ua.itaysonlab.catogram.preferences.ktx.int
 import ua.itaysonlab.catogram.preferences.ktx.long
-import ua.itaysonlab.catogram.preferences.ktx.string
 
 // Used for storing data
 object DoubleBottomStorageBridge {

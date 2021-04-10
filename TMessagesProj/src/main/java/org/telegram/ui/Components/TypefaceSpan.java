@@ -13,8 +13,6 @@ import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
 
-import org.telegram.messenger.AndroidUtilities;
-
 public class TypefaceSpan extends MetricAffectingSpan {
 
     private Typeface typeface;

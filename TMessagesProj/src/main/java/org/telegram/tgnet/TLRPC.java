@@ -9,15 +9,11 @@
 package org.telegram.tgnet;
 
 import android.text.TextUtils;
-import android.util.Log;
 
-import org.telegram.messenger.FileLoader;
-import org.telegram.messenger.FileLog;
 import org.telegram.messenger.Utilities;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import ua.itaysonlab.catogram.tabs.TabIconManager;

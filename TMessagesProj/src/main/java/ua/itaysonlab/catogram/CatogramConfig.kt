@@ -2,7 +2,6 @@ package ua.itaysonlab.catogram
 
 import android.app.Activity
 import android.content.SharedPreferences
-import com.google.android.exoplayer2.util.Log
 import org.telegram.messenger.ApplicationLoader
 import org.telegram.messenger.MessagesController
 import ua.itaysonlab.catogram.preferences.ktx.boolean

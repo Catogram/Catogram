@@ -1,7 +1,6 @@
 package ua.itaysonlab.catogram.translate.impl
 
 import org.json.JSONObject
-import org.telegram.messenger.LocaleController
 import ua.itaysonlab.extras.doAsync
 import ua.itaysonlab.extras.uiThread
 import java.net.URL

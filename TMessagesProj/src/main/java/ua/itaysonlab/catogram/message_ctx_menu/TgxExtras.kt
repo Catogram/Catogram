@@ -3,7 +3,9 @@ package ua.itaysonlab.catogram.message_ctx_menu
 import android.app.Activity
 import android.net.Uri
 import androidx.core.view.inputmethod.InputContentInfoCompat
-import org.telegram.messenger.*
+import org.telegram.messenger.AccountInstance
+import org.telegram.messenger.LocaleController
+import org.telegram.messenger.MessageObject
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment
 import ua.itaysonlab.redesign.sheet.TgxMessageMenuSheetFragment

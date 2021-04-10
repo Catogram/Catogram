@@ -19,20 +19,14 @@ import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
 
-import android.util.Log;
-
-import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLoader;
 import org.telegram.messenger.SharedConfig;
-import org.telegram.messenger.UserConfig;
 import org.telegram.messenger.Utilities;
 import org.telegram.tgnet.TLRPC;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import ua.itaysonlab.catogram.CatogramConfig;
 

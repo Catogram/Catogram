@@ -102,6 +102,7 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL;
+
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
 

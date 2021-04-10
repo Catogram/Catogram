@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import org.telegram.messenger.*
 import org.telegram.ui.*
-import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.extras.CatogramExtras
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment

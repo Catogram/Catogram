@@ -1,6 +1,5 @@
 package ua.itaysonlab.catogram
 
-import android.content.Context
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory

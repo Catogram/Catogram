@@ -2,9 +2,7 @@ package ua.itaysonlab.tgkit.preference.types;
 
 import androidx.annotation.Nullable;
 
-import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.Theme;
-import org.telegram.ui.Cells.TextCell;
 
 import ua.itaysonlab.tgkit.preference.TGKitPreference;
 

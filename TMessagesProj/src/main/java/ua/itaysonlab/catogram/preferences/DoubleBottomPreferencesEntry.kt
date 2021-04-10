@@ -1,13 +1,11 @@
 package ua.itaysonlab.catogram.preferences
 
 import android.util.Base64
-import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.UserConfig
 import org.telegram.tgnet.TLRPC
 import org.telegram.ui.ActionBar.BaseFragment
-import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.double_bottom.DoubleBottomPasscodeActivity
 import ua.itaysonlab.catogram.double_bottom.DoubleBottomStorageBridge
 import ua.itaysonlab.catogram.preferences.ktx.*

@@ -96,7 +96,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import ua.itaysonlab.catogram.CGFeatureHooks;
-import ua.itaysonlab.catogram.CatogramConfig;
 
 /**
  * Created by grishka on 21.07.17.
