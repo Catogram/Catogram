@@ -373,7 +373,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private int debugHeaderRow;
     private int sendLogsRow;
     private int clearLogsRow;
-    private int switchBackendRow;
     private int versionRow;
 
     private int emptyRow;
@@ -2612,21 +2611,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 sendLogs();
             } else if (position == clearLogsRow) {
                 FileLog.cleanupLogs();
-            } else if (position == switchBackendRow) {
-                if (getParentActivity() == null) {
-                    return;
-                }
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getParentActivity());
-                builder1.setMessage(LocaleController.getString("AreYouSure", R.string.AreYouSure));
-                builder1.setTitle(LocaleController.getString("AppName", R.string.AppName));
-                builder1.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialogInterface, i) -> {
-                    SharedConfig.pushAuthKey = null;
-                    SharedConfig.pushAuthKeyId = null;
-                    SharedConfig.saveConfig();
-                    getConnectionsManager().switchBackend();
-                });
-                builder1.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-                showDialog(builder1.create());
             } else if (position == languageRow) {
                 presentFragment(new LanguageSelectActivity());
             } else if (position == setUsernameRow) {
@@ -2671,7 +2655,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                                 SharedConfig.pauseMusicOnRecord ? LocaleController.getString("DebugMenuDisablePauseMusic", R.string.DebugMenuDisablePauseMusic) : LocaleController.getString("DebugMenuEnablePauseMusic", R.string.DebugMenuEnablePauseMusic),
                                 BuildVars.DEBUG_VERSION && !AndroidUtilities.isTablet() && Build.VERSION.SDK_INT >= 23 ? (SharedConfig.smoothKeyboard ? LocaleController.getString("DebugMenuDisableSmoothKeyboard", R.string.DebugMenuDisableSmoothKeyboard) : LocaleController.getString("DebugMenuEnableSmoothKeyboard", R.string.DebugMenuEnableSmoothKeyboard)) : null,
                                 BuildVars.DEBUG_PRIVATE_VERSION ? (SharedConfig.disableVoiceAudioEffects ? "Enable voip audio effects" : "Disable voip audio effects") : null,
-                                Build.VERSION.SDK_INT >= 21 ? (SharedConfig.noStatusBar ? "Show status bar background" : "Hide status bar background") : null
+                                Build.VERSION.SDK_INT >= 21 ? (SharedConfig.noStatusBar ? "Show status bar background" : "Hide status bar background") : null,
+                                LocaleController.getString("CG_SB", R.string.CG_SB)
                         };
                         builder.setItems(items, (dialog, which) -> {
                             if (which == 0) {
@@ -2726,6 +2711,21 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                                         getParentActivity().getWindow().setStatusBarColor(0x33000000);
                                     }
                                 }
+                            } else if (which == 15) {
+                                if (getParentActivity() == null) {
+                                    return;
+                                }
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(getParentActivity());
+                                builder1.setMessage(LocaleController.getString("CG_SwitchBackend", R.string.CG_SwitchBackend));
+                                builder1.setTitle(LocaleController.getString("AppName", R.string.AppName));
+                                builder1.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialogInterface, i) -> {
+                                    SharedConfig.pushAuthKey = null;
+                                    SharedConfig.pushAuthKeyId = null;
+                                    SharedConfig.saveConfig();
+                                    getConnectionsManager().switchBackend();
+                                });
+                                builder1.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
+                                showDialog(builder1.create());
                             }
                         });
                         builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
@@ -5208,7 +5208,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         debugHeaderRow = -1;
         sendLogsRow = -1;
         clearLogsRow = -1;
-        switchBackendRow = -1;
         versionRow = -1;
 
         sendMessageRow = -1;
@@ -5295,9 +5294,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 if (BuildVars.LOGS_ENABLED) {
                     sendLogsRow = rowCount++;
                     clearLogsRow = rowCount++;
-                }
-                if (BuildVars.DEBUG_PRIVATE_VERSION) {
-                    switchBackendRow = rowCount++;
                 }
                 versionRow = rowCount++;
             } else {
@@ -6851,9 +6847,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     } else if (position == sendLogsRow) {
                         textCell.setText(LocaleController.getString("DebugSendLogs", R.string.DebugSendLogs), true);
                     } else if (position == clearLogsRow) {
-                        textCell.setText(LocaleController.getString("DebugClearLogs", R.string.DebugClearLogs), switchBackendRow != -1);
-                    } else if (position == switchBackendRow) {
-                        textCell.setText("Switch Backend", false);
+                        textCell.setText(LocaleController.getString("DebugClearLogs", R.string.DebugClearLogs), false);
                     } else if (position == devicesRow) {
                         textCell.setTextAndIcon(LocaleController.getString("Devices", R.string.Devices), R.drawable.menu_devices, true);
                     } else if (position == setAvatarRow) {
@@ -6986,7 +6980,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         position == versionRow || position == dataRow || position == chatRow ||
                         position == questionRow || position == devicesRow || position == filtersRow ||
                         position == faqRow || position == policyRow || position == sendLogsRow || position == catogramRow ||
-                        position == clearLogsRow || position == switchBackendRow || position == setAvatarRow;
+                        position == clearLogsRow || position == setAvatarRow;
             }
             if (holder.itemView instanceof UserCell) {
                 UserCell userCell = (UserCell) holder.itemView;
@@ -7024,7 +7018,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     position == languageRow || position == dataRow || position == chatRow ||
                     position == questionRow || position == devicesRow || position == filtersRow ||
                     position == faqRow || position == policyRow || position == sendLogsRow ||
-                    position == clearLogsRow || position == switchBackendRow || position == setAvatarRow) {
+                    position == clearLogsRow || position == setAvatarRow) {
                 return 4;
             } else if (position == notificationsDividerRow) {
                 return 5;
@@ -7924,7 +7918,6 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             put(++pointer, debugHeaderRow, sparseIntArray);
             put(++pointer, sendLogsRow, sparseIntArray);
             put(++pointer, clearLogsRow, sparseIntArray);
-            put(++pointer, switchBackendRow, sparseIntArray);
             put(++pointer, versionRow, sparseIntArray);
             put(++pointer, emptyRow, sparseIntArray);
             put(++pointer, bottomPaddingRow, sparseIntArray);
