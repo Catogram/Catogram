@@ -20804,7 +20804,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else if (type == 1) {
                 Browser.openUrl(getParentActivity(), url, inlineReturn == 0, false);
             } else if (type == 2) {
-                AlertsCreator.showOpenUrlAlert(ChatActivity.this, url, true, true, true);
+                Browser.openUrl(getParentActivity(), url, inlineReturn == 0);
             }
         }
     }
