@@ -128,6 +128,8 @@ import java.util.List;
 import java.util.Locale;
 
 import ua.itaysonlab.CatogramLogger;
+import ua.itaysonlab.catogram.translate.impl.AnotherYandexTranslateImpl;
+
 
 public class ChatActivityEnterView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
 
@@ -2863,7 +2865,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             });
             sendPopupLayout.setShownFromBotton(false);
 
-            for (int a = 0; a < 2; a++) {
+            for (int a = 0; a < 3; a++) {
                 if (a == 0 && !parentFragment.canScheduleMessage() || a == 1 && (UserObject.isUserSelf(user) || slowModeTimer > 0 && !isInScheduleMode())) {
                     continue;
                 }
@@ -2875,8 +2877,10 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     } else {
                         cell.setTextAndIcon(LocaleController.getString("ScheduleMessage", R.string.ScheduleMessage), R.drawable.msg_schedule);
                     }
-                } else {
+                } else if (num == 1) {
                     cell.setTextAndIcon(LocaleController.getString("SendWithoutSound", R.string.SendWithoutSound), R.drawable.input_notify_off);
+                } else if (num == 2) {
+                    cell.setTextAndIcon(LocaleController.getString("CG_Translate", R.string.CG_Translate), R.drawable.round_translate_24);
                 }
                 cell.setMinimumWidth(AndroidUtilities.dp(196));
                 sendPopupLayout.addView(cell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48));
@@ -2886,8 +2890,10 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     }
                     if (num == 0) {
                         AlertsCreator.createScheduleDatePickerDialog(parentActivity, parentFragment.getDialogId(), this::sendMessageInternal);
-                    } else {
+                    } else if (num == 1) {
                         sendMessageInternal(false, 0);
+                    } else if (num == 2) {
+                       AnotherYandexTranslateImpl.translateEditText(messageEditText.getText().toString(),messageEditText);
                     }
                 });
             }
