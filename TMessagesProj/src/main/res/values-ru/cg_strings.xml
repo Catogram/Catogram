@@ -229,4 +229,6 @@
     <string name="CG_RecentStickers_desc">недавних стикеров</string>
     <string name="CG_Without_Authorship">Без авторства</string>
     <string name="CG_Private">Это приватный канал</string>
+    <string name="CG_TrLang">Язык назначения</string>
+    <string name="CG_Tr">Переводчик</string>
 </resources>

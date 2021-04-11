@@ -1,7 +1,11 @@
 package ua.itaysonlab.catogram.translate.impl
 
+import android.widget.Toast
+import com.google.android.play.core.internal.bf
 import org.json.JSONObject
+import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.Components.EditTextCaption
+import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.extras.doAsync
 import ua.itaysonlab.extras.uiThread
 import java.net.URL
@@ -48,7 +52,7 @@ abstract class AnotherYandexTranslateImpl: BaseTranslationImpl() {
             @JvmStatic
             fun translateEditText(txt: String, editText: EditTextCaption) {
                 return detectLang(txt) { detectedLang ->
-                    translateText(txt, detectedLang, "en") { text ->
+                    translateText(txt, detectedLang, CatogramConfig.trLang) { text ->
                         editText.setText(text)
                     }
                 }

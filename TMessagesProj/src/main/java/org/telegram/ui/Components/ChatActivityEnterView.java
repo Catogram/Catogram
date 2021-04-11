@@ -128,6 +128,7 @@ import java.util.List;
 import java.util.Locale;
 
 import ua.itaysonlab.CatogramLogger;
+import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.translate.impl.AnotherYandexTranslateImpl;
 
 

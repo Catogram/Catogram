@@ -6,14 +6,16 @@ import org.telegram.messenger.ApplicationLoader
 import org.telegram.messenger.MessagesController
 import ua.itaysonlab.catogram.preferences.ktx.boolean
 import ua.itaysonlab.catogram.preferences.ktx.int
+import ua.itaysonlab.catogram.preferences.ktx.string
 import ua.itaysonlab.catogram.ui.CatogramToasts
 import ua.itaysonlab.catogram.vkui.icon_replaces.BaseIconReplace
 import ua.itaysonlab.catogram.vkui.icon_replaces.NoIconReplace
 import ua.itaysonlab.catogram.vkui.icon_replaces.VkIconReplace
 
 object CatogramConfig {
-    private val sharedPreferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE)
 
+    private val sharedPreferences: SharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE)
+    var trLang by sharedPreferences.string("cg_tr_lang", "en")
     var hideProxySponsor by sharedPreferences.boolean("advanced_hideproxysponsor", true)
     var hidePhoneNumber by sharedPreferences.boolean("advanced_hidephonenumber", true)
     var fakePhoneNumber by sharedPreferences.boolean("advanced_fakephonenumber", false)
@@ -43,6 +45,7 @@ object CatogramConfig {
     var forceHLDrawer by sharedPreferences.boolean("cg_hl_drawer", false)
 
     var redesign_messageOption by sharedPreferences.int("cg_messageOption", 3)
+    var translateOptions by sharedPreferences.int("cg_trOptions", 0)
     var redesign_forceDrawerIconsOption by sharedPreferences.int("cg_drawerIconsOption", 0)
     var redesign_iconOption by sharedPreferences.int("cg_iconoption", 0)
     var redesign_SlideDrawer by sharedPreferences.boolean("cg_redesign_slidedrawer", false)
