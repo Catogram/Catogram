@@ -5,6 +5,7 @@ import com.google.android.play.core.internal.bf
 import org.json.JSONObject
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.Components.EditTextCaption
+import org.telegram.ui.Components.EditTextEmoji
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.extras.doAsync
 import ua.itaysonlab.extras.uiThread
@@ -57,5 +58,13 @@ abstract class AnotherYandexTranslateImpl: BaseTranslationImpl() {
                     }
                 }
             }
+        @JvmStatic
+        fun translateComment(txt: String, editText: EditTextEmoji) {
+            return detectLang(txt) { detectedLang ->
+                translateText(txt, detectedLang, CatogramConfig.trLang) { text ->
+                    editText.setText(text)
+                }
+            }
+        }
         }
     }
