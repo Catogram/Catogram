@@ -401,6 +401,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                             Pair(6, "ja"),
                             Pair(7, "hi"),
                             Pair(8, "de"),
+                            Pair(9, "id"),
                     )
                 }, {
                     return@contract when (CatogramConfig.translateOptions) {
@@ -412,6 +413,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                         6 -> "ja"
                         7 -> "hi"
                         8 -> "de"
+                        9 -> "id"
                         else -> "en"
                     }
                 }) {
@@ -443,6 +445,9 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                         }
                         8 -> {
                             CatogramConfig.trLang = "de"
+                        }
+                        9 -> {
+                            CatogramConfig.trLang = "id"
                         }
                     }
                 }
