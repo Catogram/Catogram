@@ -174,6 +174,17 @@ android {
             ndk.debugSymbolLevel = 'FULL'
         }
 
+        standalone {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.release
+            applicationIdSuffix ".web"
+            minifyEnabled true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk.debugSymbolLevel = 'FULL'
+        }
+
         release {
             debuggable false
             jniDebuggable false
@@ -196,6 +207,10 @@ android {
 
     sourceSets.HA {
         manifest.srcFile 'config/debug/AndroidManifest.xml'
+    }
+
+    sourceSets.standalone {
+        manifest.srcFile 'config/release/AndroidManifest.xml'
     }
 
     sourceSets.release {
@@ -274,9 +289,6 @@ android {
             sourceSets.debug {
                 manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
             }
-            /*sourceSets.debugAsan {
-                manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
-            }*/
             sourceSets.release {
                 manifest.srcFile 'config/release/AndroidManifest_SDK23.xml'
             }
@@ -307,11 +319,11 @@ android {
             sourceSets.debug {
                 manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
             }
-            /*sourceSets.debugAsan {
-                manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
-            }*/
             sourceSets.release {
                 manifest.srcFile 'config/release/AndroidManifest_SDK23.xml'
+            }
+            sourceSets.standalone {
+                manifest.srcFile 'config/release/AndroidManifest_standalone.xml'
             }
             ext {
                 abiVersionCode = 9
@@ -319,7 +331,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2274
+    defaultConfig.versionCode = 2284
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -338,7 +350,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionName "7.6.1"
+        versionName "7.7.0"
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
 

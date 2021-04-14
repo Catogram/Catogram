@@ -73,6 +73,8 @@ import androidx.recyclerview.widget.LinearSmoothScrollerCustom;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.exoplayer2.util.Log;
+
 import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
@@ -252,6 +254,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
     private int messagesCount;
     private int hasPoll;
+    private boolean hasInvoice;
 
     private PacmanAnimation pacmanAnimation;
 
@@ -870,7 +873,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
         @Override
         public boolean onTouchEvent(MotionEvent ev) {
-            if (filterTabsView != null  && !filterTabsView.isEditing() && !searching &&
+            if (parentLayout != null && filterTabsView != null && !filterTabsView.isEditing() && !searching &&
                     !parentLayout.checkTransitionAnimation() && !parentLayout.isInPreviewMode() && !parentLayout.isPreviewOpenAnimationInProgress() && !parentLayout.getDrawerLayoutContainer().isDrawerOpened() &&
                     (ev == null || startedTracking || ev.getY() > actionBar.getMeasuredHeight() + actionBar.getTranslationY()) && SharedConfig.getChatSwipeAction(currentAccount) == SwipeGestureSettingsView.SWIPE_GESTURE_FOLDERS) {
                 if (ev != null) {
@@ -1090,7 +1093,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
         private boolean firstLayout = true;
         private boolean ignoreLayout;
-        private ViewPage parentPage;
+        private final ViewPage parentPage;
         private int appliedPaddingTop;
         private int lastTop;
         private int lastListPadding;
@@ -1205,7 +1208,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         @Override
         protected void onDetachedFromWindow() {
             super.onDetachedFromWindow();
-            parentPage.recyclerItemsEnterAnimator.onDetached();
+            if (parentPage != null && parentPage.recyclerItemsEnterAnimator != null) {
+                parentPage.recyclerItemsEnterAnimator.onDetached();
+            }
         }
 
         @Override
@@ -1743,6 +1748,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             resetDelegate = arguments.getBoolean("resetDelegate", true);
             messagesCount = arguments.getInt("messagesCount", 0);
             hasPoll = arguments.getInt("hasPoll", 0);
+            hasInvoice = arguments.getBoolean("hasInvoice", false);
         }
 
         if (initialDialogsType == 0) {
@@ -1801,6 +1807,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             messagesController.loadUserInfo(accountInstance.getUserConfig().getCurrentUser(), false, 0);
             accountInstance.getContactsController().checkInviteText();
             accountInstance.getMediaDataController().loadRecents(MediaDataController.TYPE_FAVE, false, true, false);
+            accountInstance.getMediaDataController().loadRecents(MediaDataController.TYPE_GREETINGS, false, true, false);
             accountInstance.getMediaDataController().checkFeaturedStickers();
             for (String emoji : messagesController.diceEmojies) {
                 accountInstance.getMediaDataController().loadStickersByEmojiOrName(emoji, true, true);
@@ -2413,7 +2420,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             TLRPC.User user = getUserConfig().getCurrentUser();
             avatarDrawable.setInfo(user);
             imageView.getImageReceiver().setCurrentAccount(currentAccount);
-            imageView.setImage(ImageLocation.getForUser(user, false), "50_50", avatarDrawable, user);
+            imageView.setImage(ImageLocation.getForUserOrChat(user, ImageLocation.TYPE_SMALL), "50_50", ImageLocation.getForUserOrChat(user, ImageLocation.TYPE_STRIPPED), "50_50", avatarDrawable, user);
 
             for (int a = 0; a < UserConfig.MAX_ACCOUNT_COUNT; a++) {
                 TLRPC.User u = AccountInstance.getInstance(a).getUserConfig().getCurrentUser();
@@ -4653,7 +4660,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 if (getMessagesController().checkCanOpenChat(args, DialogsActivity.this)) {
                     ChatActivity chatActivity = new ChatActivity(args);
                     if (adapter instanceof DialogsAdapter && lower_part > 0 && (getMessagesController().dialogs_dict.get(dialogId) == null)) {
-                        TLRPC.Document sticker = getMessagesController().getPreloadedSticker();
+                        TLRPC.Document sticker = getMediaDataController().getGreetingsSticker();
                         if (sticker != null) {
                             chatActivity.setPreloadedSticker(sticker, true);
                         }
@@ -5496,6 +5503,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     private void scrollToTop() {
         int scrollDistance = viewPages[0].layoutManager.findFirstVisibleItemPosition() * AndroidUtilities.dp(SharedConfig.useThreeLinesLayout ? 78 : 72);
         int position = viewPages[0].dialogsType == 0 && hasHiddenArchive() ? 1 : 0;
+        RecyclerView.ItemAnimator animator = viewPages[0].listView.getItemAnimator();
+//        if (animator != null) {
+//            animator.endAnimations();
+//        }
         if (scrollDistance >= viewPages[0].listView.getMeasuredHeight() * 1.2f) {
             viewPages[0].scrollHelper.setScrollDirection(RecyclerAnimationScrollHelper.SCROLL_DIRECTION_UP);
             viewPages[0].scrollHelper.scrollToPosition(position, 0, false, true);
@@ -6560,10 +6571,14 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     showDialog(builder.create());
                     return;
                 }
-            } else if (lowerId == 0 && hasPoll != 0) {
+            } else if (lowerId == 0 && (hasPoll != 0 || hasInvoice)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
                 builder.setTitle(LocaleController.getString("SendMessageTitle", R.string.SendMessageTitle));
-                builder.setMessage(LocaleController.getString("PollCantForwardSecretChat", R.string.PollCantForwardSecretChat));
+                if (hasPoll != 0) {
+                    builder.setMessage(LocaleController.getString("PollCantForwardSecretChat", R.string.PollCantForwardSecretChat));
+                } else {
+                    builder.setMessage(LocaleController.getString("InvoiceCantForwardSecretChat", R.string.InvoiceCantForwardSecretChat));
+                }
                 builder.setNegativeButton(LocaleController.getString("OK", R.string.OK), null);
                 showDialog(builder.create());
                 return;
@@ -7205,3 +7220,4 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         return !(initialDialogsType == 3 && viewPages[0].selectedType != filterTabsView.getFirstTabId());
     }
 }
+

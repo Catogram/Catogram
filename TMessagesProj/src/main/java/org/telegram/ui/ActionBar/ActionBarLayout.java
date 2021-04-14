@@ -358,6 +358,11 @@ public class ActionBarLayout extends FrameLayout {
     public void setInnerTranslationX(float value) {
         innerTranslationX = value;
         invalidate();
+
+        if (fragmentsStack.size() >= 2) {
+            BaseFragment prevFragment = fragmentsStack.get(fragmentsStack.size() - 2);
+            prevFragment.onSlideProgress(false, value / containerView.getMeasuredWidth());
+        }
     }
 
     @Keep
@@ -533,9 +538,11 @@ public class ActionBarLayout extends FrameLayout {
                 return;
             }
             BaseFragment lastFragment = fragmentsStack.get(fragmentsStack.size() - 1);
+            lastFragment.prepareFragmentToSlide(true, false);
             lastFragment.onPause();
             lastFragment.onFragmentDestroy();
             lastFragment.setParentLayout(null);
+
             fragmentsStack.remove(fragmentsStack.size() - 1);
 
             LayoutContainer temp = containerView;
@@ -547,11 +554,16 @@ public class ActionBarLayout extends FrameLayout {
             currentActionBar = lastFragment.actionBar;
             lastFragment.onResume();
             lastFragment.onBecomeFullyVisible();
+            lastFragment.prepareFragmentToSlide(false, false);
 
             layoutToIgnore = containerView;
         } else {
             if (fragmentsStack.size() >= 2) {
-                BaseFragment lastFragment = fragmentsStack.get(fragmentsStack.size() - 2);
+                BaseFragment lastFragment = fragmentsStack.get(fragmentsStack.size() - 1);
+                lastFragment.prepareFragmentToSlide(true, false);
+
+                lastFragment = fragmentsStack.get(fragmentsStack.size() - 2);
+                lastFragment.prepareFragmentToSlide(false, false);
                 lastFragment.onPause();
                 if (lastFragment.fragmentView != null) {
                     ViewGroup parent = (ViewGroup) lastFragment.fragmentView.getParent();
@@ -619,6 +631,10 @@ public class ActionBarLayout extends FrameLayout {
         if (themeAnimatorSet != null) {
             presentingFragmentDescriptions = lastFragment.getThemeDescriptions();
         }
+
+        BaseFragment currentFragment = fragmentsStack.get(fragmentsStack.size() - 1);
+        currentFragment.prepareFragmentToSlide(true, true);
+        lastFragment.prepareFragmentToSlide(false, true);
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
