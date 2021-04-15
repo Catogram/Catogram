@@ -133,7 +133,7 @@ object CGFeatureHooks {
     fun injectChatActivityAvatarOnClick(cf: ChatActivity, item: AvatarPreviewer.MenuItem, user: TLRPC.User) {
         when (item) {
             AvatarPreviewer.MenuItem.CG_KICK -> {
-                cf.messagesController.deleteUserFromChat(cf.currentChat.id, cf.messagesController.getUser(user.id), cf.currentChatInfo)
+                cf.messagesController.deleteParticipantFromChat(cf.currentChat.id, cf.messagesController.getUser(user.id), cf.currentChatInfo)
             }
             AvatarPreviewer.MenuItem.CG_CHANGE_PERMS, AvatarPreviewer.MenuItem.CG_CHANGE_ADMIN_PERMS -> {
                 val action = if (item == AvatarPreviewer.MenuItem.CG_CHANGE_PERMS) 1 else 0 // 0 - change admin rights
