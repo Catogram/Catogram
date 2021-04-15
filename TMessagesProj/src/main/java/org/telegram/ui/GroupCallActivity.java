@@ -3450,14 +3450,14 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
     }
 
     private void checkContentOverlayed() {
-        boolean overlayed = !avatarPriviewTransitionInProgress && blurredView.getVisibility() == View.VISIBLE && blurredView.getAlpha() == 1f;;
+        boolean overlayed = !avatarPriviewTransitionInProgress && blurredView.getVisibility() == View.VISIBLE && blurredView.getAlpha() == 1f;
         if (contentFullyOverlayed != overlayed) {
             contentFullyOverlayed = overlayed;
             buttonsContainer.invalidate();
             containerView.invalidate();
             listView.invalidate();
         }
-    };
+    }
 
     private void updateScheduleUI(boolean animation) {
         if ((scheduleTimerContainer == null || call != null) && scheduleAnimator == null) {
@@ -5325,10 +5325,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             int type = holder.getItemViewType();
             if (type == 1) {
                 return true;
-            } else if (type == 3) {
-                return false;
-            }
-            return true;
+            } else return type != 3;
         }
 
         @Override

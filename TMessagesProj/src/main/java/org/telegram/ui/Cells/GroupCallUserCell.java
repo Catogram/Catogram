@@ -186,11 +186,7 @@ public class GroupCallUserCell extends FrameLayout {
 
     public void setUploadProgress(float progress, boolean animated) {
         avatarProgressView.setProgress(progress);
-        if (progress < 1f) {
-            AndroidUtilities.updateViewVisibilityAnimated(avatarProgressView, true, 1f, animated);
-        } else {
-            AndroidUtilities.updateViewVisibilityAnimated(avatarProgressView, false, 1f, animated);
-        }
+        AndroidUtilities.updateViewVisibilityAnimated(avatarProgressView, progress < 1f, 1f, animated);
     }
 
     private static class VerifiedDrawable extends Drawable {

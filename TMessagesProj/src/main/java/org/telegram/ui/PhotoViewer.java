@@ -160,14 +160,6 @@ import org.telegram.messenger.UserObject;
 import org.telegram.messenger.Utilities;
 import org.telegram.messenger.VideoEditedInfo;
 import org.telegram.messenger.WebFile;
-import org.telegram.messenger.ApplicationLoader;
-import org.telegram.messenger.FileLoader;
-import org.telegram.messenger.FileLog;
-import org.telegram.messenger.LocaleController;
-import org.telegram.messenger.MediaController;
-import org.telegram.messenger.MessagesController;
-import org.telegram.messenger.NotificationCenter;
-import org.telegram.messenger.R;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
@@ -13955,11 +13947,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         rewindCount++;
         boolean needUpdate = false;
         if (rewindCount == 1) {
-            if (rewindForward && videoPlayer.isPlaying()) {
-                rewindByBackSeek = false;
-            } else {
-                rewindByBackSeek = true;
-            }
+            rewindByBackSeek = !rewindForward || !videoPlayer.isPlaying();
         }
         if (rewindForward && !rewindByBackSeek) {
             if (rewindCount == 1) {

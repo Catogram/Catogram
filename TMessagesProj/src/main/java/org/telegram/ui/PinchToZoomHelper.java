@@ -322,11 +322,7 @@ public class PinchToZoomHelper {
     protected boolean zoomEnabled(View child, ImageReceiver receiver) {
         Drawable drawable = receiver.getDrawable();
         if (drawable instanceof AnimatedFileDrawable) {
-            if (((AnimatedFileDrawable)receiver.getDrawable()).isLoadingStream()) {
-                return false;
-            } else {
-                return true;
-            }
+            return !((AnimatedFileDrawable) receiver.getDrawable()).isLoadingStream();
         }
         return receiver.hasNotThumb();
     }
@@ -689,11 +685,7 @@ public class PinchToZoomHelper {
             return true;
         }
 
-        if (pointerId1 == ev.getPointerId(1) && pointerId2 == ev.getPointerId(0)) {
-            return true;
-        }
-
-        return false;
+        return pointerId1 == ev.getPointerId(1) && pointerId2 == ev.getPointerId(0);
     }
 
     protected void invalidateViews() {
