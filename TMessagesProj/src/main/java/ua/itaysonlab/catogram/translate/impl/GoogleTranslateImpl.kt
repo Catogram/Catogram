@@ -43,8 +43,5 @@ class GoogleTranslateImpl  {
             val response = OkHttpClient().newCall(request).execute()
             return JSONObject(response.body()!!.string()).getJSONArray("sentences").getJSONObject(0).getString("trans")
         }
-        fun aTranslateText(txt: String, e: Boolean): String {
-
-        }
     }
 }
