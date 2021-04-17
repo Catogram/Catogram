@@ -32,7 +32,7 @@ class GoogleTranslateImpl  {
                                                     LocaleController.getString("LanguageCode", R.string.LanguageCode))
                     .addQueryParameter("dt", "t")
                     .addQueryParameter("dj", "1")
-                    .addQueryParameter("q", URLEncoder.encode(txt, "UTF-8"))
+                    .addQueryParameter("q", txt)
                     .build()
 
             val request: Request = Request.Builder()
