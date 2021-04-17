@@ -12,8 +12,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.v5_translation_markup.view.*
 import org.telegram.messenger.*
 import org.telegram.ui.ActionBar.Theme
+import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl
 
-class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.TranslationImpl): BottomSheetDialogFragment() {
+class TranslationSheetFragment(val obj: MessageObject): BottomSheetDialogFragment() {
     private lateinit var vview: View
     private val txt by lazy {
         return@lazy if (obj.caption != null) obj.caption.toString() else obj.messageText.toString()
@@ -31,11 +32,6 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
             vview = inflater.inflate(R.layout.v5_translation_markup, container, false)
             addView(vview)
         }
-    }
-
-    private fun getAutoIsoLang(): String {
-        val iso = LocaleController.getString("LanguageCode", R.string.LanguageCode)
-        return if (impl.clazz.supportedLanguages().contains(iso)) iso else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("pt_BR")) impl.clazz.supportedLanguages()[38] else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("zh_hans")) impl.clazz.supportedLanguages()[7] else if (LocaleController.getString("LanguageCode", R.string.LanguageCode).contains("zh_hant")) impl.clazz.supportedLanguages()[7] else impl.clazz.supportedLanguages()[0]
     }
 
     @SuppressLint("SetTextI18n")
@@ -85,19 +81,13 @@ class TranslationSheetFragment(val obj: MessageObject, val impl: TranslateAPI.Tr
 
         vview.orig.setTextColor(blackText)
         vview.trsl.setTextColor(blackText)
+        vview.orig.text = txt
+        vview.trsl.text = GoogleTranslateImpl.translateText(txt, false)
+        vview.trsl_txt_lang.text = " • ${LocaleController.getString("LanguageCode", R.string.LanguageCode)}"
 
-        impl.clazz.detectLang(txt) { detectedLang ->
-            impl.clazz.translateText(txt, detectedLang, getAutoIsoLang()) { text ->
-                vview.orig.text = txt
-                vview.trsl.text = text
-                
-                vview.orig_txt_lang.text = " • $detectedLang"
-                vview.trsl_txt_lang.text = " • ${getAutoIsoLang()}"
+        vview.mk_ct.visibility = View.VISIBLE
+        vview.mk_ld.visibility = View.INVISIBLE
+        vview.copyText.visibility = View.VISIBLE
 
-                vview.mk_ct.visibility = View.VISIBLE
-                vview.mk_ld.visibility = View.INVISIBLE
-                vview.copyText.visibility = View.VISIBLE
-            }
-        }
     }
 }

@@ -10,6 +10,7 @@ import ua.itaysonlab.extras.doAsync
 import ua.itaysonlab.extras.uiThread
 import java.net.URL
 import java.net.URLEncoder
+import java.util.*
 
 abstract class AnotherYandexTranslateImpl: BaseTranslationImpl() {
 
@@ -30,7 +31,7 @@ abstract class AnotherYandexTranslateImpl: BaseTranslationImpl() {
 
         fun translateText(txt: String, lang: String, toLang: String, callback: (String) -> Unit) {
             doAsync {
-                val rst = JSONObject(URL("$API_TRANSLATE_BASEURL&text=${URLEncoder.encode(txt, "UTF-8")}&lang=$lang-$toLang").readText()).optJSONArray("text")!!.getString(0)
+                val rst = JSONObject(URL("$API_TRANSLATE_BASEURL&uuid=${UUID.randomUUID().toString().replace("-", "")}&text=${URLEncoder.encode(txt, "UTF-8")}&lang=$lang-$toLang").readText()).optJSONArray("text")!!.getString(0)
                 uiThread {
                     callback.invoke(rst)
                 }
