@@ -228,4 +228,5 @@
     <string name="CG_RecentStickers">Zeige vollständige Liste</string>
     <string name="CG_RecentStickers_desc">von zuletzt verwendeten Sticker an</string>
     <string name="CG_Without_Authorship">Without authorship</string>
+    <string name="CG_Private">This channel is private</string>
 </resources>

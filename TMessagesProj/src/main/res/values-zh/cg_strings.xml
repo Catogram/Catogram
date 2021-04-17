@@ -221,11 +221,12 @@
     <string name="CG_FwdMenu_DisableNoForward">启用来源转发</string>
     <string name="CG_DND">请勿打扰</string>
     <string name="CG_DND_desc">将会禁用所有通知提示音，这对于需要安静环境且仍需要通知的情况下很有用</string>
-    <string name="CG_Silence">安稳寂静</string>
+    <string name="CG_Silence">完全沉默</string>
     <string name="CG_Silence_desc">启用则会关闭所有通知</string>
     <string name="CG_SilenceNonContacts">联系人通知</string>
     <string name="CG_SilenceNonContacts_desc">如果启用，应用将只会向您推送来自联系人的通知时发出通知音，您可以添加一些人到您的联系人列表（即使不向这些人显示电话号码），您可以在对方的用户资料中进行操作</string>
     <string name="CG_RecentStickers">显示完整列表</string>
     <string name="CG_RecentStickers_desc">显示最近发送的贴纸（完整）</string>
-    <string name="CG_Without_Authorship">Without authorship</string>
+    <string name="CG_Without_Authorship">无来源转发</string>
+    <string name="CG_Private">This channel is private</string>
 </resources>
