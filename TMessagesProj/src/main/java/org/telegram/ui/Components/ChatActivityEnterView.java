@@ -122,14 +122,12 @@ import org.telegram.ui.LaunchActivity;
 import org.telegram.ui.StickersActivity;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import ua.itaysonlab.CatogramLogger;
-import ua.itaysonlab.catogram.translate.impl.AnotherYandexTranslateImpl;
 import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl;
 
 
@@ -2895,9 +2893,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     } else if (num == 1) {
                         sendMessageInternal(false, 0);
                     } else if (num == 2) {
-
-                       messageEditText.setText(GoogleTranslateImpl.translateText(messageEditText.getText().toString(), true));
-
+                       GoogleTranslateImpl.translateEditText(messageEditText.getText().toString(), messageEditText);
                     }
                 });
             }
