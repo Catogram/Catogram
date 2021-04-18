@@ -21,7 +21,7 @@ class GoogleTranslateImpl  {
         @JvmStatic
         fun translateText(txt: String?, e: Boolean, callback: (String) -> Unit) {
             doAsync {
-                val tl = if (e) CatogramConfig.trLang else LocaleController.getString("LanguageCode", R.string.LanguageCode)
+                val tl = if (e) CatogramConfig.trLang else if (LocaleController.getString("LanguageCode", R.string.LanguageCode) == "zh_hans" || LocaleController.getString("LanguageCode", R.string.LanguageCode) == "zh_hant") "zh" else if (LocaleController.getString("LanguageCode", R.string.LanguageCode) == "pt_BR") "pt" else LocaleController.getString("LanguageCode", R.string.LanguageCode)
 
                 val request: Request = Request.Builder()
                         .url("$api_translate_url&tl=$tl&q=${URLEncoder.encode(txt, "UTF-8")}")
