@@ -215,9 +215,10 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
+    <string name="CG_FakeUserPhone">偽の電話番号</string>
+    <string name="CG_FakeUserPhoneSummary">ドロワーと設定に偽の電話番号を表示する
+(電話番号の非表示設定を無効にする必要があります）</string>
+    <string name="CG_FwdMenu_EnableNoForward">フォワードオーサーシップを無効にする</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
     <string name="CG_DND">Do not disturb</string>
     <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
