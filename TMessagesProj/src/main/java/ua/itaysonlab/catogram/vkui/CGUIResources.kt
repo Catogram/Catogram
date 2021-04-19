@@ -216,7 +216,7 @@ class CGUIResources(private val wrapped: Resources): Resources(wrapped.assets, w
     }
 
     override fun updateConfiguration(config: Configuration?, metrics: DisplayMetrics?) {
-        wrapped.updateConfiguration(config, metrics)
+        wrapped?.updateConfiguration(config, metrics)
     }
 
     override fun getDisplayMetrics(): DisplayMetrics? {
