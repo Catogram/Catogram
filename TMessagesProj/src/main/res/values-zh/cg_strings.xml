@@ -229,10 +229,12 @@
     <string name="CG_RecentStickers_desc">显示最近发送的贴纸（完整）</string>
     <string name="CG_Without_Authorship">无来源转发</string>
     <string name="CG_Private">这个频道是私有的</string>
-    <string name="CG_ForceClean">Force Clear Telegram Cache</string>
-    <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
-    <string name="CG_SwitchBackend">You\'re going to switch to the test server. Please don\'t press OK if you don\'t know what you\'re doing. You can switch to normal server by pressing \"Switch backend\" in debug menu again.</string>
-    <string name="CG_SB">Switch backend</string>
+    <string name="CG_ForceClean">强制清除 Telegram 缓存</string>
+    <string name="CG_ForceCleanInfo">此选项将帮助您解决卡住于 “计算中...” 的问题。\n这将会清除所有的缓存，请注意！</string>
+    <string name="CG_SwitchBackend">您即将要切换至测试服务器。
+如果您不知道此操作后果，请不要轻易进行操作。
+您可以通过再次点击在调试菜单中的 “切换后端“ 按钮来切换为默认服务后端。</string>
+    <string name="CG_SB">切换后端</string>
     <string name="CG_TrLang">Destination language</string>
-    <string name="CG_Tr">Translator</string>
+    <string name="CG_Tr">翻译</string>
 </resources>
