@@ -84,12 +84,11 @@ class TranslationSheetFragment(val obj: MessageObject): BottomSheetDialogFragmen
         vview.orig.text = txt
         GoogleTranslateImpl.translateText(txt, false) { text ->
             vview.trsl.text = text
-        }
             vview.trsl_txt_lang.text = " • ${LocaleController.getString("LanguageCode", R.string.LanguageCode)}"
 
             vview.mk_ct.visibility = View.VISIBLE
             vview.mk_ld.visibility = View.INVISIBLE
             vview.copyText.visibility = View.VISIBLE
-
+        }
         }
 }
