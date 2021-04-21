@@ -231,7 +231,7 @@
     <string name="CG_RecentStickers_desc">للملصقات</string>
     <string name="CG_Without_Authorship">توجيه من غير اسم</string>
     <string name="CG_Private">هذه القناة خاصة</string>
-    <string name="CG_ForceClean">Force Clear Telegram Cache</string>
+    <string name="CG_ForceClean">فرض مسح ذاكرة التخزين المؤقتة </string>
     <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
     <string name="CG_SwitchBackend">You\'re going to switch to the test server. Please don\'t press OK if you don\'t know what you\'re doing. You can switch to normal server by pressing \"Switch backend\" in debug menu again.</string>
     <string name="CG_SB">Switch backend</string>
