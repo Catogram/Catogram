@@ -100,4 +100,3 @@
 -renamesourcefileattribute
 -repackageclasses
 -allowaccessmodification
--flattenpackagehierarchy
