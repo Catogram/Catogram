@@ -2,38 +2,23 @@ package ua.itaysonlab.catogram;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.PorterDuff;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.RemoteViews;
 import android.widget.ScrollView;
-
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.ActionBarMenuSubItem;
 import org.telegram.ui.ActionBar.ActionBarPopupWindow;
 import org.telegram.ui.Components.LayoutHelper;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class CGFeatureJavaHooks {
-    @SuppressLint("SoonBlockedPrivateApi")
-    public static void setColorFilterToRemoteView(RemoteViews rv, int id, int color) {
-        try {
-             Method m = RemoteViews.class.getDeclaredMethod("setDrawableTint", int.class, boolean.class, int.class, PorterDuff.Mode.class);
-             m.invoke(rv, id, true, color, PorterDuff.Mode.MULTIPLY);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static class PopupItem {
         public String text;
         public int icon;

@@ -21,12 +21,6 @@ object CGFeatureHooks {
     }
 
     @JvmStatic
-    fun colorWidgetBackground(rv: RemoteViews, id: Int) {
-        // Man, I love relection!
-        CGFeatureJavaHooks.setColorFilterToRemoteView(rv, id, Theme.getColor(Theme.key_windowBackgroundWhite))
-    }
-
-    @JvmStatic
     fun switchNoAuthor(b: Boolean) {
         // ...
         CatogramConfig.legacyNoAuthorship = b

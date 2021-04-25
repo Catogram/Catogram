@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 repositories {
     mavenCentral()
@@ -21,13 +20,13 @@ configurations.all {
 }
 
 dependencies {
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3-native-mt'
 
-    implementation 'androidx.core:core-ktx:1.6.0-alpha01'
-    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'androidx.core:core-ktx:1.6.0-alpha02'
+    implementation 'androidx.palette:palette-ktx:1.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.biometric:biometric:1.1.0'
@@ -62,6 +61,10 @@ dependencies {
 android {
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     compileSdkVersion 30

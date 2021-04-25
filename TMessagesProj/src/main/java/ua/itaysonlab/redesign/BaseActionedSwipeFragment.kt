@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
-import kotlinx.android.synthetic.main.v5_slide_item.view.*
-import org.telegram.messenger.R
+import org.telegram.messenger.databinding.V5SlideItemBinding
 import org.telegram.ui.ActionBar.Theme
 
 abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
@@ -25,24 +24,25 @@ abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
 
     private fun getActionsView(ctx: Context): View {
         return LinearLayout(ctx).apply {
+            val inflater = LayoutInflater.from(ctx)
             orientation = LinearLayout.VERTICAL
 
             getActions().forEach { action ->
-                addView(LayoutInflater.from(ctx).inflate(R.layout.v5_slide_item, this, false).apply {
+                addView(V5SlideItemBinding.inflate(inflater, this, false).apply {
                     if (action.icon == -1) {
-                        this.action_iv.visibility = View.GONE
+                        actionIv.visibility = View.GONE
                     } else {
-                        this.action_iv.setImageResource(action.icon)
-                        if (needToTint) this.action_iv.imageTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+                        actionIv.setImageResource(action.icon)
+                        if (needToTint) actionIv.imageTintList = ColorStateList.valueOf(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
                     }
 
-                    this.action_tv.text = action.title
-                    this.action_tv.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
-                    this.setOnClickListener {
+                    actionTv.text = action.title
+                    actionTv.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+                    root.setOnClickListener {
                         processActionClick(action.id)
                         dismiss()
                     }
-                })
+                }.root)
             }
         }
     }

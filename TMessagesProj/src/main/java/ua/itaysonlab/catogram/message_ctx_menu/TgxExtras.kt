@@ -43,11 +43,6 @@ object TgxExtras {
     }
 
     @JvmStatic
-    fun convertAndSend(accountInstance: AccountInstance, path: Uri, dialog_id: Long, replyingMessageObject: MessageObject?, inputContentInfo: InputContentInfoCompat, notify: Boolean) {
-        
-    }
-
-    @JvmStatic
     fun createForwardTimeName(obj: MessageObject, orig: CharSequence): String {
         if (!CatogramConfig.msgForwardDate) return orig.toString()
         //return orig.toString()
