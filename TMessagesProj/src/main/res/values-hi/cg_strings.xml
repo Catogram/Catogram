@@ -242,4 +242,6 @@
     <string name="CG_Not_Found">Not found</string>
     <string name="CG_Found">Update found</string>
     <string name="CG_Download">Download</string>
+    <string name="CG_HqVoice">HQ Voice messages</string>
+    <string name="CG_HqVoice_desc">Increases quality of voice messages for the price of their size</string>
 </resources>
