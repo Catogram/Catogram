@@ -22,8 +22,8 @@ configurations.all {
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-RC-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0-RC-native-mt'
 
     implementation 'androidx.core:core-ktx:1.6.0-alpha02'
     implementation 'androidx.palette:palette-ktx:1.0.0'
@@ -44,12 +44,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:20.0.4'
     implementation 'com.google.firebase:firebase-datatransport:17.0.11'
     implementation 'com.google.firebase:firebase-appindexing:19.2.0'
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.play:core:1.10.0'
 
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-vision:20.1.3'
-    implementation 'com.google.android.gms:play-services-wearable:17.0.0'
+    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.googlecode.mp4parser:isoparser:1.0.6'
     implementation 'com.facebook.rebound:rebound:0.3.8'
