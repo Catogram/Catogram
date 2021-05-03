@@ -235,4 +235,11 @@
     <string name="CG_SB">Cambia backend</string>
     <string name="CG_TrLang">Lingua di destinazione</string>
     <string name="CG_Tr">Traduttore</string>
+    <string name="CG_Updates_Category">Updates</string>
+    <string name="CG_Auto_Ota">Automatically check for updates</string>
+    <string name="CG_Auto_Ota_summary">on app launch</string>
+    <string name="CG_Ota">Search for update</string>
+    <string name="CG_Not_Found">Not found</string>
+    <string name="CG_Found">Update found</string>
+    <string name="CG_Download">Download</string>
 </resources>
