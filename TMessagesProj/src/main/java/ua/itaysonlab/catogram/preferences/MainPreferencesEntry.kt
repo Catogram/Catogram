@@ -54,6 +54,13 @@ class MainPreferencesEntry : BasePreferencesEntry {
                     it.presentFragment(CatogramPreferencesNavigator.createSecurity())
                 }
             }
+            textIcon {
+                title = LocaleController.getString("CG_Updates_Category", R.string.CG_Updates_Category)
+                icon = R.drawable.outline_send
+                listener = TGKitTextIconRow.TGTIListener {
+                    it.presentFragment(CatogramPreferencesNavigator.createUpdates())
+                }
+            }
 
             category(LocaleController.getString("AS_Header_About", R.string.AS_Header_About)) {
                 textDetail {

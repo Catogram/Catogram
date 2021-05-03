@@ -231,4 +231,11 @@
     <string name="CG_Private">Это приватный канал</string>
     <string name="CG_TrLang">Язык назначения</string>
     <string name="CG_Tr">Переводчик</string>
+    <string name="CG_Updates_Category">Обновления</string>
+    <string name="CG_Auto_Ota">Автоматически искать обновления</string>
+    <string name="CG_Auto_Ota_summary">при запуске приложения</string>
+    <string name="CG_Ota">Найти обновление</string>
+    <string name="CG_Not_Found">Не найдено</string>
+    <string name="CG_Found">Обновление найдено</string>
+    <string name="CG_Download">Загрузить</string>
 </resources>

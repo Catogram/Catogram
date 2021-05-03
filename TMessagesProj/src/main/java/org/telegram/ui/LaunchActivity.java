@@ -152,6 +152,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.OTA;
 import ua.itaysonlab.catogram.vkui.CGUIResources;
 import ua.itaysonlab.redesign.BottomSlideFragment;
 
@@ -323,6 +325,8 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         bp = new BillingProcessor(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAykhjtU7qzFYv4UI8U9uGJITqLTgpvH1SYaMVeMb0EFVABISnKDOWw6eb6LgCU9V+fPOw5TJz/RQ+OrMGuK6DcxZPOxOPRxi0zUAQbP7jiTsYEkUM22gixzKNMI93QgVOxakAl7+c51QMICVLAGFtYZVh+xZ+hX11L+JeSByK8tyPplBliYHOHFsALs3yB9SICZHj18d0hmGjDRcirxr0DMBAaX623EhDzwm/RsL6crK7dPHVWxye4ovYxFMdsx9yi9EAziVx3CCWMN8p9CrVBRDU6pyJ2BLG0a7iGYYVP4JWyFdqrZtzSJWdD8g4rEunsivfH8sl3ICaHO7hnmJaQwIDAQAB", this);
         bp.initialize();
         //PlayOTA.init(this);
+        if (CatogramConfig.INSTANCE.getAutoOta())
+            OTA.download(this);
 
         if (Build.VERSION.SDK_INT >= 24) {
             AndroidUtilities.isInMultiwindow = isInMultiWindowMode();

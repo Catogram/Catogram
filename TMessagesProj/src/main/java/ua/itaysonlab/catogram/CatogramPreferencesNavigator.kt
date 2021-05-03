@@ -12,4 +12,5 @@ object CatogramPreferencesNavigator {
     fun createSecurity() = TGKitSettingsFragment(SecurityPreferencesEntry())
 
     fun createDB() = TGKitSettingsFragment(DoubleBottomPreferencesEntry())
+    fun createUpdates() = TGKitSettingsFragment(UpdatesPreferenceEntry())
 }

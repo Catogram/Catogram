@@ -91,6 +91,8 @@ object CatogramConfig {
     var totalSilence by sharedPreferences.boolean("cg_silence", false)
     var silenceNonContacts by sharedPreferences.boolean("cg_silence_non_contacts", false)
 
+    var autoOta by sharedPreferences.boolean("cg_auto_ota", true)
+
     var ghostMode = false
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 
