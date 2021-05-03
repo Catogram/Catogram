@@ -225,11 +225,11 @@
     <string name="CG_Silence_desc">Вимикає усі сповіщення</string>
     <string name="CG_SilenceNonContacts">Тиша від відсутніх у контактах</string>
     <string name="CG_SilenceNonContacts_desc">Якщо увімкнено, сповіщення зі звуком надходитимуть лише від ваших контактів. Ви можете додати людину до контактів навіть без номера телефону, зробіть це у її профілі</string>
-    <string name="CG_RecentStickers">Показывать полный список</string>
+    <string name="CG_RecentStickers">Показувати повний список</string>
     <string name="CG_RecentStickers_desc">з недавніх стікерів</string>
     <string name="CG_Without_Authorship">Без авторства</string>
     <string name="CG_Private">Це приватний канал</string>
-    <string name="CG_ForceClean">Примусова очистка кешу Телеграм</string>
+    <string name="CG_ForceClean">Примусове очищення кешу Telegram</string>
     <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
     <string name="CG_SwitchBackend">You\'re going to switch to the test server. Please don\'t press OK if you don\'t know what you\'re doing. You can switch to normal server by pressing \"Switch backend\" in debug menu again.</string>
     <string name="CG_SB">Switch backend</string>
