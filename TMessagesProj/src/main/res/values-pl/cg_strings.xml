@@ -235,4 +235,11 @@
     <string name="CG_SB">Przełącz zaplecze</string>
     <string name="CG_TrLang">Język docelowy</string>
     <string name="CG_Tr">Tłumacz</string>
+    <string name="CG_Updates_Category">Updates</string>
+    <string name="CG_Auto_Ota">Automatically check for updates</string>
+    <string name="CG_Auto_Ota_summary">on app launch</string>
+    <string name="CG_Ota">Search for update</string>
+    <string name="CG_Not_Found">Not found</string>
+    <string name="CG_Found">Update found</string>
+    <string name="CG_Download">Download</string>
 </resources>
