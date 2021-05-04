@@ -244,6 +244,8 @@
     <string name="CG_Not_Found">当前已是最新版本</string>
     <string name="CG_Found">有新版本可供下载</string>
     <string name="CG_Download">下载</string>
-    <string name="CG_HqVoice">高清语音消息</string>
-    <string name="CG_HqVoice_desc">让语音消息的最质量更高，但这会占用更多空间</string>
+    <string name="CG_PrivateDir">Private directory of cache</string>
+    <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
+    <string name="CG_RemovedS">Removed successfully</string>
+    <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
 </resources>
