@@ -62,7 +62,7 @@ object OTA: CoroutineScope by MainScope() {
     }
 
     @JvmStatic
-    fun download(context: Context) {
+    fun download(context: Context, b: Boolean) {
         checkBS(context) { needDownload ->
             if (needDownload) {
                 val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
@@ -73,7 +73,7 @@ object OTA: CoroutineScope by MainScope() {
                         }
                 builder.show()
             }
-            else Toast.makeText(context, LocaleController.getString("CG_Not_Found", R.string.CG_Not_Found), Toast.LENGTH_SHORT).show()
+            else if (b) Toast.makeText(context, LocaleController.getString("CG_Not_Found", R.string.CG_Not_Found), Toast.LENGTH_SHORT).show()
         }
     }
 

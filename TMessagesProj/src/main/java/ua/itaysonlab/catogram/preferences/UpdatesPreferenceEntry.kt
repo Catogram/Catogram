@@ -23,7 +23,7 @@ class UpdatesPreferenceEntry : BasePreferencesEntry {
             }
             textIcon {
                 title = LocaleController.getString("CG_Ota", R.string.CG_Ota)
-                listener = TGKitTextIconRow.TGTIListener { OTA.download(bf.parentActivity) }
+                listener = TGKitTextIconRow.TGTIListener { OTA.download(bf.parentActivity, true) }
             }
         }
     }

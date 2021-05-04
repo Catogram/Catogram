@@ -326,7 +326,7 @@ public class LaunchActivity extends AppCompatActivity implements BillingProcesso
         bp.initialize();
         //PlayOTA.init(this);
         if (CatogramConfig.INSTANCE.getAutoOta())
-            OTA.download(this);
+            OTA.download(this, false);
 
         if (Build.VERSION.SDK_INT >= 24) {
             AndroidUtilities.isInMultiwindow = isInMultiWindowMode();
