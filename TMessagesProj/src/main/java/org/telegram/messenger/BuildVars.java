@@ -18,8 +18,8 @@ public class BuildVars {
     public static boolean LOGS_ENABLED = false;
     public static boolean USE_CLOUD_STRINGS = true;
     public static boolean CHECK_UPDATES = false;
-    public static int APP_ID = CATOGRAM_APP_ID;
-    public static String APP_HASH = "CATOGRAM_API_HASH";
+    public static int APP_ID = BuildConfig.APP_ID;
+    public static String APP_HASH = BuildConfig.API_HASH;
     public static boolean TON_WALLET_STANDALONE = false;
     public static int BUILD_VERSION = 2293;
     public static String BUILD_VERSION_STRING = "7.7.2";

@@ -105,6 +105,11 @@ android {
         coreLibraryDesugaringEnabled true
     }
 
+    def propFile = new File('local.properties')
+
+    def Properties props = new Properties()
+    props.load(new FileInputStream(propFile))
+
     signingConfigs {
         debug {
             storeFile file("config/release.keystore")
@@ -115,9 +120,9 @@ android {
 
         release {
             storeFile file("config/release.keystore")
-            storePassword System.getenv('STORE_PASS')
-            keyAlias System.getenv('KEY_ALIAS')
-            keyPassword System.getenv('KEY_PASS')
+            storePassword props['RELEASE_STORE_PASSWORD']
+            keyAlias props['RELEASE_KEY_ALIAS']
+            keyPassword props['RELEASE_KEY_PASSWORD']
         }
     }
 
@@ -355,6 +360,9 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionName "7.7.2"
+
+        buildConfigField "int", "APP_ID", props['APP_ID']
+        buildConfigField "String", "API_HASH", props['API_HASH']
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
 
