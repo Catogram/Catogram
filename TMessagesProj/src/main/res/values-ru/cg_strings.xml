@@ -238,4 +238,8 @@
     <string name="CG_Not_Found">Не найдено</string>
     <string name="CG_Found">Обновление найдено</string>
     <string name="CG_Download">Загрузить</string>
+    <string name="CG_PrivateDir">Приватное хранилище кэша</string>
+    <string name="CG_PrivateDir_desc">"кэш будет сохранен в приватную директорию приложения. вы, или кто-либо другой, не сможете получить доступ к хранилищу без root"</string>
+    <string name="CG_RemovedS">Удалено успешно</string>
+    <string name="CG_CleanOld">Удалить старый кэш (/sdcard/Telegram)</string>
 </resources>
