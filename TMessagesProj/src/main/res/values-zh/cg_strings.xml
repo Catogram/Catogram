@@ -235,15 +235,15 @@
 如果您不知道此操作后果，请不要轻易进行操作。
 您可以通过再次点击在调试菜单中的 “切换后端“ 按钮来切换为默认服务后端。</string>
     <string name="CG_SB">切换后端</string>
-    <string name="CG_TrLang">Destination language</string>
+    <string name="CG_TrLang">选择 输入消息时 所需要译成的语言</string>
     <string name="CG_Tr">翻译</string>
-    <string name="CG_Updates_Category">Updates</string>
+    <string name="CG_Updates_Category">更新中心</string>
     <string name="CG_Auto_Ota">自动检查应用更新</string>
-    <string name="CG_Auto_Ota_summary">on app launch</string>
-    <string name="CG_Ota">Search for update</string>
-    <string name="CG_Not_Found">Not found</string>
-    <string name="CG_Found">Update found</string>
-    <string name="CG_Download">Download</string>
-    <string name="CG_HqVoice">HQ Voice messages</string>
-    <string name="CG_HqVoice_desc">Increases quality of voice messages for the price of their size</string>
+    <string name="CG_Auto_Ota_summary">在应用启动时，自行检查是否有更新版本</string>
+    <string name="CG_Ota">检查更新</string>
+    <string name="CG_Not_Found">当前已是最新版本</string>
+    <string name="CG_Found">有新版本可供下载</string>
+    <string name="CG_Download">下载</string>
+    <string name="CG_HqVoice">高清语音消息</string>
+    <string name="CG_HqVoice_desc">让语音消息的最质量更高，但这会占用更多空间</string>
 </resources>
