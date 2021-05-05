@@ -20,14 +20,14 @@ fun TGKitPreferences.textDetail(block: TGKitTextDetailRow.() -> Unit) = add(TGKi
 fun TGKitPreferences.hint(text: String) = add(TGKitTextHintRow().also { it.title = text })
 
 fun TGKitSwitchPreference.contract(getValue: () -> Boolean, setValue: (Boolean) -> Unit) {
-    contract = object: TGKitSwitchPreference.TGSPContract {
+    contract = object : TGKitSwitchPreference.TGSPContract {
         override fun getPreferenceValue() = getValue()
         override fun toggleValue() = setValue(!getValue())
     }
 }
 
 fun TGKitListPreference.contract(getOptions: () -> List<Pair<Int, String>>, getValue: () -> String, setValue: (Int) -> Unit) {
-    contract = object: TGKitListPreference.TGTLContract {
+    contract = object : TGKitListPreference.TGTLContract {
         override fun setValue(id: Int) {
             setValue(id)
         }
@@ -51,7 +51,7 @@ fun TGKitListPreference.contract(getOptions: () -> List<Pair<Int, String>>, getV
 }
 
 fun TGKitListPreference.contractIcons(getOptions: () -> List<Triple<Int, String, Int>>, getValue: () -> String, setValue: (Int) -> Unit) {
-    contract = object: TGKitListPreference.TGTLContract {
+    contract = object : TGKitListPreference.TGTLContract {
         override fun setValue(id: Int) {
             setValue(id)
         }

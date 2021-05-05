@@ -6,10 +6,10 @@ import org.telegram.messenger.ApplicationLoader
 import org.telegram.messenger.BuildConfig
 
 object IconExtras {
-    enum class Icon (val mf: String) {
-            OLD("CG_Icon_Old"),
-            ALT_BLUE("CG_Icon_Alt_Blue"),
-            ALT_ORANGE("CG_Icon_Alt_Orange")
+    enum class Icon(val mf: String) {
+        OLD("CG_Icon_Old"),
+        ALT_BLUE("CG_Icon_Alt_Blue"),
+        ALT_ORANGE("CG_Icon_Alt_Orange")
     }
 
     fun setIcon(variant: Int) {

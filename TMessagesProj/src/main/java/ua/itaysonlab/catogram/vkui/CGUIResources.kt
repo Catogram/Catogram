@@ -19,12 +19,12 @@ import java.io.IOException
 import java.io.InputStream
 
 @Suppress("DEPRECATION")
-class CGUIResources(private val wrapped: Resources): Resources(wrapped.assets, wrapped.displayMetrics, wrapped.configuration) {
+class CGUIResources(private val wrapped: Resources) : Resources(wrapped.assets, wrapped.displayMetrics, wrapped.configuration) {
     var activeReplacement: BaseIconReplace = CatogramConfig.getIconReplacement()
     fun reloadReplacements() {
         activeReplacement = CatogramConfig.getIconReplacement()
     }
-    
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Throws(NotFoundException::class)
     override fun getDrawable(id: Int): Drawable? {
@@ -216,7 +216,7 @@ class CGUIResources(private val wrapped: Resources): Resources(wrapped.assets, w
     }
 
     override fun updateConfiguration(config: Configuration?, metrics: DisplayMetrics?) {
-        wrapped?.updateConfiguration(config, metrics)
+        wrapped.updateConfiguration(config, metrics)
     }
 
     override fun getDisplayMetrics(): DisplayMetrics? {

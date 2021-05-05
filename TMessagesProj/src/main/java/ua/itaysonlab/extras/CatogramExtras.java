@@ -32,6 +32,10 @@ import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
     public static String CG_VERSION = "3.7.5";
+    public static BitmapDrawable currentAccountBitmap;
+    // 80 in official
+    public static int LOAD_AVATAR_COUNT_HEADER = 100;
+    public static int LOAD_AVATAR_COUNT = 100;
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -39,20 +43,23 @@ public class CatogramExtras {
     }
 
     public static int px2dip(Context context, float pxValue) {
-        final float scale =  context.getResources().getDisplayMetrics().density;
+        final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
     public static void setSecureFlag(Window window) {
-        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag()) window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag())
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     public static void setSecureFlag(WindowManager.LayoutParams window) {
-        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag()) window.flags |= WindowManager.LayoutParams.FLAG_SECURE;
+        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag())
+            window.flags |= WindowManager.LayoutParams.FLAG_SECURE;
     }
 
     public static void clearSecureFlag(Window window) {
-        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag()) window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        if (!CatogramConfig.INSTANCE.getControversiveNoSecureFlag())
+            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     public static void vibrate(Vibrator vibrator, int ms) {
@@ -91,7 +98,8 @@ public class CatogramExtras {
         return CatogramFontLoader.getMono();
     }
 
-    @ColorInt public static int getLightStatusbarColor() {
+    @ColorInt
+    public static int getLightStatusbarColor() {
         if (SharedConfig.noStatusBar) {
             return 0x00000000;
         } else {
@@ -99,7 +107,8 @@ public class CatogramExtras {
         }
     }
 
-    @ColorInt public static int getDarkStatusbarColor() {
+    @ColorInt
+    public static int getDarkStatusbarColor() {
         if (SharedConfig.noStatusBar) {
             return 0x00000000;
         } else {
@@ -112,7 +121,7 @@ public class CatogramExtras {
             try {
                 final File photo = FileLoader.getPathToAttach(user.photo.photo_big, true);
                 byte[] photoData = new byte[(int) photo.length()];
-                
+
                 FileInputStream photoIn;
                 photoIn = new FileInputStream(photo);
                 new DataInputStream(photoIn).readFully(photoData);
@@ -148,10 +157,4 @@ public class CatogramExtras {
             return base;
         }
     }
-
-    public static BitmapDrawable currentAccountBitmap;
-
-    // 80 in official
-    public static int LOAD_AVATAR_COUNT_HEADER = 100;
-    public static int LOAD_AVATAR_COUNT = 100;
 }

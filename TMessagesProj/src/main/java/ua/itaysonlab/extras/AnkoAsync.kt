@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+
 package ua.itaysonlab.extras
 
 import android.app.Activity
@@ -62,14 +63,14 @@ fun <T> AnkoAsyncContext<T>.uiThread(f: (T) -> Unit): Boolean {
  * The receiver [Activity] will be passed to [f].
  *  If it is not exist anymore or if it was finished, [f] will not be called.
  */
-fun <T: Activity> AnkoAsyncContext<T>.activityUiThread(f: (T) -> Unit): Boolean {
+fun <T : Activity> AnkoAsyncContext<T>.activityUiThread(f: (T) -> Unit): Boolean {
     val activity = weakRef.get() ?: return false
     if (activity.isFinishing) return false
     activity.runOnUiThread { f(activity) }
     return true
 }
 
-fun <T: Activity> AnkoAsyncContext<T>.activityUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
+fun <T : Activity> AnkoAsyncContext<T>.activityUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
     val activity = weakRef.get() ?: return false
     if (activity.isFinishing) return false
     activity.runOnUiThread { activity.f(activity) }
@@ -77,7 +78,7 @@ fun <T: Activity> AnkoAsyncContext<T>.activityUiThreadWithContext(f: Context.(T)
 }
 
 @Deprecated(message = "Use support library fragments instead. Framework fragments were deprecated in API 28.")
-fun <T: Fragment> AnkoAsyncContext<T>.fragmentUiThread(f: (T) -> Unit): Boolean {
+fun <T : Fragment> AnkoAsyncContext<T>.fragmentUiThread(f: (T) -> Unit): Boolean {
     val fragment = weakRef.get() ?: return false
     if (fragment.isDetached) return false
     val activity = fragment.activity ?: return false
@@ -86,14 +87,16 @@ fun <T: Fragment> AnkoAsyncContext<T>.fragmentUiThread(f: (T) -> Unit): Boolean 
 }
 
 @Deprecated(message = "Use support library fragments instead. Framework fragments were deprecated in API 28.")
-fun <T: Fragment> AnkoAsyncContext<T>.fragmentUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
+fun <T : Fragment> AnkoAsyncContext<T>.fragmentUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
     val fragment = weakRef.get() ?: return false
     if (fragment.isDetached) return false
     val activity = fragment.activity ?: return false
     activity.runOnUiThread { activity.f(fragment) }
     return true
 }
-private val crashLogger = { throwable : Throwable -> throwable.printStackTrace() }
+
+private val crashLogger = { throwable: Throwable -> throwable.printStackTrace() }
+
 /**
  * Execute [task] asynchronously.
  *
@@ -103,7 +106,7 @@ private val crashLogger = { throwable : Throwable -> throwable.printStackTrace()
  */
 fun <T> T.doAsync(
         exceptionHandler: ((Throwable) -> Unit)? = crashLogger,
-        task: AnkoAsyncContext<T>.() -> Unit
+        task: AnkoAsyncContext<T>.() -> Unit,
 ): Future<Unit> {
     val context = AnkoAsyncContext(WeakReference(this))
     return BackgroundExecutor.submit {
@@ -123,7 +126,7 @@ fun <T> T.doAsync(
 fun <T> T.doAsync(
         exceptionHandler: ((Throwable) -> Unit)? = crashLogger,
         executorService: ExecutorService,
-        task: AnkoAsyncContext<T>.() -> Unit
+        task: AnkoAsyncContext<T>.() -> Unit,
 ): Future<Unit> {
     val context = AnkoAsyncContext(WeakReference(this))
     return executorService.submit<Unit> {
@@ -137,7 +140,7 @@ fun <T> T.doAsync(
 
 fun <T, R> T.doAsyncResult(
         exceptionHandler: ((Throwable) -> Unit)? = crashLogger,
-        task: AnkoAsyncContext<T>.() -> R
+        task: AnkoAsyncContext<T>.() -> R,
 ): Future<R> {
     val context = AnkoAsyncContext(WeakReference(this))
     return BackgroundExecutor.submit {
@@ -153,7 +156,7 @@ fun <T, R> T.doAsyncResult(
 fun <T, R> T.doAsyncResult(
         exceptionHandler: ((Throwable) -> Unit)? = crashLogger,
         executorService: ExecutorService,
-        task: AnkoAsyncContext<T>.() -> R
+        task: AnkoAsyncContext<T>.() -> R,
 ): Future<R> {
     val context = AnkoAsyncContext(WeakReference(this))
     return executorService.submit<R> {
@@ -168,7 +171,7 @@ fun <T, R> T.doAsyncResult(
 
 internal object BackgroundExecutor {
     var executor: ExecutorService =
-        Executors.newScheduledThreadPool(2 * Runtime.getRuntime().availableProcessors())
+            Executors.newScheduledThreadPool(2 * Runtime.getRuntime().availableProcessors())
 
     fun <T> submit(task: () -> T): Future<T> = executor.submit(task)
 

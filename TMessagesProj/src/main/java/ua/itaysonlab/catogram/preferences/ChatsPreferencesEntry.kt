@@ -79,7 +79,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.enableProximity = it
                 }
             }
-            
+
             switch {
                 title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
 
@@ -230,7 +230,7 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.newRepostUI = it
                 }
             }
-            
+
             switch {
                 title = LocaleController.getString("CG_archiveOnPull", R.string.CG_ArchiveOnPull)
                 summary = LocaleController.getString("CG_archiveOnPull_Desc", R.string.CG_ArchiveOnPull_Desc)

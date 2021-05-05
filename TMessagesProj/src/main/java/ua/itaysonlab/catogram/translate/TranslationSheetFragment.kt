@@ -55,9 +55,9 @@ class TranslationSheetFragment(val obj: MessageObject) : BottomSheetDialogFragme
         vview.copyText.setOnClickListener {
             AndroidUtilities.addToClipboard(vview.trsl.text.toString())
             Toast.makeText(
-                ApplicationLoader.applicationContext,
-                LocaleController.getString("TextCopied", R.string.TextCopied),
-                Toast.LENGTH_SHORT
+                    ApplicationLoader.applicationContext,
+                    LocaleController.getString("TextCopied", R.string.TextCopied),
+                    Toast.LENGTH_SHORT
             ).show()
             dismiss()
         }

@@ -4,7 +4,7 @@ import android.util.SparseIntArray
 import org.telegram.messenger.R
 import ua.itaysonlab.catogram.vkui.newSparseInt
 
-class VkIconReplace: BaseIconReplace() {
+class VkIconReplace : BaseIconReplace() {
     override val replaces: SparseIntArray = newSparseInt(
             // Settings - Main
             R.drawable.menu_settings to R.drawable.settings_outline_28,

@@ -22,18 +22,18 @@ object DoubleBottomStorageBridge {
     var hideAccountsInSwitcher by preferences.boolean("db_hide_accs", false)
 
     var storageInstance = DBCoreStorage(JSONObject(preferences.getString("db_data", "{}")!!))
-    set(value) {
-        field = value
-        preferences.edit().putString("db_data", value.asJson().toString()).apply()
-    }
+        set(value) {
+            field = value
+            preferences.edit().putString("db_data", value.asJson().toString()).apply()
+        }
 
     // Models
 
     data class DBCoreStorage(
-            val map: MutableMap<String, DBAccountData>
+            val map: MutableMap<String, DBAccountData>,
     ) {
         constructor(json: JSONObject) : this(
-            map = toMapTyped<JSONObject>(json).mapValues { DBAccountData(it.value) }.toMutableMap()
+                map = toMapTyped<JSONObject>(json).mapValues { DBAccountData(it.value) }.toMutableMap()
         )
 
         fun asJson(): JSONObject = toJson(map.mapValues { it.value.asJson() })
@@ -43,7 +43,7 @@ object DoubleBottomStorageBridge {
             val id: Int,
             val type: Int,
             val salt: String,
-            val hash: String
+            val hash: String,
     ) {
         constructor(json: JSONObject) : this(
                 id = json.getInt("id"),

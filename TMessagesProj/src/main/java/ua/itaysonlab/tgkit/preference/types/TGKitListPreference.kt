@@ -16,34 +16,34 @@ class TGKitListPreference : TGKitPreference() {
     }
 
     fun callActionHueta(bf: BaseFragment, pr: Activity, view: View, x: Float, y: Float, ti: TempInterface) {
-            var selected: Int = 0
-            val titleArray = mutableListOf<String>()
-            val idArray = mutableListOf<Int>()
+        var selected: Int = 0
+        val titleArray = mutableListOf<String>()
+        val idArray = mutableListOf<Int>()
 
-            if (contract!!.hasIcons()) {
-                contract!!.getOptionsIcons().forEachIndexed { index, triple ->
-                    titleArray.add(triple.second)
-                    idArray.add(triple.first)
+        if (contract!!.hasIcons()) {
+            contract!!.getOptionsIcons().forEachIndexed { index, triple ->
+                titleArray.add(triple.second)
+                idArray.add(triple.first)
 
-                    if (contract!!.getValue() == triple.second) selected = index
-                }
-            } else {
-                contract!!.getOptions().forEachIndexed { index, pair ->
-                    titleArray.add(pair.second)
-                    idArray.add(pair.first)
-
-                    if (contract!!.getValue() == pair.second) selected = index
-                }
+                if (contract!!.getValue() == triple.second) selected = index
             }
+        } else {
+            contract!!.getOptions().forEachIndexed { index, pair ->
+                titleArray.add(pair.second)
+                idArray.add(pair.first)
 
-            val d = AlertsCreator.createSingleChoiceDialog(pr, titleArray.toTypedArray(), title, selected) { di, sel ->
-                contract!!.setValue(idArray[sel])
-                ti.update()
+                if (contract!!.getValue() == pair.second) selected = index
             }
+        }
 
-            bf.visibleDialog = d
+        val d = AlertsCreator.createSingleChoiceDialog(pr, titleArray.toTypedArray(), title, selected) { di, sel ->
+            contract!!.setValue(idArray[sel])
+            ti.update()
+        }
 
-            d.show()
+        bf.visibleDialog = d
+
+        d.show()
     }
 
     interface TGTLContract {

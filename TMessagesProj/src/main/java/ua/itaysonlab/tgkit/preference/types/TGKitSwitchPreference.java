@@ -18,6 +18,7 @@ public class TGKitSwitchPreference extends TGKitPreference {
 
     public interface TGSPContract {
         boolean getPreferenceValue();
+
         void toggleValue();
     }
 }

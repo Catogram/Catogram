@@ -19,7 +19,9 @@ public class TGKitSliderPreference extends TGKitPreference {
         void setValue(int value);
 
         int getPreferenceValue();
+
         int getMin();
+
         int getMax();
     }
 }

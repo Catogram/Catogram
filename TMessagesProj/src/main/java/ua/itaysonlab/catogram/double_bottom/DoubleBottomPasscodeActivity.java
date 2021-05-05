@@ -48,17 +48,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class DoubleBottomPasscodeActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
+    private final static int done_button = 1;
+    private final static int pin_item = 2;
+    private final static int password_item = 3;
+    private final int type;
+    private final DBPAListener listener;
     private TextView titleTextView;
     private EditTextBoldCursor passwordEditText;
-
-    private final int type;
     private int currentPasswordType = SharedConfig.passcodeType;
     private int passcodeSetStep = 0;
     private String firstPassword;
 
-    private final static int done_button = 1;
-    private final static int pin_item = 2;
-    private final static int password_item = 3;
+    public DoubleBottomPasscodeActivity(int type, DBPAListener listener) {
+        super();
+        this.type = type;
+        this.listener = listener;
+    }
 
     public static String getHash(String passcode) {
         try {
@@ -72,18 +77,6 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
             FileLog.e(e);
             return null;
         }
-    }
-
-    interface DBPAListener {
-        void onPasscodeEntered(String passcodeHash, byte[] passcodeSalt, int type);
-    }
-
-    private final DBPAListener listener;
-
-    public DoubleBottomPasscodeActivity(int type, DBPAListener listener) {
-        super();
-        this.type = type;
-        this.listener = listener;
     }
 
     @Override
@@ -364,5 +357,9 @@ public class DoubleBottomPasscodeActivity extends BaseFragment implements Notifi
         themeDescriptions.add(new ThemeDescription(passwordEditText, ThemeDescription.FLAG_BACKGROUNDFILTER | ThemeDescription.FLAG_DRAWABLESELECTEDSTATE, null, null, null, null, Theme.key_windowBackgroundWhiteInputFieldActivated));
 
         return themeDescriptions;
+    }
+
+    interface DBPAListener {
+        void onPasscodeEntered(String passcodeHash, byte[] passcodeSalt, int type);
     }
 }

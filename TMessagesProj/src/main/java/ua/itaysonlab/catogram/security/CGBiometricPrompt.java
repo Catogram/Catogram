@@ -9,12 +9,6 @@ import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.R;
 
 public class CGBiometricPrompt {
-    public interface CGBiometricListener {
-        void onError(CharSequence msg);
-        void onFailed();
-        void onSuccess(BiometricPrompt.AuthenticationResult result);
-    }
-
     private static BiometricPrompt.PromptInfo createPromptInfo() {
         return new BiometricPrompt.PromptInfo.Builder()
                 .setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName))
@@ -44,5 +38,13 @@ public class CGBiometricPrompt {
                 listener.onFailed();
             }
         }).authenticate(createPromptInfo());
+    }
+
+    public interface CGBiometricListener {
+        void onError(CharSequence msg);
+
+        void onFailed();
+
+        void onSuccess(BiometricPrompt.AuthenticationResult result);
     }
 }

@@ -16,7 +16,7 @@ import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.extras.CatogramExtras
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment
 
-class DrawerSheetFragment: BaseActionedSwipeFragment() {
+class DrawerSheetFragment : BaseActionedSwipeFragment() {
     override fun getActions(): List<Action> {
         return mutableListOf<Action>().apply {
             add(Action("contacts", R.drawable.menu_contacts, LocaleController.getString("Contacts", R.string.Contacts)))
@@ -53,7 +53,7 @@ class DrawerSheetFragment: BaseActionedSwipeFragment() {
             }
         }
         dismiss()
-     }
+    }
 
     override fun getHeader(parent: ViewGroup, ctx: Context): View {
         val user = MessagesController.getInstance(UserConfig.selectedAccount).getUser(UserConfig.getInstance(UserConfig.selectedAccount).getClientUserId())

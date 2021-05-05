@@ -12,9 +12,9 @@ public class CatogramFontLoader {
     public static boolean needRedirect(String path) {
         return (
                 path.equals("fonts/rmedium.ttf")
-                || path.equals("fonts/rmediumitalic.ttf")
-                || path.equals("fonts/ritalic.ttf")
-                || path.equals("fonts/rmono.ttf")
+                        || path.equals("fonts/rmediumitalic.ttf")
+                        || path.equals("fonts/ritalic.ttf")
+                        || path.equals("fonts/rmono.ttf")
         );
     }
 

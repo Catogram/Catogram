@@ -74,7 +74,7 @@ object CGFeatureHooks {
             }
             2 -> {
                 // Share
-                cf.showDialog(object: ShareAlert(cf.parentActivity, arrayListOf(msg), null, isChannel, null, false) {
+                cf.showDialog(object : ShareAlert(cf.parentActivity, arrayListOf(msg), null, isChannel, null, false) {
                     override fun dismissInternal() {
                         super.dismissInternal()
                         AndroidUtilities.requestAdjustResize(cf.parentActivity, classGuid)

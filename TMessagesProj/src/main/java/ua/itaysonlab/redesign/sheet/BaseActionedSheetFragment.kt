@@ -14,7 +14,7 @@ import org.telegram.messenger.databinding.V5SlideItemBinding
 import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment
 
-abstract class BaseActionedSheetFragment: BottomSheetDialogFragment() {
+abstract class BaseActionedSheetFragment : BottomSheetDialogFragment() {
     var needToTint = true
 
     abstract fun getActions(): List<BaseActionedSwipeFragment.Action>
@@ -78,6 +78,6 @@ abstract class BaseActionedSheetFragment: BottomSheetDialogFragment() {
     data class Action(
             val id: String,
             @DrawableRes val icon: Int,
-            val title: String
+            val title: String,
     )
 }

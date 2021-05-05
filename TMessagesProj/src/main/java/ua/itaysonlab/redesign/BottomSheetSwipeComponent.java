@@ -22,42 +22,34 @@ import com.facebook.rebound.SpringListener;
 
 public class BottomSheetSwipeComponent extends FrameLayout {
     public final static SpringConfig SPRING_CONFIG = SpringConfig.fromOrigamiTensionAndFriction(95, 13);
-
-    /**
-     * Flag, that indicates if animation is in progress
-     */
-    private boolean animationInProgress;
-
-    /**
-     * Flag, that indicates if swipe is processing now
-     */
-    private boolean processingSwipeNow;
-
-    /**
-     * Flag, that indicates if swipe is disallowed now
-     */
-    private boolean swipeDisallowed;
-
-    /**
-     * Linked actionsheet
-     */
-    private BottomSlideFragment fragment;
-
-    /**
-     * Current swipe progress
-     */
-    private float currentProgress;
-
     /**
      * View touch slop
      */
     private final int touchSlop;
-
     /**
      * Reusable rects
      */
     private final Rect ignoreRect = new Rect();
-
+    /**
+     * Flag, that indicates if animation is in progress
+     */
+    private boolean animationInProgress;
+    /**
+     * Flag, that indicates if swipe is processing now
+     */
+    private boolean processingSwipeNow;
+    /**
+     * Flag, that indicates if swipe is disallowed now
+     */
+    private boolean swipeDisallowed;
+    /**
+     * Linked actionsheet
+     */
+    private BottomSlideFragment fragment;
+    /**
+     * Current swipe progress
+     */
+    private float currentProgress;
     /**
      * Current measured sheet height
      */
@@ -91,7 +83,7 @@ public class BottomSheetSwipeComponent extends FrameLayout {
                     int h = v.getMeasuredHeight();
                     if (h <= 0) {
                         Point p = new Point();
-                        ((WindowManager)v.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(p);
+                        ((WindowManager) v.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(p);
 
                         v.measure(MeasureSpec.makeMeasureSpec(p.x, MeasureSpec.AT_MOST), MeasureSpec.makeMeasureSpec(p.y, MeasureSpec.AT_MOST));
                         h = v.getMeasuredHeight();
@@ -136,6 +128,10 @@ public class BottomSheetSwipeComponent extends FrameLayout {
         }
     });
 
+    {
+        touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+    }
+
     public BottomSheetSwipeComponent(@NonNull Context context) {
         super(context);
     }
@@ -152,12 +148,9 @@ public class BottomSheetSwipeComponent extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    {
-        touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-    }
-
     /**
      * Sets current progress
+     *
      * @param currentProgress Currently progress
      */
     public void setCurrentProgress(float currentProgress) {
@@ -167,6 +160,7 @@ public class BottomSheetSwipeComponent extends FrameLayout {
 
     /**
      * Sets calculated sheet height
+     *
      * @param sheetHeight Calculated sheet height
      */
     public void setSheetHeight(int sheetHeight) {
@@ -184,6 +178,7 @@ public class BottomSheetSwipeComponent extends FrameLayout {
 
     /**
      * Sets new linked bottom fragment
+     *
      * @param fragment Bottom fragment
      */
     public void initWith(BottomSlideFragment fragment) {
@@ -230,13 +225,16 @@ public class BottomSheetSwipeComponent extends FrameLayout {
             }
 
             @Override
-            public void onSpringAtRest(Spring spring) {}
+            public void onSpringAtRest(Spring spring) {
+            }
 
             @Override
-            public void onSpringActivate(Spring spring) {}
+            public void onSpringActivate(Spring spring) {
+            }
 
             @Override
-            public void onSpringEndStateChange(Spring spring) {}
+            public void onSpringEndStateChange(Spring spring) {
+            }
         });
         s.setCurrentValue(currentProgress, true);
         s.setEndValue(0);
@@ -280,7 +278,7 @@ public class BottomSheetSwipeComponent extends FrameLayout {
 
     /**
      * @param root - Root to check childs from
-     * @param e - Event to check
+     * @param e    - Event to check
      * @param rect - Reusable rect
      * @return If this view should be ignored on swipe
      */
@@ -307,7 +305,7 @@ public class BottomSheetSwipeComponent extends FrameLayout {
 
     private boolean isIgnoredView0(View v, MotionEvent e, Rect rect) {
         v.getGlobalVisibleRect(rect);
-        if (v.getVisibility() != View.VISIBLE || !rect.contains((int)e.getX(), (int)e.getY()))
+        if (v.getVisibility() != View.VISIBLE || !rect.contains((int) e.getX(), (int) e.getY()))
             return false;
 
         return v.canScrollVertically(-1);

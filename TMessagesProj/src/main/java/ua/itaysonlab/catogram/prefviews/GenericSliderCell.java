@@ -15,20 +15,11 @@ import org.telegram.ui.Components.SeekBarView;
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 
 public class GenericSliderCell extends FrameLayout {
-    private TGKitSliderPreference.TGSLContract contract;
     private final SeekBarView sizeBar;
-
+    private final TextPaint textPaint;
+    private TGKitSliderPreference.TGSLContract contract;
     private int startRadius;
     private int endRadius;
-
-    private final TextPaint textPaint;
-
-    public GenericSliderCell setContract(TGKitSliderPreference.TGSLContract contract) {
-        this.contract = contract;
-        this.startRadius = contract.getMin();
-        this.endRadius = contract.getMax();
-        return this;
-    }
 
     public GenericSliderCell(Context context) {
         super(context);
@@ -53,6 +44,13 @@ public class GenericSliderCell extends FrameLayout {
             }
         });
         addView(sizeBar, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 38, Gravity.START | Gravity.TOP, 5, 5, 39, 0));
+    }
+
+    public GenericSliderCell setContract(TGKitSliderPreference.TGSLContract contract) {
+        this.contract = contract;
+        this.startRadius = contract.getMin();
+        this.endRadius = contract.getMax();
+        return this;
     }
 
     @Override

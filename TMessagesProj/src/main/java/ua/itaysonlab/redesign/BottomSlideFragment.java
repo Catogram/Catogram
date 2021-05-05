@@ -29,22 +29,11 @@ public abstract class BottomSlideFragment {
     private final static int TOP_STATIC_PADDING = AndroidUtilities.dp(32);
 
     public static Handler uiHandler = new Handler(Looper.getMainLooper());
-
-    public static void postOnUiThread(Runnable r) {
-        uiHandler.post(r);
-    }
-
+    public SpringSystem springSystem;
     /**
      * Background view to animate
      */
     private View mBackgroundView;
-
-    public SpringSystem springSystem;
-
-    public Activity getActivity() {
-        return mSlideController.mActivity;
-    }
-
     private boolean disableLight;
     private BottomSheetSwipeComponent sheetComponent;
     private float mProgress;
@@ -61,7 +50,8 @@ public abstract class BottomSlideFragment {
         }
 
         @Override
-        public void onActivityStarted(@NonNull Activity activity) {}
+        public void onActivityStarted(@NonNull Activity activity) {
+        }
 
         @Override
         public void onActivityResumed(@NonNull Activity activity) {
@@ -74,10 +64,12 @@ public abstract class BottomSlideFragment {
         }
 
         @Override
-        public void onActivityStopped(@NonNull Activity activity) {}
+        public void onActivityStopped(@NonNull Activity activity) {
+        }
 
         @Override
-        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {}
+        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+        }
 
         @Override
         public void onActivityDestroyed(@NonNull Activity activity) {
@@ -85,6 +77,14 @@ public abstract class BottomSlideFragment {
             if (dismissed) activity.getApplication().unregisterActivityLifecycleCallbacks(this);
         }
     };
+
+    public static void postOnUiThread(Runnable r) {
+        uiHandler.post(r);
+    }
+
+    public Activity getActivity() {
+        return mSlideController.mActivity;
+    }
 
     @CallSuper
     protected void onCreate() {
@@ -106,6 +106,7 @@ public abstract class BottomSlideFragment {
 
     /**
      * Creates view for the slide fragment
+     *
      * @param parent Parent to use
      * @return Created view
      */
@@ -114,15 +115,19 @@ public abstract class BottomSlideFragment {
 
     /**
      * Called when the view is created
+     *
      * @param v Created view
      */
-    protected void onViewCreated(View v) {}
+    protected void onViewCreated(View v) {
+    }
 
     @CallSuper
-    protected void onResume() {}
+    protected void onResume() {
+    }
 
     @CallSuper
-    protected void onPause() {}
+    protected void onPause() {
+    }
 
     /**
      * Dismisses slide fragment
@@ -160,6 +165,7 @@ public abstract class BottomSlideFragment {
 
     /**
      * Shows this fragment into activity
+     *
      * @param parent Parent activity
      */
     public void show(Activity parent) {
@@ -248,6 +254,7 @@ public abstract class BottomSlideFragment {
 
     /**
      * Callback for swipe component
+     *
      * @param progress New progress
      */
     public void onSlide(float progress) {
@@ -295,7 +302,8 @@ public abstract class BottomSlideFragment {
 
     /**
      * Callback for the insets
-     * @param bottomPadding Bottom padding to set
+     *
+     * @param bottomPadding  Bottom padding to set
      * @param virtualPadding Padding that should be set in order to remove the space from the top
      */
     protected void consumeBottomPadding(int bottomPadding, int virtualPadding) {
@@ -309,31 +317,34 @@ public abstract class BottomSlideFragment {
         dismiss();
     }
 
-    private final static class BottomSlideController {
-        private Activity mActivity;
-
-        private BottomSlideController(Activity act) {
-            mActivity = act;
-        }
-    }
-
     public interface BottomSlideActivityInterface {
         /**
          * Adds new back pressed listener
+         *
          * @param fragment New listener
          */
         void addBackPressedListener(BottomSlideFragment fragment);
 
         /**
          * Removes back pressed listener
+         *
          * @param fragment Listener to remove
          */
         void removeBackPressedListener(BottomSlideFragment fragment);
 
         /**
          * Sets light status bar disabled
+         *
          * @param isLight New disabled value
          */
         void setDisableLightStatusBar(boolean isLight);
+    }
+
+    private final static class BottomSlideController {
+        private Activity mActivity;
+
+        private BottomSlideController(Activity act) {
+            mActivity = act;
+        }
     }
 }

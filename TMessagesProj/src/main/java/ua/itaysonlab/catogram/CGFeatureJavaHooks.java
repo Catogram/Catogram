@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
+
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.ActionBarMenuSubItem;
@@ -19,18 +20,6 @@ import org.telegram.ui.Components.LayoutHelper;
 import java.util.List;
 
 public class CGFeatureJavaHooks {
-    public static class PopupItem {
-        public String text;
-        public int icon;
-        public View.OnClickListener onClick;
-
-        public PopupItem(String text, int icon, View.OnClickListener onClick) {
-            this.text = text;
-            this.icon = icon;
-            this.onClick = onClick;
-        }
-    }
-
     private static void getPointOnScreen(FrameLayout frameLayout, FrameLayout finalContainer, float[] point) {
         float x = 0;
         float y = 0;
@@ -129,6 +118,18 @@ public class CGFeatureJavaHooks {
             return actionBarPopupWindow;
         } else {
             return null;
+        }
+    }
+
+    public static class PopupItem {
+        public String text;
+        public int icon;
+        public View.OnClickListener onClick;
+
+        public PopupItem(String text, int icon, View.OnClickListener onClick) {
+            this.text = text;
+            this.icon = icon;
+            this.onClick = onClick;
         }
     }
 }

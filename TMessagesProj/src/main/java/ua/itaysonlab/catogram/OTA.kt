@@ -21,7 +21,6 @@ import okhttp3.Request
 import okio.buffer
 import okio.sink
 import org.json.JSONObject
-import org.telegram.messenger.ApplicationLoader
 import org.telegram.messenger.BuildConfig
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
@@ -30,7 +29,7 @@ import java.io.File
 import java.net.HttpURLConnection
 
 
-object OTA: CoroutineScope by MainScope() {
+object OTA : CoroutineScope by MainScope() {
 
     var needDownload = false
 
@@ -43,7 +42,7 @@ object OTA: CoroutineScope by MainScope() {
 
     lateinit var broadcastReceiver: BroadcastReceiver
 
-    private fun checkBS (callback: (Boolean) -> Unit) {
+    private fun checkBS(callback: (Boolean) -> Unit) {
         launch(handler) {
             try {
                 val request: Request =
@@ -59,8 +58,7 @@ object OTA: CoroutineScope by MainScope() {
                     } else needDownload = false
                 }
                 callback.invoke(needDownload)
-            }
-            catch (e: java.lang.Exception) {
+            } catch (e: java.lang.Exception) {
                 throw e
             }
         }
@@ -72,19 +70,19 @@ object OTA: CoroutineScope by MainScope() {
             override fun onReceive(context: Context?, intent: Intent) {
                 when (intent.extras!!.getString("action_name")) {
                     "action_download" -> {
-                            install(context!!)
+                        install(context!!)
                     }
 
                     "action_changelog" -> {
-                            download(context!!, true)
+                        download(context!!, true)
                     }
                 }
             }
         }
         try {
             context.unregisterReceiver(broadcastReceiver)
+        } catch (e: Exception) {
         }
-        catch (e: Exception) { }
         handler = CoroutineExceptionHandler { _, exception ->
             val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
             builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
@@ -94,7 +92,7 @@ object OTA: CoroutineScope by MainScope() {
                     }
             builder.show()
         }
-        checkBS{ needDownload ->
+        checkBS { needDownload ->
             if (needDownload && b) {
                 val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
                 builder.setTitle(LocaleController.getString("CG_Found", R.string.CG_Found) + " • " + version)
@@ -103,10 +101,9 @@ object OTA: CoroutineScope by MainScope() {
                             install(context)
                         }
                 builder.show()
-            }
-            else if (needDownload && !b) {
+            } else if (needDownload && !b) {
                 context.registerReceiver(broadcastReceiver, IntentFilter("OTA_NOTIF"))
-                if(Build.VERSION.SDK_INT >= 26) {
+                if (Build.VERSION.SDK_INT >= 26) {
                     val channel = NotificationChannel("channel01", "name",
                             NotificationManager.IMPORTANCE_HIGH) // for heads up notifications
 
@@ -144,8 +141,7 @@ object OTA: CoroutineScope by MainScope() {
 
                 val notificationManager = NotificationManagerCompat.from(context)
                 notificationManager.notify(1337, notification)
-            }
-            else if (b) Toast.makeText(context, LocaleController.getString("CG_Not_Found", R.string.CG_Not_Found), Toast.LENGTH_SHORT).show()
+            } else if (b) Toast.makeText(context, LocaleController.getString("CG_Not_Found", R.string.CG_Not_Found), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -163,8 +159,8 @@ object OTA: CoroutineScope by MainScope() {
     fun install(context: Context) {
         try {
             context.unregisterReceiver(broadcastReceiver)
+        } catch (e: Exception) {
         }
-        catch (e: Exception) { }
         if (checkSelfPermissionCompat(WRITE_EXTERNAL_STORAGE, context) !=
                 PackageManager.PERMISSION_GRANTED
         ) {
@@ -226,13 +222,13 @@ object OTA: CoroutineScope by MainScope() {
                             installApp(file, context)
                         }
                     }
-                }
-                catch (e: Exception) {
+                } catch (e: Exception) {
                     throw e
                 }
             }
         }
     }
+
     private fun installApp(file: File, context: Context) {
         val install = Intent(Intent.ACTION_VIEW)
         install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)

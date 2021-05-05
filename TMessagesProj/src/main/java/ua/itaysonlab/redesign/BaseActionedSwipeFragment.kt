@@ -10,7 +10,7 @@ import androidx.annotation.DrawableRes
 import org.telegram.messenger.databinding.V5SlideItemBinding
 import org.telegram.ui.ActionBar.Theme
 
-abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
+abstract class BaseActionedSwipeFragment : BottomSlideFragment() {
     var needToTint = true
 
     abstract fun getActions(): List<Action>
@@ -65,6 +65,6 @@ abstract class BaseActionedSwipeFragment: BottomSlideFragment() {
     data class Action(
             val id: String,
             @DrawableRes val icon: Int,
-            val title: String
+            val title: String,
     )
 }

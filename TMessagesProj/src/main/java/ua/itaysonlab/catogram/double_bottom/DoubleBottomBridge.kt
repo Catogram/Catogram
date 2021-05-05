@@ -31,7 +31,8 @@ object DoubleBottomBridge {
     }
 
     // return -1 if no account is found
-    @JvmStatic fun checkPasscodeForAnyOfAccounts(code: String): Int {
+    @JvmStatic
+    fun checkPasscodeForAnyOfAccounts(code: String): Int {
         if (!isDbSetupCompleted()) return -1
 
         val masterHash = DoubleBottomPasscodeActivity.getHash(code)
@@ -42,7 +43,8 @@ object DoubleBottomBridge {
         return -1
     }
 
-    @JvmStatic fun findLocalAccIdByTgId(id: Int): Int {
+    @JvmStatic
+    fun findLocalAccIdByTgId(id: Int): Int {
         for (i in 0 until UserConfig.MAX_ACCOUNT_COUNT) {
             val uc = UserConfig.getInstance(i)
             if (uc.isClientActivated && uc.currentUser.id == id) return i

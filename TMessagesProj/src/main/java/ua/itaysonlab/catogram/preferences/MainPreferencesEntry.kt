@@ -118,11 +118,13 @@ class MainPreferencesEntry : BasePreferencesEntry {
             intent.putExtra(Browser.EXTRA_APPLICATION_ID, bf.parentActivity.packageName)
             bf.parentActivity.startActivity(intent)
         }
+
         private fun goToCrowdin(bf: BaseFragment) {
             val openURL = Intent(android.content.Intent.ACTION_VIEW)
             openURL.data = Uri.parse("https://crowdin.com/project/catogram")
             bf.parentActivity.startActivity(openURL)
         }
+
         private fun goToGithub(bf: BaseFragment) {
             val openURL = Intent(android.content.Intent.ACTION_VIEW)
             openURL.data = Uri.parse("https://github.com/Catogram/Catogram")
