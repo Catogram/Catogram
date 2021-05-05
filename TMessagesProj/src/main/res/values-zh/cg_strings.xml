@@ -245,7 +245,7 @@
     <string name="CG_Found">有新版本可供下载</string>
     <string name="CG_Download">下载</string>
     <string name="CG_PrivateDir">使用私有存储目录（存储重定向）</string>
-    <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
+    <string name="CG_PrivateDir_desc">"缓存将另存至应用的私有目录，在高版本的系统中，需要使用 Root 权限才能访问这个目录。"</string>
     <string name="CG_RemovedS">移除操作已成功执行</string>
     <string name="CG_CleanOld">移除老旧缓存 (/sdcard/Telegram)</string>
 </resources>
