@@ -242,4 +242,5 @@
     <string name="CG_PrivateDir_desc">"кэш будет сохранен в приватную директорию приложения. вы, или кто-либо другой, не сможете получить доступ к хранилищу без root"</string>
     <string name="CG_RemovedS">Удалено успешно</string>
     <string name="CG_CleanOld">Удалить старый кэш (/sdcard/Telegram)</string>
+    <string name="CG_Changelog">Список изменений</string>
 </resources>
