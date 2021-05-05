@@ -23,8 +23,8 @@ import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import ua.itaysonlab.extras.CatogramExtras
 import java.io.File
+import java.lang.RuntimeException
 import java.net.HttpURLConnection
-import java.util.*
 
 
 object OTA: CoroutineScope by MainScope() {
@@ -32,8 +32,13 @@ object OTA: CoroutineScope by MainScope() {
     var needDownload = false
     lateinit var changelog: String
     lateinit var parseddString: String
+
+    lateinit var version: String
+
+    lateinit var handler: CoroutineExceptionHandler
+
     private fun checkBS(context: Context, callback: (Boolean) -> Unit) {
-        launch {
+        launch(handler) {
             try {
                 val request: Request =
                         Request.Builder().url("https://ctwoon.eu/catogram.json").build()
@@ -42,31 +47,34 @@ object OTA: CoroutineScope by MainScope() {
                     parseddString = response.body!!.string()
                     val parsedString = JSONObject(parseddString)
                     if (parsedString.getString("version") != CatogramExtras.CG_VERSION) {
+                        version = parsedString.getString("version")
                         changelog = parsedString.getString("changelog")
                         needDownload = true
                     } else needDownload = false
                 }
+                callback.invoke(needDownload)
             }
-            catch (e: Exception) {
-                val builder = AlertDialog.Builder(context)
-                builder.setTitle("Something went wrong")
-                        .setMessage(e.toString())
-                        .setPositiveButton("OK") { dialog, _ ->
-                            dialog.cancel()
-                        }
-                builder.show()
-                return@launch
+            catch (e: java.lang.Exception) {
+                throw e
             }
-            callback.invoke(needDownload)
         }
     }
 
     @JvmStatic
     fun download(context: Context, b: Boolean) {
+        handler = CoroutineExceptionHandler { _, exception ->
+            val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
+            builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
+                    .setMessage(exception.message)
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.cancel()
+                    }
+            builder.show()
+        }
         checkBS(context) { needDownload ->
             if (needDownload) {
                 val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-                builder.setTitle(LocaleController.getString("CG_Found", R.string.CG_Found))
+                builder.setTitle(LocaleController.getString("CG_Found", R.string.CG_Found) + " • " + version)
                         .setMessage(changelog)
                         .setPositiveButton(LocaleController.getString("CG_Download", R.string.CG_Download)) { _, _ ->
                             install(context)
@@ -101,7 +109,7 @@ object OTA: CoroutineScope by MainScope() {
         if (checkSelfPermissionCompat(WRITE_EXTERNAL_STORAGE, context) ==
                 PackageManager.PERMISSION_GRANTED
         ) {
-            launch {
+            launch(handler) {
                 try {
                     val progressDialog = org.telegram.ui.ActionBar.AlertDialog(context, 3)
                     progressDialog.show()
@@ -114,14 +122,8 @@ object OTA: CoroutineScope by MainScope() {
                         val body = response.body
 
                         if (response.code != HttpURLConnection.HTTP_OK) {
-                            val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-                            builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
-                                    .setMessage("Response code: " + response.code.toString())
-                                    .setPositiveButton("OK") { dialog, _ ->
-                                        dialog.cancel()
-                                    }
-                            builder.show()
-                            return@withContext
+                            progressDialog.cancel()
+                            throw RuntimeException("Response code: " + response.code.toString())
                         }
 
                         val file: File = File.createTempFile(
@@ -152,27 +154,13 @@ object OTA: CoroutineScope by MainScope() {
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && context.packageManager.canRequestPackageInstalls() && file.exists()) {
                             installApp(file, context)
-                        }
-                        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && file.exists()) {
+                        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && file.exists()) {
                             installApp(file, context)
-                        } else {
-                            val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-                            builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
-                                    .setPositiveButton("OK") { dialog, _ ->
-                                        dialog.cancel()
-                                    }
-                            builder.show()
                         }
                     }
                 }
-                catch (e: Exception) {
-                    val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-                    builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
-                            .setMessage(e.toString())
-                            .setPositiveButton("OK") { dialog, _ ->
-                                dialog.cancel()
-                            }
-                    builder.show()
+                catch(e: Exception) {
+                    throw e
                 }
             }
         }
