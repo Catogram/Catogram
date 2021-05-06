@@ -76,14 +76,15 @@ object OTA : CoroutineScope by MainScope() {
         }
 
         handler = CoroutineExceptionHandler { _, exception ->
-
-            val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-            builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
-                    .setMessage(exception.message)
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dialog.cancel()
-                    }
-            builder.show()
+            if (!b) {
+                val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
+                builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
+                        .setMessage(exception.message)
+                        .setPositiveButton("OK") { dialog, _ ->
+                            dialog.cancel()
+                        }
+                builder.show()
+            }
         }
 
         checkBS { needDownload ->
