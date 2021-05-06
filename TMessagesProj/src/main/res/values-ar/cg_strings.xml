@@ -231,4 +231,23 @@
     <string name="CG_RecentStickers_desc">للملصقات</string>
     <string name="CG_Without_Authorship">توجيه من غير اسم</string>
     <string name="CG_Private">هذه القناة خاصة</string>
+    <string name="CG_ForceClean">فرض مسح ذاكرة التخزين المؤقتة </string>
+    <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
+    <string name="CG_SwitchBackend">ستنتقل إلى الخادم التجريبي. من فضلك لا تضغط على \"موافق\" إذا كنت لا تعرف ما تفعله. يمكنك التبديل إلى الخادم العادي بالضغط على \"تبديل الخادم\" في قائمة المعالجة مرة أخرى.</string>
+    <string name="CG_SB">تبديل الخادم</string>
+    <string name="CG_TrLang">هدف ترجمة اللغة</string>
+    <string name="CG_Tr">ترجم</string>
+    <string name="CG_Updates_Category">Updates</string>
+    <string name="CG_Auto_Ota">Automatically check for updates</string>
+    <string name="CG_Auto_Ota_summary">on app launch</string>
+    <string name="CG_Ota">Search for update</string>
+    <string name="CG_Not_Found">Not found</string>
+    <string name="CG_Found">Update found</string>
+    <string name="CG_Download">Download</string>
+    <string name="CG_PrivateDir">Private directory of cache</string>
+    <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
+    <string name="CG_RemovedS">Removed successfully</string>
+    <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
+    <string name="CG_Changelog">Changelog</string>
+    <string name="CG_Downloading">Downloading</string>
 </resources>
