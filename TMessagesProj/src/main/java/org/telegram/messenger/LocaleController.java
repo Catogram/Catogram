@@ -328,15 +328,6 @@ public class LocaleController {
         languages.add(localeInfo);
         languagesDict.put(localeInfo.shortName, localeInfo);
 
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "中文（喵体）";
-        localeInfo.nameEnglish = "Chinese (Meowfied)";
-        localeInfo.shortName = localeInfo.pluralLangCode = "meowcn";
-        localeInfo.pathToFile = "file:///android_asset/unofficial_meowcn.xml";
-        localeInfo.builtIn = true;
-        localeInfo.isRtl = false;
-        languages.add(localeInfo);
-
         loadOtherLanguages();
         if (remoteLanguages.isEmpty()) {
             AndroidUtilities.runOnUIThread(() -> loadRemoteLanguages(UserConfig.selectedAccount));
