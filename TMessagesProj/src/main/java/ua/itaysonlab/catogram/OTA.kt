@@ -1,33 +1,23 @@
 package ua.itaysonlab.catogram
 
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES
+import android.os.Environment
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.FileProvider
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okio.buffer
-import okio.sink
 import org.json.JSONObject
-import org.telegram.messenger.BuildConfig
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import ua.itaysonlab.extras.CatogramExtras
-import java.io.File
-import java.net.HttpURLConnection
-
 
 object OTA : CoroutineScope by MainScope() {
 
@@ -46,14 +36,14 @@ object OTA : CoroutineScope by MainScope() {
         launch(handler) {
             try {
                 val request: Request =
-                        Request.Builder().url("https://ctwoon.eu/catogram.json").build()
+                        Request.Builder().url("https://api.github.com/repos/catogram/catogram/releases/latest").build()
                 withContext(Dispatchers.IO) {
                     val response = OkHttpClient().newCall(request).execute()
                     parseddString = response.body!!.string()
                     val parsedString = JSONObject(parseddString)
-                    if (parsedString.getString("version") != CatogramExtras.CG_VERSION) {
-                        version = parsedString.getString("version")
-                        changelog = parsedString.getString("changelog")
+                    if (parsedString.getString("name") != CatogramExtras.CG_VERSION) {
+                        version = parsedString.getString("name")
+                        changelog = parsedString.getString("body")
                         needDownload = true
                     } else needDownload = false
                 }
@@ -70,20 +60,23 @@ object OTA : CoroutineScope by MainScope() {
             override fun onReceive(context: Context?, intent: Intent) {
                 when (intent.extras!!.getString("action_name")) {
                     "action_download" -> {
-                        install(context!!)
+                        downloadApk(context!!)
                     }
 
                     "action_changelog" -> {
-                        download(context!!, true)
+                        showAlert(context!!)
                     }
                 }
             }
         }
+
         try {
             context.unregisterReceiver(broadcastReceiver)
         } catch (e: Exception) {
         }
+
         handler = CoroutineExceptionHandler { _, exception ->
+
             val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
             builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
                     .setMessage(exception.message)
@@ -92,15 +85,10 @@ object OTA : CoroutineScope by MainScope() {
                     }
             builder.show()
         }
+
         checkBS { needDownload ->
             if (needDownload && b) {
-                val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-                builder.setTitle(LocaleController.getString("CG_Found", R.string.CG_Found) + " • " + version)
-                        .setMessage(changelog)
-                        .setPositiveButton(LocaleController.getString("CG_Download", R.string.CG_Download)) { _, _ ->
-                            install(context)
-                        }
-                builder.show()
+                showAlert(context)
             } else if (needDownload && !b) {
                 context.registerReceiver(broadcastReceiver, IntentFilter("OTA_NOTIF"))
                 if (Build.VERSION.SDK_INT >= 26) {
@@ -140,105 +128,39 @@ object OTA : CoroutineScope by MainScope() {
                         .build()
 
                 val notificationManager = NotificationManagerCompat.from(context)
+
                 notificationManager.notify(1337, notification)
+
             } else if (b) Toast.makeText(context, LocaleController.getString("CG_Not_Found", R.string.CG_Not_Found), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun requestPermissionsCompat(
-            permissionsArray: Array<String>,
-            requestCode: Int,
-            context: Context,
-    ) {
-        ActivityCompat.requestPermissions(context as Activity, permissionsArray, requestCode)
-    }
-
-    private fun checkSelfPermissionCompat(permission: String, context: Context) =
-            ActivityCompat.checkSelfPermission(context, permission)
-
-    fun install(context: Context) {
+    fun showAlert(context: Context) {
+        val notificationManager = NotificationManagerCompat.from(context)
         try {
-            context.unregisterReceiver(broadcastReceiver)
+            notificationManager.cancel(1337)
         } catch (e: Exception) {
         }
-        if (checkSelfPermissionCompat(WRITE_EXTERNAL_STORAGE, context) !=
-                PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissionsCompat(
-                    arrayOf(WRITE_EXTERNAL_STORAGE),
-                    0,
-                    context
-            )
-        }
-        if (checkSelfPermissionCompat(WRITE_EXTERNAL_STORAGE, context) ==
-                PackageManager.PERMISSION_GRANTED
-        ) {
-            launch(handler) {
-                try {
-                    val progressDialog = org.telegram.ui.ActionBar.AlertDialog(context, 3)
-                    progressDialog.show()
-
-                    val request: Request = Request.Builder()
-                            .url("https://github.com/catogram/catogram/releases/latest/download/app.apk")
-                            .build()
-                    withContext(Dispatchers.IO) {
-                        val response = OkHttpClient().newCall(request).execute()
-                        val body = response.body
-
-                        if (response.code != HttpURLConnection.HTTP_OK) {
-                            progressDialog.cancel()
-                            throw RuntimeException("Response code: " + response.code.toString())
-                        }
-
-                        val file: File = File.createTempFile(
-                                "ota",
-                                ".apk",
-                                context.externalCacheDir
-                        )
-                        val sink = file.sink().buffer()
-
-                        body?.source().use { input ->
-                            sink.use { output ->
-                                if (input != null) {
-                                    output.writeAll(input)
-                                }
-                            }
-                        }
-
-                        progressDialog.dismiss()
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !context.packageManager.canRequestPackageInstalls()) {
-                            context.startActivity(
-                                    Intent(
-                                            ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                                            Uri.parse("package:ua.itaysonlab.messenger")
-                                    )
-                            )
-                        }
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && context.packageManager.canRequestPackageInstalls() && file.exists()) {
-                            installApp(file, context)
-                        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && file.exists()) {
-                            installApp(file, context)
-                        }
-                    }
-                } catch (e: Exception) {
-                    throw e
+        val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
+        builder.setTitle(LocaleController.getString("CG_Found", R.string.CG_Found) + " • " + version)
+                .setMessage(changelog)
+                .setPositiveButton(LocaleController.getString("CG_Download", R.string.CG_Download)) { _, _ ->
+                    downloadApk(context)
                 }
-            }
-        }
+        builder.show()
     }
 
-    private fun installApp(file: File, context: Context) {
-        val install = Intent(Intent.ACTION_VIEW)
-        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        install.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
-        install.data = FileProvider.getUriForFile(
-                context,
-                BuildConfig.APPLICATION_ID + ".provider",
-                file
-        )
-        context.startActivity(install)
+    fun downloadApk(context: Context) {
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.cancel(1337)
+        val request = DownloadManager.Request(Uri.parse("https://github.com/catogram/catogram/releases/latest/download/app.apk"))
+
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+        request.setTitle("Catogram v$version")
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, "ota.apk")
+
+        val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        manager.enqueue(request)
     }
 }
