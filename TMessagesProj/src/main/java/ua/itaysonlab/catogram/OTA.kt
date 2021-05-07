@@ -5,12 +5,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,6 +20,7 @@ import org.json.JSONObject
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import ua.itaysonlab.extras.CatogramExtras
+
 
 object OTA : CoroutineScope by MainScope() {
 
@@ -76,7 +79,9 @@ object OTA : CoroutineScope by MainScope() {
         }
 
         handler = CoroutineExceptionHandler { _, exception ->
-            if (!b) {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+            val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
+            if (activeNetworkInfo != null) {
                 val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
                 builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
                         .setMessage(exception.message)
