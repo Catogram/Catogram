@@ -20375,7 +20375,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         showDialog(builder.create());
     }
 
-    private void openSearchWithText(String text) {
+    public void openSearchWithText(String text) {
         if (!actionBar.isSearchFieldVisible()) {
             AndroidUtilities.updateViewVisibilityAnimated(avatarContainer, false, 0.95f, true);
             if (headerItem != null) {

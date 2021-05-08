@@ -28,7 +28,6 @@ import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ChatObject;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.ImageLoader;
-import org.telegram.messenger.ImageLocation;
 import org.telegram.messenger.ImageReceiver;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MediaDataController;
@@ -120,6 +119,10 @@ public class ChatAvatarContainer extends FrameLayout implements NotificationCent
         titleTextView.setGravity(Gravity.LEFT);
         titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         titleTextView.setLeftDrawableTopPadding(-AndroidUtilities.dp(1.3f));
+        titleTextView.setOnLongClickListener(v -> {
+            chatActivity.openSearchWithText(null);
+            return true;
+        });
         addView(titleTextView);
 
         subtitleTextView = new SimpleTextView(context);
