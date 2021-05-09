@@ -2289,6 +2289,11 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         avatarContainer.updateOnlineCount();
         avatarContainer.updateSubtitle();
         updateTitleIcons();
+        avatarContainer.setOnLongClickListener(v -> {
+            openSearchWithText(null);
+            return true;
+
+        });
 
         if (chatMode == 0 && !isThreadChat() && reportType < 0) {
             attachItem = menu.addItem(chat_menu_attach, R.drawable.ic_ab_other).setOverrideMenuClick(true).setAllowCloseAnimation(false);
