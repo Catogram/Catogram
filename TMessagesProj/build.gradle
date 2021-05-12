@@ -41,7 +41,7 @@ dependencies {
     compileOnly 'org.checkerframework:checker-compat-qual:2.5.5'
     
     implementation 'com.google.firebase:firebase-messaging:21.1.0'
-    implementation 'com.google.firebase:firebase-config:20.0.4'
+    implementation 'com.google.firebase:firebase-config:21.0.0'
     implementation 'com.google.firebase:firebase-datatransport:17.0.11'
     implementation 'com.google.firebase:firebase-appindexing:19.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
