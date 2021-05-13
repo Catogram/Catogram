@@ -79,9 +79,7 @@ object OTA : CoroutineScope by MainScope() {
         }
 
         handler = CoroutineExceptionHandler { _, exception ->
-            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-            val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
-            if (activeNetworkInfo != null) {
+            if (!exception.message?.contains("Unable to resolve host")!!) {
                 val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
                 builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
                         .setMessage(exception.message)
