@@ -234,6 +234,16 @@
     <string name="CG_SwitchBackend">Stai per spostarti sul server di test. Si prega di non premere OK se non sai cosa stai facendo. Puoi tornare al server normale premendo nuovamente \"Cambia backend\" nel menù di debug.</string>
     <string name="CG_SB">Cambia backend</string>
     <string name="CG_TrLang">Lingua di destinazione</string>
+    <string name="CG_TrLang_English">English</string>
+    <string name="CG_TrLang_Russian">Russian</string>
+    <string name="CG_TrLang_French">French</string>
+    <string name="CG_TrLang_Italian">Italian</string>
+    <string name="CG_TrLang_Spanish">Spanish</string>
+    <string name="CG_TrLang_Chinese">Chinese</string>
+    <string name="CG_TrLang_Japanese">Japanese</string>
+    <string name="CG_TrLang_Hindi">Hindi</string>
+    <string name="CG_TrLang_German">German</string>
+    <string name="CG_TrLang_Indonesian">Indonesian</string>
     <string name="CG_Tr">Traduttore</string>
     <string name="CG_Updates_Category">Updates</string>
     <string name="CG_Auto_Ota">Automatically check for updates</string>
