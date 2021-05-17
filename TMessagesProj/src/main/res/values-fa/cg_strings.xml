@@ -96,11 +96,11 @@
     <string name="CG_NewTabs_EmoticonsAppend_Desc">هنگامی که گزینه \"به جای\" خاموش است</string>
     <string name="CG_MessageMenuOption">سبک منوی پیام</string>
     <string name="CG_MessageMenuOption_TGX">استایل تلگرام X ( اسلاید)</string>
-    <string name="CG_MessageMenuOption_TGXS">Telegram X-styled (classic)</string>
-    <string name="CG_MessageMenuOption_A">Modern popup</string>
-    <string name="CG_MessageMenuOption_Default">Default</string>
-    <string name="CG_NewDrawer">Use the new drawer</string>
-    <string name="CG_NewDrawer_Desc">not compatible with multiaccount</string>
+    <string name="CG_MessageMenuOption_TGXS">استایل تلگرام X ( کلاسیک)</string>
+    <string name="CG_MessageMenuOption_A">پنجره بازشو مدرن</string>
+    <string name="CG_MessageMenuOption_Default">پیش فرض</string>
+    <string name="CG_NewDrawer">از کشوی جدید استفاده کنید</string>
+    <string name="CG_NewDrawer_Desc">سازگار با چند حساب کاربری نیست</string>
     <string name="CG_MessageButton_Override">دکمه اقدام پیام را لغو کنید</string>
     <string name="CG_MessageButton_Override_Desc">آن را بر روی پیام های خود فعال می کند</string>
     <string name="CG_MessageButton_Out">پیام های خروجی</string>
@@ -148,8 +148,8 @@
     <string name="CG_FlatChannels">فید کانال مسطح</string>
     <string name="CG_IgnoreBlacklist">از کاربران در لیست سیاه چشم پوشی کنید</string>
     <string name="CG_IgnoreBlacklist_Desc">پیام از آنها پنهان خواهد شد</string>
-    <string name="CG_KangSticker">Add to stickerpack</string>
-    <string name="CG_KangSticker_Err_NoPack_Title">Create a stickerpack?</string>
+    <string name="CG_KangSticker">اضافه کردن به بسته استیکر</string>
+    <string name="CG_KangSticker_Err_NoPack_Title">ساخت یک بسته استیکر?</string>
     <string name="CG_KangSticker_Err_NoPack_Desc">To add a sticker to your stickerpack, an active stickerpack is needed - but you don\'t have it.\n\nDo you want to create one?\nThis is an automatic process, and the requested sticker will be added after it.</string>
     <string name="CG_KangSticker_Err_NoPack_Action">Create</string>
     <string name="CG_Kangs_Manager">Stickerpack manager</string>
