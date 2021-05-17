@@ -230,9 +230,9 @@
     <string name="CG_Without_Authorship">Без авторства</string>
     <string name="CG_Private">Это приватный канал</string>
     <string name="CG_ForceClean">Очистить кэш Telegram</string>
-    <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
-    <string name="CG_SwitchBackend">You\'re going to switch to the test server. Please don\'t press OK if you don\'t know what you\'re doing. You can switch to normal server by pressing \"Switch backend\" in debug menu again.</string>
-    <string name="CG_SB">Switch backend</string>
+    <string name="CG_ForceCleanInfo">Используйте это, если вы долго видите \"Печатает...\" чтобы очистить кэш.\nЭто удалит ВСЁ из вашего кэша - будьте осторожны!</string>
+    <string name="CG_SwitchBackend">Вы переключитесь на тестовый сервер. Пожалуйста не нажимайте ОК, если вы не знаете, что делаете. Вы можете снова переключиться на нормальный сервер, нажав на \"Переключить обратно\" в меню отладки.</string>
+    <string name="CG_SB">Переключить обратно</string>
     <string name="CG_TrLang">Язык назначения</string>
     <string name="CG_TrLang_English">Английский</string>
     <string name="CG_TrLang_Russian">Русский</string>
@@ -247,7 +247,7 @@
     <string name="CG_Tr">Переводчик</string>
     <string name="CG_Updates_Category">Обновления</string>
     <string name="CG_Auto_Ota">Автоматически проверять обновления</string>
-    <string name="CG_Auto_Ota_summary">on app launch</string>
+    <string name="CG_Auto_Ota_summary">при запуске приложения</string>
     <string name="CG_Ota">Поиск обновлений</string>
     <string name="CG_Not_Found">Не найдено</string>
     <string name="CG_Found">Найдено обновление</string>
