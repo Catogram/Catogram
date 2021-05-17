@@ -230,9 +230,9 @@
     <string name="CG_Without_Authorship">Без авторства</string>
     <string name="CG_Private">Это приватный канал</string>
     <string name="CG_ForceClean">Очистить кэш Telegram</string>
-    <string name="CG_ForceCleanInfo">Используйте это, если вы долго видите \"Печатает...\" чтобы очистить кэш.\nЭто удалит ВСЁ из вашего кэша - будьте осторожны!</string>
-    <string name="CG_SwitchBackend">Вы переключитесь на тестовый сервер. Пожалуйста не нажимайте ОК, если вы не знаете, что делаете. Вы можете снова переключиться на нормальный сервер, нажав на \"Переключить обратно\" в меню отладки.</string>
-    <string name="CG_SB">Переключить обратно</string>
+    <string name="CG_ForceCleanInfo">Используйте это, если вы долго видите \"Подсчёт…\" при попытке очистки кэша.\nЭто удалит ВСЁ из вашего кэша - будьте осторожны!</string>
+    <string name="CG_SwitchBackend">Вы переключитесь на тестовый сервер. Пожалуйста не нажимайте ОК, если вы не знаете, что делаете. Вы можете снова переключиться на обычный сервер, нажав на \"Переключить сервер\" в меню отладки.</string>
+    <string name="CG_SB">Переключить сервер</string>
     <string name="CG_TrLang">Язык назначения</string>
     <string name="CG_TrLang_English">Английский</string>
     <string name="CG_TrLang_Russian">Русский</string>
