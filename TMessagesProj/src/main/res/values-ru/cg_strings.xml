@@ -252,8 +252,8 @@
     <string name="CG_Not_Found">Не найдено</string>
     <string name="CG_Found">Найдено обновление</string>
     <string name="CG_Download">Скачать</string>
-    <string name="CG_PrivateDir">Private directory of cache</string>
-    <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
+    <string name="CG_PrivateDir">Приватное хранилище кэша</string>
+    <string name="CG_PrivateDir_desc">"кэш будет сохранен в приватном хранилище приложения. Вы или кто-то ещё, не может разрешить это без рут прав"</string>
     <string name="CG_RemovedS">Успешно удалено</string>
     <string name="CG_CleanOld">Очистить старый кэш (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Список изменений</string>
