@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram
 
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.RemoteViews

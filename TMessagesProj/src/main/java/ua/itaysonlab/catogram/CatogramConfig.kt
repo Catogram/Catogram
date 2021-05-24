@@ -93,6 +93,9 @@ object CatogramConfig {
     var ghostMode = false
 
     var privateDir by sharedPreferences.boolean("cg_private_dir", true)
+    var sleepTimer by sharedPreferences.boolean("cg_sleep_timer", false)
+    var sleepTime by sharedPreferences.int("cg_sleep_time", 30)
+    var sleepOp by sharedPreferences.int("cg_op", 30)
 
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 

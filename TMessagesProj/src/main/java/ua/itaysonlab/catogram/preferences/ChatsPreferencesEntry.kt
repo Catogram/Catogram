@@ -80,6 +80,43 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                 }
             }
 
+            list {
+                title = LocaleController.getString("CG_Sleep_Time", R.string.CG_Sleep_Time)
+
+                contract({
+                    return@contract listOf(
+                        Pair(0, "5"),
+                        Pair(1, "10"),
+                        Pair(2, "30"),
+                        Pair(3, "60"),
+                    )
+                }, {
+                    return@contract when (CatogramConfig.sleepOp) {
+                        1 -> "10"
+                        2 -> "30"
+                        3 -> "60"
+                        else -> "5"
+                    }
+                }) {
+                    CatogramConfig.sleepOp = it
+
+                    when (CatogramConfig.sleepOp) {
+                        0 -> {
+                            CatogramConfig.sleepTime = 5
+                        }
+                        1 -> {
+                            CatogramConfig.sleepTime = 10
+                        }
+                        2 -> {
+                            CatogramConfig.sleepTime = 30
+                        }
+                        3 -> {
+                            CatogramConfig.sleepTime = 60
+                        }
+                    }
+                }
+            }
+
             switch {
                 title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
 

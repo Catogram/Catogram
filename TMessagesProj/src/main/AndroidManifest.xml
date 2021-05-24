@@ -375,6 +375,10 @@
             </intent-filter>
         </receiver>
         <receiver
+            android:name="ua.itaysonlab.catogram.SleepHelper"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
             android:name=".NotificationsDisabledReceiver"
             android:exported="false">
             <intent-filter>

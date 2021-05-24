@@ -14,6 +14,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -94,6 +96,11 @@ import org.telegram.ui.LaunchActivity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import ua.itaysonlab.CatogramLogger;
+import ua.itaysonlab.catogram.CatogramConfig;
+import ua.itaysonlab.catogram.SleepHelper;
 
 public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.NotificationCenterDelegate, DownloadController.FileDownloadProgressListener {
 
@@ -1020,6 +1027,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         bottomView.addView(optionsButton, LayoutHelper.createFrame(48, 48, Gravity.LEFT | Gravity.TOP));
         optionsButton.addSubItem(1, R.drawable.msg_forward, LocaleController.getString("Forward", R.string.Forward));
         optionsButton.addSubItem(2, R.drawable.msg_shareout, LocaleController.getString("ShareFile", R.string.ShareFile));
+        optionsButton.addSubItem(6, R.drawable.ic_outline_nights_stay_24, LocaleController.getString("CG_Sleep", R.string.CG_Sleep));
         optionsButton.addSubItem(5, R.drawable.msg_download, LocaleController.getString("SaveToMusic", R.string.SaveToMusic));
         optionsButton.addSubItem(4, R.drawable.msg_message, LocaleController.getString("ShowInChat", R.string.ShowInChat));
         optionsButton.setShowedFromBottom(true);
@@ -1430,6 +1438,23 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
             MediaController.saveFile(path, parentActivity, 3, fileName, messageObject.getDocument() != null ? messageObject.getDocument().mime_type : "", () -> {
                 BulletinFactory.of((FrameLayout) containerView).createDownloadBulletin(BulletinFactory.FileType.AUDIO).show();
             });
+        } else if (id == 6) {
+            Intent myIntent = new Intent(ApplicationLoader.applicationContext, SleepHelper.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    ApplicationLoader.applicationContext, 1, myIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+            );
+            AlarmManager alarmManager = (AlarmManager) ApplicationLoader.applicationContext.getSystemService(Context.ALARM_SERVICE);
+
+            if (!CatogramConfig.INSTANCE.getSleepTimer()) {
+                CatogramLogger.d("alarmcg", Boolean.toString(CatogramConfig.INSTANCE.getSleepTimer()));
+                alarmManager.set(AlarmManager.RTC_WAKEUP, TimeUnit.MINUTES.toMillis(CatogramConfig.INSTANCE.getSleepTime()), pendingIntent);
+                CatogramConfig.INSTANCE.setSleepTimer(true);
+            }
+            else {
+                alarmManager.cancel(pendingIntent);
+                CatogramConfig.INSTANCE.setSleepTimer(false);
+            }
         }
     }
 
