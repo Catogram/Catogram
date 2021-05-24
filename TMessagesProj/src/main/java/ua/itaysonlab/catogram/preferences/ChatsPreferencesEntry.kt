@@ -429,29 +429,29 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
 
                 contract({
                     return@contract listOf(
-                            Pair(0, "en"),
-                            Pair(1, "ru"),
-                            Pair(2, "fr"),
-                            Pair(3, "it"),
-                            Pair(4, "es"),
-                            Pair(5, "zh"),
-                            Pair(6, "ja"),
-                            Pair(7, "hi"),
-                            Pair(8, "de"),
-                            Pair(9, "id"),
+                            Pair(0, LocaleController.getString("CG_TrLang_English", R.string.CG_TrLang_English)),
+                            Pair(1, LocaleController.getString("CG_TrLang_Russian", R.string.CG_TrLang_Russian)),
+                            Pair(2, LocaleController.getString("CG_TrLang_French", R.string.CG_TrLang_French)),
+                            Pair(3, LocaleController.getString("CG_TrLang_Italian", R.string.CG_TrLang_Italian)),
+                            Pair(4, LocaleController.getString("CG_TrLang_Spanish", R.string.CG_TrLang_Spanish)),
+                            Pair(5, LocaleController.getString("CG_TrLang_Chinese", R.string.CG_TrLang_Chinese)),
+                            Pair(6, LocaleController.getString("CG_TrLang_Japanese", R.string.CG_TrLang_Japanese)),
+                            Pair(7, LocaleController.getString("CG_TrLang_Hindi", R.string.CG_TrLang_Hindi)),
+                            Pair(8, LocaleController.getString("CG_TrLang_German", R.string.CG_TrLang_German)),
+                            Pair(9, LocaleController.getString("CG_TrLang_Indonesian", R.string.CG_TrLang_Indonesian)),
                     )
                 }, {
                     return@contract when (CatogramConfig.translateOptions) {
-                        1 -> "ru"
-                        2 -> "fr"
-                        3 -> "it"
-                        4 -> "es"
-                        5 -> "zh"
-                        6 -> "ja"
-                        7 -> "hi"
-                        8 -> "de"
-                        9 -> "id"
-                        else -> "en"
+                        1 -> LocaleController.getString("CG_TrLang_Russian", R.string.CG_TrLang_Russian)
+                        2 -> LocaleController.getString("CG_TrLang_French", R.string.CG_TrLang_French)
+                        3 -> LocaleController.getString("CG_TrLang_Italian", R.string.CG_TrLang_Italian)
+                        4 -> LocaleController.getString("CG_TrLang_Spanish", R.string.CG_TrLang_Spanish)
+                        5 -> LocaleController.getString("CG_TrLang_Chinese", R.string.CG_TrLang_Chinese)
+                        6 -> LocaleController.getString("CG_TrLang_Japanese", R.string.CG_TrLang_Japanese)
+                        7 -> LocaleController.getString("CG_TrLang_Hindi", R.string.CG_TrLang_Hindi)
+                        8 -> LocaleController.getString("CG_TrLang_German", R.string.CG_TrLang_German)
+                        9 -> LocaleController.getString("CG_TrLang_Indonesian", R.string.CG_TrLang_Indonesian)
+                        else -> LocaleController.getString("CG_TrLang_English", R.string.CG_TrLang_English)
                     }
                 }) {
                     CatogramConfig.translateOptions = it
