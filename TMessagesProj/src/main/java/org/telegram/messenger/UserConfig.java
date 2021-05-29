@@ -20,10 +20,12 @@ import org.telegram.tgnet.TLRPC;
 import java.io.File;
 import java.util.Arrays;
 
+import ua.itaysonlab.extras.CatogramExtras;
+
 public class UserConfig extends BaseController {
 
     public static int selectedAccount;
-    public final static int MAX_ACCOUNT_COUNT = 4;
+    public final static int MAX_ACCOUNT_COUNT = CatogramExtras.MAX_ACCOUNT_COUNT;
 
     private final Object sync = new Object();
     private boolean configLoaded;
