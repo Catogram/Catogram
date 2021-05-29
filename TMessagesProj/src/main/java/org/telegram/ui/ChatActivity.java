@@ -19417,7 +19417,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             case 991: {
                 ArrayList<MessageObject> obj = new ArrayList<>();
                 obj.add(selectedObject);
-                SendMessagesHelper.getInstance(0).sendMessage(obj, UserConfig.getInstance(currentAccount).clientUserId, true, 0);
+                SendMessagesHelper.getInstance(currentAccount).sendMessage(obj, UserConfig.getInstance(currentAccount).clientUserId, true, 0);
                 undoView.showWithAction(getUserConfig().getClientUserId(), UndoView.ACTION_FWD_MESSAGES, 1);
                 break;
             }
