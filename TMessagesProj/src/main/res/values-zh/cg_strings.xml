@@ -242,10 +242,10 @@
     <string name="CG_TrLang_Italian">意大利语</string>
     <string name="CG_TrLang_Spanish">西班牙语</string>
     <string name="CG_TrLang_Chinese">中文</string>
-    <string name="CG_TrLang_Japanese">日文</string>
-    <string name="CG_TrLang_Hindi">Hindi</string>
-    <string name="CG_TrLang_German">German</string>
-    <string name="CG_TrLang_Indonesian">Indonesian</string>
+    <string name="CG_TrLang_Japanese">日语</string>
+    <string name="CG_TrLang_Hindi">印地语</string>
+    <string name="CG_TrLang_German">德语</string>
+    <string name="CG_TrLang_Indonesian">印尼语</string>
     <string name="CG_Tr">翻译</string>
     <string name="CG_Updates_Category">更新中心</string>
     <string name="CG_Auto_Ota">自动检查应用更新</string>
@@ -260,5 +260,5 @@
     <string name="CG_CleanOld">移除老旧缓存 (/sdcard/Telegram)</string>
     <string name="CG_Changelog">更新日志</string>
     <string name="CG_Sleep">睡眠定时</string>
-    <string name="CG_Sleep_Time">Sleep timer countdown (minutes)</string>
+    <string name="CG_Sleep_Time">睡眠定时器时长 (分钟)</string>
 </resources>
