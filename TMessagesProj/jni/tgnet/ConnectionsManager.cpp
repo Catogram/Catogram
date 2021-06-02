@@ -6,6 +6,10 @@
  * Copyright Nikolai Kudashov, 2015-2018.
  */
 
+#ifdef __linux__
+    #include <cassert>
+#endif
+
 #include <stdlib.h>
 #include <sys/eventfd.h>
 #include <unistd.h>
