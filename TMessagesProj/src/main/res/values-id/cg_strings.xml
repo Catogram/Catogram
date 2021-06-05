@@ -251,12 +251,12 @@
     <string name="CG_Ota">Search for update</string>
     <string name="CG_Not_Found">Not found</string>
     <string name="CG_Found">Update found</string>
-    <string name="CG_Download">Download</string>
+    <string name="CG_Download">Unduh</string>
     <string name="CG_PrivateDir">Private directory of cache</string>
     <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
     <string name="CG_RemovedS">Removed successfully</string>
     <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Changelog</string>
-    <string name="CG_Sleep">Sleep timer</string>
-    <string name="CG_Sleep_Time">Sleep timer countdown (minutes)</string>
+    <string name="CG_Sleep">Pengatur waktu tidur</string>
+    <string name="CG_Sleep_Time">Hitung mundur pengatur waktu tidur (menit)</string>
 </resources>
