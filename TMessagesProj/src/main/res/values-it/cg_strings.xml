@@ -90,9 +90,9 @@
     <string name="CG_NewTabs_NoCounter">Nascondi contatore nelle tab</string>
     <string name="CG_NewTabs_RemoveAllChats">Nascondi la cartella \"Tutte le chat\" [riavvio richiesto]</string>
     <string name="CG_NewTabs_RemoveAllChats_Desc">premi \"indietro\" nella pagina home per aprirlo</string>
-    <string name="CG_NewTabs_Emoticons">Mostra le emoticons invece dei titoli per le tab [è necessario il riavvio]</string>
+    <string name="CG_NewTabs_Emoticons">Mostra le emoji invece dei titoli per le cartelle [riavvio necessario]</string>
     <string name="CG_NewTabs_Emoticons_Desc">questo è sincronizzato al cloud da Telegram</string>
-    <string name="CG_NewTabs_EmoticonsAppend">Aggiungi le emoticons ai titoli delle tab [è necessario il riavvio]</string>
+    <string name="CG_NewTabs_EmoticonsAppend">Aggiungi le emoji ai titoli delle cartelle [riavvio necessario]</string>
     <string name="CG_NewTabs_EmoticonsAppend_Desc">quando l\'opzione \"invece che\" è spenta</string>
     <string name="CG_MessageMenuOption">Stile del menu del messaggio</string>
     <string name="CG_MessageMenuOption_TGX">Stile Telegram X (scorrimento)</string>
@@ -139,7 +139,7 @@
     <string name="CG_GooglePlay_InfoDesc">Tutti i pagamenti avvengono tramite Google Pay.</string>
     <string name="CG_GooglePlay_ChooseAmount">Scegli una quantità</string>
     <string name="CG_GooglePlay_Thanks">Grazie!</string>
-    <string name="CG_TabIconMode_Title">Tipo di icona per le tab [è necessario il riavvio]</string>
+    <string name="CG_TabIconMode_Title">Tipo di icona per le cartelle [riavvio necessario]</string>
     <string name="CG_TabIconMode_Disabled">Disabilitato</string>
     <string name="CG_TabIconMode_Append">Aggiungi al titolo della tab</string>
     <string name="CG_TabIconMode_Replace">Sostituire titolo della tab</string>
