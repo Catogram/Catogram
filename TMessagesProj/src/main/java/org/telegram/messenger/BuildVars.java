@@ -17,7 +17,6 @@ public class BuildVars {
     public static boolean DEBUG_PRIVATE_VERSION = false;
     public static boolean LOGS_ENABLED = false;
     public static boolean USE_CLOUD_STRINGS = true;
-<<<<<<< HEAD
 
     public static boolean CHECK_UPDATES = false;
     public static int APP_ID = BuildConfig.APP_ID;
