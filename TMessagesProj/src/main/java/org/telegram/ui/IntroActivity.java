@@ -46,6 +46,7 @@ import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.BottomPagesView;
 import org.telegram.ui.Components.LayoutHelper;
+import org.telegram.ui.Components.SizeNotifierFrameLayout;
 
 public class IntroActivity extends AppCompatActivity implements NotificationCenter.NotificationCenterDelegate {
 
@@ -252,11 +253,15 @@ public class IntroActivity extends AppCompatActivity implements NotificationCent
             FrameLayout frameLayout3 = new FrameLayout(this);
             setContentView(frameLayout3);
 
-            View imageView = new ImageView(this);
-            BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.catstile);
-            drawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-            imageView.setBackgroundDrawable(drawable);
-            frameLayout3.addView(imageView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+            SizeNotifierFrameLayout backgroundTablet = new SizeNotifierFrameLayout(this) {
+                @Override
+                protected boolean isActionBarVisible() {
+                    return false;
+                }
+            };
+            backgroundTablet.setOccupyStatusBar(false);
+            backgroundTablet.setBackgroundImage(Theme.getCachedWallpaper(), Theme.isWallpaperMotion());
+            frameLayout3.addView(backgroundTablet, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
 
             FrameLayout frameLayout4 = new FrameLayout(this);
             frameLayout4.setBackgroundResource(R.drawable.btnshadow);

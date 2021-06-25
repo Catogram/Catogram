@@ -684,8 +684,10 @@ public class PinchToZoomHelper {
         if (pointerId1 == ev.getPointerId(0) && pointerId2 == ev.getPointerId(1)) {
             return true;
         }
-
-        return pointerId1 == ev.getPointerId(1) && pointerId2 == ev.getPointerId(0);
+        if (pointerId1 == ev.getPointerId(1) && pointerId2 == ev.getPointerId(0)) {
+            return true;
+        }
+        return false;
     }
 
     protected void invalidateViews() {

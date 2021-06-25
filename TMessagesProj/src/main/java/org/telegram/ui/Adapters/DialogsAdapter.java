@@ -170,7 +170,7 @@ public class DialogsAdapter extends RecyclerListView.SelectionAdapter {
         if (hasHints) {
             count += 2 + messagesController.hintDialogs.size();
         } else if (dialogsType == 0 && messagesController.dialogs_dict.size() <= 10 && folderId == 0 && messagesController.isDialogsEndReached(folderId)) {
-            if (ContactsController.getInstance(currentAccount).contacts.isEmpty() && ContactsController.getInstance(currentAccount).isLoadingContacts()) {
+            if (ContactsController.getInstance(currentAccount).contacts.isEmpty() && !ContactsController.getInstance(currentAccount).doneLoadingContacts) {
                 onlineContacts = null;
                 return (currentCount = 0);
             }

@@ -6,11 +6,8 @@
  * Copyright Nikolai Kudashov, 2015-2018.
  */
 
-#ifdef __linux__
-    #include <cassert>
-#endif
-
-#include <stdlib.h>
+#include <cassert>
+#include <cstdlib>
 #include <sys/eventfd.h>
 #include <unistd.h>
 #include <chrono>
@@ -20,7 +17,7 @@
 #include <openssl/rand.h>
 #include <zlib.h>
 #include <string>
-#include <inttypes.h>
+#include <cinttypes>
 #include "ConnectionsManager.h"
 #include "FileLog.h"
 #include "EventObject.h"
@@ -3488,14 +3485,6 @@ void ConnectionsManager::setIpStrategy(uint8_t value) {
     scheduleTask([&, value] {
         ipStrategy = value;
     });
-}
-
-void ConnectionsManager::setMtProtoVersion(int version) {
-    mtProtoVersion = version;
-}
-
-int32_t ConnectionsManager::getMtProtoVersion() {
-    return mtProtoVersion;
 }
 
 int64_t ConnectionsManager::checkProxy(std::string address, uint16_t port, std::string username, std::string password, std::string secret, onRequestTimeFunc requestTimeFunc, jobject ptr1) {

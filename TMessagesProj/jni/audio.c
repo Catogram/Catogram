@@ -302,8 +302,8 @@ int initRecorder(const char *path, opus_int32 sampleRate, opus_int32 channelCoun
     inopt.gain = 0;
     inopt.endianness = 0;
     inopt.copy_comments = 0;
-    inopt.rawmode = 1;
-    inopt.ignorelength = 1;
+    inopt.rawmode = 0;
+    inopt.ignorelength = 0;
     inopt.samplesize = 16;
     inopt.channels = channelCount;
     inopt.skip = 0;
@@ -330,7 +330,7 @@ int initRecorder(const char *path, opus_int32 sampleRate, opus_int32 channelCoun
     
     min_bytes = max_frame_bytes = (1275 * 3 + 7) * header.nb_streams;
     _packet = malloc(max_frame_bytes);
-    
+
     result = opus_encoder_ctl(_encoder, OPUS_SET_BITRATE(OPUS_BITRATE_MAX));
     result = opus_encoder_ctl(_encoder, OPUS_SET_COMPLEXITY(10));
     if (result != OPUS_OK) {

@@ -428,7 +428,11 @@ public class EditTextBoldCursor extends EditText {
 
     @Override
     protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
-        super.onFocusChanged(focused, direction, previouslyFocusedRect);
+        try {
+            super.onFocusChanged(focused, direction, previouslyFocusedRect);
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
         checkHeaderVisibility(true);
     }
 

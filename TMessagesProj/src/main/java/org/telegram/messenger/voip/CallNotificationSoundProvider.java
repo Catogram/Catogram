@@ -67,7 +67,7 @@ public class CallNotificationSoundProvider extends ContentProvider {
 		}
 
 		try {
-			VoIPBaseService srv = VoIPBaseService.getSharedInstance();
+			VoIPService srv = VoIPService.getSharedInstance();
 			if (srv != null) {
 				srv.startRingtoneAndVibration();
 			}

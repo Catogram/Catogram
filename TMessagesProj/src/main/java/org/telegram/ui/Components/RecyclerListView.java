@@ -51,6 +51,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class RecyclerListView extends RecyclerView {
 
     private OnItemClickListener onItemClickListener;
@@ -204,7 +207,7 @@ public class RecyclerListView extends RecyclerView {
         @Override
         public boolean isEnabled(ViewHolder holder) {
             int position = holder.getAdapterPosition();
-            return isEnabled(getSectionForPosition(position), getPositionInSectionForPosition(position));
+            return isEnabled(holder, getSectionForPosition(position), getPositionInSectionForPosition(position));
         }
 
         @Override
@@ -289,7 +292,7 @@ public class RecyclerListView extends RecyclerView {
 
         public abstract int getSectionCount();
         public abstract int getCountForSection(int section);
-        public abstract boolean isEnabled(int section, int row);
+        public abstract boolean isEnabled(ViewHolder holder, int section, int row);
         public abstract int getItemViewType(int section, int position);
         public abstract Object getItem(int section, int position);
         public abstract void onBindViewHolder(int section, int position, ViewHolder holder);
@@ -591,7 +594,7 @@ public class RecyclerListView extends RecyclerView {
                             ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(child, HapticFeedbackConstants.LONG_PRESS);
                             child.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
                         }
-                    } else if (onItemLongClickListenerExtended != null) {
+                    } else {
                         if (onItemLongClickListenerExtended.onItemClick(currentChildView, currentChildPosition, event.getX() - currentChildView.getX(), event.getY() - currentChildView.getY())) {
                             ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(child, HapticFeedbackConstants.LONG_PRESS);
                             child.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
@@ -667,9 +670,7 @@ public class RecyclerListView extends RecyclerView {
 
             if (currentChildView != null && !interceptedByChild) {
                 try {
-                    if (event != null) {
-                        gestureDetector.onTouchEvent(event);
-                    }
+                    gestureDetector.onTouchEvent(event);
                 } catch (Exception e) {
                     FileLog.e(e);
                 }

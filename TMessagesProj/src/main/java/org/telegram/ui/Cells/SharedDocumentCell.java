@@ -68,6 +68,8 @@ public class SharedDocumentCell extends FrameLayout implements DownloadControlle
     private TextView rightDateTextView;
     private TextView captionTextView;
 
+    private boolean drawDownloadIcon = true;
+
     private boolean needDivider;
 
     private int currentAccount = UserConfig.selectedAccount;
@@ -148,7 +150,7 @@ public class SharedDocumentCell extends FrameLayout implements DownloadControlle
         nameTextView.setEllipsize(TextUtils.TruncateAt.END);
         nameTextView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_VERTICAL);
 
-        LinearLayout linearLayout = null;
+        LinearLayout linearLayout;
         if (viewType == VIEW_TYPE_PICKER) {
             nameTextView.setLines(1);
             nameTextView.setMaxLines(1);
@@ -231,6 +233,10 @@ public class SharedDocumentCell extends FrameLayout implements DownloadControlle
             dotSpan = new SpannableStringBuilder(".");
             dotSpan.setSpan(new DotDividerSpan(), 0, 1, 0);
         }
+    }
+
+    public void setDrawDownloadIcon(boolean value) {
+        drawDownloadIcon = value;
     }
 
     public void setTextAndValueAndTypeAndThumb(String text, String value, String type, String thumb, int resId, boolean divider) {
@@ -367,7 +373,7 @@ public class SharedDocumentCell extends FrameLayout implements DownloadControlle
         loading = false;
 
         TLRPC.Document document = messageObject.getDocument();
-        if (messageObject != null && document != null) {
+        if (document != null) {
             int idx;
             String name = null;
             if (messageObject.isMusic()) {
@@ -410,7 +416,11 @@ public class SharedDocumentCell extends FrameLayout implements DownloadControlle
                 thumbImageView.getImageReceiver().setShouldGenerateQualityThumb(bigthumb == null);
 
                 thumbImageView.setVisibility(VISIBLE);
-                thumbImageView.setImage(ImageLocation.getForDocument(bigthumb, document), "40_40", ImageLocation.getForDocument(thumb, document), "40_40_b", null, 0, 1, messageObject);
+                if (messageObject.strippedThumb != null) {
+                    thumbImageView.setImage(ImageLocation.getForDocument(bigthumb, document), "40_40", null, null, messageObject.strippedThumb, null, null, 1, messageObject);
+                } else {
+                    thumbImageView.setImage(ImageLocation.getForDocument(bigthumb, document), "40_40", ImageLocation.getForDocument(thumb, document), "40_40_b", null, 0, 1, messageObject);
+                }
             }
             long date = (long) messageObject.messageOwner.date * 1000;
             if (viewType == VIEW_TYPE_GLOBAL_SEARCH) {
@@ -468,7 +478,7 @@ public class SharedDocumentCell extends FrameLayout implements DownloadControlle
         }
         if (message != null && message.messageOwner.media != null) {
             loaded = false;
-            if (message.attachPathExists || message.mediaExists) {
+            if (message.attachPathExists || message.mediaExists || !drawDownloadIcon) {
                 statusImageView.setVisibility(INVISIBLE);
                 progressView.setVisibility(INVISIBLE);
 

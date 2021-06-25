@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,10 @@ import org.telegram.ui.Cells.GroupCreateUserCell;
 import org.telegram.ui.Cells.ShareDialogCell;
 
 import java.util.ArrayList;
+
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class JoinCallAlert extends BottomSheet {
 
@@ -349,7 +354,9 @@ public class JoinCallAlert extends BottomSheet {
                 }
             };
             linearLayout.setOrientation(LinearLayout.VERTICAL);
-            setCustomView(internalLayout = linearLayout);
+            NestedScrollView scrollView = new NestedScrollView(context);
+            scrollView.addView(internalLayout = linearLayout);
+            setCustomView(scrollView);
         } else {
             containerView = new FrameLayout(context) {
 
