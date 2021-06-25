@@ -1129,7 +1129,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     if (scrimView != null) {
                         delayedGroupCallUpdated = true;
                     } else {
-                        applyCallParticipantUpdates();
+                        applyCallParticipantUpdates(true);
                     }
 
                     updateSubtitle();
@@ -1224,7 +1224,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 TLRPC.TL_groupCallParticipant participant = call.participants.get(selfId);
                 if (participant != null) {
                     participant.about = chatFull.about;
-                    applyCallParticipantUpdates();
+                    applyCallParticipantUpdates(true);
                     AndroidUtilities.updateVisibleRows(listView);
 
                     if (currentOptionsLayout != null) {
@@ -1265,7 +1265,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 if (participant != null) {
                     TLRPC.UserFull userInfo = (TLRPC.UserFull) args[1];
                     participant.about = userInfo.about;
-                    applyCallParticipantUpdates();
+                    applyCallParticipantUpdates(true);
                     AndroidUtilities.updateVisibleRows(listView);
 
                     if (currentOptionsLayout != null) {
@@ -1282,12 +1282,12 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 }
             }
         } else if (id == NotificationCenter.mainUserInfoChanged) {
-            applyCallParticipantUpdates();
+            applyCallParticipantUpdates(true);
             AndroidUtilities.updateVisibleRows(listView);
         } else if (id == NotificationCenter.updateInterfaces) {
             int mask = (int) args[0];
             if ((mask & MessagesController.UPDATE_MASK_CHAT_NAME) != 0) {
-                applyCallParticipantUpdates();
+                applyCallParticipantUpdates(true);
                 AndroidUtilities.updateVisibleRows(listView);
             }
         } else if (id == NotificationCenter.groupCallScreencastStateChanged) {
@@ -1332,7 +1332,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
         }
     }
 
-    private void applyCallParticipantUpdates() {
+    private void applyCallParticipantUpdates(boolean animated) {
         if (renderersContainer.inFullscreenMode) {
             renderersContainer.setVisibleParticipant(true);
         }
@@ -1360,6 +1360,11 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             }
         }
         updateVideoParticipantList();
+        if (listView.getItemAnimator() != null && !animated) {
+            listView.setItemAnimator(null);
+        } else if (listView.getItemAnimator() == null && animated) {
+            listView.setItemAnimator(itemAnimator);
+        }
 
         try {
             UpdateCallback updateCallback = new UpdateCallback(listAdapter);
@@ -1395,6 +1400,20 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 }
             }
         }
+
+        boolean autoPinEnabled = renderersContainer.autoPinEnabled();
+        if (renderersContainer.inFullscreenMode && renderersContainer.fullscreenParticipant != null && !ChatObject.Call.videoIsActive(renderersContainer.fullscreenParticipant.participant, renderersContainer.fullscreenParticipant.presentation, call)) {
+            boolean foundAnotherVideoParticipant = false;
+            if (!visibleVideoParticipants.isEmpty()) {
+                foundAnotherVideoParticipant = true;
+                if (autoPinEnabled) {
+                    fullscreenFor(visibleVideoParticipants.get(0));
+                }
+            }
+            if (!foundAnotherVideoParticipant) {
+                fullscreenFor(null);
+            }
+        }
         fullscreenAdapter.update(true, fullscreenUsersListView);
         if (fullscreenUsersListView.getVisibility() == View.VISIBLE) {
             AndroidUtilities.updateVisibleRows(fullscreenUsersListView);
@@ -1411,22 +1430,10 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             attachedRenderersTmp.get(i).updateAttachState(true);
         }
 
-        boolean autoPinEnabled = renderersContainer.autoPinEnabled();
         if (call != null && renderersContainer.inFullscreenMode && renderersContainer.fullscreenParticipant != null && call.participants.get(MessageObject.getPeerId(renderersContainer.fullscreenParticipant.participant.peer)) == null) {
             autoPinEnabled = true;
         }
-        if (renderersContainer.inFullscreenMode && renderersContainer.fullscreenParticipant != null && !ChatObject.Call.videoIsActive(renderersContainer.fullscreenParticipant.participant, renderersContainer.fullscreenParticipant.presentation, call)) {
-            boolean foundAnotherVideoParticipant = false;
-                if (!visibleVideoParticipants.isEmpty()) {
-                    foundAnotherVideoParticipant = true;
-                    if (autoPinEnabled) {
-                        fullscreenFor(visibleVideoParticipants.get(0));
-                    }
-                }
-            if (!foundAnotherVideoParticipant) {
-                fullscreenFor(null);
-            }
-        }
+
 
         boolean hasVideoLocal = !call.visibleVideoParticipants.isEmpty();
         if (hasVideoLocal != hasVideo) {
@@ -1475,21 +1482,31 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
         if (changingPermissions) {
             return;
         }
+        boolean anyVisible = false;
         TLRPC.Chat newChat = accountInstance.getMessagesController().getChat(currentChat.id);
         if (newChat != null) {
             currentChat = newChat;
         }
         if (ChatObject.canUserDoAdminAction(currentChat, ChatObject.ACTION_INVITE)) {
             inviteItem.setVisibility(View.VISIBLE);
+            anyVisible = true;
         } else {
             inviteItem.setVisibility(View.GONE);
         }
 
-        noiseItem.setVisibility(View.VISIBLE);
+        TLRPC.TL_groupCallParticipant participant = call.participants.get(MessageObject.getPeerId(selfPeer));
+
+        if (call == null || call.isScheduled() || participant != null && !participant.can_self_unmute && participant.muted) {
+            noiseItem.setVisibility(View.GONE);
+        } else {
+            noiseItem.setVisibility(View.VISIBLE);
+            anyVisible = true;
+        }
         noiseItem.setIcon(SharedConfig.noiseSupression ? R.drawable.msg_noise_on : R.drawable.msg_noise_off);
         noiseItem.setSubtext(SharedConfig.noiseSupression ? LocaleController.getString("VoipNoiseCancellationEnabled", R.string.VoipNoiseCancellationEnabled) : LocaleController.getString("VoipNoiseCancellationDisabled", R.string.VoipNoiseCancellationDisabled));
 
         if (ChatObject.canManageCalls(currentChat)) {
+            anyVisible = true;
             leaveItem.setVisibility(View.VISIBLE);
             editTitleItem.setVisibility(View.VISIBLE);
             if (call.isScheduled()) {
@@ -1527,9 +1544,9 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             }
             updateRecordCallText();
         } else {
-            TLRPC.TL_groupCallParticipant participant = call.participants.get(MessageObject.getPeerId(selfPeer));
             boolean mutedByAdmin = participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(currentChat);
             if (Build.VERSION.SDK_INT >= 21 && !mutedByAdmin && call.canStreamVideo) {
+                anyVisible = true;
                 if (VoIPService.getSharedInstance() != null && VoIPService.getSharedInstance().getVideoState(true) == Instance.VIDEO_STATE_ACTIVE) {
                     screenShareItem.setVisibility(View.GONE);
                     screenItem.setVisibility(View.VISIBLE);
@@ -1551,17 +1568,18 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
         }
         if (ChatObject.canManageCalls(currentChat) && call.call.can_change_join_muted) {
             permissionItem.setVisibility(View.VISIBLE);
+            anyVisible = true;
         } else {
             permissionItem.setVisibility(View.GONE);
         }
         if (soundButton.getVisibility() != View.VISIBLE) {
             soundItem.setVisibility(View.VISIBLE);
             soundItemDivider.setVisibility(View.VISIBLE);
+            anyVisible = true;
         } else {
             soundItem.setVisibility(View.GONE);
             soundItemDivider.setVisibility(View.GONE);
         }
-        otherItem.setVisibility(View.VISIBLE);
 
         int margin = 48;
         if (VoIPService.getSharedInstance() != null && VoIPService.getSharedInstance().hasFewPeers || scheduleHasFewPeers) {
@@ -1576,12 +1594,18 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             }
             accountSelectCell.setObject(object);
             margin += 48;
+            anyVisible = true;
         } else {
             margin += 48;
             accountSelectCell.setVisibility(View.GONE);
             accountGap.setVisibility(View.GONE);
         }
 
+        if (anyVisible) {
+            otherItem.setVisibility(View.VISIBLE);
+        } else {
+            otherItem.setVisibility(View.GONE);
+        }
 
         FrameLayout.LayoutParams layoutParams = ((FrameLayout.LayoutParams) titleTextView.getLayoutParams());
         if (layoutParams.rightMargin != AndroidUtilities.dp(margin)) {
@@ -2208,7 +2232,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     updateRenderers = true;
                 }
                 if (updateRenderers) {
-                    applyCallParticipantUpdates();
+                    applyCallParticipantUpdates(true);
                     listAdapter.notifyDataSetChanged();
                     fullscreenAdapter.update(false, tabletVideoGridView);
                     if (isTabletMode) {
@@ -4355,7 +4379,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             @Override
             public boolean drawChild(Canvas canvas, View child, long drawingTime) {
                 GroupCallFullscreenAdapter.GroupCallUserCell cell = (GroupCallFullscreenAdapter.GroupCallUserCell) child;
-                if (!renderersContainer.isAnimating()) {
+                if (!renderersContainer.isAnimating() && !fullscreenListItemAnimator.isRunning()) {
                     cell.setAlpha(1f);
                     cell.setTranslationX(0);
                     cell.setTranslationY(0);
@@ -4478,7 +4502,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                             fullscreenAdapter.update(false, fullscreenUsersListView);
                         } else {
                             fullscreenAdapter.setVisibility(fullscreenUsersListView, true);
-                            applyCallParticipantUpdates();
+                            applyCallParticipantUpdates(true);
                         }
                     } else {
                         if (!renderersContainer.inFullscreenMode) {
@@ -4503,7 +4527,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     }
                     buttonsBackgroundGradientView2.setVisibility(startAnimation ? View.VISIBLE : View.GONE);
                     if (!delayedGroupCallUpdated) {
-                        applyCallParticipantUpdates();
+                        applyCallParticipantUpdates(true);
                     }
                 }
             }
@@ -4695,7 +4719,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
         avatarPreviewContainer.addView(avatarPagerIndicator, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, 0, 0, 0, 0, 0));
         containerView.addView(avatarPreviewContainer, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, 0, 14, 14, 14, 14));
 
-        applyCallParticipantUpdates();
+        applyCallParticipantUpdates(false);
         listAdapter.notifyDataSetChanged();
 
         if (isTabletMode) {
@@ -4986,7 +5010,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                                 }
                                 updateState(true, false);
                                 call.sortParticipants();
-                                applyCallParticipantUpdates();
+                                applyCallParticipantUpdates(true);
                                 buttonsContainer.requestLayout();
                             } else {
                                 if (service != null) {
@@ -5005,7 +5029,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 updateState(true, false);
                 updateSpeakerPhoneIcon(false);
                 call.sortParticipants();
-                applyCallParticipantUpdates();
+                applyCallParticipantUpdates(true);
                 buttonsContainer.requestLayout();
             }
         });
@@ -5113,13 +5137,13 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     renderersContainer.requestFullscreen(videoParticipant);
                     if (delayedGroupCallUpdated) {
                         delayedGroupCallUpdated = false;
-                        applyCallParticipantUpdates();
+                        applyCallParticipantUpdates(true);
                         if (updateScroll && videoParticipant != null) {
                             listView.scrollToPosition(0);
                         }
                         delayedGroupCallUpdated = true;
                     } else {
-                        applyCallParticipantUpdates();
+                        applyCallParticipantUpdates(true);
                     }
                     return false;
                 }
@@ -5155,7 +5179,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             } else {
                 if (listView.getVisibility() != View.VISIBLE) {
                     listView.setVisibility(View.VISIBLE);
-                    applyCallParticipantUpdates();
+                    applyCallParticipantUpdates(false);
                     delayedGroupCallUpdated = true;
                     listView.getViewTreeObserver().addOnPreDrawListener(requestFullscreenListener = new ViewTreeObserver.OnPreDrawListener() {
                         @Override
@@ -5716,7 +5740,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 AndroidUtilities.runOnUIThread(() -> {
                     if (call != null && !delayedGroupCallUpdated) {
                         call.addInvitedUser(id);
-                        applyCallParticipantUpdates();
+                        applyCallParticipantUpdates(true);
                         if (groupVoipInviteAlert != null) {
                             groupVoipInviteAlert.dismiss();
                         }
@@ -7050,7 +7074,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                             listView.invalidate();
                             if (delayedGroupCallUpdated) {
                                 delayedGroupCallUpdated = false;
-                                applyCallParticipantUpdates();
+                                applyCallParticipantUpdates(true);
                             }
                         }
                     });
@@ -7271,7 +7295,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
 
                     if (delayedGroupCallUpdated) {
                         delayedGroupCallUpdated = false;
-                        applyCallParticipantUpdates();
+                        applyCallParticipantUpdates(true);
                     }
 
                     if (scrimRenderer != null) {
@@ -7324,7 +7348,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
 
             if (delayedGroupCallUpdated) {
                 delayedGroupCallUpdated = false;
-                applyCallParticipantUpdates();
+                applyCallParticipantUpdates(true);
             }
             checkContentOverlayed();
         }
@@ -7832,16 +7856,16 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
 
     @Override
     public void onBackPressed() {
+        if (previewDialog != null) {
+            previewDialog.dismiss(false);
+            return;
+        }
         if (avatarsPreviewShowed) {
             dismissAvatarPreview(true);
             return;
         }
         if (renderersContainer.inFullscreenMode) {
             fullscreenFor(null);
-            return;
-        }
-        if (previewDialog != null) {
-            previewDialog.dismiss(false);
             return;
         }
         super.onBackPressed();

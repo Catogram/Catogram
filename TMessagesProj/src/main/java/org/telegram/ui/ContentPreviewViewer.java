@@ -235,8 +235,8 @@ public class ContentPreviewViewer {
                     close();
                 });
                 visibleDialog.show();
-                ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(containerView, HapticFeedbackConstants.LONG_PRESS);
-                if (delegate.needRemove()) {
+                    ua.itaysonlab.extras.CatogramExtras.performHapticFeedback(containerView, HapticFeedbackConstants.LONG_PRESS);
+                if (delegate != null && delegate.needRemove()) {
                     BottomSheet.BottomSheetCell cell = visibleDialog.getItemViews().get(0);
                     cell.setTextColor(Theme.getColor(Theme.key_dialogTextRed));
                     cell.setIconColor(Theme.getColor(Theme.key_dialogRedIcon));
