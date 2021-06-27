@@ -229,7 +229,7 @@
     <string name="CG_RecentStickers_desc">de stickers recentes</string>
     <string name="CG_Without_Authorship">Sem autoria</string>
     <string name="CG_Private">Este canal é privado</string>
-    <string name="CG_ForceClean">Forçar a limpeza do cache do telegram</string>
+    <string name="CG_ForceClean">Forçar limpeza do cache do telegram</string>
     <string name="CG_ForceCleanInfo">Use isso se enfrentar um longo \"Calculando...\" ao tentar limpar o cache.\nIsso irá excluir TUDO do seu cache - tenha cuidado!</string>
     <string name="CG_SwitchBackend">Você vai mudar para o servidor de teste. Por favor, não pressione OK se você não sabe o que está fazendo. Você pode alternar para o servidor normal pressionando \"Alternar backend\" no menu de depuração novamente.</string>
     <string name="CG_SB">Alternar backend</string>
