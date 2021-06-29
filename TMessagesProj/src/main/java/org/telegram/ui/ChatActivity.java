@@ -5714,7 +5714,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (searchingForUser && searchContainer.getVisibility() == View.VISIBLE) {
                     searchUserMessages(user, null);
                 } else {
-                    if (user.username != null) {
+                    if (user.bot || (user.username != null && !CatogramConfig.INSTANCE.getMentionByName())) {
                         chatActivityEnterView.replaceWithText(start, len, "@" + user.username + " ", false);
                     } else {
                         String name = UserObject.getFirstName(user, false);
@@ -5816,10 +5816,15 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else if (object instanceof TLRPC.User) {
                 TLRPC.User user = (TLRPC.User) object;
                 if (!(searchingForUser && searchContainer.getVisibility() == View.VISIBLE) && user != null) {
-                    String name = UserObject.getFirstName(user, false);
-                    Spannable spannable = new SpannableString(name + " ");
-                    spannable.setSpan(new URLSpanUserMention("" + user.id, 3), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    chatActivityEnterView.replaceWithText(start, len, spannable, false);
+                    if (!CatogramConfig.INSTANCE.getMentionByName() && !user.bot) {
+                        String name = UserObject.getFirstName(user, false);
+                        Spannable spannable = new SpannableString(name + " ");
+                        spannable.setSpan(new URLSpanUserMention("" + user.id, 3), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        chatActivityEnterView.replaceWithText(start, len, spannable, false);
+                    }
+                    else {
+                        chatActivityEnterView.replaceWithText(start, len, "@" + user.username + " ", false);
+                    }
                     return true;
                 }
             }

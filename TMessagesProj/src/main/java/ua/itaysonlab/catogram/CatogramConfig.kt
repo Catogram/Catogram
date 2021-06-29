@@ -97,6 +97,8 @@ object CatogramConfig {
     var sleepTime by sharedPreferences.int("cg_sleep_time", 30)
     var sleepOp by sharedPreferences.int("cg_op", 30)
 
+    var mentionByName by sharedPreferences.boolean("cg_mention_by_name", false)
+
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 
     fun getIconReplacement(): BaseIconReplace {
