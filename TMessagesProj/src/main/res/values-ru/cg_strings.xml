@@ -259,4 +259,6 @@
     <string name="CG_Changelog">Список изменений</string>
     <string name="CG_Sleep">Таймер времени сна</string>
     <string name="CG_Sleep_Time">Отсчёт времени сна (минуты)</string>
+    <string name="CG_MentionByName">Mention by name</string>
+    <string name="CG_MentionByName_Desc">instead of username</string>
 </resources>
