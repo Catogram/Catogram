@@ -261,8 +261,8 @@
     <string name="CG_Changelog">更新日志</string>
     <string name="CG_Sleep">睡眠定时</string>
     <string name="CG_Sleep_Time">睡眠定时器时长 (分钟)</string>
-    <string name="CG_MentionByName">Mention by name</string>
-    <string name="CG_MentionByName_Desc">instead of username</string>
-    <string name="CG_PlayVideo">Play video on volume button click</string>
-    <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
+    <string name="CG_MentionByName">以用户名提及</string>
+    <string name="CG_MentionByName_Desc">而不提及账号名称</string>
+    <string name="CG_PlayVideo">点击音量键时播放视频</string>
+    <string name="CG_PlayVideo_Desc">如果启用此选项，当按下音量按键时，对话框中的视频将会开始播放</string>
 </resources>
