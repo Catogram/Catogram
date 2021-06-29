@@ -37,7 +37,6 @@ import org.telegram.messenger.AccountInstance;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.FileLog;
-import org.telegram.messenger.ImageLocation;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
@@ -364,8 +363,6 @@ public class DrawerProfileCell extends FrameLayout {
         nameTextView.setText(UserObject.getUserName(user));
         if (CatogramConfig.INSTANCE.getHidePhoneNumber()) {
             phoneTextView.setText(user.username != null ? "@" + user.username : String.valueOf(AccountInstance.getInstance(UserConfig.selectedAccount).getUserConfig().clientUserId));
-        } else if (CatogramConfig.INSTANCE.getFakePhoneNumber()) {
-            phoneTextView.setText(PhoneFormat.getInstance().format("+71234567890"));
         } else {
             phoneTextView.setText(PhoneFormat.getInstance().format("+" + user.phone));
         }

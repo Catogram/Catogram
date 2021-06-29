@@ -68,7 +68,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
@@ -176,7 +175,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import ua.itaysonlab.catogram.CatogramConfig;
-import ua.itaysonlab.redesign.slides.DrawerSheetFragment;
 
 public class DialogsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
 
@@ -3084,7 +3082,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
         floatingButtonContainer = new FrameLayout(context);
         floatingButtonContainer.setVisibility(onlySelect && initialDialogsType != 10 || folderId != 0 ? View.GONE : View.VISIBLE);
-        contentView.addView(floatingButtonContainer, LayoutHelper.createFrame((Build.VERSION.SDK_INT >= 21 ? 56 : 60) + 20, (Build.VERSION.SDK_INT >= 21 ? 56 : 60) + 20, (LocaleController.isRTL || CatogramConfig.INSTANCE.getForceLeftFab() ? Gravity.LEFT : Gravity.RIGHT) | Gravity.BOTTOM, LocaleController.isRTL || CatogramConfig.INSTANCE.getForceLeftFab() ? 4 : 0, 0, LocaleController.isRTL || CatogramConfig.INSTANCE.getForceLeftFab() ? 0 : 4, 0));
+        contentView.addView(floatingButtonContainer, LayoutHelper.createFrame((Build.VERSION.SDK_INT >= 21 ? 56 : 60) + 20, (Build.VERSION.SDK_INT >= 21 ? 56 : 60) + 20, (LocaleController.isRTL ? Gravity.LEFT : Gravity.RIGHT) | Gravity.BOTTOM, LocaleController.isRTL  ? 4 : 0, 0, LocaleController.isRTL ? 0 : 4, 0));
         floatingButtonContainer.setOnClickListener(v -> {
             if (initialDialogsType == 10) {
                 if (delegate == null || selectedDialogs.isEmpty()) {

@@ -6840,7 +6840,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                             if  (ua.itaysonlab.catogram.CatogramConfig.INSTANCE.getHidePhoneNumber()) {
                                 value = LocaleController.getString("AS_Hidden", R.string.AS_Hidden);
                         } else {
-                                value = ua.itaysonlab.catogram.CatogramConfig.INSTANCE.getFakePhoneNumber() ? PhoneFormat.getInstance().format("+71234567890") : PhoneFormat.getInstance().format("+" + user.phone);
+                                value = PhoneFormat.getInstance().format("+" + user.phone);
                             }
                         } else {
                             value = LocaleController.getString("NumberUnknown", R.string.NumberUnknown);

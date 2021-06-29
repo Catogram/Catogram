@@ -238,10 +238,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import kotlin.Pair;
-import kotlin.Unit;
 import ua.itaysonlab.catogram.CGFeatureHooks;
 import ua.itaysonlab.catogram.CatogramConfig;
-import ua.itaysonlab.catogram.message_ctx_menu.TgxExtras;
 import ua.itaysonlab.catogram.stickers.StickerDownloader;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
 import ua.itaysonlab.catogram.ui.CatogramToasts;
@@ -7336,7 +7334,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void createCGShareAlertSelected() {
-        if (CatogramConfig.INSTANCE.getNewRepostUI()) {
             forwardingMessage = selectedObject;
             forwardingMessageGroup = selectedObjectGroup;
             ArrayList<MessageObject> fmessages = new ArrayList<>();
@@ -7357,19 +7354,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             });
             AndroidUtilities.setAdjustResizeToNothing(getParentActivity(), classGuid);
             fragmentView.requestLayout();
-        } else {
-            CGFeatureHooks.switchNoAuthor(false);
-            forwardingMessage = selectedObject;
-            forwardingMessageGroup = selectedObjectGroup;
-            Bundle args = new Bundle();
-            args.putBoolean("onlySelect", true);
-            args.putInt("dialogsType", 3);
-            args.putInt("messagesCount", forwardingMessageGroup == null ? 1 : forwardingMessageGroup.messages.size());
-            args.putInt("hasPoll", forwardingMessage.isPoll() ? (forwardingMessage.isPublicPoll() ? 2 : 1) : 0);
-            DialogsActivity fragment = new DialogsActivity(args);
-            fragment.setDelegate(this);
-            presentFragment(fragment);
-        }
     }
 
     private void showShareAlert() {
@@ -19023,24 +19007,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             items.add(LocaleController.getString("CG_ToSaved", R.string.CG_ToSaved));
             options.add(991);
             icons.add(R.drawable.menu_saved_cg);
-
-            if (CatogramConfig.INSTANCE.getUseTgxMenuSlide()) {
-                AndroidUtilities.hideKeyboard(getParentActivity().findViewById(android.R.id.content));
-                TgxExtras.createSlideMenu(options, items, icons, getParentActivity(), (id) -> {
-                    this.processSelectedOption(id);
-                    return Unit.INSTANCE;
-                }).show(getParentActivity());
-                return;
-            }
-
-            if (CatogramConfig.INSTANCE.getUseTgxMenuSlideSheet()) {
-                AndroidUtilities.hideKeyboard(getParentActivity().findViewById(android.R.id.content));
-                TgxExtras.createSheetMenu(options, items, icons, getParentActivity(), (id) -> {
-                    this.processSelectedOption(id);
-                    return Unit.INSTANCE;
-                }).show(((AppCompatActivity) getParentActivity()).getSupportFragmentManager(), null);
-                return;
-            }
 
             if (scrimPopupWindow != null) {
                 scrimPopupWindow.dismiss();

@@ -3224,10 +3224,6 @@ public class NotificationsController extends BaseController {
     }
 
     private void showOrUpdateNotification(boolean notifyAboutLast) {
-        if (CatogramConfig.INSTANCE.getTotalSilence()) {
-            dismissNotification();
-            return;
-        }
         if (!getUserConfig().isClientActivated() || pushMessages.isEmpty() || !SharedConfig.showNotificationsForAllAccounts && currentAccount != UserConfig.selectedAccount) {
             dismissNotification();
             return;
@@ -3388,10 +3384,6 @@ public class NotificationsController extends BaseController {
             }
 
             if (!notifyAboutLast || !value || MediaController.getInstance().isRecordingAudio() || silent == 1) {
-                notifyDisabled = true;
-            }
-
-            if (CatogramConfig.INSTANCE.getSilenceDND()) {
                 notifyDisabled = true;
             }
 
@@ -3574,7 +3566,7 @@ public class NotificationsController extends BaseController {
                     .setShowWhen(true)
                     .setWhen(((long) lastMessageObject.messageOwner.date) * 1000)
                     //.setPublicVersion(publicNotification)
-                    .setColor(CatogramConfig.INSTANCE.getAccentNotification() ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa);
+                    .setColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader));
 
             long[] vibrationPattern = null;
             Uri sound = null;
@@ -4317,7 +4309,7 @@ public class NotificationsController extends BaseController {
                     .setContentText(text.toString())
                     .setAutoCancel(true)
                     .setNumber(messageObjects.size())
-                    .setColor(CatogramConfig.INSTANCE.getAccentNotification() ? Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader) : 0xff11acfa)
+                    .setColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueHeader))
                     .setGroupSummary(false)
                     .setWhen(date)
                     .setShowWhen(true)

@@ -1,7 +1,6 @@
 package ua.itaysonlab.catogram.preferences
 
 import android.graphics.Color
-import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
@@ -24,51 +23,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.redesign_TelegramThemes
                 }) {
                     CatogramConfig.redesign_TelegramThemes = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_NewDrawer", R.string.CG_NewDrawer)
-                summary = LocaleController.getString("CG_NewDrawer_Desc", R.string.CG_NewDrawer_Desc)
-
-                contract({
-                    return@contract CatogramConfig.redesign_SlideDrawer
-                }) {
-                    CatogramConfig.redesign_SlideDrawer = it
-                }
-            }
-
-            list {
-                title = LocaleController.getString("CG_MessageMenuOption", R.string.CG_MessageMenuOption)
-
-                contract({
-                    return@contract listOf(
-                            Pair(0, LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)),
-                            Pair(1, LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)),
-                            Pair(2, LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)),
-                    )
-                }, {
-                    return@contract when (CatogramConfig.redesign_messageOption) {
-                        1 -> LocaleController.getString("CG_MessageMenuOption_TGX", R.string.CG_MessageMenuOption_TGX)
-                        2 -> LocaleController.getString("CG_MessageMenuOption_TGXS", R.string.CG_MessageMenuOption_TGXS)
-                        else -> LocaleController.getString("CG_MessageMenuOption_Default", R.string.CG_MessageMenuOption_Default)
-                    }
-                }) {
-                    CatogramConfig.redesign_messageOption = it
-                    when (CatogramConfig.redesign_messageOption) {
-                        0 -> {
-                            CatogramConfig.useTgxMenuSlide = false
-                            CatogramConfig.useTgxMenuSlideSheet = false
-                        }
-                        1 -> {
-                            CatogramConfig.useTgxMenuSlide = true
-                            CatogramConfig.useTgxMenuSlideSheet = false
-                        }
-                        2 -> {
-                            CatogramConfig.useTgxMenuSlide = false
-                            CatogramConfig.useTgxMenuSlideSheet = true
-                        }
-                    }
                 }
             }
 
@@ -122,17 +76,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.hidePhoneNumber
                 }) {
                     CatogramConfig.hidePhoneNumber = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_FakeUserPhone", R.string.CG_FakeUserPhone)
-                summary = LocaleController.getString("CG_FakeUserPhoneSummary", R.string.CG_FakeUserPhoneSummary)
-
-                contract({
-                    return@contract CatogramConfig.fakePhoneNumber
-                }) {
-                    CatogramConfig.fakePhoneNumber = it
                 }
             }
 
@@ -202,15 +145,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Notification", R.string.AS_Header_Notification)) {
-            switch {
-                title = LocaleController.getString("AS_AccentNotify", R.string.AS_AccentNotify)
-
-                contract({
-                    return@contract CatogramConfig.accentNotification
-                }) {
-                    CatogramConfig.accentNotification = it
-                }
-            }
 
             switch {
                 title = LocaleController.getString("CG_OldNotification", R.string.CG_OldNotification)
@@ -224,49 +158,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_DrawerCategory", R.string.AS_DrawerCategory)) {
-            list {
-                title = LocaleController.getString("AS_ForceIcons", R.string.AS_ForceIcons)
-
-                contract({
-                    return@contract listOf(
-                            Pair(0, LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)),
-                            Pair(1, LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)),
-                            Pair(2, LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)),
-                            Pair(3, "Halloween")
-                    )
-                }, {
-                    return@contract when (CatogramConfig.redesign_forceDrawerIconsOption) {
-                        1 -> LocaleController.getString("AS_ForceSV_Drawer", R.string.AS_ForceSV_Drawer)
-                        2 -> LocaleController.getString("AS_ForceNY_Drawer", R.string.AS_ForceNY_Drawer)
-                        3 -> "Halloween"
-                        else -> LocaleController.getString("AS_ForceDefault_Drawer", R.string.AS_ForceDefault_Drawer)
-                    }
-                }) {
-                    CatogramConfig.redesign_forceDrawerIconsOption = it
-                    when (CatogramConfig.redesign_forceDrawerIconsOption) {
-                        0 -> {
-                            CatogramConfig.forceNewYearDrawer = false
-                            CatogramConfig.forceSVDrawer = false
-                            CatogramConfig.forceHLDrawer = false
-                        }
-                        1 -> {
-                            CatogramConfig.forceNewYearDrawer = false
-                            CatogramConfig.forceSVDrawer = true
-                            CatogramConfig.forceHLDrawer = false
-                        }
-                        2 -> {
-                            CatogramConfig.forceNewYearDrawer = true
-                            CatogramConfig.forceSVDrawer = false
-                            CatogramConfig.forceHLDrawer = false
-                        }
-                        3 -> {
-                            CatogramConfig.forceNewYearDrawer = false
-                            CatogramConfig.forceSVDrawer = false
-                            CatogramConfig.forceHLDrawer = true
-                        }
-                    }
-                }
-            }
 
             switch {
                 title = LocaleController.getString("AS_DrawerAvatar", R.string.AS_DrawerAvatar)
@@ -295,30 +186,6 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.drawerDarken
                 }) {
                     CatogramConfig.drawerDarken = it
-                }
-            }
-        }
-
-        category(LocaleController.getString("AS_Header_Fun", R.string.AS_Header_Fun)) {
-            switch {
-                title = LocaleController.getString("AS_ForceNY", R.string.AS_ForceNY)
-                summary = LocaleController.getString("AS_ForceNYSummary", R.string.AS_ForceNYSummary)
-
-                contract({
-                    return@contract CatogramConfig.forceNewYear
-                }) {
-                    CatogramConfig.forceNewYear = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("AS_ForcePacman", R.string.AS_ForcePacman)
-                summary = LocaleController.getString("AS_ForcePacmanSummary", R.string.AS_ForcePacmanSummary)
-
-                contract({
-                    return@contract CatogramConfig.forcePacman
-                }) {
-                    CatogramConfig.forcePacman = it
                 }
             }
         }

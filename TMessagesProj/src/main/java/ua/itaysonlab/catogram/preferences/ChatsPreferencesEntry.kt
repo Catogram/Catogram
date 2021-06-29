@@ -34,16 +34,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     }
                 }
             }
-            switch {
-                title = LocaleController.getString("CG_RecentStickers", R.string.CG_RecentStickers)
-                summary = LocaleController.getString("CG_RecentStickers_desc", R.string.CG_RecentStickers_desc)
-
-                contract({
-                    return@contract CatogramConfig.fullRecentStickers
-                }) {
-                    CatogramConfig.fullRecentStickers = it
-                }
-            }
         }
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
@@ -138,17 +128,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
-                title = LocaleController.getString("CG_StereoVoices", R.string.CG_StereoVoices)
-                summary = LocaleController.getString("CG_StereoVoices_Desc", R.string.CG_StereoVoices_Desc)
-
-                contract({
-                    return@contract CatogramConfig.stereoVoices
-                }) {
-                    CatogramConfig.stereoVoices = it
-                }
-            }
-
-            switch {
                 title = LocaleController.getString("CG_VoiceEnhancements", R.string.CG_VoiceEnhancements)
                 summary = LocaleController.getString("CG_VoiceEnhancements_Desc", R.string.CG_VoiceEnhancements_Desc)
 
@@ -172,30 +151,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Notification", R.string.AS_Header_Notification)) {
-
-            switch {
-                title = LocaleController.getString("CG_DND", R.string.CG_DND)
-                summary = LocaleController.getString("CG_DND_desc", R.string.CG_DND_desc)
-
-
-                contract({
-                    return@contract CatogramConfig.silenceDND
-                }) {
-                    CatogramConfig.silenceDND = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_Silence", R.string.CG_Silence)
-                summary = LocaleController.getString("CG_Silence_desc", R.string.CG_Silence_desc)
-
-
-                contract({
-                    return@contract CatogramConfig.totalSilence
-                }) {
-                    CatogramConfig.totalSilence = it
-                }
-            }
 
             switch {
                 title = LocaleController.getString("CG_SilenceNonContacts", R.string.CG_SilenceNonContacts)
@@ -244,7 +199,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
 
             switch {
                 title = LocaleController.getString("CG_NewTabs_RemoveAllChats", R.string.CG_NewTabs_RemoveAllChats)
-                //summary = LocaleController.getString("CG_NewTabs_RemoveAllChats_Desc", R.string.CG_NewTabs_RemoveAllChats_Desc)
 
                 contract({
                     return@contract CatogramConfig.newTabs_hideAllChats
@@ -269,18 +223,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
-                title = LocaleController.getString("CG_NewRepostUI", R.string.CG_NewRepostUI)
-                summary = LocaleController.getString("CG_NewRepostUI_Desc", R.string.CG_NewRepostUI_Desc)
-                divider = true
-
-                contract({
-                    return@contract CatogramConfig.newRepostUI
-                }) {
-                    CatogramConfig.newRepostUI = it
-                }
-            }
-
-            switch {
                 title = LocaleController.getString("CG_archiveOnPull", R.string.CG_ArchiveOnPull)
                 summary = LocaleController.getString("CG_archiveOnPull_Desc", R.string.CG_ArchiveOnPull_Desc)
 
@@ -299,40 +241,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.syncPins
                 }) {
                     CatogramConfig.syncPins = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_SmoothKbd", R.string.CG_SmoothKbd)
-                summary = LocaleController.getString("CG_SmoothKbd_Desc", R.string.CG_SmoothKbd_Desc)
-
-                contract({
-                    return@contract SharedConfig.smoothKeyboard
-                }) {
-                    SharedConfig.toggleSmoothKeyboard()
-                    if (SharedConfig.smoothKeyboard && bf.parentActivity != null) {
-                        bf.parentActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-                    }
-                }
-            }
-
-            /* switch {
-                title = LocaleController.getString("CG_FlatChannels", R.string.CG_FlatChannels)
-
-                contract({
-                    return@contract CatogramConfig.flatChannelStyle
-                }) {
-                    CatogramConfig.flatChannelStyle = it
-                }
-            } */
-
-            switch {
-                title = LocaleController.getString("CG_FABLeft", R.string.CG_FABLeft)
-
-                contract({
-                    return@contract CatogramConfig.forceLeftFab
-                }) {
-                    CatogramConfig.forceLeftFab = it
                 }
             }
 

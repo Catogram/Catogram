@@ -39,12 +39,12 @@ object InstantVideoBridge {
 
     @JvmStatic
     fun getInstantAudioChannelCount(): Int {
-        return if (CatogramConfig.stereoVoices) 2 else 1
+        return 1
     }
 
     @JvmStatic
     fun getInstantAudioChannelType(): Int {
-        return if (CatogramConfig.stereoVoices) AudioFormat.CHANNEL_IN_STEREO else AudioFormat.CHANNEL_IN_MONO
+        return AudioFormat.CHANNEL_IN_MONO
     }
 
     // Voices AGC/NS
