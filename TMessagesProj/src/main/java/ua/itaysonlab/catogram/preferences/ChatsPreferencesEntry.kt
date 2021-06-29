@@ -1,10 +1,8 @@
 package ua.itaysonlab.catogram.preferences
 
-import android.view.WindowManager
 import androidx.core.util.Pair
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
-import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.catogram.CGFeatureHooks
@@ -37,6 +35,18 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
+
+            switch {
+                title = LocaleController.getString("CG_PlayVideo", R.string.CG_PlayVideo)
+                summary = LocaleController.getString("CG_PlayVideo_Desc", R.string.CG_PlayVideo_Desc)
+
+                contract({
+                    return@contract CatogramConfig.playVideoOnVolume
+                }) {
+                    CatogramConfig.playVideoOnVolume = it
+                }
+            }
+
             switch {
                 title = LocaleController.getString("CG_RearCam", R.string.CG_RearCam)
                 summary = LocaleController.getString("CG_RearCam_Desc", R.string.CG_RearCam_Desc)

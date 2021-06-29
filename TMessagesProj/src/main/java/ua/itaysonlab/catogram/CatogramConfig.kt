@@ -80,6 +80,8 @@ object CatogramConfig {
     var sleepTime by sharedPreferences.int("cg_sleep_time", 30)
     var sleepOp by sharedPreferences.int("cg_op", 30)
 
+    var playVideoOnVolume by sharedPreferences.boolean("cg_play_video_on_volume", false)
+
     var mentionByName by sharedPreferences.boolean("cg_mention_by_name", false)
 
     fun getIconReplacement(): BaseIconReplace {
