@@ -259,4 +259,6 @@
     <string name="CG_Changelog">Mudanças</string>
     <string name="CG_Sleep">Despertador</string>
     <string name="CG_Sleep_Time">Contagem regressiva do despertador (minutos)</string>
+    <string name="CG_MentionByName">Mention by name</string>
+    <string name="CG_MentionByName_Desc">instead of username</string>
 </resources>
