@@ -214,6 +214,7 @@ import org.telegram.ui.Components.StickersAlert;
 import org.telegram.ui.Components.TextViewSwitcher;
 import org.telegram.ui.Components.Tooltip;
 import org.telegram.ui.Components.URLSpanReplacement;
+import org.telegram.ui.Components.URLSpanUserMention;
 import org.telegram.ui.Components.URLSpanUserMentionPhotoViewer;
 import org.telegram.ui.Components.UndoView;
 import org.telegram.ui.Components.VideoEditTextureView;
@@ -5693,7 +5694,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             int len = mentionsAdapter.getResultLength();
             if (object instanceof TLRPC.User) {
                 TLRPC.User user = (TLRPC.User) object;
-                if (user.username != null) {
+                if (user.bot || (user.username != null && !CatogramConfig.INSTANCE.getMentionByName())) {
                     captionEditText.replaceWithText(start, len, "@" + user.username + " ", false);
                 } else {
                     String name = UserObject.getFirstName(user);
@@ -5712,6 +5713,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
 
         mentionListView.setOnItemLongClickListener((view, position) -> {
             Object object = mentionsAdapter.getItem(position);
+            int start = mentionsAdapter.getResultStartPosition();
+            int len = mentionsAdapter.getResultLength();
             if (object instanceof String) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
                 builder.setTitle(LocaleController.getString("AppName", R.string.AppName));
@@ -5720,6 +5723,20 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
                 showAlertDialog(builder);
                 return true;
+            } else if (object instanceof TLRPC.User) {
+                TLRPC.User user = (TLRPC.User) object;
+                if (user != null) {
+                    if (!CatogramConfig.INSTANCE.getMentionByName() && !user.bot) {
+                        String name = UserObject.getFirstName(user, false);
+                        Spannable spannable = new SpannableString(name + " ");
+                        spannable.setSpan(new URLSpanUserMention("" + user.id, 3), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        captionEditText.replaceWithText(start, len, spannable, false);
+                    }
+                    else {
+                        captionEditText.replaceWithText(start, len, "@" + user.username + " ", false);
+                    }
+                    return true;
+                }
             }
             return false;
         });
