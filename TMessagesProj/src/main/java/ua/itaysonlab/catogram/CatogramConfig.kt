@@ -84,6 +84,8 @@ object CatogramConfig {
 
     var mentionByName by sharedPreferences.boolean("cg_mention_by_name", false)
 
+    var useMediaStream by sharedPreferences.boolean("cg_media_stream", false)
+
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
             1 -> NoIconReplace()

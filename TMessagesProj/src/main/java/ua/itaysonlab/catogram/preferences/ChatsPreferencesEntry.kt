@@ -35,6 +35,16 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
         }
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
+            switch {
+                title = LocaleController.getString("CG_StreamVoip", R.string.CG_StreamVoip)
+                summary = LocaleController.getString("CG_StreamVoip_Desc", R.string.CG_StreamVoip_Desc)
+
+                contract({
+                    return@contract CatogramConfig.useMediaStream
+                }) {
+                    CatogramConfig.useMediaStream = it
+                }
+            }
 
             switch {
                 title = LocaleController.getString("CG_PlayVideo", R.string.CG_PlayVideo)
