@@ -229,8 +229,8 @@
     <string name="CG_RecentStickers_desc">de stickers recientes</string>
     <string name="CG_Without_Authorship">Sin citar</string>
     <string name="CG_Private">Este canal es privado</string>
-    <string name="CG_ForceClean">Force Clear Telegram Cache</string>
-    <string name="CG_ForceCleanInfo">Use this if you face long \"Calculating…\" when trying to clean cache.\nThis will delete EVERYTHING from your cache - be careful!</string>
+    <string name="CG_ForceClean">Forzar limpiado de la cache de telegram</string>
+    <string name="CG_ForceCleanInfo">Usa es to si ves un largo \"Calculando...\" cuando tratas de limpiar la cache.\nEsto borrará TODO dentro de tu cache - se cuidadoso!</string>
     <string name="CG_SwitchBackend">You\'re going to switch to the test server. Please don\'t press OK if you don\'t know what you\'re doing. You can switch to normal server by pressing \"Switch backend\" in debug menu again.</string>
     <string name="CG_SB">Switch backend</string>
     <string name="CG_TrLang">Destination language</string>
