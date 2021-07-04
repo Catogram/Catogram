@@ -263,4 +263,6 @@
     <string name="CG_MentionByName_Desc">kullanıcı adı yerine</string>
     <string name="CG_PlayVideo">Ses düğmesine basarak videoyu oynatın</string>
     <string name="CG_PlayVideo_Desc">Açıksa - ses düğmesine bastığınızda, iletişim kutusundaki ekrandaki video etkinleştirilir</string>
+    <string name="CG_StreamVoip">Stream VoIP as Media</string>
+    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
 </resources>
