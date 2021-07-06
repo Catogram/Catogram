@@ -216,12 +216,12 @@
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
     <string name="CG_FakeUserPhone">Nomor telepon palsu</string>
-    <string name="CG_FakeUserPhoneSummary">memperlihatkan nomor palsu di drawer dan setelan (fitur nomor palsu harus di nonaktifkan)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Menonaktifkan penerusan pesan mencantumkan nama</string>
+    <string name="CG_FakeUserPhoneSummary">tampilkan nomor telepon palsu di daftar dan pengaturan (sembunyikan preferensi nomor telepon harus dinonaktifkan)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Nonaktifkan penerusan pesan mencantumkan nama</string>
     <string name="CG_FwdMenu_DisableNoForward">Aktifkan penerusan pesan mencantumkan nama</string>
     <string name="CG_DND">Jangan ganggu</string>
     <string name="CG_DND_desc">Akan mensenyapkan semua notifikasi, berguna apabila anda tidak diperbolehkan membuat suara tetapi masih perlu melihat notifikasi</string>
-    <string name="CG_Silence">Sepenuhnya senyap</string>
+    <string name="CG_Silence">Keheningan total</string>
     <string name="CG_Silence_desc">Akan mematikan semua notifikasi</string>
     <string name="CG_SilenceNonContacts">Senyapkan non-kontak</string>
     <string name="CG_SilenceNonContacts_desc">Jika diaktifkan, notifikasi dengan suara hanya berbunyi dari kontak. Anda bisa menambahkan orang ke kontak bahkan tanpa nomor telepon, lakukan itu di profil mereka</string>
