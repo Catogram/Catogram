@@ -259,10 +259,10 @@
     <string name="CG_Changelog">Changelog</string>
     <string name="CG_Sleep">Pengatur waktu tidur</string>
     <string name="CG_Sleep_Time">Hitung mundur pengatur waktu tidur (menit)</string>
-    <string name="CG_MentionByName">Mention by name</string>
-    <string name="CG_MentionByName_Desc">instead of username</string>
-    <string name="CG_PlayVideo">Play video on volume button click</string>
-    <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
-    <string name="CG_StreamVoip">Stream VoIP as Media</string>
-    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_MentionByName">Sebutkan dengan nama</string>
+    <string name="CG_MentionByName_Desc">bukan nama pengguna</string>
+    <string name="CG_PlayVideo">Putar video dengan klik tombol volume</string>
+    <string name="CG_PlayVideo_Desc">Jika dihidupkan - saat Anda menekan tombol volume, video di layar dalam dialog akan diaktifkan</string>
+    <string name="CG_StreamVoip">Streaming VoIP sebagai Media</string>
+    <string name="CG_StreamVoip_Desc">jika diaktifkan maka panggilan VoIP akan dikenali sebagai media alih-alih panggilan</string>
 </resources>
