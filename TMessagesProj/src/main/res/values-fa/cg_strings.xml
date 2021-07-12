@@ -151,7 +151,7 @@
     <string name="CG_KangSticker">اضافه کردن به بسته استیکر</string>
     <string name="CG_KangSticker_Err_NoPack_Title">ساخت یک بسته استیکر?</string>
     <string name="CG_KangSticker_Err_NoPack_Desc">To add a sticker to your stickerpack, an active stickerpack is needed - but you don\'t have it.\n\nDo you want to create one?\nThis is an automatic process, and the requested sticker will be added after it.</string>
-    <string name="CG_KangSticker_Err_NoPack_Action">Create</string>
+    <string name="CG_KangSticker_Err_NoPack_Action">ساختن</string>
     <string name="CG_Kangs_Manager">Stickerpack manager</string>
     <string name="CG_Kangs_CreatePack">Create CG stickerpack</string>
     <string name="CG_Kangs_CreatePack_Desc">This is needed for adding stickers. Don\'t worry, that\'s an automatic process.</string>
@@ -160,7 +160,7 @@
     <string name="CG_VoiceRecognise">Recognise</string>
     <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
     <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
-    <string name="ActionBarTitle">Chats</string>
+    <string name="ActionBarTitle">گفتگوها</string>
     <string name="CG_ArchiveOnPull">Archive on pulldown</string>
     <string name="CG_ArchiveOnPull_Desc">Automatically open archive on pulldown</string>
     <string name="CG_IconReplacements">Icon replacements</string>
@@ -171,7 +171,7 @@
     <string name="CG_MsgSlideAction">Action on message swipe</string>
     <string name="CG_MsgSlideAction_Reply">Reply</string>
     <string name="CG_MsgSlideAction_Save">Save message</string>
-    <string name="CG_MsgSlideAction_Share">Share</string>
+    <string name="CG_MsgSlideAction_Share">اشتراک گذاری</string>
     <string name="CG_SyncPins">Sync pinned chats</string>
     <string name="CG_SyncPins_Desc">Disabling this will allow you to have unlimited amount of pinned chats</string>
     <string name="CG_RearCam">Use rear camera</string>
