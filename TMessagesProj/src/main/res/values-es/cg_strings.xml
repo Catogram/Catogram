@@ -220,12 +220,12 @@
     <string name="CG_FwdMenu_EnableNoForward">Des-habilitar el reenvío con firma</string>
     <string name="CG_FwdMenu_DisableNoForward">Habilitar el reenvío con firma</string>
     <string name="CG_DND">No molestar</string>
-    <string name="CG_DND_desc">Silenciar todas las notificaciones. Útil si no puedes hacer ruido pero necesitas ver las notificaciones.</string>
+    <string name="CG_DND_desc">Silenciar todas las notificaciones. Útil si no puedes hacer ruido pero necesitas ver las notificaciones</string>
     <string name="CG_Silence">Silencio total</string>
-    <string name="CG_Silence_desc">Desactivar todas las notificaciones</string>
-    <string name="CG_SilenceNonContacts">Silencia a los no-contactos</string>
+    <string name="CG_Silence_desc">Apagará todas las notificaciones</string>
+    <string name="CG_SilenceNonContacts">Silenciar los no contactos</string>
     <string name="CG_SilenceNonContacts_desc">Si está activado, solo recibirás notificaciones con sonido por parte de tus contactos. Puedes añadir a una persona a tus contactos desde su perfil, incluso si no tienes su número de teléfono</string>
-    <string name="CG_RecentStickers">Mostrar toda la lista</string>
+    <string name="CG_RecentStickers">Mostrar la lista completa</string>
     <string name="CG_RecentStickers_desc">de stickers recientes</string>
     <string name="CG_Without_Authorship">Sin citar</string>
     <string name="CG_Private">Este canal es privado</string>
@@ -253,7 +253,7 @@
     <string name="CG_Found">Actualización encontrada</string>
     <string name="CG_Download">Descargar</string>
     <string name="CG_PrivateDir">Directorio privado de la caché</string>
-    <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
+    <string name="CG_PrivateDir_desc">"la cache se guardará en un directorio privado de la app. ni tu ni otros, pueden verla sin acceso root"</string>
     <string name="CG_RemovedS">Borrado satisfactoriamente</string>
     <string name="CG_CleanOld">Borrar caché vieja (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Registro de cambios</string>
