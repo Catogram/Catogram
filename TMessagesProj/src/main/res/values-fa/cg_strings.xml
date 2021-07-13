@@ -190,7 +190,7 @@
     <string name="CG_DB_Prefs_Hide">Hide configured accounts in switcher</string>
     <string name="CG_DB_Prefs_NotSet">Not set</string>
     <string name="CG_ViewAdminsShortcut">View admins</string>
-    <string name="AS_Header_Record">Media</string>
+    <string name="AS_Header_Record">رسانه ها</string>
     <string name="CG_HqRoundVideos">High resolution round videos</string>
     <string name="CG_HqRoundVideosAudio">High bitrate on round video\'s sound</string>
     <string name="CG_StereoVoices">Record voices in stereo</string>
