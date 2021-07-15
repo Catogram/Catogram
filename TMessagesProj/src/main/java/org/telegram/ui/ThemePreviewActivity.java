@@ -3182,7 +3182,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                 motionBackgroundDrawable = new MotionBackgroundDrawable();
                 motionBackgroundDrawable.setParentView(backgroundImage);
                 if (rotatePreview) {
-                    motionBackgroundDrawable.rotatePreview();
+                    motionBackgroundDrawable.rotatePreview(false);
                 }
             }
             motionBackgroundDrawable.setColors(backgroundColor, backgroundGradientColor1, backgroundGradientColor2, backgroundGradientColor3);
@@ -3343,7 +3343,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                         motionBackgroundDrawable = new MotionBackgroundDrawable();
                         motionBackgroundDrawable.setParentView(backgroundImage);
                         if (rotatePreview) {
-                            motionBackgroundDrawable.rotatePreview();
+                            motionBackgroundDrawable.rotatePreview(false);
                         }
                     }
                     motionBackgroundDrawable.setColors(backgroundColor, color1, color2, color3);

@@ -24,6 +24,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import androidx.annotation.Keep;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
@@ -44,6 +45,7 @@ import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
 
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.R;
@@ -348,7 +350,13 @@ public class ActionBarLayout extends FrameLayout {
 
     public void drawHeaderShadow(Canvas canvas, int alpha, int y) {
         if (headerShadowDrawable != null) {
-            headerShadowDrawable.setAlpha(alpha);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (headerShadowDrawable.getAlpha() != alpha) {
+                    headerShadowDrawable.setAlpha(alpha);
+                }
+            } else {
+                headerShadowDrawable.setAlpha(alpha);
+            }
             headerShadowDrawable.setBounds(0, y, getMeasuredWidth(), y + headerShadowDrawable.getIntrinsicHeight());
             headerShadowDrawable.draw(canvas);
         }
@@ -359,7 +367,7 @@ public class ActionBarLayout extends FrameLayout {
         innerTranslationX = value;
         invalidate();
 
-        if (fragmentsStack.size() >= 2) {
+        if (fragmentsStack.size() >= 2 && containerView.getMeasuredWidth() > 0) {
             BaseFragment prevFragment = fragmentsStack.get(fragmentsStack.size() - 2);
             prevFragment.onSlideProgress(false, value / containerView.getMeasuredWidth());
         }

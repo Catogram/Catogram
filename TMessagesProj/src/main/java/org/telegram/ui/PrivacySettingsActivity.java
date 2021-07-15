@@ -505,7 +505,9 @@ public class PrivacySettingsActivity extends BaseFragment implements Notificatio
                     listAdapter.notifyItemChanged(passwordRow);
                 }
             } else {
+                currentPassword = null;
                 loadPasswordSettings();
+                updateRows();
             }
         }
     }

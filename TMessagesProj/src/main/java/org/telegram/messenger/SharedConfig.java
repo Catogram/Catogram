@@ -1009,6 +1009,7 @@ public class SharedConfig {
     }
 
     public static void checkSaveToGalleryFiles() {
+        Utilities.globalQueue.postRunnable(() -> {
         try {
             File telegramPath = new File(CatogramConfig.INSTANCE.getPrivateDir() ? ApplicationLoader.applicationContext.getExternalFilesDir(null) : Environment.getExternalStorageDirectory(), "Telegram");
             File imagePath = new File(telegramPath, "Telegram Images");
@@ -1031,9 +1032,10 @@ public class SharedConfig {
                     AndroidUtilities.createEmptyFile(new File(videoPath, ".nomedia"));
                 }
             }
-        } catch (Throwable e) {
-            FileLog.e(e);
-        }
+            } catch (Throwable e) {
+                FileLog.e(e);
+            }
+        });
     }
 
     public static int getChatSwipeAction(int currentAccount) {

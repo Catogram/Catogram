@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.text.Layout;
 import android.text.Selection;
@@ -33,6 +34,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Keep;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ChatObject;
@@ -162,12 +165,19 @@ public class UndoView extends FrameLayout {
 
     private CharSequence infoText;
     private int hideAnimationType = 1;
+    Drawable backgroundDrawable;
 
     public class LinkMovementMethodMy extends LinkMovementMethod {
         @Override
         public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
             try {
                 boolean result;
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    CharacterStyle[] links = buffer.getSpans(widget.getSelectionStart(), widget.getSelectionEnd(), CharacterStyle.class);
+                    if (links == null || links.length == 0) {
+                        return false;
+                    }
+                }
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     CharacterStyle[] links = buffer.getSpans(widget.getSelectionStart(), widget.getSelectionEnd(), CharacterStyle.class);
                     if (links != null && links.length > 0) {
@@ -274,7 +284,8 @@ public class UndoView extends FrameLayout {
         textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
         textPaint.setColor(Theme.getColor(Theme.key_undo_infoColor));
 
-        setBackgroundDrawable(Theme.createRoundRectDrawable(AndroidUtilities.dp(6), Theme.getColor(Theme.key_undo_background)));
+        setWillNotDraw(false);
+        backgroundDrawable = Theme.createRoundRectDrawable(AndroidUtilities.dp(6), Theme.getColor(Theme.key_undo_background));
 
         setOnTouchListener((v, event) -> true);
 
@@ -282,7 +293,7 @@ public class UndoView extends FrameLayout {
     }
 
     public void setColors(int background, int text) {
-        Theme.setDrawableColor(getBackground(), background);
+        Theme.setDrawableColor(backgroundDrawable, background);
         infoTextView.setTextColor(text);
         subinfoTextView.setTextColor(text);
         leftImageView.setLayerColor("info1.**", background | 0xff000000);
@@ -312,7 +323,10 @@ public class UndoView extends FrameLayout {
     }
 
     public void setAdditionalTranslationY(float value) {
-        additionalTranslationY = value;
+        if (additionalTranslationY != value) {
+            additionalTranslationY = value;
+            updatePosition();
+        }
     }
 
     public Object getCurrentInfoObject() {
@@ -344,7 +358,7 @@ public class UndoView extends FrameLayout {
         if (animated != 0) {
             AnimatorSet animatorSet = new AnimatorSet();
             if (animated == 1) {
-                animatorSet.playTogether(ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, (fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight)));
+                animatorSet.playTogether(ObjectAnimator.ofFloat(this, "enterOffset", (fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight)));
                 animatorSet.setDuration(250);
             } else {
                 animatorSet.playTogether(
@@ -365,7 +379,7 @@ public class UndoView extends FrameLayout {
             });
             animatorSet.start();
         } else {
-            setTranslationY((fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight));
+            setEnterOffset((fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight));
             setVisibility(INVISIBLE);
         }
     }
@@ -430,9 +444,15 @@ public class UndoView extends FrameLayout {
         boolean infoOnly = false;
         boolean reversedPlay = false;
         int reversedPlayEndFrame = 0;
-        setOnClickListener(null);
-        setOnTouchListener((v, event) -> true);
-        infoTextView.setMovementMethod(new LinkMovementMethodMy());
+        if (actionRunnable == null && cancelRunnable == null) {
+            setOnClickListener(view -> hide(false, 1));
+            setOnTouchListener(null);
+        } else {
+            setOnClickListener(null);
+            setOnTouchListener((v, event) -> true);
+        }
+
+        infoTextView.setMovementMethod(null);
 
         if (isTooltipAction()) {
             CharSequence infoText;
@@ -800,7 +820,7 @@ public class UndoView extends FrameLayout {
             leftImageView.setVisibility(VISIBLE);
 
             infoTextView.setTypeface(Typeface.DEFAULT);
-
+            long hapticDelay = -1;
             if (currentAction == ACTION_GIGAGROUP_SUCCESS) {
                 infoTextView.setText(LocaleController.getString("BroadcastGroupConvertSuccess", R.string.BroadcastGroupConvertSuccess));
                 leftImageView.setAnimation(R.raw.gigagroup_convert, 36, 36);
@@ -945,6 +965,7 @@ public class UndoView extends FrameLayout {
                             }
                         }
                         leftImageView.setAnimation(R.raw.forward, 30, 30);
+                        hapticDelay = 300;
                     }
                 } else {
                     int amount = (Integer) infoObject2;
@@ -954,6 +975,7 @@ public class UndoView extends FrameLayout {
                         infoTextView.setText(AndroidUtilities.replaceTags(LocaleController.formatString("FwdMessagesToChats", R.string.FwdMessagesToChats, LocaleController.formatPluralString("Chats", amount))));
                     }
                     leftImageView.setAnimation(R.raw.forward, 30, 30);
+                    hapticDelay = 300;
                 }
                 timeLeft = 3000;
             } else if (currentAction == ACTION_SHARE_BACKGROUND) {
@@ -989,9 +1011,11 @@ public class UndoView extends FrameLayout {
 
             leftImageView.setProgress(0);
             leftImageView.playAnimation();
-            leftImageView.postDelayed(() -> {
-                leftImageView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-            }, 300);
+            if (hapticDelay > 0) {
+                leftImageView.postDelayed(() -> {
+                    leftImageView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                }, hapticDelay);
+            }
         } else if (currentAction == ACTION_PROXIMITY_SET || currentAction == ACTION_PROXIMITY_REMOVED) {
             int radius = (Integer) infoObject;
             TLRPC.User user = (TLRPC.User) infoObject2;
@@ -1280,9 +1304,9 @@ public class UndoView extends FrameLayout {
 
         if (getVisibility() != VISIBLE) {
             setVisibility(VISIBLE);
-            setTranslationY((fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight));
+            setEnterOffset((fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight));
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.playTogether(ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, (fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight), (fromTop ? 1.0f : -1.0f) * additionalTranslationY));
+            animatorSet.playTogether(ObjectAnimator.ofFloat(this, "enterOffset", (fromTop ? -1.0f : 1.0f) * (AndroidUtilities.dp(8) + undoViewHeight), (fromTop ? 1.0f : -1.0f)));
             animatorSet.setInterpolator(new DecelerateInterpolator());
             animatorSet.setDuration(180);
             animatorSet.start();
@@ -1296,6 +1320,7 @@ public class UndoView extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(undoViewHeight, MeasureSpec.EXACTLY));
+        backgroundDrawable.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
     }
 
     StaticLayout timeLayout;
@@ -1305,7 +1330,37 @@ public class UndoView extends FrameLayout {
     float timeReplaceProgress = 1f;
 
     @Override
+    protected void dispatchDraw(Canvas canvas) {
+        if (additionalTranslationY != 0) {
+            canvas.save();
+
+            float bottom = getMeasuredHeight() - enterOffset + AndroidUtilities.dp(9);
+            if (bottom > 0) {
+                canvas.clipRect(0, 0, getMeasuredWidth(), bottom);
+                super.dispatchDraw(canvas);
+            }
+            canvas.restore();
+        } else {
+            super.dispatchDraw(canvas);
+        }
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
+        if (additionalTranslationY != 0) {
+            canvas.save();
+
+            float bottom = getMeasuredHeight() - enterOffset + AndroidUtilities.dp(9);
+            if (bottom > 0) {
+                canvas.clipRect(0, 0, getMeasuredWidth(), bottom);
+                super.dispatchDraw(canvas);
+            }
+            backgroundDrawable.draw(canvas);
+            canvas.restore();
+        } else {
+            backgroundDrawable.draw(canvas);
+        }
+
         if (currentAction == ACTION_DELETE || currentAction == ACTION_CLEAR) {
             int newSeconds = timeLeft > 0 ? (int) Math.ceil(timeLeft / 1000.0f) : 0;
             if (prevSeconds != newSeconds) {
@@ -1365,7 +1420,6 @@ public class UndoView extends FrameLayout {
         if (timeLeft <= 0) {
             hide(true, hideAnimationType);
         }
-
         invalidate();
     }
 
@@ -1382,5 +1436,31 @@ public class UndoView extends FrameLayout {
 
     public void setHideAnimationType(int hideAnimationType) {
         this.hideAnimationType = hideAnimationType;
+    }
+
+    float enterOffset;
+
+
+    @Keep
+    public float getEnterOffset() {
+        return enterOffset;
+    }
+
+    @Keep
+    public void setEnterOffset(float enterOffset) {
+        if (this.enterOffset != enterOffset) {
+            this.enterOffset = enterOffset;
+            updatePosition();
+        }
+    }
+
+    private void updatePosition() {
+        setTranslationY(enterOffset - additionalTranslationY);
+        invalidate();
+    }
+
+    @Override
+    public Drawable getBackground() {
+        return backgroundDrawable;
     }
 }

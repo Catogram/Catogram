@@ -213,7 +213,7 @@ public class ExternalActionActivity extends AppCompatActivity implements ActionB
         } else if (ArticleViewer.hasInstance() && ArticleViewer.getInstance().isVisible()) {
             ArticleViewer.getInstance().close(false, true);
         }
-        passcodeView.onShow();
+        passcodeView.onShow(true, false);
         SharedConfig.isWaitingForPasscodeEnter = true;
         drawerLayoutContainer.setAllowOpenDrawer(false, false);
         passcodeView.setDelegate(() -> {
