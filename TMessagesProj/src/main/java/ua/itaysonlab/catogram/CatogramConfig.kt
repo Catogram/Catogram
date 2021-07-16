@@ -28,7 +28,6 @@ object CatogramConfig {
     var drawerBlur by sharedPreferences.boolean("cg_drawer_blur", false)
     var drawerDarken by sharedPreferences.boolean("cg_drawer_darken", false)
     var controversiveNoSecureFlag by sharedPreferences.boolean("cg_ct_flag", false)
-    var useBiometricPrompt by sharedPreferences.boolean("cg_newbiometric", true)
     var contactsNever by sharedPreferences.boolean("contactsNever", false)
     var searchInActionbar by sharedPreferences.boolean("cg_chats_searchbar", false)
     var confirmCalls by sharedPreferences.boolean("cg_confirmcalls", false)
