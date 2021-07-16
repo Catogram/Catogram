@@ -31,7 +31,7 @@ import java.io.FileInputStream;
 import ua.itaysonlab.catogram.CatogramConfig;
 
 public class CatogramExtras {
-    public static String CG_VERSION = "3.8.2";
+    public static String CG_VERSION = "3.8.3";
     public static BitmapDrawable currentAccountBitmap;
     // 80 in official
     public static int LOAD_AVATAR_COUNT_HEADER = 100;
