@@ -6791,43 +6791,30 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (forwardingMessages == null || forwardingMessages.isEmpty()) {
                 showFieldPanel(false, null, null, null, foundWebPage, true, 0, true, true);
             } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setButtonsVertical(true);
-                builder.setTitle(LocaleController.getString("CancelForward", R.string.CancelForward));
-                builder.setMessage(LocaleController.getString("CancelForwardMessage", R.string.CancelForwardMessage));
-                builder.setPositiveButton(LocaleController.getString("CancelForwarding", R.string.CancelForwarding), (dialogInterface, i) -> {
-                    if (forwardingMessages != null) {
-                        forwardingMessages.clear();
-                    }
-                    showFieldPanel(false, null, null, null, foundWebPage, true, 0, true, true);
-                });
-                builder.setNegativeButton(LocaleController.getString("SelectOtherChat", R.string.SelectOtherChat), (dialogInterface, i) -> {
-                    if (forwardingMessages != null && !forwardingMessages.isEmpty()) {
-                        int hasPoll = 0;
-                        boolean hasInvoice = false;
-                        for (int a = 0, N = forwardingMessages.size(); a < N; a++) {
-                            MessageObject messageObject = forwardingMessages.get(a);
-                            if (messageObject.isPoll()) {
-                                if (hasPoll != 2) {
-                                    hasPoll = messageObject.isPublicPoll() ? 2 : 1;
-                                }
-                            } else if (messageObject.isInvoice()) {
-                                hasInvoice = true;
+                if (forwardingMessages != null && !forwardingMessages.isEmpty()) {
+                    int hasPoll = 0;
+                    boolean hasInvoice = false;
+                    for (int a = 0, N = forwardingMessages.size(); a < N; a++) {
+                        MessageObject messageObject = forwardingMessages.get(a);
+                        if (messageObject.isPoll()) {
+                            if (hasPoll != 2) {
+                                hasPoll = messageObject.isPublicPoll() ? 2 : 1;
                             }
-                            selectedMessagesIds[0].put(messageObject.getId(), messageObject);
+                        } else if (messageObject.isInvoice()) {
+                            hasInvoice = true;
                         }
-                        Bundle args = new Bundle();
-                        args.putBoolean("onlySelect", true);
-                        args.putInt("dialogsType", 3);
-                        args.putInt("hasPoll", hasPoll);
-                        args.putBoolean("hasInvoice", hasInvoice);
-                        args.putInt("messagesCount", forwardingMessages.size());
-                        DialogsActivity fragment = new DialogsActivity(args);
-                        fragment.setDelegate(ChatActivity.this);
-                        presentFragment(fragment);
+                        selectedMessagesIds[0].put(messageObject.getId(), messageObject);
                     }
-                });
-                builder.show();
+                    Bundle args = new Bundle();
+                    args.putBoolean("onlySelect", true);
+                    args.putInt("dialogsType", 3);
+                    args.putInt("hasPoll", hasPoll);
+                    args.putBoolean("hasInvoice", hasInvoice);
+                    args.putInt("messagesCount", forwardingMessages.size());
+                    DialogsActivity fragment = new DialogsActivity(args);
+                    fragment.setDelegate(ChatActivity.this);
+                    presentFragment(fragment);
+                }
             }
         });
 
