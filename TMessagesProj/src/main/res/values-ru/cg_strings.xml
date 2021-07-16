@@ -259,8 +259,8 @@
     <string name="CG_Changelog">Список изменений</string>
     <string name="CG_Sleep">Таймер времени сна</string>
     <string name="CG_Sleep_Time">Отсчёт времени сна (минуты)</string>
-    <string name="CG_MentionByName">Mention by name</string>
-    <string name="CG_MentionByName_Desc">instead of username</string>
+    <string name="CG_MentionByName">Упоминание по имени</string>
+    <string name="CG_MentionByName_Desc">вместо никнейма</string>
     <string name="CG_PlayVideo">Play video on volume button click</string>
     <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
     <string name="CG_StreamVoip">Stream VoIP as Media</string>
