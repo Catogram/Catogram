@@ -100,3 +100,8 @@
 -renamesourcefileattribute
 -repackageclasses
 -allowaccessmodification
+
+# Themimg and settings search are using refelctions
+-keepclassmembernames class org.telegram.ui.* { *; }
+-keepclassmembernames class org.telegram.ui.Cells.* { *; }
+-keepclassmembernames class org.telegram.ui.Components.* { *; }
