@@ -64,9 +64,9 @@ android {
         viewBinding true
     }
 
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion '30.0.3'
-    ndkVersion '22.1.7171670'
+    ndkVersion "21.4.7075529"
 
     defaultConfig.applicationId = "ua.itaysonlab.messenger"
 
@@ -337,7 +337,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2372
+    defaultConfig.versionCode = 2376
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -356,7 +356,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionName "7.8.1"
+        versionName "7.8.2"
 
         buildConfigField "int", "APP_ID", props['APP_ID']
         buildConfigField "String", "API_HASH", props['API_HASH']

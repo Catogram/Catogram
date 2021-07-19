@@ -349,7 +349,7 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
         if (Build.VERSION.SDK_INT >= 24) {
             AndroidUtilities.isInMultiwindow = isInMultiWindowMode();
         }
-        Theme.createCommonChatResources(this);
+        Theme.createCommonChatResources();
         Theme.createDialogsResources(this);
         if (SharedConfig.passcodeHash.length() != 0 && SharedConfig.appLocked) {
             SharedConfig.lastPauseTime = (int) (SystemClock.elapsedRealtime() / 1000);
@@ -2317,7 +2317,7 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
                     fragment = new ActionIntroActivity(ActionIntroActivity.ACTION_TYPE_CHANGE_PHONE_NUMBER);
                     closePrevious = true;
                 } else if (open_settings == 6) {
-                    fragment = new EditWidgetActivity(open_widget_edit_type, open_widget_edit, true);
+                    fragment = new EditWidgetActivity(open_widget_edit_type, open_widget_edit);
                 } else {
                     fragment = null;
                 }
@@ -3701,18 +3701,19 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
                     if (SharedConfig.pendingAppUpdate != null && SharedConfig.pendingAppUpdate.version.equals(res.version)) {
                         return;
                     }
-                    SharedConfig.setNewAppVersionAvailable(res);
-                    if (res.can_not_skip) {
-                        showUpdateActivity(accountNum, res, false);
-                    } else {
-                        drawerLayoutAdapter.notifyDataSetChanged();
-                        try {
-                            (new UpdateAppAlertDialog(LaunchActivity.this, res, accountNum)).show();
-                        } catch (Exception e) {
-                            FileLog.e(e);
+                    if (SharedConfig.setNewAppVersionAvailable(res)) {
+                        if (res.can_not_skip) {
+                            showUpdateActivity(accountNum, res, false);
+                        } else {
+                            drawerLayoutAdapter.notifyDataSetChanged();
+                            try {
+                                (new UpdateAppAlertDialog(LaunchActivity.this, res, accountNum)).show();
+                            } catch (Exception e) {
+                                FileLog.e(e);
+                            }
                         }
+                        NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.appUpdateAvailable);
                     }
-                    NotificationCenter.getGlobalInstance().postNotificationName(NotificationCenter.appUpdateAvailable);
                 });
             }
         });

@@ -2767,6 +2767,7 @@ public class NotificationsController extends BaseController {
             ShortcutInfoCompat.Builder shortcutBuilder = new ShortcutInfoCompat.Builder(ApplicationLoader.applicationContext, id)
                     .setShortLabel(chat != null ? name : UserObject.getFirstName(user))
                     .setLongLabel(name)
+                    .setIntent(new Intent(Intent.ACTION_DEFAULT))
                     .setIntent(shortcutIntent)
                     .setLongLived(true)
                     .setLocusId(new LocusIdCompat(id));
@@ -2790,16 +2791,18 @@ public class NotificationsController extends BaseController {
                 intent.putExtra("chatId", -did);
             }
             intent.putExtra("currentAccount", currentAccount);
-            IconCompat icon =  IconCompat.createWithResource(ApplicationLoader.applicationContext, R.drawable.book_group);
+            IconCompat icon;
             if (avatar != null) {
                 icon = IconCompat.createWithAdaptiveBitmap(avatar);
             } else if (user != null) {
                 icon = IconCompat.createWithResource(ApplicationLoader.applicationContext, user.bot ? R.drawable.book_bot : R.drawable.book_user);
+            } else {
+                icon = IconCompat.createWithResource(ApplicationLoader.applicationContext, R.drawable.book_group);
             }
             NotificationCompat.BubbleMetadata.Builder bubbleBuilder =
-                new NotificationCompat.BubbleMetadata.Builder(
-                    PendingIntent.getActivity(ApplicationLoader.applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT),
-                    icon);
+                    new NotificationCompat.BubbleMetadata.Builder(
+                            PendingIntent.getActivity(ApplicationLoader.applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT),
+                            icon);
             bubbleBuilder.setSuppressNotification(opened_dialog_id == did);
             bubbleBuilder.setAutoExpandBubble(false);
             bubbleBuilder.setDesiredHeight(AndroidUtilities.dp(640));
