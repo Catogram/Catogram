@@ -215,15 +215,16 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
-    <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
-    <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
-    <string name="CG_SilenceNonContacts">Silence non-contacts</string>
+    <string name="CG_FakeUserPhone">Numar de telefon fals</string>
+    <string name="CG_FakeUserPhoneSummary">arată numărul de telefon fals în sertar și setări
+(setarea pentru ascunderea numărului de telefon trebuie să fie oprită)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Oprește redirecționarea autorului</string>
+    <string name="CG_FwdMenu_DisableNoForward">Activează redirecționarea autorului</string>
+    <string name="CG_DND">Nu deranjați</string>
+    <string name="CG_DND_desc">Va da pe mut toate notificările. De ajutor dacă nu ai dat voie să se facă zgomot dar tot trebuie să te uiți la notificări</string>
+    <string name="CG_Silence">Liniște totală</string>
+    <string name="CG_Silence_desc">Va opri toate notificările</string>
+    <string name="CG_SilenceNonContacts">Non-contactele pe mut</string>
     <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
     <string name="CG_RecentStickers">Show full list</string>
     <string name="CG_RecentStickers_desc">of recent stickers</string>
@@ -257,5 +258,12 @@
     <string name="CG_RemovedS">Removed successfully</string>
     <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Changelog</string>
-    <string name="CG_Downloading">Downloading</string>
+    <string name="CG_Sleep">Sleep timer</string>
+    <string name="CG_Sleep_Time">Sleep timer countdown (minutes)</string>
+    <string name="CG_MentionByName">Mention by name</string>
+    <string name="CG_MentionByName_Desc">instead of username</string>
+    <string name="CG_PlayVideo">Play video on volume button click</string>
+    <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
+    <string name="CG_StreamVoip">Stream VoIP as Media</string>
+    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
 </resources>
