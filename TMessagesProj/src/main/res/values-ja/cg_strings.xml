@@ -258,5 +258,12 @@
     <string name="CG_RemovedS">Removed successfully</string>
     <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Changelog</string>
-    <string name="CG_Downloading">Downloading</string>
+    <string name="CG_Sleep">Sleep timer</string>
+    <string name="CG_Sleep_Time">Sleep timer countdown (minutes)</string>
+    <string name="CG_MentionByName">Mention by name</string>
+    <string name="CG_MentionByName_Desc">instead of username</string>
+    <string name="CG_PlayVideo">Play video on volume button click</string>
+    <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
+    <string name="CG_StreamVoip">Stream VoIP as Media</string>
+    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
 </resources>
