@@ -129,6 +129,8 @@ object OTA : CoroutineScope by MainScope() {
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .addAction(R.drawable.download_outline_28, LocaleController.getString("CG_Download", R.string.CG_Download), pendingIntentDownload)
                         .addAction(R.drawable.download_outline_28, LocaleController.getString("CG_Changelog", R.string.CG_Changelog), pendingIntentChangelog)
+                        .setStyle(NotificationCompat.BigTextStyle()
+                        .bigText(changelog))
                         .build()
 
                 val notificationManager = NotificationManagerCompat.from(context)
