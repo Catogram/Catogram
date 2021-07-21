@@ -18,6 +18,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.assist.AssistContent;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24129,5 +24130,20 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
     public ChatAvatarContainer getAvatarContainer() {
         return avatarContainer;
+    }
+
+    @Override
+    public void onProvideAssistContent(AssistContent outContent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String username = null;
+            if (currentUser != null) {
+                username = currentUser.username;
+            } else if (currentChat != null) {
+                username = currentChat.username;
+            }
+            if (username != null) {
+                outContent.setWebUri(Uri.parse(String.format("https://" + getMessagesController().linkPrefix + "/%s", username)));
+            }
+        }
     }
 }

@@ -6,7 +6,6 @@ import android.net.Uri
 import android.provider.Browser
 import org.telegram.messenger.BuildVars
 import org.telegram.messenger.LocaleController
-import org.telegram.messenger.R
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.LaunchActivity
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator
@@ -17,6 +16,13 @@ import ua.itaysonlab.catogram.preferences.ktx.textIcon
 import ua.itaysonlab.catogram.preferences.ktx.tgKitScreen
 import ua.itaysonlab.extras.CatogramExtras
 import ua.itaysonlab.tgkit.preference.types.TGKitTextIconRow
+
+import android.os.Build
+
+import android.app.assist.AssistContent
+import org.telegram.messenger.R
+import java.lang.String
+
 
 class MainPreferencesEntry : BasePreferencesEntry {
     override fun getPreferences(bf: BaseFragment) = tgKitScreen(LocaleController.getString("AdvancedSettings", R.string.AdvancedSettings)) {
@@ -137,5 +143,15 @@ class MainPreferencesEntry : BasePreferencesEntry {
             openURL.data = Uri.parse("https://github.com/Catogram/Catogram")
             bf.parentActivity.startActivity(openURL)
         }
+        fun onProvideAssistContent(outContent: AssistContent) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                outContent.webUri = Uri.parse(
+                    String.format(
+                        "https://t.me/catogram"
+                    )
+                )
+            }
+        }
+
     }
 }
