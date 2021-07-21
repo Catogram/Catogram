@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">Nếu tắt thì nhạc sẽ yên lặng hơn, nhưng sẽ không tắt</string>
     <string name="CG_Proximity">Bật hành động cảm biến</string>
     <string name="CG_Proximity_Desc">Bằng việc tắt nó đi bạn sẽ loại bỏ được việc màn hình tắt gây khó chịu khi nghe tin nhắn thoại (khởi động lại để áp dụng)</string>
-    <string name="CG_Donate_Desc">Chọn phương thức donate bên dưới\nNếu bạn donate &gt;= hơn $1.5 hay 100 rúp Nga, bạn có thể được phần quà là dấu tick đã xác minh hoặc dấu scam.\nChỉ rõ ID ở phần nhận xét của thanh toán và loại dấu hiệu mong muốn.</string>
+    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
     <string name="CG_Donate_Method">Chọn phương thức</string>
     <string name="CG_Mono_Desc">5375414117420108 // nhấn để sao chép</string>
     <string name="CG_Source">Mã nguồn</string>
