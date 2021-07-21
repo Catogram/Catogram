@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">Wenn dies deaktiviert ist, wird Musik leiser, geht allerdings nicht aus</string>
     <string name="CG_Proximity">Aktiviere Annäherungs-Sensor Aktionen</string>
     <string name="CG_Proximity_Desc">Wenn du dies deaktivierst, geht der Bildschirm nicht mehr aus wenn du dir eine Sprachnachricht anhörst (starte die app neu zum anwenden)</string>
-    <string name="CG_Donate_Desc">Wähle unten eine Methode zum spenden\nwenn du &gt;= als 1.5$ oder 100 Russische Rubel spendest, kannst du ein Verifikations oder \"Betrug\" Symbol neben deinen Namen als ein Geschenk bekommen.\nSchreibe deine ID in den Kommentaren zu der spende zusammen mit dem Abzeichen nach wahl.</string>
+    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
     <string name="CG_Donate_Method">Wähle eine Methode</string>
     <string name="CG_Mono_Desc">5375414117420108 // tippe zum kopieren</string>
     <string name="CG_Source">Quell-Code</string>
