@@ -974,121 +974,24 @@ public class PasscodeView extends FrameLayout {
             return;
         }
         Activity parentActivity = (Activity) getContext();
-        if (parentActivity != null && fingerprintView.getVisibility() == VISIBLE && !ApplicationLoader.mainInterfacePaused) {
-            try {
-                if (fingerprintDialog != null && fingerprintDialog.isShowing()) {
-                    return;
-                }
-            } catch (Exception e) {
-                FileLog.e(e);
-            }
-            try {
-                FingerprintManagerCompat fingerprintManager = FingerprintManagerCompat.from(ApplicationLoader.applicationContext);
-                if (fingerprintManager.isHardwareDetected() && fingerprintManager.hasEnrolledFingerprints()) {
-                    RelativeLayout relativeLayout = new RelativeLayout(getContext());
-                    relativeLayout.setPadding(AndroidUtilities.dp(24), 0, AndroidUtilities.dp(24), 0);
+        if (parentActivity != null && SharedConfig.useFingerprint && !ApplicationLoader.mainInterfacePaused) {
+                CGBiometricPrompt.callBiometricPrompt((AppCompatActivity) parentActivity, new CGBiometricPrompt.CGBiometricListener() {
+                    @Override
+                    public void onError(CharSequence msg) {
 
-                    TextView fingerprintTextView = new TextView(getContext());
-                    fingerprintTextView.setId(id_fingerprint_textview);
-                    fingerprintTextView.setTextAppearance(android.R.style.TextAppearance_Material_Subhead);
-                    fingerprintTextView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
-                    fingerprintTextView.setText(LocaleController.getString("FingerprintInfo", R.string.FingerprintInfo));
-                    relativeLayout.addView(fingerprintTextView);
-                    RelativeLayout.LayoutParams layoutParams = LayoutHelper.createRelative(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT);
-                    layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START);
-                    fingerprintTextView.setLayoutParams(layoutParams);
-
-                    fingerprintImageView = new ImageView(getContext());
-                    fingerprintImageView.setImageResource(R.drawable.ic_fp_40px);
-                    fingerprintImageView.setId(id_fingerprint_imageview);
-                    relativeLayout.addView(fingerprintImageView, LayoutHelper.createRelative(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, 0, 20, 0, 0, RelativeLayout.ALIGN_PARENT_START, RelativeLayout.BELOW, id_fingerprint_textview));
-
-                    fingerprintStatusTextView = new TextView(getContext());
-                    fingerprintStatusTextView.setGravity(Gravity.CENTER_VERTICAL);
-                    fingerprintStatusTextView.setText(LocaleController.getString("FingerprintHelp", R.string.FingerprintHelp));
-                    fingerprintStatusTextView.setTextAppearance(android.R.style.TextAppearance_Material_Body1);
-                    fingerprintStatusTextView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack) & 0x42ffffff);
-                    relativeLayout.addView(fingerprintStatusTextView);
-                    layoutParams = LayoutHelper.createRelative(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT);
-                    layoutParams.setMarginStart(AndroidUtilities.dp(16));
-                    layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, id_fingerprint_imageview);
-                    layoutParams.addRule(RelativeLayout.ALIGN_TOP, id_fingerprint_imageview);
-                    layoutParams.addRule(RelativeLayout.END_OF, id_fingerprint_imageview);
-                    fingerprintStatusTextView.setLayoutParams(layoutParams);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle(LocaleController.getString("CG_AppName", R.string.CG_AppName));
-                    builder.setView(relativeLayout);
-                    builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
-                    builder.setOnDismissListener(dialog -> {
-                        if (cancellationSignal != null) {
-                            selfCancelled = true;
-                            try {
-                                cancellationSignal.cancel();
-                            } catch (Exception e) {
-                                FileLog.e(e);
-                            }
-                            cancellationSignal = null;
-                        }
-                    });
-                    if (fingerprintDialog != null) {
-                        try {
-                            if (fingerprintDialog.isShowing()) {
-                                fingerprintDialog.dismiss();
-                            }
-                        } catch (Exception e) {
-                            FileLog.e(e);
-                        }
                     }
-                    fingerprintDialog = builder.show();
 
-                    cancellationSignal = new CancellationSignal();
-                    selfCancelled = false;
-                    fingerprintManager.authenticate(null, 0, cancellationSignal, new FingerprintManagerCompat.AuthenticationCallback() {
-                        @Override
-                        public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                            if (errMsgId == 10) {
-                                try {
-                                    if (fingerprintDialog.isShowing()) {
-                                        fingerprintDialog.dismiss();
-                                    }
-                                } catch (Exception e) {
-                                    FileLog.e(e);
-                                }
-                                fingerprintDialog = null;
-                            } else if (!selfCancelled && errMsgId != 5) {
-                                showFingerprintError(errString);
-                            }
-                        }
+                    @Override
+                    public void onFailed() {
 
-                        @Override
-                        public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                            showFingerprintError(helpString);
-                        }
+                    }
 
-                        @Override
-                        public void onAuthenticationFailed() {
-                            showFingerprintError(LocaleController.getString("FingerprintNotRecognized", R.string.FingerprintNotRecognized));
-                        }
-
-                        @Override
-                        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-                            try {
-                                if (fingerprintDialog.isShowing()) {
-                                    fingerprintDialog.dismiss();
-                                }
-                            } catch (Exception e) {
-                                FileLog.e(e);
-                            }
-                            fingerprintDialog = null;
-                            processDone(true);
-                        }
-                    }, null);
-                }
-            } catch (Throwable e) {
-                //ignore
-            }
+                    @Override
+                    public void onSuccess(BiometricPrompt.AuthenticationResult result) {
+                        processDone(true);
+                    }
+                });
+                return;
         }
     }
 

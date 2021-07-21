@@ -256,7 +256,7 @@
     <string name="CG_AudioFocus_Desc">If disabled then the music will be quieter, but won\'t turn off</string>
     <string name="CG_Proximity">Enable proximity actions</string>
     <string name="CG_Proximity_Desc">By turning it off you will get rid of the annoying screen shutdown when listening to voice messages (restart app to apply)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate >= than $1.5 or 100 Russian rubles, you may be given a verification checkmark or a scam mark as a gift.\nSpecify your ID in the comment to the payment and the desired mark.</string>
+    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate >= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
     <string name="CG_Donate_Method">Choose method</string>
     <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
     <string name="CG_Source">Source code</string>
