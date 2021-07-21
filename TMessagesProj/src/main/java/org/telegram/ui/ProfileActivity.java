@@ -5461,6 +5461,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 numberRow = rowCount++;
                 setUsernameRow = rowCount++;
                 bioRow = rowCount++;
+                idRow = rowCount++;
 
                 settingsSectionRow = rowCount++;
 
