@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">Se disattivato la musica sarà più bassa ma non si spegnerà</string>
     <string name="CG_Proximity">Abilità azioni di prossimità</string>
     <string name="CG_Proximity_Desc">Spegnendolo ti libererai del fastidioso spegnimento dello schermo quando ascolti i messaggi vocali (riavvia l\'app per applicarlo)</string>
-    <string name="CG_Donate_Desc">Scegli un metodo di donazione di seguito \nSe doni &gt;= più di $ 1.5 o 100 rubli russi, potresti ricevere la spunta di verifica o un una segnalazione come scam come regalo.\nSpecifica il tuo ID nel commento al pagamento e al segno desiderato.</string>
+    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
     <string name="CG_Donate_Method">Scegli metodo</string>
     <string name="CG_Mono_Desc">5375414117420108 // clicca per copiare</string>
     <string name="CG_Source">Codice sorgente</string>
