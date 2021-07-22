@@ -729,7 +729,7 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
         titleTextView.setEllipsize(TextUtils.TruncateAt.END);
         titleTextView.setPadding(AndroidUtilities.dp(18), 0, AndroidUtilities.dp(18), 0);
         titleTextView.setGravity(Gravity.CENTER_VERTICAL);
-        titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         containerView.addView(titleTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 50, Gravity.LEFT | Gravity.TOP, 0, 0, 40, 0));
 
         optionsButton = new ActionBarMenuItem(context, null, 0, Theme.getColor(Theme.key_sheet_other));
@@ -759,7 +759,7 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
         pickerBottomLayout.setTextColor(Theme.getColor(buttonTextColorKey = Theme.key_dialogTextBlue2));
         pickerBottomLayout.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         pickerBottomLayout.setPadding(AndroidUtilities.dp(18), 0, AndroidUtilities.dp(18), 0);
-        pickerBottomLayout.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        pickerBottomLayout.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         pickerBottomLayout.setGravity(Gravity.CENTER);
         containerView.addView(pickerBottomLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.LEFT | Gravity.BOTTOM));
 
@@ -785,7 +785,7 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
         previewSendButton.setBackground(Theme.createSelectorWithBackgroundDrawable(Theme.getColor(Theme.key_dialogBackground), Theme.getColor(Theme.key_listSelector)));
         previewSendButton.setGravity(Gravity.CENTER);
         previewSendButton.setPadding(AndroidUtilities.dp(29), 0, AndroidUtilities.dp(29), 0);
-        previewSendButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        previewSendButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         stickerPreviewLayout.addView(previewSendButton, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.BOTTOM | Gravity.LEFT));
         previewSendButton.setOnClickListener(v -> {
             if (importingStickersPaths != null) {

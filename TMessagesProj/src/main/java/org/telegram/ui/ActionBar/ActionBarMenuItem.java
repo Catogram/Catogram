@@ -180,7 +180,7 @@ public class ActionBarMenuItem extends FrameLayout {
         if (text) {
             textView = new TextView(context);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-            textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(AndroidUtilities.dp(4), 0, AndroidUtilities.dp(4), 0);
             textView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);

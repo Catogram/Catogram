@@ -1039,7 +1039,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
             pickerBottomLayout.setTextColor(Theme.getColor(darkTheme ? Theme.key_voipgroup_listeningText : Theme.key_dialogTextBlue2));
             pickerBottomLayout.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             pickerBottomLayout.setPadding(AndroidUtilities.dp(18), 0, AndroidUtilities.dp(18), 0);
-            pickerBottomLayout.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            pickerBottomLayout.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             pickerBottomLayout.setGravity(Gravity.CENTER);
             if (darkTheme && linkToCopy[1] != null) {
                 pickerBottomLayout.setText(LocaleController.getString("VoipGroupCopySpeakerLink", R.string.VoipGroupCopySpeakerLink).toUpperCase());
@@ -1292,7 +1292,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
         });
 
         textPaint.setTextSize(AndroidUtilities.dp(12));
-        textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
         selectedCountView = new View(context) {
             @Override

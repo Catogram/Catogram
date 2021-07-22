@@ -282,7 +282,7 @@ public class PhotoPaintView extends FrameLayout implements EntityView.EntityView
         cancelTextView.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, 0));
         cancelTextView.setPadding(AndroidUtilities.dp(20), 0, AndroidUtilities.dp(20), 0);
         cancelTextView.setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
-        cancelTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        cancelTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         toolsView.addView(cancelTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT));
 
         doneTextView = new TextView(context);
@@ -292,7 +292,7 @@ public class PhotoPaintView extends FrameLayout implements EntityView.EntityView
         doneTextView.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, 0));
         doneTextView.setPadding(AndroidUtilities.dp(20), 0, AndroidUtilities.dp(20), 0);
         doneTextView.setText(LocaleController.getString("Done", R.string.Done).toUpperCase());
-        doneTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        doneTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         toolsView.addView(doneTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.RIGHT));
 
         paintButton = new ImageView(context);

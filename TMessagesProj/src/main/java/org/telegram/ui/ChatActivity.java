@@ -2366,10 +2366,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             editTextItem.setVisibility(View.GONE);
 
             SpannableStringBuilder stringBuilder = new SpannableStringBuilder(LocaleController.getString("Bold", R.string.Bold));
-            stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editTextItem.addSubItem(text_bold, stringBuilder);
             stringBuilder = new SpannableStringBuilder(LocaleController.getString("Italic", R.string.Italic));
-            stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getItalic()), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editTextItem.addSubItem(text_italic, stringBuilder);
             stringBuilder = new SpannableStringBuilder(LocaleController.getString("Mono", R.string.Mono));
             stringBuilder.setSpan(new TypefaceSpan(Typeface.MONOSPACE), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -2482,7 +2482,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
         selectedMessagesCountTextView = new NumberTextView(actionMode.getContext());
         selectedMessagesCountTextView.setTextSize(18);
-        selectedMessagesCountTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        selectedMessagesCountTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         selectedMessagesCountTextView.setTextColor(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon));
         actionMode.addView(selectedMessagesCountTextView, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1.0f, 65, 0, 0, 0));
         selectedMessagesCountTextView.setOnTouchListener((v, event) -> true);
@@ -5262,7 +5262,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
         reportSpamButton.setTag(Theme.key_chat_reportSpam);
         reportSpamButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        reportSpamButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        reportSpamButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         reportSpamButton.setSingleLine(true);
         reportSpamButton.setMaxLines(1);
         reportSpamButton.setGravity(Gravity.CENTER);
@@ -5279,7 +5279,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         addToContactsButton.setTextColor(Theme.getColor(Theme.key_chat_addContact));
         addToContactsButton.setVisibility(View.GONE);
         addToContactsButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        addToContactsButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        addToContactsButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         addToContactsButton.setSingleLine(true);
         addToContactsButton.setMaxLines(1);
         addToContactsButton.setPadding(AndroidUtilities.dp(4), 0, AndroidUtilities.dp(4), 0);
@@ -5360,7 +5360,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         alertNameTextView = new TextView(context);
         alertNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         alertNameTextView.setTextColor(Theme.getColor(Theme.key_chat_topPanelTitle));
-        alertNameTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        alertNameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         alertNameTextView.setSingleLine(true);
         alertNameTextView.setEllipsize(TextUtils.TruncateAt.END);
         alertNameTextView.setMaxLines(1);
@@ -6054,7 +6054,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
         mentiondownButtonCounter = new SimpleTextView(context);
         mentiondownButtonCounter.setVisibility(View.INVISIBLE);
-        mentiondownButtonCounter.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        mentiondownButtonCounter.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         mentiondownButtonCounter.setTextSize(13);
         mentiondownButtonCounter.setTextColor(Theme.getColor(Theme.key_chat_goDownButtonCounter));
         mentiondownButtonCounter.setGravity(Gravity.CENTER);
@@ -7245,7 +7245,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         replyButton.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.getColor(Theme.key_actionBarActionModeDefaultSelector), 3));
         replyButton.setTextColor(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon));
         replyButton.setCompoundDrawablePadding(AndroidUtilities.dp(7));
-        replyButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        replyButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         Drawable image = context.getResources().getDrawable(R.drawable.input_reply).mutate();
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         replyButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
@@ -7263,7 +7263,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         forwardButton.setCompoundDrawablePadding(AndroidUtilities.dp(6));
         forwardButton.setBackgroundDrawable(Theme.createSelectorDrawable(Theme.getColor(Theme.key_actionBarActionModeDefaultSelector), 3));
         forwardButton.setTextColor(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon));
-        forwardButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        forwardButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         image = context.getResources().getDrawable(R.drawable.input_forward).mutate();
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         forwardButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
@@ -16655,10 +16655,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             menu.removeItem(android.R.id.shareText);
         }
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder(LocaleController.getString("Bold", R.string.Bold));
-        stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getBold()), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/rmedium.ttf")), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         menu.add(R.id.menu_groupbolditalic, R.id.menu_bold, 6, stringBuilder);
         stringBuilder = new SpannableStringBuilder(LocaleController.getString("Italic", R.string.Italic));
-        stringBuilder.setSpan(new TypefaceSpan(ua.itaysonlab.extras.CatogramExtras.getItalic()), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        stringBuilder.setSpan(new TypefaceSpan(AndroidUtilities.getTypeface("fonts/ritalic.ttf")), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         menu.add(R.id.menu_groupbolditalic, R.id.menu_italic, 7, stringBuilder);
         stringBuilder = new SpannableStringBuilder(LocaleController.getString("Mono", R.string.Mono));
         stringBuilder.setSpan(new TypefaceSpan(Typeface.MONOSPACE), 0, stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -25,7 +25,7 @@ public class ScamDrawable extends Drawable {
         super();
         currentType = type;
         textPaint.setTextSize(AndroidUtilities.dp(textSize));
-        textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(AndroidUtilities.dp(1));

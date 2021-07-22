@@ -687,7 +687,7 @@ public class BottomSheet extends Dialog {
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-                textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                 addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
             } else if (type == 2) {
                 textView.setGravity(Gravity.CENTER);
@@ -873,7 +873,7 @@ public class BottomSheet extends Dialog {
             if (bigTitle) {
                 titleView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
                 titleView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-                titleView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                titleView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                 titleView.setPadding(AndroidUtilities.dp(21), AndroidUtilities.dp(6), AndroidUtilities.dp(21), AndroidUtilities.dp(8));
             } else {
                 titleView.setTextColor(Theme.getColor(Theme.key_dialogTextGray2));

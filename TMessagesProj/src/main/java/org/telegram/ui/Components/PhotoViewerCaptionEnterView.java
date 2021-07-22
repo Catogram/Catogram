@@ -150,7 +150,7 @@ public class PhotoViewerCaptionEnterView extends FrameLayout implements Notifica
 
         lengthTextPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
         lengthTextPaint.setTextSize(AndroidUtilities.dp(13));
-        lengthTextPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        lengthTextPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         lengthTextPaint.setColor(0xffd9d9d9);
 
         messageEditText = new EditTextCaption(context) {

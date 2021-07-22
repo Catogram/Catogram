@@ -86,7 +86,7 @@ public class FeaturedStickerSetInfoCell extends FrameLayout {
         nameTextView = new TextView(context);
         nameTextView.setTextColor(Theme.getColor(Theme.key_chat_emojiPanelTrendingTitle));
         nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
-        nameTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setEllipsize(TextUtils.TruncateAt.END);
         nameTextView.setSingleLine(true);
         if (supportRtl) {

@@ -1241,7 +1241,7 @@ public class AlertsCreator {
         TextView textView = new TextView(context);
         textView.setTextColor(Theme.getColor(Theme.key_actionBarDefaultSubmenuItem));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-        textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         textView.setLines(1);
         textView.setMaxLines(1);
         textView.setSingleLine(true);
@@ -2168,7 +2168,7 @@ public class AlertsCreator {
         }
         titleView.setTextColor(datePickerColors.textColor);
         titleView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-        titleView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        titleView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         titleLayout.addView(titleView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP, 0, 12, 0, 0));
         titleView.setOnTouchListener((v, event) -> true);
 
@@ -3539,7 +3539,7 @@ public class AlertsCreator {
         titleTextView.setText(LocaleController.getString("LowDiskSpaceTitle2", R.string.LowDiskSpaceTitle2));
         titleTextView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
-        titleTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         titleTextView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP);
         linearLayout.addView(titleTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, 24, 0, 24, 8));
 

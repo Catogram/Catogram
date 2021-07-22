@@ -82,22 +82,6 @@ public class CatogramExtras {
         return view.performHapticFeedback(feedbackConstant);
     }
 
-    public static Typeface getBold() {
-        return CatogramFontLoader.getBold();
-    }
-
-    public static Typeface getBoldItalic() {
-        return CatogramFontLoader.getBoldItalic();
-    }
-
-    public static Typeface getItalic() {
-        return CatogramFontLoader.getItalic();
-    }
-
-    public static Typeface getMono() {
-        return CatogramFontLoader.getMono();
-    }
-
     @ColorInt
     public static int getLightStatusbarColor() {
         if (SharedConfig.noStatusBar) {

@@ -266,7 +266,7 @@ public class UndoView extends FrameLayout {
 
         undoTextView = new TextView(context);
         undoTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        undoTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        undoTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         undoTextView.setTextColor(Theme.getColor(Theme.key_undo_cancelColor));
         undoTextView.setText(LocaleController.getString("Undo", R.string.Undo));
         undoButton.addView(undoTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.LEFT, 6, 0, 0, 0));
@@ -281,7 +281,7 @@ public class UndoView extends FrameLayout {
 
         textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextSize(AndroidUtilities.dp(12));
-        textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         textPaint.setColor(Theme.getColor(Theme.key_undo_infoColor));
 
         setWillNotDraw(false);
@@ -799,7 +799,7 @@ public class UndoView extends FrameLayout {
                 subinfoTextView.setText(subInfoText);
                 subinfoTextView.setVisibility(VISIBLE);
                 infoTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-                infoTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                infoTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             } else {
                 layoutParams.leftMargin = AndroidUtilities.dp(58);
                 layoutParams.topMargin = AndroidUtilities.dp(13);
@@ -1080,7 +1080,7 @@ public class UndoView extends FrameLayout {
             subinfoTextView.setText(authorization.app_name);
             subinfoTextView.setVisibility(VISIBLE);
             infoTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-            infoTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            infoTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
             undoTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteRedText2));
             undoImageView.setVisibility(GONE);

@@ -13,6 +13,8 @@ import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
 
+import org.telegram.messenger.AndroidUtilities;
+
 public class TypefaceSpan extends MetricAffectingSpan {
 
     private Typeface typeface;
@@ -49,11 +51,11 @@ public class TypefaceSpan extends MetricAffectingSpan {
     }
 
     public boolean isBold() {
-        return typeface == ua.itaysonlab.extras.CatogramExtras.getBold();
+        return typeface == AndroidUtilities.getTypeface("fonts/rmedium.ttf");
     }
 
     public boolean isItalic() {
-        return typeface == ua.itaysonlab.extras.CatogramExtras.getItalic();
+        return typeface == AndroidUtilities.getTypeface("fonts/ritalic.ttf");
     }
 
     @Override

@@ -2925,7 +2925,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             textView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteRedText));
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             textView.setGravity(Gravity.CENTER);
-            textView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             textView.setText(LocaleController.getString("BanFromTheGroup", R.string.BanFromTheGroup));
             frameLayout1.addView(textView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 0, 1, 0, 0));
 
@@ -3072,7 +3072,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             }
             nameTextView[a].setTextSize(18);
             nameTextView[a].setGravity(Gravity.LEFT);
-            nameTextView[a].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            nameTextView[a].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             nameTextView[a].setLeftDrawableTopPadding(-AndroidUtilities.dp(1.3f));
             nameTextView[a].setPivotX(0);
             nameTextView[a].setPivotY(0);

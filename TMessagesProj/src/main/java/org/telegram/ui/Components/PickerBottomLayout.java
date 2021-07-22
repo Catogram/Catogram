@@ -45,7 +45,7 @@ public class PickerBottomLayout extends FrameLayout {
         cancelButton.setBackgroundDrawable(Theme.createSelectorDrawable(0x0f000000, 0));
         cancelButton.setPadding(AndroidUtilities.dp(33), 0, AndroidUtilities.dp(33), 0);
         cancelButton.setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
-        cancelButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        cancelButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         addView(cancelButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT));
 
         doneButton = new LinearLayout(context);
@@ -55,7 +55,7 @@ public class PickerBottomLayout extends FrameLayout {
         addView(doneButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.RIGHT));
 
         doneButtonBadgeTextView = new TextView(context);
-        doneButtonBadgeTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        doneButtonBadgeTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         doneButtonBadgeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
         doneButtonBadgeTextView.setTextColor(Theme.getColor(Theme.key_picker_badgeText));
         doneButtonBadgeTextView.setGravity(Gravity.CENTER);
@@ -71,7 +71,7 @@ public class PickerBottomLayout extends FrameLayout {
         doneButtonTextView.setGravity(Gravity.CENTER);
         doneButtonTextView.setCompoundDrawablePadding(AndroidUtilities.dp(8));
         doneButtonTextView.setText(LocaleController.getString("Send", R.string.Send).toUpperCase());
-        doneButtonTextView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        doneButtonTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         doneButton.addView(doneButtonTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL));
     }
 
