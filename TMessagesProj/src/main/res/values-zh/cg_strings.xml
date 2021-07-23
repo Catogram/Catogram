@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">在关闭情况下，录制时依然会继续播放音乐</string>
     <string name="CG_Proximity">禁用距离传感器</string>
     <string name="CG_Proximity_Desc">这在有些情况下很有用</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
+    <string name="CG_Donate_Desc">在下方选择您的捐赠方式 \n 如果您的捐赠额度超过 1.5 美元 或 100 俄罗斯卢布，即可成为捐赠用户，你的名字旁边可以添加一个小猫标记，以及使用未来的高级功能 \n 不要忘记在捐赠中留言附加您的 ID</string>
     <string name="CG_Donate_Method">选择捐赠渠道</string>
     <string name="CG_Mono_Desc">5375414117420108 // 轻触以复制</string>
     <string name="CG_Source">查看应用源码</string>
@@ -265,6 +265,6 @@
     <string name="CG_MentionByName_Desc">而不提及账号名称</string>
     <string name="CG_PlayVideo">点击音量键时播放视频</string>
     <string name="CG_PlayVideo_Desc">如果启用此选项，当按下音量按键时，对话框中的视频将会开始播放</string>
-    <string name="CG_StreamVoip">Stream VoIP as Media</string>
-    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_StreamVoip">流式 VoIP 传输</string>
+    <string name="CG_StreamVoip_Desc">如果启用此选项，语音 VoIP 聊天将会被视为 将视为媒体流式传输</string>
 </resources>
