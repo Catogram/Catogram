@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">Eğer devre dışı bırakıldıysa müzik susturulacak fakat kapanmayacak</string>
     <string name="CG_Proximity">Yakınlık eylemlerini etkinleştir</string>
     <string name="CG_Proximity_Desc">Devre dışı bırakarak, sesli mesajları dinlerken can sıkıcı ekran kapanmasından kurtulacaksınız (uygulamak için uygulamayı yeniden başlatın)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
+    <string name="CG_Donate_Desc">Aşağıda bir bağış yöntemi seçin\nlf bağış yaparsanız &gt;= 1,5 $ veya 100 Rus rublesi, premium kullanıcı olacaksınız, gelecekte kedi doğrulama işareti ve premium özellikler alacaksınız. \n ödeme yorumunda kimliğinizi belirtin.</string>
     <string name="CG_Donate_Method">Yöntem seç</string>
     <string name="CG_Mono_Desc">5375414117420108 // kopyalamak için tıkla</string>
     <string name="CG_Source">Kaynak kodu</string>
