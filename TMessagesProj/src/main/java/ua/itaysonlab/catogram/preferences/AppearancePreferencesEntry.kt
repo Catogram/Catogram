@@ -108,7 +108,7 @@ class AppearancePreferencesEntry : BasePreferencesEntry {
                     return@contract SharedConfig.noStatusBar
                 }) {
                     SharedConfig.toggleNoStatusBar()
-                    bf.parentActivity.window.statusBarColor = if (Theme.getColor(Theme.key_actionBarDefault, null, true) == Color.WHITE) CatogramExtras.getLightStatusbarColor() else CatogramExtras.getDarkStatusbarColor()
+                    bf.parentActivity.window.statusBarColor = if (Theme.getColor(Theme.key_actionBarDefault, null, true) == Color.WHITE) CatogramExtras.lightStatusbarColor else CatogramExtras.darkStatusbarColor
                 }
             }
 
