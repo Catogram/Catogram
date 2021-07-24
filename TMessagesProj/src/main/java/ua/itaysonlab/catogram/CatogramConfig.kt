@@ -85,6 +85,8 @@ object CatogramConfig {
 
     var useMediaStream by sharedPreferences.boolean("cg_media_stream", false)
 
+    var hideStickerTime by sharedPreferences.boolean("cg_hide_stick_time", true)
+
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
             1 -> NoIconReplace()

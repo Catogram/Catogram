@@ -10380,7 +10380,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (!autoPlayingMedia || !MediaController.getInstance().isPlayingMessageAndReadyToDraw(currentMessageObject) && !transitionParams.animateBackgroundBoundsInner) {
             drawOverlays(canvas);
         }
-        if ((drawTime || !mediaBackground) && !forceNotDrawTime && !transitionParams.animateBackgroundBoundsInner && !(enterTransitionInPorgress && !currentMessageObject.isVoice()) && !currentMessageObject.isAnyKindOfSticker()) {
+        if ((drawTime || !mediaBackground) && !forceNotDrawTime && !transitionParams.animateBackgroundBoundsInner && !(enterTransitionInPorgress && !currentMessageObject.isVoice()) && (!currentMessageObject.isAnyKindOfSticker() || !CatogramConfig.INSTANCE.getHideStickerTime())) {
             drawTime(canvas, 1f, false);
         }
 

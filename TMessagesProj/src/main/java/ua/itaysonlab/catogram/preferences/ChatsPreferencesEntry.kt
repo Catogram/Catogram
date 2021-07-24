@@ -32,6 +32,15 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     }
                 }
             }
+            switch {
+                title = LocaleController.getString("CG_TimeOnStick", R.string.CG_TimeOnStick)
+
+                contract({
+                    return@contract CatogramConfig.hideStickerTime
+                }) {
+                    CatogramConfig.hideStickerTime = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
