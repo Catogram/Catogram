@@ -266,4 +266,5 @@
     <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
     <string name="CG_StreamVoip">Stream VoIP as Media</string>
     <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
 </resources>
