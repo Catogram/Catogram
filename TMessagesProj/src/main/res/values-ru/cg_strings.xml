@@ -263,7 +263,7 @@
     <string name="CG_MentionByName_Desc">вместо никнейма</string>
     <string name="CG_PlayVideo">Воспроизводить видео при нажатии на кнопку громкости</string>
     <string name="CG_PlayVideo_Desc">Если активно - при нажатии на кнопку громкости, будет включено видео на экране в диалоге</string>
-    <string name="CG_StreamVoip">Stream VoIP as Media</string>
-    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_StreamVoip">Потоковая передача VoIP как мультимедиа</string>
+    <string name="CG_StreamVoip_Desc">если включено, то вызов VoIP будет распознаваться как носитель вместо вызова</string>
     <string name="CG_TimeOnStick">Скрыть время отправки на стикерах в чате</string>
 </resources>
