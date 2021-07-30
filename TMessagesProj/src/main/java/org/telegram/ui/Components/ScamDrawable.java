@@ -35,7 +35,7 @@ public class ScamDrawable extends Drawable {
         } else if (type == 1) {
             text = LocaleController.getString("FakeMessage", R.string.FakeMessage);
         } else {
-            text = "PREMIUM";
+            text = "CG+";
         }
         textWidth = (int) Math.ceil(textPaint.measureText(text));
     }
@@ -47,7 +47,7 @@ public class ScamDrawable extends Drawable {
         } else if (currentType == 1) {
             newText = LocaleController.getString("FakeMessage", R.string.FakeMessage);
         } else {
-            newText = "PREMIUM";
+            newText = "CG+";
         }
         if (!newText.equals(text)) {
             text = newText;
