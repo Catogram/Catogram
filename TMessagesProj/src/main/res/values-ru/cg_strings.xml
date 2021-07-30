@@ -220,7 +220,7 @@
     <string name="CG_FwdMenu_EnableNoForward">Удалять автора сообщений</string>
     <string name="CG_FwdMenu_DisableNoForward">Не удалять автора сообщений</string>
     <string name="CG_DND">Не беспокоить</string>
-    <string name="CG_DND_desc">Заглушит все уведомления. Полезно если вы не хотите слышать звук оповещений, но хотите видеть сами уведомления</string>
+    <string name="CG_DND_desc">Уберёт звук всех уведомлений. Полезно если Вам не нужен звук оповещений, но Вы хотите видеть сами уведомления</string>
     <string name="CG_Silence">Абсолютная тишина</string>
     <string name="CG_Silence_desc">Отключит все уведомления</string>
     <string name="CG_SilenceNonContacts">Заглушить не-контакты</string>
@@ -229,8 +229,8 @@
     <string name="CG_RecentStickers_desc">недавних стикеров</string>
     <string name="CG_Without_Authorship">Без авторства</string>
     <string name="CG_Private">Это приватный канал</string>
-    <string name="CG_ForceClean">Очистить кэш Telegram</string>
-    <string name="CG_ForceCleanInfo">Используйте это, если вы долго видите \"Подсчёт…\" при попытке очистки кэша.\nЭто удалит ВСЁ из вашего кэша - будьте осторожны!</string>
+    <string name="CG_ForceClean">Принудительно очистить кэш Telegram</string>
+    <string name="CG_ForceCleanInfo">Используйте это, если Вы долго видите \"Подсчёт…\" при попытке очистки кэша.\nЭто удалит ВСЁ из вашего кэша - будьте осторожны!</string>
     <string name="CG_SwitchBackend">Вы переключитесь на тестовый сервер. Пожалуйста не нажимайте ОК, если вы не знаете, что делаете. Вы можете снова переключиться на обычный сервер, нажав на \"Переключить сервер\" в меню отладки.</string>
     <string name="CG_SB">Переключить сервер</string>
     <string name="CG_TrLang">Язык назначения</string>
@@ -253,17 +253,17 @@
     <string name="CG_Found">Найдено обновление</string>
     <string name="CG_Download">Скачать</string>
     <string name="CG_PrivateDir">Приватное хранилище кэша</string>
-    <string name="CG_PrivateDir_desc">"кэш будет сохранен в приватном хранилище приложения. Вы или кто-то ещё, не может разрешить это без рут прав"</string>
+    <string name="CG_PrivateDir_desc">"кэш будет сохранен в приватном хранилище приложения. никто не сможет получить доступ к нему без root прав (прав суперпользователя)"</string>
     <string name="CG_RemovedS">Успешно удалено</string>
     <string name="CG_CleanOld">Очистить старый кэш (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Список изменений</string>
     <string name="CG_Sleep">Таймер времени сна</string>
     <string name="CG_Sleep_Time">Отсчёт времени сна (минуты)</string>
-    <string name="CG_MentionByName">Упоминание по имени</string>
+    <string name="CG_MentionByName">Упомянуть по имени</string>
     <string name="CG_MentionByName_Desc">вместо никнейма</string>
     <string name="CG_PlayVideo">Воспроизводить видео при нажатии на кнопку громкости</string>
     <string name="CG_PlayVideo_Desc">Если активно - при нажатии на кнопку громкости, будет включено видео на экране в диалоге</string>
     <string name="CG_StreamVoip">Потоковая передача VoIP как мультимедиа</string>
-    <string name="CG_StreamVoip_Desc">если включено, то вызов VoIP будет распознаваться как носитель вместо вызова</string>
+    <string name="CG_StreamVoip_Desc">если включено, то вызов VoIP будет распознаваться как мультимедиа вместо вызова</string>
     <string name="CG_TimeOnStick">Скрыть время отправки на стикерах в чате</string>
 </resources>
