@@ -137,26 +137,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
-                title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
-
-                contract({
-                    return@contract CatogramConfig.hqRoundVideos
-                }) {
-                    CatogramConfig.hqRoundVideos = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_HqRoundVideosAudio", R.string.CG_HqRoundVideosAudio)
-
-                contract({
-                    return@contract CatogramConfig.hqRoundVideoAudio
-                }) {
-                    CatogramConfig.hqRoundVideoAudio = it
-                }
-            }
-
-            switch {
                 title = LocaleController.getString("CG_VoiceEnhancements", R.string.CG_VoiceEnhancements)
                 summary = LocaleController.getString("CG_VoiceEnhancements_Desc", R.string.CG_VoiceEnhancements_Desc)
 

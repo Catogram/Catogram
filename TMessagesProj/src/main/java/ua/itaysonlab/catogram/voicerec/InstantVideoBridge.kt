@@ -9,31 +9,10 @@ import android.os.Build
 import ua.itaysonlab.catogram.CatogramConfig
 
 object InstantVideoBridge {
-    @JvmStatic
-    fun getInstantBitrate(): Int {
-        return when {
-            CatogramConfig.hqRoundVideos -> 1000000
-            else -> 400000
-        }
-    }
-
-    @JvmStatic
-    fun getInstantResolution(): Int {
-        return when {
-            Build.MODEL.startsWith("zeroflte") || Build.MODEL.startsWith("zenlte") -> 320
-            CatogramConfig.hqRoundVideos -> 480
-            else -> 240
-        }
-    }
-
-    @JvmStatic
-    fun getInstantAudioBitrate(): Int {
-        return if (CatogramConfig.hqRoundVideoAudio) 64000 else 32000
-    }
 
     @JvmStatic
     fun getVoiceBitrate(): Int {
-        return if (CatogramConfig.hqRoundVideoAudio) 32000 else 25000
+        return 32000
     }
 
     @JvmStatic
