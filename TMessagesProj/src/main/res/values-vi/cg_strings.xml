@@ -250,9 +250,9 @@
     <string name="CG_Auto_Ota_summary">khi mở app</string>
     <string name="CG_Ota">Tìm kiếm cập nhật</string>
     <string name="CG_Not_Found">Không tìm thấy</string>
-    <string name="CG_Found">Update found</string>
-    <string name="CG_Download">Download</string>
-    <string name="CG_PrivateDir">Private directory of cache</string>
+    <string name="CG_Found">Tìm thấy cập nhật</string>
+    <string name="CG_Download">Tải</string>
+    <string name="CG_PrivateDir">Thư mục cache bí mật</string>
     <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
     <string name="CG_RemovedS">Removed successfully</string>
     <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
