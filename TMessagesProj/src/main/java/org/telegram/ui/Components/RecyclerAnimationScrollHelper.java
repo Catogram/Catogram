@@ -237,6 +237,7 @@ public class RecyclerAnimationScrollHelper {
                             }
                         }
 
+                        recyclerView.setScrollEnabled(true);
                         recyclerView.setVerticalScrollBarEnabled(true);
 
                         if (BuildVars.DEBUG_VERSION) {
