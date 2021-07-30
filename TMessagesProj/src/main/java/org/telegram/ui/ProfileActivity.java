@@ -2761,7 +2761,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                                     SharedConfig.pushAuthKey = null;
                                     SharedConfig.pushAuthKeyId = null;
                                     SharedConfig.saveConfig();
-                                    getConnectionsManager().switchBackend();
+                                    getConnectionsManager().switchBackend(true);
                                 });
                                 builder1.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
                                 showDialog(builder1.create());

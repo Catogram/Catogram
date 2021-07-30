@@ -12,8 +12,7 @@ object InstantVideoBridge {
     @JvmStatic
     fun getInstantBitrate(): Int {
         return when {
-            Build.MODEL.startsWith("zeroflte") || Build.MODEL.startsWith("zenlte") -> 600000
-            CatogramConfig.hqRoundVideos -> 600000
+            CatogramConfig.hqRoundVideos -> 1000000
             else -> 400000
         }
     }

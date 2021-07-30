@@ -2067,7 +2067,7 @@ public class WebPlayerView extends ViewGroup implements VideoPlayer.VideoPlayerD
         return inFullscreen;
     }
 
-    public String getYouTubeVideoId(String url) {
+    public static String getYouTubeVideoId(String url) {
         Matcher matcher = youtubeIdRegex.matcher(url);
         String id = null;
         if (matcher.find()) {

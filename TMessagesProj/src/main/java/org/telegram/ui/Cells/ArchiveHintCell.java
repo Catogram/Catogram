@@ -13,7 +13,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import org.telegram.messenger.AndroidUtilities;
-import org.telegram.messenger.FileLog;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.BottomPagesView;
 import org.telegram.ui.Components.LayoutHelper;
@@ -54,12 +53,12 @@ public class ArchiveHintCell extends FrameLayout {
 
             @Override
             public void onPageSelected(int i) {
-                FileLog.d("test1");
+
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
-                FileLog.d("test1");
+
             }
         });
 

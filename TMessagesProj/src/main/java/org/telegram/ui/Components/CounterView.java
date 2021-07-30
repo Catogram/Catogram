@@ -87,6 +87,9 @@ public class CounterView extends View {
         if (count > 0) {
             setVisibility(View.VISIBLE);
         }
+        if (Math.abs(count - currentCount) > 99) {
+            animated = false;
+        }
         if (!animated) {
             currentCount = count;
             if (count == 0) {
