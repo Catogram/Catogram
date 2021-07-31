@@ -1648,7 +1648,7 @@ public class Theme {
                 themeName = getBaseThemeKey(info.settings);
             }
 
-            return "Dark Blue".equals(themeName) || "Night".equals(themeName);
+            return "Dark Blue".equals(themeName) || "Night".equals(themeName) || "AMOLED".equals(themeName);
         }
 
         public boolean isLight() {
