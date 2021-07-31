@@ -37,19 +37,11 @@ public class BuildVars {
         }
     }
 
-    private static Boolean standaloneApp;
     public static boolean isStandaloneApp() {
-        if (standaloneApp == null) {
-            standaloneApp = ApplicationLoader.applicationContext != null && "org.telegram.messenger.web".equals(ApplicationLoader.applicationContext.getPackageName());
-        }
-        return standaloneApp;
+        return true;
     }
 
-    private static Boolean betaApp;
     public static boolean isBetaApp() {
-        if (betaApp == null) {
-            betaApp = ApplicationLoader.applicationContext != null && "org.telegram.messenger.beta".equals(ApplicationLoader.applicationContext.getPackageName());
-        }
-        return betaApp;
+        return false;
     }
 }
