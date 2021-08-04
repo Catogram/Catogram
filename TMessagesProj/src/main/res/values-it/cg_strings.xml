@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">Se disattivato la musica sarà più bassa ma non si spegnerà</string>
     <string name="CG_Proximity">Abilità azioni di prossimità</string>
     <string name="CG_Proximity_Desc">Spegnendolo ti libererai del fastidioso spegnimento dello schermo quando ascolti i messaggi vocali (riavvia l\'app per applicarlo)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
+    <string name="CG_Donate_Desc">Scegli un metodo di donazione\nSe doni &gt;= di $1.5 o 100 Rubli russi, diventerai un utente premium, riceverai un simbolo di verifica e funzioni premium in futuro. \nSpecifica il tuo ID nel commento del pagamento.</string>
     <string name="CG_Donate_Method">Scegli metodo</string>
     <string name="CG_Mono_Desc">5375414117420108 // clicca per copiare</string>
     <string name="CG_Source">Codice sorgente</string>
@@ -257,12 +257,12 @@
     <string name="CG_RemovedS">Eliminato correttamente</string>
     <string name="CG_CleanOld">Rimuovi la vecchia cache (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Novità</string>
-    <string name="CG_Sleep">Sleep timer</string>
-    <string name="CG_Sleep_Time">Sleep timer countdown (minutes)</string>
+    <string name="CG_Sleep">Sveglia</string>
+    <string name="CG_Sleep_Time">Conto alla rovescia della sveglia (in minuti)</string>
     <string name="CG_MentionByName">Menziona tramite il nome</string>
     <string name="CG_MentionByName_Desc">invece dello username</string>
     <string name="CG_PlayVideo">Riproduci video al click del bottone del volume</string>
-    <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
+    <string name="CG_PlayVideo_Desc">Se attivato - quando premi il bilanciere del volume, il video a schermo nella finestra di dialogo verrà abilitato</string>
     <string name="CG_StreamVoip">Streamma VoIP come contenuto multimediale</string>
     <string name="CG_StreamVoip_Desc">se abilitato le chiamate VoIP saranno riconosciute come contenuti multimediali invece di chiamate</string>
     <string name="CG_TimeOnStick">Nascondi il tempo negli sticker in chat</string>
