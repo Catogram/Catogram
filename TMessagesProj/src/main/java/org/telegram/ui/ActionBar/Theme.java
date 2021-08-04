@@ -4273,18 +4273,18 @@ public class Theme {
             themeInfo.previewOutColor = Color.parseColor("#FFFFFF");
         }
         themeInfo.currentAccentId = DEFALT_THEME_ACCENT_ID;
-        if (Build.VERSION.SDK_INT >= 31 || Build.VERSION.CODENAME == "S") {
+        if (Build.VERSION.SDK_INT >= 29 || Build.VERSION.CODENAME == "Q") {
             themeInfo.setAccentColorOptions(
                     new int[]{0xFF5890C5, 0xFF239853, 0xFFCE5E82, 0xFF7F63C3, 0xFF2491AD, 0xFF299C2F, 0xFF8854B4, 0xFF328ACF, 0xFF43ACC7, 0xFF52AC44, 0xFFCD5F93, 0xFFD28036, 0xFF8366CC, 0xFFCE4E57, 0xFFD3AE40, monetAccent,},
                     new int[]{0xFFB8E18D, 0xFFFAFBCC, 0xFFFFF9DC, 0xFFC14F6E, 0xFFD1BD1B, 0xFFFFFAC9, 0xFFFCF6D8, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, monetAccent,},
                     new int[]{0x00000000, 0xFFF2FBC9, 0xFFFBF4DF, 0, 0, 0xFFFDEDB4, 0xFFFCF7B6, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,},
-                    new int[]{0x00000000, 0xFFdfe2a0, 0xFFf1b290, 0xFFd7c1e9, 0xFFd7b89e, 0xFFec9e73, 0xFFcbb0e4, 0xff9bbce7, 0xff91c5ec, 0xff9bc982, 0xffe4a1c1, 0xffe3ae7d, 0xffb8aaea, 0xffeb9c79, 0xffd3bc74, monetBackground,},
+                    new int[]{0x00000000, 0xFFdfe2a0, 0xFFf1b290, 0xFFd7c1e9, 0xFFd7b89e, 0xFFec9e73, 0xFFcbb0e4, 0xff9bbce7, 0xff91c5ec, 0xff9bc982, 0xffe4a1c1, 0xffe3ae7d, 0xffb8aaea, 0xffeb9c79, 0xffd3bc74, Build.VERSION.SDK_INT >= 31 || Build.VERSION.CODENAME == "S" ? monetBackground : 0x00000000,},
                     new int[]{0x00000000, 0xFFbad89d, 0xFFeccf94, 0xFFe8bdd6, 0xFFe6dec2, 0xFFe8d085, 0xFFebc8e9, 0xffc0d9f3, 0xffbfdfec, 0xffe0dd93, 0xffe9bed6, 0xffecd5a2, 0xffc5c9ee, 0xfff0bd99, 0xffe9df9e, 0x00000000,},
                     new int[]{0x00000000, 0xFFe2dea7, 0xFFe7b384, 0xFFd2aee9, 0xFFdac5ae, 0xFFeea677, 0xFFdfa8d1, 0xff95c3eb, 0xffb5e1d9, 0xffbed595, 0xffcca8e1, 0xffdfb076, 0xffb3b1e2, 0xffe79db4, 0xffe0c88b, 0x00000000,},
                     new int[]{0x00000000, 0xFF9ec790, 0xFFebdea8, 0xFFeccb88, 0xFFe5dcbf, 0xFFede4a9, 0xFFedc8a8, 0xffbbd5e8, 0xffbfdbe8, 0xffd1db97, 0xffefcbd7, 0xffecd694, 0xffdfbeed, 0xfff3b182, 0xffe5d397, 0x00000000,},
                     new int[]{99, 9, 10, 11, 12, 13, 14, 0, 1, 2, 3, 4, 5, 6, 7, 8,},
-                    new String[]{"", "p-pXcflrmFIBAAAAvXYQk-mCwZU", "JqSUrO0-mFIBAAAAWwTvLzoWGQI", "O-wmAfBPSFADAAAA4zINVfD_bro", "RepJ5uE_SVABAAAAr4d0YhgB850", "-Xc-np9y2VMCAAAARKr0yNNPYW0", "fqv01SQemVIBAAAApND8LDRUhRU", "fqv01SQemVIBAAAApND8LDRUhRU", "RepJ5uE_SVABAAAAr4d0YhgB850", "lp0prF8ISFAEAAAA_p385_CvG0w", "heptcj-hSVACAAAAC9RrMzOa-cs", "PllZ-bf_SFAEAAAA8crRfwZiDNg", "dhf9pceaQVACAAAAbzdVo4SCiZA", "Ujx2TFcJSVACAAAARJ4vLa50MkM", "p-pXcflrmFIBAAAAvXYQk-mCwZU", "",},
-                    new int[]{0, 180, 45, 0, 45, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+                    new String[]{"", "p-pXcflrmFIBAAAAvXYQk-mCwZU", "JqSUrO0-mFIBAAAAWwTvLzoWGQI", "O-wmAfBPSFADAAAA4zINVfD_bro", "RepJ5uE_SVABAAAAr4d0YhgB850", "-Xc-np9y2VMCAAAARKr0yNNPYW0", "fqv01SQemVIBAAAApND8LDRUhRU", "fqv01SQemVIBAAAApND8LDRUhRU", "RepJ5uE_SVABAAAAr4d0YhgB850", "lp0prF8ISFAEAAAA_p385_CvG0w", "heptcj-hSVACAAAAC9RrMzOa-cs", "PllZ-bf_SFAEAAAA8crRfwZiDNg", "dhf9pceaQVACAAAAbzdVo4SCiZA", "Ujx2TFcJSVACAAAARJ4vLa50MkM", "p-pXcflrmFIBAAAAvXYQk-mCwZU", "p-pXcflrmFIBAAAAvXYQk-mCwZU",},
+                    new int[]{0, 180, 45, 0, 45, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180,},
                     new int[]{0, 52, 46, 57, 45, 64, 52, 35, 36, 41, 50, 50, 35, 38, 37, 30,}
             );
         } else {
@@ -4319,12 +4319,12 @@ public class Theme {
                 themeInfo.previewInColor = Color.parseColor("#FF454647");
                 themeInfo.previewOutColor = Color.parseColor("#FF2C2D2E");
         }
-        if (Build.VERSION.SDK_INT >= 31 || Build.VERSION.CODENAME == "S") {
+        if (Build.VERSION.SDK_INT >= 29 || Build.VERSION.CODENAME == "Q") {
             themeInfo.setAccentColorOptions(
                     new int[]{0xFF927BD4, 0xFF698AFB, 0xFF23A7F0, 0xFF7B71D1, 0xFF69B955, 0xFF2990EA, 0xFF7082E9, 0xFF66BAED, 0xff3685fa, 0xff46c8ed, 0xff64AC5F, 0xffeb7cb1, 0xffee902a, 0xffa281f0, 0xffd34324, 0xffeebd34, 0xff7f8fab, monetAccent, },
                     new int[]{0xFF9D5C99, 0xFF635545, 0xFF31818B, 0xFFAD6426, 0xFF4A7034, 0xFF335D82, 0xFF36576F, 0xFF597563, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, monetAccent},
                     new int[]{0xFF604DA8, 0xFF685D4C, 0xFF1B6080, 0xFF99354E, 0xFF275D3B, 0xFF317A98, 0xFF376E87, 0xFF5E7370, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
-                    new int[]{0xFF271e2e, 0xFF171a22, 0xFF071e1f, 0xFF100f13, 0xFF0e1811, 0xFF0b131c, 0xFF1d2129, 0xFF202c2a, 0xff0e141a, 0xff162325, 0xff161d15, 0xff24191e, 0xff251b13, 0xff1f1d29, 0xff22160e, 0xff272115, 0xff171a1b, monetBackground},
+                    new int[]{0xFF271e2e, 0xFF171a22, 0xFF071e1f, 0xFF100f13, 0xFF0e1811, 0xFF0b131c, 0xFF1d2129, 0xFF202c2a, 0xff0e141a, 0xff162325, 0xff161d15, 0xff24191e, 0xff251b13, 0xff1f1d29, 0xff22160e, 0xff272115, 0xff171a1b, Build.VERSION.SDK_INT >= 31 || Build.VERSION.CODENAME == "S" ? monetBackground : 0xFF271e2e},
                     new int[]{0xFF110e13, 0xFF26262e, 0xFF141d26, 0xFF221a27, 0xFF1f2818, 0xFF192330, 0xFF12161a, 0xFF141a1e, 0xff172431, 0xff0e1718, 0xff172719, 0xff23171c, 0xff201408, 0xff14131c, 0xff2d1d16, 0xff1a160d, 0xff212328, 0x00000000},
                     new int[]{0xFF2b1e2b, 0xFF15151b, 0xFF0c151a, 0xFF0e0f13, 0xFF0b170f, 0xFF131822, 0xFF17242d, 0xFF16202b, 0xff0f171e, 0xff1e2e2e, 0xff141e14, 0xff2b1929, 0xff2e1f15, 0xff292331, 0xff23140c, 0xff292414, 0xff181a1d, 0x00000000},
                     new int[]{0xFF161227, 0xFF1a1916, 0xFF0d272c, 0xFF271d29, 0xFF171d19, 0xFF172331, 0xFF111521, 0xFF051717, 0xff141c2b, 0xff121f1f, 0xff1c261a, 0xff1f141d, 0xff1b130a, 0xff17131b, 0xff2d1924, 0xff1e170e, 0xff212228, 0x00000000},
@@ -4437,7 +4437,7 @@ public class Theme {
         themeInfo.previewInColor = 0xff989ba3;
         themeInfo.previewOutColor = 0xffa4bff9;
         themeInfo.sortIndex = 4;
-        if (Build.VERSION.SDK_INT >= 31 || Build.VERSION.CODENAME == "S") {
+        if (Build.VERSION.SDK_INT >= 29 || Build.VERSION.CODENAME == "Q") {
             themeInfo.setAccentColorOptions(
                     new int[]{0xFF6ABE3F, 0xFF8D78E3, 0xFFDE5E7E, 0xFF5977E8, 0xFFDBC11A, 0xff3e88f7, 0xff4ab5d3, 0xff4ab841, 0xffd95576, 0xffe27d2b, 0xff936cda, 0xffd04336, 0xffe8ae1c, monetAccent},
                     new int[]{0xFF8A5294, 0xFFB46C1B, 0xFFAF4F6F, 0xFF266E8D, 0xFF744EB7, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, monetAccent},

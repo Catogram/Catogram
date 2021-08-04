@@ -3,13 +3,10 @@ package ua.itaysonlab.catogram
 import android.R
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-import androidx.annotation.RequiresApi
 import androidx.appcompat.view.ContextThemeWrapper
 import com.google.android.material.color.MaterialColors
-import org.telegram.ui.ActionBar.Theme
 
 object MonetHelper {
 
