@@ -1224,7 +1224,8 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
         if (object.type != 0) {
             object.generateCaption();
         } else {
-            object.generateLayout(null);
+            object.resetLayout();
+            object.checkLayout();
         }
 
         ArrayList<TLRPC.Message> arr = new ArrayList<>();
@@ -2236,13 +2237,14 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
 
             if (!retry) {
                 if (messageObject.editingMessage != null) {
+                    String oldMessge = newMsg.message;
                     newMsg.message = messageObject.editingMessage.toString();
                     messageObject.caption = null;
                     if (type == 1) {
                         if (messageObject.editingMessageEntities != null) {
                             newMsg.entities = messageObject.editingMessageEntities;
                             newMsg.flags |= 128;
-                        } else {
+                        } else if (!TextUtils.equals(oldMessge, newMsg.message)) {
                             newMsg.flags &=~ 128;
                         }
                     } else {
@@ -2255,7 +2257,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                             if (entities != null && !entities.isEmpty()) {
                                 newMsg.entities = entities;
                                 newMsg.flags |= 128;
-                            } else {
+                            } else if (!TextUtils.equals(oldMessge, newMsg.message)) {
                                 newMsg.flags &=~ 128;
                             }
                         }
@@ -2273,7 +2275,8 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     if (messageObject.messageOwner.media instanceof TLRPC.TL_messageMediaPhoto || messageObject.messageOwner.media instanceof TLRPC.TL_messageMediaDocument) {
                         messageObject.generateCaption();
                     } else {
-                        messageObject.generateLayout(null);
+                        messageObject.resetLayout();
+                        messageObject.checkLayout();
                     }
                 }
                 messageObject.createMessageSendInfo();
@@ -5396,6 +5399,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                                     msgObj.messageOwner.ttl_period = message.ttl_period;
                                     msgObj.messageOwner.flags |= 33554432;
                                 }
+                                msgObj.messageOwner.entities = message.entities;
                                 updateMediaPaths(msgObj, message, message.id, originalPath, false);
                                 existFlags = msgObj.getMediaExistanceFlags();
                                 newMsgObj.id = message.id;
@@ -7848,20 +7852,18 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
             float scale = videoEditedInfo.originalWidth > videoEditedInfo.originalHeight ? maxSize / videoEditedInfo.originalWidth : maxSize / videoEditedInfo.originalHeight;
             videoEditedInfo.resultWidth = Math.round(videoEditedInfo.originalWidth * scale / 2) * 2;
             videoEditedInfo.resultHeight = Math.round(videoEditedInfo.originalHeight * scale / 2) * 2;
-
-            bitrate = MediaController.makeVideoBitrate(
-                    videoEditedInfo.originalHeight, videoEditedInfo.originalWidth,
-                    originalBitrate,
-                    videoEditedInfo.resultHeight, videoEditedInfo.resultWidth
-            );
-
         }
+        bitrate = MediaController.makeVideoBitrate(
+                videoEditedInfo.originalHeight, videoEditedInfo.originalWidth,
+                originalBitrate,
+                videoEditedInfo.resultHeight, videoEditedInfo.resultWidth
+        );
 
         if (selectedCompression == compressionsCount - 1) {
             videoEditedInfo.resultWidth = videoEditedInfo.originalWidth;
             videoEditedInfo.resultHeight = videoEditedInfo.originalHeight;
-            videoEditedInfo.bitrate = originalBitrate;
-            videoEditedInfo.estimatedSize = (int) (new File(videoPath).length());
+            videoEditedInfo.bitrate = bitrate;
+            videoEditedInfo.estimatedSize = (int) (audioFramesSize + videoDuration / 1000.0f * bitrate / 8);
         } else {
             videoEditedInfo.bitrate = bitrate;
             videoEditedInfo.estimatedSize = (int) (audioFramesSize + videoFramesSize);
