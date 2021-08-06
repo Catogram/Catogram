@@ -12,13 +12,6 @@ import ua.itaysonlab.tgkit.preference.types.TGKitTextIconRow
 
 class DonatePreferenceEntry : BasePreferencesEntry {
     override fun getPreferences(bf: BaseFragment) = tgKitScreen(LocaleController.getString("CG_Donate", R.string.CG_Donate)) {
-
-        category(LocaleController.getString("CG_GooglePlay_Info", R.string.CG_GooglePlay_Info)) {
-            textDetail {
-                title = LocaleController.getString("CG_GooglePlay_Info", R.string.CG_GooglePlay_Info)
-                detail = LocaleController.getString("CG_Donate_Desc", R.string.CG_Donate_Desc)
-            }
-        }
         category(LocaleController.getString("CG_Donate_Method", R.string.CG_Donate_Method)) {
             textIcon {
                 title = "PayPal"
