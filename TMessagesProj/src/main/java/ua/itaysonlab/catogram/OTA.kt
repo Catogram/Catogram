@@ -19,6 +19,7 @@ import okhttp3.Request
 import org.json.JSONObject
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
+import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl.translateText
 import ua.itaysonlab.extras.CatogramExtras
 
 
@@ -94,34 +95,35 @@ object OTA : CoroutineScope by MainScope() {
             if (needDownload && b) {
                 showAlert(context)
             } else if (needDownload && !b) {
-                context.registerReceiver(broadcastReceiver, IntentFilter("OTA_NOTIF"))
-                if (Build.VERSION.SDK_INT >= 26) {
-                    val channel = NotificationChannel("channel01", "name",
+                translateText(changelog, false) { txt ->
+                    context.registerReceiver(broadcastReceiver, IntentFilter("OTA_NOTIF"))
+                    if (Build.VERSION.SDK_INT >= 26) {
+                        val channel = NotificationChannel("channel01", "name",
                             NotificationManager.IMPORTANCE_HIGH) // for heads up notifications
 
-                    channel.description = "description"
+                        channel.description = "description"
 
-                    val notificationManager: NotificationManager? = context.getSystemService(NotificationManager::class.java)
+                        val notificationManager: NotificationManager? = context.getSystemService(NotificationManager::class.java)
 
-                    notificationManager!!.createNotificationChannel(channel)
-                }
+                        notificationManager!!.createNotificationChannel(channel)
+                    }
 
-                val intentDownload = Intent(context, NotificationActionService::class.java)
+                    val intentDownload = Intent(context, NotificationActionService::class.java)
                         .setAction("action_download")
-                val pendingIntentDownload = PendingIntent.getBroadcast(
+                    val pendingIntentDownload = PendingIntent.getBroadcast(
                         context, 0,
                         intentDownload, PendingIntent.FLAG_UPDATE_CURRENT
-                )
+                    )
 
-                val intentChangelog = Intent(context, NotificationActionService::class.java)
+                    val intentChangelog = Intent(context, NotificationActionService::class.java)
                         .setAction("action_changelog")
 
-                val pendingIntentChangelog = PendingIntent.getBroadcast(
+                    val pendingIntentChangelog = PendingIntent.getBroadcast(
                         context, 0,
                         intentChangelog, PendingIntent.FLAG_UPDATE_CURRENT
-                )
+                    )
 
-                val notification: Notification = NotificationCompat.Builder(context, "channel01")
+                    val notification: Notification = NotificationCompat.Builder(context, "channel01")
                         .setSmallIcon(R.drawable.cg_notification)
                         .setContentTitle(LocaleController.getString("CG_Found", R.string.CG_Found))
                         .setContentText(version)
@@ -130,12 +132,13 @@ object OTA : CoroutineScope by MainScope() {
                         .addAction(R.drawable.download_outline_28, LocaleController.getString("CG_Download", R.string.CG_Download), pendingIntentDownload)
                         .addAction(R.drawable.download_outline_28, LocaleController.getString("CG_Changelog", R.string.CG_Changelog), pendingIntentChangelog)
                         .setStyle(NotificationCompat.BigTextStyle()
-                        .bigText(changelog))
+                            .bigText(txt))
                         .build()
 
-                val notificationManager = NotificationManagerCompat.from(context)
+                    val notificationManager = NotificationManagerCompat.from(context)
 
-                notificationManager.notify(1337, notification)
+                    notificationManager.notify(1337, notification)
+                }
 
             } else if (b) Toast.makeText(context, LocaleController.getString("CG_Not_Found", R.string.CG_Not_Found), Toast.LENGTH_SHORT).show()
         }
