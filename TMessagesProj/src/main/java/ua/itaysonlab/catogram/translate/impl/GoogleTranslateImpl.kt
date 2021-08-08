@@ -17,27 +17,35 @@ object GoogleTranslateImpl : CoroutineScope by MainScope() {
     @JvmStatic
     fun translateText(txt: String?, e: Boolean, callback: (String) -> Unit) {
         launch {
-            val tl = when {
-                e -> CatogramConfig.trLang
-                else -> when (LocaleController.getString("LanguageCode", R.string.LanguageCode)) {
-                    "zh_hans", "zh_hant" -> "zh"
-                    "pt_BR" -> "pt"
-                    else -> LocaleController.getString("LanguageCode", R.string.LanguageCode)
+            try {
+                val tl = when {
+                    e -> CatogramConfig.trLang
+                    else -> when (LocaleController.getString(
+                        "LanguageCode",
+                        R.string.LanguageCode
+                    )) {
+                        "zh_hans", "zh_hant" -> "zh"
+                        "pt_BR" -> "pt"
+                        else -> LocaleController.getString("LanguageCode", R.string.LanguageCode)
+                    }
                 }
-            }
 
-            val request: Request = Request.Builder().url("$api_translate_url&tl=$tl&q=${URLEncoder.encode(txt, "UTF-8")}").build()
-            val sb = StringBuilder()
+                val request: Request = Request.Builder()
+                    .url("$api_translate_url&tl=$tl&q=${URLEncoder.encode(txt, "UTF-8")}").build()
+                val sb = StringBuilder()
 
-            withContext(Dispatchers.IO) {
-                val response = OkHttpClient().newCall(request).execute()
-                val arr = JSONObject(response.body!!.string()).getJSONArray("sentences")
-                for (i in 0 until arr.length()) {
-                    sb.append(arr.getJSONObject(i).getString("trans"))
+                withContext(Dispatchers.IO) {
+                    val response = OkHttpClient().newCall(request).execute()
+                    val arr = JSONObject(response.body!!.string()).getJSONArray("sentences")
+                    for (i in 0 until arr.length()) {
+                        sb.append(arr.getJSONObject(i).getString("trans"))
+                    }
                 }
-            }
 
-            callback.invoke(sb.toString())
+                callback.invoke(sb.toString())
+            } catch (e: Exception) {
+                callback.invoke(LocaleController.getString("CG_NoInternet", R.string.CG_NoInternet))
+            }
         }
     }
 
