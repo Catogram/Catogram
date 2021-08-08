@@ -25,7 +25,7 @@
     <string name="AS_Header_Categories">Catogram 客制化</string>
     <string name="AS_Header_About">关于 Catogram</string>
     <string name="CG_AboutDesc">实验性质的 Telegram 修改版。</string>
-    <string name="CG_Donate">官方捐赠通道</string>
+    <string name="CG_Donate">捐赠通道</string>
     <string name="CG_DonatDesc">帮我们购买PS5</string>
     <string name="CG_ToChannel">官方通知频道</string>
     <string name="CG_ToChat">官方讨论群组</string>
@@ -134,7 +134,7 @@
     <string name="CG_ToSaved">收藏</string>
     <string name="CG_FABLeft">将 \"新对话\" 按钮反方向放置</string>
     <string name="CG_IntroMessage">一个 **非官方的** Telegram 客户端修改.\n添加了一些新 **特性** 与更多 **自定义** 功能</string>
-    <string name="CG_GooglePlay_Donate">官方捐赠通道</string>
+    <string name="CG_GooglePlay_Donate">捐赠通道</string>
     <string name="CG_GooglePlay_Info">信息</string>
     <string name="CG_GooglePlay_InfoDesc">需要 Google Play 服务才能完成本次支付流程</string>
     <string name="CG_GooglePlay_ChooseAmount">选择一个项目以继续</string>
@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">在关闭情况下，录制时依然会继续播放音乐</string>
     <string name="CG_Proximity">禁用距离传感器</string>
     <string name="CG_Proximity_Desc">这在有些情况下很有用</string>
-    <string name="CG_Donate_Desc">您可以在下方选择您的捐赠方式\n如果您捐款超过 1.5$（USD）或 100₽（RUB）\n您可以要求得到本地形式的账号标记（例如 Telegram 的官方认证标记，又亦或者是 Telegram 的 Scam 标记） \n您可以在捐款备注中说明您的 Telegram ID，以及您想需要的标注类型</string>
+    <string name="CG_Donate_Desc">在下方选择您的捐赠方式 \n 如果您的捐赠额度超过 1.5 美元 或 100 俄罗斯卢布，即可成为捐赠用户，你的名字旁边可以添加一个特别标记，以及使用未来的高级功能 \n 不要忘记在捐赠的留言中附加您的 ID</string>
     <string name="CG_Donate_Method">选择捐赠渠道</string>
     <string name="CG_Mono_Desc">5375414117420108 // 轻触以复制</string>
     <string name="CG_Source">查看应用源码</string>
@@ -265,6 +265,7 @@
     <string name="CG_MentionByName_Desc">而不提及账号名称</string>
     <string name="CG_PlayVideo">点击音量键时播放视频</string>
     <string name="CG_PlayVideo_Desc">如果启用此选项，当按下音量按键时，对话框中的视频将会开始播放</string>
-    <string name="CG_StreamVoip">Stream VoIP as Media</string>
-    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_StreamVoip">流式 VoIP 传输</string>
+    <string name="CG_StreamVoip_Desc">如果启用此选项，语音 VoIP 聊天将会被视为 将视为媒体流式传输</string>
+    <string name="CG_TimeOnStick">在聊天中为贴纸隐藏发送时间</string>
 </resources>

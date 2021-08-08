@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">If disabled then the music will be quieter, but won\'t turn off</string>
     <string name="CG_Proximity">Enable proximity actions</string>
     <string name="CG_Proximity_Desc">By turning it off you will get rid of the annoying screen shutdown when listening to voice messages (restart app to apply)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you may be given a verification checkmark or a scam mark as a gift.\nSpecify your ID in the comment to the payment and the desired mark.</string>
+    <string name="CG_Donate_Desc">नीचे एक दान विधि चुनें\nयदि आप $1.5 या 100 रूसी रूबल से अधिक दान करते हैं, तो आप प्रीमियम उपयोगकर्ता बन जाएंगे, आपको भविष्य में बिल्ली सत्यापन चिह्न और प्रीमियम सुविधाएँ प्राप्त होंगी। \nअपना ID निर्दिष्ट करें</string>
     <string name="CG_Donate_Method">Choose method</string>
     <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
     <string name="CG_Source">Source code</string>
@@ -215,8 +215,8 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
+    <string name="CG_FakeUserPhone">फर्जी फोन नंबर</string>
+    <string name="CG_FakeUserPhoneSummary">दराज और सेटिंग्स में नकली फोन नंबर दिखाएं (फोन नंबर प्राथमिकता छुपाएं अक्षम होना चाहिए)</string>
     <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
     <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
     <string name="CG_DND">Do not disturb</string>
@@ -265,4 +265,5 @@
     <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
     <string name="CG_StreamVoip">Stream VoIP as Media</string>
     <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
 </resources>
