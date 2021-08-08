@@ -761,7 +761,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                 dropDown.setMaxLines(1);
                 dropDown.setEllipsize(TextUtils.TruncateAt.END);
                 dropDown.setTextColor(Theme.getColor(Theme.key_actionBarDefaultTitle));
-                dropDown.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                dropDown.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                 dropDown.setText(LocaleController.getString("ColorPickerMainColor", R.string.ColorPickerMainColor));
                 Drawable dropDownDrawable = context.getResources().getDrawable(R.drawable.ic_arrow_drop_down).mutate();
                 dropDownDrawable.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarDefaultTitle), PorterDuff.Mode.MULTIPLY));
@@ -1219,7 +1219,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
 
                 bottomOverlayChatText = new TextView(context);
                 bottomOverlayChatText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-                bottomOverlayChatText.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                bottomOverlayChatText.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                 bottomOverlayChatText.setTextColor(Theme.getColor(Theme.key_chat_fieldOverlayText));
                 bottomOverlayChatText.setText(LocaleController.getString("SetBackground", R.string.SetBackground));
                 bottomOverlayChat.addView(bottomOverlayChatText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER));
@@ -1246,7 +1246,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                 }
                 TextPaint textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
                 textPaint.setTextSize(AndroidUtilities.dp(14));
-                textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                 for (int a = 0; a < texts.length; a++) {
                     textSizes[a] = (int) Math.ceil(textPaint.measureText(texts[a]));
                     maxTextSize = Math.max(maxTextSize, textSizes[a]);
@@ -1440,7 +1440,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
 
                         patternsCancelButton[a] = new TextView(context);
                         patternsCancelButton[a].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-                        patternsCancelButton[a].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                        patternsCancelButton[a].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                         patternsCancelButton[a].setTextColor(Theme.getColor(Theme.key_chat_fieldOverlayText));
                         patternsCancelButton[a].setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
                         patternsCancelButton[a].setGravity(Gravity.CENTER);
@@ -1489,7 +1489,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
 
                         patternsSaveButton[a] = new TextView(context);
                         patternsSaveButton[a].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
-                        patternsSaveButton[a].setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                        patternsSaveButton[a].setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                         patternsSaveButton[a].setTextColor(Theme.getColor(Theme.key_chat_fieldOverlayText));
                         patternsSaveButton[a].setText(LocaleController.getString("ApplyTheme", R.string.ApplyTheme).toUpperCase());
                         patternsSaveButton[a].setGravity(Gravity.CENTER);
@@ -1516,7 +1516,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
 
                         titleView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText));
                         titleView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-                        titleView.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+                        titleView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
                         titleView.setPadding(AndroidUtilities.dp(21), AndroidUtilities.dp(6), AndroidUtilities.dp(21), AndroidUtilities.dp(8));
 
                         titleView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
@@ -1841,7 +1841,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
             cancelButton.setBackgroundDrawable(Theme.createSelectorDrawable(0x0f000000, 0));
             cancelButton.setPadding(AndroidUtilities.dp(29), 0, AndroidUtilities.dp(29), 0);
             cancelButton.setText(LocaleController.getString("Cancel", R.string.Cancel).toUpperCase());
-            cancelButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            cancelButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             saveButtonsContainer.addView(cancelButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT));
             cancelButton.setOnClickListener(v -> cancelThemeApply(false));
 
@@ -1852,7 +1852,7 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
             doneButton.setBackgroundDrawable(Theme.createSelectorDrawable(0x0f000000, 0));
             doneButton.setPadding(AndroidUtilities.dp(29), 0, AndroidUtilities.dp(29), 0);
             doneButton.setText(LocaleController.getString("ApplyTheme", R.string.ApplyTheme).toUpperCase());
-            doneButton.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+            doneButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             saveButtonsContainer.addView(doneButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.RIGHT));
             doneButton.setOnClickListener(v -> {
                 Theme.ThemeInfo previousTheme = Theme.getPreviousTheme();

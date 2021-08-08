@@ -13,4 +13,5 @@ object CatogramPreferencesNavigator {
 
     fun createDB() = TGKitSettingsFragment(DoubleBottomPreferencesEntry())
     fun createUpdates() = TGKitSettingsFragment(UpdatesPreferenceEntry())
+    fun createDonate() = TGKitSettingsFragment(DonatePreferenceEntry())
 }

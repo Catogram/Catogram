@@ -945,11 +945,6 @@ public class ViewPagerFixed extends FrameLayout {
                 }
 
                 @Override
-                public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
-                    return super.scrollHorizontallyBy(dx, recycler, state);
-                }
-
-                @Override
                 public void onInitializeAccessibilityNodeInfo(@NonNull RecyclerView.Recycler recycler, @NonNull RecyclerView.State state, @NonNull AccessibilityNodeInfoCompat info) {
                     super.onInitializeAccessibilityNodeInfo(recycler, state, info);
                     if (isInHiddenMode) {

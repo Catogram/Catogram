@@ -63,8 +63,6 @@ object CatogramConfig {
     var messageSlideAction by sharedPreferences.int("cg_msgslide_action", 0)
     var enableSwipeToPIP by sharedPreferences.boolean("cg_swipe_to_pip", false)
 
-    var hqRoundVideos by sharedPreferences.boolean("cg_hq_roundvideos", true)
-    var hqRoundVideoAudio by sharedPreferences.boolean("cg_hq_roundvideo_audio", true)
     var voicesAgc by sharedPreferences.boolean("cg_hq_voices_agc", true)
     var overrideVoipEnhancements by sharedPreferences.boolean("cg_hq_voip_overrideservercfg", true)
 
@@ -84,6 +82,8 @@ object CatogramConfig {
     var mentionByName by sharedPreferences.boolean("cg_mention_by_name", false)
 
     var useMediaStream by sharedPreferences.boolean("cg_media_stream", false)
+
+    var hideStickerTime by sharedPreferences.boolean("cg_hide_stick_time", true)
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {

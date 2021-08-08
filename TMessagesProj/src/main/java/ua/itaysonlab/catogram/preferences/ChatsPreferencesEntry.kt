@@ -32,6 +32,15 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     }
                 }
             }
+            switch {
+                title = LocaleController.getString("CG_TimeOnStick", R.string.CG_TimeOnStick)
+
+                contract({
+                    return@contract CatogramConfig.hideStickerTime
+                }) {
+                    CatogramConfig.hideStickerTime = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Header_Record", R.string.AS_Header_Record)) {
@@ -124,26 +133,6 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                             CatogramConfig.sleepTime = 60
                         }
                     }
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
-
-                contract({
-                    return@contract CatogramConfig.hqRoundVideos
-                }) {
-                    CatogramConfig.hqRoundVideos = it
-                }
-            }
-
-            switch {
-                title = LocaleController.getString("CG_HqRoundVideosAudio", R.string.CG_HqRoundVideosAudio)
-
-                contract({
-                    return@contract CatogramConfig.hqRoundVideoAudio
-                }) {
-                    CatogramConfig.hqRoundVideoAudio = it
                 }
             }
 

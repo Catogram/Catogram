@@ -79,7 +79,7 @@ public class CheckBox extends View {
 
         textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextSize(AndroidUtilities.dp(18));
-        textPaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        textPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
         checkDrawable = context.getResources().getDrawable(resId).mutate();
     }

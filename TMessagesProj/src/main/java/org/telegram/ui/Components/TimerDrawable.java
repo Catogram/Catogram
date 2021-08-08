@@ -35,7 +35,7 @@ public class TimerDrawable extends Drawable {
     private int time = 0;
 
     public TimerDrawable(Context context) {
-        timePaint.setTypeface(ua.itaysonlab.extras.CatogramExtras.getBold());
+        timePaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         timePaint.setTextSize(AndroidUtilities.dp(11));
 
         linePaint.setStrokeWidth(AndroidUtilities.dp(1));
@@ -66,6 +66,11 @@ public class TimerDrawable extends Drawable {
             if (timeString.length() < 2) {
                 timeString += LocaleController.getString("SecretChatTimerDays", R.string.SecretChatTimerDays);
             }
+        } else if (time >= 30 * 60 * 60 * 24 && time <= 60 * 60 * 24 * 31) {
+            timeString = "" + value / 60 / 60 / 24 / 30;
+            if (timeString.length() < 2) {
+                timeString += LocaleController.getString("SecretChatTimerMonths", R.string.SecretChatTimerMonths);
+            }
         } else {
             timeString = "" + value / 60 / 60 / 24 / 7;
             if (timeString.length() < 2) {
@@ -74,11 +79,6 @@ public class TimerDrawable extends Drawable {
                 timeString = "c";
             }
         }
-        /*
-        <string name="SecretChatTimerDays">d</string>
-    <string name="SecretChatTimerSeconds">s</string>
-    <string name="SecretChatTimerMinutes">m</string>
-         */
 
         timeWidth = timePaint.measureText(timeString);
         try {

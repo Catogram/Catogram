@@ -287,7 +287,7 @@ public class GroupCallRenderersContainer extends FrameLayout {
             }
         };
 
-        speakingMembersAvatars = new AvatarsImageView(context);
+        speakingMembersAvatars = new AvatarsImageView(context, true);
         speakingMembersAvatars.setStyle(AvatarsImageView.STYLE_GROUP_CALL_TOOLTIP);
 
         speakingMembersToast.setClipChildren(false);
@@ -1144,6 +1144,7 @@ public class GroupCallRenderersContainer extends FrameLayout {
                     super.onAnimationEnd(animation);
                     swipeToBackAnimator = null;
                     swipeToBackDy = 0;
+                    invalidate();
                 }
             });
             swipeToBackAnimator.setInterpolator(CubicBezierInterpolator.DEFAULT);

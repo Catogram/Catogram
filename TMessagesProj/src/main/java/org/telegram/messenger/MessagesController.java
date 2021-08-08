@@ -283,6 +283,9 @@ public class MessagesController extends BaseController implements NotificationCe
     public String mapKey;
     public int maxMessageLength;
     public int maxCaptionLength;
+    public int roundVideoSize;
+    public int roundVideoBitrate;
+    public int roundAudioBitrate;
     public boolean blockedCountry;
     public boolean preloadFeaturedStickers;
     public String youtubePipType;
@@ -753,7 +756,9 @@ public class MessagesController extends BaseController implements NotificationCe
         autoarchiveAvailable = mainPreferences.getBoolean("autoarchiveAvailable", false);
         groipCallVideoMaxParticipants = mainPreferences.getInt("groipCallVideoMaxParticipants", 30);
         suggestStickersApiOnly = mainPreferences.getBoolean("suggestStickersApiOnly", false);
-
+        roundVideoSize = mainPreferences.getInt("roundVideoSize", 384);
+        roundVideoBitrate = mainPreferences.getInt("roundVideoBitrate", 1000);
+        roundAudioBitrate = mainPreferences.getInt("roundAudioBitrate", 64);
         pendingSuggestions = mainPreferences.getStringSet("pendingSuggestions", null);
         if (pendingSuggestions != null) {
             pendingSuggestions = new HashSet<>(pendingSuggestions);
@@ -1613,6 +1618,50 @@ public class MessagesController extends BaseController implements NotificationCe
                                     updateCheckDelay = delay;
                                     editor.putInt("updateCheckDelay", updateCheckDelay);
                                     changed = true;
+                                }
+                            }
+                            break;
+                        }
+                        case "round_video_encoding": {
+                            if (value.value instanceof TLRPC.TL_jsonObject) {
+                                TLRPC.TL_jsonObject jsonObject = (TLRPC.TL_jsonObject) value.value;
+                                for (int b = 0, N2 = jsonObject.value.size(); b < N2; b++) {
+                                    TLRPC.TL_jsonObjectValue value2 = jsonObject.value.get(b);
+                                    switch (value2.key) {
+                                        case "diameter": {
+                                            if (value2.value instanceof TLRPC.TL_jsonNumber) {
+                                                TLRPC.TL_jsonNumber number = (TLRPC.TL_jsonNumber) value2.value;
+                                                if (number.value != roundVideoSize) {
+                                                    roundVideoSize = (int) number.value;
+                                                    editor.putInt("roundVideoSize", roundVideoSize);
+                                                    changed = true;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                        case "video_bitrate": {
+                                            if (value2.value instanceof TLRPC.TL_jsonNumber) {
+                                                TLRPC.TL_jsonNumber number = (TLRPC.TL_jsonNumber) value2.value;
+                                                if (number.value != roundVideoBitrate) {
+                                                    roundVideoBitrate = (int) number.value;
+                                                    editor.putInt("roundVideoBitrate", roundVideoBitrate);
+                                                    changed = true;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                        case "audio_bitrate": {
+                                            if (value2.value instanceof TLRPC.TL_jsonNumber) {
+                                                TLRPC.TL_jsonNumber number = (TLRPC.TL_jsonNumber) value2.value;
+                                                if (number.value != roundAudioBitrate) {
+                                                    roundAudioBitrate = (int) number.value;
+                                                    editor.putInt("roundAudioBitrate", roundAudioBitrate);
+                                                    changed = true;
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                             break;
@@ -3781,7 +3830,7 @@ public class MessagesController extends BaseController implements NotificationCe
     public void didAddedNewTask(final int minDate, final SparseArray<ArrayList<Long>> mids) {
         Utilities.stageQueue.postRunnable(() -> {
             if (currentDeletingTaskMids == null && !gettingNewDeleteTask || currentDeletingTaskTime != 0 && minDate < currentDeletingTaskTime) {
-                getNewDeleteTask(null, 0);
+                getNewDeleteTask(null, 0, false);
             }
         });
         if (mids != null) {
@@ -3789,10 +3838,10 @@ public class MessagesController extends BaseController implements NotificationCe
         }
     }
 
-    public void getNewDeleteTask(final ArrayList<Integer> oldTask, final int channelId) {
+    public void getNewDeleteTask(final ArrayList<Integer> oldTask, final int channelId, boolean oldMedia) {
         Utilities.stageQueue.postRunnable(() -> {
             gettingNewDeleteTask = true;
-            getMessagesStorage().getNewTask(oldTask, channelId);
+            getMessagesStorage().getNewTask(oldTask, channelId, oldMedia);
         });
     }
 
@@ -3813,7 +3862,7 @@ public class MessagesController extends BaseController implements NotificationCe
                     deleteMessages(mids, null, null, 0, 0, false, false, !mids.isEmpty() && mids.get(0) > 0);
                 }
                 Utilities.stageQueue.postRunnable(() -> {
-                    getNewDeleteTask(mids, currentDeletingTaskChannelId);
+                    getNewDeleteTask(mids, currentDeletingTaskChannelId, currentDeletingTaskMedia);
                     currentDeletingTaskTime = 0;
                     currentDeletingTaskMids = null;
                     currentDeletingTaskMedia = false;
@@ -5141,10 +5190,18 @@ public class MessagesController extends BaseController implements NotificationCe
             if (info != null) {
                 if (fullUsers.get(user.id) == null) {
                     fullUsers.put(user.id, info);
+
+                    int index = blockePeers.indexOfKey(user.id);
                     if (info.blocked) {
-                        blockePeers.put(user.id, 1);
+                        if (index < 0) {
+                            blockePeers.put(user.id, 1);
+                            getNotificationCenter().postNotificationName(NotificationCenter.blockedUsersDidLoad);
+                        }
                     } else {
-                        blockePeers.delete(user.id);
+                        if (index >= 0) {
+                            blockePeers.removeAt(index);
+                            getNotificationCenter().postNotificationName(NotificationCenter.blockedUsersDidLoad);
+                        }
                     }
                 }
                 getNotificationCenter().postNotificationName(NotificationCenter.userInfoDidLoad, user.id, info);
@@ -5817,11 +5874,18 @@ public class MessagesController extends BaseController implements NotificationCe
                             newPrintingStrings.put(threadId, LocaleController.getString("RecordingAudio", R.string.RecordingAudio));
                         }
                         newPrintingStringsTypes.put(threadId, 1);
-                    } else if (pu.action instanceof TLRPC.TL_sendMessageRecordRoundAction || pu.action instanceof TLRPC.TL_sendMessageUploadRoundAction) {
+                    } else if (pu.action instanceof TLRPC.TL_sendMessageRecordRoundAction) {
                         if (lower_id < 0) {
                             newPrintingStrings.put(threadId, LocaleController.formatString("IsRecordingRound", R.string.IsRecordingRound, getUserNameForTyping(user)));
                         } else {
                             newPrintingStrings.put(threadId, LocaleController.getString("RecordingRound", R.string.RecordingRound));
+                        }
+                        newPrintingStringsTypes.put(threadId, 4);
+                    } else if (pu.action instanceof TLRPC.TL_sendMessageUploadRoundAction) {
+                        if (lower_id < 0) {
+                            newPrintingStrings.put(threadId, LocaleController.formatString("IsSendingVideo", R.string.IsSendingVideo, getUserNameForTyping(user)));
+                        } else {
+                            newPrintingStrings.put(threadId, LocaleController.getString("SendingVideoStatus", R.string.SendingVideoStatus));
                         }
                         newPrintingStringsTypes.put(threadId, 4);
                     } else if (pu.action instanceof TLRPC.TL_sendMessageUploadAudioAction) {
@@ -5831,11 +5895,18 @@ public class MessagesController extends BaseController implements NotificationCe
                             newPrintingStrings.put(threadId, LocaleController.getString("SendingAudio", R.string.SendingAudio));
                         }
                         newPrintingStringsTypes.put(threadId, 2);
-                    } else if (pu.action instanceof TLRPC.TL_sendMessageUploadVideoAction || pu.action instanceof TLRPC.TL_sendMessageRecordVideoAction) {
+                    } else if (pu.action instanceof TLRPC.TL_sendMessageUploadVideoAction) {
                         if (lower_id < 0) {
                             newPrintingStrings.put(threadId, LocaleController.formatString("IsSendingVideo", R.string.IsSendingVideo, getUserNameForTyping(user)));
                         } else {
                             newPrintingStrings.put(threadId, LocaleController.getString("SendingVideoStatus", R.string.SendingVideoStatus));
+                        }
+                        newPrintingStringsTypes.put(threadId, 2);
+                    } else if (pu.action instanceof TLRPC.TL_sendMessageRecordVideoAction) {
+                        if (lower_id < 0) {
+                            newPrintingStrings.put(threadId, LocaleController.formatString("IsRecordingVideo", R.string.IsRecordingVideo, getUserNameForTyping(user)));
+                        } else {
+                            newPrintingStrings.put(threadId, LocaleController.getString("RecordingVideoStatus", R.string.RecordingVideoStatus));
                         }
                         newPrintingStringsTypes.put(threadId, 2);
                     } else if (pu.action instanceof TLRPC.TL_sendMessageUploadDocumentAction) {
@@ -5859,6 +5930,20 @@ public class MessagesController extends BaseController implements NotificationCe
                             newPrintingStrings.put(threadId, LocaleController.getString("SendingGame", R.string.SendingGame));
                         }
                         newPrintingStringsTypes.put(threadId, 3);
+                    } else if (pu.action instanceof TLRPC.TL_sendMessageGeoLocationAction) {
+                        if (lower_id < 0) {
+                            newPrintingStrings.put(threadId, LocaleController.formatString("IsSelectingLocation", R.string.IsSelectingLocation, getUserNameForTyping(user)));
+                        } else {
+                            newPrintingStrings.put(threadId, LocaleController.getString("SelectingLocation", R.string.SelectingLocation));
+                        }
+                        newPrintingStringsTypes.put(threadId, 0);
+                    } else if (pu.action instanceof TLRPC.TL_sendMessageChooseContactAction) {
+                        if (lower_id < 0) {
+                            newPrintingStrings.put(threadId, LocaleController.formatString("IsSelectingContact", R.string.IsSelectingContact, getUserNameForTyping(user)));
+                        } else {
+                            newPrintingStrings.put(threadId, LocaleController.getString("SelectingContact", R.string.SelectingContact));
+                        }
+                        newPrintingStringsTypes.put(threadId, 0);
                     } else {
                         if (lower_id < 0) {
                             newPrintingStrings.put(threadId, LocaleController.formatString("IsTypingGroup", R.string.IsTypingGroup, getUserNameForTyping(user)));
@@ -7421,7 +7506,7 @@ public class MessagesController extends BaseController implements NotificationCe
     public void processLoadedDialogs(final TLRPC.messages_Dialogs dialogsRes, final ArrayList<TLRPC.EncryptedChat> encChats, final int folderId, final int offset, final int count, final int loadType, final boolean resetEnd, final boolean migrate, final boolean fromCache) {
         Utilities.stageQueue.postRunnable(() -> {
             if (!firstGettingTask) {
-                getNewDeleteTask(null, 0);
+                getNewDeleteTask(null, 0, false);
                 firstGettingTask = true;
             }
 
@@ -14141,12 +14226,12 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public static String getRestrictionReason(ArrayList<TLRPC.TL_restrictionReason> reasons) {
-        if (reasons.isEmpty() || AndroidUtilities.isStandaloneApp()) {
+        if (reasons.isEmpty() || BuildVars.isStandaloneApp()) {
             return null;
         }
         for (int a = 0, N = reasons.size(); a < N; a++) {
             TLRPC.TL_restrictionReason reason = reasons.get(a);
-            if ("all".equals(reason.platform) || !AndroidUtilities.isStandaloneApp() && !AndroidUtilities.isBetaApp() && "android".equals(reason.platform)) {
+            if ("all".equals(reason.platform) || !BuildVars.isStandaloneApp() && !BuildVars.isBetaApp() && "android".equals(reason.platform)) {
                 return reason.text;
             }
         }

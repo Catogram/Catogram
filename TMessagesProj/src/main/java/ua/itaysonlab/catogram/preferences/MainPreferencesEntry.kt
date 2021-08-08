@@ -61,6 +61,13 @@ class MainPreferencesEntry : BasePreferencesEntry {
                     it.presentFragment(CatogramPreferencesNavigator.createUpdates())
                 }
             }
+            textIcon {
+                title = LocaleController.getString("CG_Donate", R.string.CG_Donate)
+                icon = R.drawable.money_circle_outline_28
+                listener = TGKitTextIconRow.TGTIListener {
+                    it.presentFragment(CatogramPreferencesNavigator.createDonate())
+                }
+            }
 
             category(LocaleController.getString("AS_Header_About", R.string.AS_Header_About)) {
                 textDetail {
