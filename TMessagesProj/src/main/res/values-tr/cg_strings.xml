@@ -266,4 +266,5 @@
     <string name="CG_StreamVoip">Medya olarak VoIP akışı</string>
     <string name="CG_StreamVoip_Desc">etkinleştirilirse, VoIP araması arama yerine medya olarak tanınır</string>
     <string name="CG_TimeOnStick">Sohbette çıkartmalarda zamanı gizle</string>
+    <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
 </resources>
