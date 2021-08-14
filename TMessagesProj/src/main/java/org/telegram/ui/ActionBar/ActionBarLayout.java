@@ -293,7 +293,7 @@ public class ActionBarLayout extends FrameLayout {
 
         if (layerShadowDrawable == null) {
             layerShadowDrawable = getResources().getDrawable(R.drawable.layer_shadow);
-            headerShadowDrawable = getResources().getDrawable(R.drawable.header_shadow).mutate();
+            headerShadowDrawable = CatogramConfig.INSTANCE.getFlatActionbar() ? null : getResources().getDrawable(R.drawable.header_shadow).mutate();
             scrimPaint = new Paint();
         }
     }
