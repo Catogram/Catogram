@@ -268,4 +268,5 @@
     <string name="CG_StreamVoip">流式 VoIP 传输</string>
     <string name="CG_StreamVoip_Desc">如果启用此选项，语音 VoIP 聊天将会被视为 将视为媒体流式传输</string>
     <string name="CG_TimeOnStick">在聊天中为贴纸隐藏发送时间</string>
+    <string name="CG_NoInternet">无法完成翻译，请检查您的网络连接</string>
 </resources>
