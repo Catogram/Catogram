@@ -157,7 +157,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:mimeType="vnd.android.cursor.item/vnd.ua.itaysonlab.messenger.android.profile" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.org.telegram.messenger.android.profile" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
