@@ -266,5 +266,5 @@
     <string name="CG_StreamVoip">Transmitir VoIP como mídia</string>
     <string name="CG_StreamVoip_Desc">se habilitado, a chamada VoIP será reconhecida como mídia em vez de chamada</string>
     <string name="CG_TimeOnStick">Ocultar o tempo nos adesivos no chat</string>
-    <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
+    <string name="CG_NoInternet">Não foi possível traduzir. Talvez você esteja offline?</string>
 </resources>
