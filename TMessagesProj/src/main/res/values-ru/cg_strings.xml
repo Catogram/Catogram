@@ -266,5 +266,5 @@
     <string name="CG_StreamVoip">Потоковая передача VoIP как мультимедиа</string>
     <string name="CG_StreamVoip_Desc">если включено, то вызов VoIP будет распознаваться как мультимедиа вместо вызова</string>
     <string name="CG_TimeOnStick">Скрыть время отправки на стикерах в чате</string>
-    <string name="CG_NoInternet">Не получается перевести. Отсутсвует интернет-соединение?</string>
+    <string name="CG_NoInternet">Ошибка при переводе. Возможно вы не в сети?</string>
 </resources>
