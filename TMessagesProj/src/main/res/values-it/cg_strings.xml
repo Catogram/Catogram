@@ -266,4 +266,5 @@
     <string name="CG_StreamVoip">Streamma VoIP come contenuto multimediale</string>
     <string name="CG_StreamVoip_Desc">se abilitato le chiamate VoIP saranno riconosciute come contenuti multimediali invece di chiamate</string>
     <string name="CG_TimeOnStick">Nascondi il tempo negli sticker in chat</string>
+    <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
 </resources>

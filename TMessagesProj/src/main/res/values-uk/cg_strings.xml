@@ -266,4 +266,5 @@
     <string name="CG_StreamVoip">Відтворювати VoIP як медіа</string>
     <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
     <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
+    <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
 </resources>

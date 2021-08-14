@@ -203,7 +203,7 @@
     <string name="CG_AudioFocus_Desc">Eğer devre dışı bırakıldıysa müzik susturulacak fakat kapanmayacak</string>
     <string name="CG_Proximity">Yakınlık eylemlerini etkinleştir</string>
     <string name="CG_Proximity_Desc">Devre dışı bırakarak, sesli mesajları dinlerken can sıkıcı ekran kapanmasından kurtulacaksınız (uygulamak için uygulamayı yeniden başlatın)</string>
-    <string name="CG_Donate_Desc">Aşağıda bir bağış yöntemi seçin\nlf bağış yaparsanız &gt;= 1,5 $ veya 100 Rus rublesi, premium kullanıcı olacaksınız, gelecekte kedi doğrulama işareti ve premium özellikler alacaksınız. \n ödeme yorumunda kimliğinizi belirtin.</string>
+    <string name="CG_Donate_Desc">Aşağıda bir bağış yöntemi seçin\nlf bağış yaparsanız &gt;= 1,5 $ veya 100 Rus rublesi, premium kullanıcı olacaksınız, gelecekte kedi doğrulama işareti ve premium özellikler alacaksınız. \n ödeme açıklamasında ID\'nizi belirtin.</string>
     <string name="CG_Donate_Method">Yöntem seç</string>
     <string name="CG_Mono_Desc">5375414117420108 // kopyalamak için tıkla</string>
     <string name="CG_Source">Kaynak kodu</string>
@@ -217,14 +217,14 @@
     <string name="CG_ToLinkedChat">Bağlantılı sik</string>
     <string name="CG_FakeUserPhone">Sahte telefon numarası</string>
     <string name="CG_FakeUserPhoneSummary">çekmecede ve ayarlarda sahte telefon numarası göster (telefon numarasını gizle seçeneği devre dışı bırakılır)</string>
-    <string name="CG_FwdMenu_EnableNoForward">İlet yazarlığını devre dışı bırak</string>
-    <string name="CG_FwdMenu_DisableNoForward">İlet yazarlığını etkinleştir</string>
+    <string name="CG_FwdMenu_EnableNoForward">İletilerde gönderen kimliğini gösterme</string>
+    <string name="CG_FwdMenu_DisableNoForward">İletilerde gönderen kimliğini göster</string>
     <string name="CG_DND">Rahatsız etme</string>
     <string name="CG_DND_desc">Bütün bildirimleri susturacak. Ses için müsait değilsen, yine de bildirimleri görmek istiyorsan kullanışlı</string>
     <string name="CG_Silence">Hepten sessiz</string>
     <string name="CG_Silence_desc">Tüm bildirimleri kapatacak</string>
     <string name="CG_SilenceNonContacts">Rehberde olmayanlara sessizlik</string>
-    <string name="CG_SilenceNonContacts_desc">Etkinleştiğinde bildirim sesi sadece rehberinde olan kişilerden gelecek. Rehberine birini telefon numarasına ihtiyaç duymadan ekleyebilirsin profiline girip</string>
+    <string name="CG_SilenceNonContacts_desc">Etkinleştiğinde bildirim sesi sadece rehberinde olan kişilerden gelecek. Birini rehberine, profiline girip telefon numarasına ihtiyaç duymadan ekleyebilirsin</string>
     <string name="CG_RecentStickers">Tam listeyi göster</string>
     <string name="CG_RecentStickers_desc">son çıkartmalar için</string>
     <string name="CG_Without_Authorship">Yazarlık olmadan</string>
@@ -266,4 +266,5 @@
     <string name="CG_StreamVoip">Medya olarak VoIP akışı</string>
     <string name="CG_StreamVoip_Desc">etkinleştirilirse, VoIP araması arama yerine medya olarak tanınır</string>
     <string name="CG_TimeOnStick">Sohbette çıkartmalarda zamanı gizle</string>
+    <string name="CG_NoInternet">Çevrilemedi, internete bağlı olmayabilir misin?</string>
 </resources>
