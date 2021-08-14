@@ -24,7 +24,7 @@ import java.lang.Exception
 
 object CatogramExtras {
 
-    var CG_VERSION = "3.8.8.1"
+    var CG_VERSION = "3.8.9"
     @JvmField
     var currentAccountBitmap: BitmapDrawable? = null
 
