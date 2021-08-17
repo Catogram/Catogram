@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram 高级设置</string>
+    <string name="AdvancedSettings">高级设定</string>
     <string name="AS_Header_Appearance">外观相关</string>
     <string name="AS_HideUserPhone">隐藏手机号码</string>
     <string name="AS_HideUserPhoneSummary">在侧边栏与设置页</string>
