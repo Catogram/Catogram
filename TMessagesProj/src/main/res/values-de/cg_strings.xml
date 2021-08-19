@@ -247,11 +247,11 @@
     <string name="CG_Tr">Übersetzer</string>
     <string name="CG_Updates_Category">Updates</string>
     <string name="CG_Auto_Ota">Automatisch nach Updates suchen</string>
-    <string name="CG_Auto_Ota_summary">on app launch</string>
-    <string name="CG_Ota">Search for update</string>
-    <string name="CG_Not_Found">Not found</string>
-    <string name="CG_Found">Update found</string>
-    <string name="CG_Download">Download</string>
+    <string name="CG_Auto_Ota_summary">beim Start der App</string>
+    <string name="CG_Ota">Suche nach Aktualisierungen</string>
+    <string name="CG_Not_Found">Nicht gefunden</string>
+    <string name="CG_Found">Aktualisierung gefunden</string>
+    <string name="CG_Download">Runterladen</string>
     <string name="CG_PrivateDir">Private directory of cache</string>
     <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
     <string name="CG_RemovedS">Removed successfully</string>
