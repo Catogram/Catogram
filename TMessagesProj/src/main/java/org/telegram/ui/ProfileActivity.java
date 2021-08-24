@@ -178,6 +178,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate {
@@ -392,6 +393,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
     private int channelInfoRow;
     private int usernameRow;
     private int idRow;
+    private int dcRow;
     private int notificationsDividerRow;
     private int notificationsRow;
     private int infoSectionRow;
@@ -5417,6 +5419,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         channelInfoRow = -1;
         usernameRow = -1;
         idRow = -1;
+        dcRow = -1;
         settingsTimerRow = -1;
         settingsKeyRow = -1;
         notificationsDividerRow = -1;
@@ -5468,7 +5471,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 setUsernameRow = rowCount++;
                 bioRow = rowCount++;
                 idRow = rowCount++;
-
+                if (CatogramConfig.INSTANCE.getShowDc())
+                    dcRow = rowCount++;
                 settingsSectionRow = rowCount++;
 
                 Set<String> suggestions = getMessagesController().pendingSuggestions;
@@ -5523,6 +5527,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     usernameRow = rowCount++;
                 }
                 idRow = rowCount++;
+                if (CatogramConfig.INSTANCE.getShowDc())
+                    dcRow = rowCount++;
                 if (phoneRow != -1 || userInfoRow != -1 || usernameRow != -1) {
                     notificationsDividerRow = rowCount++;
                 }
@@ -5571,6 +5577,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 }
             }
             idRow = rowCount++;
+            if (CatogramConfig.INSTANCE.getShowDc())
+                dcRow = rowCount++;
             if (infoHeaderRow != -1) {
                 notificationsDividerRow = rowCount++;
             }
@@ -6942,6 +6950,18 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                             did = -chat_id;
                         }
                         detailCell.setTextAndValue(did + "", "ID", false);
+                    } else if (position == dcRow) {
+                        String a;
+                        try {
+                            if (getMessagesController().getUser(user_id) != null) {
+                                a = getMessagesController().getUser(user_id).photo.dc_id + "";
+                            } else {
+                                a = getMessagesController().getChat(chat_id).photo.dc_id + "";
+                            }
+                        } catch (Exception e) {
+                            a = "null";
+                        }
+                            detailCell.setTextAndValue(a, "DC", false);
                     } else if (position == usernameRow) {
                         String text;
                         if (user_id != 0) {
@@ -7261,7 +7281,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             if (position == infoHeaderRow || position == membersHeaderRow || position == settingsSectionRow2 ||
                     position == numberSectionRow || position == helpHeaderRow || position == debugHeaderRow) {
                 return 1;
-            } else if (position == idRow || position == phoneRow || position == usernameRow || position == locationRow ||
+            } else if (position == idRow || position == dcRow || position == phoneRow || position == usernameRow || position == locationRow ||
                     position == numberRow || position == setUsernameRow || position == bioRow) {
                 return 2;
             } else if (position == userInfoRow || position == channelInfoRow) {
@@ -8210,6 +8230,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             put(++pointer, channelInfoRow, sparseIntArray);
             put(++pointer, usernameRow, sparseIntArray);
             put(++pointer, idRow, sparseIntArray);
+            put(++pointer, dcRow, sparseIntArray);
             put(++pointer, notificationsDividerRow, sparseIntArray);
             put(++pointer, notificationsRow, sparseIntArray);
             put(++pointer, infoSectionRow, sparseIntArray);

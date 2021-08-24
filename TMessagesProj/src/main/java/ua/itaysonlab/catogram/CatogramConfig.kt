@@ -85,6 +85,8 @@ object CatogramConfig {
 
     var hideStickerTime by sharedPreferences.boolean("cg_hide_stick_time", true)
 
+    var showDc by sharedPreferences.boolean("cg_show_dc", false)
+
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
             1 -> NoIconReplace()

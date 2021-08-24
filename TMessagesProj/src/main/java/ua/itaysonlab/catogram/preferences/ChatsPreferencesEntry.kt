@@ -331,6 +331,14 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
+                title = LocaleController.getString("CG_ShowDC", R.string.CG_ShowDC)
+                contract({
+                    return@contract CatogramConfig.showDc
+                }) {
+                    CatogramConfig.showDc = it
+                }
+            }
+            switch {
                 title = LocaleController.getString("CG_NewAvaHeader_OpenOnTap", R.string.CG_NewAvaHeader_OpenOnTap)
                 summary = LocaleController.getString("CG_NewAvaHeader_OpenOnTap_Desc", R.string.CG_NewAvaHeader_OpenOnTap_Desc)
 
