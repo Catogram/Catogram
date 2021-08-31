@@ -71,7 +71,7 @@ object CGFeatureHooks {
             }
             1 -> {
                 // Save to PM
-                cf.sendMessagesHelper.sendMessage(arrayListOf(msg), UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toLong(), true, 0)
+                cf.sendMessagesHelper.sendMessage(arrayListOf(msg), UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toLong(), true, false, true, 0)
             }
             2 -> {
                 // Share

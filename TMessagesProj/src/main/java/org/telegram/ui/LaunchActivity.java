@@ -1622,13 +1622,15 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
                                                 wallPaper = new TLRPC.TL_wallPaper();
                                                 wallPaper.settings = new TLRPC.TL_wallPaperSettings();
                                                 wallPaper.slug = path.replace("bg/", "");
+                                                boolean ok = false;
                                                 if (wallPaper.slug != null && wallPaper.slug.length() == 6) {
                                                     try {
                                                         wallPaper.settings.background_color = Integer.parseInt(wallPaper.slug, 16) | 0xff000000;
+                                                        wallPaper.slug = null;
+                                                        ok = true;
                                                     } catch (Exception ignore) {
 
                                                     }
-                                                    wallPaper.slug = null;
                                                 } else if (wallPaper.slug != null && wallPaper.slug.length() >= 13 && AndroidUtilities.isValidWallChar(wallPaper.slug.charAt(6))) {
                                                     try {
                                                         wallPaper.settings.background_color = Integer.parseInt(wallPaper.slug.substring(0, 6), 16) | 0xff000000;
@@ -1639,19 +1641,21 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
                                                         if (wallPaper.slug.length() == 27 && AndroidUtilities.isValidWallChar(wallPaper.slug.charAt(20))) {
                                                             wallPaper.settings.fourth_background_color = Integer.parseInt(wallPaper.slug.substring(21), 16) | 0xff000000;
                                                         }
-                                                    } catch (Exception ignore) {
+                                                        try {
+                                                            String rotation = data.getQueryParameter("rotation");
+                                                            if (!TextUtils.isEmpty(rotation)) {
+                                                                wallPaper.settings.rotation = Utilities.parseInt(rotation);
+                                                            }
+                                                        } catch (Exception ignore) {
 
-                                                    }
-                                                    try {
-                                                        String rotation = data.getQueryParameter("rotation");
-                                                        if (!TextUtils.isEmpty(rotation)) {
-                                                            wallPaper.settings.rotation = Utilities.parseInt(rotation);
                                                         }
+                                                        wallPaper.slug = null;
+                                                        ok = true;
                                                     } catch (Exception ignore) {
 
                                                     }
-                                                    wallPaper.slug = null;
-                                                } else {
+                                                }
+                                                if (!ok) {
                                                     String mode = data.getQueryParameter("mode");
                                                     if (mode != null) {
                                                         mode = mode.toLowerCase();
@@ -1847,13 +1851,15 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
                                         if (wallPaper.slug == null) {
                                             wallPaper.slug = data.getQueryParameter("color");
                                         }
+                                        boolean ok = false;
                                         if (wallPaper.slug != null && wallPaper.slug.length() == 6) {
                                             try {
                                                 wallPaper.settings.background_color = Integer.parseInt(wallPaper.slug, 16) | 0xff000000;
+                                                wallPaper.slug = null;
+                                                ok = true;
                                             } catch (Exception ignore) {
 
                                             }
-                                            wallPaper.slug = null;
                                         } else if (wallPaper.slug != null && wallPaper.slug.length() >= 13 && AndroidUtilities.isValidWallChar(wallPaper.slug.charAt(6))) {
                                             try {
                                                 wallPaper.settings.background_color = Integer.parseInt(wallPaper.slug.substring(0, 6), 16) | 0xff000000;
@@ -1864,19 +1870,21 @@ public class LaunchActivity extends AppCompatActivity implements  BottomSlideFra
                                                 if (wallPaper.slug.length() == 27 && AndroidUtilities.isValidWallChar(wallPaper.slug.charAt(20))) {
                                                     wallPaper.settings.fourth_background_color = Integer.parseInt(wallPaper.slug.substring(21), 16) | 0xff000000;
                                                 }
-                                            } catch (Exception ignore) {
+                                                try {
+                                                    String rotation = data.getQueryParameter("rotation");
+                                                    if (!TextUtils.isEmpty(rotation)) {
+                                                        wallPaper.settings.rotation = Utilities.parseInt(rotation);
+                                                    }
+                                                } catch (Exception ignore) {
 
-                                            }
-                                            try {
-                                                String rotation = data.getQueryParameter("rotation");
-                                                if (!TextUtils.isEmpty(rotation)) {
-                                                    wallPaper.settings.rotation = Utilities.parseInt(rotation);
                                                 }
+                                                wallPaper.slug = null;
+                                                ok = true;
                                             } catch (Exception ignore) {
 
                                             }
-                                            wallPaper.slug = null;
-                                        } else {
+                                        }
+                                        if (!ok) {
                                             String mode = data.getQueryParameter("mode");
                                             if (mode != null) {
                                                 mode = mode.toLowerCase();

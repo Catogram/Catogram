@@ -1447,7 +1447,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
             } else if ((int) did != 0) {
                 ArrayList<MessageObject> arrayList = new ArrayList<>();
                 arrayList.add(messageObject);
-                sendMessage(arrayList, did, true, 0);
+                sendMessage(arrayList, did, true, false, true, 0);
             }
         } else if (messageObject.messageOwner.message != null) {
             TLRPC.WebPage webPage = null;
@@ -1474,7 +1474,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
         } else if ((int) did != 0) {
             ArrayList<MessageObject> arrayList = new ArrayList<>();
             arrayList.add(messageObject);
-            sendMessage(arrayList, did, true, 0);
+            sendMessage(arrayList, did, true, false, true, 0);
         }
     }
 
@@ -1632,7 +1632,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
         }
     }
 
-    public int sendMessage(ArrayList<MessageObject> messages, final long peer, boolean notify, int scheduleDate) {
+    public int sendMessage(ArrayList<MessageObject> messages, final long peer, boolean forwardFromMyName, boolean hideCaption, boolean notify, int scheduleDate) {
         if (messages == null || messages.isEmpty()) {
             return 0;
         }
@@ -1715,68 +1715,74 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 }
 
                 final TLRPC.Message newMsg = new TLRPC.TL_message();
-                boolean forwardFromSaved = msgObj.getDialogId() == myId && msgObj.isFromUser() && msgObj.messageOwner.from_id.user_id == myId;
-                if (msgObj.isForwarded()) {
-                    newMsg.fwd_from = new TLRPC.TL_messageFwdHeader();
-                    if ((msgObj.messageOwner.fwd_from.flags & 1) != 0) {
-                        newMsg.fwd_from.flags |= 1;
-                        newMsg.fwd_from.from_id = msgObj.messageOwner.fwd_from.from_id;
-                    }
-                    if ((msgObj.messageOwner.fwd_from.flags & 32) != 0) {
-                        newMsg.fwd_from.flags |= 32;
-                        newMsg.fwd_from.from_name = msgObj.messageOwner.fwd_from.from_name;
-                    }
-                    if ((msgObj.messageOwner.fwd_from.flags & 4) != 0) {
-                        newMsg.fwd_from.flags |= 4;
-                        newMsg.fwd_from.channel_post = msgObj.messageOwner.fwd_from.channel_post;
-                    }
-                    if ((msgObj.messageOwner.fwd_from.flags & 8) != 0) {
-                        newMsg.fwd_from.flags |= 8;
-                        newMsg.fwd_from.post_author = msgObj.messageOwner.fwd_from.post_author;
-                    }
-                    if ((peer == myId || isChannel) && (msgObj.messageOwner.fwd_from.flags & 16) != 0 && !UserObject.isReplyUser(msgObj.getDialogId())) {
-                        newMsg.fwd_from.flags |= 16;
-                        newMsg.fwd_from.saved_from_peer = msgObj.messageOwner.fwd_from.saved_from_peer;
-                        newMsg.fwd_from.saved_from_msg_id = msgObj.messageOwner.fwd_from.saved_from_msg_id;
-                    }
-                    newMsg.fwd_from.date = msgObj.messageOwner.fwd_from.date;
-                    newMsg.flags = TLRPC.MESSAGE_FLAG_FWD;
-                } else if (!forwardFromSaved) { //if (!toMyself || !msgObj.isOutOwner())
-                    int fromId = msgObj.getFromChatId();
-                    newMsg.fwd_from = new TLRPC.TL_messageFwdHeader();
-                    newMsg.fwd_from.channel_post = msgObj.getId();
-                    newMsg.fwd_from.flags |= 4;
-                    if (msgObj.isFromUser()) {
-                        newMsg.fwd_from.from_id = msgObj.messageOwner.from_id;
-                        newMsg.fwd_from.flags |= 1;
-                    } else {
-                        newMsg.fwd_from.from_id = new TLRPC.TL_peerChannel();
-                        newMsg.fwd_from.from_id.channel_id = msgObj.messageOwner.peer_id.channel_id;
-                        newMsg.fwd_from.flags |= 1;
-                        if (msgObj.messageOwner.post && fromId > 0) {
-                            newMsg.fwd_from.from_id = msgObj.messageOwner.from_id != null ? msgObj.messageOwner.from_id : msgObj.messageOwner.peer_id;
+                if (!forwardFromMyName) {
+                    boolean forwardFromSaved = msgObj.getDialogId() == myId && msgObj.isFromUser() && msgObj.messageOwner.from_id.user_id == myId;
+                    if (msgObj.isForwarded()) {
+                        newMsg.fwd_from = new TLRPC.TL_messageFwdHeader();
+                        if ((msgObj.messageOwner.fwd_from.flags & 1) != 0) {
+                            newMsg.fwd_from.flags |= 1;
+                            newMsg.fwd_from.from_id = msgObj.messageOwner.fwd_from.from_id;
                         }
-                    }
-                    if (msgObj.messageOwner.post_author != null) {
+                        if ((msgObj.messageOwner.fwd_from.flags & 32) != 0) {
+                            newMsg.fwd_from.flags |= 32;
+                            newMsg.fwd_from.from_name = msgObj.messageOwner.fwd_from.from_name;
+                        }
+                        if ((msgObj.messageOwner.fwd_from.flags & 4) != 0) {
+                            newMsg.fwd_from.flags |= 4;
+                            newMsg.fwd_from.channel_post = msgObj.messageOwner.fwd_from.channel_post;
+                        }
+                        if ((msgObj.messageOwner.fwd_from.flags & 8) != 0) {
+                            newMsg.fwd_from.flags |= 8;
+                            newMsg.fwd_from.post_author = msgObj.messageOwner.fwd_from.post_author;
+                        }
+                        if ((peer == myId || isChannel) && (msgObj.messageOwner.fwd_from.flags & 16) != 0 && !UserObject.isReplyUser(msgObj.getDialogId())) {
+                            newMsg.fwd_from.flags |= 16;
+                            newMsg.fwd_from.saved_from_peer = msgObj.messageOwner.fwd_from.saved_from_peer;
+                            newMsg.fwd_from.saved_from_msg_id = msgObj.messageOwner.fwd_from.saved_from_msg_id;
+                        }
+                        newMsg.fwd_from.date = msgObj.messageOwner.fwd_from.date;
+                        newMsg.flags = TLRPC.MESSAGE_FLAG_FWD;
+                    } else if (!forwardFromSaved) { //if (!toMyself || !msgObj.isOutOwner())
+                        int fromId = msgObj.getFromChatId();
+                        newMsg.fwd_from = new TLRPC.TL_messageFwdHeader();
+                        newMsg.fwd_from.channel_post = msgObj.getId();
+                        newMsg.fwd_from.flags |= 4;
+                        if (msgObj.isFromUser()) {
+                            newMsg.fwd_from.from_id = msgObj.messageOwner.from_id;
+                            newMsg.fwd_from.flags |= 1;
+                        } else {
+                            newMsg.fwd_from.from_id = new TLRPC.TL_peerChannel();
+                            newMsg.fwd_from.from_id.channel_id = msgObj.messageOwner.peer_id.channel_id;
+                            newMsg.fwd_from.flags |= 1;
+                            if (msgObj.messageOwner.post && fromId > 0) {
+                                newMsg.fwd_from.from_id = msgObj.messageOwner.from_id != null ? msgObj.messageOwner.from_id : msgObj.messageOwner.peer_id;
+                            }
+                        }
+                        if (msgObj.messageOwner.post_author != null) {
                         /*newMsg.fwd_from.post_author = msgObj.messageOwner.post_author;
                         newMsg.fwd_from.flags |= 8;*/
-                    } else if (!msgObj.isOutOwner() && fromId > 0 && msgObj.messageOwner.post) {
-                        TLRPC.User signUser = getMessagesController().getUser(fromId);
-                        if (signUser != null) {
-                            newMsg.fwd_from.post_author = ContactsController.formatName(signUser.first_name, signUser.last_name);
-                            newMsg.fwd_from.flags |= 8;
+                        } else if (!msgObj.isOutOwner() && fromId > 0 && msgObj.messageOwner.post) {
+                            TLRPC.User signUser = getMessagesController().getUser(fromId);
+                            if (signUser != null) {
+                                newMsg.fwd_from.post_author = ContactsController.formatName(signUser.first_name, signUser.last_name);
+                                newMsg.fwd_from.flags |= 8;
+                            }
+                        }
+                        newMsg.date = msgObj.messageOwner.date;
+                        newMsg.flags = TLRPC.MESSAGE_FLAG_FWD;
+                    }
+                    if (peer == myId && newMsg.fwd_from != null) {
+                        newMsg.fwd_from.flags |= 16;
+                        newMsg.fwd_from.saved_from_msg_id = msgObj.getId();
+                        newMsg.fwd_from.saved_from_peer = msgObj.messageOwner.peer_id;
+                        if (newMsg.fwd_from.saved_from_peer.user_id == myId) {
+                            newMsg.fwd_from.saved_from_peer.user_id = (int) msgObj.getDialogId();
                         }
                     }
-                    newMsg.date = msgObj.messageOwner.date;
-                    newMsg.flags = TLRPC.MESSAGE_FLAG_FWD;
-                }
-                if (peer == myId && newMsg.fwd_from != null) {
-                    newMsg.fwd_from.flags |= 16;
-                    newMsg.fwd_from.saved_from_msg_id = msgObj.getId();
-                    newMsg.fwd_from.saved_from_peer = msgObj.messageOwner.peer_id;
-                    if (newMsg.fwd_from.saved_from_peer.user_id == myId) {
-                        newMsg.fwd_from.saved_from_peer.user_id = (int) msgObj.getDialogId();
-                    }
+                } else {
+                    newMsg.params = new HashMap<>();
+                    newMsg.params.put("fwd_id", "" + msgObj.getId());
+                    newMsg.params.put("fwd_peer", "" + msgObj.getDialogId());
                 }
                 if (!msgObj.messageOwner.restriction_reason.isEmpty()) {
                     newMsg.restriction_reason = msgObj.messageOwner.restriction_reason;
@@ -1802,7 +1808,9 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
 
                     newMsg.flags |= 8388608;
                 }
-                newMsg.message = msgObj.messageOwner.message;
+                if (!hideCaption || newMsg.media == null) {
+                    newMsg.message = msgObj.messageOwner.message;
+                }
                 if (newMsg.message == null) {
                     newMsg.message = "";
                 }
@@ -1959,6 +1967,8 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     }
                     req.random_id = randomIds;
                     req.id = ids;
+                    req.drop_author = forwardFromMyName;
+                    req.drop_media_captions = hideCaption;
                     req.with_my_score = messages.size() == 1 && messages.get(0).messageOwner.with_my_score;
 
                     final ArrayList<TLRPC.Message> newMsgObjArr = arr;
@@ -3134,7 +3144,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 if (parentObject == null && params != null && params.containsKey("parentObject")) {
                     parentObject = params.get("parentObject");
                 }
-                if (retryMessageObject.isForwarded()) {
+                if (retryMessageObject.isForwarded() || params != null && params.containsKey("fwd_id")) {
                     type = 4;
                 } else {
                     if (retryMessageObject.isDice()) {
@@ -4330,15 +4340,34 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 TLRPC.TL_messages_forwardMessages reqSend = new TLRPC.TL_messages_forwardMessages();
                 reqSend.to_peer = sendToPeer;
                 reqSend.with_my_score = retryMessageObject.messageOwner.with_my_score;
-                if (retryMessageObject.messageOwner.ttl != 0) {
-                    TLRPC.Chat chat = getMessagesController().getChat(-retryMessageObject.messageOwner.ttl);
-                    reqSend.from_peer = new TLRPC.TL_inputPeerChannel();
-                    reqSend.from_peer.channel_id = -retryMessageObject.messageOwner.ttl;
-                    if (chat != null) {
-                        reqSend.from_peer.access_hash = chat.access_hash;
+                if (params != null && params.containsKey("fwd_id")) {
+                    int fwdId = Utilities.parseInt(params.get("fwd_id"));
+                    reqSend.drop_author = true;
+                    long peerId = Utilities.parseLong(params.get("fwd_peer"));
+                    if (peerId < 0) {
+                        TLRPC.Chat chat = getMessagesController().getChat((int) -peerId);
+                        if (ChatObject.isChannel(chat)) {
+                            reqSend.from_peer = new TLRPC.TL_inputPeerChannel();
+                            reqSend.from_peer.channel_id = chat.id;
+                            reqSend.from_peer.access_hash = chat.access_hash;
+                        } else {
+                            reqSend.from_peer = new TLRPC.TL_inputPeerEmpty();
+                        }
+                    } else {
+                        reqSend.from_peer = new TLRPC.TL_inputPeerEmpty();
                     }
+                    reqSend.id.add(fwdId);
                 } else {
-                    reqSend.from_peer = new TLRPC.TL_inputPeerEmpty();
+                    if (retryMessageObject.messageOwner.ttl != 0) {
+                        TLRPC.Chat chat = getMessagesController().getChat(-retryMessageObject.messageOwner.ttl);
+                        reqSend.from_peer = new TLRPC.TL_inputPeerChannel();
+                        reqSend.from_peer.channel_id = -retryMessageObject.messageOwner.ttl;
+                        if (chat != null) {
+                            reqSend.from_peer.access_hash = chat.access_hash;
+                        }
+                    } else {
+                        reqSend.from_peer = new TLRPC.TL_inputPeerEmpty();
+                    }
                 }
                 reqSend.silent = newMsg.silent;
                 if (scheduleDate != 0) {
@@ -6920,7 +6949,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
         return String.format(Locale.US, blur ? "%d_%d@%d_%d_b" : "%d_%d@%d_%d", photoSize.location.volume_id, photoSize.location.local_id, (int) (point.x / AndroidUtilities.density), (int) (point.y / AndroidUtilities.density));
     }
 
-    private static boolean shouldSendWebPAsSticker(String path, Uri uri) {
+    public static boolean shouldSendWebPAsSticker(String path, Uri uri) {
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
         try {

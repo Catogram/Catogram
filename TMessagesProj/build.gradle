@@ -338,7 +338,7 @@ android {
         }
     }
 
-    defaultConfig.versionCode = 2390
+    defaultConfig.versionCode = 2406
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
@@ -357,7 +357,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionName "7.9.3"
+        versionName "8.0.0"
 
         buildConfigField "int", "APP_ID", props['APP_ID']
         buildConfigField "String", "API_HASH", props['API_HASH']

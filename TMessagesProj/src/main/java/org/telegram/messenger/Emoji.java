@@ -22,6 +22,7 @@ import android.os.Build;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
 import android.view.View;
@@ -191,6 +192,9 @@ public class Emoji {
     }
 
     public static boolean isValidEmoji(CharSequence code) {
+        if (TextUtils.isEmpty(code)) {
+            return false;
+        }
         DrawableInfo info = rects.get(code);
         if (info == null) {
             CharSequence newCode = EmojiData.emojiAliasMap.get(code);
