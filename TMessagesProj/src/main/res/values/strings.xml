@@ -4702,7 +4702,4 @@
     <string name="ShowCaption">Show caption</string>
     <string name="HideCaption">Hide caption</string>
     <string name="TapForForwardingOptions">Tap here for forwarding options</string>
-    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
-    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
-    >>>>>>> 368822d20 (Update to 8.0.0 (2406))
 </resources>

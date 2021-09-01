@@ -267,4 +267,8 @@
     <string name="CG_StreamVoip_Desc">если включено, то вызов VoIP будет распознаваться как мультимедиа вместо вызова</string>
     <string name="CG_TimeOnStick">Скрыть время отправки на стикерах в чате</string>
     <string name="CG_NoInternet">Ошибка при переводе. Возможно вы не в сети?</string>
+    <string name="CG_FwdMenu_EnableCaptions">Включить подписи</string>
+    <string name="CG_FwdMenu_DisableCaptions">Скрыть подписи</string>
+    <string name="CG_FwdMenu_NoNotify">Не уведомлять</string>
+    <string name="CG_FwdMenu_Notify">Уведомлять</string>
 </resources>
