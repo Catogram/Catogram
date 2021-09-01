@@ -267,4 +267,6 @@
     <string name="CG_StreamVoip_Desc">اگر فعالم کنی، تماس های دریافتی مث مدل زنگخورت میشه</string>
     <string name="CG_TimeOnStick">مخفی کردن نمایش ساعت روی استیکر</string>
     <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
+    <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
+    <string name="CG_FwdMenu_Notify">Notify</string>
 </resources>
