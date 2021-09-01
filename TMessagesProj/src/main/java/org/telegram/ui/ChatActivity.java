@@ -1106,7 +1106,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int delete = 12;
     private final static int chat_enc_timer = 13;
     private final static int select_between = 112;
-    private final static int save_message = 113;
     private final static int chat_menu_attach = 14;
     private final static int clear_history = 15;
     private final static int delete_chat = 16;
@@ -2029,20 +2028,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             updateVisibleRows();
                         }
                     }
-                } else if (id == save_message) {
-                    ArrayList<MessageObject> obj = new ArrayList<>();
-                    int m = 0;
-                    for (int a = 1; a >= 0; a--) {
-                        for (int b = 0; b < selectedMessagesIds[a].size(); b++) {
-                            obj.add(selectedMessagesIds[a].valueAt(b));
-                            m = b;
-                        }
-                    }
-                    SendMessagesHelper.getInstance(currentAccount).sendMessage(obj, UserConfig.getInstance(currentAccount).clientUserId, true, false, true, 0);
-                    undoView.showWithAction(getUserConfig().getClientUserId(), UndoView.ACTION_FWD_MESSAGES, m);
-                    clearSelectionMode();
                 } else if (id == forward) {
-                    CGFeatureHooks.switchNoAuthor(false);
                     openForward();
                 } else if (id == save_to) {
                     ArrayList<MessageObject> messageObjects = new ArrayList<>();
@@ -2539,7 +2525,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         selectedMessagesCountTextView.setOnTouchListener((v, event) -> true);
 
         if (currentEncryptedChat == null) {
-            actionModeViews.add(actionMode.addItemWithWidth(save_message, R.drawable.menu_saved, AndroidUtilities.dp(54), LocaleController.getString("CG_ToSaved", R.string.CG_ToSaved)));
             actionModeViews.add(actionMode.addItemWithWidth(save_to, R.drawable.msg_download, AndroidUtilities.dp(54), LocaleController.getString("SaveToMusic", R.string.SaveToMusic)));
             actionModeViews.add(actionMode.addItemWithWidth(edit, R.drawable.msg_edit, AndroidUtilities.dp(54), LocaleController.getString("Edit", R.string.Edit)));
             actionModeViews.add(actionMode.addItemWithWidth(select_between, R.drawable.list_check_outline_28, AndroidUtilities.dp(54), LocaleController.getString("Edit", R.string.Edit)));
@@ -7561,7 +7546,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         bottomOverlayImage.setOnClickListener(v -> undoView.showWithAction(dialog_id, UndoView.ACTION_TEXT_INFO, LocaleController.getString("BroadcastGroupInfo", R.string.BroadcastGroupInfo)));
 
         replyButton = new TextView(context);
-        replyButton.setText(LocaleController.getString("CG_Without_Authorship", R.string.CG_Without_Authorship));
+        replyButton.setText(LocaleController.getString("CG_MsgSlideAction_Save", R.string.CG_MsgSlideAction_Save));
         replyButton.setGravity(Gravity.CENTER_VERTICAL);
         replyButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         replyButton.setPadding(AndroidUtilities.dp(14), 0, AndroidUtilities.dp(21), 0);
@@ -7573,8 +7558,17 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         replyButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
         replyButton.setOnClickListener(v -> {
-            CGFeatureHooks.switchNoAuthor(true);
-            openForward(); 
+            ArrayList<MessageObject> obj = new ArrayList<>();
+            int m = 0;
+            for (int a = 1; a >= 0; a--) {
+                for (int b = 0; b < selectedMessagesIds[a].size(); b++) {
+                    obj.add(selectedMessagesIds[a].valueAt(b));
+                    m = b;
+                }
+            }
+            SendMessagesHelper.getInstance(currentAccount).sendMessage(obj, UserConfig.getInstance(currentAccount).clientUserId, false, false, true, 0);
+            undoView.showWithAction(getUserConfig().getClientUserId(), UndoView.ACTION_FWD_MESSAGES, m);
+            clearSelectionMode();
         });
         bottomMessagesActionContainer.addView(replyButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.LEFT | Gravity.TOP));
 
@@ -7591,7 +7585,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         forwardButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
         forwardButton.setOnClickListener(v -> {
-            CGFeatureHooks.switchNoAuthor(false);
             openForward(); 
         });
         bottomMessagesActionContainer.addView(forwardButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.RIGHT | Gravity.TOP));
