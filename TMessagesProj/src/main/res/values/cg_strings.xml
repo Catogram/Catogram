@@ -324,4 +324,6 @@
     <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
     <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
     <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
+    <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
+    <string name="CG_FwdMenu_Notify">Notify</string>
 </resources>

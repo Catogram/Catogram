@@ -1286,7 +1286,11 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                     if (frameLayout2.getTag() != null && commentTextView.length() > 0) {
                         SendMessagesHelper.getInstance(currentAccount).sendMessage(commentTextView.getText().toString(), key, null, null, null, true, null, null, null, true, 0, null);
                     }
-                    SendMessagesHelper.getInstance(currentAccount).sendMessage(sendingMessageObjects, key, false,false, true, 0);
+                    if (CatogramConfig.INSTANCE.getForwardNoAuthorship() || CatogramConfig.INSTANCE.getForwardWithoutCaptions()) {
+                        SendMessagesHelper.getInstance(currentAccount).sendMessage(sendingMessageObjects, key, true,CatogramConfig.INSTANCE.getForwardWithoutCaptions(), CatogramConfig.INSTANCE.getForwardNotify(), 0);
+                    } else {
+                        SendMessagesHelper.getInstance(currentAccount).sendMessage(sendingMessageObjects, key, false,false, CatogramConfig.INSTANCE.getForwardNotify(), 0);
+                    }
                 }
                 onSend(selectedDialogs, sendingMessageObjects.size());
             } else {

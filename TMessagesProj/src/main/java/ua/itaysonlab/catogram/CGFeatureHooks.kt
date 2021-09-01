@@ -37,7 +37,33 @@ object CGFeatureHooks {
                     CatogramConfig.forwardNoAuthorship = !CatogramConfig.forwardNoAuthorship
                     currentPopup?.dismiss()
                     currentPopup = null
-                }
+                },
+            CGFeatureJavaHooks.PopupItem(
+                if (CatogramConfig.forwardWithoutCaptions) {
+                    LocaleController.getString("CG_FwdMenu_EnableCaptions", R.string.CG_FwdMenu_EnableCaptions)
+                } else {
+                    LocaleController.getString("CG_FwdMenu_DisableCaptions", R.string.CG_FwdMenu_DisableCaptions)
+                },
+                R.drawable.msg_edit
+            ) {
+                // Toggle!
+                CatogramConfig.forwardWithoutCaptions = !CatogramConfig.forwardWithoutCaptions
+                currentPopup?.dismiss()
+                currentPopup = null
+            },
+            CGFeatureJavaHooks.PopupItem(
+                if (CatogramConfig.forwardNotify) {
+                    LocaleController.getString("CG_FwdMenu_NoNotify", R.string.CG_FwdMenu_NoNotify)
+                } else {
+                    LocaleController.getString("CG_FwdMenu_Notify", R.string.CG_FwdMenu_Notify)
+                },
+                R.drawable.input_notify_on
+            ) {
+                // Toggle!
+                CatogramConfig.forwardNotify = !CatogramConfig.forwardNotify
+                currentPopup?.dismiss()
+                currentPopup = null
+            },
         ))
     }
 
