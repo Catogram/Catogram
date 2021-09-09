@@ -1,5 +1,6 @@
 package ua.itaysonlab.catogram
 
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.RemoteViews
@@ -18,6 +19,12 @@ object CGFeatureHooks {
     @JvmStatic
     fun colorFeedWidgetItem(rv: RemoteViews) {
         rv.setTextColor(R.id.feed_widget_item_text, Theme.getColor(Theme.key_windowBackgroundWhiteBlackText))
+    }
+
+    @JvmStatic
+    fun switchNoAuthor(b: Boolean) {
+        // ...
+        CatogramConfig.legacyNoAuthorship = b
     }
 
     private var currentPopup: ActionBarPopupWindow? = null
@@ -90,7 +97,7 @@ object CGFeatureHooks {
             }
             1 -> {
                 // Save to PM
-                cf.sendMessagesHelper.sendMessage(arrayListOf(msg), UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toLong(), false, false, true, 0)
+                cf.sendMessagesHelper.sendMessage(arrayListOf(msg), UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toLong(), true, false, true, 0)
             }
             2 -> {
                 // Share
