@@ -24,7 +24,6 @@ object CGFeatureHooks {
     @JvmStatic
     fun switchNoAuthor(b: Boolean) {
         // ...
-        CatogramConfig.legacyNoAuthorship = b
     }
 
     private var currentPopup: ActionBarPopupWindow? = null
