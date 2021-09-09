@@ -269,4 +269,6 @@
     <string name="CG_NoInternet">Impossibile tradurre. Forse sei offline?</string>
     <string name="CG_FwdMenu_NoNotify">Non notificare</string>
     <string name="CG_FwdMenu_Notify">Notifica</string>
+    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
+    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
 </resources>
