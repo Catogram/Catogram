@@ -270,4 +270,6 @@
     <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
     <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
     <string name="CG_FwdMenu_Notify">Notify</string>
+    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
+    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
 </resources>
