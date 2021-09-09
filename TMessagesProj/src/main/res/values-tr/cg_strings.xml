@@ -269,4 +269,6 @@
     <string name="CG_NoInternet">Çevrilemedi, internete bağlı olmayabilir misin?</string>
     <string name="CG_FwdMenu_NoNotify">Bildirme</string>
     <string name="CG_FwdMenu_Notify">Bildir</string>
+    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
+    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
 </resources>
