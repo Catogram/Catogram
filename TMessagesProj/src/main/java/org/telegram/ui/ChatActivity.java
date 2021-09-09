@@ -254,6 +254,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     public TLRPC.Chat currentChat;
     protected TLRPC.User currentUser;
     protected TLRPC.EncryptedChat currentEncryptedChat;
+    private boolean noAuthor;
     private boolean userBlocked;
 
     private int chatInviterId;
@@ -2042,7 +2043,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     undoView.showWithAction(getUserConfig().getClientUserId(), UndoView.ACTION_FWD_MESSAGES, m);
                     clearSelectionMode();
                 } else if (id == forward) {
-                    CGFeatureHooks.switchNoAuthor(false);
+                    noAuthor = false;
                     openForward();
                 } else if (id == save_to) {
                     ArrayList<MessageObject> messageObjects = new ArrayList<>();
@@ -7573,7 +7574,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         replyButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
         replyButton.setOnClickListener(v -> {
-            CGFeatureHooks.switchNoAuthor(true);
+            noAuthor = true;
             openForward(); 
         });
         bottomMessagesActionContainer.addView(replyButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.LEFT | Gravity.TOP));
@@ -7591,7 +7592,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         image.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_actionBarActionModeDefaultIcon), PorterDuff.Mode.MULTIPLY));
         forwardButton.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
         forwardButton.setOnClickListener(v -> {
-            CGFeatureHooks.switchNoAuthor(false);
+            noAuthor = false;
             openForward(); 
         });
         bottomMessagesActionContainer.addView(forwardButton, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.RIGHT | Gravity.TOP));
@@ -7890,6 +7891,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (forwardingMessages != null) {
                     int hasPoll = 0;
                     boolean hasInvoice = false;
+
                     for (int a = 0, N = forwardingMessages.messages.size(); a < N; a++) {
                         MessageObject messageObject = forwardingMessages.messages.get(a);
                         if (messageObject.isPoll()) {
@@ -10703,7 +10705,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         replyNameTextView.setText(LocaleController.formatPluralString("PreviewForwardFile", messageObjectsToForward.size()));
                     }
                 }
-
+                forwardingMessages.hideForwardSendersName = noAuthor;
                 if (forwardingMessages.hideForwardSendersName) {
                     replyObjectTextView.setText(LocaleController.getString("HiddenSendersNameDescription", R.string.HiddenSendersNameDescription));
                 } else {
@@ -21007,7 +21009,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 if (message != null) {
                     getSendMessagesHelper().sendMessage(message.toString(), did, null, null, null, true, null, null, null, true, 0, null);
                 }
-                getSendMessagesHelper().sendMessage(fmessages, did, false, false,true, 0);
+                getSendMessagesHelper().sendMessage(fmessages, did, noAuthor, false,true, 0);
             }
             fragment.finishFragment();
             if (dids.size() == 1) {
