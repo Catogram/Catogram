@@ -3155,7 +3155,7 @@ public class DialogCell extends BaseCell {
         } else {
             info.addAction(AccessibilityNodeInfo.ACTION_CLICK);
             info.addAction(AccessibilityNodeInfo.ACTION_LONG_CLICK);
-            info.setSelected(checkBox.isChecked());
+            if(checkBox!=null)info.setSelected(checkBox.isChecked());
             StringBuilder sb = new StringBuilder();
             if (currentDialogFolderId == 1) {
                 sb.append(LocaleController.getString("ArchivedChats", R.string.ArchivedChats));
