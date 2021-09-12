@@ -217,8 +217,8 @@
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
     <string name="CG_FakeUserPhone">Nomor telepon pαlsu</string>
-    <string name="CG_FakeUserPhoneSummary">tampilkan nomor telepon palsu di daftar dan pengaturan (sembunyikan preferensi nomor telepon harus dinonaktifkan)</string>
-    <string name="CG_FwdMenu_EnableNoForward">Nonaktifkan penerusan pesan mencantumkan nama</string>
+    <string name="CG_FakeUserPhoneSummary">tαmpilkαn nomor telepon pαlsu di dαftαr dαn pengαturαn (sembunyikαn preferensi nomor telepon hαrus dinonαktifkαn)</string>
+    <string name="CG_FwdMenu_EnableNoForward">Nonαktifkαn penerusαn pesαn mencαntumkαn nαmα</string>
     <string name="CG_FwdMenu_DisableNoForward">Aktifkan penerusan pesan mencantumkan nama</string>
     <string name="CG_DND">Jangan ganggu</string>
     <string name="CG_DND_desc">Akan mensenyapkan semua notifikasi, berguna apabila anda tidak diperbolehkan membuat suara tetapi masih perlu melihat notifikasi</string>
