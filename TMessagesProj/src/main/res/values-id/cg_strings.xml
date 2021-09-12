@@ -203,7 +203,8 @@
     <string name="CG_AudioFocus_Desc">If disabled then the music will be quieter, but won\'t turn off</string>
     <string name="CG_Proximity">Enable proximity actions</string>
     <string name="CG_Proximity_Desc">By turning it off you will get rid of the annoying screen shutdown when listening to voice messages (restart app to apply)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
+    <string name="CG_Donate_Desc">Pilih metode donasi di bawah\nJika Anda menyumbang &gt;= dari $1.5 atau 100 rubel Rusia, Anda akan menjadi pengguna premium, Anda akan menerima tanda verifikasi kucing dan fitur premium di masa mendatang. \nTentukan ID Anda di komentar untuk pembayaran.
+ </string>
     <string name="CG_Donate_Method">Choose method</string>
     <string name="CG_Mono_Desc">5375414117420108 // tap to copy</string>
     <string name="CG_Source">Source code</string>
@@ -215,7 +216,7 @@
     <string name="CG_ClearedFromCache">Cleared from cache</string>
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Nomor telepon palsu</string>
+    <string name="CG_FakeUserPhone">Nomor telepon pαlsu</string>
     <string name="CG_FakeUserPhoneSummary">tampilkan nomor telepon palsu di daftar dan pengaturan (sembunyikan preferensi nomor telepon harus dinonaktifkan)</string>
     <string name="CG_FwdMenu_EnableNoForward">Nonaktifkan penerusan pesan mencantumkan nama</string>
     <string name="CG_FwdMenu_DisableNoForward">Aktifkan penerusan pesan mencantumkan nama</string>
@@ -265,11 +266,11 @@
     <string name="CG_PlayVideo_Desc">Jika dihidupkan - saat Anda menekan tombol volume, video di layar dalam dialog akan diaktifkan</string>
     <string name="CG_StreamVoip">Streaming VoIP sebagai Media</string>
     <string name="CG_StreamVoip_Desc">jika diaktifkan maka panggilan VoIP akan dikenali sebagai media alih-alih panggilan</string>
-    <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
-    <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
-    <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
-    <string name="CG_FwdMenu_Notify">Notify</string>
-    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
-    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
-    <string name="CG_Mutual_Contact">mutual contact</string>
+    <string name="CG_TimeOnStick">Sembunyikan waktu pada stiker dalam obrolan</string>
+    <string name="CG_NoInternet">Gα bisα terjemαhin. Mungkin kαmu offline?</string>
+    <string name="CG_FwdMenu_NoNotify">Jαngαn kαsih tαu</string>
+    <string name="CG_FwdMenu_Notify">kαsih tαu</string>
+    <string name="CG_FwdMenu_EnableCaptions">αktifkαn teks</string>
+    <string name="CG_FwdMenu_DisableCaptions">Sembunyikαn teks</string>
+    <string name="CG_Mutual_Contact">mutuαlαn kontαk</string>
 </resources>
