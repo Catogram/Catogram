@@ -55,6 +55,7 @@ object CatogramConfig {
     var forwardWithoutCaptions by sharedPreferences.boolean("cg_forward_without_captions", false)
     var forwardNotify by sharedPreferences.boolean("cg_forward_notify", true)
     var msgForwardDate by sharedPreferences.boolean("cg_msg_fwd_date", false)
+    var noAuthorship by sharedPreferences.boolean("cg_no_authorship", false)
 
     var newTabs_iconsV2_mode by sharedPreferences.int("cg_tabs_v2", 0)
 
