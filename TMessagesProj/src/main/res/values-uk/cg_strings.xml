@@ -244,6 +244,9 @@
     <string name="CG_TrLang_Hindi">Гінді</string>
     <string name="CG_TrLang_German">Німецька</string>
     <string name="CG_TrLang_Indonesian">Індонезійська</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Перекладач</string>
     <string name="CG_Updates_Category">Оновлення</string>
     <string name="CG_Auto_Ota">Автоматично перевіряти оновлення</string>
