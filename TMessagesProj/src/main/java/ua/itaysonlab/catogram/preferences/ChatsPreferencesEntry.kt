@@ -376,6 +376,9 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                             Pair(7, LocaleController.getString("CG_TrLang_Hindi", R.string.CG_TrLang_Hindi)),
                             Pair(8, LocaleController.getString("CG_TrLang_German", R.string.CG_TrLang_German)),
                             Pair(9, LocaleController.getString("CG_TrLang_Indonesian", R.string.CG_TrLang_Indonesian)),
+                            Pair(10, LocaleController.getString("CG_TrLang_Bosnian", R.string.CG_TrLang_Bosnian)),
+                            Pair(11, LocaleController.getString("CG_TrLang_Croatian", R.string.CG_TrLang_Croatian)),
+                            Pair(12, LocaleController.getString("CG_TrLang_Serbian", R.string.CG_TrLang_Serbian)),
                     )
                 }, {
                     return@contract when (CatogramConfig.translateOptions) {
@@ -388,6 +391,9 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                         7 -> LocaleController.getString("CG_TrLang_Hindi", R.string.CG_TrLang_Hindi)
                         8 -> LocaleController.getString("CG_TrLang_German", R.string.CG_TrLang_German)
                         9 -> LocaleController.getString("CG_TrLang_Indonesian", R.string.CG_TrLang_Indonesian)
+                        10 -> LocaleController.getString("CG_TrLang_Bosnian", R.string.CG_TrLang_Bosnian)
+                        11 -> LocaleController.getString("CG_TrLang_Croatian", R.string.CG_TrLang_Croatian)
+                        12 -> LocaleController.getString("CG_TrLang_Serbian", R.string.CG_TrLang_Serbian)
                         else -> LocaleController.getString("CG_TrLang_English", R.string.CG_TrLang_English)
                     }
                 }) {
@@ -422,6 +428,15 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                         }
                         9 -> {
                             CatogramConfig.trLang = "id"
+                        }
+                        10 -> {
+                            CatogramConfig.trLang = "bs"
+                        }
+                        11 -> {
+                            CatogramConfig.trLang = "hr"
+                        }
+                        12 -> {
+                            CatogramConfig.trLang = "sr"
                         }
                     }
                 }
