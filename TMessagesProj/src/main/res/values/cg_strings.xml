@@ -301,6 +301,9 @@
     <string name="CG_TrLang_Hindi">Hindi</string>
     <string name="CG_TrLang_German">German</string>
     <string name="CG_TrLang_Indonesian">Indonesian</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Translator</string>
     <string name="CG_Updates_Category">Updates</string>
     <string name="CG_Auto_Ota">Automatically check for updates</string>
