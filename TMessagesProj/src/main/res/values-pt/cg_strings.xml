@@ -244,6 +244,9 @@
     <string name="CG_TrLang_Hindi">Híndi</string>
     <string name="CG_TrLang_German">Alemão</string>
     <string name="CG_TrLang_Indonesian">Indonésio</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Tradutor</string>
     <string name="CG_Updates_Category">Atualizações</string>
     <string name="CG_Auto_Ota">Verificar atualizações automaticamente</string>
