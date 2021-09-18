@@ -140,7 +140,7 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import ua.itaysonlab.CatogramLogger;
-import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl;
+import ua.itaysonlab.catogram.translate.impl.DeeplTranslateImpl;
 
 
 public class ChatActivityEnterView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
@@ -3140,7 +3140,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     } else if (num == 1) {
                         sendMessageInternal(false, 0);
                     } else if (num == 2) {
-                       GoogleTranslateImpl.translateEditText(messageEditText.getText().toString(), messageEditText);
+                       DeeplTranslateImpl.translateEditText(messageEditText.getText().toString(), messageEditText);
                     }
                 });
             }

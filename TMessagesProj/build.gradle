@@ -16,6 +16,7 @@ configurations.all {
 }
 
 dependencies {
+    implementation files('libs/org.deepl.jar')
     implementation 'com.android.billingclient:billing:4.0.0'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30'
