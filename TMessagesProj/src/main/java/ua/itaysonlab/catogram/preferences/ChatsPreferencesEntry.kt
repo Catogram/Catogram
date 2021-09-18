@@ -157,6 +157,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.voicesAgc = it
                 }
             }
+
+            switch {
+                title = LocaleController.getString("CG_hq_voice", R.string.CG_hq_voice)
+                summary = LocaleController.getString("CG_relaunch", R.string.CG_relaunch)
+
+                contract({
+                    return@contract CatogramConfig.hqVoice
+                }) {
+                    CatogramConfig.hqVoice = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Header_Notification", R.string.AS_Header_Notification)) {

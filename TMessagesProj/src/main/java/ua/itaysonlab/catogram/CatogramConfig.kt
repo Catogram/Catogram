@@ -89,6 +89,8 @@ object CatogramConfig {
 
     var showDc by sharedPreferences.boolean("cg_show_dc", false)
 
+    var hqVoice by sharedPreferences.boolean("cg_hq_voice", true)
+
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {

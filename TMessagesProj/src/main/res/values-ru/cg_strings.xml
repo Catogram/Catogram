@@ -272,4 +272,6 @@
     <string name="CG_FwdMenu_NoNotify">Не уведомлять</string>
     <string name="CG_FwdMenu_Notify">Уведомлять</string>
     <string name="CG_Mutual_Contact">взаимный контакт</string>
+    <string name="CG_relaunch">нужен перезапуск приложения</string>
+    <string name="CG_hq_voice">HQ Голосовые сообщения</string>
 </resources>

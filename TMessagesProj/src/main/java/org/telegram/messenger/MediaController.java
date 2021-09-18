@@ -563,7 +563,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
     private ArrayList<ByteBuffer> recordBuffers = new ArrayList<>();
     private ByteBuffer fileBuffer;
     public int recordBufferSize = 1280;
-    public int sampleRate = 48000;
+    public int sampleRate = CatogramConfig.INSTANCE.getHqVoice() ? 48000 : 16000;
     private int sendAfterDone;
     private boolean sendAfterDoneNotify;
     private int sendAfterDoneScheduleDate;
@@ -855,7 +855,6 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
 
         recordQueue.postRunnable(() -> {
             try {
-                sampleRate = 48000;
                 int minBuferSize = AudioRecord.getMinBufferSize(sampleRate, InstantVideoBridge.getInstantAudioChannelType(), AudioFormat.ENCODING_PCM_16BIT);
                 if (minBuferSize <= 0) {
                     minBuferSize = 1280;
@@ -3465,7 +3464,7 @@ public class MediaController implements AudioManager.OnAudioFocusChangeListener,
             recordingAudioFile = new File(FileLoader.getDirectory(FileLoader.MEDIA_DIR_CACHE), FileLoader.getAttachFileName(recordingAudio));
 
             try {
-                if (startRecord(recordingAudioFile.getAbsolutePath(), 48000, InstantVideoBridge.getInstantAudioChannelCount(), InstantVideoBridge.getVoiceBitrate()) == 0) {
+                if (startRecord(recordingAudioFile.getAbsolutePath(), sampleRate, InstantVideoBridge.getInstantAudioChannelCount(), InstantVideoBridge.getVoiceBitrate()) == 0) {
                     AndroidUtilities.runOnUIThread(() -> {
                         recordStartRunnable = null;
                         NotificationCenter.getInstance(currentAccount).postNotificationName(NotificationCenter.recordStartError, guid);
