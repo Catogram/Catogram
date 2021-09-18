@@ -275,4 +275,6 @@
     <string name="CG_FwdMenu_EnableCaptions">Altyazıları etkinleştir</string>
     <string name="CG_FwdMenu_DisableCaptions">Altyazıları gizle</string>
     <string name="CG_Mutual_Contact">karşılıklı kişiler</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>
