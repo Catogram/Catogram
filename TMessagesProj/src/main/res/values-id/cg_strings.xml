@@ -276,4 +276,6 @@
     <string name="CG_FwdMenu_EnableCaptions">αktifkαn teks</string>
     <string name="CG_FwdMenu_DisableCaptions">Sembunyikαn teks</string>
     <string name="CG_Mutual_Contact">mutuαlαn kontαk</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>
