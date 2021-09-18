@@ -5,7 +5,7 @@
 
     <string name="AS_Header_Appearance">Appearance</string>
     <string name="AS_HideUserPhone">Hide phone number</string>
-    <string name="AS_HideUserPhoneSummary">in drawer and settings</string>
+    <string name="AS_HideUserPhoneSummary">Hides your phone number everywhere within the app.</string>
     <string name="AS_NoRounding">Disable number rounding</string>
     <string name="AS_NoRoundingSummary">1.2K -> 1234</string>
     <string name="AS_Vibration">Disable vibration</string>
@@ -31,13 +31,13 @@
     <string name="AS_Header_Categories">Categories</string>
     <string name="AS_Header_About">About Catogram</string>
 
-    <string name="CG_AboutDesc">An experimental Telegram app modification.</string>
+    <string name="CG_AboutDesc">A custom fork of the official Telegram app.</string>
     <string name="CG_Donate">Donate</string>
     <string name="CG_DonatDesc">Help us to buy PS5</string>
     <string name="CG_ToChannel">Open official channel</string>
     <string name="CG_ToChat">Open official chat</string>
-    <string name="AS_SysEmoji">Use system emoji</string>
-    <string name="AS_SysEmojiDesc">can cause bugs, be careful</string>
+    <string name="AS_SysEmoji">Use system default emoji pack</string>
+    <string name="AS_SysEmojiDesc">Can cause instabilties</string>
 
     <string name="AS_DrawerAvatar">Avatar as header background</string>
     <string name="AS_DrawerBlur">Blur header background</string>
@@ -45,7 +45,7 @@
     <string name="AS_DrawerCategory">Drawer</string>
     <string name="AS_FlatSB">Flat statusbar</string>
     <string name="AS_FlatAB">Disable toolbar shadow</string>
-    <string name="AS_FlatSB_Desc">only for Android 6+</string>
+    <string name="AS_FlatSB_Desc">Only for Android 6.0 and above.</string>
     <string name="AS_RedesignCategory">Redesign</string>
 
     <string name="CG_Filters_Header">Dialog filter</string>
@@ -97,13 +97,13 @@
     <string name="CG_ABSearch_Desc">in the chat window</string>
 
     <string name="CG_SmoothKbd">Smooth keyboard animation</string>
-    <string name="CG_SmoothKbd_Desc">uses official Telegram implementation</string>
+    <string name="CG_SmoothKbd_Desc">Uses official Telegram implementation</string>
 
-    <string name="CG_Header_Profile">Profiles</string>
+    <string name="CG_Header_Profile">Profile settings</string>
     <string name="CG_NewAvaHeader_NoEdgeTapping">Block edge tapping</string>
-    <string name="CG_NewAvaHeader_NoEdgeTapping_Desc">you still can scroll images</string>
-    <string name="CG_NewAvaHeader_OpenOnTap">Open in fullscreen on tap</string>
-    <string name="CG_NewAvaHeader_OpenOnTap_Desc">this WILL replace tapping on edges</string>
+    <string name="CG_NewAvaHeader_NoEdgeTapping_Desc">Scrolling through images should still be possible</string>
+    <string name="CG_NewAvaHeader_OpenOnTap">Open fullscreen view upon tapping</string>
+    <string name="CG_NewAvaHeader_OpenOnTap_Desc">This will disable edge tapping</string>
     <string name="CG_NewAvaHeader_AlwaysExpand">Always expand</string>
     <string name="CG_NewAvaHeader_AlwaysExpand_Desc">always expand avatar into header when opening profile</string>
 
@@ -171,7 +171,7 @@
     <string name="CG_ToSaved">Save message</string>
 
     <string name="CG_FABLeft">\"New chat\" on the left</string>
-    <string name="CG_IntroMessage">An **unofficial** Telegram client modification.\nIt has **additional features** and **improved customization**.</string>
+    <string name="CG_IntroMessage">A **custom** Telegram fork.\nBringing you **additional features** and **improved customization**.</string>
 
     <string name="CG_GooglePlay_Donate">Donate</string>
     <string name="CG_GooglePlay_Info">Information</string>
@@ -204,7 +204,7 @@
     <string name="CG_Kangs_Delete">Delete CG stickerpack</string>
     <string name="CG_Kangs_Delete_Desc">This will delete EVERY added sticker!</string>
 
-    <string name="CG_VoiceRecognise">Recognise</string>
+    <string name="CG_VoiceRecognise">Recognize</string>
     <string name="CG_VoiceRecognise_Started">Audio message recognition started!</string>
     <string name="CG_VoiceRecognise_Error">Audio message recognition failed! [%s]</string>
     <string name="ActionBarTitle">Chats</string>
@@ -215,7 +215,7 @@
     <string name="CG_IconReplacement_VKUI">VKUI Icons</string>
     <string name="CG_IconReplacement_Default">Default</string>
 
-    <string name="CG_HideMsgIfUserBlocked">Hide messages if user is blocked</string>
+    <string name="CG_HideMsgIfUserBlocked">Hide messages from a blocked account</string>
     <string name="CG_OldNotification">Default notification icon</string>
 
     <string name="CG_MsgSlideAction">Action on message swipe</string>
@@ -225,13 +225,12 @@
     <string name="CG_SyncPins">Sync pinned chats</string>
     <string name="CG_SyncPins_Desc">Disabling this will allow you to have unlimited amount of pinned chats</string>
     <string name="CG_RearCam">Use rear camera</string>
-    <string name="CG_RearCam_Desc">Instead of frontal for video messages</string>
+    <string name="CG_RearCam_Desc">Default to the front camera when starting round video message recording.</string>
     <string name="CG_EnableSwipePIP">Enable Picture-in-Picture for videos</string>
-    <string name="CG_EnableSwipePIP_Desc">by swiping in the video player</string>
     <string name="CG_TelegramThemes">Official themes</string>
     <string name="CG_TelegramThemes_Desc">Show official themes instead of VKUI in chat settings</string>
     <string name="CG_SaveSticker">Save sticker</string>
-    <string name="CG_FailedToSaveSticker">Failed to save sticker. The sticker may have not loaded yet.</string>
+    <string name="CG_FailedToSaveSticker">Failed to save sticker. The sticker isn't loaded yet.</string>
 
     <string name="AS_Header_DoubleBottom">Double Bottom</string>
     <string name="CG_DB_Accounts">Available Accounts</string>
@@ -245,15 +244,15 @@
 
     <string name="AS_Header_Record">Media</string>
     <string name="CG_HqRoundVideos">High resolution round videos</string>
-    <string name="CG_HqRoundVideosAudio">High bitrate on round video\'s sound</string>
+    <string name="CG_HqRoundVideosAudio">Enables higher bitrate round video\'s sound</string>
     <string name="CG_StereoVoices">Record voices in stereo</string>
-    <string name="CG_StereoVoices_Desc">can be unsupported by your device!</string>
+    <string name="CG_StereoVoices_Desc">Not supported on devices with just one microphone</string>
     <string name="CG_VoiceEnhancements">Voice Enhancements</string>
-    <string name="CG_VoiceEnhancements_Desc">Noise Suppression and voice normalization</string>
+    <string name="CG_VoiceEnhancements_Desc">Enables noise suppression and voice normalization</string>
     <string name="CG_Voip_ForceEnhancements">Force VoIP Voice Enhancements</string>
-    <string name="CG_Voip_ForceEnhancements_Desc">enables AEC/NS even if server doesn\'t support it</string>
-    <string name="CG_AudioFocus">Mute music while playing voices or videos</string>
-    <string name="CG_AudioFocus_Desc">If disabled then the music will be quieter, but won\'t turn off</string>
+    <string name="CG_Voip_ForceEnhancements_Desc">Force enables AEC/NS Enhancements</string>
+    <string name="CG_AudioFocus">Mute audio from other sources while playing in-app media</string>
+    <string name="CG_AudioFocus_Desc">If disabled, temporarily turns the volume down for other media sources</string>
     <string name="CG_Proximity">Enable proximity actions</string>
     <string name="CG_Proximity_Desc">By turning it off you will get rid of the annoying screen shutdown when listening to voice messages (restart app to apply)</string>
     <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate >= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
@@ -269,20 +268,20 @@
 
     <string name="CG_ToBeginning">To Beginning</string>
     <string name="CG_ToLinkedChat">Linked Chat</string>
-    <string name="CG_FakeUserPhone">Fake phone number</string>
-    <string name="CG_FakeUserPhoneSummary">show fake phone number in drawer and settings (hide phone number preference must be disabled)</string>
+    <string name="CG_FakeUserPhone">Show a fake phone number</string>
+    <string name="CG_FakeUserPhoneSummary">Displays a randomnly generated phone number. Doesn't work with Hide phone number preference enabled.</string>
 
-    <string name="CG_FwdMenu_EnableNoForward">Disable forward authorship</string>
-    <string name="CG_FwdMenu_DisableNoForward">Enable forward authorship</string>
+    <string name="CG_FwdMenu_EnableNoForward">Preserve forwarder identity</string>
+    <string name="CG_FwdMenu_DisableNoForward">Mask forwarder identity</string>
     
     <string name="CG_DND">Do not disturb</string>
-    <string name="CG_DND_desc">Will mute all notifications. Useful if you are not allowed to make noise but still need to see notifications</string>
+    <string name="CG_DND_desc">This will mute all notifications.</string>
     <string name="CG_Silence">Total silence</string>
-    <string name="CG_Silence_desc">Will turn off all notifications</string>
+    <string name="CG_Silence_desc">This will turn off all notifications</string>
     <string name="CG_SilenceNonContacts">Silence non-contacts</string>
-    <string name="CG_SilenceNonContacts_desc">If enabled, notifications with sound will come only from contacts. You can add a person to your contacts even without a phone number, do it in their profile</string>
-    <string name="CG_RecentStickers">Show full list</string>
-    <string name="CG_RecentStickers_desc">of recent stickers</string>
+    <string name="CG_SilenceNonContacts_desc">Messages only from your contacts will be audible. You can add a person to your contacts even without a phone number</string>
+    <string name="CG_RecentStickers">Show all recent stickers</string>
+    <string name="CG_RecentStickers_desc">Expands the list of recently used stickers.</string>
     <string name="CG_Without_Authorship">Without authorship</string>
     <string name="CG_Private">This channel is private</string>
 
@@ -313,7 +312,7 @@
     <string name="CG_Found">Update found</string>
     <string name="CG_Download">Download</string>
     <string name="CG_PrivateDir">Private directory of cache</string>
-    <string name="CG_PrivateDir_desc">"cache will be saved into private directory of app. you, or anyone else, can't access it without root"</string>
+    <string name="CG_PrivateDir_desc">Enhances privacy by storing cache in a secure folder inaccessible without root.</string>
     <string name="CG_RemovedS">Removed successfully</string>
     <string name="CG_CleanOld">Remove old cache (/sdcard/Telegram)</string>
     <string name="CG_Changelog">Changelog</string>
@@ -322,9 +321,9 @@
     <string name="CG_MentionByName">Mention by name</string>
     <string name="CG_MentionByName_Desc">instead of username</string>
     <string name="CG_PlayVideo">Play video on volume button click</string>
-    <string name="CG_PlayVideo_Desc">If turned on - when you press the volume button, the video on the screen in the dialog will be enabled</string>
+    <string name="CG_PlayVideo_Desc">Use volume buttons to start video playback when in chat.</string>
     <string name="CG_StreamVoip">Stream VoIP as Media</string>
-    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
+    <string name="CG_StreamVoip_Desc">Turn this on to get a boost in voice quality when using Bluetooth to take calls.</string>
     <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
     <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
     <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
