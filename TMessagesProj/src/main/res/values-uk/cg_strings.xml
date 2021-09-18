@@ -275,4 +275,6 @@
     <string name="CG_FwdMenu_EnableCaptions">Увімкнути субтитри</string>
     <string name="CG_FwdMenu_DisableCaptions">Приховати субтитри</string>
     <string name="CG_Mutual_Contact">взаємний контакт</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>
