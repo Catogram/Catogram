@@ -14,12 +14,8 @@ import org.telegram.messenger.databinding.V5TranslationMarkupBinding
 import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.catogram.translate.impl.DeeplTranslateImpl
 
-class TranslationSheetFragment(val obj: MessageObject) : BottomSheetDialogFragment() {
+class TranslationSheetFragment(val txt: String) : BottomSheetDialogFragment() {
     private lateinit var vview: V5TranslationMarkupBinding
-
-    private val txt by lazy {
-        return@lazy TranslateAPI.extractMessageText(obj)
-    }
 
     override fun getTheme(): Int {
         return R.style.TransSheet

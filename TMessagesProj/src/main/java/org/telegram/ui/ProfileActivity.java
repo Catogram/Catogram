@@ -69,6 +69,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.ColorUtils;
@@ -180,6 +181,7 @@ import java.util.zip.ZipOutputStream;
 
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator;
+import ua.itaysonlab.catogram.translate.TranslateAPI;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate {
 
@@ -3798,7 +3800,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 return false;
             }
             AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
-            builder.setItems(new CharSequence[]{LocaleController.getString("Copy", R.string.Copy)}, (dialogInterface, i) -> {
+            builder.setItems(new CharSequence[]{LocaleController.getString("Copy", R.string.Copy), LocaleController.getString("CG_Translate", R.string.CG_Translate)}, (dialogInterface, i) -> {
                 try {
                     String about;
                     if (position == locationRow) {
@@ -3811,11 +3813,16 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     if (TextUtils.isEmpty(about)) {
                         return;
                     }
-                    AndroidUtilities.addToClipboard(about);
-                    if (position == bioRow) {
-                        BulletinFactory.of(this).createCopyBulletin(LocaleController.getString("BioCopied", R.string.BioCopied)).show();
-                    } else {
-                        BulletinFactory.of(this).createCopyBulletin(LocaleController.getString("TextCopied", R.string.TextCopied)).show();
+                    if (i == 0) {
+                        AndroidUtilities.addToClipboard(about);
+                        if (position == bioRow) {
+                            BulletinFactory.of(this).createCopyBulletin(LocaleController.getString("BioCopied", R.string.BioCopied)).show();
+                        } else {
+                            BulletinFactory.of(this).createCopyBulletin(LocaleController.getString("TextCopied", R.string.TextCopied)).show();
+                        }
+                    }
+                    else {
+                        TranslateAPI.callTranslationDialog(about, (AppCompatActivity) getParentActivity());
                     }
                 } catch (Exception e) {
                     FileLog.e(e);
