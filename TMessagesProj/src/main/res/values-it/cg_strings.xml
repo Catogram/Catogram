@@ -244,9 +244,9 @@
     <string name="CG_TrLang_Hindi">Hindi</string>
     <string name="CG_TrLang_German">Tedesco</string>
     <string name="CG_TrLang_Indonesian">Indonesiano</string>
-    <string name="CG_TrLang_Bosnian">Bosnian</string>
-    <string name="CG_TrLang_Croatian">Croatian</string>
-    <string name="CG_TrLang_Serbian">Serbian</string>
+    <string name="CG_TrLang_Bosnian">Bosniaco</string>
+    <string name="CG_TrLang_Croatian">Croato</string>
+    <string name="CG_TrLang_Serbian">Serbo</string>
     <string name="CG_Tr">Traduttore</string>
     <string name="CG_Updates_Category">Aggiornamenti</string>
     <string name="CG_Auto_Ota">Controlla automaticamente gli aggiornamenti</string>
@@ -275,6 +275,6 @@
     <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
     <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
     <string name="CG_Mutual_Contact">mutual contact</string>
-    <string name="CG_relaunch">needs restart of app</string>
-    <string name="CG_hq_voice">HQ Voice messages</string>
+    <string name="CG_relaunch">necessita il riavvio dell\'app</string>
+    <string name="CG_hq_voice">Messaggi vocali ad alta qualità</string>
 </resources>
