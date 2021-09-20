@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.telegram.messenger.*
 import org.telegram.messenger.databinding.V5TranslationMarkupBinding
 import org.telegram.ui.ActionBar.Theme
-import ua.itaysonlab.catogram.translate.impl.DeeplTranslateImpl
+import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl
 
 class TranslationSheetFragment(val txt: String) : BottomSheetDialogFragment() {
     private lateinit var vview: V5TranslationMarkupBinding
@@ -84,7 +84,7 @@ class TranslationSheetFragment(val txt: String) : BottomSheetDialogFragment() {
         vview.trsl.setTextColor(blackText)
         vview.orig.text = txt
 
-        DeeplTranslateImpl.translateText(txt, false) { text ->
+        GoogleTranslateImpl.translateText(txt, false) { text ->
             vview.trsl.text = text
             vview.trslTxtLang.text = " • ${LocaleController.getString("LanguageCode", R.string.LanguageCode)}"
 

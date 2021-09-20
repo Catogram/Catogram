@@ -141,7 +141,7 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import ua.itaysonlab.CatogramLogger;
-import ua.itaysonlab.catogram.translate.impl.DeeplTranslateImpl;
+import ua.itaysonlab.catogram.translate.impl.GoogleTranslateImpl;
 
 
 public class ChatActivityEnterView extends FrameLayout implements NotificationCenter.NotificationCenterDelegate, SizeNotifierFrameLayout.SizeNotifierFrameLayoutDelegate, StickersAlert.StickersAlertDelegate {
@@ -3154,7 +3154,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                     } else if (num == 1) {
                         sendMessageInternal(false, 0);
                     } else {
-                       DeeplTranslateImpl.translateEditText(messageEditText.getText().toString(), messageEditText);
+                       GoogleTranslateImpl.translateEditText(messageEditText.getText().toString(), messageEditText);
                     }
                 });
             }

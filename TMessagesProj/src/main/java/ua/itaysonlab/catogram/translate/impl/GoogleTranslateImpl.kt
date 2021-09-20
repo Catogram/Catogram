@@ -1,15 +1,18 @@
 package ua.itaysonlab.catogram.translate.impl
 
 import kotlinx.coroutines.*
-import org.deepl.DeepLTranslater
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
 import org.telegram.messenger.LocaleController
 import org.telegram.messenger.R
 import org.telegram.ui.Components.EditTextCaption
 import org.telegram.ui.Components.EditTextEmoji
 import ua.itaysonlab.catogram.CatogramConfig
-import java.util.*
+import java.net.URLEncoder
 
-object DeeplTranslateImpl : CoroutineScope by MainScope() {
+object GoogleTranslateImpl : CoroutineScope by MainScope() {
+    private const val api_translate_url = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&dj=1&sl=auto"
 
     @JvmStatic
     fun translateText(txt: String?, e: Boolean, callback: (String) -> Unit) {
@@ -27,16 +30,19 @@ object DeeplTranslateImpl : CoroutineScope by MainScope() {
                     }
                 }
 
+                val request: Request = Request.Builder()
+                    .url("$api_translate_url&tl=$tl&q=${URLEncoder.encode(txt, "UTF-8")}").build()
+                val sb = StringBuilder()
+
                 withContext(Dispatchers.IO) {
-                    val a = DeepLTranslater().translate(
-                        txt, "auto",
-                        tl?.toUpperCase(Locale.getDefault()), null
-                    )
-                    withContext(Dispatchers.Main) {
-                        callback.invoke(a)
+                    val response = OkHttpClient().newCall(request).execute()
+                    val arr = JSONObject(response.body!!.string()).getJSONArray("sentences")
+                    for (i in 0 until arr.length()) {
+                        sb.append(arr.getJSONObject(i).getString("trans"))
                     }
                 }
 
+                callback.invoke(sb.toString())
             } catch (e: Exception) {
                 callback.invoke(LocaleController.getString("CG_NoInternet", R.string.CG_NoInternet))
             }
