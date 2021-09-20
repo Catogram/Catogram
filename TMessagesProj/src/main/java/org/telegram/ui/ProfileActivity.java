@@ -186,6 +186,7 @@ import java.util.zip.ZipOutputStream;
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.CatogramPreferencesNavigator;
 import ua.itaysonlab.catogram.translate.TranslateAPI;
+import ua.itaysonlab.extras.CatogramExtras;
 
 public class ProfileActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate, SharedMediaLayout.SharedMediaPreloaderDelegate, ImageUpdater.ImageUpdaterDelegate {
 
@@ -6894,7 +6895,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                                 }
                                 break;
                         }
-                        cell.setText(LocaleController.formatString("CatogramVersion", R.string.CatogramVersion, String.format(Locale.US, "v%s (%d) %s", pInfo.versionName, code, abi)));
+                        cell.setText("Catogram v" + CatogramExtras.INSTANCE.getCG_VERSION() + " [" + BuildVars.BUILD_VERSION_STRING + "]");
                     } catch (Exception e) {
                         FileLog.e(e);
                     }
