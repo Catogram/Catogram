@@ -244,6 +244,9 @@
     <string name="CG_TrLang_Hindi">Hindi</string>
     <string name="CG_TrLang_German">German</string>
     <string name="CG_TrLang_Indonesian">Indonesian</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Translator</string>
     <string name="CG_Updates_Category">Updates</string>
     <string name="CG_Auto_Ota">Automatically check for updates</string>
@@ -267,4 +270,11 @@
     <string name="CG_StreamVoip_Desc">اگر فعالم کنی، تماس های دریافتی مث مدل زنگخورت میشه</string>
     <string name="CG_TimeOnStick">مخفی کردن نمایش ساعت روی استیکر</string>
     <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
+    <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
+    <string name="CG_FwdMenu_Notify">Notify</string>
+    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
+    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
+    <string name="CG_Mutual_Contact">mutual contact</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>

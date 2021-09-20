@@ -244,6 +244,9 @@
     <string name="CG_TrLang_Hindi">Гінді</string>
     <string name="CG_TrLang_German">Німецька</string>
     <string name="CG_TrLang_Indonesian">Індонезійська</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Перекладач</string>
     <string name="CG_Updates_Category">Оновлення</string>
     <string name="CG_Auto_Ota">Автоматично перевіряти оновлення</string>
@@ -264,7 +267,14 @@
     <string name="CG_PlayVideo">Відтворити відео за натисканням кнопки гучності</string>
     <string name="CG_PlayVideo_Desc">Якщо активно - при натисканні на клавішу гучності, буде ввімкнене відео на екрані в діалозі</string>
     <string name="CG_StreamVoip">Відтворювати VoIP як медіа</string>
-    <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
-    <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
-    <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
+    <string name="CG_StreamVoip_Desc">якщо увімкнено, то виклик VoIP буде розпізнаватися, як мультимедіа, замість виклику</string>
+    <string name="CG_TimeOnStick">Сховати час відправки наліпки в чаті</string>
+    <string name="CG_NoInternet">Неможливо перекласти. Можливо, ви не в мережі?</string>
+    <string name="CG_FwdMenu_NoNotify">Не сповіщати</string>
+    <string name="CG_FwdMenu_Notify">Сповіщати</string>
+    <string name="CG_FwdMenu_EnableCaptions">Увімкнути субтитри</string>
+    <string name="CG_FwdMenu_DisableCaptions">Приховати субтитри</string>
+    <string name="CG_Mutual_Contact">взаємний контакт</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>

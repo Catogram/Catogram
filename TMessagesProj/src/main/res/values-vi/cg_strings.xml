@@ -244,6 +244,9 @@
     <string name="CG_TrLang_Hindi">Tiếng Hindi</string>
     <string name="CG_TrLang_German">Tiếng Đức</string>
     <string name="CG_TrLang_Indonesian">Tiếng Indonesia</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Dịch</string>
     <string name="CG_Updates_Category">Bản cập nhật</string>
     <string name="CG_Auto_Ota">Tự động kiểm tra cập nhật</string>
@@ -267,4 +270,11 @@
     <string name="CG_StreamVoip_Desc">if enabled then VoIP call will be recognized as media instead of call</string>
     <string name="CG_TimeOnStick">Hide time on stickers in chat</string>
     <string name="CG_NoInternet">Can\'t translate. Maybe you\'re offline?</string>
+    <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
+    <string name="CG_FwdMenu_Notify">Notify</string>
+    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
+    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
+    <string name="CG_Mutual_Contact">mutual contact</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>

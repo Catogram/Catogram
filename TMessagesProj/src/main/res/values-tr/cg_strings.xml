@@ -244,6 +244,9 @@
     <string name="CG_TrLang_Hindi">Hintçe</string>
     <string name="CG_TrLang_German">Almanca</string>
     <string name="CG_TrLang_Indonesian">Endonezyaca</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Çevirmen</string>
     <string name="CG_Updates_Category">Güncellemeler</string>
     <string name="CG_Auto_Ota">Güncellemeleri otomatik olarak kontrol et</string>
@@ -267,4 +270,11 @@
     <string name="CG_StreamVoip_Desc">etkinleştirilirse, VoIP araması arama yerine medya olarak tanınır</string>
     <string name="CG_TimeOnStick">Sohbette çıkartmalarda zamanı gizle</string>
     <string name="CG_NoInternet">Çevrilemedi, internete bağlı olmayabilir misin?</string>
+    <string name="CG_FwdMenu_NoNotify">Bildirme</string>
+    <string name="CG_FwdMenu_Notify">Bildir</string>
+    <string name="CG_FwdMenu_EnableCaptions">Altyazıları etkinleştir</string>
+    <string name="CG_FwdMenu_DisableCaptions">Altyazıları gizle</string>
+    <string name="CG_Mutual_Contact">karşılıklı kişiler</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- by iTaysonLab -->
-    <string name="AdvancedSettings">Catogram 高级设置</string>
+    <string name="AdvancedSettings">高级设定</string>
     <string name="AS_Header_Appearance">外观相关</string>
     <string name="AS_HideUserPhone">隐藏手机号码</string>
     <string name="AS_HideUserPhoneSummary">在侧边栏与设置页</string>
@@ -246,6 +246,9 @@
     <string name="CG_TrLang_Hindi">印地语</string>
     <string name="CG_TrLang_German">德语</string>
     <string name="CG_TrLang_Indonesian">印尼语</string>
+    <string name="CG_TrLang_Bosnian">Bosnian</string>
+    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">翻译</string>
     <string name="CG_Updates_Category">更新中心</string>
     <string name="CG_Auto_Ota">自动检查应用更新</string>
@@ -269,4 +272,11 @@
     <string name="CG_StreamVoip_Desc">如果启用此选项，语音 VoIP 聊天将会被视为 将视为媒体流式传输</string>
     <string name="CG_TimeOnStick">在聊天中为贴纸隐藏发送时间</string>
     <string name="CG_NoInternet">无法完成翻译，请检查您的网络连接</string>
+    <string name="CG_FwdMenu_NoNotify">Don\'t notify</string>
+    <string name="CG_FwdMenu_Notify">Notify</string>
+    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
+    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
+    <string name="CG_Mutual_Contact">mutual contact</string>
+    <string name="CG_relaunch">needs restart of app</string>
+    <string name="CG_hq_voice">HQ Voice messages</string>
 </resources>
