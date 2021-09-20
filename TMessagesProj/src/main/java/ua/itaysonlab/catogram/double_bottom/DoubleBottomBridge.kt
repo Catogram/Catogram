@@ -22,7 +22,7 @@ object DoubleBottomBridge {
         return DoubleBottomStorageBridge.storageInstance.map.isNotEmpty()
     }
 
-    fun isDbActivatedForAccount(id: Int): Boolean {
+    fun isDbActivatedForAccount(id: Long): Boolean {
         DoubleBottomStorageBridge.storageInstance.map.values.forEach {
             if (it.id == id) return true
         }
@@ -32,7 +32,7 @@ object DoubleBottomBridge {
 
     // return -1 if no account is found
     @JvmStatic
-    fun checkPasscodeForAnyOfAccounts(code: String): Int {
+    fun checkPasscodeForAnyOfAccounts(code: String): Long {
         if (!isDbSetupCompleted()) return -1
 
         val masterHash = DoubleBottomPasscodeActivity.getHash(code)
@@ -44,7 +44,7 @@ object DoubleBottomBridge {
     }
 
     @JvmStatic
-    fun findLocalAccIdByTgId(id: Int): Int {
+    fun findLocalAccIdByTgId(id: Long): Int {
         for (i in 0 until UserConfig.MAX_ACCOUNT_COUNT) {
             val uc = UserConfig.getInstance(i)
             if (uc.isClientActivated && uc.currentUser.id == id) return i

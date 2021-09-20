@@ -29,7 +29,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -50,6 +49,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ContactsController;
+import org.telegram.messenger.DialogObject;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
@@ -74,6 +74,8 @@ import org.telegram.ui.Components.RecyclerListView;
 
 import java.util.ArrayList;
 
+import androidx.collection.LongSparseArray;
+
 public class FilterUsersActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, View.OnClickListener {
 
     private ScrollView scrollView;
@@ -94,11 +96,11 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
 
     private boolean isInclude;
     private int filterFlags;
-    private ArrayList<Integer> initialIds;
+    private ArrayList<Long> initialIds;
 
     private boolean searchWas;
     private boolean searching;
-    private SparseArray<GroupCreateSpan> selectedContacts = new SparseArray<>();
+    private LongSparseArray<GroupCreateSpan> selectedContacts = new LongSparseArray<>();
     private ArrayList<GroupCreateSpan> allSpans = new ArrayList<>();
     private GroupCreateSpan currentDeletingSpan;
 
@@ -144,7 +146,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
     }
 
     public interface FilterUsersActivityDelegate {
-        void didSelectChats(ArrayList<Integer> ids, int flags);
+        void didSelectChats(ArrayList<Long> ids, int flags);
     }
 
     private class SpansContainer extends ViewGroup {
@@ -262,7 +264,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
 
         public void addSpan(final GroupCreateSpan span, boolean animated) {
             allSpans.add(span);
-            int uid = span.getUid();
+            long uid = span.getUid();
             if (uid > Integer.MIN_VALUE + 7) {
                 selectedCount++;
             }
@@ -297,7 +299,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
 
         public void removeSpan(final GroupCreateSpan span) {
             ignoreScrollEvent = true;
-            int uid = span.getUid();
+            long uid = span.getUid();
             if (uid > Integer.MIN_VALUE + 7) {
                 selectedCount--;
             }
@@ -334,7 +336,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
         }
     }
 
-    public FilterUsersActivity(boolean include, ArrayList<Integer> arrayList, int flags) {
+    public FilterUsersActivity(boolean include, ArrayList<Long> arrayList, int flags) {
         super();
         isInclude = include;
         filterFlags = flags;
@@ -631,7 +633,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
             if (view instanceof GroupCreateUserCell) {
                 GroupCreateUserCell cell = (GroupCreateUserCell) view;
                 Object object = cell.getObject();
-                int id;
+                long id;
                 if (object instanceof String) {
                     int flag;
                     if (isInclude) {
@@ -793,7 +795,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
         if (initialIds != null && !initialIds.isEmpty()) {
             TLObject object;
             for (int a = 0, N = initialIds.size(); a < N; a++) {
-                Integer id = initialIds.get(a);
+                Long id = initialIds.get(a);
                 if (id > 0) {
                     object = getMessagesController().getUser(id);
                 } else {
@@ -868,7 +870,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
             if (child instanceof GroupCreateUserCell) {
                 GroupCreateUserCell cell = (GroupCreateUserCell) child;
                 Object object = cell.getObject();
-                int id;
+                long id;
                 if (object instanceof String) {
                     String str = (String) object;
                     switch (str) {
@@ -917,9 +919,9 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
         /*if (!doneButtonVisible || selectedContacts.size() == 0) {
             return false;
         }*/
-        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Long> result = new ArrayList<>();
         for (int a = 0; a < selectedContacts.size(); a++) {
-            int uid = selectedContacts.keyAt(a);
+            long uid = selectedContacts.keyAt(a);
             if (uid <= Integer.MIN_VALUE + 7) {
                 continue;
             }
@@ -972,12 +974,11 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
             ArrayList<TLRPC.Dialog> dialogs = getMessagesController().getAllDialogs();
             for (int a = 0, N = dialogs.size(); a < N; a++) {
                 TLRPC.Dialog dialog = dialogs.get(a);
-                int lowerId = (int) dialog.id;
-                if (lowerId == 0) {
+                if (DialogObject.isEncryptedDialog(dialog.id)) {
                     continue;
                 }
-                if (lowerId > 0) {
-                    TLRPC.User user = getMessagesController().getUser(lowerId);
+                if (DialogObject.isUserDialog(dialog.id)) {
+                    TLRPC.User user = getMessagesController().getUser(dialog.id);
                     if (user != null) {
                         contacts.add(user);
                         if (UserObject.isUserSelf(user)) {
@@ -985,7 +986,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
                         }
                     }
                 } else {
-                    TLRPC.Chat chat = getMessagesController().getChat(-lowerId);
+                    TLRPC.Chat chat = getMessagesController().getChat(-dialog.id);
                     if (chat != null) {
                         contacts.add(chat);
                     }
@@ -1163,7 +1164,7 @@ public class FilterUsersActivity extends BaseFragment implements NotificationCen
                         }
                         object = contacts.get(position - usersStartRow);
                     }
-                    int id;
+                    long id;
                     if (object instanceof TLRPC.User) {
                         id = ((TLRPC.User) object).id;
                     } else if (object instanceof TLRPC.Chat) {

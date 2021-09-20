@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.DialogObject;
 import org.telegram.messenger.FileLoader;
 import org.telegram.messenger.ImageLoader;
 import org.telegram.messenger.ImageLocation;
@@ -279,7 +280,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.fileLoaded);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.fileLoadProgressChanged);
         NotificationCenter.getInstance(currentAccount).addObserver(this, NotificationCenter.reloadDialogPhotos);
-        MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 80, 0, true, parentClassGuid);
+        MessagesController.getInstance(currentAccount).loadDialogPhotos(dialogId, 80, 0, true, parentClassGuid);
     }
 
     public void onDestroy() {
@@ -461,10 +462,10 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         if (prevImageLocation == null || prevImageLocation.location.local_id != imageLocation.location.local_id) {
             if (!imagesLocations.isEmpty()) {
                 prevImageLocation = imageLocation;
-                MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 100, 0, true, parentClassGuid);
+                MessagesController.getInstance(currentAccount).loadDialogPhotos(dialogId, 80, 0, true, parentClassGuid);
                 return true;
             } else {
-                MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 100, 0, true, parentClassGuid);
+                MessagesController.getInstance(currentAccount).loadDialogPhotos(dialogId, 80, 0, true, parentClassGuid);
             }
         }
         if (!imagesLocations.isEmpty()) {
@@ -735,7 +736,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
     public void didReceivedNotification(int id, int account, Object... args) {
         if (id == NotificationCenter.dialogPhotosLoaded) {
             int guid = (Integer) args[3];
-            int did = (Integer) args[0];
+            long did = (Long) args[0];
             if (did == dialogId && parentClassGuid == guid && adapter != null) {
                 boolean fromCache = (Boolean) args[2];
                 ArrayList<TLRPC.Photo> arrayList = (ArrayList<TLRPC.Photo>) args[4];
@@ -748,7 +749,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
                 imagesLocationsSizes.clear();
                 imagesUploadProgress.clear();
                 ImageLocation currentImageLocation = null;
-                if (did < 0) {
+                if (DialogObject.isChatDialog(did)) {
                     TLRPC.Chat chat = MessagesController.getInstance(currentAccount).getChat(-did);
                     currentImageLocation = ImageLocation.getForUserOrChat(chat, ImageLocation.TYPE_BIG);
                     if (currentImageLocation != null) {
@@ -889,7 +890,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
             if (settingMainPhoto != 0) {
                 return;
             }
-            MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 80, 0, true, parentClassGuid);
+            MessagesController.getInstance(currentAccount).loadDialogPhotos(dialogId, 80, 0, true, parentClassGuid);
         }
     }
 
@@ -1113,7 +1114,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
         reset();
         this.dialogId = dialogId;
         if (dialogId != 0) {
-            MessagesController.getInstance(currentAccount).loadDialogPhotos((int) dialogId, 80, 0, true, parentClassGuid);
+            MessagesController.getInstance(currentAccount).loadDialogPhotos(dialogId, 80, 0, true, parentClassGuid);
         }
     }
 

@@ -307,7 +307,7 @@ public class ExternalActionActivity extends AppCompatActivity implements ActionB
                 }
             }
 
-            final int bot_id = intent.getIntExtra("bot_id", 0);
+            final long bot_id = intent.getLongExtra("bot_id", 0);
             final String nonce = intent.getStringExtra("nonce");
             final String payload = intent.getStringExtra("payload");
             final TLRPC.TL_account_getAuthorizationForm req = new TLRPC.TL_account_getAuthorizationForm();

@@ -40,13 +40,13 @@ object DoubleBottomStorageBridge {
     }
 
     data class DBAccountData(
-            val id: Int,
-            val type: Int,
-            val salt: String,
-            val hash: String,
+        val id: Long,
+        val type: Int,
+        val salt: String,
+        val hash: String,
     ) {
         constructor(json: JSONObject) : this(
-                id = json.getInt("id"),
+                id = json.getLong("id"),
                 type = json.getInt("type"),
                 salt = json.getString("pwd_salt"),
                 hash = json.getString("pwd_hash"),

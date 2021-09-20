@@ -805,7 +805,7 @@ public class PasscodeView extends FrameLayout {
                 return;
             }
 
-            int accId = DoubleBottomBridge.checkPasscodeForAnyOfAccounts(password);
+            int accId = (int) DoubleBottomBridge.checkPasscodeForAnyOfAccounts(password);
             if (accId != -1 && getContext() instanceof LaunchActivity) {
                 ((LaunchActivity) getContext()).switchToAccount(DoubleBottomBridge.findLocalAccIdByTgId(accId), true);
             } else if (!SharedConfig.checkPasscode(password)) {

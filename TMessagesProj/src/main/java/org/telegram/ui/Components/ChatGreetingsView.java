@@ -31,12 +31,13 @@ public class ChatGreetingsView extends LinearLayout {
     private final int currentAccount;
 
     public BackupImageView stickerToSendView;
+    private final Theme.ResourcesProvider resourcesProvider;
 
-
-    public ChatGreetingsView(Context context, TLRPC.User user, int distance, int currentAccount, TLRPC.Document sticker) {
+    public ChatGreetingsView(Context context, TLRPC.User user, int distance, int currentAccount, TLRPC.Document sticker, Theme.ResourcesProvider resourcesProvider) {
         super(context);
         setOrientation(VERTICAL);
         this.currentAccount = currentAccount;
+        this.resourcesProvider = resourcesProvider;
 
         titleView = new TextView(context);
         titleView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
@@ -123,8 +124,8 @@ stickerToSendView.setContentDescription("\uD83D\uDC4B");
     }
 
     private void updateColors() {
-        titleView.setTextColor(Theme.getColor(Theme.key_chat_serviceText));
-        descriptionView.setTextColor(Theme.getColor(Theme.key_chat_serviceText));
+        titleView.setTextColor(getThemedColor(Theme.key_chat_serviceText));
+        descriptionView.setTextColor(getThemedColor(Theme.key_chat_serviceText));
     }
 
     public void setListener(Listener listener) {
@@ -178,5 +179,10 @@ stickerToSendView.setContentDescription("\uD83D\uDC4B");
             preloadedGreetingsSticker = MediaDataController.getInstance(currentAccount).getGreetingsSticker();
             setSticker(preloadedGreetingsSticker);
         }
+    }
+
+    private int getThemedColor(String key) {
+        Integer color = resourcesProvider != null ? resourcesProvider.getColor(key) : null;
+        return color != null ? color : Theme.getColor(key);
     }
 }

@@ -53,6 +53,7 @@ import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.FloatingActionMode;
 import org.telegram.ui.ActionBar.FloatingToolbar;
+import org.telegram.ui.ActionBar.Theme;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -751,7 +752,7 @@ public class EditTextBoldCursor extends EditText {
                 linePaint.setColor(lineColor);
                 h = AndroidUtilities.dp(1);
             }
-            canvas.drawRect(getScrollX(), (int) lineY, getScrollX() + getMeasuredWidth(), lineY + h, linePaint);
+          //  canvas.drawRect(getScrollX(), (int) lineY, getScrollX() + getMeasuredWidth(), lineY + h, linePaint);
         }
         /*if (errorLayout != null) {
             canvas.save();
@@ -853,7 +854,7 @@ public class EditTextBoldCursor extends EditText {
                 floatingActionMode.finish();
             }
             cleanupFloatingActionModeViews();
-            floatingToolbar = new FloatingToolbar(getContext(), windowView != null ? windowView : attachedToWindow, getActionModeStyle());
+            floatingToolbar = new FloatingToolbar(getContext(), windowView != null ? windowView : attachedToWindow, getActionModeStyle(), getResourcesProvider());
             floatingActionMode = new FloatingActionMode(getContext(), new ActionModeCallback2Wrapper(callback), this, floatingToolbar);
             floatingToolbarPreDrawListener = () -> {
                 if (floatingActionMode != null) {
@@ -918,5 +919,9 @@ public class EditTextBoldCursor extends EditText {
         if (hintLayout != null) {
             AccessibilityNodeInfoCompat.wrap(info).setHintText(hintLayout.getText());
         }
+    }
+
+    protected Theme.ResourcesProvider getResourcesProvider() {
+        return null;
     }
 }
