@@ -37,7 +37,9 @@ class DrawerSheetFragment : BaseActionedSwipeFragment() {
             }
             "saved" -> {
                 (activity as LaunchActivity).presentFragment(ChatActivity(Bundle().apply {
-                    putInt("user_id", UserConfig.getInstance(UserConfig.selectedAccount).getClientUserId())
+                    putInt("user_id",
+                        UserConfig.getInstance(UserConfig.selectedAccount).getClientUserId().toInt()
+                    )
                 }))
             }
             "archive" -> {
@@ -47,7 +49,9 @@ class DrawerSheetFragment : BaseActionedSwipeFragment() {
             }
             "settings" -> {
                 val args = Bundle()
-                args.putInt("user_id", UserConfig.getInstance(UserConfig.selectedAccount).clientUserId)
+                args.putInt("user_id",
+                    UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toInt()
+                )
                 args.putBoolean("expandPhoto", true)
                 (activity as LaunchActivity).presentFragment(ProfileActivity(args))
             }

@@ -6,8 +6,12 @@ import org.telegram.tgnet.TLRPC
 
 object TranslateAPI {
     @JvmStatic
-    fun callTranslationDialog(msg: MessageObject, act: AppCompatActivity) {
+    fun callTranslationDialog(msg: String, act: AppCompatActivity) {
         TranslationSheetFragment(msg).show(act.supportFragmentManager, null)
+    }
+    @JvmStatic
+    fun callTranslationDialog(msg: MessageObject, act: AppCompatActivity) {
+        TranslationSheetFragment(extractMessageText(msg)).show(act.supportFragmentManager, null)
     }
 
     fun extractMessageText(msg: MessageObject): String {

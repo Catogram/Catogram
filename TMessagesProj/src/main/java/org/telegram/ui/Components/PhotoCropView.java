@@ -65,6 +65,7 @@ public class PhotoCropView extends FrameLayout {
     private float flashAlpha = 0.0f;
 
     private Paint circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Theme.ResourcesProvider resourcesProvider;
 
     private ArrayList<Rect> exclusionRects = new ArrayList<>();
     private Rect exclustionRect = new Rect();
@@ -95,8 +96,9 @@ public class PhotoCropView extends FrameLayout {
         }
     };
 
-    public PhotoCropView(Context context) {
+    public PhotoCropView(Context context, Theme.ResourcesProvider resourcesProvider) {
         super(context);
+        this.resourcesProvider = resourcesProvider;
 
         inBubbleMode = context instanceof BubbleActivity;
 
@@ -217,7 +219,7 @@ public class PhotoCropView extends FrameLayout {
                 canvas.drawCircle(rect.centerX(), rect.centerY(), rect.width() / 2, circlePaint);
             }
 
-            circlePaint.setColor(Theme.getColor(Theme.key_dialogFloatingButton));
+            circlePaint.setColor(getThemedColor(Theme.key_dialogFloatingButton));
             circlePaint.setAlpha(Math.min(255, (int) (255 * thumbAnimationProgress * thumbImageVisibleProgress)));
             canvas.drawCircle(targetX + targetSize / 2, targetY + targetSize + AndroidUtilities.dp(8), AndroidUtilities.dp(3), circlePaint);
         }
@@ -391,5 +393,10 @@ public class PhotoCropView extends FrameLayout {
     public void invalidate() {
         super.invalidate();
         cropView.invalidate();
+    }
+
+    private int getThemedColor(String key) {
+        Integer color = resourcesProvider != null ? resourcesProvider.getColor(key) : null;
+        return color != null ? color : Theme.getColor(key);
     }
 }

@@ -20,6 +20,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.media.MediaDescription;
+import android.media.MediaMetadata;
+import android.media.browse.MediaBrowser;
+import android.media.session.MediaSession;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,15 +32,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.SystemClock;
-import android.support.v4.media.MediaBrowserCompat;
-import android.support.v4.media.MediaDescriptionCompat;
-import android.support.v4.media.MediaMetadataCompat;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v4.media.session.PlaybackStateCompat;
+import android.service.media.MediaBrowserService;
 import android.text.TextUtils;
-import android.util.SparseArray;
-
-import androidx.media.MediaBrowserServiceCompat;
 
 import org.telegram.SQLite.SQLiteCursor;
 import org.telegram.messenger.audioinfo.AudioInfo;
@@ -49,24 +47,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.collection.LongSparseArray;
+
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class MusicBrowserService extends MediaBrowserServiceCompat implements NotificationCenter.NotificationCenterDelegate {
+public class MusicBrowserService extends MediaBrowserService implements NotificationCenter.NotificationCenterDelegate {
 
     private static final String SLOT_RESERVATION_SKIP_TO_NEXT = "com.google.android.gms.car.media.ALWAYS_RESERVE_SPACE_FOR.ACTION_SKIP_TO_NEXT";
     private static final String SLOT_RESERVATION_SKIP_TO_PREV = "com.google.android.gms.car.media.ALWAYS_RESERVE_SPACE_FOR.ACTION_SKIP_TO_PREVIOUS";
     private static final String SLOT_RESERVATION_QUEUE = "com.google.android.gms.car.media.ALWAYS_RESERVE_SPACE_FOR.ACTION_QUEUE";
 
-    private MediaSessionCompat mediaSession;
+    private MediaSession mediaSession;
     private static final String MEDIA_ID_ROOT = "__ROOT__";
 
     private int currentAccount = UserConfig.selectedAccount;
     private boolean chatsLoaded;
     private boolean loadingChats;
-    private ArrayList<Integer> dialogs = new ArrayList<>();
-    private SparseArray<TLRPC.User> users = new SparseArray<>();
-    private SparseArray<TLRPC.Chat> chats = new SparseArray<>();
-    private SparseArray<ArrayList<MessageObject>> musicObjects = new SparseArray<>();
-    private SparseArray<ArrayList<MediaSessionCompat.QueueItem>> musicQueues = new SparseArray<>();
+    private ArrayList<Long> dialogs = new ArrayList<>();
+    private LongSparseArray<TLRPC.User> users = new LongSparseArray<>();
+    private LongSparseArray<TLRPC.Chat> chats = new LongSparseArray<>();
+    private LongSparseArray<ArrayList<MessageObject>> musicObjects = new LongSparseArray<>();
+    private LongSparseArray<ArrayList<MediaSession.QueueItem>> musicQueues = new LongSparseArray<>();
 
     public static final String ACTION_CMD = "com.example.android.mediabrowserservice.ACTION_CMD";
     public static final String CMD_NAME = "CMD_NAME";
@@ -77,7 +77,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
 
     private boolean serviceStarted;
 
-    private int lastSelectedDialog;
+    private long lastSelectedDialog;
 
     private static final int STOP_DELAY = 30000;
 
@@ -88,12 +88,12 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
         super.onCreate();
         ApplicationLoader.postInitApplication();
 
-        lastSelectedDialog = MessagesController.getNotificationsSettings(currentAccount).getInt("auto_lastSelectedDialog", 0);
+        lastSelectedDialog = AndroidUtilities.getPrefIntOrLong(MessagesController.getNotificationsSettings(currentAccount), "auto_lastSelectedDialog", 0);
 
-        mediaSession = new MediaSessionCompat(this, "MusicService");
+        mediaSession = new MediaSession(this, "MusicService");
         setSessionToken(mediaSession.getSessionToken());
         mediaSession.setCallback(new MediaSessionCallback());
-        mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+        mediaSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
 
         Context context = getApplicationContext();
         Intent intent = new Intent(context, LaunchActivity.class);
@@ -146,35 +146,35 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
     }
 
     @Override
-    public void onLoadChildren(final String parentMediaId, final Result<List<MediaBrowserCompat.MediaItem>> result) {
+    public void onLoadChildren(String parentMediaId, Result<List<MediaBrowser.MediaItem>> result) {
         if (!chatsLoaded) {
             result.detach();
             if (loadingChats) {
                 return;
             }
             loadingChats = true;
-            final MessagesStorage messagesStorage = MessagesStorage.getInstance(currentAccount);
+            MessagesStorage messagesStorage = MessagesStorage.getInstance(currentAccount);
             messagesStorage.getStorageQueue().postRunnable(() -> {
                 try {
-                    ArrayList<Integer> usersToLoad = new ArrayList<>();
-                    ArrayList<Integer> chatsToLoad = new ArrayList<>();
-                    SQLiteCursor cursor = messagesStorage.getDatabase().queryFinalized(String.format(Locale.US, "SELECT DISTINCT uid FROM media_v2 WHERE uid != 0 AND mid > 0 AND type = %d", MediaDataController.MEDIA_MUSIC));
+                    ArrayList<Long> usersToLoad = new ArrayList<>();
+                    ArrayList<Long> chatsToLoad = new ArrayList<>();
+                    SQLiteCursor cursor = messagesStorage.getDatabase().queryFinalized(String.format(Locale.US, "SELECT DISTINCT uid FROM media_v3 WHERE uid != 0 AND mid > 0 AND type = %d", MediaDataController.MEDIA_MUSIC));
                     while (cursor.next()) {
-                        int lower_part = (int) cursor.longValue(0);
-                        if (lower_part == 0) {
+                        long dialogId = cursor.longValue(0);
+                        if (DialogObject.isEncryptedDialog(dialogId)) {
                             continue;
                         }
-                        dialogs.add(lower_part);
-                        if (lower_part > 0) {
-                            usersToLoad.add(lower_part);
+                        dialogs.add(dialogId);
+                        if (DialogObject.isUserDialog(dialogId)) {
+                            usersToLoad.add(dialogId);
                         } else {
-                            chatsToLoad.add(-lower_part);
+                            chatsToLoad.add(-dialogId);
                         }
                     }
                     cursor.dispose();
                     if (!dialogs.isEmpty()) {
                         String ids = TextUtils.join(",", dialogs);
-                        cursor = messagesStorage.getDatabase().queryFinalized(String.format(Locale.US, "SELECT uid, data, mid FROM media_v2 WHERE uid IN (%s) AND mid > 0 AND type = %d ORDER BY date DESC, mid DESC", ids, MediaDataController.MEDIA_MUSIC));
+                        cursor = messagesStorage.getDatabase().queryFinalized(String.format(Locale.US, "SELECT uid, data, mid FROM media_v3 WHERE uid IN (%s) AND mid > 0 AND type = %d ORDER BY date DESC, mid DESC", ids, MediaDataController.MEDIA_MUSIC));
                         while (cursor.next()) {
                             NativeByteBuffer data = cursor.byteBufferValue(1);
                             if (data != null) {
@@ -182,11 +182,11 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                                 message.readAttachPath(data, UserConfig.getInstance(currentAccount).clientUserId);
                                 data.reuse();
                                 if (MessageObject.isMusicMessage(message)) {
-                                    int did = cursor.intValue(0);
+                                    long did = cursor.longValue(0);
                                     message.id = cursor.intValue(2);
                                     message.dialog_id = did;
                                     ArrayList<MessageObject> arrayList = musicObjects.get(did);
-                                    ArrayList<MediaSessionCompat.QueueItem> arrayList1 = musicQueues.get(did);
+                                    ArrayList<MediaSession.QueueItem> arrayList1 = musicQueues.get(did);
                                     if (arrayList == null) {
                                         arrayList = new ArrayList<>();
                                         musicObjects.put(did, arrayList);
@@ -194,11 +194,11 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                                         musicQueues.put(did, arrayList1);
                                     }
                                     MessageObject messageObject = new MessageObject(currentAccount, message, false, true);
-                                    arrayList.add(messageObject);
-                                    MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder().setMediaId(did + "_" + arrayList.size());
+                                    arrayList.add(0, messageObject);
+                                    MediaDescription.Builder builder = new MediaDescription.Builder().setMediaId(did + "_" + arrayList.size());
                                     builder.setTitle(messageObject.getMusicTitle());
                                     builder.setSubtitle(messageObject.getMusicAuthor());
-                                    arrayList1.add(new MediaSessionCompat.QueueItem(builder.build(), arrayList1.size()));
+                                    arrayList1.add(0, new MediaSession.QueueItem(builder.build(), arrayList1.size()));
                                 }
                             }
                         }
@@ -232,7 +232,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                     }
                     if (lastSelectedDialog != 0) {
                         ArrayList<MessageObject> arrayList = musicObjects.get(lastSelectedDialog);
-                        ArrayList<MediaSessionCompat.QueueItem> arrayList1 = musicQueues.get(lastSelectedDialog);
+                        ArrayList<MediaSession.QueueItem> arrayList1 = musicQueues.get(lastSelectedDialog);
                         if (arrayList != null && !arrayList.isEmpty()) {
                             mediaSession.setQueue(arrayList1);
                             if (lastSelectedDialog > 0) {
@@ -251,10 +251,10 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                                 }
                             }
                             MessageObject messageObject = arrayList.get(0);
-                            MediaMetadataCompat.Builder builder = new MediaMetadataCompat.Builder();
-                            builder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, messageObject.getDuration() * 1000);
-                            builder.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, messageObject.getMusicAuthor());
-                            builder.putString(MediaMetadataCompat.METADATA_KEY_TITLE, messageObject.getMusicTitle());
+                            MediaMetadata.Builder builder = new MediaMetadata.Builder();
+                            builder.putLong(MediaMetadata.METADATA_KEY_DURATION, messageObject.getDuration() * 1000);
+                            builder.putString(MediaMetadata.METADATA_KEY_ARTIST, messageObject.getMusicAuthor());
+                            builder.putString(MediaMetadata.METADATA_KEY_TITLE, messageObject.getMusicTitle());
                             mediaSession.setMetadata(builder.build());
                         }
                     }
@@ -266,16 +266,16 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
         }
     }
 
-    private void loadChildrenImpl(final String parentMediaId, final Result<List<MediaBrowserCompat.MediaItem>> result) {
-        List<MediaBrowserCompat.MediaItem> mediaItems = new ArrayList<>();
+    private void loadChildrenImpl(String parentMediaId, Result<List<MediaBrowser.MediaItem>> result) {
+        List<MediaBrowser.MediaItem> mediaItems = new ArrayList<>();
 
         if (MEDIA_ID_ROOT.equals(parentMediaId)) {
             for (int a = 0; a < dialogs.size(); a++) {
-                int did = dialogs.get(a);
-                MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder().setMediaId("__CHAT_" + did);
+                long dialogId = dialogs.get(a);
+                MediaDescription.Builder builder = new MediaDescription.Builder().setMediaId("__CHAT_" + dialogId);
                 TLRPC.FileLocation avatar = null;
-                if (did > 0) {
-                    TLRPC.User user = users.get(did);
+                if (DialogObject.isUserDialog(dialogId)) {
+                    TLRPC.User user = users.get(dialogId);
                     if (user != null) {
                         builder.setTitle(ContactsController.formatName(user.first_name, user.last_name));
                         if (user.photo != null && !(user.photo.photo_small instanceof TLRPC.TL_fileLocationUnavailable)) {
@@ -285,7 +285,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                         builder.setTitle("DELETED USER");
                     }
                 } else {
-                    TLRPC.Chat chat = chats.get(-did);
+                    TLRPC.Chat chat = chats.get(-dialogId);
                     if (chat != null) {
                         builder.setTitle(chat.title);
                         if (chat.photo != null && !(chat.photo.photo_small instanceof TLRPC.TL_fileLocationUnavailable)) {
@@ -305,7 +305,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                 if (avatar == null || bitmap == null) {
                     builder.setIconUri(Uri.parse("android.resource://" + getApplicationContext().getPackageName() + "/drawable/contact_blue"));
                 }
-                mediaItems.add(new MediaBrowserCompat.MediaItem(builder.build(), MediaBrowserCompat.MediaItem.FLAG_BROWSABLE));
+                mediaItems.add(new MediaBrowser.MediaItem(builder.build(), MediaBrowser.MediaItem.FLAG_BROWSABLE));
             }
         } else if (parentMediaId != null && parentMediaId.startsWith("__CHAT_")) {
             int did = 0;
@@ -318,10 +318,10 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
             if (arrayList != null) {
                 for (int a = 0; a < arrayList.size(); a++) {
                     MessageObject messageObject = arrayList.get(a);
-                    MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder().setMediaId(did + "_" + a);
+                    MediaDescription.Builder builder = new MediaDescription.Builder().setMediaId(did + "_" + a);
                     builder.setTitle(messageObject.getMusicTitle());
                     builder.setSubtitle(messageObject.getMusicAuthor());
-                    mediaItems.add(new MediaBrowserCompat.MediaItem(builder.build(), MediaBrowserCompat.MediaItem.FLAG_PLAYABLE));
+                    mediaItems.add(new MediaBrowser.MediaItem(builder.build(), MediaBrowser.MediaItem.FLAG_PLAYABLE));
                 }
             }
         }
@@ -353,7 +353,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
         return null;
     }
 
-    private final class MediaSessionCallback extends MediaSessionCompat.Callback {
+    private final class MediaSessionCallback extends MediaSession.Callback {
         @Override
         public void onPlay() {
             MessageObject messageObject = MediaController.getInstance().getPlayingMessageObject();
@@ -366,7 +366,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
 
         @Override
         public void onSkipToQueueItem(long queueId) {
-            MediaController.getInstance().playMessageAtIndex((MediaController.getInstance().getPlaylist().size()) - 1 - (int) queueId);
+            MediaController.getInstance().playMessageAtIndex((int) queueId);
             handlePlayRequest();
         }
 
@@ -374,7 +374,7 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
         public void onSeekTo(long position) {
             MessageObject messageObject = MediaController.getInstance().getPlayingMessageObject();
             if (messageObject != null) {
-                MediaController.getInstance().seekToProgress(messageObject, position / 1000f / (float) messageObject.getDuration());
+                MediaController.getInstance().seekToProgress(messageObject, position / 1000 / (float) messageObject.getDuration());
             }
         }
 
@@ -385,15 +385,15 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
                 return;
             }
             try {
-                int did = Integer.parseInt(args[0]);
+                long did = Long.parseLong(args[0]);
                 int id = Integer.parseInt(args[1]);
                 ArrayList<MessageObject> arrayList = musicObjects.get(did);
-                ArrayList<MediaSessionCompat.QueueItem> arrayList1 = musicQueues.get(did);
+                ArrayList<MediaSession.QueueItem> arrayList1 = musicQueues.get(did);
                 if (arrayList == null || id < 0 || id >= arrayList.size()) {
                     return;
                 }
                 lastSelectedDialog = did;
-                MessagesController.getNotificationsSettings(currentAccount).edit().putInt("auto_lastSelectedDialog", did).commit();
+                MessagesController.getNotificationsSettings(currentAccount).edit().putLong("auto_lastSelectedDialog", did).commit();
                 MediaController.getInstance().setPlaylist(arrayList, arrayList.get(id), 0, false, null);
                 mediaSession.setQueue(arrayList1);
                 if (did > 0) {
@@ -444,8 +444,8 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
             }
             query = query.toLowerCase();
             for (int a = 0; a < dialogs.size(); a++) {
-                int did = dialogs.get(a);
-                if (did > 0) {
+                long did = dialogs.get(a);
+                if (DialogObject.isUserDialog(did)) {
                     TLRPC.User user = users.get(did);
                     if (user == null) {
                         continue;
@@ -469,31 +469,31 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
     }
 
     private void updatePlaybackState(String error) {
-        long position = PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN;
+        long position = PlaybackState.PLAYBACK_POSITION_UNKNOWN;
         MessageObject playingMessageObject = MediaController.getInstance().getPlayingMessageObject();
         if (playingMessageObject != null) {
             position = playingMessageObject.audioProgressSec * 1000L;
         }
 
-        PlaybackStateCompat.Builder stateBuilder = new PlaybackStateCompat.Builder().setActions(getAvailableActions());
+        PlaybackState.Builder stateBuilder = new PlaybackState.Builder().setActions(getAvailableActions());
         int state;
         if (playingMessageObject == null) {
-            state = PlaybackStateCompat.STATE_STOPPED;
+            state = PlaybackState.STATE_STOPPED;
         } else {
             if (MediaController.getInstance().isDownloadingCurrentMessage()) {
-                state = PlaybackStateCompat.STATE_BUFFERING;
+                state = PlaybackState.STATE_BUFFERING;
             } else {
-                state = MediaController.getInstance().isMessagePaused() ? PlaybackStateCompat.STATE_PAUSED : PlaybackStateCompat.STATE_PLAYING;
+                state = MediaController.getInstance().isMessagePaused() ? PlaybackState.STATE_PAUSED : PlaybackState.STATE_PLAYING;
             }
         }
 
         if (error != null) {
             stateBuilder.setErrorMessage(error);
-            state = PlaybackStateCompat.STATE_ERROR;
+            state = PlaybackState.STATE_ERROR;
         }
         stateBuilder.setState(state, position, 1.0f, SystemClock.elapsedRealtime());
         if (playingMessageObject != null) {
-            stateBuilder.setActiveQueueItemId(Math.max(0, (MediaController.getInstance().getPlaylist().size() - 1) - MediaController.getInstance().getPlayingMessageObjectNum()));
+            stateBuilder.setActiveQueueItemId(MediaController.getInstance().getPlayingMessageObjectNum());
         } else {
             stateBuilder.setActiveQueueItemId(0);
         }
@@ -502,14 +502,14 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
     }
 
     private long getAvailableActions() {
-        long actions = PlaybackStateCompat.ACTION_PLAY | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID | PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH;
+        long actions = PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PLAY_FROM_MEDIA_ID | PlaybackState.ACTION_PLAY_FROM_SEARCH;
         MessageObject playingMessageObject = MediaController.getInstance().getPlayingMessageObject();
         if (playingMessageObject != null) {
             if (!MediaController.getInstance().isMessagePaused()) {
-                actions |= PlaybackStateCompat.ACTION_PAUSE;
+                actions |= PlaybackState.ACTION_PAUSE;
             }
-            actions |= PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS;
-            actions |= PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
+            actions |= PlaybackState.ACTION_SKIP_TO_PREVIOUS;
+            actions |= PlaybackState.ACTION_SKIP_TO_NEXT;
         }
         return actions;
     }
@@ -544,15 +544,15 @@ public class MusicBrowserService extends MediaBrowserServiceCompat implements No
         if (messageObject == null) {
             return;
         }
-        MediaMetadataCompat.Builder builder = new MediaMetadataCompat.Builder();
-        builder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, messageObject.getDuration() * 1000);
-        builder.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, messageObject.getMusicAuthor());
-        builder.putString(MediaMetadataCompat.METADATA_KEY_TITLE, messageObject.getMusicTitle());
+        MediaMetadata.Builder builder = new MediaMetadata.Builder();
+        builder.putLong(MediaMetadata.METADATA_KEY_DURATION, messageObject.getDuration() * 1000);
+        builder.putString(MediaMetadata.METADATA_KEY_ARTIST, messageObject.getMusicAuthor());
+        builder.putString(MediaMetadata.METADATA_KEY_TITLE, messageObject.getMusicTitle());
         AudioInfo audioInfo = MediaController.getInstance().getAudioInfo();
         if (audioInfo != null) {
             Bitmap bitmap = audioInfo.getCover();
             if (bitmap != null) {
-                builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, bitmap);
+                builder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, bitmap);
             }
         }
         mediaSession.setMetadata(builder.build());

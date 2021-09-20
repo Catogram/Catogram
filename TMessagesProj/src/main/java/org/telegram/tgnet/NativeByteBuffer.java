@@ -6,6 +6,7 @@ import org.telegram.messenger.FileLog;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
 
 public class NativeByteBuffer extends AbstractSerializedData {
 
@@ -15,20 +16,19 @@ public class NativeByteBuffer extends AbstractSerializedData {
     private int len;
     public boolean reused = true;
 
-    private static final ThreadLocal<NativeByteBuffer> addressWrapper = new ThreadLocal<NativeByteBuffer>() {
+    private static final ThreadLocal<LinkedList<NativeByteBuffer>> addressWrappers = new ThreadLocal<LinkedList<NativeByteBuffer>>() {
         @Override
-        protected NativeByteBuffer initialValue() {
-            return new NativeByteBuffer(0, true);
+        protected LinkedList<NativeByteBuffer> initialValue() {
+            return new LinkedList<>();
         }
     };
 
     public static NativeByteBuffer wrap(long address) {
-        NativeByteBuffer result = addressWrapper.get();
         if (address != 0) {
-            if (!result.reused) {
-                if (BuildVars.LOGS_ENABLED) {
-                    FileLog.e("forgot to reuse?");
-                }
+            LinkedList<NativeByteBuffer> queue = addressWrappers.get();
+            NativeByteBuffer result = queue.poll();
+            if (result == null) {
+                result = new NativeByteBuffer(0, true);
             }
             result.address = address;
             result.reused = false;
@@ -39,8 +39,10 @@ public class NativeByteBuffer extends AbstractSerializedData {
                 result.buffer.position(position);
             }
             result.buffer.order(ByteOrder.LITTLE_ENDIAN);
+            return result;
+        } else {
+            return null;
         }
-        return result;
     }
 
     private NativeByteBuffer(int address, boolean wrap) {
@@ -598,6 +600,7 @@ public class NativeByteBuffer extends AbstractSerializedData {
 
     public void reuse() {
         if (address != 0) {
+            addressWrappers.get().add(this);
             reused = true;
             native_reuse(address);
         }

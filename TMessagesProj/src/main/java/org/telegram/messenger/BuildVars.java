@@ -20,13 +20,11 @@ public class BuildVars {
     public static boolean CHECK_UPDATES = false;
     public static int APP_ID = BuildConfig.APP_ID;
     public static String APP_HASH = BuildConfig.API_HASH;
-    public static int BUILD_VERSION = 2390;
-    public static String BUILD_VERSION_STRING = "7.9.3";
-    public static String APPCENTER_HASH = "a5b5c4f5-51da-dedc-9918-d9766a22ca7c";
-    public static String APPCENTER_HASH_DEBUG = "f9726602-67c9-48d2-b5d0-4761f1c1a8f3";
+    public static int BUILD_VERSION = 2428;
+    public static String BUILD_VERSION_STRING = "8.0.1";
     public static boolean NO_SCOPED_STORAGE = true/* || Build.VERSION.SDK_INT <= 28*/;
     //
-    public static String SMS_HASH = isStandaloneApp() ? "w0lkcmTZkKh" : (DEBUG_VERSION ? "O2P2z+/jBpJ" : "oLeq9AcOZkT");
+    public static String SMS_HASH = "w0lkcmTZkKh";
     public static String PLAYSTORE_APP_URL = "https://t.me/catogram";
 
     static {

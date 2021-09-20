@@ -24,7 +24,7 @@ object CGFeatureHooks {
     @JvmStatic
     fun switchNoAuthor(b: Boolean) {
         // ...
-        CatogramConfig.legacyNoAuthorship = b
+        CatogramConfig.noAuthorship = b
     }
 
     private var currentPopup: ActionBarPopupWindow? = null
@@ -44,7 +44,33 @@ object CGFeatureHooks {
                     CatogramConfig.forwardNoAuthorship = !CatogramConfig.forwardNoAuthorship
                     currentPopup?.dismiss()
                     currentPopup = null
-                }
+                },
+            CGFeatureJavaHooks.PopupItem(
+                if (CatogramConfig.forwardWithoutCaptions) {
+                    LocaleController.getString("CG_FwdMenu_EnableCaptions", R.string.CG_FwdMenu_EnableCaptions)
+                } else {
+                    LocaleController.getString("CG_FwdMenu_DisableCaptions", R.string.CG_FwdMenu_DisableCaptions)
+                },
+                R.drawable.msg_edit
+            ) {
+                // Toggle!
+                CatogramConfig.forwardWithoutCaptions = !CatogramConfig.forwardWithoutCaptions
+                currentPopup?.dismiss()
+                currentPopup = null
+            },
+            CGFeatureJavaHooks.PopupItem(
+                if (CatogramConfig.forwardNotify) {
+                    LocaleController.getString("CG_FwdMenu_NoNotify", R.string.CG_FwdMenu_NoNotify)
+                } else {
+                    LocaleController.getString("CG_FwdMenu_Notify", R.string.CG_FwdMenu_Notify)
+                },
+                R.drawable.input_notify_on
+            ) {
+                // Toggle!
+                CatogramConfig.forwardNotify = !CatogramConfig.forwardNotify
+                currentPopup?.dismiss()
+                currentPopup = null
+            },
         ))
     }
 
@@ -71,7 +97,7 @@ object CGFeatureHooks {
             }
             1 -> {
                 // Save to PM
-                cf.sendMessagesHelper.sendMessage(arrayListOf(msg), UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toLong(), true, 0)
+                cf.sendMessagesHelper.sendMessage(arrayListOf(msg), UserConfig.getInstance(UserConfig.selectedAccount).clientUserId.toLong(), true, false, true, 0)
             }
             2 -> {
                 // Share

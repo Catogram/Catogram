@@ -141,15 +141,6 @@ public abstract class FourierTransform {
     }
 
     /**
-     * Sets the window to use on the samples before taking the forward transform.
-     * If an invalid window is asked for, an error will be reported and the
-     * current window will not be changed.
-     *
-     * @param windowFunction
-     */
-
-
-    /**
      * Returns the length of the time domain signal expected by this transform.
      *
      * @return the length of the time domain signal expected by this transform
@@ -225,8 +216,7 @@ public abstract class FourierTransform {
         if (freq > sampleRate / 2 - getBandWidth() / 2) return spectrum.length - 1;
         // all other cases
         float fraction = freq / (float) sampleRate;
-        int i = Math.round(timeSize * fraction);
-        return i;
+        return Math.round(timeSize * fraction);
     }
 
     /**

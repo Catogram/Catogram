@@ -52,8 +52,10 @@ object CatogramConfig {
     var enableProximity by sharedPreferences.boolean("cg_enableproximity", true)
 
     var forwardNoAuthorship by sharedPreferences.boolean("cg_forward_no_authorship", false)
-    var legacyNoAuthorship by sharedPreferences.boolean("cg_legacy_no_authorship", false)
+    var forwardWithoutCaptions by sharedPreferences.boolean("cg_forward_without_captions", false)
+    var forwardNotify by sharedPreferences.boolean("cg_forward_notify", true)
     var msgForwardDate by sharedPreferences.boolean("cg_msg_fwd_date", false)
+    var noAuthorship by sharedPreferences.boolean("cg_no_authorship", false)
 
     var newTabs_iconsV2_mode by sharedPreferences.int("cg_tabs_v2", 0)
 
@@ -84,6 +86,11 @@ object CatogramConfig {
     var useMediaStream by sharedPreferences.boolean("cg_media_stream", false)
 
     var hideStickerTime by sharedPreferences.boolean("cg_hide_stick_time", true)
+
+    var showDc by sharedPreferences.boolean("cg_show_dc", false)
+
+    var hqVoice by sharedPreferences.boolean("cg_hq_voice", true)
+
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
