@@ -12,6 +12,7 @@ import ua.itaysonlab.catogram.CatogramConfig
 import java.net.URLEncoder
 
 object GoogleTranslateImpl : CoroutineScope by MainScope() {
+
     private const val api_translate_url = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&dj=1&sl=auto"
 
     @JvmStatic
@@ -43,8 +44,9 @@ object GoogleTranslateImpl : CoroutineScope by MainScope() {
                 }
 
                 callback.invoke(sb.toString())
-            } catch (e: Exception) {
-                callback.invoke(LocaleController.getString("CG_NoInternet", R.string.CG_NoInternet))
+            } catch (ex: Exception) {
+                if (!e)
+                    callback.invoke(LocaleController.getString("CG_NoInternet", R.string.CG_NoInternet))
             }
         }
     }
