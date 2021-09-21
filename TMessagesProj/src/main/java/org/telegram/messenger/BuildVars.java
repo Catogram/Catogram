@@ -20,8 +20,8 @@ public class BuildVars {
     public static boolean CHECK_UPDATES = false;
     public static int APP_ID = BuildConfig.APP_ID;
     public static String APP_HASH = BuildConfig.API_HASH;
-    public static int BUILD_VERSION = 2428;
-    public static String BUILD_VERSION_STRING = "8.0.1";
+    public static int BUILD_VERSION = 2431;
+    public static String BUILD_VERSION_STRING = "8.1.1";
     public static boolean NO_SCOPED_STORAGE = true/* || Build.VERSION.SDK_INT <= 28*/;
     //
     public static String SMS_HASH = "w0lkcmTZkKh";
@@ -30,7 +30,7 @@ public class BuildVars {
     static {
         if (ApplicationLoader.applicationContext != null) {
             SharedPreferences sharedPreferences = ApplicationLoader.applicationContext.getSharedPreferences("systemConfig", Context.MODE_PRIVATE);
-            LOGS_ENABLED = DEBUG_VERSION || sharedPreferences.getBoolean("logsEnabled", DEBUG_VERSION);
+            LOGS_ENABLED = DEBUG_VERSION || sharedPreferences.getBoolean("logsEnabled", false);
         }
     }
 
