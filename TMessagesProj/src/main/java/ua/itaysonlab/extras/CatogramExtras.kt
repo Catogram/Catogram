@@ -7,13 +7,11 @@ import ua.itaysonlab.catogram.CatogramConfig.controversiveNoSecureFlag
 import ua.itaysonlab.catogram.CatogramConfig.noVibration
 import ua.itaysonlab.catogram.CatogramConfig.drawerBlur
 import android.graphics.drawable.BitmapDrawable
-import ua.itaysonlab.catogram.CatogramConfig
 import android.view.WindowManager
 import android.os.Vibrator
 import androidx.annotation.ColorInt
 import org.telegram.messenger.SharedConfig
 import org.telegram.tgnet.TLRPC
-import ua.itaysonlab.extras.CatogramExtras
 import android.view.View
 import android.view.Window
 import org.telegram.messenger.FileLoader
