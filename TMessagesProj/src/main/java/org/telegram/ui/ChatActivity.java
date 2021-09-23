@@ -7016,7 +7016,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     }
                     updatePinnedMessageView(true);
                     updateBottomOverlay();
-                    updateVisibleRows(2);
+                    updateVisibleRows();
                 }
             }
 
@@ -14859,7 +14859,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
             }
             if (changed) {
-                updateVisibleRows(1);
+                updateVisibleRows();
             }
         } else if (id == NotificationCenter.messagePlayingDidStart) {
             MessageObject messageObject = (MessageObject) args[0];
@@ -16996,7 +16996,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     chatAdapter.notifyItemRangeChanged(chatAdapter.messagesStartRow, messages.size());
                 }
             }
-            updateVisibleRows(1);
+            updateVisibleRows();
         } else if (threadMessageId == 0) {
             first_unread_id = 0;
             last_message_id = 0;
@@ -21531,10 +21531,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void updateVisibleRows() {
-        updateVisibleRows(0);
-    }
-
-    private void updateVisibleRows(int updateMode) {
         if (chatListView == null) {
             return;
         }
@@ -21563,18 +21559,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 ChatMessageCell cell = (ChatMessageCell) view;
                 MessageObject messageObject = cell.getMessageObject();
 
-                boolean shouldUpdateReply = false;
-                if (messageObject.isReply()) {
-                    if (updateMode == 1 && messagesDict[0].indexOfKey(messageObject.replyMessageObject.getId()) < 0) {
-                        cell.getMessageObject().replyMessageObject = null;
-                        cell.getMessageObject().messageOwner.reply_to = null;
-                        shouldUpdateReply = true;
-                    } else if (updateMode == 2 && messageObject.replyMessageObject.getId() == editingMessageObject.getId()) {
-                        cell.getMessageObject().replyMessageObject = editingMessageObject;
-                        shouldUpdateReply = true;
-                    }
-                }
-
                 boolean disableSelection = false;
                 boolean selected = false;
                 if (actionBar.isActionModeShowed() || reportType >= 0) {
@@ -21595,10 +21579,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
 
                 if (!cell.getMessageObject().deleted || cell.linkedChatId != linkedChatId) {
-                    cell.setIsUpdating(true, shouldUpdateReply);
+                    cell.setIsUpdating(true);
                     cell.linkedChatId = chatInfo != null ? chatInfo.linked_chat_id : 0;
                     cell.setMessageObject(cell.getMessageObject(), cell.getCurrentMessagesGroup(), cell.isPinnedBottom(), cell.isPinnedTop());
-                    cell.setIsUpdating(false, false);
+                    cell.setIsUpdating(false);
                 }
                 if (cell != scrimView) {
                     cell.setCheckPressed(!disableSelection, disableSelection && selected);
