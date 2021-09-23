@@ -277,4 +277,6 @@
     <string name="CG_Mutual_Contact">взаимный контакт</string>
     <string name="CG_relaunch">нужен перезапуск приложения</string>
     <string name="CG_hq_voice">HQ Голосовые сообщения</string>
+    <string name="CG_IgnoreArchivedChats">Игнорировать архивированные каналы</string>
+    <string name="CG_IgnoreArchivedChats_desc">при переходе к следующему каналу свайпом</string>
 </resources>

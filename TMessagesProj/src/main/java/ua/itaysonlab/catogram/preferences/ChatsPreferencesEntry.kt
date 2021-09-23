@@ -226,6 +226,16 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.newTabs_hideAllChats = it
                 }
             }
+            switch {
+                title = LocaleController.getString("CG_IgnoreArchivedChats", R.string.CG_IgnoreArchivedChats)
+                summary = LocaleController.getString("CG_IgnoreArchivedChats_desc", R.string.CG_IgnoreArchivedChats_desc)
+
+                contract({
+                    return@contract CatogramConfig.ignoreArchivedChannels
+                }) {
+                    CatogramConfig.ignoreArchivedChannels = it
+                }
+            }
         }
 
         category(LocaleController.getString("AS_Header_Chats", R.string.AS_Header_Chats)) {

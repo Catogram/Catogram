@@ -91,6 +91,8 @@ object CatogramConfig {
 
     var hqVoice by sharedPreferences.boolean("cg_hq_voice", true)
 
+    var ignoreArchivedChannels by sharedPreferences.boolean("cg_ignore_archived_channels", false)
+
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
