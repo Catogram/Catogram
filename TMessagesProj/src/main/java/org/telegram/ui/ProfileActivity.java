@@ -104,6 +104,7 @@ import org.telegram.messenger.MediaController;
 import org.telegram.messenger.MediaDataController;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.MessagesController;
+import org.telegram.messenger.MessagesStorage;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.NotificationsController;
 import org.telegram.messenger.R;
@@ -1883,7 +1884,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     onWriteButtonClick();
                 } else if (id == view_admins_item) {
                     Bundle args = new Bundle();
-                    args.putInt("chat_id", (int) currentChat.id);
+                    args.putLong("chat_id", currentChat.id);
                     args.putInt("type", ChatUsersActivity.TYPE_ADMIN);
                     args.putBoolean("showRecents", false);
                     ChatUsersActivity fragment = new ChatUsersActivity(args);
