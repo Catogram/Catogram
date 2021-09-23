@@ -278,4 +278,6 @@
     <string name="CG_Mutual_Contact">mutuαlαn kontαk</string>
     <string name="CG_relaunch">needs restart of app</string>
     <string name="CG_hq_voice">HQ Voice messages</string>
+    <string name="CG_IgnoreArchivedChats">Ignore archived channels</string>
+    <string name="CG_IgnoreArchivedChats_desc">while jumping to next channel</string>
 </resources>
