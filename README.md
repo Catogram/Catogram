@@ -1,4 +1,4 @@
-<img src="https://catogram.me/favicon.ico" width="150" align="right"/>
+<img src="https://avatars.githubusercontent.com/u/76093575?s=200&v=4" width="150" align="right"/>
 
 ## Catogram
 
@@ -9,7 +9,8 @@ Experimental telegram client based on [official Android sources](https://github.
 [![Chat](https://img.shields.io/badge/Chat-Telegram-blue.svg)](https://t.me/catogram_en)
 
 
- # Catogram features:
+ ## Features:
+
 - Message translator
 - TGX Style of context menu
 - VKUI Icons and inbuilt themes
@@ -17,7 +18,7 @@ Experimental telegram client based on [official Android sources](https://github.
 - Ability to use system emojis, disable number rounding (vibration / tooltip shadow), use accent as notification color, hiding number from settings and drawer
 - Many others.. Download the app to check them all
 
- # Thanks to:
+ ## Thanks to:
 - [Nekogram](https://gitlab.com/Nekogram/Nekogram)
 - [Nekogram Lite](https://github.com/satouriko/nekolite)
 - [Nekogram X](https://github.com/NekoX-Dev/NekoX)
