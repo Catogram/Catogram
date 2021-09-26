@@ -204,7 +204,7 @@
     <string name="CG_AudioFocus_Desc">إذا تم تعطيلها، فستكون الموسيقى أكثر هدوءًا، لكنها لن تتوقف</string>
     <string name="CG_Proximity">تفعيل إجراءات القرب</string>
     <string name="CG_Proximity_Desc">من خلال إيقاف التشغيل ، ستتخلص من \"إغلاق الشاشة\" المزعج عند الاستماع إلى الرسائل الصوتية (قم بإعادة فتح التطبيق للتشغيل)</string>
-    <string name="CG_Donate_Desc">Choose a donation method below\nIf you donate &gt;= than $1.5 or 100 Russian rubles, you\'ll become premium user, you will receive cat verification mark and premium features in future. \nSpecify your ID in the comment to the payment.</string>
+    <string name="CG_Donate_Desc">اختر طريقة التبرع أدناه.\n إذا تبرعت &gt;= بأكثر من 1.5 دولار أو 100 روبل روسي ، فستصبح مستخدمًا متميزًا ، وستتلقى علامة التحقق من القط وميزات متميزة في المستقبل. \nحدد المعرف الخاص بك في تعليق الدفع.</string>
     <string name="CG_Donate_Method">اختيار الطريقة</string>
     <string name="CG_Mono_Desc">انقر للنسخ // 5375414117420108</string>
     <string name="CG_Source">مصدر البرنامج</string>
