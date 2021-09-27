@@ -244,8 +244,8 @@
     <string name="CG_TrLang_Hindi">Tiếng Hindi</string>
     <string name="CG_TrLang_German">Tiếng Đức</string>
     <string name="CG_TrLang_Indonesian">Tiếng Indonesia</string>
-    <string name="CG_TrLang_Bosnian">Bosnian</string>
-    <string name="CG_TrLang_Croatian">Croatian</string>
+    <string name="CG_TrLang_Bosnian">Tiếng Bosnia</string>
+    <string name="CG_TrLang_Croatian">Tiếng Croatia</string>
     <string name="CG_TrLang_Serbian">Serbian</string>
     <string name="CG_Tr">Dịch</string>
     <string name="CG_Updates_Category">Bản cập nhật</string>
