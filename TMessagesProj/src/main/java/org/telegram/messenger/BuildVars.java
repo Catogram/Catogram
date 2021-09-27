@@ -20,8 +20,8 @@ public class BuildVars {
     public static boolean CHECK_UPDATES = false;
     public static int APP_ID = BuildConfig.APP_ID;
     public static String APP_HASH = BuildConfig.API_HASH;
-    public static int BUILD_VERSION = 2431;
-    public static String BUILD_VERSION_STRING = "8.1.1";
+    public static int BUILD_VERSION = 2432;
+    public static String BUILD_VERSION_STRING = "8.1.2";
     public static boolean NO_SCOPED_STORAGE = true/* || Build.VERSION.SDK_INT <= 28*/;
     //
     public static String SMS_HASH = "w0lkcmTZkKh";
