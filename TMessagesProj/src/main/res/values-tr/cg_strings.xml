@@ -279,4 +279,6 @@
     <string name="CG_hq_voice">Kalite Sesli mesajlar</string>
     <string name="CG_IgnoreArchivedChats">Arşivlenmiş kanalları yoksay</string>
     <string name="CG_IgnoreArchivedChats_desc">bir sonraki kanala atlarken</string>
+    <string name="CG_DisableCam">Disable cam in media attach menu</string>
+    <string name="CG_DisableCam_Desc">enable if media attach menu lags</string>
 </resources>
