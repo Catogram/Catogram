@@ -279,4 +279,6 @@
     <string name="CG_hq_voice">HQ Голосовые сообщения</string>
     <string name="CG_IgnoreArchivedChats">Игнорировать архивированные каналы</string>
     <string name="CG_IgnoreArchivedChats_desc">при переходе к следующему каналу свайпом</string>
+    <string name="CG_DisableCam">Отключить камеру в меню выбора фото</string>
+    <string name="CG_DisableCam_Desc">включите если это меню тормозит</string>
 </resources>

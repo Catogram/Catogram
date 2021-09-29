@@ -78,6 +78,17 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
             }
 
             switch {
+                title = LocaleController.getString("CG_DisableCam", R.string.CG_DisableCam)
+                summary = LocaleController.getString("CG_DisableCam_Desc", R.string.CG_DisableCam_Desc)
+
+                contract({
+                    return@contract CatogramConfig.disableAttachCamera
+                }) {
+                    CatogramConfig.disableAttachCamera = it
+                }
+            }
+
+            switch {
                 title = LocaleController.getString("CG_AudioFocus", R.string.CG_AudioFocus)
                 summary = LocaleController.getString("CG_AudioFocus_Desc", R.string.CG_AudioFocus_Desc)
 

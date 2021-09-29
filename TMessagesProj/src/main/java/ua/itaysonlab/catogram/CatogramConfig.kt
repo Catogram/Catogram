@@ -93,6 +93,8 @@ object CatogramConfig {
 
     var ignoreArchivedChannels by sharedPreferences.boolean("cg_ignore_archived_channels", false)
 
+    var disableAttachCamera by sharedPreferences.boolean("cg_disable_attach_camera", false)
+
 
     fun getIconReplacement(): BaseIconReplace {
         return when (iconReplacement) {
