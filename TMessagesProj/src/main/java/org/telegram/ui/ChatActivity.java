@@ -1173,7 +1173,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         @Override
         public boolean onItemClick(View view, int position, float x, float y) {
             if (textSelectionHelper.isTryingSelect() || textSelectionHelper.isSelectionMode()) {
-                return false;
+                //return false;
             }
             wasManualScroll = true;
             if (!actionBar.isActionModeShowed() && reportType < 0) {
