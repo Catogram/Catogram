@@ -13663,7 +13663,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 return true;
             }
         } else if (event.getAction() == MotionEvent.ACTION_HOVER_EXIT) {
-            //currentFocusedVirtualViewId = -2;
+            currentFocusedVirtualViewId = -2;
         }
         return false;
     }
