@@ -276,9 +276,9 @@
     <string name="CG_FwdMenu_DisableCaptions">Скрыть субтитры</string>
     <string name="CG_Mutual_Contact">взаимный контакт</string>
     <string name="CG_relaunch">нужно перезапустить приложение</string>
-    <string name="CG_hq_voice">HQ Голосвые сообщения</string>
+    <string name="CG_hq_voice">HQ Голосовые сообщения</string>
     <string name="CG_IgnoreArchivedChats">Игнорировать архивные каналы</string>
     <string name="CG_IgnoreArchivedChats_desc">во время перехода к следующему каналу</string>
     <string name="CG_DisableCam">Отключить Google камеру</string>
-    <string name="CG_DisableCam_Desc">enable if media attach menu lags</string>
+    <string name="CG_DisableCam_Desc">GC: отключить камеру (описание)</string>
 </resources>
