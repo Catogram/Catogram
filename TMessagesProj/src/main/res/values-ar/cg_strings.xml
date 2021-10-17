@@ -280,6 +280,6 @@
     <string name="CG_hq_voice">رسائل صوتية عالية الجودة</string>
     <string name="CG_IgnoreArchivedChats">تجاهل القنوات المؤرشفة</string>
     <string name="CG_IgnoreArchivedChats_desc">أثناء الانتقال إلى القناة التالية</string>
-    <string name="CG_DisableCam">Disable cam in media attach menu</string>
-    <string name="CG_DisableCam_Desc">enable if media attach menu lags</string>
+    <string name="CG_DisableCam">تعطيل الكاميرا في قائمة إرفاق الوسائط</string>
+    <string name="CG_DisableCam_Desc">تمكين في حالة تأخر قائمة إرفاق الوسائط</string>
 </resources>
