@@ -234,7 +234,7 @@
     <string name="CG_ForceCleanInfo">استخدم هذا إذا واجهت عبارة \"جارِ الحساب…\" طويلاً عند محاولة تنظيف ذاكرة التخزين المؤقت. \nسيؤدي هذا إلى حذف كل شيء من ذاكرة التخزين المؤقت - كن حذرًا!</string>
     <string name="CG_SwitchBackend">ستنتقل إلى الخادم التجريبي. من فضلك لا تضغط على \"موافق\" إذا كنت لا تعرف ما تفعله. يمكنك التبديل إلى الخادم العادي بالضغط على \"تبديل الخادم\" في قائمة المعالجة مرة أخرى.</string>
     <string name="CG_SB">تبديل الخادم</string>
-    <string name="CG_TrLang">اللغة الأم</string>
+    <string name="CG_TrLang">لغة الوجهة</string>
     <string name="CG_TrLang_English">الإنكليزية</string>
     <string name="CG_TrLang_Russian">الروسية</string>
     <string name="CG_TrLang_French">الفرنسية</string>
