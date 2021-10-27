@@ -272,13 +272,13 @@
     <string name="CG_NoInternet">Impossibile tradurre. Forse sei offline?</string>
     <string name="CG_FwdMenu_NoNotify">Non notificare</string>
     <string name="CG_FwdMenu_Notify">Notifica</string>
-    <string name="CG_FwdMenu_EnableCaptions">Enable captions</string>
-    <string name="CG_FwdMenu_DisableCaptions">Hide captions</string>
-    <string name="CG_Mutual_Contact">mutual contact</string>
+    <string name="CG_FwdMenu_EnableCaptions">Abilita didascalie</string>
+    <string name="CG_FwdMenu_DisableCaptions">Nascondi didascalie</string>
+    <string name="CG_Mutual_Contact">contatto reciproco</string>
     <string name="CG_relaunch">necessita il riavvio dell\'app</string>
     <string name="CG_hq_voice">Messaggi vocali ad alta qualità</string>
-    <string name="CG_IgnoreArchivedChats">Ignore archived channels</string>
-    <string name="CG_IgnoreArchivedChats_desc">while jumping to next channel</string>
-    <string name="CG_DisableCam">Disable cam in media attach menu</string>
-    <string name="CG_DisableCam_Desc">enable if media attach menu lags</string>
+    <string name="CG_IgnoreArchivedChats">Ignora canali archiviati</string>
+    <string name="CG_IgnoreArchivedChats_desc">mentre ti sposti nel prossimo canale</string>
+    <string name="CG_DisableCam">Disabilita fotocamera nel menù allegati</string>
+    <string name="CG_DisableCam_Desc">abilita se il menù allegati presenta lag</string>
 </resources>
