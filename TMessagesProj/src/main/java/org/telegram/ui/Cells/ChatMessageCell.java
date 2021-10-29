@@ -897,6 +897,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 onSeekBarDrag(progress);
                 invalidate();
             }
+
         };
         roundVideoPlayingDrawable = new RoundVideoPlayingDrawable(this, resourcesProvider);
     }
@@ -2565,7 +2566,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 }
             }
             invalidate();
-        }
+                    }
     }
 
     public void setFullyDraw(boolean draw) {
@@ -6420,16 +6421,18 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (currentMessageObject == null) {
             return;
         }
+        seekBarAccessibilityDelegate.postAccessibilityEventRunnable(this);
         currentMessageObject.audioProgress = progress;
         MediaController.getInstance().seekToProgress(currentMessageObject, progress);
         updatePlayingMessageProgress();
-    }
+}
 
     @Override
     public void onSeekBarContinuousDrag(float progress) {
         if (currentMessageObject == null) {
             return;
         }
+seekBarAccessibilityDelegate.postAccessibilityEventRunnable(this);
         currentMessageObject.audioProgress = progress;
         currentMessageObject.audioProgressSec = (int) (currentMessageObject.getDuration() * progress);
         updatePlayingMessageProgress();
@@ -13619,7 +13622,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 }
             }
         }
-        if (currentMessageObject.isVoice() ||currentMessageObject.isRoundVideo() || currentMessageObject.isMusic() && MediaController.getInstance().isPlayingMessage(currentMessageObject)) {
+        if (isSeekbarCell()) {
             if (seekBarAccessibilityDelegate.performAccessibilityActionInternal(action, arguments)) {
                 return true;
             }
@@ -13638,7 +13641,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             onDetachedFromWindow();
         }
     }
-
+    public boolean isSeekbarCell() {
+        return !(buttonState==1 &&loadingProgressLayout!=null) &&(currentMessageObject.isVoice() ||currentMessageObject.isRoundVideo() || currentMessageObject.isMusic());
+    }
     @Override
     public boolean dispatchHoverEvent(MotionEvent event) {
         int x = (int) event.getX();
@@ -13666,6 +13671,12 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             currentFocusedVirtualViewId = -2;
         }
         return false;
+    }
+
+    @Override
+    public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
+        super.onInitializeAccessibilityEvent(event);
+        if(isSeekbarCell()) seekBarAccessibilityDelegate.onInitializeAccessibilityEvent(this,event);
     }
 
     @Override
@@ -14059,7 +14070,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     info.addAction(AccessibilityNodeInfo.ACTION_LONG_CLICK);
                 }
 
-                if ((currentMessageObject.isVoice() ||currentMessageObject.isRoundVideo() || currentMessageObject.isMusic()) && MediaController.getInstance().isPlayingMessage(currentMessageObject)) {
+                if (isSeekbarCell()) {
                     seekBarAccessibilityDelegate.onInitializeAccessibilityNodeInfoInternal(info);
                 }
                 //smallest ids should be added at first,because talkback can focus on it not always in correct order
