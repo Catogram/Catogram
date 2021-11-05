@@ -323,6 +323,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
             menuIconImageView.setScaleType(ImageView.ScaleType.CENTER);
             menuIconImageView.setImageResource(R.drawable.ic_more_vertical_24);
             menuIconImageView.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_dialogSearchIcon), PorterDuff.Mode.MULTIPLY));
+            menuIconImageView.setContentDescription(LocaleController.getString("AccDescrMoreOptions",R.string.AccDescrMoreOptions));
             menuIconImageView.setOnClickListener((v) -> CGFeatureHooks.showForwardMenu(ShareAlert.this, SearchField.this));
 
             addView(menuIconImageView, LayoutHelper.createFrame(36, 36, Gravity.RIGHT | Gravity.TOP, 0, 11, 16, 0));
@@ -335,6 +336,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
             clearSearchImageView.setScaleY(0.1f);
             clearSearchImageView.setAlpha(0.0f);
             clearSearchImageView.setColorFilter(new PorterDuffColorFilter(getThemedColor(darkTheme ? Theme.key_voipgroup_searchPlaceholder : Theme.key_dialogSearchIcon), PorterDuff.Mode.MULTIPLY));
+            clearSearchImageView.setContentDescription(LocaleController.getString("ClearButton",R.string.ClearButton));
             addView(clearSearchImageView, LayoutHelper.createFrame(36, 36, Gravity.RIGHT | Gravity.TOP, 14, 11, 14, 0));
             clearSearchImageView.setOnClickListener(v -> {
                 updateSearchAdapter = true;

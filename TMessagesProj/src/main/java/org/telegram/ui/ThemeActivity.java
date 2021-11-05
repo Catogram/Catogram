@@ -34,6 +34,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -252,8 +253,9 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
             sizeBar.setDelegate(new SeekBarView.SeekBarViewDelegate() {
                 @Override
                 public void onSeekBarDrag(boolean stop, float progress) {
-                    setFontSize(Math.round(startFontSize + (endFontSize - startFontSize) * progress));
-                }
+                    sizeBar.getSeekBarAccessibilityDelegate().postAccessibilityEventRunnable(TextSizeCell.this);
+                    setFontSize(getValueUsingProgress(startFontSize,endFontSize,progress));
+                 }
 
                 @Override
                 public void onSeekBarPressed(boolean pressed) {
@@ -261,12 +263,12 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
 
                 @Override
                 public CharSequence getContentDescription() {
-                    return String.valueOf(Math.round(startFontSize + (endFontSize - startFontSize) * sizeBar.getProgress()));
+                    return String.valueOf(getValueUsingProgress(startFontSize,endFontSize,sizeBar.getProgress()));
                 }
 
                 @Override
                 public int getStepsCount() {
-                    return endFontSize - startFontSize;
+                    return endFontSize-startFontSize;
                 }
             });
             sizeBar.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
@@ -303,6 +305,12 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
         }
 
         @Override
+        public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
+            super.onInitializeAccessibilityEvent(event);
+            sizeBar.getSeekBarAccessibilityDelegate().onInitializeAccessibilityEvent(this,event);
+        }
+
+        @Override
         public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
             super.onInitializeAccessibilityNodeInfo(info);
             sizeBar.getSeekBarAccessibilityDelegate().onInitializeAccessibilityNodeInfoInternal(this, info);
@@ -335,7 +343,8 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
             sizeBar.setDelegate(new SeekBarView.SeekBarViewDelegate() {
                 @Override
                 public void onSeekBarDrag(boolean stop, float progress) {
-                    setBubbleRadius(Math.round(startRadius + (endRadius - startRadius) * progress), false);
+                    sizeBar.getSeekBarAccessibilityDelegate().postAccessibilityEventRunnable(BubbleRadiusCell.this);
+                    setBubbleRadius(getValueUsingProgress(startRadius,endRadius,progress), false);
                 }
 
                 @Override
@@ -344,12 +353,12 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
 
                 @Override
                 public CharSequence getContentDescription() {
-                    return String.valueOf(Math.round(startRadius + (endRadius - startRadius) * sizeBar.getProgress()));
+                    return String.valueOf(getValueUsingProgress(startRadius,endRadius,sizeBar.getProgress()));
                 }
 
                 @Override
                 public int getStepsCount() {
-                    return endRadius - startRadius;
+return endRadius-startRadius;
                 }
             });
             sizeBar.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
@@ -372,6 +381,12 @@ public class ThemeActivity extends BaseFragment implements NotificationCenter.No
         public void invalidate() {
             super.invalidate();
             sizeBar.invalidate();
+        }
+
+        @Override
+        public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
+            super.onInitializeAccessibilityEvent(event);
+            sizeBar.getSeekBarAccessibilityDelegate().onInitializeAccessibilityEvent(this, event);
         }
 
         @Override

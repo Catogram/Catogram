@@ -214,6 +214,7 @@ public class NumberPicker extends LinearLayout {
             public CharSequence getContentDescription(View host) {
                 return NumberPicker.this.getContentDescription(mValue);
             }
+
         });
     }
 

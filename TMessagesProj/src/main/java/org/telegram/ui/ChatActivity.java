@@ -1175,7 +1175,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         @Override
         public boolean onItemClick(View view, int position, float x, float y) {
             if (textSelectionHelper.isTryingSelect() || textSelectionHelper.isSelectionMode()) {
-                return false;
+                //return false;
             }
             wasManualScroll = true;
             if (!actionBar.isActionModeShowed() && reportType < 0) {
@@ -2471,6 +2471,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             TLRPC.UserFull userFull = null;
             if (currentUser != null) {
                 audioCallIconItem = menu.addItem(call, R.drawable.ic_call, themeDelegate);
+audioCallIconItem.setContentDescription(LocaleController.getString("Call",R.string.Call));
                 userFull = getMessagesController().getUserFull(currentUser.id);
                 if (userFull != null && userFull.phone_calls_available) {
                     showAudioCallAsIcon = !inPreviewMode;

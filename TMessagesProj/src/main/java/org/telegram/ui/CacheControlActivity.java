@@ -698,6 +698,7 @@ public class CacheControlActivity extends BaseFragment {
                     view.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
                     SharedPreferences preferences = MessagesController.getGlobalMainSettings();
                     slideChooseView.setCallback(index -> {
+                        slideChooseView.accessibilityDelegate.postAccessibilityEventRunnable(slideChooseView);
                         if (index == 0) {
                             SharedConfig.setKeepMedia(1001);
                         } else if (index == 1) {
@@ -708,7 +709,7 @@ public class CacheControlActivity extends BaseFragment {
                             SharedConfig.setKeepMedia(1);
                         } else if (index == 4) {
                             SharedConfig.setKeepMedia(2);
-                        }
+                                                    }
                     });
                     int keepMedia = SharedConfig.keepMedia;
                     int index;
