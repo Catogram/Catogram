@@ -531,7 +531,10 @@ public class ChatPullingDownDrawable implements NotificationCenter.NotificationC
                 return null;
             }
             if (chat != null && dialog.id != currentDialogId && dialog.unread_count > 0 && DialogObject.isChannel(dialog) && !chat.megagroup && !messagesController.isPromoDialog(dialog.id, false)) {
-                return dialog;
+                String reason = MessagesController.getRestrictionReason(chat.restriction_reason);
+                if (reason == null) {
+                    return dialog;
+                }
             }
         }
 

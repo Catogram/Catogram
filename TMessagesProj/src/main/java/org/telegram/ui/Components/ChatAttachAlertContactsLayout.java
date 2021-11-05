@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ContactsController;
-import org.telegram.messenger.ImageLocation;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
@@ -46,7 +45,6 @@ import org.telegram.ui.ActionBar.ThemeDescription;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import androidx.collection.LongSparseArray;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
@@ -678,8 +676,9 @@ public class ChatAttachAlertContactsLayout extends ChatAttachAlert.AttachAlertLa
         }
 
         @Override
-        public int getPositionForScrollProgress(float progress) {
-            return 0;
+        public void getPositionForScrollProgress(RecyclerListView listView, float progress, int[] position) {
+            position[0] = 0;
+            position[1] = 0;
         }
 
         @Override
