@@ -79,17 +79,7 @@ object OTA : CoroutineScope by MainScope() {
         } catch (e: Exception) {
         }
 
-        handler = CoroutineExceptionHandler { _, exception ->
-            if (!exception.message?.contains("Unable to resolve host")!!) {
-                val builder = org.telegram.ui.ActionBar.AlertDialog.Builder(context)
-                builder.setTitle(LocaleController.getString("ErrorOccurred", R.string.ErrorOccurred))
-                        .setMessage(exception.message)
-                        .setPositiveButton("OK") { dialog, _ ->
-                            dialog.cancel()
-                        }
-                builder.show()
-            }
-        }
+        handler = CoroutineExceptionHandler { _, _ -> }
 
         checkBS { needDownload ->
             if (needDownload && b) {
